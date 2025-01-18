@@ -212,6 +212,7 @@ fun <T> SearchableExpandedDropDownMenu(
                         leadingIcon = {
                             Icon(imageVector = Icons.Outlined.Search, contentDescription = null)
                         },
+                        maxLines = 1,
                         placeholder = {
                             Text(text = "Search")
                         },

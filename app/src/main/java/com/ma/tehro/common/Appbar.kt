@@ -30,7 +30,7 @@ fun Appbar(
             .fillMaxWidth()
             .height(56.dp)
             .background(MaterialTheme.colorScheme.primary)
-            .padding(start = 16.dp),
+            .padding(start = if (handleBack) 0.dp else 16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ) {

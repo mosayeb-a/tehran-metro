@@ -55,7 +55,7 @@ fun StationDetail(
                 )
                 AppbarDetail(
                     text = station.address ?: "آدرس مشخص نشده",
-                    fa = station.translations!!.fa,
+                    fa = station.translations.fa,
                     en = station.name,
                     line = lineNumber
                 )
@@ -217,7 +217,7 @@ fun AppbarDetail(
         }
         Row(
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp, bottom = 4.dp)
+                .padding(start = 4.dp, end = 4.dp, bottom = 4.dp)
                 .fillMaxWidth()
                 .height(26.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -227,9 +227,9 @@ fun AppbarDetail(
                 text = text,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.labelMedium
+                style = MaterialTheme.typography.labelMedium,
+                modifier = Modifier.wrapContentWidth()
             )
-            Spacer(Modifier.width(4.dp))
             Icon(
                 modifier = Modifier.size(18.dp),
                 painter = painterResource(R.drawable.location_on_24px),
@@ -237,5 +237,4 @@ fun AppbarDetail(
             )
         }
     }
-
 }
