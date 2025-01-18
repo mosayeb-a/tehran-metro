@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -27,11 +28,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.R
 import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.calculateLineName
+import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.data.Station
 
 @Composable
@@ -50,7 +53,12 @@ fun StationDetail(
                     handleBack = true,
                     onBackClick = onBack
                 )
-                AppbarDetail(text = station.address ?: "آدرس مشخص نشده")
+                AppbarDetail(
+                    text = station.address ?: "آدرس مشخص نشده",
+                    fa = station.fa,
+                    en = station.name,
+                    line = lineNumber
+                )
             }
         }
     ) { paddingValues ->
@@ -172,26 +180,62 @@ fun FacilityItem(
 }
 
 @Composable
-fun AppbarDetail(modifier: Modifier = Modifier, text: String) {
-    Row(
-        modifier = modifier
-            .padding(start = 16.dp, end = 16.dp, bottom = 4.dp)
-            .fillMaxWidth()
-            .height(26.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = text,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-            style = MaterialTheme.typography.labelMedium
-        )
-        Spacer(Modifier.width(4.dp))
-        Icon(
-            modifier = Modifier.size(18.dp),
-            painter = painterResource(R.drawable.location_on_24px),
-            contentDescription = "address"
-        )
+fun AppbarDetail(
+    modifier: Modifier = Modifier,
+    text: String,
+    fa: String,
+    en: String,
+    line: Int
+) {
+    Column(modifier = modifier) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(getLineColorByNumber(line))
+                .padding(26.dp),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(modifier = Modifier) {
+                Text(
+                    modifier = Modifier
+                        .wrapContentWidth()
+                        .fillMaxWidth(),
+                    text = fa,
+                    style = MaterialTheme.typography.titleMedium,
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    modifier = Modifier
+                        .wrapContentWidth()
+                        .fillMaxWidth(),
+                    text = en,
+                    style = MaterialTheme.typography.titleMedium,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+        Row(
+            modifier = Modifier
+                .padding(start = 16.dp, end = 16.dp, bottom = 4.dp)
+                .fillMaxWidth()
+                .height(26.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = text,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.labelMedium
+            )
+            Spacer(Modifier.width(4.dp))
+            Icon(
+                modifier = Modifier.size(18.dp),
+                painter = painterResource(R.drawable.location_on_24px),
+                contentDescription = "address"
+            )
+        }
     }
+
 }

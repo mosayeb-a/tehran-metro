@@ -15,7 +15,7 @@
     "latitude": "35.804501",
     "address": "خیابان شریعتی-ضلع جنوب غربی میدان قدس",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -43,7 +43,7 @@
     "latitude": "35.793119",
     "address": "خیابان دکترشریعتی - روبه روی پل رومی",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -72,7 +72,7 @@
     "latitude": "35.785374",
     "address": "100 متر بعد از تقاطع بزرگراه شهید صدر و خیابان دکتر شریعتی",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -101,7 +101,7 @@
     "latitude": "35.7726822",
     "address": "خیابان دکترشریعتی، بالاتر از دو راهی قلهک، نرسیده به خیابان دولت",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -130,7 +130,7 @@
     "latitude": "35.7626452",
     "address": "خیابان دکتر شریعتی، بالاتر از بلوار میرداماد",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -159,7 +159,7 @@
     "latitude": "35.76006",
     "address": "بلوار میرداماد، جنب پمپ بنزین، زیر ساختمان رز میرداماد",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -188,7 +188,7 @@
     "latitude": "35.7565207",
     "address": "بزرگراه شهید حقانی - جنب پارک طالقانی",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -217,7 +217,7 @@
     "latitude": "35.748228",
     "address": "بزرگراه شهید همت ، جنب سازمان فرهنگ و ارتباطات اسلامی",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -246,7 +246,7 @@
     "latitude": "35.74073",
     "address": "بزرگراه رسالت ، شمال مصلی ، روبروی سازمان فرهنگ و ارتباطات اسلامی",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -280,8 +280,8 @@
     "latitude": "35.731037",
     "address": "تقاطع خیابان های شهید بهشتی و شهید مفتح",
     "colors": [
-      "#E0001F",
-      "#67C5F5"
+      "#FFDB4E49",
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -312,7 +312,7 @@
     "latitude": "35.724453",
     "address": "تقاطع خیابان های استاد شهید مطهری و شهید مفتح",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -341,7 +341,7 @@
     "latitude": "35.707161",
     "address": "تقاطع خیابان آیت اله طالقانی و خیابان شهید مفتح",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -375,8 +375,8 @@
     "latitude": "35.701316",
     "address": "خیابان انقلاب اسلامی ، تقاطع سعدی شمالی و شهید مفتح",
     "colors": [
-      "#E0001F",
-      "#DACC4A"
+      "#FFDB4E49",
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -407,7 +407,7 @@
     "latitude": "35.6934793",
     "address": "میدان استقلال - (میدان مخبرالدوله)",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -441,8 +441,8 @@
     "latitude": "35.686433",
     "address": "میدان امام خمینی (ره)",
     "colors": [
-      "#E0001F",
-      "#2F4389"
+      "#FFDB4E49",
+      "#FF2866A6"
     ],
     "disabled": false,
     "wc": false,
@@ -473,7 +473,7 @@
     "latitude": "35.678276",
     "address": "تقاطع خیابان های پانزد خرداد و خیام - چهارراه گلوبندک",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -502,7 +502,7 @@
     "latitude": "35.673073",
     "address": "خیابان خیام شمالی ، پایین تر از چهارراه گلوبندک ، جنب امامزاده",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -536,8 +536,8 @@
     "latitude": "35.667753",
     "address": "میدان محمدیه(اعدام) ، تقاطع خیابان خیام و مولوی",
     "colors": [
-      "#E0001F",
-      "#7F0B74"
+      "#FFDB4E49",
+      "#FF994CA1"
     ],
     "disabled": false,
     "wc": false,
@@ -568,7 +568,7 @@
     "latitude": "35.65754",
     "address": "تقاطع خیابان های شوش و خیام",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -597,7 +597,7 @@
     "latitude": "35.650688",
     "address": "خیابان عباسی ، ضلع شمال غربی ترمینال جنوب",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -626,7 +626,7 @@
     "latitude": "35.640609",
     "address": "خیابان شهید رجایی ، خیابان ابریشم ، 100متری شهید همدانی",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": true,
@@ -655,7 +655,7 @@
     "latitude": "35.629256",
     "address": "جاده قدیم قم- سه راه پالایشگاه - خیابان شهید گلشنی",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": true,
@@ -684,7 +684,7 @@
     "latitude": "35.609764",
     "address": "بلوار شهید دستواره جنوبی - بین میدان مادر و نماز",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": true,
@@ -713,7 +713,7 @@
     "latitude": "35.594672",
     "address": "شهر ری ، میدان فرمانداری ، خیابان مدرس",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": true,
@@ -739,7 +739,7 @@
       }
     ],
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "relations": [
@@ -763,7 +763,7 @@
     "latitude": "35.546998",
     "address": "اتوبان شهید کاظمی، روبه روی درب شمالی بهشت زهرا",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -793,7 +793,7 @@
     "latitude": "35.539811",
     "address": "شهر آفتاب",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -819,7 +819,7 @@
       }
     ],
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": true,
     "relations": [
@@ -840,7 +840,7 @@
       }
     ],
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "relations": [
@@ -861,7 +861,7 @@
       }
     ],
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": true,
     "relations": [
@@ -884,7 +884,7 @@
     "latitude": "35.545077",
     "address": "ضلع شرقی حرم امام خمینی - بلوار اصلی بهشت زهرا",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -913,7 +913,7 @@
     "latitude": "35.521574",
     "address": "جاده قدیم قم - بعداز درب اصلی بهشت زهرا (س) - جنب پارک لاله",
     "colors": [
-      "#E0001F"
+      "#FFDB4E49"
     ],
     "disabled": false,
     "wc": false,
@@ -941,7 +941,7 @@
     "latitude": "35.729687",
     "address": "تهرانپارس، اول خیابان درختی ، روبه روی فرهنگسرای اشراق",
     "colors": [
-      "#2F4389"
+      "#FF2866A6"
     ],
     "disabled": false,
     "wc": false,
@@ -969,7 +969,7 @@
     "latitude": "35.7316491",
     "address": "بزرگراه رسالت بعد از چهارراه تیرانداز نبش اخوت",
     "colors": [
-      "#2F4389"
+      "#FF2866A6"
     ],
     "disabled": false,
     "wc": false,
@@ -998,7 +998,7 @@
     "latitude": "35.733397",
     "address": "تقاطع بزرگراه رسالت و شهید باقری",
     "colors": [
-      "#2F4389"
+      "#FF2866A6"
     ],
     "disabled": false,
     "wc": false,
@@ -1027,7 +1027,7 @@
     "latitude": "35.734425",
     "address": "بزرگراه رسالت، چهار راه دردشت",
     "colors": [
-      "#2F4389"
+      "#FF2866A6"
     ],
     "disabled": false,
     "wc": true,
@@ -1056,7 +1056,7 @@
     "latitude": "35.73547",
     "address": "بزگراه رسالت، چهارراه شهید آیت",
     "colors": [
-      "#2F4389"
+      "#FF2866A6"
     ],
     "disabled": false,
     "wc": false,
@@ -1085,7 +1085,7 @@
     "latitude": "35.733088",
     "address": "خیابان شهید مدنی، بالاتر از خیابان گلبرگ",
     "colors": [
-      "#2F4389"
+      "#FF2866A6"
     ],
     "disabled": false,
     "wc": false,
@@ -1114,7 +1114,7 @@
     "latitude": "35.7264805",
     "address": "خیابان شهید مدنی، روبروی ساختمان های مسکونی دادگستری",
     "colors": [
-      "#2F4389"
+      "#FF2866A6"
     ],
     "disabled": false,
     "wc": false,
@@ -1143,7 +1143,7 @@
     "latitude": "35.71826",
     "address": "تقاطع خیابان های شهید مدنی و سبلان",
     "colors": [
-      "#2F4389"
+      "#FF2866A6"
     ],
     "disabled": false,
     "wc": false,
@@ -1172,7 +1172,7 @@
     "latitude": "35.70913",
     "address": "خیابان شهید مدنی، بالاتر از بیمارستان امام حسین (ع)",
     "colors": [
-      "#2F4389"
+      "#FF2866A6"
     ],
     "disabled": false,
     "wc": false,
@@ -1206,8 +1206,8 @@
     "latitude": "35.702188",
     "address": "میدان امام حسین (ع) - تقاطع خیابان انقلاب اسلامی و شهید مدنی",
     "colors": [
-      "#2F4389",
-      "#EF639F"
+      "#FF2866A6",
+      "#FFE8629F"
     ],
     "disabled": false,
     "wc": false,
@@ -1243,8 +1243,8 @@
     "latitude": "35.699338",
     "address": "خیابان بهارستان، میدان ابن سینا",
     "colors": [
-      "#2F4389",
-      "#DACC4A"
+      "#FF2866A6",
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -1275,7 +1275,7 @@
     "latitude": "35.692263",
     "address": "خیابان بهارستان، جنب ساختمان وزارت فرهنگ و ارشاد اسلامی",
     "colors": [
-      "#2F4389"
+      "#FF2866A6"
     ],
     "disabled": false,
     "wc": false,
@@ -1304,7 +1304,7 @@
     "latitude": "35.6889986",
     "address": "خیابان اکباتان، سه راهی ملت - اکباتان",
     "colors": [
-      "#2F4389"
+      "#FF2866A6"
     ],
     "disabled": false,
     "wc": false,
@@ -1333,7 +1333,7 @@
     "latitude": "35.6863779",
     "address": "میدان حسن آباد",
     "colors": [
-      "#2F4389"
+      "#FF2866A6"
     ],
     "disabled": false,
     "wc": false,
@@ -1362,7 +1362,7 @@
     "latitude": "35.6874007",
     "address": "خیابان امام خمینی (ره)، روبروی مجلس",
     "colors": [
-      "#2F4389"
+      "#FF2866A6"
     ],
     "disabled": false,
     "wc": false,
@@ -1391,7 +1391,7 @@
     "latitude": "35.691008",
     "address": "خیابان کارگر جنوبی، تقاطع پاستور و دانشگاه جنگ",
     "colors": [
-      "#2F4389"
+      "#FF2866A6"
     ],
     "disabled": false,
     "wc": false,
@@ -1425,8 +1425,8 @@
     "latitude": "35.69526",
     "address": "تقاطع بزرگراه شهید نواب صفوی و خیابان آذربایجان",
     "colors": [
-      "#2F4389",
-      "#7F0B74"
+      "#FF2866A6",
+      "#FF994CA1"
     ],
     "disabled": false,
     "wc": false,
@@ -1462,8 +1462,8 @@
     "latitude": "35.700627",
     "address": "تقاطع خیابان های آزادی و آذربایجان",
     "colors": [
-      "#2F4389",
-      "#DACC4A"
+      "#FF2866A6",
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -1494,7 +1494,7 @@
     "latitude": "35.70575",
     "address": "خیابان حبیب الهی - شهید تیموری",
     "colors": [
-      "#2F4389"
+      "#FF2866A6"
     ],
     "disabled": false,
     "wc": false,
@@ -1523,7 +1523,7 @@
     "latitude": "35.716134",
     "address": "خیابان محمدعلی جناح، بلوار شهید گلاب، بلوار شهید چوب تراش",
     "colors": [
-      "#2F4389"
+      "#FF2866A6"
     ],
     "disabled": false,
     "wc": false,
@@ -1557,8 +1557,8 @@
     "latitude": "35.717598",
     "address": "بزرگراه محمد علی جناح، خیابان سازمان آب",
     "colors": [
-      "#2F4389",
-      "#007E46"
+      "#FF2866A6",
+      "#FF49977C"
     ],
     "disabled": false,
     "wc": true,
@@ -1587,7 +1587,7 @@
     "latitude": "35.799759",
     "address": "بلوار نیروی هوایی، میدان اول شهرک",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -1615,7 +1615,7 @@
     "latitude": "35.797925",
     "address": "بزرگراه لشگرک - تقاطع بلوار ارتش - ابتدای شهرک شهید محلاتی",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -1641,7 +1641,7 @@
       }
     ],
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "relations": [
@@ -1665,7 +1665,7 @@
     "latitude": "35.790987",
     "address": "نوبنیاد، ابتدای اقدسیه",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -1694,7 +1694,7 @@
     "latitude": "35.779428",
     "address": "تقاطع خیابان مغان و بزرگراه شهید صیاد شیرازی",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -1723,7 +1723,7 @@
     "latitude": "35.771831",
     "address": "اتوبان صیاد شیرازی٬ بالاتر از خیابان موسوی",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -1752,7 +1752,7 @@
     "latitude": "35.7595603",
     "address": "بزرگراه صیاد شیرازی، تقاطع بزرگراه شهید زین‌الدین",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -1781,7 +1781,7 @@
     "latitude": "35.743739",
     "address": "بلوار خواجه عبدالله انصاری",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -1810,7 +1810,7 @@
     "latitude": "35.735349",
     "address": "تفاطع بزگراه صیاد شیرازی و مسیل باختر",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -1839,7 +1839,7 @@
     "latitude": "35.731553",
     "address": "\tخیابان شریعتی - تقاطع خیابان شهید بهشتی",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -1868,7 +1868,7 @@
     "latitude": "35.731066",
     "address": "خیابان عباس آباد، روبروی بلوار یوسفی",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -1897,7 +1897,7 @@
     "latitude": "35.728365",
     "address": "خیابان بهشتی، مابین میرزای شیرازی و قائم مقام فرهانی",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -1926,7 +1926,7 @@
     "latitude": "35.721672",
     "address": "خیابان ولیعصر، تقاطع خیابان دکتر فاطمی",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -1960,8 +1960,8 @@
     "latitude": "35.700954",
     "address": "خیابان انقلاب اسلامی، چهارراه ولیعصر(عج)",
     "colors": [
-      "#67C5F5",
-      "#DACC4A"
+      "#FF73B1E8",
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -1992,7 +1992,7 @@
     "latitude": "35.681087",
     "address": "خیابان ولیعصر(عج) میدان منیریه",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -2023,8 +2023,8 @@
       }
     ],
     "colors": [
-      "#67C5F5",
-      "#7F0B74"
+      "#FF73B1E8",
+      "#FF994CA1"
     ],
     "disabled": false,
     "relations": [
@@ -2050,7 +2050,7 @@
     "latitude": "35.6595573",
     "address": "میدان راه آهن",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -2079,7 +2079,7 @@
     "latitude": "35.659075",
     "address": "حد فاصل پل جوادیه و میدان رباط کریم",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -2108,7 +2108,7 @@
     "latitude": "35.6525844",
     "address": "بزرگراه شهید چراغی",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -2137,7 +2137,7 @@
     "latitude": "35.6435696",
     "address": "بزرگراه شهید چراغی، جوانه",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -2166,7 +2166,7 @@
     "latitude": "35.638159",
     "address": "بزرگراه شهید چراغی،ابتدای خیابان ورزش",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -2195,7 +2195,7 @@
     "latitude": "35.63392",
     "address": " بزرگراه سعیدی ، روبروی خیابان سهیل",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -2224,7 +2224,7 @@
     "latitude": "35.627216",
     "address": "بزرگراه سعیدی، نرسیده به بزرگراه آزادگان ابتدای شهید حیدری",
     "colors": [
-      "#67C5F5"
+      "#FF73B1E8"
     ],
     "disabled": false,
     "wc": false,
@@ -2252,7 +2252,7 @@
     "latitude": "35.698954",
     "address": "ابتدای بزرگراه شهید دوران،بالاتر از بانک سپه",
     "colors": [
-      "#DACC4A"
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -2280,7 +2280,7 @@
     "latitude": "35.6926988",
     "address": "خیابان پیروزی- بین خیابانهای چهارم و پنجم نیرو هوایی",
     "colors": [
-      "#DACC4A"
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -2309,7 +2309,7 @@
     "latitude": "35.6913253",
     "address": "خیابان پیروزی ، چهار راه کوکاکولا ، جنب مجتمع تجاری کسا",
     "colors": [
-      "#DACC4A"
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -2338,7 +2338,7 @@
     "latitude": "35.691356",
     "address": "خیابان پیروزی –قبل از خیابان شهید حسن پورمند",
     "colors": [
-      "#DACC4A"
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -2367,7 +2367,7 @@
     "latitude": "35.6907927",
     "address": "خیابان پیروزی ،چهارصد دستگاه( تقاطع اتوبان امام علی (ع) و پیروزی)",
     "colors": [
-      "#DACC4A"
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -2396,7 +2396,7 @@
     "latitude": "35.701255",
     "address": "میدان فردوسی",
     "colors": [
-      "#DACC4A"
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -2425,7 +2425,7 @@
     "latitude": "35.701255",
     "address": "میدان انقلاب اسلامی،ابتدای خیابان آزادی، کوچه شهید جنتی",
     "colors": [
-      "#DACC4A"
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -2459,8 +2459,8 @@
     "latitude": "35.700767",
     "address": "خیابان آزادی - شمال شرقی تقاطع خیابان آزادی و شهید نواب صفوی",
     "colors": [
-      "#DACC4A",
-      "#7F0B74"
+      "#FFF4B653",
+      "#FF994CA1"
     ],
     "disabled": false,
     "wc": false,
@@ -2491,7 +2491,7 @@
     "latitude": "35.700653",
     "address": "خیابان آزادی - نرسیده به خیابان دکتر حبیب اله",
     "colors": [
-      "#DACC4A"
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -2520,7 +2520,7 @@
     "latitude": "35.700131",
     "address": "خیابان آزادی- قبل از میدان آزادی - تقاطع خیابان نور بخش",
     "colors": [
-      "#DACC4A"
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -2549,7 +2549,7 @@
     "latitude": "35.700802",
     "address": "میدان آزادی - ابتدای بزرگراه شهید برادران رحمانی",
     "colors": [
-      "#DACC4A"
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -2578,7 +2578,7 @@
     "latitude": "35.699546",
     "address": "بزرگراه شهید لشگری، ابتدای بیمه",
     "colors": [
-      "#DACC4A"
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -2608,7 +2608,7 @@
     "latitude": "35.690689",
     "address": "میدان آزادی، ترمینال ۲ فرودگاه مهرآباد",
     "colors": [
-      "#DACC4A"
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -2637,7 +2637,7 @@
     "latitude": "35.6886266",
     "address": "میدان آزادی، ترمینال ۶ فرودگاه مهرآباد",
     "colors": [
-      "#DACC4A"
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -2665,7 +2665,7 @@
     "latitude": "35.705557400000004",
     "address": "فاز دو شهرک اکباتان- روبروی بلوک 13",
     "colors": [
-      "#DACC4A"
+      "#FFF4B653"
     ],
     "disabled": false,
     "wc": false,
@@ -2691,7 +2691,7 @@
       }
     ],
     "colors": [
-      "#DACC4A"
+      "#FFF4B653"
     ],
     "disabled": false,
     "relations": [
@@ -2719,8 +2719,8 @@
     "latitude": "35.717476",
     "address": "ارم سبز",
     "colors": [
-      "#DACC4A",
-      "#007E46"
+      "#FFF4B653",
+      "#FF49977C"
     ],
     "disabled": false,
     "wc": true,
@@ -2751,7 +2751,7 @@
     "latitude": "35.716727",
     "address": "اتوبان کرج - جنب مجموعه ورزشی آزادی",
     "colors": [
-      "#007E46"
+      "#FF49977C"
     ],
     "disabled": false,
     "wc": false,
@@ -2780,7 +2780,7 @@
     "latitude": "35.717563",
     "address": "کیلومتر 8 اتوبان تهران کرج ، روبروی کارخانه بهنوش ، بلوار کوهک",
     "colors": [
-      "#007E46"
+      "#FF49977C"
     ],
     "disabled": false,
     "wc": true,
@@ -2809,7 +2809,7 @@
     "latitude": "35.725402",
     "address": "کیلومتر 14 اتوبان تهران کرج ، جنب باشگاه ایران خودرو",
     "colors": [
-      "#007E46"
+      "#FF49977C"
     ],
     "disabled": false,
     "wc": true,
@@ -2838,7 +2838,7 @@
     "latitude": "35.7444768",
     "address": "کیلومتر 16 بزرگراه تهران کرج - خیابان دارو پخش",
     "colors": [
-      "#007E46"
+      "#FF49977C"
     ],
     "disabled": false,
     "wc": true,
@@ -2867,7 +2867,7 @@
     "latitude": "35.751002",
     "address": "کیلومتر ۲۳ بزرگراه تهران-کرج، جنب اردوگاه آموزشی قدس",
     "colors": [
-      "#007E46"
+      "#FF49977C"
     ],
     "disabled": false,
     "wc": false,
@@ -2896,7 +2896,7 @@
     "latitude": "35.7662914",
     "address": "کیلومتر 27 جاده مخصوص تهران کرج اتمسفر",
     "colors": [
-      "#007E46"
+      "#FF49977C"
     ],
     "disabled": false,
     "wc": true,
@@ -2925,7 +2925,7 @@
     "latitude": "35.7870098",
     "address": "کرج ، پل فردیس ، جنب میدان شهید سلطانی ، ابتدای جاده ملارد",
     "colors": [
-      "#007E46"
+      "#FF49977C"
     ],
     "disabled": false,
     "wc": true,
@@ -2954,7 +2954,7 @@
     "latitude": "35.800951",
     "address": "اتوبان ( تهران - کرج ) جاده محمد شهر",
     "colors": [
-      "#007E46"
+      "#FF49977C"
     ],
     "disabled": false,
     "wc": false,
@@ -2983,7 +2983,7 @@
     "latitude": "35.824877",
     "address": "کرج-45 متری گلشهر- خیابان اختر غربی",
     "colors": [
-      "#007E46"
+      "#FF49977C"
     ],
     "disabled": false,
     "wc": true,
@@ -3009,7 +3009,7 @@
       }
     ],
     "colors": [
-      "#007E46"
+      "#FF49977C"
     ],
     "disabled": true,
     "relations": [
@@ -3029,7 +3029,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": true,
     "relations": [
@@ -3049,7 +3049,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": true,
     "relations": [
@@ -3070,7 +3070,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": true,
     "relations": [
@@ -3091,7 +3091,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": true,
     "relations": [
@@ -3112,7 +3112,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": false,
     "relations": [
@@ -3133,7 +3133,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": false,
     "relations": [
@@ -3154,7 +3154,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": false,
     "relations": [
@@ -3175,7 +3175,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": false,
     "relations": [
@@ -3196,7 +3196,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": true,
     "relations": [
@@ -3222,8 +3222,8 @@
       }
     ],
     "colors": [
-      "#EF639F",
-      "#7F0B74"
+      "#FFE8629F",
+      "#FF994CA1"
     ],
     "disabled": true,
     "relations": [
@@ -3246,7 +3246,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": false,
     "relations": [
@@ -3275,8 +3275,8 @@
     "latitude": "35.690381",
     "address": "خیابان پیروزی تقاطع 17 شهریور،نرسیده به میدان شهدا، جنب اداره برق",
     "colors": [
-      "#DACC4A",
-      "#EF639F"
+      "#FFF4B653",
+      "#FFE8629F"
     ],
     "disabled": false,
     "wc": false,
@@ -3304,7 +3304,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": true,
     "relations": [
@@ -3325,7 +3325,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": true,
     "relations": [
@@ -3354,8 +3354,8 @@
     "latitude": "35.715986",
     "address": "میدان هفت تیر",
     "colors": [
-      "#E0001F",
-      "#EF639F"
+      "#FFDB4E49",
+      "#FFE8629F"
     ],
     "disabled": false,
     "wc": false,
@@ -3383,7 +3383,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": true,
     "relations": [
@@ -3412,8 +3412,8 @@
     "latitude": "35.7115282",
     "address": "خیابان ولیعصر، میدان ولیعصر",
     "colors": [
-      "#67C5F5",
-      "#EF639F"
+      "#FF73B1E8",
+      "#FFE8629F"
     ],
     "disabled": false,
     "wc": false,
@@ -3441,7 +3441,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": false,
     "relations": [
@@ -3462,7 +3462,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": false,
     "relations": [
@@ -3488,8 +3488,8 @@
       }
     ],
     "colors": [
-      "#EF639F",
-      "#7F0B74"
+      "#FFE8629F",
+      "#FF994CA1"
     ],
     "disabled": false,
     "relations": [
@@ -3512,7 +3512,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": false,
     "relations": [
@@ -3533,7 +3533,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": false,
     "relations": [
@@ -3554,7 +3554,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": false,
     "relations": [
@@ -3575,7 +3575,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": false,
     "relations": [
@@ -3596,7 +3596,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": false,
     "relations": [
@@ -3617,7 +3617,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": true,
     "relations": [
@@ -3638,7 +3638,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": true,
     "relations": [
@@ -3659,7 +3659,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": true,
     "relations": [
@@ -3680,7 +3680,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": true,
     "relations": [
@@ -3701,7 +3701,7 @@
       }
     ],
     "colors": [
-      "#EF639F"
+      "#FFE8629F"
     ],
     "disabled": true,
     "relations": [
@@ -3721,7 +3721,7 @@
       }
     ],
     "colors": [
-      "#7F0B74"
+      "#FF994CA1"
     ],
     "disabled": true,
     "relations": [
@@ -3744,7 +3744,7 @@
     "latitude": "35.667159",
     "address": "محدوده بزرگراه بسیج - افسریه",
     "colors": [
-      "#7F0B74"
+      "#FF994CA1"
     ],
     "disabled": false,
     "wc": false,
@@ -3770,7 +3770,7 @@
       }
     ],
     "colors": [
-      "#7F0B74"
+      "#FF994CA1"
     ],
     "disabled": false,
     "relations": [
@@ -3791,7 +3791,7 @@
       }
     ],
     "colors": [
-      "#7F0B74"
+      "#FF994CA1"
     ],
     "disabled": false,
     "relations": [
@@ -3812,7 +3812,7 @@
       }
     ],
     "colors": [
-      "#7F0B74"
+      "#FF994CA1"
     ],
     "disabled": false,
     "relations": [
@@ -3833,7 +3833,7 @@
       }
     ],
     "colors": [
-      "#7F0B74"
+      "#FF994CA1"
     ],
     "disabled": false,
     "relations": [
@@ -3854,7 +3854,7 @@
       }
     ],
     "colors": [
-      "#7F0B74"
+      "#FF994CA1"
     ],
     "disabled": false,
     "relations": [
@@ -3875,7 +3875,7 @@
       }
     ],
     "colors": [
-      "#7F0B74"
+      "#FF994CA1"
     ],
     "disabled": false,
     "relations": [
@@ -3899,7 +3899,7 @@
     "latitude": "35.682491",
     "address": "محدوده بزرگراه شهیدنواب صفوی با جنوب خیابان کمیل",
     "colors": [
-      "#7F0B74"
+      "#FF994CA1"
     ],
     "disabled": false,
     "wc": false,
@@ -3925,7 +3925,7 @@
       }
     ],
     "colors": [
-      "#7F0B74"
+      "#FF994CA1"
     ],
     "disabled": false,
     "relations": [
@@ -3946,7 +3946,7 @@
       }
     ],
     "colors": [
-      "#7F0B74"
+      "#FF994CA1"
     ],
     "disabled": false,
     "relations": [
@@ -3967,7 +3967,7 @@
       }
     ],
     "colors": [
-      "#7F0B74"
+      "#FF994CA1"
     ],
     "disabled": false,
     "relations": [
@@ -3988,7 +3988,7 @@
       }
     ],
     "colors": [
-      "#7F0B74"
+      "#FF994CA1"
     ],
     "disabled": false,
     "relations": [
@@ -4012,7 +4012,7 @@
     "latitude": "35.754386",
     "address": "محدوده ضلع شمالی میدان صنعت",
     "colors": [
-      "#7F0B74"
+      "#FF994CA1"
     ],
     "disabled": false,
     "wc": false,
@@ -4038,7 +4038,7 @@
       }
     ],
     "colors": [
-      "#7F0B74"
+      "#FF994CA1"
     ],
     "disabled": false,
     "relations": [
@@ -4059,7 +4059,7 @@
       }
     ],
     "colors": [
-      "#7F0B74"
+      "#FF994CA1"
     ],
     "disabled": false,
     "relations": [
