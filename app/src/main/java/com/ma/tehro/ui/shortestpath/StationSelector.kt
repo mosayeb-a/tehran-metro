@@ -118,7 +118,7 @@ fun StationDropdown(
             .fillMaxWidth(),
         onDropDownItemSelected = { entry ->
             selectedStation = entry.key
-            onStationSelected(entry.key, entry.value.fa)
+            onStationSelected(entry.key, entry.value.translations.fa)
         },
         dropdownItem = { entry ->
             Row(
@@ -129,7 +129,7 @@ fun StationDropdown(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "${entry.value.fa}\n${entry.value.name}",
+                    text = "${entry.value.translations.fa}\n${entry.value.name}",
                     style = MaterialTheme.typography.bodyMedium,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
@@ -174,7 +174,7 @@ fun StationDropdown(
         ),
         searchPredicate = { searchText, entry ->
             entry.value.name.contains(searchText, ignoreCase = true) ||
-                    entry.value.fa.contains(searchText, ignoreCase = true)
+                    entry.value.translations.fa.contains(searchText, ignoreCase = true)
         }
     )
 }

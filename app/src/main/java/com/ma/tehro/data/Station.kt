@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Station(
     val name: String,
-    val fa: String,
+    val translations: Translations,
     val lines: List<Int> = emptyList(),
     val longitude: String? = null,
     val latitude: String? = null,
@@ -19,6 +19,11 @@ data class Station(
     val atm: Boolean? = null,
     val relations: List<String> = emptyList(),
     val positionsInLine: List<PositionInLine> = emptyList(),
+)
+
+@Serializable
+data class Translations(
+    val fa: String
 )
 
 @Serializable

@@ -55,7 +55,7 @@ fun StationDetail(
                 )
                 AppbarDetail(
                     text = station.address ?: "آدرس مشخص نشده",
-                    fa = station.fa,
+                    fa = station.translations!!.fa,
                     en = station.name,
                     line = lineNumber
                 )

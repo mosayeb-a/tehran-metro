@@ -72,7 +72,7 @@ class ShortestPathViewModel @Inject constructor(
         return path
     }
 
-    fun findShortestPathWithDirection(from: String, to: String): List<PathItem> {
+    private fun findShortestPathWithDirection(from: String, to: String): List<PathItem> {
         val result = findShortestPath(stations, from, to)
         if (result.path.isEmpty()) return emptyList()
 
@@ -195,6 +195,14 @@ class ShortestPathViewModel @Inject constructor(
             val currentStation = current!!.path.last()
 
             if (currentStation == to) {
+
+                val lastStation = stations[currentStation]
+
+                if (lastStation?.disabled == true) {
+
+                    continue
+                }
+
                 val lineChanges = countLineChanges(current.path, stations)
                 return PathResult(
                     path = current.path,
@@ -219,6 +227,12 @@ class ShortestPathViewModel @Inject constructor(
             station.relations.forEach { nextStationName ->
                 val nextStation = stations[nextStationName] ?: return@forEach
 
+
+                if (nextStation.disabled && (nextStationName == to ||
+                            nextStation.relations.any { it == to })) {
+                    return@forEach
+                }
+
                 var newCost = current.cost + stationCost
 
                 val needsLineChange = currentLine != null &&
@@ -241,9 +255,6 @@ class ShortestPathViewModel @Inject constructor(
 
         return PathResult(emptyList(), 0)
     }
-
-
-
 
     private fun countLineChanges(path: List<String>, stations: Map<String, Station>): Int {
         var changes = 0

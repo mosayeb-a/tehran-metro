@@ -197,7 +197,7 @@ fun StationRow(
             modifier = Modifier.weight(1f),
             station = station,
             itemHeight = itemHeight,
-            lineColor = color
+            lineNumber = lineNumber
         )
 
         if (disabled) {

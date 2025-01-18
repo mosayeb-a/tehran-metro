@@ -240,7 +240,7 @@ fun <T> SearchableExpandedDropDownMenu(
                                 keyboardController?.hide()
                                 if (selectedItem is Map.Entry<*, *> && selectedItem.value is Station) {
                                     val station = selectedItem.value as Station
-                                    selectedOptionText = "${station.name}\n${station.fa}"
+                                    selectedOptionText = "${station.name}\n${station.translations.fa}"
                                     onDropDownItemSelected(selectedItem)
                                 }
                                 searchedOption = ""

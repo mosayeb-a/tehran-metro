@@ -95,7 +95,7 @@ fun Stations(
                             .weight(1f),
                         station = station,
                         itemHeight = itemHeight,
-                        lineColor = lineColor,
+                        lineNumber = lineNumber,
                     )
                 }
 
@@ -112,14 +112,12 @@ fun StationItem(
     modifier: Modifier = Modifier,
     station: Station,
     itemHeight: Float,
-    lineColor: Color
+    lineNumber: Int
 ) {
-    val lineColorString = "#${Integer.toHexString(lineColor.toArgb()).uppercase()}"
-
-    val normalizedLineColorString = lineColorString.takeLast(6)
-    val colors: List<String> = station.colors
-        .map { it.takeLast(6) }
-        .filter { it != normalizedLineColorString }
+    // Get colors for other lines
+    val colors = station.lines
+        .filter { it != lineNumber }
+        .map { getLineColorByNumber(it) }
 
     val maxCircleSize = 36.dp
     val minCircleSize = 28.dp
@@ -139,7 +137,7 @@ fun StationItem(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = station.fa,
+                text = station.translations.fa,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold,
                 color = Color.White
@@ -157,13 +155,13 @@ fun StationItem(
                 .padding(start = 8.dp),
             contentAlignment = Alignment.CenterEnd
         ) {
-            colors.forEachIndexed { index, colorString ->
+            colors.forEachIndexed { index, color ->
                 val circleSize = maxCircleSize - (index * circleSizeStep)
                 Box(
                     modifier = Modifier
                         .size(circleSize)
                         .clip(CircleShape)
-                        .background(Color(android.graphics.Color.parseColor("#$colorString")))
+                        .background(color) // Use the `color` variable directly
                         .align(Alignment.Center)
                         .offset(y = (index * -8).dp)
                 ) {
@@ -180,3 +178,5 @@ fun StationItem(
         }
     }
 }
+
+

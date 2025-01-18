@@ -8,7 +8,7 @@ import kotlinx.serialization.json.Json
 import java.io.File
 
 fun main() {
-    val stations: MutableMap<String, Station> = readJsonStationsAsText("stations")
+    val stations: MutableMap<String, Station> = readJsonStationsAsText("stations2")
     val updatedStations = addPositionsInLine(stations)
 
     File("station_updated.json").writeText(Json.encodeToString(updatedStations))
@@ -16,16 +16,18 @@ fun main() {
 }
 
 fun addPositionsInLine(stations: MutableMap<String, Station>): Map<String, Station> {
-    val lines = stations.values.flatMap { it.lines }.distinct()
+    val lines = stations.values.flatMap { it.lines }.toSet()
 
     for (line in lines) {
         val orderedStations = getOrderedStationsByLine(line, stations)
         orderedStations.forEachIndexed { index, station ->
-            val updatedPositions =
-                station.positionsInLine + PositionInLine(position = index + 1, line = line)
-            stations[station.name] = station.copy(positionsInLine = updatedPositions)
+            val updatedStation = station.copy(
+                positionsInLine = station.positionsInLine + PositionInLine(index + 1, line)
+            )
+            stations[station.name] = updatedStation
         }
     }
+
     return stations
 }
 
