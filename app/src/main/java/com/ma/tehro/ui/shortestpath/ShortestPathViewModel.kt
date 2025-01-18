@@ -72,7 +72,7 @@ class ShortestPathViewModel @Inject constructor(
         return path
     }
 
-    private fun findShortestPathWithDirection(from: String, to: String): List<PathItem> {
+    fun findShortestPathWithDirection(from: String, to: String): List<PathItem> {
         val result = findShortestPath(stations, from, to)
         if (result.path.isEmpty()) return emptyList()
 
