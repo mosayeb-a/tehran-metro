@@ -107,4 +107,8 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+
+
+    implementation("org.osmdroid:osmdroid-android:6.1.16")
+    implementation("androidx.interpolator:interpolator:1.0.0")
 }

@@ -4,8 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -129,28 +129,36 @@ fun StationItem(
         modifier = modifier
             .fillMaxWidth()
             .height(itemHeight.dp)
-            .padding(16.dp),
+            .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-
-        Text(
-            text = station.name,
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold,
-            color = Color.White
-        )
-
+        Column(
+            modifier = Modifier
+                .weight(1f),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = station.fa,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+            Text(
+                text = station.name,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+        }
 
         Box(
             modifier = Modifier
-                .padding(start = 8.dp)
-                .fillMaxHeight(),
+                .padding(start = 8.dp),
             contentAlignment = Alignment.CenterEnd
         ) {
             colors.forEachIndexed { index, colorString ->
                 val circleSize = maxCircleSize - (index * circleSizeStep)
-
                 Box(
                     modifier = Modifier
                         .size(circleSize)
@@ -160,7 +168,9 @@ fun StationItem(
                         .offset(y = (index * -8).dp)
                 ) {
                     Icon(
-                        modifier = Modifier.align(Alignment.Center),
+                        modifier = Modifier
+                            .size(18.dp)
+                            .align(Alignment.Center),
                         painter = painterResource(R.drawable.sync_alt_24px),
                         contentDescription = "See stations by line",
                         tint = Color.White

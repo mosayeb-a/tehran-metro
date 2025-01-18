@@ -3,6 +3,7 @@ package com.ma.tehro.ui.line
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,8 +32,10 @@ import androidx.navigation.NavHostController
 import com.ma.tehro.R
 import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.StationsScreen
+import com.ma.tehro.common.calculateLineName
 import com.ma.tehro.common.getLineColorByNumber
-import com.ma.tehro.common.getLineEndpoints
+import com.ma.tehro.common.getLineEnEndpoints
+import com.ma.tehro.common.getLineFaEndpoints
 
 @Composable
 fun Lines(
@@ -46,7 +49,7 @@ fun Lines(
 
     Scaffold(
         topBar = {
-            Appbar("lines list")
+            Appbar("فهرست خطوط\nlines list")
         },
         floatingActionButton = {
             FloatingActionButton(
@@ -91,7 +94,7 @@ fun LineItem(
     onClick: () -> Unit,
     itemHeight: Float
 ) {
-    val endpoint = remember { getLineEndpoints() }
+    val lineName = calculateLineName(lineNumber)
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -103,9 +106,9 @@ fun LineItem(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            text = "Line $lineNumber - ${endpoint[lineNumber]?.first}/${endpoint[lineNumber]?.second}",
-            style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.weight(1f),
+            text = lineName,
+            style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.Bold,
             color = Color.White
         )

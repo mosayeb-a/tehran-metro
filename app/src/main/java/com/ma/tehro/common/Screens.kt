@@ -13,7 +13,12 @@ data class StationsScreen(val lineNumber: Int)
 object StationSelectorScreen
 
 @Serializable
-data class PathFinderScreen(val startStation: String, val destination: String)
+data class PathFinderScreen(
+    val startEnStation: String,
+    val startFaStation: String,
+    val enDestination: String,
+    val faDestination: String
+)
 
 @Serializable
 data class StationDetailScreen(val station: Station, val lineNumber: Int)

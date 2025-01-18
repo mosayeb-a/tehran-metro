@@ -78,14 +78,21 @@ class MainActivity : ComponentActivity() {
                     animateComposable<StationSelectorScreen> { backStackEntry ->
                         val viewModel: ShortestPathViewModel = hiltViewModel(backStackEntry)
                         StationSelector(
-                            stations = viewModel.stations.map { it.value.name },
+                            stations = viewModel.stations,
                             onBack = { navController.popBackStack() },
                             viewState = viewModel.uiState.collectAsStateWithLifecycle().value,
-                            onSelectedChange = { isFrom, query ->
-                                viewModel.onSelectedChange(isFrom, query)
+                            onSelectedChange = { isFrom, query, fa ->
+                                viewModel.onSelectedChange(isFrom, query, fa)
                             },
-                            onFindPathClick = { start, dest ->
-                                navController.navigate(PathFinderScreen(start, dest))
+                            onFindPathClick = { startEn, destEn, startFa, destFa ->
+                                navController.navigate(
+                                    PathFinderScreen(
+                                        startEn,
+                                        startFa,
+                                        destEn,
+                                        destFa
+                                    )
+                                )
                             }
                         )
                     }
@@ -95,23 +102,18 @@ class MainActivity : ComponentActivity() {
                         PathFinder(
                             findShortestPath = {
                                 viewModel.findShortestPathWithDirectionCache(
-                                    from = args.startStation,
-                                    to = args.destination
+                                    from = args.startEnStation,
+                                    to = args.enDestination
                                 )
                             },
                             onBack = { navController.popBackStack() },
-                            from = args.startStation,
-                            to = args.destination,
-                            getLineByPath = { path -> viewModel.getCachedLineByPath(path) },
-                            isIndexInTheRange = { index, pairs ->
-                                viewModel.isIndexInTheRange(
-                                    index = index,
-                                    lineAndTitlePosition = pairs
-                                )
-                            },
+                            fromEn = args.startEnStation,
+                            toEn = args.enDestination,
                             onStationClick = { station, line ->
                                 navController.navigate(StationDetailScreen(station, line))
                             },
+                            fromFa = args.startFaStation,
+                            toFa = args.faDestination,
                         )
                     }
                     animateComposable<StationDetailScreen>(

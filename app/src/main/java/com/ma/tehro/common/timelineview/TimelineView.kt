@@ -65,7 +65,7 @@ object TimelineView {
 
 
             if (iconBitmap != null) {
-                val iconSize = nodeRadius * 1.6f
+                val iconSize = nodeRadius * 1.8f
                 val topLeft = Offset(
                     size.width / 2 - iconSize / 2,
                     size.height / 2 - iconSize / 2

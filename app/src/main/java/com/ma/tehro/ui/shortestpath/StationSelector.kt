@@ -1,5 +1,6 @@
 package com.ma.tehro.ui.shortestpath
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,26 +22,28 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.timelineview.TimelineView
 import com.ma.tehro.common.timelineview.TimelineView.SingleNode
+import com.ma.tehro.data.Station
 
 @Composable
 fun StationSelector(
     viewState: PathUiState,
-    stations: List<String>,
-    onFindPathClick: (from: String, to: String) -> Unit,
-    onSelectedChange: (isFrom: Boolean, query: String) -> Unit,
+    stations: Map<String, Station>,
+    onFindPathClick: (fromEn: String, toEn: String, fromFa: String, toFa: String) -> Unit,
+    onSelectedChange: (isFrom: Boolean, query: String, faQuery: String) -> Unit,
     onBack: () -> Unit
 ) {
-
     Scaffold(
         containerColor = MaterialTheme.colorScheme.primary,
         topBar = {
             Column {
                 Appbar(
-                    title = "Path Finder",
+                    title = "مسیریابی" + "\n" + "Path Finder",
                     handleBack = true,
                     onBackClick = onBack
                 )
@@ -55,18 +58,18 @@ fun StationSelector(
                 .fillMaxWidth()
         ) {
             StationDropdown(
-                query = viewState.selectedStartStation,
+                query = viewState.selectedEnStartStation,
                 stations = stations,
-                onStationSelected = { query -> onSelectedChange(true, query) },
+                onStationSelected = { en, fa -> onSelectedChange(true, en, fa) },
                 isFrom = true
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
             StationDropdown(
-                query = viewState.selectedDestStation,
+                query = viewState.selectedEnDestStation,
                 stations = stations,
-                onStationSelected = { query -> onSelectedChange(false, query) },
+                onStationSelected = { en, fa -> onSelectedChange(false, en, fa) },
                 isFrom = false
             )
 
@@ -78,16 +81,21 @@ fun StationSelector(
                     .fillMaxWidth()
                     .height(76.dp),
                 onClick = {
-                    onFindPathClick(viewState.selectedStartStation, viewState.selectedDestStation)
+                    onFindPathClick(
+                        viewState.selectedEnStartStation,
+                        viewState.selectedEnDestStation,
+                        viewState.selectedFaStartStation,
+                        viewState.selectedFaDestStation,
+                    )
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.tertiary,
                     disabledContainerColor = MaterialTheme.colorScheme.tertiary.copy(alpha = .5f)
                 ),
-                enabled = viewState.selectedStartStation.isNotEmpty() &&
-                        viewState.selectedDestStation.isNotEmpty()
+                enabled = viewState.selectedEnStartStation.isNotEmpty() &&
+                        viewState.selectedEnDestStation.isNotEmpty()
             ) {
-                Text("Find Path")
+                Text(text = "یافتن مسیر\nFind Path")
             }
 
         }
@@ -97,25 +105,41 @@ fun StationSelector(
 @Composable
 fun StationDropdown(
     query: String,
-    stations: List<String>,
-    onStationSelected: (String) -> Unit,
+    stations: Map<String, Station>,
+    onStationSelected: (en: String, fa: String) -> Unit,
     isFrom: Boolean
 ) {
     var selectedStation by rememberSaveable { mutableStateOf(query) }
+
     SearchableExpandedDropDownMenu(
-        listOfItems = stations,
+        listOfItems = stations.entries.toList(),
         modifier = Modifier
             .padding(horizontal = 6.dp)
             .fillMaxWidth(),
-        onDropDownItemSelected = { station ->
-            selectedStation = station
-            onStationSelected(station)
+        onDropDownItemSelected = { entry ->
+            selectedStation = entry.key
+            onStationSelected(entry.key, entry.value.fa)
         },
-        dropdownItem = { stationName ->
-            Text(text = stationName)
+        dropdownItem = { entry ->
+            Row(
+                modifier = Modifier
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = "${entry.value.fa}\n${entry.value.name}",
+                    style = MaterialTheme.typography.bodyMedium,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Start,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
         },
         defaultItem = { defaultStation ->
-            selectedStation = defaultStation
+            selectedStation = defaultStation.key
         },
         startContent = {
             Row(
@@ -130,7 +154,7 @@ fun StationDropdown(
                     isDashed = true
                 )
                 Text(
-                    text = if (isFrom) "FROM" else "TO",
+                    text = if (isFrom) "مبدا" + "\n" + "FROM" else "مقصد" + "\n" + "TO",
                     modifier = Modifier
                         .padding(start = 4.dp)
                         .align(Alignment.CenterVertically),
@@ -138,9 +162,7 @@ fun StationDropdown(
                 )
             }
         },
-        onSearchTextFieldClicked = {
-
-        },
+        onSearchTextFieldClicked = {},
         colors = TextFieldDefaults.colors(
             focusedContainerColor = Color.White,
             unfocusedContainerColor = Color.White,
@@ -149,6 +171,10 @@ fun StationDropdown(
             focusedTextColor = Color.Black,
             unfocusedTextColor = Color.Black,
             cursorColor = Color.Black
-        )
+        ),
+        searchPredicate = { searchText, entry ->
+            entry.value.name.contains(searchText, ignoreCase = true) ||
+                    entry.value.fa.contains(searchText, ignoreCase = true)
+        }
     )
 }

@@ -12,9 +12,9 @@ import com.ma.tehro.R
 
 val DmSansFontFamily: FontFamily
     @Composable get() = FontFamily(
-        Font(R.font.dm_sans_regular, weight = FontWeight.Normal),
-        Font(R.font.dm_sans_medium, weight = FontWeight.Medium),
-        Font(R.font.dm_sans_bold, weight = FontWeight.Bold),
+        Font(R.font.vazirmatn_regular, weight = FontWeight.Normal),
+        Font(R.font.vazirmatn_medium, weight = FontWeight.Medium),
+        Font(R.font.vazirmatn_bold, weight = FontWeight.Bold),
     )
 val AppTypography: Typography
     @Composable get() {

@@ -24,7 +24,7 @@
 
             val expectedPath = actualPath.map {
                 when (it) {
-                    is PathItem.Title -> PathItem.Title(it.text)
+                    is PathItem.Title -> PathItem.Title(it.en)
                     is PathItem.StationItem -> PathItem.StationItem(stations[it.station.name]!!)
                 }
             }

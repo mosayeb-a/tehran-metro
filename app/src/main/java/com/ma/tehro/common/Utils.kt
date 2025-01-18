@@ -54,7 +54,7 @@ fun Painter.toImageBitmap(
     return bitmap
 }
 
-fun getLineEndpoints(): Map<Int, Pair<String, String>> {
+fun getLineEnEndpoints(): Map<Int, Pair<String, String>> {
     return mapOf(
         1 to Pair("Tajrish", "Kahrizak"),
         2 to Pair("Farhangsara", "Sadeghiyeh"),
@@ -63,6 +63,17 @@ fun getLineEndpoints(): Map<Int, Pair<String, String>> {
         5 to Pair("Sadeghiyeh", "Qasem Soleimani"),
         6 to Pair("Haram-e Abdol Azim", "Kouhsar"),
         7 to Pair("Varzeshgah-e Takhti", "Meydan-e Ketab")
+    )
+}
+fun getLineFaEndpoints(): Map<Int, Pair<String, String>> {
+    return mapOf(
+        1 to Pair("تجریش", "کهریزک"),
+        2 to Pair("فرهنگسرا", "صادقیه"),
+        3 to Pair("قائم", "آزادگان"),
+        4 to Pair("کلاهدوز", "ارم سبز"),
+        5 to Pair("صادقیه", "قاسم سلیمانی"),
+        6 to Pair("حرم عبدالعظیم", "کوهسار"),
+        7 to Pair("ورزشگاه تختی", "میدان کتاب")
     )
 }
 
@@ -92,7 +103,6 @@ fun getLineNumberByColor(color: Color): Int {
     }
 }
 
-
 fun readJsonStationsAsText(fileName: String): MutableMap<String, Station> {
     val path =
         "/home/mosayeb/MyAndroidStuff/AndroidProjects/RealeaseVersion/tehro/app/src/main/res/raw/$fileName.json"
@@ -102,6 +112,18 @@ fun readJsonStationsAsText(fileName: String): MutableMap<String, Station> {
 }
 
 fun calculateLineName(lineNumber: Int): String {
-    val endpoint = getLineEndpoints()
-    return "Line $lineNumber - ${endpoint[lineNumber]?.first}/${endpoint[lineNumber]?.second}"
+    val enEndpoints = getLineEnEndpoints()
+    val faEndpoints = getLineFaEndpoints()
+
+    return """
+        خط ${lineNumber.toFarsiNumber()} - ${faEndpoints[lineNumber]?.first}/${faEndpoints[lineNumber]?.second}
+        Line $lineNumber - ${enEndpoints[lineNumber]?.first}/${enEndpoints[lineNumber]?.second}
+    """.trimIndent()
+}
+
+fun Int.toFarsiNumber(): String {
+    val farsiNumbers = charArrayOf('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹')
+    return this.toString().map {
+        if (it.isDigit()) farsiNumbers[it.digitToInt()] else it
+    }.joinToString("")
 }

@@ -2,7 +2,9 @@ package com.ma.tehro.ui.shortestpath
 
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
-import com.ma.tehro.common.getLineEndpoints
+import com.ma.tehro.common.getLineEnEndpoints
+import com.ma.tehro.common.getLineFaEndpoints
+import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.data.Station
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,15 +14,26 @@ import javax.inject.Inject
 
 @Immutable
 sealed class PathItem {
-    data class Title(val text: String) : PathItem()
-    data class StationItem(val station: Station) : PathItem()
+    data class Title(val en: String, val fa: String) : PathItem()
+    data class StationItem(
+        val station: Station,
+        val isPassthrough: Boolean = false,
+        val lineNumber: Int
+    ) : PathItem()
 }
 
 @Immutable
 data class PathUiState(
     val isLoading: Boolean = false,
-    val selectedStartStation: String = "",
-    val selectedDestStation: String = "",
+    val selectedEnStartStation: String = "",
+    val selectedFaStartStation: String = "",
+    val selectedEnDestStation: String = "",
+    val selectedFaDestStation: String = "",
+)
+
+data class PathResult(
+    val path: List<String>,
+    val lineChanges: Int,
 )
 
 data class PathCost(
@@ -36,53 +49,13 @@ class ShortestPathViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(PathUiState())
     val uiState: StateFlow<PathUiState> get() = _uiState
 
-    fun onSelectedChange(isFrom: Boolean, station: String) {
+    fun onSelectedChange(isFrom: Boolean, enStation: String, faStation: String) {
         _uiState.value = _uiState.value.copy(
-            selectedStartStation = if (isFrom) station else _uiState.value.selectedStartStation,
-            selectedDestStation = if (!isFrom) station else _uiState.value.selectedDestStation
+            selectedEnStartStation = if (isFrom) enStation else _uiState.value.selectedEnStartStation,
+            selectedFaStartStation = if (isFrom) faStation else _uiState.value.selectedFaStartStation,
+            selectedEnDestStation = if (!isFrom) enStation else _uiState.value.selectedEnDestStation,
+            selectedFaDestStation = if (!isFrom) faStation else _uiState.value.selectedFaDestStation
         )
-    }
-
-
-    fun isIndexInTheRange(index: Int, lineAndTitlePosition: List<Pair<Int, Pair<Int, Int>>>): Int? {
-        return lineAndTitlePosition.firstOrNull { (_, range) ->
-            index in range.first..range.second
-        }?.first
-    }
-
-
-    private fun getLineByPath(path: List<PathItem>): List<Pair<Int, Pair<Int, Int>>> {
-        val lines = mutableListOf<Pair<Int, Pair<Int, Int>>>()
-        var currentLine: Int? = null
-        var segmentStartIndex = 0
-
-        path.forEachIndexed { index, item ->
-            if (item is PathItem.Title) {
-                val lineNumber = item.text.substring(5, 6).toInt()
-
-                if (currentLine != null && lineNumber != currentLine) {
-                    lines.add(currentLine!! to (segmentStartIndex to index - 1))
-                }
-
-                currentLine = lineNumber
-                segmentStartIndex = index
-            }
-        }
-
-        if (currentLine != null) {
-            lines.add(currentLine!! to (segmentStartIndex to path.lastIndex))
-        }
-
-        return lines
-    }
-
-    private val lineAndTitlePositionCache =
-        mutableMapOf<List<PathItem>, List<Pair<Int, Pair<Int, Int>>>>()
-
-    fun getCachedLineByPath(path: List<PathItem>): List<Pair<Int, Pair<Int, Int>>> {
-        return lineAndTitlePositionCache.getOrPut(path) {
-            getLineByPath(path)
-        }
     }
 
     private val pathCache = mutableMapOf<Pair<String, String>, List<PathItem>>()
@@ -90,11 +63,9 @@ class ShortestPathViewModel @Inject constructor(
     fun findShortestPathWithDirectionCache(from: String, to: String): List<PathItem> {
         val key = Pair(from, to)
 
-
         if (pathCache.containsKey(key)) {
             return pathCache[key]!!
         }
-
 
         val path = findShortestPathWithDirection(from, to)
         pathCache[key] = path
@@ -102,19 +73,25 @@ class ShortestPathViewModel @Inject constructor(
     }
 
     fun findShortestPathWithDirection(from: String, to: String): List<PathItem> {
-        val shortestPath = findShortestPath(stations, from, to)
-        if (shortestPath.isEmpty()) return emptyList()
+        val result = findShortestPath(stations, from, to)
+        if (result.path.isEmpty()) return emptyList()
 
         val directions = mutableListOf<PathItem>()
         var currentLine: Int? = null
         var previousStation: Station? = null
 
-        val firstStation = stations[shortestPath.first()] ?: return emptyList()
-        directions.add(PathItem.StationItem(firstStation))
+        val firstStation = stations[result.path.first()] ?: return emptyList()
+        directions.add(
+            PathItem.StationItem(
+                station = firstStation,
+                isPassthrough = firstStation.disabled,
+                lineNumber = firstStation.lines.first()
+            )
+        )
 
-        for (i in 0 until shortestPath.size - 1) {
-            val currentStationName = shortestPath[i]
-            val nextStationName = shortestPath[i + 1]
+        for (i in 0 until result.path.size - 1) {
+            val currentStationName = result.path[i]
+            val nextStationName = result.path[i + 1]
 
             val currentStation = stations[currentStationName] ?: continue
             val nextStation = stations[nextStationName] ?: continue
@@ -129,27 +106,49 @@ class ShortestPathViewModel @Inject constructor(
 
             if (currentLine != currentLinePosition.line) {
                 currentLine = currentLinePosition.line
-                val endpoints = getLineEndpoints()[currentLine] ?: continue
-                val direction = if (currentLinePosition.position < nextLinePosition.position) {
-                    "Line $currentLine: To ${endpoints.second}"
+                val enEndpoints = getLineEnEndpoints()[currentLine] ?: continue
+                val faEndpoints = getLineFaEndpoints()[currentLine] ?: continue
+
+                if (currentLinePosition.position < nextLinePosition.position) {
+                    directions.add(
+                        PathItem.Title(
+                            fa = "خط ${currentLine.toFarsiNumber()}: به سمت ${faEndpoints.second}",
+                            en = "Line $currentLine: To ${enEndpoints.second}"
+                        )
+                    )
                 } else {
-                    "Line $currentLine: To ${endpoints.first}"
+                    directions.add(
+                        PathItem.Title(
+                            fa = "خط ${currentLine.toFarsiNumber()}: به سمت ${faEndpoints.first}",
+                            en = "Line $currentLine: To ${enEndpoints.first}"
+                        )
+                    )
                 }
-                directions.add(PathItem.Title(direction))
 
                 if (previousStation != null) {
-                    directions.add(PathItem.StationItem(currentStation))
+                    directions.add(
+                        PathItem.StationItem(
+                            station = currentStation,
+                            isPassthrough = currentStation.disabled,
+                            lineNumber = currentLinePosition.line
+                        )
+                    )
                 }
             }
 
             if (previousStation == null || previousStation.name != nextStation.name) {
-                directions.add(PathItem.StationItem(nextStation))
+                directions.add(
+                    PathItem.StationItem(
+                        station = nextStation,
+                        isPassthrough = nextStation.disabled,
+                        lineNumber = currentLinePosition.line
+                    )
+                )
             }
 
             previousStation = nextStation
         }
 
-        // todo quick fix
         if (directions.size > 1) {
             directions.swap(0, 1)
         }
@@ -182,7 +181,7 @@ class ShortestPathViewModel @Inject constructor(
         to: String,
         stationCost: Int = 3,
         lineChangeCost: Int = 6
-    ): List<String> {
+    ): PathResult {
         val queue = PriorityQueue<PathCost>(compareBy { it.cost })
         val visited = mutableSetOf<String>()
         val costMap = mutableMapOf<String, Int>().apply {
@@ -195,7 +194,13 @@ class ShortestPathViewModel @Inject constructor(
             val current = queue.poll()
             val currentStation = current!!.path.last()
 
-            if (currentStation == to) return current.path
+            if (currentStation == to) {
+                val lineChanges = countLineChanges(current.path, stations)
+                return PathResult(
+                    path = current.path,
+                    lineChanges = lineChanges
+                )
+            }
 
             if (costMap.getOrDefault(currentStation, Int.MAX_VALUE) < current.cost) continue
 
@@ -211,32 +216,53 @@ class ShortestPathViewModel @Inject constructor(
                 station.lines.first()
             }
 
-            station.relations
-                .filter { stations[it]?.disabled != true }
-                .forEach { nextStationName ->
-                    val nextStation = stations[nextStationName] ?: return@forEach
+            station.relations.forEach { nextStationName ->
+                val nextStation = stations[nextStationName] ?: return@forEach
 
-                    var newCost = current.cost + stationCost
+                var newCost = current.cost + stationCost
 
-                    val needsLineChange = currentLine != null &&
-                            !nextStation.lines.contains(currentLine)
-                    if (needsLineChange) {
-                        newCost += lineChangeCost
-                    }
-
-                    if (newCost < costMap.getOrDefault(nextStationName, Int.MAX_VALUE)) {
-                        costMap[nextStationName] = newCost
-                        queue.add(
-                            PathCost(
-                                path = current.path + nextStationName,
-                                cost = newCost
-                            )
-                        )
-                    }
+                val needsLineChange = currentLine != null &&
+                        !nextStation.lines.contains(currentLine)
+                if (needsLineChange) {
+                    newCost += lineChangeCost
                 }
+
+                if (newCost < costMap.getOrDefault(nextStationName, Int.MAX_VALUE)) {
+                    costMap[nextStationName] = newCost
+                    queue.add(
+                        PathCost(
+                            path = current.path + nextStationName,
+                            cost = newCost
+                        )
+                    )
+                }
+            }
         }
 
-        return emptyList()
+        return PathResult(emptyList(), 0)
+    }
+
+
+
+
+    private fun countLineChanges(path: List<String>, stations: Map<String, Station>): Int {
+        var changes = 0
+        var currentLine: Int? = null
+
+        for (stationName in path) {
+            val station = stations[stationName] ?: continue
+
+            if (currentLine == null) {
+                currentLine = station.lines.first()
+                continue
+            }
+
+            if (!station.lines.contains(currentLine)) {
+                changes++
+                currentLine = station.lines.first()
+            }
+        }
+        return changes
     }
 
     private fun MutableList<PathItem>.swap(index1: Int, index2: Int) {
@@ -245,3 +271,4 @@ class ShortestPathViewModel @Inject constructor(
         this[index2] = temp
     }
 }
+

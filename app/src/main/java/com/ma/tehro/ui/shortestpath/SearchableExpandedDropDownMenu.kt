@@ -37,11 +37,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.ma.tehro.data.Station
 
 @Composable
 fun <T> SearchableExpandedDropDownMenu(
@@ -49,7 +54,6 @@ fun <T> SearchableExpandedDropDownMenu(
     listOfItems: List<T>,
     enable: Boolean = true,
     readOnly: Boolean = true,
-    placeholder: @Composable (() -> Unit) = { Text(text = "Select Option") },
     openedIcon: ImageVector = Icons.Outlined.KeyboardArrowUp,
     closedIcon: ImageVector = Icons.Outlined.KeyboardArrowDown,
     parentTextFieldCornerRadius: Dp = 12.dp,
@@ -62,6 +66,9 @@ fun <T> SearchableExpandedDropDownMenu(
     defaultItem: (T) -> Unit,
     onSearchTextFieldClicked: () -> Unit,
     startContent: @Composable (() -> Unit) = { },
+    searchPredicate: (String, T) -> Boolean = { searchText, item ->
+        item.toString().contains(searchText, ignoreCase = true)
+    }
 ) {
     var selectedOptionText by rememberSaveable { mutableStateOf("") }
     var searchedOption by rememberSaveable { mutableStateOf("") }
@@ -106,22 +113,39 @@ fun <T> SearchableExpandedDropDownMenu(
     ) {
         OutlinedTextField(
             modifier = modifier
-                .height(76.dp),
+                .height(76.dp)
+                .fillMaxWidth(),
             colors = colors,
-            value = selectedOptionText,
+            value = "",
             readOnly = readOnly,
             enabled = enable,
             onValueChange = { selectedOptionText = it },
-            placeholder = {
-                Box(
-                    modifier = Modifier.fillMaxHeight(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    placeholder()
-                }
-            },
             leadingIcon = {
                 startContent.invoke()
+            },
+            placeholder = {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Text(
+                        text = selectedOptionText.split("\n").getOrNull(0) ?: "",
+                        style = MaterialTheme.typography.bodyMedium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        color = Color.Black,
+                        modifier = Modifier.weight(1f)
+                    )
+                    Text(
+                        text = selectedOptionText.split("\n").getOrNull(1) ?: "",
+                        style = MaterialTheme.typography.bodyMedium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        color = Color.Black,
+                        textAlign = TextAlign.End,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
             },
             trailingIcon = {
                 IconToggleButton(
@@ -165,7 +189,6 @@ fun <T> SearchableExpandedDropDownMenu(
                 expanded = expanded,
                 onDismissRequest = { expanded = false },
             ) {
-
                 Column(
                     verticalArrangement = Arrangement.spacedBy(10.dp),
                 ) {
@@ -182,11 +205,8 @@ fun <T> SearchableExpandedDropDownMenu(
                             ),
                         onValueChange = { selectedSport ->
                             searchedOption = selectedSport
-                            filteredItems = listOfItems.filter {
-                                it.toString().contains(
-                                    searchedOption,
-                                    ignoreCase = true,
-                                )
+                            filteredItems = listOfItems.filter { item ->
+                                searchPredicate(searchedOption, item)
                             }.toMutableList()
                         },
                         leadingIcon = {
@@ -218,8 +238,11 @@ fun <T> SearchableExpandedDropDownMenu(
                         DropdownMenuItem(
                             onClick = {
                                 keyboardController?.hide()
-                                selectedOptionText = selectedItem.toString()
-                                onDropDownItemSelected(selectedItem)
+                                if (selectedItem is Map.Entry<*, *> && selectedItem.value is Station) {
+                                    val station = selectedItem.value as Station
+                                    selectedOptionText = "${station.name}\n${station.fa}"
+                                    onDropDownItemSelected(selectedItem)
+                                }
                                 searchedOption = ""
                                 expanded = false
                             },
