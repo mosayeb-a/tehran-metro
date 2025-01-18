@@ -7,8 +7,7 @@ import com.ma.tehro.data.Station
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import java.util.LinkedList
-import java.util.Queue
+import java.util.PriorityQueue
 import javax.inject.Inject
 
 @Immutable
@@ -24,6 +23,10 @@ data class PathUiState(
     val selectedDestStation: String = "",
 )
 
+data class PathCost(
+    val path: List<String>,
+    val cost: Int
+)
 
 @HiltViewModel
 class ShortestPathViewModel @Inject constructor(
@@ -154,28 +157,85 @@ class ShortestPathViewModel @Inject constructor(
         return directions
     }
 
+    /**
+     * Finds the optimal path between two metro stations considering both distance and line changes.
+     *
+     * This implementation uses Dijkstra's algorithm with a priority queue to find the path that
+     * minimizes the total cost, where cost is calculated based on:
+     * - Number of stations traveled (stationCost per station)
+     * - Number of line changes required (lineChangeCost per change)
+     *
+     * Cost Calculation:
+     * - Base cost per station: 3 points (configurable via stationCost)
+     * - Additional cost for line change: 6 points (configurable via lineChangeCost)
+     * - Total path cost = (number of stations × stationCost) + (number of line changes × lineChangeCost)
+     *
+     * Example:
+     * Path with 5 stations and 1 line change:
+     * - Station cost: 5 × 3 = 15
+     * - Line change cost: 1 × 6 = 6
+     * - Total cost: 21
+     **/
     private fun findShortestPath(
         stations: Map<String, Station>,
         from: String,
-        to: String
+        to: String,
+        stationCost: Int = 3,
+        lineChangeCost: Int = 6
     ): List<String> {
+        val queue = PriorityQueue<PathCost>(compareBy { it.cost })
         val visited = mutableSetOf<String>()
-        val queue: Queue<List<String>> = LinkedList()
-        queue.add(listOf(from))
+        val costMap = mutableMapOf<String, Int>().apply {
+            put(from, 0)
+        }
+
+        queue.add(PathCost(listOf(from), 0))
 
         while (queue.isNotEmpty()) {
-            val path = queue.poll()
-            val current = path.last()
+            val current = queue.poll()
+            val currentStation = current!!.path.last()
 
-            if (current == to) return path
-            if (visited.contains(current)) continue
+            if (currentStation == to) return current.path
 
-            visited.add(current)
-            val station = stations[current] ?: continue
-            station.relations.filter { stations[it]?.disabled != true }.forEach { relation ->
-                queue.add(path + relation)
+            if (costMap.getOrDefault(currentStation, Int.MAX_VALUE) < current.cost) continue
+
+            visited.add(currentStation)
+
+            val station = stations[currentStation] ?: continue
+            val currentLine = if (current.path.size > 1) {
+                val prevStation = stations[current.path[current.path.size - 2]]
+                prevStation?.lines?.firstOrNull { line ->
+                    station.lines.contains(line)
+                }
+            } else {
+                station.lines.first()
             }
+
+            station.relations
+                .filter { stations[it]?.disabled != true }
+                .forEach { nextStationName ->
+                    val nextStation = stations[nextStationName] ?: return@forEach
+
+                    var newCost = current.cost + stationCost
+
+                    val needsLineChange = currentLine != null &&
+                            !nextStation.lines.contains(currentLine)
+                    if (needsLineChange) {
+                        newCost += lineChangeCost
+                    }
+
+                    if (newCost < costMap.getOrDefault(nextStationName, Int.MAX_VALUE)) {
+                        costMap[nextStationName] = newCost
+                        queue.add(
+                            PathCost(
+                                path = current.path + nextStationName,
+                                cost = newCost
+                            )
+                        )
+                    }
+                }
         }
+
         return emptyList()
     }
 
