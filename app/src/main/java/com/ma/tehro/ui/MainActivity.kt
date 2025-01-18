@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
@@ -135,26 +136,33 @@ class MainActivity : ComponentActivity() {
 inline fun <reified T : Any> NavGraphBuilder.animateComposable(
     typeMap: Map<KType, @JvmSuppressWildcards NavType<*>> = emptyMap(),
     noinline content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit
-) {
+)  {
     this.composable<T>(
         typeMap = typeMap,
         enterTransition = { defaultEnterTransition() },
         exitTransition = { defaultExitTransition() },
-        popEnterTransition = { defaultEnterTransition() },
-        popExitTransition = { defaultExitTransition() }
+        popEnterTransition = { defaultPopEnterTransition() },
+        popExitTransition = { defaultPopExitTransition() }
     ) {
         content(it)
     }
 }
-
 fun defaultEnterTransition(): EnterTransition = slideInHorizontally(
     initialOffsetX = { it },
-    animationSpec = tween(durationMillis = 300)
+    animationSpec = tween(durationMillis = 230)
 )
 
 fun defaultExitTransition(): ExitTransition = slideOutHorizontally(
     targetOffsetX = { -it },
-    animationSpec = tween(durationMillis = 300)
+    animationSpec = tween(durationMillis = 230)
 )
 
+fun defaultPopEnterTransition(): EnterTransition = slideInHorizontally(
+    initialOffsetX = { -it },
+    animationSpec = tween(durationMillis = 230)
+)
 
+fun defaultPopExitTransition(): ExitTransition = slideOutHorizontally(
+    targetOffsetX = { it },
+    animationSpec = tween(durationMillis = 230)
+)
