@@ -1,0 +1,9 @@
+A free and open-source offline Android app for navigating the Tehran Metro system efficiently.
+
+Features:
+
+- Detailed station info, including facilities and connections.
+- Shortest path calculation between stations.
+- Browse stations by metro lines.
+- Offline support and lightweight design.
+- Open-source, privacy-respecting, and ad-free.
