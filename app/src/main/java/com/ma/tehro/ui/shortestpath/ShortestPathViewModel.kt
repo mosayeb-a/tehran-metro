@@ -58,20 +58,6 @@ class ShortestPathViewModel @Inject constructor(
         )
     }
 
-    private val pathCache = mutableMapOf<Pair<String, String>, List<PathItem>>()
-
-    fun findShortestPathWithDirectionCache(from: String, to: String): List<PathItem> {
-        val key = Pair(from, to)
-
-        if (pathCache.containsKey(key)) {
-            return pathCache[key]!!
-        }
-
-        val path = findShortestPathWithDirection(from, to)
-        pathCache[key] = path
-        return path
-    }
-
     fun findShortestPathWithDirection(from: String, to: String): List<PathItem> {
         val result = findShortestPath(stations, from, to)
         if (result.path.isEmpty()) return emptyList()
@@ -79,13 +65,22 @@ class ShortestPathViewModel @Inject constructor(
         val directions = mutableListOf<PathItem>()
         var currentLine: Int? = null
         var previousStation: Station? = null
-
         val firstStation = stations[result.path.first()] ?: return emptyList()
+        val secondStation = if (result.path.size > 1) stations[result.path[1]] else null
+
+        val initialLine = if (secondStation != null) {
+            firstStation.positionsInLine.firstOrNull { firstPos ->
+                secondStation.positionsInLine.any { it.line == firstPos.line }
+            }?.line ?: firstStation.lines.first()
+        } else {
+            firstStation.lines.first()
+        }
+
         directions.add(
             PathItem.StationItem(
                 station = firstStation,
                 isPassthrough = firstStation.disabled,
-                lineNumber = firstStation.lines.first()
+                lineNumber = initialLine
             )
         )
 
