@@ -102,7 +102,7 @@ class MainActivity : ComponentActivity() {
                         val args: PathFinderScreen = backStackEntry.toRoute()
                         PathFinder(
                             findShortestPath = {
-                                viewModel.findShortestPathWithDirectionCache(
+                                viewModel.findShortestPathWithDirection(
                                     from = args.startEnStation,
                                     to = args.enDestination
                                 )
