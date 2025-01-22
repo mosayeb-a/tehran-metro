@@ -1,0 +1,12 @@
+default_platform(:android)
+
+platform :android do
+  desc "Build the release APK for F-Droid"
+  lane :build_fdroid do
+    gradle(
+      task: "clean assembleRelease",
+      project_dir: "./"
+    )
+  end
+end
+	
