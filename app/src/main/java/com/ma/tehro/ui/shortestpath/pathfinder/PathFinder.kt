@@ -38,8 +38,8 @@ import com.ma.tehro.common.timelineview.TimelineView
 import com.ma.tehro.common.timelineview.TimelineView.SingleNode
 import com.ma.tehro.common.toImageBitmap
 import com.ma.tehro.data.Station
+import com.ma.tehro.ui.detail.repo.PathItem
 import com.ma.tehro.ui.line.stations.StationItem
-import com.ma.tehro.ui.shortestpath.PathItem
 
 @Composable
 fun PathFinder(

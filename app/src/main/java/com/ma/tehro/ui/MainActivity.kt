@@ -79,7 +79,6 @@ class MainActivity : ComponentActivity() {
                     animateComposable<StationSelectorScreen> { backStackEntry ->
                         val viewModel: ShortestPathViewModel = hiltViewModel(backStackEntry)
                         StationSelector(
-                            stations = viewModel.stations,
                             onBack = { navController.popBackStack() },
                             viewState = viewModel.uiState.collectAsStateWithLifecycle().value,
                             onSelectedChange = { isFrom, query, fa ->
