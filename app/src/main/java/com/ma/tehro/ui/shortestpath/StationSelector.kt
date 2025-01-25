@@ -33,7 +33,6 @@ import com.ma.tehro.data.Station
 @Composable
 fun StationSelector(
     viewState: PathUiState,
-    stations: Map<String, Station>,
     onFindPathClick: (fromEn: String, toEn: String, fromFa: String, toFa: String) -> Unit,
     onSelectedChange: (isFrom: Boolean, query: String, faQuery: String) -> Unit,
     onBack: () -> Unit
@@ -59,7 +58,7 @@ fun StationSelector(
         ) {
             StationDropdown(
                 query = viewState.selectedEnStartStation,
-                stations = stations,
+                stations = viewState.stations,
                 onStationSelected = { en, fa -> onSelectedChange(true, en, fa) },
                 isFrom = true
             )
@@ -68,7 +67,7 @@ fun StationSelector(
 
             StationDropdown(
                 query = viewState.selectedEnDestStation,
-                stations = stations,
+                stations = viewState.stations,
                 onStationSelected = { en, fa -> onSelectedChange(false, en, fa) },
                 isFrom = false
             )

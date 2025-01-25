@@ -2,32 +2,21 @@ package com.ma.tehro.ui.line
 
 import androidx.lifecycle.ViewModel
 import com.ma.tehro.data.Station
+import com.ma.tehro.ui.detail.repo.LineRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-
+// todo: make single viewmodel for whole app for simplification
 @HiltViewModel
 class LineViewModel @Inject constructor(
-    private val stations: Map<String, Station>
+    private val repository: LineRepository
 ) : ViewModel() {
 
-    // todo get it in init and expose it as a state to ui
-    fun getLines(): List<Int> {
-//        val lines = stations.values
-//            .flatMap { it.lines }
-//            .sorted()
+    fun getLines(): List<Int> =
+        repository.getLines()
 
-        return listOf(1, 2, 3, 4, 5, 6, 7)
-    }
-
-    // TODO create seprate viewmodel for stations or ..
     fun getOrderedStationsInLineByPosition(
         line: Int,
-    ): List<Station> {
-        return stations.values
-            .filter { it.lines.contains(line) }
-            .sortedBy { station ->
-                station.positionsInLine.find { it.line == line }?.position
-            }
-    }
+    ): List<Station> =
+        repository.getOrderedStationsByLine(line)
 }
