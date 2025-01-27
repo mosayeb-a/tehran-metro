@@ -22,6 +22,7 @@ fun TehroTheme(
     MaterialTheme(
         colorScheme = AppColorScheme,
         typography = AppTypography,
-        content = content
+        shapes = AppShapes,
+        content = content,
     )
 }

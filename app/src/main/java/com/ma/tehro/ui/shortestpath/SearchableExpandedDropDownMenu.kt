@@ -3,9 +3,7 @@ package com.ma.tehro.ui.shortestpath
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -45,7 +43,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.ma.tehro.data.Station
 
 @Composable
@@ -63,6 +60,7 @@ fun <T> SearchableExpandedDropDownMenu(
     isError: Boolean = false,
     showDefaultSelectedItem: Boolean = false,
     defaultItemIndex: Int = 0,
+    initialValue: String = "",
     defaultItem: (T) -> Unit,
     onSearchTextFieldClicked: () -> Unit,
     startContent: @Composable (() -> Unit) = { },
@@ -70,7 +68,7 @@ fun <T> SearchableExpandedDropDownMenu(
         item.toString().contains(searchText, ignoreCase = true)
     }
 ) {
-    var selectedOptionText by rememberSaveable { mutableStateOf("") }
+    var selectedOptionText by remember { mutableStateOf(initialValue) }
     var searchedOption by rememberSaveable { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
     var filteredItems = mutableListOf<T>()
@@ -87,6 +85,8 @@ fun <T> SearchableExpandedDropDownMenu(
             listOfItems[defaultItemIndex],
         )
     }
+
+    LaunchedEffect(initialValue) { selectedOptionText = initialValue }
 
     val maxHeight = remember(itemHeights.toMap()) {
         if (itemHeights.keys.toSet() != listOfItems.indices.toSet()) {
@@ -128,6 +128,7 @@ fun <T> SearchableExpandedDropDownMenu(
                     modifier = Modifier
                         .fillMaxWidth()
                 ) {
+                    println("initialValue: " + initialValue)
                     Text(
                         text = selectedOptionText.split("\n").getOrNull(0) ?: "",
                         style = MaterialTheme.typography.bodyMedium,
@@ -241,7 +242,8 @@ fun <T> SearchableExpandedDropDownMenu(
                                 keyboardController?.hide()
                                 if (selectedItem is Map.Entry<*, *> && selectedItem.value is Station) {
                                     val station = selectedItem.value as Station
-                                    selectedOptionText = "${station.name}\n${station.translations.fa}"
+                                    selectedOptionText =
+                                        "${station.name}\n${station.translations.fa}"
                                     onDropDownItemSelected(selectedItem)
                                 }
                                 searchedOption = ""
