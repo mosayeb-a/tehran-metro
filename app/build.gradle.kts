@@ -111,4 +111,5 @@ dependencies {
 
     implementation("org.osmdroid:osmdroid-android:6.1.16")
     implementation("androidx.interpolator:interpolator:1.0.0")
+    implementation("com.google.android.gms:play-services-location:21.3.0")
 }
