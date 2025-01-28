@@ -8,8 +8,18 @@ import com.ma.tehro.ui.detail.repo.PathRepositoryImpl
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import kotlin.test.assertFalse
 
 class ShortestPathTest {
+
+    /**
+     * Note: The test cases are tightly coupled to the data in the `stations.json` file.
+     * any changes to the file may cause the tests to fail.
+     *
+     * a potential solution is to avoid hardcoding the paths as static data. Instead,
+     * we could dynamically traverse the stations until we reach an intersection point
+     * or list only the intersecting stations.
+     */
 
     private lateinit var repository: PathRepository
     private lateinit var stations: Map<String, Station>
@@ -28,22 +38,22 @@ class ShortestPathTest {
 
         assertShortestPath(from, to, expectedPath)
     }
-//
-//    @Test
-//    fun `from Roudaki to Ostad Mo'in`() {
-//        val from = "Roudaki"
-//        val to = "Ostad Mo'in"
-//        val expectedPath = listOf(
-//            "Roudaki",
-//            "Shahid Navab-e Safavi",
-//            "Towhid",
-//            "Shademan",
-//            "Doctor Habibollah",
-//            "Ostad Mo'in"
-//        )
-//
-//        assertShortestPath(from, to, expectedPath)
-//    }
+
+    @Test
+    fun `from Roudaki to Ostad Mo'in`() {
+        val from = "Roudaki"
+        val to = "Ostad Mo'in"
+        val expectedPath = listOf(
+            "Roudaki",
+            "Shahid Navab-e Safavi",
+            "Towhid",
+            "Shademan",
+            "Doctor Habibollah",
+            "Ostad Mo'in"
+        )
+
+        assertShortestPath(from, to, expectedPath)
+    }
 
     @Test
     fun `from Kahrizak to Tajrish`() {
@@ -86,7 +96,6 @@ class ShortestPathTest {
 
     @Test
     fun `from Bahar Shiraz (Khanevadeh Hospital) to Allameh Jafari`() {
-        // it need a refacotr
         val from = "Bahar Shiraz (Khanevadeh Hospital)"
         val to = "Allameh Jafari"
         val expectedPath = listOf(
@@ -109,26 +118,38 @@ class ShortestPathTest {
         assertShortestPath(from, to, expectedPath)
     }
 
-//    @Test
-//    fun `from Javadiyeh to Ayatollah Taleghani`() {
-//        val from = "Javadiyeh"
-//        val to = "Ayatollah Taleghani"
-//        val expectedPath = listOf(
-//            "Roudaki",
-//            "Shahid Navab-e Safavi",
-//            "Towhid",
-//            "Shademan",
-//            "Doctor Habibollah",
-//            "Ostad Mo'in"
-//        )
-//        val actualPath = viewModel.findShortestPathWithDirection(from, to)
-//            .filterIsInstance<PathItem.StationItem>()
-//            .map { it.station.name }
-//            .toSet()
-//            .toList()
-//        println(actualPath)
-////        assertShortestPath(from, to, expectedPath)
-//    }
+    @Test
+    fun `from Shoush to Meydan-e Enghelab-e Eslami`() {
+        val from = "Shoush"
+        val to = "Meydan-e Enghelab-e Eslami"
+        val expectedPath = listOf(
+            "Shoush",
+            "Meydan-e Mohammadiyeh",
+            "Khayyam",
+            "Panzdah-e Khordad",
+            "Imam Khomeini",
+            "Sa'adi",
+            "Darvazeh Dolat",
+            "Ferdowsi",
+            "Teatr-e Shahr",
+            "Meydan-e Enghelab-e Eslami",
+        )
+        assertShortestPath(from, to, expectedPath)
+    }
+
+    @Test
+    fun `from Mowlavi to Darvazeh Shemiran, disabled station shouldn't cause line change`() {
+        val from = "Mowlavi"
+        val to = "Darvazeh Shemiran"
+        val result = repository.findShortestPathWithDirection(from, to)
+        val actualStations = result
+            .filterIsInstance<PathItem.StationItem>()
+            .map { it.station.name }
+            .toSet()
+            .toList()
+        println(actualStations)
+        assertFalse { actualStations.contains("Shohada-ye Hefdah-e Shahrivar") }
+    }
 
     private fun assertShortestPath(from: String, to: String, expectedStations: List<String>) {
         val result = repository.findShortestPathWithDirection(from, to)
