@@ -22,3 +22,6 @@ data class PathFinderScreen(
 
 @Serializable
 data class StationDetailScreen(val station: Station, val lineNumber: Int)
+
+@Serializable
+object MapScreen

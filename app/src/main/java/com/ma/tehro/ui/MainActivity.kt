@@ -46,6 +46,7 @@ import com.google.android.gms.location.Priority
 import com.google.android.gms.location.SettingsClient
 import com.ma.tehro.common.AppSnackbar
 import com.ma.tehro.common.LinesScreen
+import com.ma.tehro.common.MapScreen
 import com.ma.tehro.common.ObserveAsEvents
 import com.ma.tehro.common.PathFinderScreen
 import com.ma.tehro.common.StationDetailScreen
@@ -59,6 +60,7 @@ import com.ma.tehro.ui.detail.StationDetail
 import com.ma.tehro.ui.line.LineViewModel
 import com.ma.tehro.ui.line.Lines
 import com.ma.tehro.ui.line.stations.Stations
+import com.ma.tehro.ui.map.StationsMap
 import com.ma.tehro.ui.shortestpath.PathViewModel
 import com.ma.tehro.ui.shortestpath.StationSelector
 import com.ma.tehro.ui.shortestpath.pathfinder.PathFinder
@@ -140,8 +142,14 @@ class MainActivity : ComponentActivity() {
                                 lines = metroViewModel.getLines(),
                                 onFindPathClicked = {
                                     navController.navigate(StationSelectorScreen)
+                                },
+                                onMapClick = {
+                                    navController.navigate(MapScreen)
                                 }
                             )
+                        }
+                        animateComposable<MapScreen> {
+                            StationsMap()
                         }
                         animateComposable<StationsScreen> { backStackEntry ->
                             val metroViewModel: LineViewModel = hiltViewModel(backStackEntry)

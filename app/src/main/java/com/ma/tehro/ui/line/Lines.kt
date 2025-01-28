@@ -3,7 +3,6 @@ package com.ma.tehro.ui.line
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,11 +15,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,14 +33,13 @@ import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.StationsScreen
 import com.ma.tehro.common.calculateLineName
 import com.ma.tehro.common.getLineColorByNumber
-import com.ma.tehro.common.getLineEnEndpoints
-import com.ma.tehro.common.getLineFaEndpoints
 
 @Composable
 fun Lines(
     navController: NavHostController,
     lines: List<Int>,
-    onFindPathClicked: () -> Unit
+    onFindPathClicked: () -> Unit,
+    onMapClick: () -> Unit
 ) {
     val screenHeight = LocalConfiguration.current.screenHeightDp
     val itemHeight = ((screenHeight / (lines.size + 1).coerceAtLeast(1)) * 1.2f)
@@ -49,7 +47,25 @@ fun Lines(
 
     Scaffold(
         topBar = {
-            Appbar("فهرست خطوط\nlines list")
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.primary)
+                ,
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Appbar(title = "فهرست خطوط\nlines list", modifier = Modifier.weight(1f))
+                IconButton(
+                    onClick = onMapClick,
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.explore_nearby_24px),
+                        contentDescription = "show map screen",
+                        tint = Color.White
+                    )
+                }
+            }
         },
         floatingActionButton = {
             FloatingActionButton(
