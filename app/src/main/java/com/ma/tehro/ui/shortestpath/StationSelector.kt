@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -78,134 +79,136 @@ fun StationSelector(
             }
         }
     ) {
-        Column(
+        LazyColumn(
             modifier = Modifier
                 .padding(top = 16.dp)
                 .padding(it)
                 .fillMaxWidth()
         ) {
-            Row(
-                modifier = Modifier.height(IntrinsicSize.Min),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                TextButton(
-                    modifier = Modifier.padding(start = 12.dp),
-                    onClick = {
-                        findNearestStationAsStart()
-                    },
-                    shape = RoundedCornerShape(
-                        topStart = 36.dp,
-                        bottomStart = 36.dp,
-                        topEnd = if (viewState.nearestStations.isEmpty()) 36.dp else 0.dp,
-                        bottomEnd = if (viewState.nearestStations.isEmpty()) 36.dp else 0.dp
-                    ),
-                    enabled = !viewState.findNearestLocationProgress,
-                    colors = ButtonDefaults.buttonColors(
-                        contentColor = MaterialTheme.colorScheme.onPrimary,
-                        disabledContentColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = .6f)
-                    ),
+            item(1) {
+                Row(
+                    modifier = Modifier.height(IntrinsicSize.Min),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    TextButton(
+                        modifier = Modifier.padding(start = 12.dp),
+                        onClick = {
+                            findNearestStationAsStart()
+                        },
+                        shape = RoundedCornerShape(
+                            topStart = 36.dp,
+                            bottomStart = 36.dp,
+                            topEnd = if (viewState.nearestStations.isEmpty()) 36.dp else 0.dp,
+                            bottomEnd = if (viewState.nearestStations.isEmpty()) 36.dp else 0.dp
+                        ),
+                        enabled = !viewState.findNearestLocationProgress,
+                        colors = ButtonDefaults.buttonColors(
+                            contentColor = MaterialTheme.colorScheme.onPrimary,
+                            disabledContentColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = .6f)
+                        ),
                     ) {
-                        Icon(
-                            painter = painterResource(R.drawable.explore_nearby_24px),
-                            contentDescription = "find nearby stations"
-                        )
-                        Text(
-                            text = "یافتن نزدیک‌ترین ایستگاه\nFind nearest stations",
-                            style = MaterialTheme.typography.labelMedium
-                        )
-
-                        if (viewState.findNearestLocationProgress && viewState.nearestStations.isEmpty()) {
-                            CircularProgressIndicator(
-                                modifier = Modifier.size(18.dp),
-                                color = MaterialTheme.colorScheme.onPrimary,
-                            )
-                        }
-                    }
-                }
-                if (!viewState.findNearestLocationProgress && viewState.nearestStations.isNotEmpty()) {
-                    VerticalDivider(modifier = Modifier.fillMaxHeight())
-                    Box {
-                        TextButton(
-                            modifier = Modifier.padding(end = 12.dp),
-                            onClick = { expandedMenu = true },
-                            shape = RoundedCornerShape(
-                                topStart = 0.dp,
-                                bottomStart = 0.dp,
-                                topEnd = 36.dp,
-                                bottomEnd = 36.dp
-                            ),
-                            colors = ButtonDefaults.buttonColors(
-                                contentColor = MaterialTheme.colorScheme.onPrimary,
-                                disabledContentColor = MaterialTheme.colorScheme.onPrimary.copy(
-                                    alpha = .6f
-                                )
-                            ),
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(4.dp)
                         ) {
+                            Icon(
+                                painter = painterResource(R.drawable.explore_nearby_24px),
+                                contentDescription = "find nearby stations"
+                            )
                             Text(
-                                text = viewState.nearestStations.first()
-                                    .let { info -> "${info.station.name}\n${info.station.translations.fa}" },
+                                text = "یافتن نزدیک‌ترین ایستگاه\nFind nearest stations",
                                 style = MaterialTheme.typography.labelMedium
                             )
-                            Spacer(Modifier.width(2.dp))
-                            Icon(
-                                modifier = Modifier
-                                    .size(24.dp)
-                                    .rotate(rotationAngle),
-                                painter = painterResource(R.drawable.arrow_drop_down_24px),
-                                contentDescription = "more nearby station"
-                            )
+
+                            if (viewState.findNearestLocationProgress && viewState.nearestStations.isEmpty()) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(18.dp),
+                                    color = MaterialTheme.colorScheme.onPrimary,
+                                )
+                            }
                         }
-                        if (expandedMenu) {
-                            DropdownMenu(
-                                expanded = expandedMenu,
-                                onDismissRequest = {
-                                    expandedMenu = false
-                                },
+                    }
+                    if (!viewState.findNearestLocationProgress && viewState.nearestStations.isNotEmpty()) {
+                        VerticalDivider(modifier = Modifier.fillMaxHeight())
+                        Box {
+                            TextButton(
+                                modifier = Modifier.padding(end = 12.dp),
+                                onClick = { expandedMenu = true },
+                                shape = RoundedCornerShape(
+                                    topStart = 0.dp,
+                                    bottomStart = 0.dp,
+                                    topEnd = 36.dp,
+                                    bottomEnd = 36.dp
+                                ),
+                                colors = ButtonDefaults.buttonColors(
+                                    contentColor = MaterialTheme.colorScheme.onPrimary,
+                                    disabledContentColor = MaterialTheme.colorScheme.onPrimary.copy(
+                                        alpha = .6f
+                                    )
+                                ),
                             ) {
-                                viewState.nearestStations.forEach { info ->
-                                    DropdownMenuItem(
-                                        onClick = {
-                                            expandedMenu = false
-                                            onNearestStationChanged(info)
-                                        },
-                                        text = {
-                                            Row(
-                                                modifier = Modifier
-                                                    .padding(vertical = 4.dp)
-                                                    .fillMaxWidth(),
-                                                verticalAlignment = Alignment.CenterVertically,
-                                                horizontalArrangement = Arrangement.SpaceBetween
-                                            ) {
-                                                Column(
-                                                    modifier = Modifier.weight(1f)
+                                Text(
+                                    text = viewState.nearestStations.first()
+                                        .let { info -> "${info.station.name}\n${info.station.translations.fa}" },
+                                    style = MaterialTheme.typography.labelMedium
+                                )
+                                Spacer(Modifier.width(2.dp))
+                                Icon(
+                                    modifier = Modifier
+                                        .size(24.dp)
+                                        .rotate(rotationAngle),
+                                    painter = painterResource(R.drawable.arrow_drop_down_24px),
+                                    contentDescription = "more nearby station"
+                                )
+                            }
+                            if (expandedMenu) {
+                                DropdownMenu(
+                                    expanded = expandedMenu,
+                                    onDismissRequest = {
+                                        expandedMenu = false
+                                    },
+                                ) {
+                                    viewState.nearestStations.forEach { info ->
+                                        DropdownMenuItem(
+                                            onClick = {
+                                                expandedMenu = false
+                                                onNearestStationChanged(info)
+                                            },
+                                            text = {
+                                                Row(
+                                                    modifier = Modifier
+                                                        .padding(vertical = 4.dp)
+                                                        .fillMaxWidth(),
+                                                    verticalAlignment = Alignment.CenterVertically,
+                                                    horizontalArrangement = Arrangement.SpaceBetween
                                                 ) {
+                                                    Column(
+                                                        modifier = Modifier.weight(1f)
+                                                    ) {
+                                                        Text(
+                                                            text = info.station.translations.fa,
+                                                            style = MaterialTheme.typography.bodyMedium,
+                                                            maxLines = 1,
+                                                            overflow = TextOverflow.Ellipsis,
+                                                        )
+                                                        Text(
+                                                            text = info.station.name,
+                                                            style = MaterialTheme.typography.bodyMedium,
+                                                            maxLines = 1,
+                                                            overflow = TextOverflow.Ellipsis,
+                                                        )
+                                                    }
                                                     Text(
-                                                        text = info.station.translations.fa,
-                                                        style = MaterialTheme.typography.bodyMedium,
-                                                        maxLines = 1,
-                                                        overflow = TextOverflow.Ellipsis,
-                                                    )
-                                                    Text(
-                                                        text = info.station.name,
-                                                        style = MaterialTheme.typography.bodyMedium,
-                                                        maxLines = 1,
-                                                        overflow = TextOverflow.Ellipsis,
+                                                        modifier = Modifier
+                                                            .padding(start = 8.dp),
+                                                        text = "فاصله: ${info.distanceTextFa}\ndistance: ${info.distanceTextEn}",
+                                                        style = MaterialTheme.typography.bodySmall,
+                                                        textAlign = TextAlign.End
                                                     )
                                                 }
-                                                Text(
-                                                    modifier = Modifier
-                                                        .padding(start = 8.dp),
-                                                    text = "فاصله: ${info.distanceTextFa}\ndistance: ${info.distanceTextEn}",
-                                                    style = MaterialTheme.typography.bodySmall,
-                                                    textAlign = TextAlign.End
-                                                )
-                                            }
-                                        },
-                                    )
+                                            },
+                                        )
+                                    }
                                 }
                             }
                         }
@@ -213,47 +216,57 @@ fun StationSelector(
                 }
             }
 
-            Spacer(Modifier.height(16.dp))
+            item(2){
+                Spacer(Modifier.height(16.dp))
+            }
 
-            StationDropdown(
+            item(3) { StationDropdown(
                 query = "${viewState.selectedFaStartStation}\n${viewState.selectedEnStartStation}",
                 stations = viewState.stations,
                 onStationSelected = { en, fa -> onSelectedChange(true, en, fa) },
                 isFrom = true
-            )
+            ) }
 
-            Spacer(modifier = Modifier.height(8.dp))
+            item(4) {
+                Spacer(modifier = Modifier.height(8.dp))
+            }
 
-            StationDropdown(
-                query = "${viewState.selectedFaDestStation}\n${viewState.selectedEnDestStation}",
-                stations = viewState.stations,
-                onStationSelected = { en, fa -> onSelectedChange(false, en, fa) },
-                isFrom = false
-            )
+            item(5) {
+                StationDropdown(
+                    query = "${viewState.selectedFaDestStation}\n${viewState.selectedEnDestStation}",
+                    stations = viewState.stations,
+                    isFrom = false,
+                    onStationSelected = { en, fa -> onSelectedChange(false, en, fa) }
+                )
+            }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            item(6) {
+                Spacer(modifier = Modifier.height(16.dp))
+            }
 
-            Button(
-                modifier = Modifier
-                    .padding(8.dp)
-                    .fillMaxWidth()
-                    .height(76.dp),
-                onClick = {
-                    onFindPathClick(
-                        viewState.selectedEnStartStation,
-                        viewState.selectedEnDestStation,
-                        viewState.selectedFaStartStation,
-                        viewState.selectedFaDestStation,
-                    )
-                },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.tertiary,
-                    disabledContainerColor = MaterialTheme.colorScheme.tertiary.copy(alpha = .5f)
-                ),
-                enabled = viewState.selectedEnStartStation.isNotEmpty() &&
-                        viewState.selectedEnDestStation.isNotEmpty()
-            ) {
-                Text(text = createBilingualMessage(fa = "یافتن مسیر", en = "Find Path"))
+            item(7) {
+                Button(
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .fillMaxWidth()
+                        .height(76.dp),
+                    onClick = {
+                        onFindPathClick(
+                            viewState.selectedEnStartStation,
+                            viewState.selectedEnDestStation,
+                            viewState.selectedFaStartStation,
+                            viewState.selectedFaDestStation,
+                        )
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.tertiary,
+                        disabledContainerColor = MaterialTheme.colorScheme.tertiary.copy(alpha = .5f)
+                    ),
+                    enabled = viewState.selectedEnStartStation.isNotEmpty() &&
+                            viewState.selectedEnDestStation.isNotEmpty()
+                ) {
+                    Text(text = createBilingualMessage(fa = "یافتن مسیر", en = "Find Path"))
+                }
             }
         }
     }
