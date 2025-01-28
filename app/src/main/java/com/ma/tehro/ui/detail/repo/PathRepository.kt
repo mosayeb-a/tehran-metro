@@ -25,7 +25,8 @@ data class PathResult(
 
 data class PathCost(
     val path: List<String>,
-    val cost: Int
+    val cost: Int,
+    val currentLine: Int?
 )
 
 interface PathRepository {
@@ -151,107 +152,87 @@ class PathRepositoryImpl @Inject constructor(
      * - Line change cost: 1 × 6 = 6
      * - Total cost: 21
      **/
+    private fun countLineChanges(path: List<String>, stations: Map<String, Station>): Int {
+        var lineChanges = 0
+        var currentLine: Int? = null
+
+        for (i in 0 until path.size - 1) {
+            val currentStation = stations[path[i]] ?: continue
+            val nextStation = stations[path[i + 1]] ?: continue
+
+            val possibleLines = currentStation.positionsInLine.map { it.line }
+                .intersect(nextStation.positionsInLine.map { it.line })
+
+            val newLine = possibleLines.firstOrNull()
+            if (newLine != null && currentLine != null && newLine != currentLine) {
+                lineChanges++
+            }
+
+            currentLine = newLine
+        }
+
+        return lineChanges
+    }
+
+
     private fun findShortestPath(
         stations: Map<String, Station>,
         from: String,
         to: String,
         stationCost: Int = 3,
-        lineChangeCost: Int = 6
+        lineChangeCost: Int = 6 // we can set it to 10
     ): PathResult {
         val queue = PriorityQueue<PathCost>(compareBy { it.cost })
-        val visited = mutableSetOf<String>()
-        val costMap = mutableMapOf<String, Int>().apply {
-            put(from, 0)
-        }
+        val visited = mutableMapOf<Pair<String, Int?>, Int>()
 
-        queue.add(PathCost(listOf(from), 0))
+        queue.add(PathCost(path = listOf(from), cost = 0, currentLine = null))
 
         while (queue.isNotEmpty()) {
             val current = queue.poll()
-            val currentStation = current!!.path.last()
+            val currentStationName = current!!.path.last()
 
-            if (currentStation == to) {
-
-                val lastStation = stations[currentStation]
-
-                if (lastStation?.disabled == true) {
-
-                    continue
-                }
-
+            if (currentStationName == to) {
                 val lineChanges = countLineChanges(current.path, stations)
-                return PathResult(
-                    path = current.path,
-                    lineChanges = lineChanges
-                )
+                return PathResult(path = current.path, lineChanges = lineChanges)
             }
 
-            if (costMap.getOrDefault(currentStation, Int.MAX_VALUE) < current.cost) continue
+            val currentStation = stations[currentStationName] ?: continue
 
-            visited.add(currentStation)
+            val visitedKey = currentStationName to current.currentLine
+            if (visited[visitedKey] != null && visited[visitedKey]!! <= current.cost) continue
+            visited[visitedKey] = current.cost
 
-            val station = stations[currentStation] ?: continue
-            val currentLine = if (current.path.size > 1) {
-                val prevStation = stations[current.path[current.path.size - 2]]
-                prevStation?.lines?.firstOrNull { line ->
-                    station.lines.contains(line)
-                }
-            } else {
-                station.lines.first()
-            }
+            for (nextStationName in currentStation.relations) {
+                val nextStation = stations[nextStationName] ?: continue
 
-            station.relations.forEach { nextStationName ->
-                val nextStation = stations[nextStationName] ?: return@forEach
+                // consider the disables
+//                if (nextStation.disabled && nextStationName != to) continue
 
+                val possibleLines = currentStation.positionsInLine.map { it.line }
+                    .intersect(nextStation.positionsInLine.map { it.line })
 
-                if (nextStation.disabled && (nextStationName == to ||
-                            nextStation.relations.any { it == to })
-                ) {
-                    return@forEach
-                }
+                for (line in possibleLines) {
+                    val isLineChange = (current.currentLine != null && line != current.currentLine)
 
-                var newCost = current.cost + stationCost
+                    if (isLineChange && currentStation.disabled) continue
 
-                val needsLineChange = currentLine != null &&
-                        !nextStation.lines.contains(currentLine)
-                if (needsLineChange) {
-                    newCost += lineChangeCost
-                }
+                    val newCost =
+                        current.cost + stationCost + if (isLineChange) lineChangeCost else 0
 
-                if (newCost < costMap.getOrDefault(nextStationName, Int.MAX_VALUE)) {
-                    costMap[nextStationName] = newCost
                     queue.add(
                         PathCost(
                             path = current.path + nextStationName,
-                            cost = newCost
+                            cost = newCost,
+                            currentLine = line
                         )
                     )
                 }
             }
         }
 
-        return PathResult(emptyList(), 0)
+        return PathResult(path = emptyList(), lineChanges = 0)
     }
 
-    private fun countLineChanges(path: List<String>, stations: Map<String, Station>): Int {
-        var changes = 0
-        var currentLine: Int? = null
-
-        for (stationName in path) {
-            val station = stations[stationName] ?: continue
-
-            if (currentLine == null) {
-                currentLine = station.lines.first()
-                continue
-            }
-
-            if (!station.lines.contains(currentLine)) {
-                changes++
-                currentLine = station.lines.first()
-            }
-        }
-        return changes
-    }
 
     private fun MutableList<PathItem>.swap(index1: Int, index2: Int) {
         val temp = this[index1]
