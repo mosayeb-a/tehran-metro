@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.coroutines.cancellation.CancellationException
 
 @Immutable
 data class PathUiState(
@@ -98,6 +99,8 @@ class PathViewModel @Inject constructor(
                         findNearestLocationProgress = false
                     )
                 }
+            } catch (e: CancellationException) {
+                // do not expose this
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(
                     nearestStations = emptyList(),
