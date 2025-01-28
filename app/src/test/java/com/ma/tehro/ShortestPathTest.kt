@@ -2,9 +2,9 @@ package com.ma.tehro
 
 import com.ma.tehro.common.readJsonStationsAsText
 import com.ma.tehro.data.Station
-import com.ma.tehro.ui.detail.repo.PathItem
-import com.ma.tehro.ui.detail.repo.PathRepository
-import com.ma.tehro.ui.detail.repo.PathRepositoryImpl
+import com.ma.tehro.data.repo.PathItem
+import com.ma.tehro.data.repo.PathRepository
+import com.ma.tehro.data.repo.PathRepositoryImpl
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

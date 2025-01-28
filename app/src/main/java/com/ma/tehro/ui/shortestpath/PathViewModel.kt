@@ -10,8 +10,8 @@ import com.ma.tehro.common.messenger.UiMessageManager
 import com.ma.tehro.data.Station
 import com.ma.tehro.services.LocationTracker
 import com.ma.tehro.services.NearestStation
-import com.ma.tehro.ui.detail.repo.PathItem
-import com.ma.tehro.ui.detail.repo.PathRepository
+import com.ma.tehro.data.repo.PathItem
+import com.ma.tehro.data.repo.PathRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

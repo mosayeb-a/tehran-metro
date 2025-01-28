@@ -2,7 +2,7 @@ package com.ma.tehro.ui.line
 
 import androidx.lifecycle.ViewModel
 import com.ma.tehro.data.Station
-import com.ma.tehro.ui.detail.repo.LineRepository
+import com.ma.tehro.data.repo.LineRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

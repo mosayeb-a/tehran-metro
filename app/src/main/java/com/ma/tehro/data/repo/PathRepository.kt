@@ -1,4 +1,4 @@
-package com.ma.tehro.ui.detail.repo
+package com.ma.tehro.data.repo
 
 import androidx.compose.runtime.Immutable
 import com.ma.tehro.common.getLineEnEndpoints

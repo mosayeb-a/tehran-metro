@@ -1,4 +1,4 @@
-package com.ma.tehro.ui.detail.repo
+package com.ma.tehro.data.repo
 
 import com.ma.tehro.data.Station
 import javax.inject.Inject
