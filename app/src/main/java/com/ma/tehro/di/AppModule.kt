@@ -10,10 +10,10 @@ import com.ma.tehro.services.DefaultLocationClient
 import com.ma.tehro.services.LocationClient
 import com.ma.tehro.services.LocationTracker
 import com.ma.tehro.services.LocationTrackerImpl
-import com.ma.tehro.ui.detail.repo.LineRepository
-import com.ma.tehro.ui.detail.repo.LineRepositoryImpl
-import com.ma.tehro.ui.detail.repo.PathRepository
-import com.ma.tehro.ui.detail.repo.PathRepositoryImpl
+import com.ma.tehro.data.repo.LineRepository
+import com.ma.tehro.data.repo.LineRepositoryImpl
+import com.ma.tehro.data.repo.PathRepository
+import com.ma.tehro.data.repo.PathRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

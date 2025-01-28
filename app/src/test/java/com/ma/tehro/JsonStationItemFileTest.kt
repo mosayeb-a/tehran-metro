@@ -3,8 +3,8 @@ package com.ma.tehro
 import com.ma.tehro.common.readJsonStationsAsText
 import com.ma.tehro.data.Station
 import com.ma.tehro.scripts.getOrderedStationsByLine
-import com.ma.tehro.ui.detail.repo.LineRepository
-import com.ma.tehro.ui.detail.repo.LineRepositoryImpl
+import com.ma.tehro.data.repo.LineRepository
+import com.ma.tehro.data.repo.LineRepositoryImpl
 import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
