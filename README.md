@@ -27,7 +27,7 @@ the project is developed using **compose** for building UIs and implements algor
 ## Planned Features
 1. **Add Branches to Line 1 and 4**
 2. ~~**Find Nearest Station by Current Location**~~ (Done)
-3. **Show All Stations on the Map**
+3. ~~**Show All Stations on the Map**~~ (Done)
 4. **Time Estimate for Shortest Path**: Calculate the estimated travel time between stations, considering line changes and station count.
 5. **A way to edit station info by users or report any issue to remote**
 
