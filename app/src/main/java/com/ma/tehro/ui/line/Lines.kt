@@ -50,19 +50,20 @@ fun Lines(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.primary)
-                ,
+                    .background(MaterialTheme.colorScheme.primary),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Appbar(title = "فهرست خطوط\nlines list", modifier = Modifier.weight(1f))
                 IconButton(
+                    modifier = Modifier
+                        .padding(end = 6.dp)
+                        .size(46.dp),
                     onClick = onMapClick,
                 ) {
                     Icon(
-                        painter = painterResource(R.drawable.explore_nearby_24px),
+                        painter = painterResource(R.drawable.map_24px),
                         contentDescription = "show map screen",
-                        tint = Color.White
                     )
                 }
             }
