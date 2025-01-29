@@ -61,6 +61,7 @@ import com.ma.tehro.ui.line.LineViewModel
 import com.ma.tehro.ui.line.Lines
 import com.ma.tehro.ui.line.stations.Stations
 import com.ma.tehro.ui.map.StationsMap
+import com.ma.tehro.ui.map.StationsMapViewModel
 import com.ma.tehro.ui.shortestpath.PathViewModel
 import com.ma.tehro.ui.shortestpath.StationSelector
 import com.ma.tehro.ui.shortestpath.pathfinder.PathFinder
@@ -149,7 +150,23 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         animateComposable<MapScreen> {
-                            StationsMap()
+                            val viewModel: StationsMapViewModel = hiltViewModel(it)
+                            StationsMap(
+                                onFindCurrentLocationClick = {
+                                    if (hasLocationPermission()) {
+                                        checkAndPromptEnableGPS {
+                                            viewModel.getCurrentLocation()
+                                        }
+                                    } else {
+                                        ActivityCompat.requestPermissions(
+                                            this@MainActivity,
+                                            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                                            100
+                                        )
+                                    }
+                                },
+                                viewState = viewModel.uiState.collectAsStateWithLifecycle().value,
+                            )
                         }
                         animateComposable<StationsScreen> { backStackEntry ->
                             val metroViewModel: LineViewModel = hiltViewModel(backStackEntry)

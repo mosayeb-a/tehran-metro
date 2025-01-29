@@ -112,7 +112,7 @@ fun StationSelector(
                             horizontalArrangement = Arrangement.spacedBy(4.dp)
                         ) {
                             Icon(
-                                painter = painterResource(R.drawable.explore_nearby_24px),
+                                painter = painterResource(R.drawable.location_on_24px),
                                 contentDescription = "find nearby stations"
                             )
                             Text(

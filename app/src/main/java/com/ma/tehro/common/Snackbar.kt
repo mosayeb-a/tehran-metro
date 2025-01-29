@@ -25,7 +25,7 @@ fun AppSnackbar(
         modifier = modifier
             .padding(16.dp)
             .wrapContentSize(),
-        color = MaterialTheme.colorScheme.secondary,
+        color = MaterialTheme.colorScheme.secondary.copy(alpha = .9f),
         shape = MaterialTheme.shapes.small,
         tonalElevation = 6.dp
     ) {

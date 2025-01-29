@@ -57,10 +57,9 @@ class AppModule {
     @Provides
     @Singleton
     fun provideLocationClient(
-        @ApplicationContext context: Context,
         fusedLocationClient: FusedLocationProviderClient
     ): LocationClient {
-        return DefaultLocationClient(context, fusedLocationClient)
+        return DefaultLocationClient(fusedLocationClient)
     }
 
     @Provides
