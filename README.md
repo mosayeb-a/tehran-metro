@@ -32,6 +32,8 @@ the project is developed using **compose** for building UIs and implements algor
 3. ~~**Show All Stations on the Map**~~ (Done)
 5. **Time Estimate for Shortest Path**: Calculate the estimated travel time between stations, considering line changes and station count.
 6. **A way to edit station info by users or report any issue to remote**
+7. **Refactor GMS and Firebase usage to comply with F-Droid's open-source policies**
+
 
 If you'd like to work on any of these features, please open an issue to discuss your approach before starting implementation.
 
