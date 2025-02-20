@@ -1,4 +1,4 @@
-package com.ma.tehro.scripts
+package scripts
 
 import com.ma.tehro.common.readJsonStationsAsText
 import com.ma.tehro.data.PositionInLine
@@ -8,10 +8,12 @@ import kotlinx.serialization.json.Json
 import java.io.File
 
 fun main() {
-    val stations: MutableMap<String, Station> = readJsonStationsAsText("stations2")
-    val updatedStations = addPositionsInLine(stations)
+    val stations: MutableMap<String, Station> = readJsonStationsAsText("stations_updated")
+    val updatedStations = addPositionsInLine(stations).mapValues { (_, station) ->
+        station.copy(colors = emptyList())
+    }
 
-    File("station_updated.json").writeText(Json.encodeToString(updatedStations))
+    File("station_updated2.json").writeText(Json.encodeToString(updatedStations))
     println("Updated stations.json successfully!")
 }
 

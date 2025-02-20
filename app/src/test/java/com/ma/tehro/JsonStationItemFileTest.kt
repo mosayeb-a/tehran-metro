@@ -2,7 +2,7 @@ package com.ma.tehro
 
 import com.ma.tehro.common.readJsonStationsAsText
 import com.ma.tehro.data.Station
-import com.ma.tehro.scripts.getOrderedStationsByLine
+import scripts.getOrderedStationsByLine
 import com.ma.tehro.data.repo.LineRepository
 import com.ma.tehro.data.repo.LineRepositoryImpl
 import org.junit.Before
@@ -11,7 +11,7 @@ import kotlin.test.assertEquals
 
 class JsonStationItemFileTest {
 
-    private val stations: Map<String, Station> = readJsonStationsAsText("stations_updated")
+    private val stations: Map<String, Station> = readJsonStationsAsText("stations_updated2")
     private lateinit var repository: LineRepository
 
     @Before

@@ -2,13 +2,13 @@ package com.ma.tehro
 
 import com.ma.tehro.common.readJsonStationsAsText
 import com.ma.tehro.data.Station
-import com.ma.tehro.scripts.getOrderedStationsByLine
+import scripts.getOrderedStationsByLine
 import org.junit.Test
 import kotlin.test.assertEquals
 
 class DifferenceJsonStationItemFilesTest {
-    private val stations: Map<String, Station> = readJsonStationsAsText("stations")
-    private val newStations: Map<String, Station> = readJsonStationsAsText("station_updated")
+    private val stations: Map<String, Station> = readJsonStationsAsText("stations_updated")
+    private val newStations: Map<String, Station> = readJsonStationsAsText("stations_updated2")
 
     @Test
     fun `is the sizes are the same`() {

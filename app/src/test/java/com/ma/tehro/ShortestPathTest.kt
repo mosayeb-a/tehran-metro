@@ -26,7 +26,7 @@ class ShortestPathTest {
 
     @Before
     fun setup() {
-        stations = readJsonStationsAsText("stations_updated")
+        stations = readJsonStationsAsText("stations_updated2")
         repository = PathRepositoryImpl(stations)
     }
 
