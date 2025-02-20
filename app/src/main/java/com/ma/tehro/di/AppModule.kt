@@ -14,6 +14,8 @@ import com.ma.tehro.data.repo.LineRepository
 import com.ma.tehro.data.repo.LineRepositoryImpl
 import com.ma.tehro.data.repo.PathRepository
 import com.ma.tehro.data.repo.PathRepositoryImpl
+import com.ma.tehro.data.repo.DataCorrectionRepository
+import com.ma.tehro.data.repo.DataCorrectionRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,6 +47,10 @@ class AppModule {
     fun provideLineRepo(stations: Map<String, Station>): LineRepository =
         LineRepositoryImpl(stations)
 
+    @Provides
+    @Singleton
+    fun provideStationCorrectionRepo(): DataCorrectionRepository =
+        DataCorrectionRepositoryImpl()
 
     @Provides
     @Singleton

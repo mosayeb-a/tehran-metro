@@ -1,4 +1,5 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -21,6 +22,23 @@ android {
         targetSdk = 35
         versionCode = 3
         versionName = "0.2.0"
+
+
+        val localProperties = Properties().apply {
+            load(File(rootDir, "local.properties").inputStream())
+        }
+        val apiKey = localProperties.getProperty("github_token")
+        buildConfigField(
+            type = "String",
+            name = "github_token",
+            value = apiKey
+        )
+        val gistId = localProperties.getProperty("gist_id")
+        buildConfigField(
+            type = "String",
+            name = "gist_id",
+            value = gistId
+        )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -61,6 +79,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -71,6 +90,10 @@ android {
         }
     }
 }
+
+val localProperties = gradleLocalProperties(rootDir, providers)
+val githubToken: String? = localProperties.getProperty("github_token")
+val gistId: String? = localProperties.getProperty("gist_id")
 
 dependencies {
     implementation(libs.androidx.core.ktx)
@@ -108,8 +131,7 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
 
-
-    implementation("org.osmdroid:osmdroid-android:6.1.16")
+    implementation(libs.osmdroid.android)
     implementation("androidx.interpolator:interpolator:1.0.0")
     implementation("com.google.android.gms:play-services-location:21.3.0")
 }

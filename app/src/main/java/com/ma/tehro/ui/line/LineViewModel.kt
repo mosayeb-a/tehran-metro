@@ -6,7 +6,6 @@ import com.ma.tehro.data.repo.LineRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-// todo: make single viewmodel for whole app for simplification
 @HiltViewModel
 class LineViewModel @Inject constructor(
     private val repository: LineRepository

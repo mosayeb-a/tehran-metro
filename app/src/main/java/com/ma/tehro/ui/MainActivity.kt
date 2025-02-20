@@ -52,6 +52,7 @@ import com.ma.tehro.common.PathFinderScreen
 import com.ma.tehro.common.StationDetailScreen
 import com.ma.tehro.common.StationSelectorScreen
 import com.ma.tehro.common.StationsScreen
+import com.ma.tehro.common.SubmitStationInfoScreen
 import com.ma.tehro.common.hasLocationPermission
 import com.ma.tehro.common.messenger.UiMessageManager
 import com.ma.tehro.common.navTypeOf
@@ -65,6 +66,8 @@ import com.ma.tehro.ui.map.StationsMapViewModel
 import com.ma.tehro.ui.shortestpath.PathViewModel
 import com.ma.tehro.ui.shortestpath.StationSelector
 import com.ma.tehro.ui.shortestpath.pathfinder.PathFinder
+import com.ma.tehro.ui.submit_info.SubmitInfoViewModel
+import com.ma.tehro.ui.submit_info.SubmitStationInfo
 import com.ma.tehro.ui.theme.Gray
 import com.ma.tehro.ui.theme.TehroTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -117,6 +120,9 @@ class MainActivity : ComponentActivity() {
 
                         if (result == SnackbarResult.ActionPerformed) {
                             event.action?.action?.invoke()
+                        }
+                        if (event.action?.name == "Dismiss") {
+                            snackbarHostState.currentSnackbarData?.dismiss()
                         }
                     }
                 }
@@ -253,6 +259,23 @@ class MainActivity : ComponentActivity() {
                             StationDetail(
                                 station = args.station,
                                 onBack = { navController.popBackStack() },
+                                lineNumber = args.lineNumber,
+                                onSubmitInfoStationClicked = { station, line ->
+                                    navController.navigate(SubmitStationInfoScreen(station, line))
+                                }
+                            )
+                        }
+                        animateComposable<SubmitStationInfoScreen>(
+                            typeMap = mapOf(typeOf<Station>() to navTypeOf<Station>()),
+                        ) { backStackEntry ->
+                            val viewModel: SubmitInfoViewModel = hiltViewModel(backStackEntry)
+                            val args: SubmitStationInfoScreen = backStackEntry.toRoute()
+                            println(args.station)
+                            SubmitStationInfo(
+                                onBack = { navController.popBackStack() },
+                                onSubmitInfo = { viewModel.submitStationCorrection(it) },
+                                state = viewModel.state.collectAsStateWithLifecycle().value,
+                                station = args.station,
                                 lineNumber = args.lineNumber
                             )
                         }
