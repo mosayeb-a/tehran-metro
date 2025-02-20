@@ -30,7 +30,7 @@ class AppModule {
     @Provides
     @Singleton
     fun provideStations(context: Application): Map<String, Station> {
-        val stationsJson = context.resources.openRawResource(R.raw.stations_updated)
+        val stationsJson = context.resources.openRawResource(R.raw.stations)
             .bufferedReader()
             .use { it.readText() }
 

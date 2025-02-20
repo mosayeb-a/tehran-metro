@@ -10,9 +10,6 @@
     "longitude": "51.433643000000004",
     "latitude": "35.804501",
     "address": "خیابان شریعتی-ضلع جنوب غربی میدان قدس",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -23,6 +20,10 @@
       "Gheytariyeh"
     ],
     "positionsInLine": [
+      {
+        "position": 1,
+        "line": 1
+      },
       {
         "position": 1,
         "line": 1
@@ -40,9 +41,6 @@
     "longitude": "51.435252",
     "latitude": "35.793119",
     "address": "خیابان دکترشریعتی - روبه روی پل رومی",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -54,6 +52,10 @@
       "Shahid Sadr"
     ],
     "positionsInLine": [
+      {
+        "position": 2,
+        "line": 1
+      },
       {
         "position": 2,
         "line": 1
@@ -71,9 +73,6 @@
     "longitude": "51.435639",
     "latitude": "35.785374",
     "address": "100 متر بعد از تقاطع بزرگراه شهید صدر و خیابان دکتر شریعتی",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -85,6 +84,10 @@
       "Qolhak"
     ],
     "positionsInLine": [
+      {
+        "position": 3,
+        "line": 1
+      },
       {
         "position": 3,
         "line": 1
@@ -102,9 +105,6 @@
     "longitude": "51.4379137",
     "latitude": "35.7726822",
     "address": "خیابان دکترشریعتی، بالاتر از دو راهی قلهک، نرسیده به خیابان دولت",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -116,6 +116,10 @@
       "Doctor Shariati"
     ],
     "positionsInLine": [
+      {
+        "position": 4,
+        "line": 1
+      },
       {
         "position": 4,
         "line": 1
@@ -133,9 +137,6 @@
     "longitude": "51.4440981",
     "latitude": "35.7626452",
     "address": "خیابان دکتر شریعتی، بالاتر از بلوار میرداماد",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -147,6 +148,10 @@
       "Mirdamad"
     ],
     "positionsInLine": [
+      {
+        "position": 5,
+        "line": 1
+      },
       {
         "position": 5,
         "line": 1
@@ -164,9 +169,6 @@
     "longitude": "51.43375",
     "latitude": "35.76006",
     "address": "بلوار میرداماد، جنب پمپ بنزین، زیر ساختمان رز میرداماد",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -178,6 +180,10 @@
       "Shahid Haghani"
     ],
     "positionsInLine": [
+      {
+        "position": 6,
+        "line": 1
+      },
       {
         "position": 6,
         "line": 1
@@ -195,9 +201,6 @@
     "longitude": "51.4257773",
     "latitude": "35.7565207",
     "address": "بزرگراه شهید حقانی - جنب پارک طالقانی",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -209,6 +212,10 @@
       "Shahid Hemmat"
     ],
     "positionsInLine": [
+      {
+        "position": 7,
+        "line": 1
+      },
       {
         "position": 7,
         "line": 1
@@ -226,9 +233,6 @@
     "longitude": "51.427372",
     "latitude": "35.748228",
     "address": "بزرگراه شهید همت ، جنب سازمان فرهنگ و ارتباطات اسلامی",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -240,6 +244,10 @@
       "Mosalla-ye Imam Khomeini"
     ],
     "positionsInLine": [
+      {
+        "position": 8,
+        "line": 1
+      },
       {
         "position": 8,
         "line": 1
@@ -257,9 +265,6 @@
     "longitude": "51.427082",
     "latitude": "35.74073",
     "address": "بزرگراه رسالت ، شمال مصلی ، روبروی سازمان فرهنگ و ارتباطات اسلامی",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -273,6 +278,10 @@
     "positionsInLine": [
       {
         "position": 8,
+        "line": 1
+      },
+      {
+        "position": 9,
         "line": 1
       }
     ]
@@ -289,10 +298,6 @@
     "longitude": "51.42704",
     "latitude": "35.731037",
     "address": "تقاطع خیابان های شهید بهشتی و شهید مفتح",
-    "colors": [
-      "#E0001F",
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -306,6 +311,14 @@
       "Shahid Mofattah"
     ],
     "positionsInLine": [
+      {
+        "position": 10,
+        "line": 1
+      },
+      {
+        "position": 12,
+        "line": 3
+      },
       {
         "position": 10,
         "line": 1
@@ -327,9 +340,6 @@
     "longitude": "51.427632",
     "latitude": "35.724453",
     "address": "تقاطع خیابان های استاد شهید مطهری و شهید مفتح",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -341,6 +351,10 @@
       "Shohada-ye Haftom-e Tir"
     ],
     "positionsInLine": [
+      {
+        "position": 11,
+        "line": 1
+      },
       {
         "position": 11,
         "line": 1
@@ -358,9 +372,6 @@
     "longitude": "51.425495",
     "latitude": "35.707161",
     "address": "تقاطع خیابان آیت اله طالقانی و خیابان شهید مفتح",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -372,6 +383,10 @@
       "Darvazeh Dolat"
     ],
     "positionsInLine": [
+      {
+        "position": 13,
+        "line": 1
+      },
       {
         "position": 13,
         "line": 1
@@ -390,10 +405,6 @@
     "longitude": "51.425849",
     "latitude": "35.701316",
     "address": "خیابان انقلاب اسلامی ، تقاطع سعدی شمالی و شهید مفتح",
-    "colors": [
-      "#E0001F",
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -407,6 +418,14 @@
       "Sa'adi"
     ],
     "positionsInLine": [
+      {
+        "position": 14,
+        "line": 1
+      },
+      {
+        "position": 8,
+        "line": 4
+      },
       {
         "position": 14,
         "line": 1
@@ -428,9 +447,6 @@
     "longitude": "51.4244163",
     "latitude": "35.6934793",
     "address": "میدان استقلال - (میدان مخبرالدوله)",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -442,6 +458,10 @@
       "Imam Khomeini"
     ],
     "positionsInLine": [
+      {
+        "position": 15,
+        "line": 1
+      },
       {
         "position": 15,
         "line": 1
@@ -460,10 +480,6 @@
     "longitude": "51.421171",
     "latitude": "35.686433",
     "address": "میدان امام خمینی (ره)",
-    "colors": [
-      "#E0001F",
-      "#2F4389"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -477,6 +493,14 @@
       "Panzdah-e Khordad"
     ],
     "positionsInLine": [
+      {
+        "position": 16,
+        "line": 1
+      },
+      {
+        "position": 14,
+        "line": 2
+      },
       {
         "position": 16,
         "line": 1
@@ -498,9 +522,6 @@
     "longitude": "51.417287",
     "latitude": "35.678276",
     "address": "تقاطع خیابان های پانزد خرداد و خیام - چهارراه گلوبندک",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -512,6 +533,10 @@
       "Khayyam"
     ],
     "positionsInLine": [
+      {
+        "position": 17,
+        "line": 1
+      },
       {
         "position": 17,
         "line": 1
@@ -529,9 +554,6 @@
     "longitude": "51.416568",
     "latitude": "35.673073",
     "address": "خیابان خیام شمالی ، پایین تر از چهارراه گلوبندک ، جنب امامزاده",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -543,6 +565,10 @@
       "Meydan-e Mohammadiyeh"
     ],
     "positionsInLine": [
+      {
+        "position": 18,
+        "line": 1
+      },
       {
         "position": 18,
         "line": 1
@@ -561,10 +587,6 @@
     "longitude": "51.415488",
     "latitude": "35.667753",
     "address": "میدان محمدیه(اعدام) ، تقاطع خیابان خیام و مولوی",
-    "colors": [
-      "#E0001F",
-      "#7F0B74"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -578,6 +600,14 @@
       "Shoush"
     ],
     "positionsInLine": [
+      {
+        "position": 19,
+        "line": 1
+      },
+      {
+        "position": 8,
+        "line": 7
+      },
       {
         "position": 19,
         "line": 1
@@ -599,9 +629,6 @@
     "longitude": "51.414154",
     "latitude": "35.65754",
     "address": "تقاطع خیابان های شوش و خیام",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -613,6 +640,10 @@
       "Payaneh Jonoub(Jonoub Terminal)"
     ],
     "positionsInLine": [
+      {
+        "position": 20,
+        "line": 1
+      },
       {
         "position": 20,
         "line": 1
@@ -630,9 +661,6 @@
     "longitude": "51.416289",
     "latitude": "35.650688",
     "address": "خیابان عباسی ، ضلع شمال غربی پایانه جنوب",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -644,6 +672,10 @@
       "Shahid Bokharaei"
     ],
     "positionsInLine": [
+      {
+        "position": 21,
+        "line": 1
+      },
       {
         "position": 21,
         "line": 1
@@ -661,9 +693,6 @@
     "longitude": "51.414787",
     "latitude": "35.640609",
     "address": "خیابان شهید رجایی ، خیابان ابریشم ، 100متری شهید همدانی",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": true,
     "coffeeShop": false,
@@ -675,6 +704,10 @@
       "Aliabad"
     ],
     "positionsInLine": [
+      {
+        "position": 22,
+        "line": 1
+      },
       {
         "position": 22,
         "line": 1
@@ -692,9 +725,6 @@
     "longitude": "51.416203",
     "latitude": "35.629256",
     "address": "جاده قدیم قم- سه راه پالایشگاه - خیابان شهید گلشنی",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": true,
     "coffeeShop": false,
@@ -706,6 +736,10 @@
       "Javanmard-e Ghassab"
     ],
     "positionsInLine": [
+      {
+        "position": 23,
+        "line": 1
+      },
       {
         "position": 23,
         "line": 1
@@ -723,9 +757,6 @@
     "longitude": "51.420141",
     "latitude": "35.609764",
     "address": "بلوار شهید دستواره جنوبی - بین میدان مادر و نماز",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": true,
     "coffeeShop": false,
@@ -737,6 +768,10 @@
       "Shahr-e Rey"
     ],
     "positionsInLine": [
+      {
+        "position": 24,
+        "line": 1
+      },
       {
         "position": 24,
         "line": 1
@@ -754,9 +789,6 @@
     "longitude": "51.422287",
     "latitude": "35.594672",
     "address": "شهر ری ، میدان فرمانداری ، خیابان مدرس",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": true,
     "coffeeShop": false,
@@ -771,6 +803,10 @@
       {
         "position": 25,
         "line": 1
+      },
+      {
+        "position": 25,
+        "line": 1
       }
     ]
   },
@@ -782,15 +818,16 @@
     "lines": [
       1
     ],
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "relations": [
       "Shahr-e Rey",
       "Shahed - BagherShahr"
     ],
     "positionsInLine": [
+      {
+        "position": 26,
+        "line": 1
+      },
       {
         "position": 26,
         "line": 1
@@ -808,9 +845,6 @@
     "longitude": "51.382606",
     "latitude": "35.546998",
     "address": "اتوبان شهید کاظمی، روبه روی درب شمالی بهشت زهرا",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -823,6 +857,10 @@
       "Holy Shrine of Imam Khomeini"
     ],
     "positionsInLine": [
+      {
+        "position": 27,
+        "line": 1
+      },
       {
         "position": 27,
         "line": 1
@@ -840,9 +878,6 @@
     "longitude": "51.349032",
     "latitude": "35.539811",
     "address": "شهر آفتاب",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -857,6 +892,10 @@
       {
         "position": 28,
         "line": 1
+      },
+      {
+        "position": 28,
+        "line": 1
       }
     ]
   },
@@ -868,15 +907,16 @@
     "lines": [
       1
     ],
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": true,
     "relations": [
       "Namayeshgah-e Shahr-e Aftab",
       "Emam Khomeini Airport"
     ],
     "positionsInLine": [
+      {
+        "position": 29,
+        "line": 1
+      },
       {
         "position": 29,
         "line": 1
@@ -891,15 +931,16 @@
     "lines": [
       1
     ],
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "relations": [
       "Vavan",
       "Shahr-e Parand"
     ],
     "positionsInLine": [
+      {
+        "position": 30,
+        "line": 1
+      },
       {
         "position": 30,
         "line": 1
@@ -914,14 +955,15 @@
     "lines": [
       1
     ],
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": true,
     "relations": [
       "Emam Khomeini Airport"
     ],
     "positionsInLine": [
+      {
+        "position": 31,
+        "line": 1
+      },
       {
         "position": 31,
         "line": 1
@@ -939,9 +981,6 @@
     "longitude": "51.373036",
     "latitude": "35.545077",
     "address": "ضلع شرقی حرم امام خمینی - بلوار اصلی بهشت زهرا",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -953,6 +992,10 @@
       "Kahrizak"
     ],
     "positionsInLine": [
+      {
+        "position": 32,
+        "line": 1
+      },
       {
         "position": 32,
         "line": 1
@@ -970,9 +1013,6 @@
     "longitude": "51.369292",
     "latitude": "35.521574",
     "address": "جاده قدیم قم - بعداز درب اصلی بهشت زهرا (س) - جنب پارک لاله",
-    "colors": [
-      "#E0001F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -983,6 +1023,10 @@
       "Holy Shrine of Imam Khomeini"
     ],
     "positionsInLine": [
+      {
+        "position": 33,
+        "line": 1
+      },
       {
         "position": 33,
         "line": 1
@@ -1000,9 +1044,6 @@
     "longitude": "51.546757",
     "latitude": "35.729687",
     "address": "تهرانپارس، اول خیابان درختی ، روبه روی فرهنگسرای اشراق",
-    "colors": [
-      "#2F4389"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1013,6 +1054,10 @@
       "Tehranpars"
     ],
     "positionsInLine": [
+      {
+        "position": 1,
+        "line": 2
+      },
       {
         "position": 1,
         "line": 2
@@ -1030,9 +1075,6 @@
     "longitude": "51.5285321",
     "latitude": "35.7316491",
     "address": "بزرگراه رسالت بعد از چهارراه تیرانداز نبش اخوت",
-    "colors": [
-      "#2F4389"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1044,6 +1086,10 @@
       "Shahid Bagheri"
     ],
     "positionsInLine": [
+      {
+        "position": 2,
+        "line": 2
+      },
       {
         "position": 2,
         "line": 2
@@ -1061,9 +1107,6 @@
     "longitude": "51.516856",
     "latitude": "35.733397",
     "address": "تقاطع بزرگراه رسالت و شهید باقری",
-    "colors": [
-      "#2F4389"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1075,6 +1118,10 @@
       "Daneshgah-e Elm va Sanat"
     ],
     "positionsInLine": [
+      {
+        "position": 3,
+        "line": 2
+      },
       {
         "position": 3,
         "line": 2
@@ -1092,9 +1139,6 @@
     "longitude": "51.504786",
     "latitude": "35.734425",
     "address": "بزرگراه رسالت، چهار راه دردشت",
-    "colors": [
-      "#2F4389"
-    ],
     "disabled": false,
     "wc": true,
     "coffeeShop": false,
@@ -1106,6 +1150,10 @@
       "Sarsabz"
     ],
     "positionsInLine": [
+      {
+        "position": 4,
+        "line": 2
+      },
       {
         "position": 4,
         "line": 2
@@ -1123,9 +1171,6 @@
     "longitude": "51.494873",
     "latitude": "35.73547",
     "address": "بزگراه رسالت، چهارراه شهید آیت",
-    "colors": [
-      "#2F4389"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1137,6 +1182,10 @@
       "Janbazan"
     ],
     "positionsInLine": [
+      {
+        "position": 5,
+        "line": 2
+      },
       {
         "position": 5,
         "line": 2
@@ -1154,9 +1203,6 @@
     "longitude": "51.484081",
     "latitude": "35.733088",
     "address": "خیابان شهید مدنی، بالاتر از خیابان گلبرگ",
-    "colors": [
-      "#2F4389"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1168,6 +1214,10 @@
       "Fadak"
     ],
     "positionsInLine": [
+      {
+        "position": 6,
+        "line": 2
+      },
       {
         "position": 6,
         "line": 2
@@ -1185,9 +1235,6 @@
     "longitude": "51.4756353",
     "latitude": "35.7264805",
     "address": "خیابان شهید مدنی، روبروی ساختمان های مسکونی دادگستری",
-    "colors": [
-      "#2F4389"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1199,6 +1246,10 @@
       "Sabalan"
     ],
     "positionsInLine": [
+      {
+        "position": 7,
+        "line": 2
+      },
       {
         "position": 7,
         "line": 2
@@ -1216,9 +1267,6 @@
     "longitude": "51.464531",
     "latitude": "35.71826",
     "address": "تقاطع خیابان های شهید مدنی و سبلان",
-    "colors": [
-      "#2F4389"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1230,6 +1278,10 @@
       "Shahid Madani"
     ],
     "positionsInLine": [
+      {
+        "position": 8,
+        "line": 2
+      },
       {
         "position": 8,
         "line": 2
@@ -1247,9 +1299,6 @@
     "longitude": "51.453459",
     "latitude": "35.70913",
     "address": "خیابان شهید مدنی، بالاتر از بیمارستان امام حسین (ع)",
-    "colors": [
-      "#2F4389"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1261,6 +1310,10 @@
       "Imam Hussein"
     ],
     "positionsInLine": [
+      {
+        "position": 9,
+        "line": 2
+      },
       {
         "position": 9,
         "line": 2
@@ -1279,10 +1332,6 @@
     "longitude": "51.445702",
     "latitude": "35.702188",
     "address": "میدان امام حسین (ع) - تقاطع خیابان انقلاب اسلامی و شهید مدنی",
-    "colors": [
-      "#2F4389",
-      "#EF639F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1296,6 +1345,14 @@
       "Darvazeh Shemiran"
     ],
     "positionsInLine": [
+      {
+        "position": 10,
+        "line": 2
+      },
+      {
+        "position": 13,
+        "line": 6
+      },
       {
         "position": 10,
         "line": 2
@@ -1318,10 +1375,6 @@
     "longitude": "51.437709",
     "latitude": "35.699338",
     "address": "خیابان بهارستان، میدان ابن سینا",
-    "colors": [
-      "#2F4389",
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1335,6 +1388,14 @@
       "Baharistan"
     ],
     "positionsInLine": [
+      {
+        "position": 7,
+        "line": 4
+      },
+      {
+        "position": 11,
+        "line": 2
+      },
       {
         "position": 7,
         "line": 4
@@ -1356,9 +1417,6 @@
     "longitude": "51.432946",
     "latitude": "35.692263",
     "address": "خیابان بهارستان، جنب ساختمان وزارت فرهنگ و ارشاد اسلامی",
-    "colors": [
-      "#2F4389"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1370,6 +1428,10 @@
       "Mellat"
     ],
     "positionsInLine": [
+      {
+        "position": 12,
+        "line": 2
+      },
       {
         "position": 12,
         "line": 2
@@ -1387,9 +1449,6 @@
     "longitude": "51.4277635",
     "latitude": "35.6889986",
     "address": "خیابان اکباتان، سه راهی ملت - اکباتان",
-    "colors": [
-      "#2F4389"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1401,6 +1460,10 @@
       "Imam Khomeini"
     ],
     "positionsInLine": [
+      {
+        "position": 13,
+        "line": 2
+      },
       {
         "position": 13,
         "line": 2
@@ -1418,9 +1481,6 @@
     "longitude": "51.4088914",
     "latitude": "35.6863779",
     "address": "میدان حسن آباد",
-    "colors": [
-      "#2F4389"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1432,6 +1492,10 @@
       "Daneshgah-e Imam Ali"
     ],
     "positionsInLine": [
+      {
+        "position": 15,
+        "line": 2
+      },
       {
         "position": 15,
         "line": 2
@@ -1449,9 +1513,6 @@
     "longitude": "51.3990645",
     "latitude": "35.6874007",
     "address": "خیابان امام خمینی (ره)، روبروی مجلس",
-    "colors": [
-      "#2F4389"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1463,6 +1524,10 @@
       "Meydan-e Horr"
     ],
     "positionsInLine": [
+      {
+        "position": 16,
+        "line": 2
+      },
       {
         "position": 16,
         "line": 2
@@ -1480,9 +1545,6 @@
     "longitude": "51.3884",
     "latitude": "35.691008",
     "address": "خیابان کارگر جنوبی، تقاطع پاستور و دانشگاه جنگ",
-    "colors": [
-      "#2F4389"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1494,6 +1556,10 @@
       "Shahid Navab-e Safavi"
     ],
     "positionsInLine": [
+      {
+        "position": 17,
+        "line": 2
+      },
       {
         "position": 17,
         "line": 2
@@ -1512,10 +1578,6 @@
     "longitude": "51.378229",
     "latitude": "35.69526",
     "address": "تقاطع بزرگراه شهید نواب صفوی و خیابان آذربایجان",
-    "colors": [
-      "#2F4389",
-      "#7F0B74"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1529,6 +1591,14 @@
       "Shademan"
     ],
     "positionsInLine": [
+      {
+        "position": 18,
+        "line": 2
+      },
+      {
+        "position": 14,
+        "line": 7
+      },
       {
         "position": 18,
         "line": 2
@@ -1551,10 +1621,6 @@
     "longitude": "51.363809",
     "latitude": "35.700627",
     "address": "تقاطع خیابان های آزادی و آذربایجان",
-    "colors": [
-      "#2F4389",
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1568,6 +1634,14 @@
       "Daneshgah-e Sharif"
     ],
     "positionsInLine": [
+      {
+        "position": 13,
+        "line": 4
+      },
+      {
+        "position": 19,
+        "line": 2
+      },
       {
         "position": 13,
         "line": 4
@@ -1589,9 +1663,6 @@
     "longitude": "51.353638",
     "latitude": "35.70575",
     "address": "خیابان حبیب الهی - شهید تیموری",
-    "colors": [
-      "#2F4389"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1603,6 +1674,10 @@
       "Tarasht"
     ],
     "positionsInLine": [
+      {
+        "position": 20,
+        "line": 2
+      },
       {
         "position": 20,
         "line": 2
@@ -1620,9 +1695,6 @@
     "longitude": "51.34351",
     "latitude": "35.716134",
     "address": "خیابان محمدعلی جناح، بلوار شهید گلاب، بلوار شهید چوب تراش",
-    "colors": [
-      "#2F4389"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1634,6 +1706,10 @@
       "Tehran (Sadeghiyeh)"
     ],
     "positionsInLine": [
+      {
+        "position": 21,
+        "line": 2
+      },
       {
         "position": 21,
         "line": 2
@@ -1652,10 +1728,6 @@
     "longitude": "51.330979",
     "latitude": "35.717598",
     "address": "بزرگراه محمد علی جناح، خیابان سازمان آب",
-    "colors": [
-      "#2F4389",
-      "#007E46"
-    ],
     "disabled": false,
     "wc": true,
     "coffeeShop": false,
@@ -1667,6 +1739,14 @@
       "Eram-e Sabz"
     ],
     "positionsInLine": [
+      {
+        "position": 22,
+        "line": 2
+      },
+      {
+        "position": 1,
+        "line": 5
+      },
       {
         "position": 22,
         "line": 2
@@ -1688,9 +1768,6 @@
     "longitude": "51.521684",
     "latitude": "35.799759",
     "address": "بلوار نیروی هوایی، میدان اول شهرک",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1701,6 +1778,10 @@
       "Shahid Mahallati"
     ],
     "positionsInLine": [
+      {
+        "position": 1,
+        "line": 3
+      },
       {
         "position": 1,
         "line": 3
@@ -1718,9 +1799,6 @@
     "longitude": "51.508169",
     "latitude": "35.797925",
     "address": "بزرگراه لشگرک - تقاطع بلوار ارتش - ابتدای شهرک شهید محلاتی",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1735,6 +1813,10 @@
       {
         "position": 2,
         "line": 3
+      },
+      {
+        "position": 2,
+        "line": 3
       }
     ]
   },
@@ -1746,15 +1828,16 @@
     "lines": [
       3
     ],
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "relations": [
       "Shahid Mahallati",
       "Nobonyad"
     ],
     "positionsInLine": [
+      {
+        "position": 3,
+        "line": 3
+      },
       {
         "position": 3,
         "line": 3
@@ -1772,9 +1855,6 @@
     "longitude": "51.478029",
     "latitude": "35.790987",
     "address": "نوبنیاد، ابتدای اقدسیه",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1786,6 +1866,10 @@
       "Hoseinabad"
     ],
     "positionsInLine": [
+      {
+        "position": 4,
+        "line": 3
+      },
       {
         "position": 4,
         "line": 3
@@ -1803,9 +1887,6 @@
     "longitude": "51.47852",
     "latitude": "35.779428",
     "address": "تقاطع خیابان مغان و بزرگراه شهید صیاد شیرازی",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1817,6 +1898,10 @@
       "Meydan-e Heravi"
     ],
     "positionsInLine": [
+      {
+        "position": 5,
+        "line": 3
+      },
       {
         "position": 5,
         "line": 3
@@ -1834,9 +1919,6 @@
     "longitude": "51.473219",
     "latitude": "35.771831",
     "address": "اتوبان صیاد شیرازی٬ بالاتر از خیابان موسوی",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1848,6 +1930,10 @@
       "Shahid Zeynoddin"
     ],
     "positionsInLine": [
+      {
+        "position": 6,
+        "line": 3
+      },
       {
         "position": 6,
         "line": 3
@@ -1865,9 +1951,6 @@
     "longitude": "51.4659032",
     "latitude": "35.7595603",
     "address": "بزرگراه صیاد شیرازی، تقاطع بزرگراه شهید زین‌الدین",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1879,6 +1962,10 @@
       "Khajeh Abdollah-e Ansari"
     ],
     "positionsInLine": [
+      {
+        "position": 7,
+        "line": 3
+      },
       {
         "position": 7,
         "line": 3
@@ -1896,9 +1983,6 @@
     "longitude": "51.462922",
     "latitude": "35.743739",
     "address": "بلوار خواجه عبدالله انصاری",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1910,6 +1994,10 @@
       "Shahid Sayyad Shirazi"
     ],
     "positionsInLine": [
+      {
+        "position": 8,
+        "line": 3
+      },
       {
         "position": 8,
         "line": 3
@@ -1927,9 +2015,6 @@
     "longitude": "51.458594",
     "latitude": "35.735349",
     "address": "تفاطع بزگراه صیاد شیرازی و مسیل باختر",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1941,6 +2026,10 @@
       "Shahid Ghodousi"
     ],
     "positionsInLine": [
+      {
+        "position": 9,
+        "line": 3
+      },
       {
         "position": 9,
         "line": 3
@@ -1958,9 +2047,6 @@
     "longitude": "51.4445",
     "latitude": "35.731553",
     "address": "\tخیابان شریعتی - تقاطع خیابان شهید بهشتی",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -1972,6 +2058,10 @@
       "Sohrevardi"
     ],
     "positionsInLine": [
+      {
+        "position": 10,
+        "line": 3
+      },
       {
         "position": 10,
         "line": 3
@@ -1989,9 +2079,6 @@
     "longitude": "51.435852",
     "latitude": "35.731066",
     "address": "خیابان عباس آباد، روبروی بلوار یوسفی",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2003,6 +2090,10 @@
       "Shahid Beheshti"
     ],
     "positionsInLine": [
+      {
+        "position": 11,
+        "line": 3
+      },
       {
         "position": 11,
         "line": 3
@@ -2020,9 +2111,6 @@
     "longitude": "51.417448",
     "latitude": "35.728365",
     "address": "خیابان بهشتی، مابین میرزای شیرازی و قائم مقام فرهانی",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2034,6 +2122,10 @@
       "Meydan-e Jahad"
     ],
     "positionsInLine": [
+      {
+        "position": 13,
+        "line": 3
+      },
       {
         "position": 13,
         "line": 3
@@ -2051,9 +2143,6 @@
     "longitude": "51.408803",
     "latitude": "35.721672",
     "address": "خیابان ولیعصر، تقاطع خیابان دکتر فاطمی",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2065,6 +2154,10 @@
       "Meydan-e Hazrat Vali Asr"
     ],
     "positionsInLine": [
+      {
+        "position": 14,
+        "line": 3
+      },
       {
         "position": 14,
         "line": 3
@@ -2083,10 +2176,6 @@
     "longitude": "51.405831",
     "latitude": "35.700954",
     "address": "خیابان انقلاب اسلامی، چهارراه ولیعصر(عج)",
-    "colors": [
-      "#67C5F5",
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": true,
@@ -2100,6 +2189,14 @@
       "Moniriyeh"
     ],
     "positionsInLine": [
+      {
+        "position": 16,
+        "line": 3
+      },
+      {
+        "position": 10,
+        "line": 4
+      },
       {
         "position": 16,
         "line": 3
@@ -2121,9 +2218,6 @@
     "longitude": "51.401594",
     "latitude": "35.681087",
     "address": "خیابان ولیعصر(عج) میدان منیریه",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2135,6 +2229,10 @@
       "Mahdiyeh"
     ],
     "positionsInLine": [
+      {
+        "position": 17,
+        "line": 3
+      },
       {
         "position": 17,
         "line": 3
@@ -2150,10 +2248,6 @@
       3,
       7
     ],
-    "colors": [
-      "#67C5F5",
-      "#7F0B74"
-    ],
     "disabled": false,
     "relations": [
       "Moniriyeh",
@@ -2162,6 +2256,14 @@
       "Rahahan"
     ],
     "positionsInLine": [
+      {
+        "position": 18,
+        "line": 3
+      },
+      {
+        "position": 9,
+        "line": 7
+      },
       {
         "position": 18,
         "line": 3
@@ -2183,9 +2285,6 @@
     "longitude": "51.3984659",
     "latitude": "35.6595573",
     "address": "میدان راه آهن",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2197,6 +2296,10 @@
       "Javadiyeh"
     ],
     "positionsInLine": [
+      {
+        "position": 19,
+        "line": 3
+      },
       {
         "position": 19,
         "line": 3
@@ -2214,9 +2317,6 @@
     "longitude": "51.388215",
     "latitude": "35.659075",
     "address": "حد فاصل پل جوادیه و میدان رباط کریم",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2228,6 +2328,10 @@
       "Zamzam"
     ],
     "positionsInLine": [
+      {
+        "position": 20,
+        "line": 3
+      },
       {
         "position": 20,
         "line": 3
@@ -2245,9 +2349,6 @@
     "longitude": "51.3733202",
     "latitude": "35.6525844",
     "address": "بزرگراه شهید چراغی",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2259,6 +2360,10 @@
       "Shahrak-e Shariaty"
     ],
     "positionsInLine": [
+      {
+        "position": 21,
+        "line": 3
+      },
       {
         "position": 21,
         "line": 3
@@ -2276,9 +2381,6 @@
     "longitude": "51.3677387",
     "latitude": "35.6435696",
     "address": "بزرگراه شهید چراغی، جوانه",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2290,6 +2392,10 @@
       "Abdol Abad"
     ],
     "positionsInLine": [
+      {
+        "position": 22,
+        "line": 3
+      },
       {
         "position": 22,
         "line": 3
@@ -2307,9 +2413,6 @@
     "longitude": "51.359773",
     "latitude": "35.638159",
     "address": "بزرگراه شهید چراغی،ابتدای خیابان ورزش",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2321,6 +2424,10 @@
       "Nemat Abad"
     ],
     "positionsInLine": [
+      {
+        "position": 23,
+        "line": 3
+      },
       {
         "position": 23,
         "line": 3
@@ -2338,9 +2445,6 @@
     "longitude": "51.34703",
     "latitude": "35.63392",
     "address": " بزرگراه سعیدی ، روبروی خیابان سهیل",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2352,6 +2456,10 @@
       "Azadegan"
     ],
     "positionsInLine": [
+      {
+        "position": 24,
+        "line": 3
+      },
       {
         "position": 24,
         "line": 3
@@ -2369,9 +2477,6 @@
     "longitude": "51.335533",
     "latitude": "35.627216",
     "address": "بزرگراه سعیدی، نرسیده به بزرگراه آزادگان ابتدای شهید حیدری",
-    "colors": [
-      "#67C5F5"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2382,6 +2487,10 @@
       "Nemat Abad"
     ],
     "positionsInLine": [
+      {
+        "position": 25,
+        "line": 3
+      },
       {
         "position": 25,
         "line": 3
@@ -2399,9 +2508,6 @@
     "longitude": "51.498563",
     "latitude": "35.698954",
     "address": "ابتدای بزرگراه شهید دوران،بالاتر از بانک سپه",
-    "colors": [
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2412,6 +2518,10 @@
       "Niroohavaii"
     ],
     "positionsInLine": [
+      {
+        "position": 1,
+        "line": 4
+      },
       {
         "position": 1,
         "line": 4
@@ -2429,9 +2539,6 @@
     "longitude": "51.4886226",
     "latitude": "35.6926988",
     "address": "خیابان پیروزی- بین خیابانهای چهارم و پنجم نیرو هوایی",
-    "colors": [
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2443,6 +2550,10 @@
       "Nabard"
     ],
     "positionsInLine": [
+      {
+        "position": 2,
+        "line": 4
+      },
       {
         "position": 2,
         "line": 4
@@ -2460,9 +2571,6 @@
     "longitude": "51.4777301",
     "latitude": "35.6913253",
     "address": "خیابان پیروزی ، چهار راه کوکاکولا ، جنب مجتمع تجاری کسا",
-    "colors": [
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2474,6 +2582,10 @@
       "Piroozi"
     ],
     "positionsInLine": [
+      {
+        "position": 3,
+        "line": 4
+      },
       {
         "position": 3,
         "line": 4
@@ -2491,9 +2603,6 @@
     "longitude": "51.46775",
     "latitude": "35.691356",
     "address": "خیابان پیروزی –قبل از خیابان شهید حسن پورمند",
-    "colors": [
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2505,6 +2614,10 @@
       "Ebn-e Sina"
     ],
     "positionsInLine": [
+      {
+        "position": 4,
+        "line": 4
+      },
       {
         "position": 4,
         "line": 4
@@ -2522,9 +2635,6 @@
     "longitude": "51.4579435",
     "latitude": "35.6907927",
     "address": "خیابان پیروزی ،چهارصد دستگاه( تقاطع اتوبان امام علی (ع) و پیروزی)",
-    "colors": [
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2536,6 +2646,10 @@
       "Meydan-e Shohada"
     ],
     "positionsInLine": [
+      {
+        "position": 5,
+        "line": 4
+      },
       {
         "position": 5,
         "line": 4
@@ -2553,9 +2667,6 @@
     "longitude": "51.418569",
     "latitude": "35.701255",
     "address": "میدان فردوسی",
-    "colors": [
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2567,6 +2678,10 @@
       "Teatr-e Shahr"
     ],
     "positionsInLine": [
+      {
+        "position": 9,
+        "line": 4
+      },
       {
         "position": 9,
         "line": 4
@@ -2584,9 +2699,6 @@
     "longitude": "51.392176",
     "latitude": "35.701255",
     "address": "میدان انقلاب اسلامی،ابتدای خیابان آزادی، کوچه شهید جنتی",
-    "colors": [
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": true,
@@ -2598,6 +2710,10 @@
       "Towhid"
     ],
     "positionsInLine": [
+      {
+        "position": 11,
+        "line": 4
+      },
       {
         "position": 11,
         "line": 4
@@ -2616,10 +2732,6 @@
     "longitude": "51.378572",
     "latitude": "35.700767",
     "address": "خیابان آزادی - شمال شرقی تقاطع خیابان آزادی و شهید نواب صفوی",
-    "colors": [
-      "#F8E100",
-      "#7F0B74"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2633,6 +2745,14 @@
       "Shademan"
     ],
     "positionsInLine": [
+      {
+        "position": 12,
+        "line": 4
+      },
+      {
+        "position": 15,
+        "line": 7
+      },
       {
         "position": 12,
         "line": 4
@@ -2654,9 +2774,6 @@
     "longitude": "51.356079",
     "latitude": "35.700653",
     "address": "خیابان آزادی - نرسیده به خیابان دکتر حبیب اله",
-    "colors": [
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2668,6 +2785,10 @@
       "Ostad Mo'in"
     ],
     "positionsInLine": [
+      {
+        "position": 14,
+        "line": 4
+      },
       {
         "position": 14,
         "line": 4
@@ -2685,9 +2806,6 @@
     "longitude": "51.34461",
     "latitude": "35.700131",
     "address": "خیابان آزادی- قبل از میدان آزادی - تقاطع خیابان نور بخش",
-    "colors": [
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2699,6 +2817,10 @@
       "Meydan-e Azadi"
     ],
     "positionsInLine": [
+      {
+        "position": 15,
+        "line": 4
+      },
       {
         "position": 15,
         "line": 4
@@ -2716,9 +2838,6 @@
     "longitude": "51.332492",
     "latitude": "35.700802",
     "address": "میدان آزادی - ابتدای بزرگراه شهید برادران رحمانی",
-    "colors": [
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2730,6 +2849,10 @@
       "Bimeh"
     ],
     "positionsInLine": [
+      {
+        "position": 16,
+        "line": 4
+      },
       {
         "position": 16,
         "line": 4
@@ -2747,9 +2870,6 @@
     "longitude": "51.32036",
     "latitude": "35.699546",
     "address": "بزرگراه شهید لشگری، ابتدای بیمه",
-    "colors": [
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": true,
@@ -2762,6 +2882,10 @@
       "Mehrabad Airport Terminal 1&2"
     ],
     "positionsInLine": [
+      {
+        "position": 17,
+        "line": 4
+      },
       {
         "position": 17,
         "line": 4
@@ -2779,9 +2903,6 @@
     "longitude": "51.3196823",
     "latitude": "35.690689",
     "address": "میدان آزادی، پایانه ۲ فرودگاه مهرآباد",
-    "colors": [
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2795,6 +2916,10 @@
     "positionsInLine": [
       {
         "position": 22,
+        "line": 4
+      },
+      {
+        "position": 21,
         "line": 4
       }
     ]
@@ -2810,9 +2935,6 @@
     "longitude": "51.3271795",
     "latitude": "35.6886266",
     "address": "میدان آزادی، پایانه ۶ فرودگاه مهرآباد",
-    "colors": [
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2825,6 +2947,10 @@
     "positionsInLine": [
       {
         "position": 23,
+        "line": 4
+      },
+      {
+        "position": 22,
         "line": 4
       }
     ]
@@ -2840,9 +2966,6 @@
     "longitude": "51.3074478",
     "latitude": "35.705557400000004",
     "address": "فاز دو شهرک اکباتان- روبروی بلوک 13",
-    "colors": [
-      "#F8E100"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2857,6 +2980,10 @@
       {
         "position": 18,
         "line": 4
+      },
+      {
+        "position": 18,
+        "line": 4
       }
     ]
   },
@@ -2868,9 +2995,6 @@
     "lines": [
       4
     ],
-    "colors": [
-      "#F8E100"
-    ],
     "disabled": false,
     "coffeeShop": false,
     "groceryStore": false,
@@ -2880,6 +3004,10 @@
       "Eram-e Sabz"
     ],
     "positionsInLine": [
+      {
+        "position": 20,
+        "line": 4
+      },
       {
         "position": 20,
         "line": 4
@@ -2898,10 +3026,6 @@
     "longitude": "51.301979",
     "latitude": "35.717476",
     "address": "ارم سبز",
-    "colors": [
-      "#F8E100",
-      "#007E46"
-    ],
     "disabled": false,
     "wc": true,
     "coffeeShop": true,
@@ -2915,6 +3039,14 @@
       "Shahrak-e Ekbatan"
     ],
     "positionsInLine": [
+      {
+        "position": 19,
+        "line": 4
+      },
+      {
+        "position": 2,
+        "line": 5
+      },
       {
         "position": 19,
         "line": 4
@@ -2936,9 +3068,6 @@
     "longitude": "51.281208",
     "latitude": "35.716727",
     "address": "اتوبان کرج - جنب مجموعه ورزشی آزادی",
-    "colors": [
-      "#007E46"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -2950,6 +3079,10 @@
       "Chitgar"
     ],
     "positionsInLine": [
+      {
+        "position": 3,
+        "line": 5
+      },
       {
         "position": 3,
         "line": 5
@@ -2967,9 +3100,6 @@
     "longitude": "51.243904",
     "latitude": "35.717563",
     "address": "کیلومتر 8 اتوبان تهران کرج ، روبروی کارخانه بهنوش ، بلوار کوهک",
-    "colors": [
-      "#007E46"
-    ],
     "disabled": false,
     "wc": true,
     "coffeeShop": false,
@@ -2981,6 +3111,10 @@
       "Iran Khodro"
     ],
     "positionsInLine": [
+      {
+        "position": 4,
+        "line": 5
+      },
       {
         "position": 4,
         "line": 5
@@ -2998,9 +3132,6 @@
     "longitude": "51.196654",
     "latitude": "35.725402",
     "address": "کیلومتر 14 اتوبان تهران کرج ، جنب باشگاه ایران خودرو",
-    "colors": [
-      "#007E46"
-    ],
     "disabled": false,
     "wc": true,
     "coffeeShop": false,
@@ -3012,6 +3143,10 @@
       "Vardavard"
     ],
     "positionsInLine": [
+      {
+        "position": 5,
+        "line": 5
+      },
       {
         "position": 5,
         "line": 5
@@ -3029,9 +3164,6 @@
     "longitude": "51.1509866",
     "latitude": "35.7444768",
     "address": "کیلومتر 16 بزرگراه تهران کرج - خیابان دارو پخش",
-    "colors": [
-      "#007E46"
-    ],
     "disabled": false,
     "wc": true,
     "coffeeShop": false,
@@ -3043,6 +3175,10 @@
       "Garmdareh"
     ],
     "positionsInLine": [
+      {
+        "position": 6,
+        "line": 5
+      },
       {
         "position": 6,
         "line": 5
@@ -3060,9 +3196,6 @@
     "longitude": "51.08193",
     "latitude": "35.751002",
     "address": "کیلومتر ۲۳ بزرگراه تهران-کرج، جنب اردوگاه آموزشی قدس",
-    "colors": [
-      "#007E46"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -3074,6 +3207,10 @@
       "Atmosphere"
     ],
     "positionsInLine": [
+      {
+        "position": 7,
+        "line": 5
+      },
       {
         "position": 7,
         "line": 5
@@ -3091,9 +3228,6 @@
     "longitude": "51.0469759",
     "latitude": "35.7662914",
     "address": "کیلومتر 27 جاده مخصوص تهران کرج اتمسفر",
-    "colors": [
-      "#007E46"
-    ],
     "disabled": false,
     "wc": true,
     "coffeeShop": false,
@@ -3105,6 +3239,10 @@
       "Karaj"
     ],
     "positionsInLine": [
+      {
+        "position": 8,
+        "line": 5
+      },
       {
         "position": 8,
         "line": 5
@@ -3122,9 +3260,6 @@
     "longitude": "51.0026979",
     "latitude": "35.7870098",
     "address": "کرج ، پل فردیس ، جنب میدان شهید سلطانی ، ابتدای جاده ملارد",
-    "colors": [
-      "#007E46"
-    ],
     "disabled": false,
     "wc": true,
     "coffeeShop": false,
@@ -3136,6 +3271,10 @@
       "Mohammadshahr"
     ],
     "positionsInLine": [
+      {
+        "position": 9,
+        "line": 5
+      },
       {
         "position": 9,
         "line": 5
@@ -3153,9 +3292,6 @@
     "longitude": "50.964729",
     "latitude": "35.800951",
     "address": "اتوبان ( تهران - کرج ) جاده محمد شهر",
-    "colors": [
-      "#007E46"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -3167,6 +3303,10 @@
       "Golshahr"
     ],
     "positionsInLine": [
+      {
+        "position": 10,
+        "line": 5
+      },
       {
         "position": 10,
         "line": 5
@@ -3184,9 +3324,6 @@
     "longitude": "50.933079",
     "latitude": "35.824877",
     "address": "کرج-45 متری گلشهر- خیابان اختر غربی",
-    "colors": [
-      "#007E46"
-    ],
     "disabled": false,
     "wc": true,
     "coffeeShop": true,
@@ -3201,6 +3338,10 @@
       {
         "position": 11,
         "line": 5
+      },
+      {
+        "position": 11,
+        "line": 5
       }
     ]
   },
@@ -3212,14 +3353,15 @@
     "lines": [
       5
     ],
-    "colors": [
-      "#007E46"
-    ],
     "disabled": true,
     "relations": [
       "Golshahr"
     ],
     "positionsInLine": [
+      {
+        "position": 12,
+        "line": 5
+      },
       {
         "position": 12,
         "line": 5
@@ -3234,14 +3376,15 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": true,
     "relations": [
       "Meydan-e Hazrat-e Abdol Azim"
     ],
     "positionsInLine": [
+      {
+        "position": 1,
+        "line": 6
+      },
       {
         "position": 1,
         "line": 6
@@ -3256,15 +3399,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": true,
     "relations": [
       "Haram-e Hazrat-e Abdol Azim",
       "Ebn-e Babviyeh"
     ],
     "positionsInLine": [
+      {
+        "position": 2,
+        "line": 6
+      },
       {
         "position": 2,
         "line": 6
@@ -3279,15 +3423,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": true,
     "relations": [
       "Meydan-e Hazrat-e Abdol Azim",
       "Cheshmeh Ali"
     ],
     "positionsInLine": [
+      {
+        "position": 3,
+        "line": 6
+      },
       {
         "position": 3,
         "line": 6
@@ -3302,15 +3447,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": true,
     "relations": [
       "Ebn-e Babviyeh",
       "Shohada-ye Dowlat Abad"
     ],
     "positionsInLine": [
+      {
+        "position": 4,
+        "line": 6
+      },
       {
         "position": 4,
         "line": 6
@@ -3325,15 +3471,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": false,
     "relations": [
       "Cheshmeh Ali",
       "Kiyan Shahr"
     ],
     "positionsInLine": [
+      {
+        "position": 5,
+        "line": 6
+      },
       {
         "position": 5,
         "line": 6
@@ -3348,15 +3495,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": false,
     "relations": [
       "Shohada-ye Dowlat Abad",
       "Be'sat"
     ],
     "positionsInLine": [
+      {
+        "position": 6,
+        "line": 6
+      },
       {
         "position": 6,
         "line": 6
@@ -3371,15 +3519,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": false,
     "relations": [
       "Kiyan Shahr",
       "Shahid Rezaei"
     ],
     "positionsInLine": [
+      {
+        "position": 7,
+        "line": 6
+      },
       {
         "position": 7,
         "line": 6
@@ -3394,15 +3543,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": false,
     "relations": [
       "Be'sat",
       "Meydan-e Khorasan"
     ],
     "positionsInLine": [
+      {
+        "position": 8,
+        "line": 6
+      },
       {
         "position": 8,
         "line": 6
@@ -3417,15 +3567,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": true,
     "relations": [
       "Shahid Rezaei",
       "Shohada-ye Hefdah-e Shahrivar"
     ],
     "positionsInLine": [
+      {
+        "position": 9,
+        "line": 6
+      },
       {
         "position": 9,
         "line": 6
@@ -3441,10 +3592,6 @@
       6,
       7
     ],
-    "colors": [
-      "#EF639F",
-      "#7F0B74"
-    ],
     "disabled": true,
     "relations": [
       "Meydan-e Khorasan",
@@ -3453,6 +3600,14 @@
       "Meydan-e Ghiyam"
     ],
     "positionsInLine": [
+      {
+        "position": 5,
+        "line": 7
+      },
+      {
+        "position": 10,
+        "line": 6
+      },
       {
         "position": 5,
         "line": 7
@@ -3471,15 +3626,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": false,
     "relations": [
       "Shohada-ye Hefdah-e Shahrivar",
       "Meydan-e Shohada"
     ],
     "positionsInLine": [
+      {
+        "position": 11,
+        "line": 6
+      },
       {
         "position": 11,
         "line": 6
@@ -3498,10 +3654,6 @@
     "longitude": "51.447237",
     "latitude": "35.690381",
     "address": "خیابان پیروزی تقاطع 17 شهریور،نرسیده به میدان شهدا، جنب اداره برق",
-    "colors": [
-      "#F8E100",
-      "#EF639F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -3522,6 +3674,14 @@
       {
         "position": 12,
         "line": 6
+      },
+      {
+        "position": 6,
+        "line": 4
+      },
+      {
+        "position": 12,
+        "line": 6
       }
     ]
   },
@@ -3533,15 +3693,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": true,
     "relations": [
       "Imam Hussein",
       "Bahar Shiraz (Khanevadeh Hospital)"
     ],
     "positionsInLine": [
+      {
+        "position": 14,
+        "line": 6
+      },
       {
         "position": 14,
         "line": 6
@@ -3556,15 +3717,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": true,
     "relations": [
       "Sarbaz",
       "Shohada-ye Haftom-e Tir"
     ],
     "positionsInLine": [
+      {
+        "position": 15,
+        "line": 6
+      },
       {
         "position": 15,
         "line": 6
@@ -3583,10 +3745,6 @@
     "longitude": "51.426042",
     "latitude": "35.715986",
     "address": "میدان هفت تیر",
-    "colors": [
-      "#E0001F",
-      "#EF639F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -3607,6 +3765,14 @@
       {
         "position": 16,
         "line": 6
+      },
+      {
+        "position": 12,
+        "line": 1
+      },
+      {
+        "position": 16,
+        "line": 6
       }
     ]
   },
@@ -3618,15 +3784,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": true,
     "relations": [
       "Shohada-ye Haftom-e Tir",
       "Meydan-e Hazrat Vali Asr"
     ],
     "positionsInLine": [
+      {
+        "position": 17,
+        "line": 6
+      },
       {
         "position": 17,
         "line": 6
@@ -3645,10 +3812,6 @@
     "longitude": "51.4070255",
     "latitude": "35.7115282",
     "address": "خیابان ولیعصر، میدان ولیعصر",
-    "colors": [
-      "#67C5F5",
-      "#EF639F"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -3669,6 +3832,14 @@
       {
         "position": 18,
         "line": 6
+      },
+      {
+        "position": 15,
+        "line": 3
+      },
+      {
+        "position": 18,
+        "line": 6
       }
     ]
   },
@@ -3680,15 +3851,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": false,
     "relations": [
       "Meydan-e Hazrat Vali Asr",
       "Karagar"
     ],
     "positionsInLine": [
+      {
+        "position": 19,
+        "line": 6
+      },
       {
         "position": 19,
         "line": 6
@@ -3703,15 +3875,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": false,
     "relations": [
       "Bustan-e Laleh",
       "Daneshgah-e Tarbiat Modarres"
     ],
     "positionsInLine": [
+      {
+        "position": 20,
+        "line": 6
+      },
       {
         "position": 20,
         "line": 6
@@ -3727,10 +3900,6 @@
       6,
       7
     ],
-    "colors": [
-      "#EF639F",
-      "#7F0B74"
-    ],
     "disabled": false,
     "relations": [
       "Karagar",
@@ -3739,6 +3908,14 @@
       "Shahrak-e Azmayesh"
     ],
     "positionsInLine": [
+      {
+        "position": 17,
+        "line": 7
+      },
+      {
+        "position": 21,
+        "line": 6
+      },
       {
         "position": 17,
         "line": 7
@@ -3757,15 +3934,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": false,
     "relations": [
       "Daneshgah-e Tarbiat Modarres",
       "Marzdaran"
     ],
     "positionsInLine": [
+      {
+        "position": 22,
+        "line": 6
+      },
       {
         "position": 22,
         "line": 6
@@ -3780,15 +3958,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": false,
     "relations": [
       "Shahrak-e Azmayesh",
       "Yadegar-e Imam"
     ],
     "positionsInLine": [
+      {
+        "position": 23,
+        "line": 6
+      },
       {
         "position": 23,
         "line": 6
@@ -3803,15 +3982,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": false,
     "relations": [
       "Marzdaran",
       "Shahid Ashrafi Esfahani"
     ],
     "positionsInLine": [
+      {
+        "position": 24,
+        "line": 6
+      },
       {
         "position": 24,
         "line": 6
@@ -3826,15 +4006,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": false,
     "relations": [
       "Yadegar-e Imam",
       "Shahid Sattari"
     ],
     "positionsInLine": [
+      {
+        "position": 25,
+        "line": 6
+      },
       {
         "position": 25,
         "line": 6
@@ -3849,15 +4030,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": false,
     "relations": [
       "Shahid Ashrafi Esfahani",
       "Ayatollah Kashani"
     ],
     "positionsInLine": [
+      {
+        "position": 26,
+        "line": 6
+      },
       {
         "position": 26,
         "line": 6
@@ -3872,9 +4054,6 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": true,
     "relations": [
       "Shahid Sattari",
@@ -3882,6 +4061,10 @@
       "Allameh Jafari"
     ],
     "positionsInLine": [
+      {
+        "position": 27,
+        "line": 6
+      },
       {
         "position": 27,
         "line": 6
@@ -3896,15 +4079,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": true,
     "relations": [
       "Ayatollah Kashani",
       "Shahran"
     ],
     "positionsInLine": [
+      {
+        "position": 28,
+        "line": 6
+      },
       {
         "position": 28,
         "line": 6
@@ -3919,15 +4103,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": true,
     "relations": [
       "Shahr-e Ziba",
       "Shohada-ye Kan"
     ],
     "positionsInLine": [
+      {
+        "position": 29,
+        "line": 6
+      },
       {
         "position": 29,
         "line": 6
@@ -3942,15 +4127,16 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": true,
     "relations": [
       "Shahran",
       "Kouhsar"
     ],
     "positionsInLine": [
+      {
+        "position": 30,
+        "line": 6
+      },
       {
         "position": 30,
         "line": 6
@@ -3965,14 +4151,15 @@
     "lines": [
       6
     ],
-    "colors": [
-      "#EF639F"
-    ],
     "disabled": true,
     "relations": [
       "Shohada-ye Kan"
     ],
     "positionsInLine": [
+      {
+        "position": 31,
+        "line": 6
+      },
       {
         "position": 31,
         "line": 6
@@ -3987,14 +4174,15 @@
     "lines": [
       7
     ],
-    "colors": [
-      "#7F0B74"
-    ],
     "disabled": true,
     "relations": [
       "Basij"
     ],
     "positionsInLine": [
+      {
+        "position": 1,
+        "line": 7
+      },
       {
         "position": 1,
         "line": 7
@@ -4012,9 +4200,6 @@
     "longitude": "51.489404",
     "latitude": "35.667159",
     "address": "محدوده بزرگراه بسیج - افسریه",
-    "colors": [
-      "#7F0B74"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -4029,6 +4214,10 @@
       {
         "position": 2,
         "line": 7
+      },
+      {
+        "position": 2,
+        "line": 7
       }
     ]
   },
@@ -4040,15 +4229,16 @@
     "lines": [
       7
     ],
-    "colors": [
-      "#7F0B74"
-    ],
     "disabled": false,
     "relations": [
       "Basij",
       "Chehel Tan-e Doulab"
     ],
     "positionsInLine": [
+      {
+        "position": 3,
+        "line": 7
+      },
       {
         "position": 3,
         "line": 7
@@ -4063,15 +4253,16 @@
     "lines": [
       7
     ],
-    "colors": [
-      "#7F0B74"
-    ],
     "disabled": false,
     "relations": [
       "Ahang",
       "Shohada-ye Hefdah-e Shahrivar"
     ],
     "positionsInLine": [
+      {
+        "position": 4,
+        "line": 7
+      },
       {
         "position": 4,
         "line": 7
@@ -4086,15 +4277,16 @@
     "lines": [
       7
     ],
-    "colors": [
-      "#7F0B74"
-    ],
     "disabled": false,
     "relations": [
       "Shohada-ye Hefdah-e Shahrivar",
       "Mowlavi"
     ],
     "positionsInLine": [
+      {
+        "position": 6,
+        "line": 7
+      },
       {
         "position": 6,
         "line": 7
@@ -4109,15 +4301,16 @@
     "lines": [
       7
     ],
-    "colors": [
-      "#7F0B74"
-    ],
     "disabled": false,
     "relations": [
       "Meydan-e Ghiyam",
       "Meydan-e Mohammadiyeh"
     ],
     "positionsInLine": [
+      {
+        "position": 7,
+        "line": 7
+      },
       {
         "position": 7,
         "line": 7
@@ -4132,15 +4325,16 @@
     "lines": [
       7
     ],
-    "colors": [
-      "#7F0B74"
-    ],
     "disabled": false,
     "relations": [
       "Mahdiyeh",
       "Beryanak"
     ],
     "positionsInLine": [
+      {
+        "position": 10,
+        "line": 7
+      },
       {
         "position": 10,
         "line": 7
@@ -4155,15 +4349,16 @@
     "lines": [
       7
     ],
-    "colors": [
-      "#7F0B74"
-    ],
     "disabled": false,
     "relations": [
       "Helal Ahmar",
       "Komeyl"
     ],
     "positionsInLine": [
+      {
+        "position": 11,
+        "line": 7
+      },
       {
         "position": 11,
         "line": 7
@@ -4181,9 +4376,6 @@
     "longitude": "51.380143",
     "latitude": "35.682491",
     "address": "محدوده بزرگراه شهیدنواب صفوی با جنوب خیابان کمیل",
-    "colors": [
-      "#7F0B74"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -4198,6 +4390,10 @@
       {
         "position": 12,
         "line": 7
+      },
+      {
+        "position": 12,
+        "line": 7
       }
     ]
   },
@@ -4209,15 +4405,16 @@
     "lines": [
       7
     ],
-    "colors": [
-      "#7F0B74"
-    ],
     "disabled": false,
     "relations": [
       "Komeyl",
       "Shahid Navab-e Safavi"
     ],
     "positionsInLine": [
+      {
+        "position": 13,
+        "line": 7
+      },
       {
         "position": 13,
         "line": 7
@@ -4232,15 +4429,16 @@
     "lines": [
       7
     ],
-    "colors": [
-      "#7F0B74"
-    ],
     "disabled": false,
     "relations": [
       "Towhid",
       "Daneshgah-e Tarbiat Modarres"
     ],
     "positionsInLine": [
+      {
+        "position": 16,
+        "line": 7
+      },
       {
         "position": 16,
         "line": 7
@@ -4255,15 +4453,16 @@
     "lines": [
       7
     ],
-    "colors": [
-      "#7F0B74"
-    ],
     "disabled": false,
     "relations": [
       "Daneshgah-e Tarbiat Modarres",
       "Milad Tower"
     ],
     "positionsInLine": [
+      {
+        "position": 18,
+        "line": 7
+      },
       {
         "position": 18,
         "line": 7
@@ -4278,15 +4477,16 @@
     "lines": [
       7
     ],
-    "colors": [
-      "#7F0B74"
-    ],
     "disabled": false,
     "relations": [
       "Boostan-e Goftegou",
       "Meydan-e San'at"
     ],
     "positionsInLine": [
+      {
+        "position": 19,
+        "line": 7
+      },
       {
         "position": 19,
         "line": 7
@@ -4304,9 +4504,6 @@
     "longitude": "51.367808",
     "latitude": "35.754386",
     "address": "محدوده ضلع شمالی میدان صنعت",
-    "colors": [
-      "#7F0B74"
-    ],
     "disabled": false,
     "wc": false,
     "coffeeShop": false,
@@ -4321,6 +4518,10 @@
       {
         "position": 20,
         "line": 7
+      },
+      {
+        "position": 20,
+        "line": 7
       }
     ]
   },
@@ -4332,15 +4533,16 @@
     "lines": [
       7
     ],
-    "colors": [
-      "#7F0B74"
-    ],
     "disabled": false,
     "relations": [
       "Meydan-e San'at",
       "Meydan-e Ketab"
     ],
     "positionsInLine": [
+      {
+        "position": 21,
+        "line": 7
+      },
       {
         "position": 21,
         "line": 7
@@ -4355,14 +4557,15 @@
     "lines": [
       7
     ],
-    "colors": [
-      "#7F0B74"
-    ],
     "disabled": false,
     "relations": [
       "Shahid Dadman"
     ],
     "positionsInLine": [
+      {
+        "position": 22,
+        "line": 7
+      },
       {
         "position": 22,
         "line": 7
