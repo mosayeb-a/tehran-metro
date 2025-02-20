@@ -18,6 +18,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -41,18 +42,39 @@ import com.ma.tehro.data.Station
 fun StationDetail(
     onBack: () -> Unit = {},
     station: Station,
-    lineNumber: Int
+    lineNumber: Int,
+    onSubmitInfoStationClicked: (station: Station, line: Int) -> Unit
 ) {
     val lineName = remember(lineNumber) { calculateLineName(lineNumber) }
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             Column(modifier = Modifier.background(MaterialTheme.colorScheme.primary)) {
-                Appbar(
-                    title = lineName,
-                    handleBack = true,
-                    onBackClick = onBack
-                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(MaterialTheme.colorScheme.primary),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Appbar(
+                        modifier = Modifier.weight(1f),
+                        title = lineName,
+                        handleBack = true,
+                        onBackClick = onBack
+                    )
+                    IconButton(
+                        modifier = Modifier
+                            .padding(end = 6.dp)
+                            .size(46.dp),
+                        onClick = { onSubmitInfoStationClicked(station,lineNumber) },
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.clarify_24px),
+                            contentDescription = "show map screen",
+                        )
+                    }
+                }
                 AppbarDetail(
                     text = station.address ?: "آدرس مشخص نشده",
                     fa = station.translations.fa,

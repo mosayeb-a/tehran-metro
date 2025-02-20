@@ -25,3 +25,6 @@ data class StationDetailScreen(val station: Station, val lineNumber: Int)
 
 @Serializable
 object MapScreen
+
+@Serializable
+data class SubmitStationInfoScreen(val station: Station, val lineNumber: Int)
