@@ -66,14 +66,15 @@ fun SubmitStationInfo(
     var groceryStore by remember { mutableStateOf(station.groceryStore ?: false) }
     var fastFood by remember { mutableStateOf(station.fastFood ?: false) }
     var atm by remember { mutableStateOf(station.atm ?: false) }
+    var selectedLine by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
             Column {
                 Appbar(
                     title = createBilingualMessage(
-                        fa = "ارسال اصلاحیه ایستگاه برای ${station.translations.fa}",
-                        en = "submit station correction for ${station.name}"
+                        fa = if (lineNumber == 0) "ارسال اطلاعات ایستگاه جدید" else "ارسال اصلاحیه ایستگاه برای ${station.translations.fa}",
+                        en = if (lineNumber == 0) "submit new station info" else "submit station correction for ${station.name}"
                     ),
                     handleBack = true,
                     onBackClick = onBack
@@ -92,7 +93,7 @@ fun SubmitStationInfo(
                 Column(
                     modifier = Modifier
                         .clip(RoundedCornerShape(8.dp))
-                        .background(getLineColorByNumber(lineNumber).copy(alpha = .41f))
+                        .background(getLineColorByNumber(lineNumber).copy(alpha = .51f))
                         .padding(6.dp)
                 ) {
                     Text(
@@ -122,14 +123,29 @@ fun SubmitStationInfo(
             }
             item { Spacer(Modifier.height(4.dp)) }
             item {
-                CorrectionEditText(
-                    value = translations,
-                    onValueChange = { translations = it },
-                    label = "نام فارسی",
-                    modifier = Modifier.fillMaxWidth()
-                )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    CorrectionEditText(
+                        value = translations,
+                        onValueChange = { translations = it },
+                        label = "نام فارسی",
+                        modifier = Modifier.weight(0.8f)
+                    )
+                    CorrectionEditText(
+                        value = selectedLine,
+                        onValueChange = { selectedLine = it },
+                        label = "خط",
+                        modifier = Modifier.weight(0.2f),
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            keyboardType = KeyboardType.Number
+                        ),
+                    )
+                }
             }
             item { Spacer(Modifier.height(4.dp)) }
+
             item {
                 CorrectionEditText(
                     value = address,
@@ -291,7 +307,8 @@ fun CorrectionEditText(
     onValueChange: (value: String) -> Unit,
     label: String,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    maxLines: Int = 1
+    maxLines: Int = 1,
+    trailingIcon: @Composable (() -> Unit)? = null,
 ) {
     OutlinedTextField(
         value = value,
@@ -302,6 +319,7 @@ fun CorrectionEditText(
                 textAlign = TextAlign.Center,
             )
         },
+        trailingIcon = trailingIcon,
         modifier = modifier.fillMaxWidth(),
         colors = OutlinedTextFieldDefaults.colors(
             focusedTextColor = Color.White,

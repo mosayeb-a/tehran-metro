@@ -54,6 +54,7 @@ import com.ma.tehro.common.hasLocationPermission
 import com.ma.tehro.common.messenger.UiMessageManager
 import com.ma.tehro.common.navTypeOf
 import com.ma.tehro.data.Station
+import com.ma.tehro.data.Translations
 import com.ma.tehro.ui.detail.StationDetail
 import com.ma.tehro.ui.line.LineViewModel
 import com.ma.tehro.ui.line.Lines
@@ -149,6 +150,30 @@ class MainActivity : ComponentActivity() {
                                 },
                                 onMapClick = {
                                     navController.navigate(MapScreen)
+                                },
+                                onNewSubmitInfoStationClicked = {
+                                    navController.navigate(
+                                        SubmitStationInfoScreen(
+                                            station = Station(
+                                                name = "",
+                                                translations = Translations(fa = ""),
+                                                lines = listOf(),
+                                                longitude = null,
+                                                latitude = null,
+                                                address = null,
+                                                colors = listOf(),
+                                                disabled = false,
+                                                wc = null,
+                                                coffeeShop = null,
+                                                groceryStore = null,
+                                                fastFood = null,
+                                                atm = null,
+                                                relations = listOf(),
+                                                positionsInLine = listOf()
+                                            ),
+                                            lineNumber = 0
+                                        )
+                                    )
                                 }
                             )
                         }
