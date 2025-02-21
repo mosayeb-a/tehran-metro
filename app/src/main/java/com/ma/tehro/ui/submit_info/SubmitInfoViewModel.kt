@@ -46,7 +46,7 @@ class SubmitInfoViewModel @Inject constructor(
                         )
                     )
                 )
-            } catch (e: Exception) {
+            } catch (e: Throwable) {
                 _state.update { it.copy(isLoading = false) }
                 UiMessageManager.sendEvent(
                     UiMessage(
