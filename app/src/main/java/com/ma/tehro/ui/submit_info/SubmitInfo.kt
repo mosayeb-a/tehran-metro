@@ -66,14 +66,16 @@ fun SubmitStationInfo(
     var groceryStore by remember { mutableStateOf(station.groceryStore ?: false) }
     var fastFood by remember { mutableStateOf(station.fastFood ?: false) }
     var atm by remember { mutableStateOf(station.atm ?: false) }
-    var selectedLine by remember { mutableStateOf("") }
+    var selectedLine by remember {
+        mutableStateOf(if (lineNumber == 0) "" else station.lines.joinToString(", "))
+    }
 
     Scaffold(
         topBar = {
             Column {
                 Appbar(
                     title = createBilingualMessage(
-                        fa = if (lineNumber == 0) "ارسال اطلاعات ایستگاه جدید" else "ارسال اصلاحیه ایستگاه برای ${station.translations.fa}",
+                        fa = if (lineNumber == 0) "ارسال اطلاعات ایستگاه جدید" else "ارسال اصلاحیه برای ایستگاه ${station.translations.fa}",
                         en = if (lineNumber == 0) "submit new station info" else "submit station correction for ${station.name}"
                     ),
                     handleBack = true,
@@ -93,7 +95,7 @@ fun SubmitStationInfo(
                 Column(
                     modifier = Modifier
                         .clip(RoundedCornerShape(8.dp))
-                        .background(getLineColorByNumber(lineNumber).copy(alpha = .51f))
+                        .background(getLineColorByNumber(lineNumber).copy(alpha = .61f))
                         .padding(6.dp)
                 ) {
                     Text(
