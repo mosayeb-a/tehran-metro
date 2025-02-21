@@ -41,7 +41,7 @@ class SubmitInfoViewModel @Inject constructor(
                             en = "Station info sent successfully"
                         ),
                         action = Action(
-                            name = "Dismiss",
+                            name = createBilingualMessage(fa = "بستن", en = "Dismiss"),
                             action = {}
                         )
                     )
@@ -55,7 +55,7 @@ class SubmitInfoViewModel @Inject constructor(
                             en = "Station info failed to send"
                         ),
                         action = Action(
-                            name = "Retry",
+                            name = createBilingualMessage(fa = "تلاش دوباره", en = "Retry"),
                             action = { submitStationCorrection(station) }
                         )
                     )

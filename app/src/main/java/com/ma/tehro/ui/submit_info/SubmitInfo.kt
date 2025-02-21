@@ -266,7 +266,6 @@ fun SubmitStationInfo(
                                     address = address.takeIf { it.isNotEmpty() },
                                     disabled = disabled,
                                     lines = station.lines,
-                                    colors = station.colors,
                                     wc = wc,
                                     coffeeShop = coffeeShop,
                                     groceryStore = groceryStore,
