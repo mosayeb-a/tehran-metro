@@ -1,6 +1,7 @@
 package com.ma.tehro.data.repo
 
 import com.ma.tehro.BuildConfig
+import com.ma.tehro.common.AppException
 import com.ma.tehro.data.Station
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -84,8 +85,7 @@ class DataCorrectionRepositoryImpl : DataCorrectionRepository {
 
                 patchConnection.disconnect()
             } catch (e: Exception) {
-                println("error sending correction - ${e.localizedMessage}")
-                e.printStackTrace()
+                throw AppException(e.message.toString())
             }
         }
     }
