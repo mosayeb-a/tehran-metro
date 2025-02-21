@@ -33,13 +33,15 @@ import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.StationsScreen
 import com.ma.tehro.common.calculateLineName
 import com.ma.tehro.common.getLineColorByNumber
+import com.ma.tehro.data.Station
 
 @Composable
 fun Lines(
     navController: NavHostController,
     lines: List<Int>,
     onFindPathClicked: () -> Unit,
-    onMapClick: () -> Unit
+    onMapClick: () -> Unit,
+    onNewSubmitInfoStationClicked: () -> Unit
 ) {
     val screenHeight = LocalConfiguration.current.screenHeightDp
     val itemHeight = ((screenHeight / (lines.size + 1).coerceAtLeast(1)) * 1.2f)
@@ -63,6 +65,17 @@ fun Lines(
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.map_24px),
+                        contentDescription = "show map screen",
+                    )
+                }
+                IconButton(
+                    modifier = Modifier
+                        .padding(end = 6.dp)
+                        .size(46.dp),
+                    onClick = { onNewSubmitInfoStationClicked() },
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.clarify_24px),
                         contentDescription = "show map screen",
                     )
                 }
