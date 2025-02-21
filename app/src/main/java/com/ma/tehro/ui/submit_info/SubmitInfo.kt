@@ -69,6 +69,18 @@ fun SubmitStationInfo(
     var selectedLine by remember {
         mutableStateOf(if (lineNumber == 0) "" else station.lines.joinToString(", "))
     }
+    val isChanged = name != station.name ||
+            translations != station.translations.fa ||
+            longitude != (station.longitude ?: "") ||
+            latitude != (station.latitude ?: "") ||
+            address != (station.address ?: "") ||
+            disabled != station.disabled ||
+            wc != (station.wc ?: false) ||
+            coffeeShop != (station.coffeeShop ?: false) ||
+            groceryStore != (station.groceryStore ?: false) ||
+            fastFood != (station.fastFood ?: false) ||
+            atm != (station.atm ?: false) ||
+            selectedLine != (if (lineNumber == 0) "" else station.lines.joinToString(", "))
 
     Scaffold(
         topBar = {
@@ -277,7 +289,7 @@ fun SubmitStationInfo(
                             )
                         }
                     },
-                    enabled = !state.isLoading,
+                    enabled = !state.isLoading && isChanged,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.tertiary,
                         disabledContainerColor = MaterialTheme.colorScheme.tertiary.copy(alpha = .5f)
