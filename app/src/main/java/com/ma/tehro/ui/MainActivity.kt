@@ -161,7 +161,6 @@ class MainActivity : ComponentActivity() {
                                                 longitude = null,
                                                 latitude = null,
                                                 address = null,
-                                                colors = listOf(),
                                                 disabled = false,
                                                 wc = null,
                                                 coffeeShop = null,

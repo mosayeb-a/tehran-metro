@@ -10,7 +10,6 @@ data class Station(
     val longitude: String? = null,
     val latitude: String? = null,
     val address: String? = null,
-    val colors: List<String> = emptyList(),
     val disabled: Boolean,
     val wc: Boolean? = null,
     val coffeeShop: Boolean? = null,
