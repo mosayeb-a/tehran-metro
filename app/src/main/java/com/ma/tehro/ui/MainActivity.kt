@@ -13,9 +13,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
@@ -142,7 +139,7 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         startDestination = LinesScreen,
                     ) {
-                        animateComposable<LinesScreen> {
+                        baseComposable<LinesScreen> {
                             val metroViewModel: LineViewModel = hiltViewModel(it)
                             Lines(
                                 navController = navController,
@@ -155,7 +152,7 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
-                        animateComposable<MapScreen> {
+                        baseComposable<MapScreen> {
                             val viewModel: StationsMapViewModel = hiltViewModel(it)
                             StationsMap(
                                 onFindCurrentLocationClick = {
@@ -174,7 +171,7 @@ class MainActivity : ComponentActivity() {
                                 viewState = viewModel.uiState.collectAsStateWithLifecycle().value,
                             )
                         }
-                        animateComposable<StationsScreen> { backStackEntry ->
+                        baseComposable<StationsScreen> { backStackEntry ->
                             val metroViewModel: LineViewModel = hiltViewModel(backStackEntry)
                             val args = backStackEntry.toRoute<StationsScreen>()
                             Stations(
@@ -188,7 +185,7 @@ class MainActivity : ComponentActivity() {
                                 },
                             )
                         }
-                        animateComposable<StationSelectorScreen> { backStackEntry ->
+                        baseComposable<StationSelectorScreen> { backStackEntry ->
                             val viewModel: PathViewModel = hiltViewModel(backStackEntry)
                             StationSelector(
                                 onBack = { navController.popBackStack() },
@@ -232,7 +229,7 @@ class MainActivity : ComponentActivity() {
                                 },
                             )
                         }
-                        animateComposable<PathFinderScreen> { backStackEntry ->
+                        baseComposable<PathFinderScreen> { backStackEntry ->
                             val viewModel: PathViewModel = hiltViewModel(backStackEntry)
                             val args: PathFinderScreen = backStackEntry.toRoute()
                             PathFinder(
@@ -252,7 +249,7 @@ class MainActivity : ComponentActivity() {
                                 toFa = args.faDestination,
                             )
                         }
-                        animateComposable<StationDetailScreen>(
+                        baseComposable<StationDetailScreen>(
                             typeMap = mapOf(typeOf<Station>() to navTypeOf<Station>()),
                         ) { backStackEntry ->
                             val args = backStackEntry.toRoute<StationDetailScreen>()
@@ -265,7 +262,7 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
-                        animateComposable<SubmitStationInfoScreen>(
+                        baseComposable<SubmitStationInfoScreen>(
                             typeMap = mapOf(typeOf<Station>() to navTypeOf<Station>()),
                         ) { backStackEntry ->
                             val viewModel: SubmitInfoViewModel = hiltViewModel(backStackEntry)
@@ -340,37 +337,17 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-inline fun <reified T : Any> NavGraphBuilder.animateComposable(
+inline fun <reified T : Any> NavGraphBuilder.baseComposable(
     typeMap: Map<KType, @JvmSuppressWildcards NavType<*>> = emptyMap(),
     noinline content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit
 ) {
     this.composable<T>(
         typeMap = typeMap,
-        enterTransition = { defaultEnterTransition() },
-        exitTransition = { defaultExitTransition() },
-        popEnterTransition = { defaultPopEnterTransition() },
-        popExitTransition = { defaultPopExitTransition() }
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None },
+        popEnterTransition = { EnterTransition.None },
+        popExitTransition = { ExitTransition.None },
     ) {
         content(it)
     }
 }
-
-fun defaultEnterTransition(): EnterTransition = slideInHorizontally(
-    initialOffsetX = { it },
-    animationSpec = tween(durationMillis = 230)
-)
-
-fun defaultExitTransition(): ExitTransition = slideOutHorizontally(
-    targetOffsetX = { -it },
-    animationSpec = tween(durationMillis = 230)
-)
-
-fun defaultPopEnterTransition(): EnterTransition = slideInHorizontally(
-    initialOffsetX = { -it },
-    animationSpec = tween(durationMillis = 230)
-)
-
-fun defaultPopExitTransition(): ExitTransition = slideOutHorizontally(
-    targetOffsetX = { it },
-    animationSpec = tween(durationMillis = 230)
-)
