@@ -128,7 +128,6 @@ fun <T> SearchableExpandedDropDownMenu(
                     modifier = Modifier
                         .fillMaxWidth()
                 ) {
-                    println("initialValue: " + initialValue)
                     Text(
                         text = selectedOptionText.split("\n").getOrNull(0) ?: "",
                         style = MaterialTheme.typography.bodyMedium,
