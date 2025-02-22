@@ -118,12 +118,6 @@ dependencies {
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.navigation.ui)
 
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.logging)
-    implementation(libs.ktor.client.android)
-    implementation(libs.ktor.client.content.negotiation)
-    implementation(libs.ktor.serialization.kotlinx.json)
-
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
@@ -132,6 +126,5 @@ dependencies {
     implementation(libs.firebase.analytics)
 
     implementation(libs.osmdroid.android)
-    implementation("androidx.interpolator:interpolator:1.0.0")
     implementation("com.google.android.gms:play-services-location:21.3.0")
 }
