@@ -173,7 +173,7 @@ fun <T> SearchableExpandedDropDownMenu(
             interactionSource = remember { MutableInteractionSource() }
                 .also { interactionSource ->
                     LaunchedEffect(interactionSource) {
-                        keyboardController?.show()
+//                        keyboardController?.show()
                         interactionSource.interactions.collect {
                             if (it is PressInteraction.Release) {
                                 expanded = !expanded
