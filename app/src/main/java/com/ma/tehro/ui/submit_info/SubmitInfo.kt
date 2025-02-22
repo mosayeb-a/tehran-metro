@@ -30,7 +30,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,7 +43,6 @@ import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.data.Station
-import kotlinx.coroutines.launch
 
 @Composable
 fun SubmitStationInfo(
@@ -53,22 +52,21 @@ fun SubmitStationInfo(
     state: SubmitInfoState,
     lineNumber: Int
 ) {
-    val coroutineScope = rememberCoroutineScope()
-
-    var name by remember { mutableStateOf(station.name) }
-    var translations by remember { mutableStateOf(station.translations.fa) }
-    var longitude by remember { mutableStateOf(station.longitude ?: "") }
-    var latitude by remember { mutableStateOf(station.latitude ?: "") }
-    var address by remember { mutableStateOf(station.address ?: "") }
-    var disabled by remember { mutableStateOf(station.disabled) }
-    var wc by remember { mutableStateOf(station.wc ?: false) }
-    var coffeeShop by remember { mutableStateOf(station.coffeeShop ?: false) }
-    var groceryStore by remember { mutableStateOf(station.groceryStore ?: false) }
-    var fastFood by remember { mutableStateOf(station.fastFood ?: false) }
-    var atm by remember { mutableStateOf(station.atm ?: false) }
-    var selectedLine by remember {
+    var name by rememberSaveable { mutableStateOf(station.name) }
+    var translations by rememberSaveable { mutableStateOf(station.translations.fa) }
+    var longitude by rememberSaveable { mutableStateOf(station.longitude ?: "") }
+    var latitude by rememberSaveable { mutableStateOf(station.latitude ?: "") }
+    var address by rememberSaveable { mutableStateOf(station.address ?: "") }
+    var disabled by rememberSaveable { mutableStateOf(station.disabled) }
+    var wc by rememberSaveable { mutableStateOf(station.wc ?: false) }
+    var coffeeShop by rememberSaveable { mutableStateOf(station.coffeeShop ?: false) }
+    var groceryStore by rememberSaveable { mutableStateOf(station.groceryStore ?: false) }
+    var fastFood by rememberSaveable { mutableStateOf(station.fastFood ?: false) }
+    var atm by rememberSaveable { mutableStateOf(station.atm ?: false) }
+    var selectedLine by rememberSaveable {
         mutableStateOf(if (lineNumber == 0) "" else station.lines.joinToString(", "))
     }
+
     val isChanged = name != station.name ||
             translations != station.translations.fa ||
             longitude != (station.longitude ?: "") ||
@@ -103,7 +101,7 @@ fun SubmitStationInfo(
                 .padding(horizontal = 8.dp)
         ) {
             item { Spacer(Modifier.height(16.dp)) }
-            item {
+            item("title") {
                 Column(
                     modifier = Modifier
                         .clip(RoundedCornerShape(8.dp))
@@ -127,7 +125,7 @@ fun SubmitStationInfo(
                 }
             }
             item { Spacer(Modifier.height(12.dp)) }
-            item {
+            item("name") {
                 CorrectionEditText(
                     value = name,
                     onValueChange = { name = it },
@@ -136,7 +134,7 @@ fun SubmitStationInfo(
                 )
             }
             item { Spacer(Modifier.height(4.dp)) }
-            item {
+            item("fa_name") {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -160,7 +158,7 @@ fun SubmitStationInfo(
             }
             item { Spacer(Modifier.height(4.dp)) }
 
-            item {
+            item("address") {
                 CorrectionEditText(
                     value = address,
                     onValueChange = { address = it },
@@ -170,7 +168,7 @@ fun SubmitStationInfo(
                 )
             }
             item { Spacer(Modifier.height(4.dp)) }
-            item {
+            item("lat_long") {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -198,7 +196,7 @@ fun SubmitStationInfo(
 
             item { Spacer(Modifier.height(16.dp)) }
 
-            item {
+            item("checkbox") {
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -261,33 +259,31 @@ fun SubmitStationInfo(
             }
             item { Spacer(Modifier.height(16.dp)) }
 
-            item {
+            item("submit") {
                 Button(
                     modifier = Modifier
                         .padding(8.dp)
                         .fillMaxWidth()
                         .height(76.dp),
                     onClick = {
-                        coroutineScope.launch {
-                            onSubmitInfo(
-                                Station(
-                                    name = name,
-                                    translations = station.translations.copy(fa = translations),
-                                    longitude = longitude.takeIf { it.isNotEmpty() },
-                                    latitude = latitude.takeIf { it.isNotEmpty() },
-                                    address = address.takeIf { it.isNotEmpty() },
-                                    disabled = disabled,
-                                    lines = station.lines,
-                                    wc = wc,
-                                    coffeeShop = coffeeShop,
-                                    groceryStore = groceryStore,
-                                    fastFood = fastFood,
-                                    atm = atm,
-                                    relations = station.relations,
-                                    positionsInLine = station.positionsInLine
-                                )
+                        onSubmitInfo(
+                            Station(
+                                name = name,
+                                translations = station.translations.copy(fa = translations),
+                                longitude = longitude.takeIf { it.isNotEmpty() },
+                                latitude = latitude.takeIf { it.isNotEmpty() },
+                                address = address.takeIf { it.isNotEmpty() },
+                                disabled = disabled,
+                                lines = station.lines,
+                                wc = wc,
+                                coffeeShop = coffeeShop,
+                                groceryStore = groceryStore,
+                                fastFood = fastFood,
+                                atm = atm,
+                                relations = station.relations,
+                                positionsInLine = station.positionsInLine
                             )
-                        }
+                        )
                     },
                     enabled = !state.isLoading && isChanged,
                     colors = ButtonDefaults.buttonColors(
