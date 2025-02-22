@@ -2,11 +2,12 @@
 
 **Tehran Metro** is an offline Android application designed to help users navigate the Tehran Metro system. The app provides key features to make commuting easier, such as viewing station details, finding the shortest path between stations, and more.
 
-<img src="https://github.com/user-attachments/assets/7a17d4a7-14a5-43c4-8a29-02aa5082e871" width="150" style="display: inline-block; margin-right: 10px;"/>
+<img src="https://github.com/user-attachments/assets/bc8e7919-4bea-4c67-803a-6897013668c6" width="150" style="display: inline-block; margin-right: 10px;"/>
 <img src="https://github.com/user-attachments/assets/36ebec47-146a-4833-88be-dd231a3b57e9" width="150" style="display: inline-block; margin-right: 10px;"/>
 <img src="https://github.com/user-attachments/assets/3b37e083-c3a0-4fe5-a33d-d7e3d96ed787" width="150" style="display: inline-block; margin-right: 10px;"/>
 <img src="https://github.com/user-attachments/assets/99f41c03-0ea4-4900-b6c0-72e1100eed0f" width="150" style="display: inline-block; margin-right: 10px;"/>
-<img src="https://github.com/user-attachments/assets/f7e4f330-a71d-427f-a571-88d0158aab26" width="150" style="display: inline-block; margin-right: 10px;"/>
+<img src="https://github.com/user-attachments/assets/d462372d-7722-431a-afd2-37def1fe9cd0" width="150" style="display: inline-block; margin-right: 10px;"/>
+<img src="https://github.com/user-attachments/assets/1f0d51aa-542e-44ab-a8bf-cf1661987c61" width="150" style="display: inline-block; margin-right: 10px;"/>
 
 ## Features
 - **View Stations by Line**:  
