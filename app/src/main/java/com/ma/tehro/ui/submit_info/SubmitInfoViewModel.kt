@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class SubmitInfoState(
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
 )
 
 @HiltViewModel
@@ -27,6 +27,20 @@ class SubmitInfoViewModel @Inject constructor(
 
     private val _state: MutableStateFlow<SubmitInfoState> = MutableStateFlow(SubmitInfoState())
     val state: StateFlow<SubmitInfoState> = _state.asStateFlow()
+
+//    init {
+//        val stationJson: String? = savedStateHandle["station"]
+//        val station: Station = stationJson?.let { Json.decodeFromString(it) }!!
+//        _state.update { it.copy(station = station) }
+//
+//        val lineNumber: Int = savedStateHandle.get<Int>("lineNumber")!!
+//        _state.update { it.copy(lineNumber = lineNumber) }
+//    }
+//
+//
+//    fun onChangeStationValue(station: Station) {
+//        _state.update { it.copy(station = station) }
+//    }
 
     fun submitStationCorrection(station: Station) {
         viewModelScope.launch {
