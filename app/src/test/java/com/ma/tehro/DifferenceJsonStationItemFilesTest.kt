@@ -2,7 +2,7 @@ package com.ma.tehro
 
 import com.ma.tehro.common.readJsonStationsAsText
 import com.ma.tehro.data.Station
-import scripts.getOrderedStationsByLine
+import com.ma.tehro.scripts.getOrderedStationsByLine
 import org.junit.Test
 import kotlin.test.assertEquals
 
