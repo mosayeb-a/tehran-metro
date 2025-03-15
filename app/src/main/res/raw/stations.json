@@ -23,10 +23,6 @@
       {
         "position": 1,
         "line": 1
-      },
-      {
-        "position": 1,
-        "line": 1
       }
     ]
   },
@@ -52,10 +48,6 @@
       "Shahid Sadr"
     ],
     "positionsInLine": [
-      {
-        "position": 2,
-        "line": 1
-      },
       {
         "position": 2,
         "line": 1
@@ -87,10 +79,6 @@
       {
         "position": 3,
         "line": 1
-      },
-      {
-        "position": 3,
-        "line": 1
       }
     ]
   },
@@ -116,10 +104,6 @@
       "Doctor Shariati"
     ],
     "positionsInLine": [
-      {
-        "position": 4,
-        "line": 1
-      },
       {
         "position": 4,
         "line": 1
@@ -151,10 +135,6 @@
       {
         "position": 5,
         "line": 1
-      },
-      {
-        "position": 5,
-        "line": 1
       }
     ]
   },
@@ -180,10 +160,6 @@
       "Shahid Haghani"
     ],
     "positionsInLine": [
-      {
-        "position": 6,
-        "line": 1
-      },
       {
         "position": 6,
         "line": 1
@@ -215,10 +191,6 @@
       {
         "position": 7,
         "line": 1
-      },
-      {
-        "position": 7,
-        "line": 1
       }
     ]
   },
@@ -244,10 +216,6 @@
       "Mosalla-ye Imam Khomeini"
     ],
     "positionsInLine": [
-      {
-        "position": 8,
-        "line": 1
-      },
       {
         "position": 8,
         "line": 1
@@ -278,10 +246,6 @@
     "positionsInLine": [
       {
         "position": 8,
-        "line": 1
-      },
-      {
-        "position": 9,
         "line": 1
       }
     ]
@@ -318,14 +282,6 @@
       {
         "position": 12,
         "line": 3
-      },
-      {
-        "position": 10,
-        "line": 1
-      },
-      {
-        "position": 12,
-        "line": 3
       }
     ]
   },
@@ -354,10 +310,6 @@
       {
         "position": 11,
         "line": 1
-      },
-      {
-        "position": 11,
-        "line": 1
       }
     ]
   },
@@ -383,10 +335,6 @@
       "Darvazeh Dolat"
     ],
     "positionsInLine": [
-      {
-        "position": 13,
-        "line": 1
-      },
       {
         "position": 13,
         "line": 1
@@ -425,14 +373,6 @@
       {
         "position": 8,
         "line": 4
-      },
-      {
-        "position": 14,
-        "line": 1
-      },
-      {
-        "position": 8,
-        "line": 4
       }
     ]
   },
@@ -458,10 +398,6 @@
       "Imam Khomeini"
     ],
     "positionsInLine": [
-      {
-        "position": 15,
-        "line": 1
-      },
       {
         "position": 15,
         "line": 1
@@ -500,14 +436,6 @@
       {
         "position": 14,
         "line": 2
-      },
-      {
-        "position": 16,
-        "line": 1
-      },
-      {
-        "position": 14,
-        "line": 2
       }
     ]
   },
@@ -536,10 +464,6 @@
       {
         "position": 17,
         "line": 1
-      },
-      {
-        "position": 17,
-        "line": 1
       }
     ]
   },
@@ -565,10 +489,6 @@
       "Meydan-e Mohammadiyeh"
     ],
     "positionsInLine": [
-      {
-        "position": 18,
-        "line": 1
-      },
       {
         "position": 18,
         "line": 1
@@ -607,14 +527,6 @@
       {
         "position": 8,
         "line": 7
-      },
-      {
-        "position": 19,
-        "line": 1
-      },
-      {
-        "position": 8,
-        "line": 7
       }
     ]
   },
@@ -640,10 +552,6 @@
       "Payaneh Jonoub(Jonoub Terminal)"
     ],
     "positionsInLine": [
-      {
-        "position": 20,
-        "line": 1
-      },
       {
         "position": 20,
         "line": 1
@@ -675,10 +583,6 @@
       {
         "position": 21,
         "line": 1
-      },
-      {
-        "position": 21,
-        "line": 1
       }
     ]
   },
@@ -704,10 +608,6 @@
       "Aliabad"
     ],
     "positionsInLine": [
-      {
-        "position": 22,
-        "line": 1
-      },
       {
         "position": 22,
         "line": 1
@@ -739,10 +639,6 @@
       {
         "position": 23,
         "line": 1
-      },
-      {
-        "position": 23,
-        "line": 1
       }
     ]
   },
@@ -768,10 +664,6 @@
       "Shahr-e Rey"
     ],
     "positionsInLine": [
-      {
-        "position": 24,
-        "line": 1
-      },
       {
         "position": 24,
         "line": 1
@@ -803,10 +695,6 @@
       {
         "position": 25,
         "line": 1
-      },
-      {
-        "position": 25,
-        "line": 1
       }
     ]
   },
@@ -824,10 +712,6 @@
       "Shahed - BagherShahr"
     ],
     "positionsInLine": [
-      {
-        "position": 26,
-        "line": 1
-      },
       {
         "position": 26,
         "line": 1
@@ -860,10 +744,6 @@
       {
         "position": 27,
         "line": 1
-      },
-      {
-        "position": 27,
-        "line": 1
       }
     ]
   },
@@ -892,10 +772,6 @@
       {
         "position": 28,
         "line": 1
-      },
-      {
-        "position": 28,
-        "line": 1
       }
     ]
   },
@@ -913,10 +789,6 @@
       "Emam Khomeini Airport"
     ],
     "positionsInLine": [
-      {
-        "position": 29,
-        "line": 1
-      },
       {
         "position": 29,
         "line": 1
@@ -940,10 +812,6 @@
       {
         "position": 30,
         "line": 1
-      },
-      {
-        "position": 30,
-        "line": 1
       }
     ]
   },
@@ -960,10 +828,6 @@
       "Emam Khomeini Airport"
     ],
     "positionsInLine": [
-      {
-        "position": 31,
-        "line": 1
-      },
       {
         "position": 31,
         "line": 1
@@ -995,10 +859,6 @@
       {
         "position": 32,
         "line": 1
-      },
-      {
-        "position": 32,
-        "line": 1
       }
     ]
   },
@@ -1026,10 +886,6 @@
       {
         "position": 33,
         "line": 1
-      },
-      {
-        "position": 33,
-        "line": 1
       }
     ]
   },
@@ -1054,10 +910,6 @@
       "Tehranpars"
     ],
     "positionsInLine": [
-      {
-        "position": 1,
-        "line": 2
-      },
       {
         "position": 1,
         "line": 2
@@ -1089,10 +941,6 @@
       {
         "position": 2,
         "line": 2
-      },
-      {
-        "position": 2,
-        "line": 2
       }
     ]
   },
@@ -1118,10 +966,6 @@
       "Daneshgah-e Elm va Sanat"
     ],
     "positionsInLine": [
-      {
-        "position": 3,
-        "line": 2
-      },
       {
         "position": 3,
         "line": 2
@@ -1153,10 +997,6 @@
       {
         "position": 4,
         "line": 2
-      },
-      {
-        "position": 4,
-        "line": 2
       }
     ]
   },
@@ -1182,10 +1022,6 @@
       "Janbazan"
     ],
     "positionsInLine": [
-      {
-        "position": 5,
-        "line": 2
-      },
       {
         "position": 5,
         "line": 2
@@ -1217,10 +1053,6 @@
       {
         "position": 6,
         "line": 2
-      },
-      {
-        "position": 6,
-        "line": 2
       }
     ]
   },
@@ -1246,10 +1078,6 @@
       "Sabalan"
     ],
     "positionsInLine": [
-      {
-        "position": 7,
-        "line": 2
-      },
       {
         "position": 7,
         "line": 2
@@ -1281,10 +1109,6 @@
       {
         "position": 8,
         "line": 2
-      },
-      {
-        "position": 8,
-        "line": 2
       }
     ]
   },
@@ -1310,10 +1134,6 @@
       "Imam Hussein"
     ],
     "positionsInLine": [
-      {
-        "position": 9,
-        "line": 2
-      },
       {
         "position": 9,
         "line": 2
@@ -1345,14 +1165,6 @@
       "Darvazeh Shemiran"
     ],
     "positionsInLine": [
-      {
-        "position": 10,
-        "line": 2
-      },
-      {
-        "position": 13,
-        "line": 6
-      },
       {
         "position": 10,
         "line": 2
@@ -1395,14 +1207,6 @@
       {
         "position": 11,
         "line": 2
-      },
-      {
-        "position": 7,
-        "line": 4
-      },
-      {
-        "position": 11,
-        "line": 2
       }
     ]
   },
@@ -1428,10 +1232,6 @@
       "Mellat"
     ],
     "positionsInLine": [
-      {
-        "position": 12,
-        "line": 2
-      },
       {
         "position": 12,
         "line": 2
@@ -1463,10 +1263,6 @@
       {
         "position": 13,
         "line": 2
-      },
-      {
-        "position": 13,
-        "line": 2
       }
     ]
   },
@@ -1492,10 +1288,6 @@
       "Daneshgah-e Imam Ali"
     ],
     "positionsInLine": [
-      {
-        "position": 15,
-        "line": 2
-      },
       {
         "position": 15,
         "line": 2
@@ -1527,10 +1319,6 @@
       {
         "position": 16,
         "line": 2
-      },
-      {
-        "position": 16,
-        "line": 2
       }
     ]
   },
@@ -1556,10 +1344,6 @@
       "Shahid Navab-e Safavi"
     ],
     "positionsInLine": [
-      {
-        "position": 17,
-        "line": 2
-      },
       {
         "position": 17,
         "line": 2
@@ -1591,14 +1375,6 @@
       "Shademan"
     ],
     "positionsInLine": [
-      {
-        "position": 18,
-        "line": 2
-      },
-      {
-        "position": 14,
-        "line": 7
-      },
       {
         "position": 18,
         "line": 2
@@ -1641,14 +1417,6 @@
       {
         "position": 19,
         "line": 2
-      },
-      {
-        "position": 13,
-        "line": 4
-      },
-      {
-        "position": 19,
-        "line": 2
       }
     ]
   },
@@ -1677,10 +1445,6 @@
       {
         "position": 20,
         "line": 2
-      },
-      {
-        "position": 20,
-        "line": 2
       }
     ]
   },
@@ -1706,10 +1470,6 @@
       "Tehran (Sadeghiyeh)"
     ],
     "positionsInLine": [
-      {
-        "position": 21,
-        "line": 2
-      },
       {
         "position": 21,
         "line": 2
@@ -1746,14 +1506,6 @@
       {
         "position": 1,
         "line": 5
-      },
-      {
-        "position": 22,
-        "line": 2
-      },
-      {
-        "position": 1,
-        "line": 5
       }
     ]
   },
@@ -1778,10 +1530,6 @@
       "Shahid Mahallati"
     ],
     "positionsInLine": [
-      {
-        "position": 1,
-        "line": 3
-      },
       {
         "position": 1,
         "line": 3
@@ -1813,10 +1561,6 @@
       {
         "position": 2,
         "line": 3
-      },
-      {
-        "position": 2,
-        "line": 3
       }
     ]
   },
@@ -1834,10 +1578,6 @@
       "Nobonyad"
     ],
     "positionsInLine": [
-      {
-        "position": 3,
-        "line": 3
-      },
       {
         "position": 3,
         "line": 3
@@ -1869,10 +1609,6 @@
       {
         "position": 4,
         "line": 3
-      },
-      {
-        "position": 4,
-        "line": 3
       }
     ]
   },
@@ -1898,10 +1634,6 @@
       "Meydan-e Heravi"
     ],
     "positionsInLine": [
-      {
-        "position": 5,
-        "line": 3
-      },
       {
         "position": 5,
         "line": 3
@@ -1933,10 +1665,6 @@
       {
         "position": 6,
         "line": 3
-      },
-      {
-        "position": 6,
-        "line": 3
       }
     ]
   },
@@ -1962,10 +1690,6 @@
       "Khajeh Abdollah-e Ansari"
     ],
     "positionsInLine": [
-      {
-        "position": 7,
-        "line": 3
-      },
       {
         "position": 7,
         "line": 3
@@ -1997,10 +1721,6 @@
       {
         "position": 8,
         "line": 3
-      },
-      {
-        "position": 8,
-        "line": 3
       }
     ]
   },
@@ -2026,10 +1746,6 @@
       "Shahid Ghodousi"
     ],
     "positionsInLine": [
-      {
-        "position": 9,
-        "line": 3
-      },
       {
         "position": 9,
         "line": 3
@@ -2061,10 +1777,6 @@
       {
         "position": 10,
         "line": 3
-      },
-      {
-        "position": 10,
-        "line": 3
       }
     ]
   },
@@ -2090,10 +1802,6 @@
       "Shahid Beheshti"
     ],
     "positionsInLine": [
-      {
-        "position": 11,
-        "line": 3
-      },
       {
         "position": 11,
         "line": 3
@@ -2125,10 +1833,6 @@
       {
         "position": 13,
         "line": 3
-      },
-      {
-        "position": 13,
-        "line": 3
       }
     ]
   },
@@ -2154,10 +1858,6 @@
       "Meydan-e Hazrat Vali Asr"
     ],
     "positionsInLine": [
-      {
-        "position": 14,
-        "line": 3
-      },
       {
         "position": 14,
         "line": 3
@@ -2196,14 +1896,6 @@
       {
         "position": 10,
         "line": 4
-      },
-      {
-        "position": 16,
-        "line": 3
-      },
-      {
-        "position": 10,
-        "line": 4
       }
     ]
   },
@@ -2232,10 +1924,6 @@
       {
         "position": 17,
         "line": 3
-      },
-      {
-        "position": 17,
-        "line": 3
       }
     ]
   },
@@ -2256,14 +1944,6 @@
       "Rahahan"
     ],
     "positionsInLine": [
-      {
-        "position": 18,
-        "line": 3
-      },
-      {
-        "position": 9,
-        "line": 7
-      },
       {
         "position": 18,
         "line": 3
@@ -2299,10 +1979,6 @@
       {
         "position": 19,
         "line": 3
-      },
-      {
-        "position": 19,
-        "line": 3
       }
     ]
   },
@@ -2328,10 +2004,6 @@
       "Zamzam"
     ],
     "positionsInLine": [
-      {
-        "position": 20,
-        "line": 3
-      },
       {
         "position": 20,
         "line": 3
@@ -2363,10 +2035,6 @@
       {
         "position": 21,
         "line": 3
-      },
-      {
-        "position": 21,
-        "line": 3
       }
     ]
   },
@@ -2392,10 +2060,6 @@
       "Abdol Abad"
     ],
     "positionsInLine": [
-      {
-        "position": 22,
-        "line": 3
-      },
       {
         "position": 22,
         "line": 3
@@ -2427,10 +2091,6 @@
       {
         "position": 23,
         "line": 3
-      },
-      {
-        "position": 23,
-        "line": 3
       }
     ]
   },
@@ -2456,10 +2116,6 @@
       "Azadegan"
     ],
     "positionsInLine": [
-      {
-        "position": 24,
-        "line": 3
-      },
       {
         "position": 24,
         "line": 3
@@ -2490,10 +2146,6 @@
       {
         "position": 25,
         "line": 3
-      },
-      {
-        "position": 25,
-        "line": 3
       }
     ]
   },
@@ -2518,10 +2170,6 @@
       "Niroohavaii"
     ],
     "positionsInLine": [
-      {
-        "position": 1,
-        "line": 4
-      },
       {
         "position": 1,
         "line": 4
@@ -2553,10 +2201,6 @@
       {
         "position": 2,
         "line": 4
-      },
-      {
-        "position": 2,
-        "line": 4
       }
     ]
   },
@@ -2582,10 +2226,6 @@
       "Piroozi"
     ],
     "positionsInLine": [
-      {
-        "position": 3,
-        "line": 4
-      },
       {
         "position": 3,
         "line": 4
@@ -2617,10 +2257,6 @@
       {
         "position": 4,
         "line": 4
-      },
-      {
-        "position": 4,
-        "line": 4
       }
     ]
   },
@@ -2646,10 +2282,6 @@
       "Meydan-e Shohada"
     ],
     "positionsInLine": [
-      {
-        "position": 5,
-        "line": 4
-      },
       {
         "position": 5,
         "line": 4
@@ -2681,10 +2313,6 @@
       {
         "position": 9,
         "line": 4
-      },
-      {
-        "position": 9,
-        "line": 4
       }
     ]
   },
@@ -2710,10 +2338,6 @@
       "Towhid"
     ],
     "positionsInLine": [
-      {
-        "position": 11,
-        "line": 4
-      },
       {
         "position": 11,
         "line": 4
@@ -2752,14 +2376,6 @@
       {
         "position": 15,
         "line": 7
-      },
-      {
-        "position": 12,
-        "line": 4
-      },
-      {
-        "position": 15,
-        "line": 7
       }
     ]
   },
@@ -2785,10 +2401,6 @@
       "Ostad Mo'in"
     ],
     "positionsInLine": [
-      {
-        "position": 14,
-        "line": 4
-      },
       {
         "position": 14,
         "line": 4
@@ -2820,10 +2432,6 @@
       {
         "position": 15,
         "line": 4
-      },
-      {
-        "position": 15,
-        "line": 4
       }
     ]
   },
@@ -2849,10 +2457,6 @@
       "Bimeh"
     ],
     "positionsInLine": [
-      {
-        "position": 16,
-        "line": 4
-      },
       {
         "position": 16,
         "line": 4
@@ -2885,10 +2489,6 @@
       {
         "position": 17,
         "line": 4
-      },
-      {
-        "position": 17,
-        "line": 4
       }
     ]
   },
@@ -2917,10 +2517,6 @@
       {
         "position": 22,
         "line": 4
-      },
-      {
-        "position": 21,
-        "line": 4
       }
     ]
   },
@@ -2947,10 +2543,6 @@
     "positionsInLine": [
       {
         "position": 23,
-        "line": 4
-      },
-      {
-        "position": 22,
         "line": 4
       }
     ]
@@ -2980,10 +2572,6 @@
       {
         "position": 18,
         "line": 4
-      },
-      {
-        "position": 18,
-        "line": 4
       }
     ]
   },
@@ -3004,10 +2592,6 @@
       "Eram-e Sabz"
     ],
     "positionsInLine": [
-      {
-        "position": 20,
-        "line": 4
-      },
       {
         "position": 20,
         "line": 4
@@ -3046,14 +2630,6 @@
       {
         "position": 2,
         "line": 5
-      },
-      {
-        "position": 19,
-        "line": 4
-      },
-      {
-        "position": 2,
-        "line": 5
       }
     ]
   },
@@ -3079,10 +2655,6 @@
       "Chitgar"
     ],
     "positionsInLine": [
-      {
-        "position": 3,
-        "line": 5
-      },
       {
         "position": 3,
         "line": 5
@@ -3114,10 +2686,6 @@
       {
         "position": 4,
         "line": 5
-      },
-      {
-        "position": 4,
-        "line": 5
       }
     ]
   },
@@ -3143,10 +2711,6 @@
       "Vardavard"
     ],
     "positionsInLine": [
-      {
-        "position": 5,
-        "line": 5
-      },
       {
         "position": 5,
         "line": 5
@@ -3178,10 +2742,6 @@
       {
         "position": 6,
         "line": 5
-      },
-      {
-        "position": 6,
-        "line": 5
       }
     ]
   },
@@ -3207,10 +2767,6 @@
       "Atmosphere"
     ],
     "positionsInLine": [
-      {
-        "position": 7,
-        "line": 5
-      },
       {
         "position": 7,
         "line": 5
@@ -3242,10 +2798,6 @@
       {
         "position": 8,
         "line": 5
-      },
-      {
-        "position": 8,
-        "line": 5
       }
     ]
   },
@@ -3271,10 +2823,6 @@
       "Mohammadshahr"
     ],
     "positionsInLine": [
-      {
-        "position": 9,
-        "line": 5
-      },
       {
         "position": 9,
         "line": 5
@@ -3306,10 +2854,6 @@
       {
         "position": 10,
         "line": 5
-      },
-      {
-        "position": 10,
-        "line": 5
       }
     ]
   },
@@ -3338,10 +2882,6 @@
       {
         "position": 11,
         "line": 5
-      },
-      {
-        "position": 11,
-        "line": 5
       }
     ]
   },
@@ -3361,10 +2901,6 @@
       {
         "position": 12,
         "line": 5
-      },
-      {
-        "position": 12,
-        "line": 5
       }
     ]
   },
@@ -3381,10 +2917,6 @@
       "Meydan-e Hazrat-e Abdol Azim"
     ],
     "positionsInLine": [
-      {
-        "position": 1,
-        "line": 6
-      },
       {
         "position": 1,
         "line": 6
@@ -3408,10 +2940,6 @@
       {
         "position": 2,
         "line": 6
-      },
-      {
-        "position": 2,
-        "line": 6
       }
     ]
   },
@@ -3429,10 +2957,6 @@
       "Cheshmeh Ali"
     ],
     "positionsInLine": [
-      {
-        "position": 3,
-        "line": 6
-      },
       {
         "position": 3,
         "line": 6
@@ -3456,10 +2980,6 @@
       {
         "position": 4,
         "line": 6
-      },
-      {
-        "position": 4,
-        "line": 6
       }
     ]
   },
@@ -3477,10 +2997,6 @@
       "Kiyan Shahr"
     ],
     "positionsInLine": [
-      {
-        "position": 5,
-        "line": 6
-      },
       {
         "position": 5,
         "line": 6
@@ -3504,10 +3020,6 @@
       {
         "position": 6,
         "line": 6
-      },
-      {
-        "position": 6,
-        "line": 6
       }
     ]
   },
@@ -3525,10 +3037,6 @@
       "Shahid Rezaei"
     ],
     "positionsInLine": [
-      {
-        "position": 7,
-        "line": 6
-      },
       {
         "position": 7,
         "line": 6
@@ -3552,10 +3060,6 @@
       {
         "position": 8,
         "line": 6
-      },
-      {
-        "position": 8,
-        "line": 6
       }
     ]
   },
@@ -3573,10 +3077,6 @@
       "Shohada-ye Hefdah-e Shahrivar"
     ],
     "positionsInLine": [
-      {
-        "position": 9,
-        "line": 6
-      },
       {
         "position": 9,
         "line": 6
@@ -3607,14 +3107,6 @@
       {
         "position": 10,
         "line": 6
-      },
-      {
-        "position": 5,
-        "line": 7
-      },
-      {
-        "position": 10,
-        "line": 6
       }
     ]
   },
@@ -3632,10 +3124,6 @@
       "Meydan-e Shohada"
     ],
     "positionsInLine": [
-      {
-        "position": 11,
-        "line": 6
-      },
       {
         "position": 11,
         "line": 6
@@ -3674,14 +3162,6 @@
       {
         "position": 12,
         "line": 6
-      },
-      {
-        "position": 6,
-        "line": 4
-      },
-      {
-        "position": 12,
-        "line": 6
       }
     ]
   },
@@ -3702,10 +3182,6 @@
       {
         "position": 14,
         "line": 6
-      },
-      {
-        "position": 14,
-        "line": 6
       }
     ]
   },
@@ -3723,10 +3199,6 @@
       "Shohada-ye Haftom-e Tir"
     ],
     "positionsInLine": [
-      {
-        "position": 15,
-        "line": 6
-      },
       {
         "position": 15,
         "line": 6
@@ -3765,14 +3237,6 @@
       {
         "position": 16,
         "line": 6
-      },
-      {
-        "position": 12,
-        "line": 1
-      },
-      {
-        "position": 16,
-        "line": 6
       }
     ]
   },
@@ -3790,10 +3254,6 @@
       "Meydan-e Hazrat Vali Asr"
     ],
     "positionsInLine": [
-      {
-        "position": 17,
-        "line": 6
-      },
       {
         "position": 17,
         "line": 6
@@ -3832,14 +3292,6 @@
       {
         "position": 18,
         "line": 6
-      },
-      {
-        "position": 15,
-        "line": 3
-      },
-      {
-        "position": 18,
-        "line": 6
       }
     ]
   },
@@ -3860,10 +3312,6 @@
       {
         "position": 19,
         "line": 6
-      },
-      {
-        "position": 19,
-        "line": 6
       }
     ]
   },
@@ -3881,10 +3329,6 @@
       "Daneshgah-e Tarbiat Modarres"
     ],
     "positionsInLine": [
-      {
-        "position": 20,
-        "line": 6
-      },
       {
         "position": 20,
         "line": 6
@@ -3915,14 +3359,6 @@
       {
         "position": 21,
         "line": 6
-      },
-      {
-        "position": 17,
-        "line": 7
-      },
-      {
-        "position": 21,
-        "line": 6
       }
     ]
   },
@@ -3940,10 +3376,6 @@
       "Marzdaran"
     ],
     "positionsInLine": [
-      {
-        "position": 22,
-        "line": 6
-      },
       {
         "position": 22,
         "line": 6
@@ -3967,10 +3399,6 @@
       {
         "position": 23,
         "line": 6
-      },
-      {
-        "position": 23,
-        "line": 6
       }
     ]
   },
@@ -3988,10 +3416,6 @@
       "Shahid Ashrafi Esfahani"
     ],
     "positionsInLine": [
-      {
-        "position": 24,
-        "line": 6
-      },
       {
         "position": 24,
         "line": 6
@@ -4015,10 +3439,6 @@
       {
         "position": 25,
         "line": 6
-      },
-      {
-        "position": 25,
-        "line": 6
       }
     ]
   },
@@ -4036,10 +3456,6 @@
       "Ayatollah Kashani"
     ],
     "positionsInLine": [
-      {
-        "position": 26,
-        "line": 6
-      },
       {
         "position": 26,
         "line": 6
@@ -4064,10 +3480,6 @@
       {
         "position": 27,
         "line": 6
-      },
-      {
-        "position": 27,
-        "line": 6
       }
     ]
   },
@@ -4085,10 +3497,6 @@
       "Shahran"
     ],
     "positionsInLine": [
-      {
-        "position": 28,
-        "line": 6
-      },
       {
         "position": 28,
         "line": 6
@@ -4112,10 +3520,6 @@
       {
         "position": 29,
         "line": 6
-      },
-      {
-        "position": 29,
-        "line": 6
       }
     ]
   },
@@ -4133,10 +3537,6 @@
       "Kouhsar"
     ],
     "positionsInLine": [
-      {
-        "position": 30,
-        "line": 6
-      },
       {
         "position": 30,
         "line": 6
@@ -4159,10 +3559,6 @@
       {
         "position": 31,
         "line": 6
-      },
-      {
-        "position": 31,
-        "line": 6
       }
     ]
   },
@@ -4179,10 +3575,6 @@
       "Basij"
     ],
     "positionsInLine": [
-      {
-        "position": 1,
-        "line": 7
-      },
       {
         "position": 1,
         "line": 7
@@ -4214,10 +3606,6 @@
       {
         "position": 2,
         "line": 7
-      },
-      {
-        "position": 2,
-        "line": 7
       }
     ]
   },
@@ -4235,10 +3623,6 @@
       "Chehel Tan-e Doulab"
     ],
     "positionsInLine": [
-      {
-        "position": 3,
-        "line": 7
-      },
       {
         "position": 3,
         "line": 7
@@ -4262,10 +3646,6 @@
       {
         "position": 4,
         "line": 7
-      },
-      {
-        "position": 4,
-        "line": 7
       }
     ]
   },
@@ -4283,10 +3663,6 @@
       "Mowlavi"
     ],
     "positionsInLine": [
-      {
-        "position": 6,
-        "line": 7
-      },
       {
         "position": 6,
         "line": 7
@@ -4310,10 +3686,6 @@
       {
         "position": 7,
         "line": 7
-      },
-      {
-        "position": 7,
-        "line": 7
       }
     ]
   },
@@ -4334,10 +3706,6 @@
       {
         "position": 10,
         "line": 7
-      },
-      {
-        "position": 10,
-        "line": 7
       }
     ]
   },
@@ -4355,10 +3723,6 @@
       "Komeyl"
     ],
     "positionsInLine": [
-      {
-        "position": 11,
-        "line": 7
-      },
       {
         "position": 11,
         "line": 7
@@ -4390,10 +3754,6 @@
       {
         "position": 12,
         "line": 7
-      },
-      {
-        "position": 12,
-        "line": 7
       }
     ]
   },
@@ -4411,10 +3771,6 @@
       "Shahid Navab-e Safavi"
     ],
     "positionsInLine": [
-      {
-        "position": 13,
-        "line": 7
-      },
       {
         "position": 13,
         "line": 7
@@ -4438,10 +3794,6 @@
       {
         "position": 16,
         "line": 7
-      },
-      {
-        "position": 16,
-        "line": 7
       }
     ]
   },
@@ -4462,10 +3814,6 @@
       {
         "position": 18,
         "line": 7
-      },
-      {
-        "position": 18,
-        "line": 7
       }
     ]
   },
@@ -4483,10 +3831,6 @@
       "Meydan-e San'at"
     ],
     "positionsInLine": [
-      {
-        "position": 19,
-        "line": 7
-      },
       {
         "position": 19,
         "line": 7
@@ -4518,10 +3862,6 @@
       {
         "position": 20,
         "line": 7
-      },
-      {
-        "position": 20,
-        "line": 7
       }
     ]
   },
@@ -4542,10 +3882,6 @@
       {
         "position": 21,
         "line": 7
-      },
-      {
-        "position": 21,
-        "line": 7
       }
     ]
   },
@@ -4562,10 +3898,6 @@
       "Shahid Dadman"
     ],
     "positionsInLine": [
-      {
-        "position": 22,
-        "line": 7
-      },
       {
         "position": 22,
         "line": 7
