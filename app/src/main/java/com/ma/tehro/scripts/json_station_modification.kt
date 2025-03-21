@@ -1,6 +1,5 @@
 package com.ma.tehro.scripts
 
-import com.ma.tehro.common.readJsonStationsAsText
 import com.ma.tehro.data.PositionInLine
 import com.ma.tehro.data.Station
 import kotlinx.serialization.encodeToString

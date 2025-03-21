@@ -120,14 +120,6 @@ fun getLineNumberByColor(color: Color): Int {
     }
 }
 
-fun readJsonStationsAsText(fileName: String): MutableMap<String, Station> {
-    val path =
-        "/home/mosayeb/MyAndroidStuff/AndroidProjects/RealeaseVersion/tehro/app/src/main/res/raw/$fileName.json"
-    val file = File(path).readText(Charsets.UTF_8)
-    val stations: MutableMap<String, Station> = Json.decodeFromString(file)
-    return stations
-}
-
 fun calculateLineName(lineNumber: Int): String {
     val enEndpoints = getLineEnEndpoints()
     val faEndpoints = getLineFaEndpoints()
