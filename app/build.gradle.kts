@@ -131,6 +131,5 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
 
     // temp: for reading XLS files
-    implementation("org.apache.poi:poi-ooxml:5.2.3")
-
+//    implementation("org.apache.poi:poi-ooxml:5.2.3")
 }

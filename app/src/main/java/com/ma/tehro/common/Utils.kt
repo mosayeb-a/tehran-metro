@@ -20,14 +20,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavType
-import com.ma.tehro.data.Station
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import java.io.File
 import kotlin.math.asin
 import kotlin.math.cos
 import kotlin.math.pow
@@ -71,29 +69,6 @@ fun Painter.toImageBitmap(
     return bitmap
 }
 
-fun getLineEnEndpoints(): Map<Int, Pair<String, String>> {
-    return mapOf(
-        1 to Pair("Tajrish", "Kahrizak"),
-        2 to Pair("Farhangsara", "Sadeghiyeh"),
-        3 to Pair("Qa'em", "Azadegan"),
-        4 to Pair("Kolahdooz", "Allameh Jafari"),
-        5 to Pair("Sadeghiyeh", "Qasem Soleimani"),
-        6 to Pair("Haram-e Abdol Azim", "Kouhsar"),
-        7 to Pair("Varzeshgah-e Takhti", "Meydan-e Ketab")
-    )
-}
-fun getLineFaEndpoints(): Map<Int, Pair<String, String>> {
-    return mapOf(
-        1 to Pair("تجریش", "کهریزک"),
-        2 to Pair("فرهنگسرا", "صادقیه"),
-        3 to Pair("قائم", "آزادگان"),
-        4 to Pair("کلاهدوز", "علامه جعفری"),
-        5 to Pair("صادقیه", "قاسم سلیمانی"),
-        6 to Pair("حرم عبدالعظیم", "کوهسار"),
-        7 to Pair("ورزشگاه تختی", "میدان کتاب")
-    )
-}
-
 fun getLineColorByNumber(lineNumber: Int): Color {
     return when (lineNumber) {
         1 -> Color(android.graphics.Color.parseColor(COLOR_LINE_1))
@@ -120,13 +95,19 @@ fun getLineNumberByColor(color: Color): Int {
     }
 }
 
-fun calculateLineName(lineNumber: Int): String {
-    val enEndpoints = getLineEnEndpoints()
-    val faEndpoints = getLineFaEndpoints()
+fun calculateLineName(lineNumber: Int, useBranch: Boolean = false): String {
+    val enEndpoints = LineEndpoints.getEn(lineNumber, useBranch)
+    val faEndpoints = LineEndpoints.getFa(lineNumber, useBranch)
+
+    val pathType = if (useBranch && LineEndpoints.hasBranch(lineNumber)) {
+        "Branch Line" to "خط فرعی"
+    } else {
+        "Line" to "خط"
+    }
 
     return """
-        خط ${lineNumber.toFarsiNumber()} - ${faEndpoints[lineNumber]?.first}/${faEndpoints[lineNumber]?.second}
-        Line $lineNumber - ${enEndpoints[lineNumber]?.first}/${enEndpoints[lineNumber]?.second}
+        ${pathType.second} ${lineNumber.toFarsiNumber()} - ${faEndpoints?.first}/${faEndpoints?.second}
+        ${pathType.first} $lineNumber - ${enEndpoints?.first}/${enEndpoints?.second}
     """.trimIndent()
 }
 

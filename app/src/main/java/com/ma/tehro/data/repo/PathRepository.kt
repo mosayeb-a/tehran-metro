@@ -1,8 +1,7 @@
 package com.ma.tehro.data.repo
 
 import androidx.compose.runtime.Immutable
-import com.ma.tehro.common.getLineEnEndpoints
-import com.ma.tehro.common.getLineFaEndpoints
+import com.ma.tehro.common.LineEndpoints
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.data.Station
 import java.util.PriorityQueue
@@ -83,8 +82,8 @@ class PathRepositoryImpl @Inject constructor(
 
             if (currentLine != currentLinePosition.line) {
                 currentLine = currentLinePosition.line
-                val enEndpoints = getLineEnEndpoints()[currentLine] ?: continue
-                val faEndpoints = getLineFaEndpoints()[currentLine] ?: continue
+                val enEndpoints = LineEndpoints.getEn(currentLine) ?: continue
+                val faEndpoints = LineEndpoints.getFa(currentLine) ?: continue
 
                 if (currentLinePosition.position < nextLinePosition.position) {
                     directions.add(

@@ -143,7 +143,14 @@ class MainActivity : ComponentActivity() {
                         baseComposable<LinesScreen> {
                             val metroViewModel: LineViewModel = hiltViewModel(it)
                             Lines(
-                                navController = navController,
+                                onlineClick = { line, seeAlternateStations ->
+                                    navController.navigate(
+                                        StationsScreen(
+                                            line,
+                                            seeAlternateStations
+                                        )
+                                    )
+                                },
                                 lines = metroViewModel.getLines(),
                                 onFindPathClicked = {
                                     navController.navigate(StationSelectorScreen)
@@ -200,12 +207,20 @@ class MainActivity : ComponentActivity() {
                             val args = backStackEntry.toRoute<StationsScreen>()
                             Stations(
                                 lineNumber = args.lineNumber,
+                                useBranch = args.useBranch,
                                 orderedStations = metroViewModel.getOrderedStationsInLineByPosition(
-                                    args.lineNumber
+                                    args.lineNumber,
+                                    args.useBranch
                                 ),
                                 onBackClick = { navController.popBackStack() },
                                 onStationClick = { station, line ->
-                                    navController.navigate(StationDetailScreen(station, line))
+                                    navController.navigate(
+                                        StationDetailScreen(
+                                            station = station,
+                                            lineNumber = line,
+                                            useBranch = args.useBranch
+                                        )
+                                    )
                                 },
                             )
                         }
@@ -267,7 +282,13 @@ class MainActivity : ComponentActivity() {
                                 fromEn = args.startEnStation,
                                 toEn = args.enDestination,
                                 onStationClick = { station, line ->
-                                    navController.navigate(StationDetailScreen(station, line))
+                                    navController.navigate(
+                                        StationDetailScreen(
+                                            station = station,
+                                            lineNumber = line,
+                                            useBranch = false
+                                        )
+                                    )
                                 },
                                 fromFa = args.startFaStation,
                                 toFa = args.faDestination,
@@ -281,6 +302,7 @@ class MainActivity : ComponentActivity() {
                                 station = args.station,
                                 onBack = { navController.popBackStack() },
                                 lineNumber = args.lineNumber,
+                                useBranch = args.useBranch,
                                 onSubmitInfoStationClicked = { station, line ->
                                     navController.navigate(SubmitStationInfoScreen(station, line))
                                 }

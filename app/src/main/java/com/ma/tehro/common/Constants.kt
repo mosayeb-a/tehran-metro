@@ -8,3 +8,7 @@ const val COLOR_LINE_4 = "#FFF4B653"
 const val COLOR_LINE_5 = "#FF49977C"
 const val COLOR_LINE_6 = "#FFE8629F"
 const val COLOR_LINE_7 = "#FF994CA1"
+
+const val NORMAL_DAY_TIMETABLE = 0
+const val THURSDAY_TIMETABLE = 1
+const val FRIDAY_TIMETABLE = 2

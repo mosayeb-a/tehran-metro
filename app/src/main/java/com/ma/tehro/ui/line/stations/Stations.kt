@@ -25,7 +25,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -42,6 +41,7 @@ import com.ma.tehro.data.Station
 @Composable
 fun Stations(
     lineNumber: Int,
+    useBranch: Boolean,
     orderedStations: List<Station>,
     onBackClick: () -> Unit,
     onStationClick: (station: Station, lineNumber: Int) -> Unit
@@ -52,7 +52,8 @@ fun Stations(
     val itemHeight =
         ((screenHeight / (orderedStations.size + 1).coerceAtLeast(1)) * 2.4f)
             .coerceAtLeast(72f)
-    val lineName = remember(lineNumber) { calculateLineName(lineNumber) }
+    val lineName = remember(lineNumber) { calculateLineName(lineNumber,useBranch) }
+
     Scaffold(
         topBar = {
             Appbar(
@@ -114,14 +115,14 @@ fun StationItem(
     itemHeight: Float,
     lineNumber: Int
 ) {
-    // Get colors for other lines
     val colors = station.lines
         .filter { it != lineNumber }
         .map { getLineColorByNumber(it) }
 
     val maxCircleSize = 36.dp
     val minCircleSize = 28.dp
-    val circleSizeStep = (maxCircleSize - minCircleSize) / (colors.size - 1).coerceAtLeast(1)
+    val circleSizeStep = (maxCircleSize - minCircleSize) / (colors.size - 1)
+        .coerceAtLeast(1)
 
     Row(
         modifier = modifier
@@ -161,7 +162,7 @@ fun StationItem(
                     modifier = Modifier
                         .size(circleSize)
                         .clip(CircleShape)
-                        .background(color) // Use the `color` variable directly
+                        .background(color)
                         .align(Alignment.Center)
                         .offset(y = (index * -8).dp)
                 ) {

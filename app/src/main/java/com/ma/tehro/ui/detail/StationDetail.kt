@@ -41,11 +41,12 @@ import com.ma.tehro.data.Station
 @Composable
 fun StationDetail(
     onBack: () -> Unit = {},
+    useBranch: Boolean,
     station: Station,
     lineNumber: Int,
     onSubmitInfoStationClicked: (station: Station, line: Int) -> Unit
 ) {
-    val lineName = remember(lineNumber) { calculateLineName(lineNumber) }
+    val lineName = remember(lineNumber) { calculateLineName(lineNumber, useBranch) }
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
@@ -67,7 +68,7 @@ fun StationDetail(
                         modifier = Modifier
                             .padding(end = 6.dp)
                             .size(46.dp),
-                        onClick = { onSubmitInfoStationClicked(station,lineNumber) },
+                        onClick = { onSubmitInfoStationClicked(station, lineNumber) },
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.clarify_24px),
