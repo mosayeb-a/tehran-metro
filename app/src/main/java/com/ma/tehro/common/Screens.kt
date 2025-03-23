@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 object LinesScreen
 
 @Serializable
-data class StationsScreen(val lineNumber: Int)
+data class StationsScreen(val lineNumber: Int, val useBranch: Boolean)
 
 @Serializable
 object StationSelectorScreen
@@ -21,7 +21,7 @@ data class PathFinderScreen(
 )
 
 @Serializable
-data class StationDetailScreen(val station: Station, val lineNumber: Int)
+data class StationDetailScreen(val station: Station, val lineNumber: Int,val useBranch: Boolean)
 
 @Serializable
 object MapScreen

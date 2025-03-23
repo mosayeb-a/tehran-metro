@@ -16,6 +16,7 @@ class LineViewModel @Inject constructor(
 
     fun getOrderedStationsInLineByPosition(
         line: Int,
+        useAlternateBranch: Boolean
     ): List<Station> =
-        repository.getOrderedStationsByLine(line)
+        repository.getOrderedStationsByLine(line, useAlternateBranch)
 }
