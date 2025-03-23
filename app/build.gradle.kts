@@ -129,7 +129,4 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.3.0")
 
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
-
-    // temp: for reading XLS files
-//    implementation("org.apache.poi:poi-ooxml:5.2.3")
 }

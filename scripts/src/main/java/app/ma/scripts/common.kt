@@ -1,4 +1,4 @@
-package com.ma.tehro.scripts
+package app.ma.scripts
 
 import com.ma.tehro.data.Station
 import kotlinx.serialization.json.Json
