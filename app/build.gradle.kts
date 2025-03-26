@@ -129,4 +129,7 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.3.0")
 
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+
+    androidTestImplementation("androidx.benchmark:benchmark-junit4:1.1.1")
+    androidTestImplementation("androidx.test:runner:1.5.2")
 }

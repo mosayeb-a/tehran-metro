@@ -6,16 +6,18 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.ma.tehro.R
 import com.ma.tehro.data.Station
-import com.ma.tehro.services.DefaultLocationClient
-import com.ma.tehro.services.LocationClient
-import com.ma.tehro.services.LocationTracker
-import com.ma.tehro.services.LocationTrackerImpl
+import com.ma.tehro.data.repo.DataCorrectionRepository
+import com.ma.tehro.data.repo.DataCorrectionRepositoryImpl
 import com.ma.tehro.data.repo.LineRepository
 import com.ma.tehro.data.repo.LineRepositoryImpl
 import com.ma.tehro.data.repo.PathRepository
 import com.ma.tehro.data.repo.PathRepositoryImpl
-import com.ma.tehro.data.repo.DataCorrectionRepository
-import com.ma.tehro.data.repo.DataCorrectionRepositoryImpl
+import com.ma.tehro.data.repo.TrainScheduleRepository
+import com.ma.tehro.data.repo.TrainScheduleRepositoryImpl
+import com.ma.tehro.services.DefaultLocationClient
+import com.ma.tehro.services.LocationClient
+import com.ma.tehro.services.LocationTracker
+import com.ma.tehro.services.LocationTrackerImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,12 +31,18 @@ import javax.inject.Singleton
 class AppModule {
     @Provides
     @Singleton
-    fun provideStations(context: Application): Map<String, Station> {
+    fun provideJson(): Json {
+        return Json { ignoreUnknownKeys = true }
+    }
+
+    @Provides
+    @Singleton
+    fun provideStations(context: Application, json: Json): Map<String, Station> {
         val stationsJson = context.resources.openRawResource(R.raw.stations)
             .bufferedReader()
             .use { it.readText() }
 
-        return Json.decodeFromString(stationsJson)
+        return json.decodeFromString(stationsJson)
     }
 
     @Provides
@@ -75,5 +83,14 @@ class AppModule {
         stations: Map<String, Station>
     ): LocationTracker {
         return LocationTrackerImpl(locationClient, stations)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTrainScheduleRepository(
+        @ApplicationContext context: Context,
+        json: Json
+    ): TrainScheduleRepository {
+        return TrainScheduleRepositoryImpl(context, json)
     }
 }

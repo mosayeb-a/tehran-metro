@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -35,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import com.ma.tehro.R
 import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.calculateLineName
+import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.data.Station
 
@@ -44,43 +46,41 @@ fun StationDetail(
     useBranch: Boolean,
     station: Station,
     lineNumber: Int,
-    onSubmitInfoStationClicked: (station: Station, line: Int) -> Unit
+    onSubmitInfoStationClicked: (station: Station, line: Int) -> Unit,
+    onTrainScheduleClick: (stationName: String, faStationName: String, lineNumber: Int, useBranch: Boolean) -> Unit
 ) {
     val lineName = remember(lineNumber) { calculateLineName(lineNumber, useBranch) }
+    val lineColor = remember { getLineColorByNumber(lineNumber) }
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             Column(modifier = Modifier.background(MaterialTheme.colorScheme.primary)) {
-                Row(
+                Appbar(
+                    title = lineName,
+                    handleBack = true,
+                    onBackClick = onBack,
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(MaterialTheme.colorScheme.primary),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Appbar(
-                        modifier = Modifier.weight(1f),
-                        title = lineName,
-                        handleBack = true,
-                        onBackClick = onBack
-                    )
-                    IconButton(
-                        modifier = Modifier
-                            .padding(end = 6.dp)
-                            .size(46.dp),
-                        onClick = { onSubmitInfoStationClicked(station, lineNumber) },
-                    ) {
-                        Icon(
-                            painter = painterResource(R.drawable.clarify_24px),
-                            contentDescription = "show map screen",
-                        )
+                    content = {
+                        IconButton(
+                            modifier = Modifier
+                                .padding(end = 6.dp)
+                                .size(46.dp),
+                            onClick = { onSubmitInfoStationClicked(station, lineNumber) },
+                        ) {
+                            Icon(
+                                painter = painterResource(R.drawable.clarify_24px),
+                                contentDescription = "submit station info",
+                            )
+                        }
                     }
-                }
+                )
                 AppbarDetail(
                     text = station.address ?: "آدرس مشخص نشده",
                     fa = station.translations.fa,
                     en = station.name,
-                    line = lineNumber
+                    lineColor = lineColor
                 )
             }
         }
@@ -107,6 +107,38 @@ fun StationDetail(
         LazyColumn(
             modifier = Modifier.padding(paddingValues),
         ) {
+            item("timetable") {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            onTrainScheduleClick(
+                                station.name,
+                                station.translations.fa,
+                                lineNumber,
+                                useBranch
+                            )
+                        }
+                        .background(lineColor)
+                        .padding(8.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.directions_subway_24px),
+                        contentDescription = "train schedule"
+                    )
+                    Text(
+                        text = createBilingualMessage(
+                            fa = "زمان‌بندی حرکت قطار",
+                            en = "SCHEDULE"
+                        ),
+                        style = MaterialTheme.typography.labelSmall
+                            .copy(color = Color.White.copy(alpha = .8f)),
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
             item("label") {
                 Row(
                     modifier = Modifier
@@ -145,6 +177,7 @@ fun StationDetail(
                 Spacer(Modifier.width(4.dp))
                 HorizontalDivider()
             }
+            item("end_spacer") { Spacer(Modifier.height(58.dp)) }
         }
     }
 }
@@ -208,13 +241,13 @@ fun AppbarDetail(
     text: String,
     fa: String,
     en: String,
-    line: Int
+    lineColor: Color
 ) {
     Column(modifier = modifier) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(getLineColorByNumber(line))
+                .background(lineColor)
                 .padding(26.dp),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically

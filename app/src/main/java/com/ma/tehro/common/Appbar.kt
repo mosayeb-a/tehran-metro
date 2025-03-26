@@ -3,6 +3,7 @@ package com.ma.tehro.common
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -24,21 +25,21 @@ fun Appbar(
     title: String,
     handleBack: Boolean = false,
     onBackClick: () -> Unit = {},
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    backgroundColor: Color = MaterialTheme.colorScheme.primary,
+    content: (@Composable RowScope.() -> Unit)? = null
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .background(backgroundColor)
             .height(56.dp)
-            .background(MaterialTheme.colorScheme.primary)
             .padding(start = if (handleBack) 0.dp else 16.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Start
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         if (handleBack) {
-            IconButton(
-                onClick = onBackClick,
-            ) {
+            IconButton(onClick = onBackClick) {
                 Icon(
                     painter = painterResource(R.drawable.arrow_back_24px),
                     contentDescription = "go back",
@@ -51,8 +52,10 @@ fun Appbar(
             style = MaterialTheme.typography.bodySmall,
             color = Color.White,
             maxLines = 2,
-            overflow = TextOverflow.Ellipsis
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.weight(1f)
         )
+        content?.invoke(this)
     }
 }
 

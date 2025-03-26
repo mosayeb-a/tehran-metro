@@ -40,4 +40,6 @@ dependencies {
     // temp: for reading XLS files
     implementation("org.apache.poi:poi-ooxml:5.2.3")
     implementation(libs.kotlinx.serialization)
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.1")
+
 }

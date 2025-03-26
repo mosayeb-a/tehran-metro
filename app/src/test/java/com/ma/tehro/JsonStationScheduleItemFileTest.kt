@@ -9,7 +9,7 @@ import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class JsonStationItemFileTest {
+class JsonStationScheduleItemFileTest {
 
     private val stations: Map<String, Station> = readJsonStationsAsText("stations_updated2")
     private lateinit var repository: LineRepository
