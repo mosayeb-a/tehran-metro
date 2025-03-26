@@ -6,7 +6,7 @@ import com.ma.tehro.scripts.readJsonStationsAsText
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class DifferenceJsonStationItemFilesTest {
+class DifferenceJsonStationScheduleItemFilesTest {
     private val stations: Map<String, Station> = readJsonStationsAsText("stations_updated")
     private val newStations: Map<String, Station> = readJsonStationsAsText("stations_updated2")
 

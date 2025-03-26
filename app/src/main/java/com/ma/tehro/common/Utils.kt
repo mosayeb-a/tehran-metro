@@ -4,7 +4,9 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.view.Window
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.geometry.Size
@@ -16,6 +18,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
@@ -26,6 +29,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import java.util.Locale
 import kotlin.math.asin
 import kotlin.math.cos
 import kotlin.math.pow
@@ -172,4 +176,53 @@ fun <T> ObserveAsEvents(
 
 fun createBilingualMessage(fa: String, en: String): String {
     return "$fa\n$en"
+}
+
+fun fractionToTime(fraction: Double): String {
+    // 24 * 60 * 60 * 1000
+    val millisInDay = 86400000
+    val totalMillis = (fraction * millisInDay).toLong()
+
+    // 60 * 60 * 1000
+    val hours = (totalMillis / 3600000) % 24
+    //60 * 1000
+    val minutes = (totalMillis / 60000) % 60
+    val seconds = (totalMillis / 1000) % 60
+
+    return String.format(Locale.US, "%02d:%02d:%02d", hours, minutes, seconds)
+}
+
+fun setStatusBarColor(window: Window, color: Int) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+        window.decorView.setOnApplyWindowInsetsListener { view, insets ->
+            val statusBarInsets = insets.getInsets(android.view.WindowInsets.Type.statusBars())
+            view.setBackgroundColor(color)
+            view.setPadding(0, statusBarInsets.top, 0, 0)
+            insets
+        }
+    } else {
+        window.statusBarColor = color
+    }
+
+
+    WindowCompat.getInsetsController(window, window.decorView).apply {
+        isAppearanceLightStatusBars = false
+    }
+}
+fun setNavigationBarColor(window: Window, color: Int) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+        window.decorView.setOnApplyWindowInsetsListener { view, insets ->
+            val navigationBarInsets = insets.getInsets(android.view.WindowInsets.Type.navigationBars())
+            view.setPadding(0, 0, 0, navigationBarInsets.bottom)
+            insets
+        }
+        window.navigationBarColor = color
+    } else {
+        window.navigationBarColor = color
+    }
+
+
+    WindowCompat.getInsetsController(window, window.decorView).apply {
+        isAppearanceLightNavigationBars = false
+    }
 }

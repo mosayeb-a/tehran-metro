@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,20 +17,24 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.BasicAlertDialog
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,9 +50,12 @@ import com.ma.tehro.common.LineEndpoints
 import com.ma.tehro.common.calculateLineName
 import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.getLineColorByNumber
+import com.ma.tehro.ui.theme.Blue
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Composable
 fun Lines(
+    modifier: Modifier = Modifier,
     lines: List<Int>,
     onFindPathClicked: () -> Unit,
     onlineClick: (line: Int, seeBranchStations: Boolean) -> Unit,
@@ -62,71 +70,76 @@ fun Lines(
     var showBranchDialog by remember { mutableStateOf(false) }
     var selectedLine by remember { mutableStateOf<Int?>(null) }
 
-
-    if (showBranchDialog && selectedLine != null) {
-        BranchSelectionDialog(
-            line = selectedLine!!,
-            onDismiss = { showBranchDialog = false },
-            onSelect = { useBranch ->
-                onlineClick(selectedLine!!, useBranch)
-                showBranchDialog = false
+    val lazyListState = rememberLazyListState()
+    var isExtended by remember { mutableStateOf(true) }
+    LaunchedEffect(lazyListState) {
+        snapshotFlow { lazyListState.isScrollInProgress }
+            .distinctUntilChanged()
+            .collect { isScrolling ->
+                isExtended = !isScrolling
             }
-        )
     }
 
     Scaffold(
+        modifier = modifier,
         topBar = {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.primary),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Appbar(title = "فهرست خطوط\nlines list", modifier = Modifier.weight(1f))
-                IconButton(
-                    modifier = Modifier
-                        .padding(end = 6.dp)
-                        .size(46.dp),
-                    onClick = onMapClick,
-                ) {
-                    Icon(
-                        painter = painterResource(R.drawable.map_24px),
-                        contentDescription = "show map screen",
-                    )
+            Appbar(
+                title = "فهرست خطوط\nlines list",
+                backgroundColor = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.fillMaxWidth(),
+                content = {
+                    IconButton(
+                        modifier = Modifier
+                            .padding(end = 6.dp)
+                            .size(46.dp),
+                        onClick = onMapClick,
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.map_24px),
+                            contentDescription = "show map screen",
+                        )
+                    }
+                    IconButton(
+                        modifier = Modifier
+                            .padding(end = 6.dp)
+                            .size(46.dp),
+                        onClick = { onNewSubmitInfoStationClicked() },
+                    ) {
+                        Icon(
+                            painter = painterResource(R.drawable.clarify_24px),
+                            contentDescription = "submit info",
+                        )
+                    }
                 }
-                IconButton(
-                    modifier = Modifier
-                        .padding(end = 6.dp)
-                        .size(46.dp),
-                    onClick = { onNewSubmitInfoStationClicked() },
-                ) {
-                    Icon(
-                        painter = painterResource(R.drawable.clarify_24px),
-                        contentDescription = "show map screen",
-                    )
-                }
-            }
+            )
         },
         floatingActionButton = {
-            FloatingActionButton(
-                modifier = Modifier.size(62.dp),
+            ExtendedFloatingActionButton(
                 onClick = onFindPathClicked,
-                containerColor = MaterialTheme.colorScheme.primary,
-                shape = FloatingActionButtonDefaults.largeShape,
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.route),
-                    contentDescription = "Find Shortest Path",
-                    tint = Color.White
-                )
-            }
+                containerColor = Blue,
+                expanded = isExtended,
+                icon = {
+                    Icon(
+                        painter = painterResource(R.drawable.route),
+                        contentDescription = "path finder",
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
+                },
+                text = {
+                    if (isExtended) {
+                        Text(
+                            text = createBilingualMessage(fa = "مسیریابی", en = "ROUTING"),
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+            )
         }
-    ) { paddingValues ->
+    ) { innerpadding ->
         LazyColumn(
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxWidth()
+            state = lazyListState,
+            modifier = Modifier.padding(innerpadding)
         ) {
             items(lines, key = { it }) { line ->
                 LineItem(
@@ -147,6 +160,17 @@ fun Lines(
                 Spacer(modifier = Modifier.height(itemHeight.dp - (itemHeight.dp / 3)))
             }
         }
+    }
+
+    if (showBranchDialog && selectedLine != null) {
+        BranchSelectionDialog(
+            line = selectedLine!!,
+            onDismiss = { showBranchDialog = false },
+            onSelect = { useBranch ->
+                onlineClick(selectedLine!!, useBranch)
+                showBranchDialog = false
+            }
+        )
     }
 }
 
@@ -184,7 +208,7 @@ fun LineItem(
     }
 }
 
-
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BranchSelectionDialog(
     line: Int,
@@ -201,69 +225,101 @@ fun BranchSelectionDialog(
     val branchEnEndpoints = remember(line) { LineEndpoints.getEn(line, true) }
     val branchFaEndpoints = remember(line) { LineEndpoints.getFa(line, true) }
 
-    AlertDialog(
+    BasicAlertDialog(
         onDismissRequest = onDismiss,
-        shape = RoundedCornerShape(32.dp),
-        title = {
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                text = createBilingualMessage(
-                    fa = "مسیرتان را انتخاب کنید",
-                    en = "SELECT YOUR PATH"
-                ),
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.titleMedium
-            )
-        },
-        containerColor = MaterialTheme.colorScheme.outlineVariant,
-        text = {
-            Column(modifier = Modifier.fillMaxWidth()) {
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp)
+    ) {
+        Surface(
+            shape = RoundedCornerShape(24.dp),
+            color = MaterialTheme.colorScheme.secondaryContainer,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 22.dp, horizontal = 14.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
                 Text(
                     text = createBilingualMessage(
-                        fa = "${mainFaEndpoints?.first} / ${mainFaEndpoints?.second}",
-                        en = "${mainEnEndpoints?.first} / ${mainEnEndpoints?.second}"
+                        fa = "انتخاب مسیر",
+                        en = "SELECT PATH"
                     ),
-                    style = MaterialTheme.typography.titleSmall.copy(color = Color.White),
                     textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(24.dp))
-                        .background(getLineColorByNumber(line).copy(alpha = .6f))
-                        .clickable(
-                            interactionSource = mainInteractionSource,
-                            indication = indication
-                        ) {
-                            onSelect(false)
-                            onDismiss()
-                        }
-                        .padding(16.dp)
+                    style = MaterialTheme.typography.bodyLarge.copy(color = Color.White),
+                    modifier = Modifier.fillMaxWidth()
                 )
-                Spacer(Modifier.height(16.dp))
-                Text(
-                    text = createBilingualMessage(
-                        fa = "${branchFaEndpoints?.first} / ${branchFaEndpoints?.second}",
-                        en = "${branchEnEndpoints?.first} / ${branchEnEndpoints?.second}"
-                    ),
-                    style = MaterialTheme.typography.titleSmall.copy(
-                        color = Color.White,
-                    ),
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(24.dp))
-                        .background(getLineColorByNumber(line).copy(alpha = .6f))
-                        .clickable(
-                            interactionSource = branchInteractionSource,
-                            indication = indication
-                        ) {
-                            onSelect(true)
-                            onDismiss()
-                        }
-                        .padding(16.dp)
+
+                PathSelectionItem(
+                    faEndpoints = mainFaEndpoints,
+                    enEndpoints = mainEnEndpoints,
+                    backgroundColor = getLineColorByNumber(line).copy(alpha = .9f),
+                    interactionSource = mainInteractionSource,
+                    indication = indication,
+                    onClick = {
+                        onSelect(false)
+                        onDismiss()
+                    }
+                )
+
+                PathSelectionItem(
+                    faEndpoints = branchFaEndpoints,
+                    enEndpoints = branchEnEndpoints,
+                    backgroundColor = getLineColorByNumber(line),
+                    interactionSource = branchInteractionSource,
+                    indication = indication,
+                    onClick = {
+                        onSelect(true)
+                        onDismiss()
+                    }
                 )
             }
-        },
-        confirmButton = { },
-        dismissButton = { }
-    )
+        }
+    }
+}
+
+@Composable
+private fun PathSelectionItem(
+    faEndpoints: Pair<String, String>?,
+    enEndpoints: Pair<String, String>?,
+    backgroundColor: Color,
+    interactionSource: MutableInteractionSource,
+    indication: Indication,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(36.dp))
+            .background(backgroundColor)
+            .clickable(
+                interactionSource = interactionSource,
+                indication = indication
+            ) {
+                onClick()
+            }
+            .padding(10.dp)
+    ) {
+        Text(
+            text = createBilingualMessage(
+                fa = "${faEndpoints?.first} / ${faEndpoints?.second}",
+                en = "${enEndpoints?.first} / ${enEndpoints?.second}"
+            ),
+            style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Icon(
+            painter = painterResource(R.drawable.arrow_forward_24px),
+            contentDescription = "See stations by line",
+            tint = Color.White,
+            modifier = Modifier
+                .padding(end = 8.dp)
+                .align(Alignment.CenterEnd)
+        )
+    }
 }

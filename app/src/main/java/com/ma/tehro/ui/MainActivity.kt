@@ -1,7 +1,7 @@
 package com.ma.tehro.ui
 
 import android.Manifest
-import android.content.Context
+import android.annotation.SuppressLint
 import android.content.IntentSender
 import android.location.LocationManager
 import android.os.Bundle
@@ -20,12 +20,12 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.app.ActivityCompat
-import androidx.core.view.WindowCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
@@ -50,9 +50,12 @@ import com.ma.tehro.common.StationDetailScreen
 import com.ma.tehro.common.StationSelectorScreen
 import com.ma.tehro.common.StationsScreen
 import com.ma.tehro.common.SubmitStationInfoScreen
+import com.ma.tehro.common.TrainScheduleScreen
 import com.ma.tehro.common.hasLocationPermission
 import com.ma.tehro.common.messenger.UiMessageManager
 import com.ma.tehro.common.navTypeOf
+import com.ma.tehro.common.setNavigationBarColor
+import com.ma.tehro.common.setStatusBarColor
 import com.ma.tehro.data.Station
 import com.ma.tehro.data.Translations
 import com.ma.tehro.ui.detail.StationDetail
@@ -66,8 +69,11 @@ import com.ma.tehro.ui.shortestpath.StationSelector
 import com.ma.tehro.ui.shortestpath.pathfinder.PathFinder
 import com.ma.tehro.ui.submit_info.SubmitInfoViewModel
 import com.ma.tehro.ui.submit_info.SubmitStationInfo
+import com.ma.tehro.ui.theme.DarkGray
 import com.ma.tehro.ui.theme.Gray
 import com.ma.tehro.ui.theme.TehroTheme
+import com.ma.tehro.ui.train_schedule.TrainSchedule
+import com.ma.tehro.ui.train_schedule.TrainScheduleViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlin.reflect.KType
@@ -86,13 +92,12 @@ class MainActivity : ComponentActivity() {
     private lateinit var locationSettingsRequest: LocationSettingsRequest
     private lateinit var settingsClient: SettingsClient
 
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //todo refactor this
-        window.statusBarColor = Gray.toArgb()
-        WindowCompat.getInsetsController(window, window.decorView)
-            .isAppearanceLightStatusBars = false
+        setStatusBarColor(window, Gray.toArgb())
+        setNavigationBarColor(window, DarkGray.toArgb())
 
         settingsClient = LocationServices.getSettingsClient(this)
         locationSettingsRequest = LocationSettingsRequest.Builder()
@@ -136,18 +141,19 @@ class MainActivity : ComponentActivity() {
                     },
                 ) { innerPadding ->
                     NavHost(
-                        modifier = Modifier.padding(innerPadding),
+                        modifier = Modifier
+                            .padding(innerPadding),
                         navController = navController,
                         startDestination = LinesScreen,
                     ) {
                         baseComposable<LinesScreen> {
                             val metroViewModel: LineViewModel = hiltViewModel(it)
                             Lines(
-                                onlineClick = { line, seeAlternateStations ->
+                                onlineClick = { line, isBranch ->
                                     navController.navigate(
                                         StationsScreen(
                                             line,
-                                            seeAlternateStations
+                                            isBranch
                                         )
                                     )
                                 },
@@ -235,10 +241,10 @@ class MainActivity : ComponentActivity() {
                                 onFindPathClick = { startEn, destEn, startFa, destFa ->
                                     navController.navigate(
                                         PathFinderScreen(
-                                            startEn,
-                                            startFa,
-                                            destEn,
-                                            destFa
+                                            startEnStation = startEn,
+                                            startFaStation = startFa,
+                                            enDestination = destEn,
+                                            faDestination = destFa
                                         )
                                     )
                                 },
@@ -305,6 +311,31 @@ class MainActivity : ComponentActivity() {
                                 useBranch = args.useBranch,
                                 onSubmitInfoStationClicked = { station, line ->
                                     navController.navigate(SubmitStationInfoScreen(station, line))
+                                },
+                                onTrainScheduleClick = { name, fa, line, useBranch ->
+                                    navController.navigate(
+                                        TrainScheduleScreen(
+                                            enStationName = name,
+                                            lineNumber = line,
+                                            useBranch = useBranch,
+                                            faStationName = fa
+                                        )
+                                    )
+                                }
+                            )
+                        }
+                        baseComposable<TrainScheduleScreen> {
+                            val viewModel: TrainScheduleViewModel = hiltViewModel(it)
+                            val state by viewModel.state.collectAsStateWithLifecycle()
+                            val args = it.toRoute<TrainScheduleScreen>()
+                            println(args.faStationName)
+                            TrainSchedule(
+                                state = state,
+                                faStationName = args.faStationName,
+                                lineNumber = args.lineNumber,
+                                onBack = { navController.popBackStack() },
+                                onScheduleTypeSelected = { destination, scheduleType ->
+                                    viewModel.onScheduleTypeSelected(destination, scheduleType)
                                 }
                             )
                         }
@@ -333,7 +364,7 @@ class MainActivity : ComponentActivity() {
     ) { result ->
         when (result.resultCode) {
             RESULT_OK -> {
-                val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+                val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
                 val isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 if (isGpsEnabled) {
                     pendingGpsCallback?.invoke()

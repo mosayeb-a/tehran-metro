@@ -10,7 +10,7 @@ object LineEndpoints {
             branch = StationName("Tajrish", "تجریش") to StationName("Shahr-e Parand", "شهر پرند")
         ),
         2 to LineBranches(
-            main = StationName("Farhangsara", "فرهنگسرا") to StationName("Sadeghiyeh", "صادقیه")
+            main = StationName("Farhangsara", "فرهنگسرا") to StationName("Tehran (Sadeghiyeh)", "صادقیه")
         ),
         3 to LineBranches(
             main = StationName("Qa'em", "قائم") to StationName("Azadegan", "آزادگان")
