@@ -36,3 +36,6 @@ data class TrainScheduleScreen(
     val lineNumber: Int,
     val useBranch: Boolean
 )
+
+@Serializable
+object SubmitFeedbackScreen

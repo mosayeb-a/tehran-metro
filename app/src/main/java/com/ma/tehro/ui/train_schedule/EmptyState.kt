@@ -20,21 +20,9 @@ import com.ma.tehro.common.BilingualText
 fun EmptyState(
     modifier: Modifier = Modifier,
     faMessage: String,
-    enMessage: String
+    enMessage: String,
+    faces: List<String>
 ) {
-    val faces = listOf(
-        "(˘･_･˘)",
-        "(╥﹏╥)",
-        "(｡•́︿•̀｡)",
-        "(っ˘̩╭╮˘̩)っ",
-        "( ˘･з･)",
-        "(◕︵◕)",
-        "ಥ_ಥ",
-        "(｡╯︵╰｡)",
-        "(-̩̩̩-̩̩̩-̩̩̩-̩̩̩-̩̩̩___-̩̩̩-̩̩̩-̩̩̩-̩̩̩-̩̩̩)",
-        "(;´༎ຶД༎ຶ`)"
-    )
-
     val selectedFace = remember { faces.random() }
 
     Box(
@@ -49,9 +37,9 @@ fun EmptyState(
             Text(
                 text = selectedFace,
                 style = MaterialTheme.typography.headlineLarge.copy(fontSize = 46.sp),
-                modifier = Modifier
+                modifier = Modifier,
             )
-            Spacer(Modifier.height(22.dp))
+            Spacer(Modifier.height(18.dp))
             BilingualText(
                 fa = faMessage,
                 en = enMessage,
@@ -60,4 +48,41 @@ fun EmptyState(
             )
         }
     }
+}
+
+object EmptyStatesFaces {
+    val happy = listOf(
+        "(◠‿◠)",
+        "ʘ‿ʘ",
+        "(◕‿◕)",
+        "(*^▽^*)",
+        "(◠‿◠✿)",
+        "٩(◕‿◕｡)۶",
+        "(｡♥‿♥｡)",
+        "(◕‿◕✿)",
+        "( ﾟ▽ﾟ)/"
+    )
+    val suggestion = listOf(
+        "(・_・ヾ",
+        "(｡･ω･｡)",
+        "(◕ᴗ◕✿)",
+        "('ω')",
+        "(´･ω･`)?",
+        "(◠‿◕)",
+        "(。・_・。)",
+        "(・∀・)",
+        "(◕‿◕)"
+    )
+    val sad = listOf(
+        "(˘･_･˘)",
+        "(╥﹏╥)",
+        "(｡•́︿•̀｡)",
+        "(っ˘̩╭╮˘̩)っ",
+        "( ˘･з･)",
+        "(◕︵◕)",
+        "ಥ_ಥ",
+        "(｡╯︵╰｡)",
+        "(-̩̩̩-̩̩̩-̩̩̩-̩̩̩-̩̩̩___-̩̩̩-̩̩̩-̩̩̩-̩̩̩-̩̩̩)",
+        "(;´༎ຶД༎ຶ`)"
+    )
 }

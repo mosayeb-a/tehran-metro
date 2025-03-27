@@ -226,3 +226,9 @@ fun setNavigationBarColor(window: Window, color: Int) {
         isAppearanceLightNavigationBars = false
     }
 }
+
+fun isFarsi(text: String): Boolean {
+    if (text.isEmpty()) return false
+    val firstChar = text.trim().firstOrNull() ?: return false
+    return firstChar in '\u0600'..'\u06FF'
+}

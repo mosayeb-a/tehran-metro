@@ -1,4 +1,4 @@
-package com.ma.tehro.ui.submit_info
+package com.ma.tehro.ui.submit_suggestion.station
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -43,6 +43,7 @@ import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.data.Station
+import com.ma.tehro.ui.submit_suggestion.SubmitInfoState
 
 @Composable
 fun SubmitStationInfo(
@@ -64,7 +65,7 @@ fun SubmitStationInfo(
     var fastFood by rememberSaveable { mutableStateOf(station.fastFood ?: false) }
     var atm by rememberSaveable { mutableStateOf(station.atm ?: false) }
     var selectedLine by rememberSaveable {
-        mutableStateOf(if (lineNumber == 0) "" else station.lines.joinToString(", "))
+        mutableStateOf(station.lines.joinToString(", "))
     }
 
     val isChanged = name != station.name ||
@@ -78,15 +79,15 @@ fun SubmitStationInfo(
             groceryStore != (station.groceryStore ?: false) ||
             fastFood != (station.fastFood ?: false) ||
             atm != (station.atm ?: false) ||
-            selectedLine != (if (lineNumber == 0) "" else station.lines.joinToString(", "))
+            selectedLine != station.lines.joinToString(", ")
 
     Scaffold(
         topBar = {
             Column {
                 Appbar(
                     title = createBilingualMessage(
-                        fa = if (lineNumber == 0) "ارسال اطلاعات ایستگاه جدید" else "ارسال اصلاحیه برای ایستگاه ${station.translations.fa}",
-                        en = if (lineNumber == 0) "submit new station info" else "submit station correction for ${station.name}"
+                        fa ="ارسال اصلاحیه برای ایستگاه ${station.translations.fa}",
+                        en = "submit station correction for ${station.name}"
                     ),
                     handleBack = true,
                     onBackClick = onBack

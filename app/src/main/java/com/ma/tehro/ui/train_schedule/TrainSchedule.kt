@@ -98,7 +98,8 @@ fun TrainSchedule(
                 EmptyState(
                     modifier = Modifier.fillMaxSize(),
                     faMessage = "هیچ زمان‌بندی‌ای برای این ایستگاه ثبت نشده. به‌احتمالِ زیاد، ایستگاه غیرفعال است",
-                    enMessage = "No schedule is available for this station. It is most likely inactive."
+                    enMessage = "No schedule is available for this station. It is most likely inactive.",
+                    faces = EmptyStatesFaces.sad
                 )
         }
     }

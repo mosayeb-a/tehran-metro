@@ -5,88 +5,128 @@ import com.ma.tehro.common.AppException
 import com.ma.tehro.data.Station
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import java.net.HttpURLConnection
 import java.net.URL
+import javax.inject.Inject
 
 interface DataCorrectionRepository {
     suspend fun submitStationCorrection(station: Station)
-    suspend fun submitSimpleCorrection(message: String)
+    suspend fun submitFeedback(message: String)
 }
 
-class DataCorrectionRepositoryImpl : DataCorrectionRepository {
+@Serializable
+data class FeedbackEntry(
+    val message: String,
+    val timestamp: String
+)
+
+class DataCorrectionRepositoryImpl @Inject constructor(
+    val json: Json
+) : DataCorrectionRepository {
     private val token = BuildConfig.github_token
-    private val gistId = BuildConfig.gist_id
+    private val stationsGistId = BuildConfig.stations_gist_id
+    private val feedbacksGistId = BuildConfig.feedbacks_gist_id
 
     override suspend fun submitStationCorrection(station: Station) {
-        sendCorrectionToGist(Json.encodeToString(station))
+        updateGist(stationsGistId, station, "gistfile1.txt")
     }
 
-    override suspend fun submitSimpleCorrection(message: String) {
-        sendCorrectionToGist(message)
+    override suspend fun submitFeedback(message: String) {
+        val now = Clock.System.now()
+            .toLocalDateTime(TimeZone.of("Asia/Tehran"))
+            .toString()
+            .substringBefore('.')
+            .replace('T', ' ')
+
+        val feedback = FeedbackEntry(
+            message = message,
+            timestamp = now
+        )
+        updateGist(feedbacksGistId, feedback, "feedbacks.json")
     }
 
-    private suspend fun sendCorrectionToGist(newStationJson: String) {
-        withContext(Dispatchers.IO) {
-            try {
-                val url = URL("https://api.github.com/gists/$gistId")
-                val getConnection = url.openConnection() as HttpURLConnection
-                getConnection.requestMethod = "GET"
-                getConnection.setRequestProperty("Authorization", "Bearer $token")
-                getConnection.setRequestProperty("Accept", "application/vnd.github.v3+json")
+    private suspend inline fun <reified T> updateGist(
+        gistId: String,
+        content: T,
+        fileName: String
+    ) = withContext(Dispatchers.IO) {
+        try {
+            val url = URL("https://api.github.com/gists/$gistId")
 
-                val existingContent = getConnection.inputStream.bufferedReader().use { it.readText() }
-                getConnection.disconnect()
-                val currentStationsJson = Json.parseToJsonElement(existingContent)
-                    .jsonObject["files"]?.jsonObject?.get("gistfile1.txt")
+            val existingContent = getExistingContent(url)
+
+            val currentItems: MutableList<T> = try {
+                val fileContent = json.parseToJsonElement(existingContent)
+                    .jsonObject["files"]?.jsonObject?.get(fileName)
                     ?.jsonObject?.get("content")?.jsonPrimitive?.content ?: "[]"
 
-                val currentStations = try {
-                    Json.decodeFromString<MutableList<Station>>(currentStationsJson)
-                } catch (e: Exception) {
-                    println("Error parsing JSON: ${e.localizedMessage}")
-                    mutableListOf()
-                }
+                json.decodeFromString<MutableList<T>>(fileContent)
+            } catch (e: Exception) {
+                println(e)
+                mutableListOf()
+            }
 
-                val newStation = Json.decodeFromString<Station>(newStationJson)
-                currentStations.add(newStation)
-                val updatedContent = Json.encodeToString(currentStations)
+            currentItems.add(content)
 
-                val patchConnection = url.openConnection() as HttpURLConnection
-                patchConnection.requestMethod = "PATCH"
-                patchConnection.setRequestProperty("Authorization", "Bearer $token")
-                patchConnection.setRequestProperty("Accept", "application/vnd.github.v3+json")
-                patchConnection.setRequestProperty("Content-Type", "application/json")
-                patchConnection.doOutput = true
+            updateGistContent(url, fileName, currentItems)
+        } catch (e: Exception) {
+            println(e)
+            throw AppException(e.message ?: "Unknown error occurred")
+        }
+    }
 
-                val payload = Json.encodeToString(
-                    mapOf(
-                        "files" to mapOf(
-                            "gistfile1.txt" to mapOf(
-                                "content" to updatedContent
-                            )
+    private fun getExistingContent(url: URL): String {
+        val connection = (url.openConnection() as HttpURLConnection).apply {
+            requestMethod = "GET"
+            setRequestProperty("Authorization", "Bearer $token")
+            setRequestProperty("Accept", "application/vnd.github.v3+json")
+        }
+
+        return connection.inputStream.bufferedReader().readText().also {
+            connection.disconnect()
+        }
+    }
+
+    private inline fun <reified T> updateGistContent(url: URL, fileName: String, currentItems: List<T>) {
+        val connection = (url.openConnection() as HttpURLConnection).apply {
+            requestMethod = "PATCH"
+            setRequestProperty("Authorization", "Bearer $token")
+            setRequestProperty("Accept", "application/vnd.github.v3+json")
+            setRequestProperty("Content-Type", "application/json")
+            doOutput = true
+        }
+
+        try {
+            val payload = json.encodeToString(
+                mapOf(
+                    "files" to mapOf(
+                        fileName to mapOf(
+                            "content" to json.encodeToString(currentItems)
                         )
                     )
                 )
-                println("updated payload: $payload")
+            )
 
-                patchConnection.outputStream.use { outputStream ->
-                    outputStream.write(payload.toByteArray())
-                    outputStream.flush()
-                }
-
-                val responseCode = patchConnection.responseCode
-                val responseMessage = patchConnection.inputStream.bufferedReader().use { it.readText() }
-                println("response code: $responseCode")
-                println("response message: $responseMessage")
-
-                patchConnection.disconnect()
-            } catch (e: Exception) {
-                throw AppException(e.message.toString())
+            connection.outputStream.use { output ->
+                output.write(payload.toByteArray())
             }
+
+            if (connection.responseCode !in 200..299) {
+                val errorResponse = connection.errorStream?.bufferedReader()?.readText() ?: "unknown error"
+                throw AppException("HTTP Error: ${connection.responseCode} - $errorResponse")
+            }
+        } finally {
+            connection.disconnect()
         }
     }
 }

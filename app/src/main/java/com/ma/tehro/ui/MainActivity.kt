@@ -1,7 +1,6 @@
 package com.ma.tehro.ui
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.IntentSender
 import android.location.LocationManager
 import android.os.Bundle
@@ -49,6 +48,7 @@ import com.ma.tehro.common.PathFinderScreen
 import com.ma.tehro.common.StationDetailScreen
 import com.ma.tehro.common.StationSelectorScreen
 import com.ma.tehro.common.StationsScreen
+import com.ma.tehro.common.SubmitFeedbackScreen
 import com.ma.tehro.common.SubmitStationInfoScreen
 import com.ma.tehro.common.TrainScheduleScreen
 import com.ma.tehro.common.hasLocationPermission
@@ -57,7 +57,6 @@ import com.ma.tehro.common.navTypeOf
 import com.ma.tehro.common.setNavigationBarColor
 import com.ma.tehro.common.setStatusBarColor
 import com.ma.tehro.data.Station
-import com.ma.tehro.data.Translations
 import com.ma.tehro.ui.detail.StationDetail
 import com.ma.tehro.ui.line.LineViewModel
 import com.ma.tehro.ui.line.Lines
@@ -67,8 +66,9 @@ import com.ma.tehro.ui.map.StationsMapViewModel
 import com.ma.tehro.ui.shortestpath.PathViewModel
 import com.ma.tehro.ui.shortestpath.StationSelector
 import com.ma.tehro.ui.shortestpath.pathfinder.PathFinder
-import com.ma.tehro.ui.submit_info.SubmitInfoViewModel
-import com.ma.tehro.ui.submit_info.SubmitStationInfo
+import com.ma.tehro.ui.submit_suggestion.SubmitSuggestionViewModel
+import com.ma.tehro.ui.submit_suggestion.feedback.SubmitFeedback
+import com.ma.tehro.ui.submit_suggestion.station.SubmitStationInfo
 import com.ma.tehro.ui.theme.DarkGray
 import com.ma.tehro.ui.theme.Gray
 import com.ma.tehro.ui.theme.TehroTheme
@@ -92,7 +92,6 @@ class MainActivity : ComponentActivity() {
     private lateinit var locationSettingsRequest: LocationSettingsRequest
     private lateinit var settingsClient: SettingsClient
 
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -164,28 +163,8 @@ class MainActivity : ComponentActivity() {
                                 onMapClick = {
                                     navController.navigate(MapScreen)
                                 },
-                                onNewSubmitInfoStationClicked = {
-                                    navController.navigate(
-                                        SubmitStationInfoScreen(
-                                            station = Station(
-                                                name = "",
-                                                translations = Translations(fa = ""),
-                                                lines = listOf(),
-                                                longitude = null,
-                                                latitude = null,
-                                                address = null,
-                                                disabled = false,
-                                                wc = null,
-                                                coffeeShop = null,
-                                                groceryStore = null,
-                                                fastFood = null,
-                                                atm = null,
-                                                relations = listOf(),
-                                                positionsInLine = listOf()
-                                            ),
-                                            lineNumber = 0
-                                        )
-                                    )
+                                onSubmitFeedbackClick = {
+                                    navController.navigate(SubmitFeedbackScreen)
                                 }
                             )
                         }
@@ -328,7 +307,6 @@ class MainActivity : ComponentActivity() {
                             val viewModel: TrainScheduleViewModel = hiltViewModel(it)
                             val state by viewModel.state.collectAsStateWithLifecycle()
                             val args = it.toRoute<TrainScheduleScreen>()
-                            println(args.faStationName)
                             TrainSchedule(
                                 state = state,
                                 faStationName = args.faStationName,
@@ -339,12 +317,20 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
+                        baseComposable<SubmitFeedbackScreen> {
+                            val viewModel: SubmitSuggestionViewModel = hiltViewModel(it)
+                            val state by viewModel.state.collectAsStateWithLifecycle()
+                            SubmitFeedback(
+                                onSendMessageClicked ={ message -> viewModel.sendSimpleFeedback(message) },
+                                viewState = state,
+                                onBack = {navController.popBackStack()}
+                            )
+                        }
                         baseComposable<SubmitStationInfoScreen>(
                             typeMap = mapOf(typeOf<Station>() to navTypeOf<Station>()),
                         ) { backStackEntry ->
-                            val viewModel: SubmitInfoViewModel = hiltViewModel(backStackEntry)
+                            val viewModel: SubmitSuggestionViewModel = hiltViewModel(backStackEntry)
                             val args: SubmitStationInfoScreen = backStackEntry.toRoute()
-                            println(args.station)
                             SubmitStationInfo(
                                 onBack = { navController.popBackStack() },
                                 onSubmitInfo = { viewModel.submitStationCorrection(it) },
@@ -399,7 +385,6 @@ class MainActivity : ComponentActivity() {
                             IntentSenderRequest.Builder(exception.resolution).build()
                         )
                     } catch (sendEx: IntentSender.SendIntentException) {
-                        sendEx.printStackTrace()
                         pendingGpsCallback = null
                     }
                 } else {

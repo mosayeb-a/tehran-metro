@@ -32,7 +32,11 @@ class AppModule {
     @Provides
     @Singleton
     fun provideJson(): Json {
-        return Json { ignoreUnknownKeys = true }
+        return Json {
+            ignoreUnknownKeys = true
+            isLenient = true
+            encodeDefaults = true
+        }
     }
 
     @Provides
@@ -57,8 +61,8 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideStationCorrectionRepo(): DataCorrectionRepository =
-        DataCorrectionRepositoryImpl()
+    fun provideStationCorrectionRepo(json: Json): DataCorrectionRepository =
+        DataCorrectionRepositoryImpl(json)
 
     @Provides
     @Singleton
