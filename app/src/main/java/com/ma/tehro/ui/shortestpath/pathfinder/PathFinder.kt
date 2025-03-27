@@ -16,11 +16,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -48,29 +44,21 @@ fun PathFinder(
     fromFa: String,
     toEn: String,
     toFa: String,
-    findShortestPath: () -> List<PathItem>,
+    state: PathFinderState,
     onBack: () -> Unit,
     onStationClick: (station: Station, lineNumber: Int) -> Unit
 ) {
-    var path by remember { mutableStateOf<List<PathItem>>(emptyList()) }
-
-    LaunchedEffect(fromEn, toEn) {
-        if (path.isEmpty()) {
-            path = findShortestPath()
-        }
-    }
-
     Scaffold(
         containerColor = MaterialTheme.colorScheme.primary,
         topBar = {
-            Appbar(fromEn = fromEn, toEn = toEn, onBack = onBack, fromFa = fromFa, toFa = toFa,)
+            Appbar(fromEn = fromEn, toEn = toEn, onBack = onBack, fromFa = fromFa, toFa = toFa)
         }
     ) { padding ->
         LazyColumn(
             modifier = modifier.padding(padding),
         ) {
             itemsIndexed(
-                items = path,
+                items = state.shortestPath,
                 key = { index, _ -> index }
             ) { index, item ->
                 when (item) {
@@ -90,7 +78,7 @@ fun PathFinder(
                             },
                             station = item.station,
                             itemHeight = 76f,
-                            isLastItem = index == path.size - 1,
+                            isLastItem = index == state.shortestPath.size - 1,
                             disabled = item.isPassthrough,
                             lineNumber = item.lineNumber,
 
@@ -114,7 +102,8 @@ fun PinableTitle(
 ) {
     val iconPainter =
         painterResource(
-            id = if (isFirstItem) R.drawable.arrow_drop_down_24px else R.drawable.sync_alt_24px)
+            id = if (isFirstItem) R.drawable.arrow_drop_down_24px else R.drawable.sync_alt_24px
+        )
 
     val density = LocalDensity.current
     val layoutDirection = LocalLayoutDirection.current

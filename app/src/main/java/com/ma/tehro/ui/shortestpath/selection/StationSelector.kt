@@ -1,4 +1,4 @@
-package com.ma.tehro.ui.shortestpath
+package com.ma.tehro.ui.shortestpath.selection
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -53,7 +53,7 @@ import com.ma.tehro.services.NearestStation
 
 @Composable
 fun StationSelector(
-    viewState: PathUiState,
+    viewState: StationSelectionState,
     onFindPathClick: (fromEn: String, toEn: String, fromFa: String, toFa: String) -> Unit,
     onSelectedChange: (isFrom: Boolean, query: String, faQuery: String) -> Unit,
     onBack: () -> Unit,

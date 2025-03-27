@@ -63,8 +63,9 @@ import com.ma.tehro.ui.line.Lines
 import com.ma.tehro.ui.line.stations.Stations
 import com.ma.tehro.ui.map.StationsMap
 import com.ma.tehro.ui.map.StationsMapViewModel
-import com.ma.tehro.ui.shortestpath.PathViewModel
-import com.ma.tehro.ui.shortestpath.StationSelector
+import com.ma.tehro.ui.shortestpath.pathfinder.PathViewModel
+import com.ma.tehro.ui.shortestpath.selection.StationSelectionViewModel
+import com.ma.tehro.ui.shortestpath.selection.StationSelector
 import com.ma.tehro.ui.shortestpath.pathfinder.PathFinder
 import com.ma.tehro.ui.submit_suggestion.SubmitSuggestionViewModel
 import com.ma.tehro.ui.submit_suggestion.feedback.SubmitFeedback
@@ -210,10 +211,11 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         baseComposable<StationSelectorScreen> { backStackEntry ->
-                            val viewModel: PathViewModel = hiltViewModel(backStackEntry)
+                            val viewModel: StationSelectionViewModel = hiltViewModel(backStackEntry)
+                            val state by viewModel.uiState.collectAsStateWithLifecycle()
                             StationSelector(
                                 onBack = { navController.popBackStack() },
-                                viewState = viewModel.uiState.collectAsStateWithLifecycle().value,
+                                viewState = state,
                                 onSelectedChange = { isFrom, query, fa ->
                                     viewModel.onSelectedChange(isFrom, query, fa)
                                 },
@@ -255,14 +257,10 @@ class MainActivity : ComponentActivity() {
                         }
                         baseComposable<PathFinderScreen> { backStackEntry ->
                             val viewModel: PathViewModel = hiltViewModel(backStackEntry)
+                            val state by viewModel.state.collectAsStateWithLifecycle()
                             val args: PathFinderScreen = backStackEntry.toRoute()
                             PathFinder(
-                                findShortestPath = {
-                                    viewModel.findShortestPathWithDirection(
-                                        from = args.startEnStation,
-                                        to = args.enDestination
-                                    )
-                                },
+                                state = state,
                                 onBack = { navController.popBackStack() },
                                 fromEn = args.startEnStation,
                                 toEn = args.enDestination,
@@ -321,9 +319,13 @@ class MainActivity : ComponentActivity() {
                             val viewModel: SubmitSuggestionViewModel = hiltViewModel(it)
                             val state by viewModel.state.collectAsStateWithLifecycle()
                             SubmitFeedback(
-                                onSendMessageClicked ={ message -> viewModel.sendSimpleFeedback(message) },
+                                onSendMessageClicked = { message ->
+                                    viewModel.sendSimpleFeedback(
+                                        message
+                                    )
+                                },
                                 viewState = state,
-                                onBack = {navController.popBackStack()}
+                                onBack = { navController.popBackStack() }
                             )
                         }
                         baseComposable<SubmitStationInfoScreen>(

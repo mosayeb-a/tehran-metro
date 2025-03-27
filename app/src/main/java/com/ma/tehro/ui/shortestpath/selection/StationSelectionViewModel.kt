@@ -1,4 +1,4 @@
-package com.ma.tehro.ui.shortestpath
+package com.ma.tehro.ui.shortestpath.selection
 
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
@@ -8,10 +8,9 @@ import com.ma.tehro.common.messenger.Action
 import com.ma.tehro.common.messenger.UiMessage
 import com.ma.tehro.common.messenger.UiMessageManager
 import com.ma.tehro.data.Station
+import com.ma.tehro.data.repo.PathRepository
 import com.ma.tehro.services.LocationTracker
 import com.ma.tehro.services.NearestStation
-import com.ma.tehro.data.repo.PathItem
-import com.ma.tehro.data.repo.PathRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,26 +18,26 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 
+
 @Immutable
-data class PathUiState(
+data class StationSelectionState(
     val selectedEnStartStation: String = "",
     val selectedFaStartStation: String = "",
     val selectedEnDestStation: String = "",
     val selectedFaDestStation: String = "",
     val stations: Map<String, Station> = emptyMap(),
-    val path: List<PathItem> = emptyList(),
     val findNearestLocationProgress: Boolean = false,
     val nearestStations: List<NearestStation> = emptyList(),
 )
 
 @HiltViewModel
-class PathViewModel @Inject constructor(
+class StationSelectionViewModel @Inject constructor(
     private val repository: PathRepository,
     private val locationTracker: LocationTracker
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(PathUiState())
-    val uiState: StateFlow<PathUiState> get() = _uiState
+    private val _uiState = MutableStateFlow(StationSelectionState())
+    val uiState: StateFlow<StationSelectionState> get() = _uiState
 
     init {
         viewModelScope.launch {
@@ -56,8 +55,6 @@ class PathViewModel @Inject constructor(
         )
     }
 
-    fun findShortestPathWithDirection(from: String, to: String): List<PathItem> =
-        repository.findShortestPathWithDirection(from = from, to = to)
 
     fun findNearestStation(forceRefresh: Boolean = false) {
         viewModelScope.launch {
@@ -118,4 +115,3 @@ class PathViewModel @Inject constructor(
         }
     }
 }
-
