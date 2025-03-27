@@ -24,21 +24,17 @@ android {
         versionName = "0.3.0"
 
 
-        val localProperties = Properties().apply {
+        val properties = Properties().apply {
             load(File(rootDir, "local.properties").inputStream())
         }
-        val apiKey = localProperties.getProperty("github_token")
-        buildConfigField(
-            type = "String",
-            name = "github_token",
-            value = apiKey
+        val fields = mapOf(
+            "github_token" to properties.getProperty("github_token"),
+            "stations_gist_id" to properties.getProperty("stations_gist_id"),
+            "feedbacks_gist_id" to properties.getProperty("feedbacks_gist_id")
         )
-        val gistId = localProperties.getProperty("gist_id")
-        buildConfigField(
-            type = "String",
-            name = "gist_id",
-            value = gistId
-        )
+        fields.forEach { (name, value) ->
+            buildConfigField("String", name, value)
+        }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -90,10 +86,6 @@ android {
         }
     }
 }
-
-val localProperties = gradleLocalProperties(rootDir, providers)
-val githubToken: String? = localProperties.getProperty("github_token")
-val gistId: String? = localProperties.getProperty("gist_id")
 
 dependencies {
     implementation(libs.androidx.core.ktx)

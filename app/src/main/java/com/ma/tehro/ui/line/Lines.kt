@@ -10,10 +10,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -60,7 +60,7 @@ fun Lines(
     onFindPathClicked: () -> Unit,
     onlineClick: (line: Int, seeBranchStations: Boolean) -> Unit,
     onMapClick: () -> Unit,
-    onNewSubmitInfoStationClicked: () -> Unit
+    onSubmitFeedbackClick: () -> Unit
 ) {
     val screenHeight = LocalConfiguration.current.screenHeightDp
     val itemHeight = remember(screenHeight, lines.size) {
@@ -91,7 +91,8 @@ fun Lines(
                     IconButton(
                         modifier = Modifier
                             .padding(end = 6.dp)
-                            .size(46.dp),
+                            .fillMaxHeight()
+                            .width(46.dp),
                         onClick = onMapClick,
                     ) {
                         Icon(
@@ -102,11 +103,12 @@ fun Lines(
                     IconButton(
                         modifier = Modifier
                             .padding(end = 6.dp)
-                            .size(46.dp),
-                        onClick = { onNewSubmitInfoStationClicked() },
+                            .fillMaxHeight()
+                            .width(46.dp),
+                        onClick = { onSubmitFeedbackClick() },
                     ) {
                         Icon(
-                            painter = painterResource(R.drawable.clarify_24px),
+                            painter = painterResource(R.drawable.help_24px),
                             contentDescription = "submit info",
                         )
                     }

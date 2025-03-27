@@ -19,7 +19,8 @@ fun BilingualText(
     modifier: Modifier = Modifier,
     style: TextStyle = LocalTextStyle.current,
     maxLine: Int = Int.MAX_VALUE,
-    spaceBetween: Dp = (-2).dp
+    spaceBetween: Dp = (-2).dp,
+    textAlign: TextAlign =TextAlign.Center
 ) {
     Column(
         modifier = modifier,
@@ -28,7 +29,7 @@ fun BilingualText(
         Text(
             text = fa,
             style = style,
-            textAlign = TextAlign.Center,
+            textAlign = textAlign,
             maxLines = maxLine,
             modifier = Modifier.fillMaxWidth()
         )
@@ -36,7 +37,7 @@ fun BilingualText(
             text = en,
             style = style,
             maxLines = maxLine,
-            textAlign = TextAlign.Center,
+            textAlign = textAlign,
             modifier = Modifier.fillMaxWidth()
         )
     }

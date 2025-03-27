@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarData
@@ -19,14 +20,14 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun AppSnackbar(
     data: SnackbarData,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Surface(
         modifier = modifier
-            .padding(16.dp)
+            .padding(start = 16.dp, end = 16.dp, bottom = 86.dp)
             .wrapContentSize(),
-        color = MaterialTheme.colorScheme.secondary.copy(alpha = .97f),
-        shape = MaterialTheme.shapes.small,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        shape = RoundedCornerShape(16.dp),
         tonalElevation = 6.dp
     ) {
         Row(
@@ -39,7 +40,7 @@ fun AppSnackbar(
             Text(
                 text = data.visuals.message,
                 modifier = Modifier.weight(1f),
-                style = MaterialTheme.typography.labelMedium,
+                style = MaterialTheme.typography.labelMedium.copy(color = MaterialTheme.colorScheme.primary),
             )
             data.visuals.actionLabel?.let { actionLabel ->
                 TextButton(
@@ -52,7 +53,7 @@ fun AppSnackbar(
                     Text(
                         text = actionLabel,
                         style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onSecondary,
+                        color = MaterialTheme.colorScheme.primary,
                         textAlign = TextAlign.Center
                     )
                 }
