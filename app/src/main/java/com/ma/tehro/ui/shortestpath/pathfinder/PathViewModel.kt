@@ -1,6 +1,6 @@
 package com.ma.tehro.ui.shortestpath.pathfinder
 
-import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@Immutable
+@Stable
 data class PathFinderState(
     val shortestPath: List<PathItem> = emptyList()
 )

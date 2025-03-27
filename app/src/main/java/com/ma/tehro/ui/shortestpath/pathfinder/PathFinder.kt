@@ -1,21 +1,34 @@
 package com.ma.tehro.ui.shortestpath.pathfinder
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.SizeTransform
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,6 +41,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import com.ma.tehro.R
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.timelineview.TimelineView
@@ -48,44 +62,97 @@ fun PathFinder(
     onBack: () -> Unit,
     onStationClick: (station: Station, lineNumber: Int) -> Unit
 ) {
+    val titleIndices = remember(state.shortestPath) {
+        state.shortestPath.mapIndexedNotNull { index, item ->
+            if (item is PathItem.Title) index to item else null
+        }
+    }
+
+
     Scaffold(
+        modifier = modifier,
         containerColor = MaterialTheme.colorScheme.primary,
         topBar = {
             Appbar(fromEn = fromEn, toEn = toEn, onBack = onBack, fromFa = fromFa, toFa = toFa)
         }
     ) { padding ->
-        LazyColumn(
-            modifier = modifier.padding(padding),
-        ) {
-            itemsIndexed(
-                items = state.shortestPath,
-                key = { index, _ -> index }
-            ) { index, item ->
-                when (item) {
-                    is PathItem.Title -> {
+        Box(modifier = Modifier.fillMaxSize()) {
+            val lazyListState = rememberLazyListState()
+
+            val currentTitle by remember(lazyListState) {
+                derivedStateOf {
+                    val firstVisibleItem = lazyListState.firstVisibleItemIndex
+                    titleIndices.lastOrNull { (index, _) ->
+                        index <= firstVisibleItem
+                    }?.second
+                }
+            }
+            LazyColumn(
+                contentPadding = padding,
+                state = lazyListState
+            ) {
+                itemsIndexed(
+                    items = state.shortestPath,
+                    key = { index, item ->
+                        when (item) {
+                            is PathItem.Title -> "${item.en}_$index"
+                            is PathItem.StationItem -> "${item.station.name}_$index"
+                        }
+                    }
+                ) { index, item ->
+                    when (item) {
+                        is PathItem.Title -> {
+                            PinableTitle(
+                                en = item.en,
+                                fa = item.fa,
+                                isFirstItem = index == 0,
+                                lineNumber = item.en[5].digitToInt()
+                            )
+                        }
+
+                        is PathItem.StationItem -> {
+                            Column {
+                                StationRow(
+                                    modifier = Modifier.clickable {
+                                        onStationClick(item.station, item.lineNumber)
+                                    },
+                                    station = item.station,
+                                    isLastItem = index == state.shortestPath.size - 1,
+                                    disabled = item.isPassthrough,
+                                    lineNumber = item.lineNumber,
+                                )
+                                HorizontalDivider(thickness = 0.28.dp)
+                            }
+                        }
+                    }
+                }
+            }
+
+            Box(modifier = Modifier.fillMaxSize()) {
+                AnimatedContent(
+                    targetState = currentTitle,
+                    transitionSpec = {
+                        (slideInVertically { height -> -height } + fadeIn()).togetherWith(
+                            slideOutVertically { height -> height } + fadeOut()
+                        ).using(
+                            SizeTransform(clip = false)
+                        )
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.TopCenter)
+                        .offset(y = padding.calculateTopPadding())
+                        .zIndex(1f), label = ""
+                ) { title ->
+                    title?.let {
                         PinableTitle(
-                            en = item.en,
-                            fa = item.fa,
-                            isFirstItem = index == 0,
-                            lineNumber = item.en[5].digitToInt()
+                            modifier = Modifier.fillMaxWidth(),
+                            en = title.en,
+                            fa = title.fa,
+                            isFirstItem = false,
+                            lineNumber = title.en[5].digitToInt()
                         )
                     }
-
-                    is PathItem.StationItem -> {
-                        StationRow(
-                            modifier = Modifier.clickable {
-                                onStationClick(item.station, item.lineNumber)
-                            },
-                            station = item.station,
-                            itemHeight = 76f,
-                            isLastItem = index == state.shortestPath.size - 1,
-                            disabled = item.isPassthrough,
-                            lineNumber = item.lineNumber,
-
-                            )
-                        HorizontalDivider(thickness = .28.dp)
-                    }
-
                 }
             }
         }
@@ -100,20 +167,23 @@ fun PinableTitle(
     isFirstItem: Boolean,
     lineNumber: Int,
 ) {
-    val iconPainter =
-        painterResource(
-            id = if (isFirstItem) R.drawable.arrow_drop_down_24px else R.drawable.sync_alt_24px
-        )
+    val iconRes = remember(isFirstItem) {
+        if (isFirstItem) R.drawable.arrow_drop_down_24px else R.drawable.sync_alt_24px
+    }
+    val iconPainter = painterResource(id = iconRes)
 
     val density = LocalDensity.current
     val layoutDirection = LocalLayoutDirection.current
 
-    val iconImageBitmap = remember {
+    val iconImageBitmap = remember(iconRes, density, layoutDirection) {
         iconPainter.toImageBitmap(
             size = Size(32f, 32f),
             density = density,
             layoutDirection = layoutDirection
         )
+    }
+    val lineColor = remember(lineNumber) {
+        getLineColorByNumber(lineNumber)
     }
     Row(
         modifier = modifier
@@ -124,7 +194,7 @@ fun PinableTitle(
     ) {
         SingleNode(
             modifier = Modifier.padding(start = 12.dp),
-            color = getLineColorByNumber(lineNumber),
+            color = lineColor,
             nodeType = if (isFirstItem) TimelineView.NodeType.FIRST else TimelineView.NodeType.MIDDLE,
             nodeSize = 36f,
             isChecked = true,
@@ -155,7 +225,6 @@ fun PinableTitle(
 fun StationRow(
     modifier: Modifier = Modifier,
     station: Station,
-    itemHeight: Float,
     isLastItem: Boolean,
     disabled: Boolean = false,
     lineNumber: Int
@@ -164,7 +233,7 @@ fun StationRow(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(itemHeight.dp)
+            .height(74.dp)
             .alpha(if (disabled) 0.7f else 1f)
             .background(color)
 
@@ -185,7 +254,7 @@ fun StationRow(
         StationItem(
             modifier = Modifier.weight(1f),
             station = station,
-            itemHeight = itemHeight,
+            itemHeight = 75f,
             lineNumber = lineNumber
         )
 
