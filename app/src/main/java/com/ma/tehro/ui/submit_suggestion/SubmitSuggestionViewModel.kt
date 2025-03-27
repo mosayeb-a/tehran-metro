@@ -31,11 +31,7 @@ class SubmitSuggestionViewModel @Inject constructor(
 
     fun submitStationCorrection(station: Station) {
         viewModelScope.launch {
-            submitWithMessage(
-                submitAction = { repo.submitStationCorrection(station) },
-                successMessage = "Station info sent successfully",
-                errorMessage = "Station info failed to send"
-            )
+            submitWithMessage(submitAction = { repo.submitStationCorrection(station) })
         }
     }
 
@@ -43,16 +39,12 @@ class SubmitSuggestionViewModel @Inject constructor(
         viewModelScope.launch {
             submitWithMessage(
                 submitAction = { repo.submitFeedback(message.trim()) },
-                successMessage = "Feedback sent successfully",
-                errorMessage = "Failed to send feedback"
             )
         }
     }
 
     private suspend fun submitWithMessage(
         submitAction: suspend () -> Unit,
-        successMessage: String,
-        errorMessage: String
     ) {
         try {
             _state.update { it.copy(isLoading = true, isSubmissionSent = false) }
@@ -84,8 +76,6 @@ class SubmitSuggestionViewModel @Inject constructor(
                             viewModelScope.launch {
                                 submitWithMessage(
                                     submitAction = submitAction,
-                                    successMessage = successMessage,
-                                    errorMessage = errorMessage
                                 )
                             }
                         }
