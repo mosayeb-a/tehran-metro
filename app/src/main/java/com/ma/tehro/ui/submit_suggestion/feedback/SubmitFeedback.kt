@@ -47,7 +47,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.ma.tehro.R
 import com.ma.tehro.common.Appbar
-import com.ma.tehro.common.BilingualText
 import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.isFarsi
 import com.ma.tehro.ui.submit_suggestion.SubmitInfoState

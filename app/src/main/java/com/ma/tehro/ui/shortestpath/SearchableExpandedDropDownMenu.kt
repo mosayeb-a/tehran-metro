@@ -17,6 +17,7 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconToggleButton
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -40,10 +41,13 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.ma.tehro.common.isFarsi
 import com.ma.tehro.data.Station
+import kotlinx.coroutines.coroutineScope
 
 @Composable
 fun <T> SearchableExpandedDropDownMenu(
@@ -209,6 +213,10 @@ fun <T> SearchableExpandedDropDownMenu(
                                 searchPredicate(searchedOption, item)
                             }.toMutableList()
                         },
+                        textStyle = LocalTextStyle.current.copy(
+                            textDirection = if (isFarsi(searchedOption)) TextDirection.Rtl else TextDirection.Ltr,
+                            textAlign = if (isFarsi(searchedOption)) TextAlign.Right else TextAlign.Left,
+                        ),
                         leadingIcon = {
                             Icon(imageVector = Icons.Outlined.Search, contentDescription = null)
                         },
