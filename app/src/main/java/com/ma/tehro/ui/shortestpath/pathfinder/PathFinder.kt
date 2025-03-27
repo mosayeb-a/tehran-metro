@@ -233,10 +233,9 @@ fun StationRow(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .height(74.dp)
+            .height(78.dp)
             .alpha(if (disabled) 0.7f else 1f)
             .background(color)
-
     ) {
         SingleNode(
             modifier = Modifier.padding(start = 16.dp),
@@ -254,7 +253,6 @@ fun StationRow(
         StationItem(
             modifier = Modifier.weight(1f),
             station = station,
-            itemHeight = 75f,
             lineNumber = lineNumber
         )
 
