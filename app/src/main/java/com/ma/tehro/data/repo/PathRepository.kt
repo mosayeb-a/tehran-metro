@@ -29,7 +29,7 @@ data class PathCost(
 )
 
 interface PathRepository {
-    fun findShortestPathWithDirection(from: String, to: String): List<PathItem>
+    suspend fun findShortestPathWithDirection(from: String, to: String): List<PathItem>
     fun getStations(): Map<String, Station>
 }
 
@@ -39,7 +39,7 @@ class PathRepositoryImpl @Inject constructor(
 
     override fun getStations(): Map<String, Station> = stations
 
-    override fun findShortestPathWithDirection(from: String, to: String): List<PathItem> {
+    override suspend fun findShortestPathWithDirection(from: String, to: String): List<PathItem> {
         val result = findShortestPath(stations, from, to)
         if (result.path.isEmpty()) return emptyList()
 
@@ -173,7 +173,6 @@ class PathRepositoryImpl @Inject constructor(
         return lineChanges
     }
 
-
     private fun findShortestPath(
         stations: Map<String, Station>,
         from: String,
@@ -181,7 +180,8 @@ class PathRepositoryImpl @Inject constructor(
         stationCost: Int = 3,
         lineChangeCost: Int = 6 // we can set it to 10
     ): PathResult {
-        val queue = PriorityQueue<PathCost>(compareBy { it.cost })
+        val queue = PriorityQueue<PathCost>(64, compareBy { it.cost })
+//        private val visited = ConcurrentHashMap<Pair<String, Int?>, Int>()
         val visited = mutableMapOf<Pair<String, Int?>, Int>()
 
         queue.add(PathCost(path = listOf(from), cost = 0, currentLine = null))
@@ -215,13 +215,10 @@ class PathRepositoryImpl @Inject constructor(
 
                     if (isLineChange && currentStation.disabled) continue
 
-                    val newCost =
-                        current.cost + stationCost + if (isLineChange) lineChangeCost else 0
-
                     queue.add(
                         PathCost(
                             path = current.path + nextStationName,
-                            cost = newCost,
+                            cost = current.cost + stationCost + if (isLineChange) lineChangeCost else 0,
                             currentLine = line
                         )
                     )
@@ -231,7 +228,6 @@ class PathRepositoryImpl @Inject constructor(
 
         return PathResult(path = emptyList(), lineChanges = 0)
     }
-
 
     private fun MutableList<PathItem>.swap(index1: Int, index2: Int) {
         val temp = this[index1]

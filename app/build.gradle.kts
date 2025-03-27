@@ -18,7 +18,7 @@ android {
 
     defaultConfig {
         applicationId = "com.ma.tehro"
-        minSdk = 24
+        minSdk = 21
         targetSdk = 35
         versionCode = 4
         versionName = "0.3.0"

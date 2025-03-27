@@ -1,4 +1,4 @@
-package com.ma.tehro.ui.shortestpath
+package com.ma.tehro.ui.shortestpath.selection
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
@@ -47,7 +47,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.isFarsi
 import com.ma.tehro.data.Station
-import kotlinx.coroutines.coroutineScope
 
 @Composable
 fun <T> SearchableExpandedDropDownMenu(
