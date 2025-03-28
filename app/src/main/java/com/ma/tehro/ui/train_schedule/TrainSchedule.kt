@@ -41,7 +41,7 @@ import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.setStatusBarColor
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.data.ScheduleType
-import com.ma.tehro.data.StationName
+import com.ma.tehro.data.BilingualName
 import com.ma.tehro.data.repo.GroupedScheduleInfo
 import com.ma.tehro.ui.theme.Gray
 import kotlinx.coroutines.launch
@@ -53,7 +53,7 @@ fun TrainSchedule(
     lineNumber: Int,
     state: TrainScheduleState,
     onBack: () -> Unit,
-    onScheduleTypeSelected: (StationName, ScheduleType?) -> Unit
+    onScheduleTypeSelected: (BilingualName, ScheduleType?) -> Unit
 ) {
     val lineColor = remember { getLineColorByNumber(lineNumber) }
     val window = (LocalView.current.context as Activity).window
@@ -108,9 +108,9 @@ fun TrainSchedule(
 fun AppBarDetail(
     modifier: Modifier = Modifier,
     schedules: List<GroupedScheduleInfo>,
-    processedSchedules: Map<StationName, List<ScheduleSection>>,
-    selectedScheduleTypes: Map<StationName, ScheduleType?>,
-    onScheduleTypeSelected: (StationName, ScheduleType?) -> Unit,
+    processedSchedules: Map<BilingualName, List<ScheduleSection>>,
+    selectedScheduleTypes: Map<BilingualName, ScheduleType?>,
+    onScheduleTypeSelected: (BilingualName, ScheduleType?) -> Unit,
     lineColor: Color,
     currentTimeAsDouble: Double,
 ) {

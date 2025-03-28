@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ma.tehro.common.TimeUtils
 import com.ma.tehro.data.ScheduleType
-import com.ma.tehro.data.StationName
+import com.ma.tehro.data.BilingualName
 import com.ma.tehro.data.repo.GroupedScheduleInfo
 import com.ma.tehro.data.repo.TrainScheduleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,11 +26,11 @@ data class TrainScheduleState(
     val stationName: String = "",
     val lineNumber: Int = 0,
     val schedules: List<GroupedScheduleInfo> = emptyList(),
-    val selectedScheduleTypes: Map<StationName, ScheduleType?> = emptyMap(),
+    val selectedScheduleTypes: Map<BilingualName, ScheduleType?> = emptyMap(),
     val currentTimeAsDouble: Double = 0.0,
     val currentDayType: ScheduleType? = null,
     val isLoading: Boolean = true,
-    val processedSchedules: Map<StationName, List<ScheduleSection>> = emptyMap(),
+    val processedSchedules: Map<BilingualName, List<ScheduleSection>> = emptyMap(),
 )
 
 @HiltViewModel
@@ -95,7 +95,7 @@ class TrainScheduleViewModel @Inject constructor(
         }
     }
 
-    fun onScheduleTypeSelected(destination: StationName, scheduleType: ScheduleType?) {
+    fun onScheduleTypeSelected(destination: BilingualName, scheduleType: ScheduleType?) {
         viewModelScope.launch(Dispatchers.IO) {
             val currentState = state.value
             val schedule = currentState.schedules.find { it.destination == destination }

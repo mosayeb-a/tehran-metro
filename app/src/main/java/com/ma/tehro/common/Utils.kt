@@ -18,12 +18,13 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColorInt
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavType
-import kotlinx.coroutines.CoroutineDispatcher
+import com.ma.tehro.data.BilingualName
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -33,17 +34,9 @@ import java.util.Locale
 import kotlin.math.asin
 import kotlin.math.cos
 import kotlin.math.pow
+import kotlin.math.roundToLong
 import kotlin.math.sin
 import kotlin.math.sqrt
-
-
-data class AppCoroutineDispatchers(
-    val io: CoroutineDispatcher,
-    val databaseWrite: CoroutineDispatcher,
-    val databaseRead: CoroutineDispatcher,
-    val computation: CoroutineDispatcher,
-    val main: CoroutineDispatcher,
-)
 
 inline fun <reified T> navTypeOf(
     isNullableAllowed: Boolean = false,
@@ -73,15 +66,16 @@ fun Painter.toImageBitmap(
     return bitmap
 }
 
+
 fun getLineColorByNumber(lineNumber: Int): Color {
     return when (lineNumber) {
-        1 -> Color(android.graphics.Color.parseColor(COLOR_LINE_1))
-        2 -> Color(android.graphics.Color.parseColor(COLOR_LINE_2))
-        3 -> Color(android.graphics.Color.parseColor(COLOR_LINE_3))
-        4 -> Color(android.graphics.Color.parseColor(COLOR_LINE_4))
-        5 -> Color(android.graphics.Color.parseColor(COLOR_LINE_5))
-        6 -> Color(android.graphics.Color.parseColor(COLOR_LINE_6))
-        7 -> Color(android.graphics.Color.parseColor(COLOR_LINE_7))
+        1 -> Color(COLOR_LINE_1.toColorInt())
+        2 -> Color(COLOR_LINE_2.toColorInt())
+        3 -> Color(COLOR_LINE_3.toColorInt())
+        4 -> Color(COLOR_LINE_4.toColorInt())
+        5 -> Color(COLOR_LINE_5.toColorInt())
+        6 -> Color(COLOR_LINE_6.toColorInt())
+        7 -> Color(COLOR_LINE_7.toColorInt())
         else -> Color.Gray
     }
 }
@@ -100,6 +94,21 @@ fun calculateLineName(lineNumber: Int, useBranch: Boolean = false): String {
         ${pathType.second} ${lineNumber.toFarsiNumber()} - ${faEndpoints?.first}/${faEndpoints?.second}
         ${pathType.first} $lineNumber - ${enEndpoints?.first}/${enEndpoints?.second}
     """.trimIndent()
+}
+
+fun calculateBilingualLineName(lineNumber: Int, useBranch: Boolean = false): BilingualName {
+    val enEndpoints = LineEndpoints.getEn(lineNumber, useBranch)
+    val faEndpoints = LineEndpoints.getFa(lineNumber, useBranch)
+
+    val pathType = if (useBranch && LineEndpoints.hasBranch(lineNumber)) {
+        "Branch Line" to "خط فرعی"
+    } else {
+        "Line" to "خط"
+    }
+    return BilingualName(
+        en = "${pathType.first} $lineNumber - ${enEndpoints?.first} / ${enEndpoints?.second}",
+        fa = "${pathType.second} ${lineNumber.toFarsiNumber()} - ${faEndpoints?.first} / ${faEndpoints?.second}"
+    )
 }
 
 fun String.toFarsiNumber(): String {
@@ -167,7 +176,7 @@ fun createBilingualMessage(fa: String, en: String): String {
 
 fun fractionToTime(fraction: Double): String {
     val millisInDay = 24 * 60 * 60 * 1000
-    val totalMillis = Math.round(fraction * millisInDay)
+    val totalMillis = (fraction * millisInDay).roundToLong()
 
     val hours = (totalMillis / (60 * 60 * 1000)) % 24
     val minutes = (totalMillis / (60 * 1000)) % 60
@@ -193,10 +202,12 @@ fun setStatusBarColor(window: Window, color: Int) {
         isAppearanceLightStatusBars = false
     }
 }
+
 fun setNavigationBarColor(window: Window, color: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
         window.decorView.setOnApplyWindowInsetsListener { view, insets ->
-            val navigationBarInsets = insets.getInsets(android.view.WindowInsets.Type.navigationBars())
+            val navigationBarInsets =
+                insets.getInsets(android.view.WindowInsets.Type.navigationBars())
             view.setPadding(0, 0, 0, navigationBarInsets.bottom)
             insets
         }

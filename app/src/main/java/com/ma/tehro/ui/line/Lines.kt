@@ -44,10 +44,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.ma.tehro.R
 import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.LineEndpoints
-import com.ma.tehro.common.calculateLineName
+import com.ma.tehro.common.calculateBilingualLineName
 import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.ui.theme.Blue
@@ -159,7 +160,7 @@ fun Lines(
                 )
             }
             item("spacer") {
-                Spacer(modifier = Modifier.height(itemHeight.dp - (itemHeight.dp / 3)))
+                Spacer(modifier = Modifier.height(itemHeight.dp - (itemHeight.dp / 4)))
             }
         }
     }
@@ -183,7 +184,7 @@ fun LineItem(
     onClick: () -> Unit,
     itemHeight: Float
 ) {
-    val lineName = calculateLineName(lineNumber)
+    val lineName = calculateBilingualLineName(lineNumber)
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -194,14 +195,26 @@ fun LineItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(
+        Column(
             modifier = Modifier.weight(1f),
-            text = lineName,
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold,
-            color = Color.White
-        )
-        Spacer(modifier = Modifier.width(4.dp))
+        ) {
+            Text(
+                text = lineName.fa,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.W500
+                ),
+                color = Color.White
+            )
+            Text(
+                text = lineName.en,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.W400
+                ),
+                color = Color.White.copy(alpha = 0.9f)
+            )
+        }
         Icon(
             painter = painterResource(R.drawable.arrow_forward_24px),
             contentDescription = "See stations by line",
@@ -209,6 +222,7 @@ fun LineItem(
         )
     }
 }
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

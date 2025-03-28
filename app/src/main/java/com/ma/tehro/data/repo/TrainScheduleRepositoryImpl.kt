@@ -4,7 +4,7 @@ import android.content.Context
 import com.ma.tehro.R
 import com.ma.tehro.common.LineEndpoints
 import com.ma.tehro.data.ScheduleType
-import com.ma.tehro.data.StationName
+import com.ma.tehro.data.BilingualName
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
@@ -19,7 +19,7 @@ interface TrainScheduleRepository {
 }
 
 data class GroupedScheduleInfo(
-    val destination: StationName,
+    val destination: BilingualName,
     val schedules: Map<ScheduleType, List<Double>>
 )
 
@@ -73,7 +73,7 @@ class TrainScheduleRepositoryImpl @Inject constructor(
                 }
 
                 Triple(
-                    StationName(validEn, validFa),
+                    BilingualName(validEn, validFa),
                     scheduleType,
                     schedule["timetable"] ?: emptyList()
                 )
