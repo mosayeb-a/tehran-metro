@@ -18,12 +18,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 
-
 @Immutable
 data class StationSelectionState(
-    val selectedEnStartStation: String = "",
+    val selectedEnStartStation: String = "Tajrish",
     val selectedFaStartStation: String = "",
-    val selectedEnDestStation: String = "",
+    val selectedEnDestStation: String = "Shahr-e Parand",
     val selectedFaDestStation: String = "",
     val stations: Map<String, Station> = emptyMap(),
     val findNearestLocationProgress: Boolean = false,

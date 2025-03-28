@@ -94,14 +94,12 @@ fun Stations(
                 }
 
                 if (index < orderedStations.size - 1) {
-                    if (index < orderedStations.size - 1) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(0.77.dp)
-                                .background(lineColor.copy(alpha = 0.9f))
-                        )
-                    }
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(0.77.dp)
+                            .background(lineColor.copy(alpha = 0.9f))
+                    )
                 }
             }
         }
@@ -177,5 +175,3 @@ fun StationItem(
         }
     }
 }
-
-

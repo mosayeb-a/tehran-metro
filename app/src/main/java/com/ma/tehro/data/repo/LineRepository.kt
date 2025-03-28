@@ -1,6 +1,6 @@
 package com.ma.tehro.data.repo
 
-import com.ma.tehro.data.BranchConfig
+import com.ma.tehro.common.lineBranches
 import com.ma.tehro.data.Station
 import javax.inject.Inject
 
@@ -12,31 +12,6 @@ interface LineRepository {
 class LineRepositoryImpl @Inject constructor(
     private val stations: Map<String, Station>
 ) : LineRepository {
-    private val lineBranches = mapOf(
-        1 to BranchConfig(
-            branchPoint = "Shahed - BagherShahr",
-            branch = listOf(
-                "Namayeshgah-e Shahr-e Aftab",
-                "Vavan",
-                "Emam Khomeini Airport",
-                "Shahr-e Parand"
-            )
-        ),
-        4 to BranchConfig(
-            branchPoint = "Bimeh",
-            branch = listOf(
-                "Mehrabad Airport Terminal 1&2",
-                "Mehrabad Airport Terminal 4&6"
-            )
-        ),
-        5 to BranchConfig(
-            branchPoint = "Golshahr",
-            branch = listOf(
-                "Shahid Sepahbod Qasem Soleimani"
-            )
-        )
-    )
-
     override fun getLines(): List<Int> = listOf(1, 2, 3, 4, 5, 6, 7)
 
     override fun getOrderedStationsByLine(

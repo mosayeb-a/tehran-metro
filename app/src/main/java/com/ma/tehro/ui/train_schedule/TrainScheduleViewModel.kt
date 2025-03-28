@@ -1,10 +1,10 @@
 package com.ma.tehro.ui.train_schedule
 
-import android.icu.util.Calendar
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ma.tehro.common.TimeUtils
 import com.ma.tehro.data.ScheduleType
 import com.ma.tehro.data.StationName
 import com.ma.tehro.data.repo.GroupedScheduleInfo
@@ -31,7 +31,6 @@ data class TrainScheduleState(
     val currentDayType: ScheduleType? = null,
     val isLoading: Boolean = true,
     val processedSchedules: Map<StationName, List<ScheduleSection>> = emptyMap(),
-    val initialScrollPositions: Map<StationName, Int?> = emptyMap()
 )
 
 @HiltViewModel
@@ -59,9 +58,9 @@ class TrainScheduleViewModel @Inject constructor(
     private fun loadSchedules(stationName: String, lineNumber: Int, isBranch: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             val schedules = repository.getScheduleByStation(stationName, lineNumber, isBranch)
-            val currentDayType =
-                getScheduleTypeForCurrentDay(schedules.flatMap { it.schedules.keys })
-            val currentTime = getCurrentTimeAsDouble()
+            val currentDayType = TimeUtils.getScheduleTypeForCurrentDay(schedules.flatMap { it.schedules.keys })
+            println(currentDayType)
+            val currentTime = TimeUtils.getCurrentTimeAsDouble()
 
             val processedData = schedules.associate { groupInfo ->
                 val selectedType = groupInfo.schedules.keys.run {
@@ -78,9 +77,7 @@ class TrainScheduleViewModel @Inject constructor(
                     )
                 }
 
-                val scrollPosition = sections.findInitialScrollPosition(currentTime)
-
-                groupInfo.destination to Triple(selectedType, sections, scrollPosition)
+                groupInfo.destination to Pair(selectedType, sections)
             }
 
             _state.update {
@@ -92,7 +89,6 @@ class TrainScheduleViewModel @Inject constructor(
                     selectedScheduleTypes = processedData.mapValues { it.value.first },
                     currentDayType = currentDayType,
                     processedSchedules = processedData.mapValues { it.value.second },
-                    initialScrollPositions = processedData.mapValues { it.value.third },
                     currentTimeAsDouble = currentTime
                 )
             }
@@ -114,15 +110,10 @@ class TrainScheduleViewModel @Inject constructor(
                     )
                 }
 
-                val newScrollPosition = if (scheduleType != null) {
-                    newSections.findInitialScrollPosition(currentState.currentTimeAsDouble)
-                } else null
-
                 _state.update { state ->
                     state.copy(
                         selectedScheduleTypes = state.selectedScheduleTypes + (destination to scheduleType),
                         processedSchedules = state.processedSchedules + (destination to newSections),
-                        initialScrollPositions = state.initialScrollPositions + (destination to newScrollPosition)
                     )
                 }
             }
@@ -132,67 +123,14 @@ class TrainScheduleViewModel @Inject constructor(
     private fun startTimeUpdates() {
         timeScope.launch {
             while (isActive) {
-                _state.update { it.copy(currentTimeAsDouble = getCurrentTimeAsDouble()) }
+                _state.update { it.copy(currentTimeAsDouble = TimeUtils.getCurrentTimeAsDouble()) }
                 delay(1000 - (System.currentTimeMillis() % 1000))
             }
         }
     }
 
-    private fun List<ScheduleSection>.findInitialScrollPosition(currentTime: Double): Int? {
-        var position = 0
-        forEach { section ->
-            position++
-            if (section.isCurrentDay) {
-                section.times.indexOfFirst { it > currentTime }
-                    .takeIf { it != -1 }
-                    ?.let { return position + it }
-            }
-            position += section.times.size + 1
-        }
-        return null
-    }
-
     override fun onCleared() {
         super.onCleared()
         timeUpdateJob.cancel()
-    }
-
-    private fun getScheduleTypeForCurrentDay(types: List<ScheduleType>): ScheduleType? {
-        val dayOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
-        return when (dayOfWeek) {
-            in Calendar.SATURDAY downTo Calendar.WEDNESDAY -> types.firstOrNull {
-                it in listOf(
-                    ScheduleType.SATURDAY_TO_WEDNESDAY,
-                    ScheduleType.ALL_DAY,
-                    ScheduleType.SATURDAY_TO_THURSDAY
-                )
-            }
-
-            Calendar.THURSDAY -> types.firstOrNull {
-                it in listOf(
-                    ScheduleType.THURSDAY,
-                    ScheduleType.ALL_DAY,
-                    ScheduleType.SATURDAY_TO_THURSDAY
-                )
-            }
-
-            Calendar.FRIDAY -> types.firstOrNull {
-                it in listOf(
-                    ScheduleType.FRIDAY,
-                    ScheduleType.ALL_DAY,
-                    ScheduleType.HOLIDAYS_AND_FRIDAY
-                )
-            }
-
-            else -> null
-        }
-    }
-
-    private fun getCurrentTimeAsDouble(): Double {
-        return Calendar.getInstance().run {
-            (get(Calendar.HOUR_OF_DAY) * 3600 +
-                    get(Calendar.MINUTE) * 60 +
-                    get(Calendar.SECOND)).toDouble() / 86400.0
-        }
     }
 }

@@ -80,7 +80,6 @@ fun TrainSchedule(
             state.schedules.isNotEmpty() -> AppBarDetail(
                 schedules = state.schedules,
                 processedSchedules = state.processedSchedules,
-                initialScrollPositions = state.initialScrollPositions,
                 onScheduleTypeSelected = onScheduleTypeSelected,
                 selectedScheduleTypes = state.selectedScheduleTypes,
                 lineColor = lineColor,
@@ -110,7 +109,6 @@ fun AppBarDetail(
     modifier: Modifier = Modifier,
     schedules: List<GroupedScheduleInfo>,
     processedSchedules: Map<StationName, List<ScheduleSection>>,
-    initialScrollPositions: Map<StationName, Int?>,
     selectedScheduleTypes: Map<StationName, ScheduleType?>,
     onScheduleTypeSelected: (StationName, ScheduleType?) -> Unit,
     lineColor: Color,
@@ -129,7 +127,6 @@ fun AppBarDetail(
                 ScheduleList(
                     scheduleInfo = currentSchedule,
                     processedSections = processedSchedules[destination] ?: emptyList(),
-                    initialScrollPosition = initialScrollPositions[destination],
                     lazyListState = lazyListState,
                     selectedType = selectedScheduleTypes[destination],
                     onScheduleTypeSelected = { scheduleType ->
@@ -146,7 +143,6 @@ fun AppBarDetail(
 private fun ScheduleList(
     scheduleInfo: GroupedScheduleInfo,
     processedSections: List<ScheduleSection>,
-    initialScrollPosition: Int?,
     lazyListState: LazyListState,
     modifier: Modifier = Modifier,
     selectedType: ScheduleType?,
@@ -154,10 +150,37 @@ private fun ScheduleList(
     currentTimeAsDouble: Double,
 ) {
     val coroutineScope = rememberCoroutineScope()
-    LaunchedEffect(initialScrollPosition) {
-        initialScrollPosition?.let { position ->
+
+
+    LaunchedEffect(Unit) {
+        val sectionsToShow = if (selectedType != null) {
+            processedSections.filter { it.type == selectedType }
+        } else {
+            processedSections
+        }
+
+        var targetIndex = 0
+        var found = false
+
+
+        sectionsToShow.forEach { section ->
+            if (!found && section.isCurrentDay) {
+                val firstActiveTimeIndex = section.times.indexOfFirst { it > currentTimeAsDouble }
+                if (firstActiveTimeIndex != -1) {
+                    targetIndex += firstActiveTimeIndex
+                    found = true
+                } else {
+                    targetIndex += section.times.size
+                }
+            } else {
+                targetIndex += section.times.size
+            }
+            targetIndex += 1
+        }
+
+        if (found) {
             coroutineScope.launch {
-                lazyListState.scrollToItem(index = position, scrollOffset = -300)
+                lazyListState.scrollToItem(index = targetIndex, scrollOffset = -300)
             }
         }
     }
@@ -231,7 +254,7 @@ private fun TimeListItem(
         isFirstActiveTime -> {
             LaunchedEffect(Unit) {
                 snapshotFlow { remainingTime(time) }
-//                    .distinctUntilChanged()
+
                     .collect { }
             }
             remainingTime(time)
@@ -334,7 +357,7 @@ private fun ScheduleTypeChips(
 
 fun remainingTime(target: Double): String {
     val calendar = android.icu.util.Calendar.getInstance()
-    // quick impl: current time in seconds since start of day
+
     val currentSeconds = calendar.get(android.icu.util.Calendar.HOUR_OF_DAY) * 3600 +
             calendar.get(android.icu.util.Calendar.MINUTE) * 60 +
             calendar.get(android.icu.util.Calendar.SECOND)

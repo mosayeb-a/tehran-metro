@@ -86,19 +86,6 @@ fun getLineColorByNumber(lineNumber: Int): Color {
     }
 }
 
-fun getLineNumberByColor(color: Color): Int {
-    return when (color) {
-        Color(android.graphics.Color.parseColor(COLOR_LINE_1)) -> 1
-        Color(android.graphics.Color.parseColor(COLOR_LINE_2)) -> 2
-        Color(android.graphics.Color.parseColor(COLOR_LINE_3)) -> 3
-        Color(android.graphics.Color.parseColor(COLOR_LINE_4)) -> 4
-        Color(android.graphics.Color.parseColor(COLOR_LINE_5)) -> 5
-        Color(android.graphics.Color.parseColor(COLOR_LINE_6)) -> 6
-        Color(android.graphics.Color.parseColor(COLOR_LINE_7)) -> 7
-        else -> -1
-    }
-}
-
 fun calculateLineName(lineNumber: Int, useBranch: Boolean = false): String {
     val enEndpoints = LineEndpoints.getEn(lineNumber, useBranch)
     val faEndpoints = LineEndpoints.getFa(lineNumber, useBranch)
@@ -179,14 +166,11 @@ fun createBilingualMessage(fa: String, en: String): String {
 }
 
 fun fractionToTime(fraction: Double): String {
-    // 24 * 60 * 60 * 1000
-    val millisInDay = 86400000
-    val totalMillis = (fraction * millisInDay).toLong()
+    val millisInDay = 24 * 60 * 60 * 1000
+    val totalMillis = Math.round(fraction * millisInDay)
 
-    // 60 * 60 * 1000
-    val hours = (totalMillis / 3600000) % 24
-    //60 * 1000
-    val minutes = (totalMillis / 60000) % 60
+    val hours = (totalMillis / (60 * 60 * 1000)) % 24
+    val minutes = (totalMillis / (60 * 1000)) % 60
     val seconds = (totalMillis / 1000) % 60
 
     return String.format(Locale.US, "%02d:%02d:%02d", hours, minutes, seconds)
