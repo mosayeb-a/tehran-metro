@@ -1,5 +1,6 @@
 package com.ma.tehro.common
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Indication
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
@@ -32,14 +33,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
-import com.ma.tehro.data.StationName
+import com.ma.tehro.data.BilingualName
 import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue
 
+@SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun DraggableTabRow(
     modifier: Modifier = Modifier,
-    tabsList: List<StationName>,
+    tabsList: List<BilingualName>,
     lineColor: Color,
     onTabSelected: @Composable (page: Int, lazyListState: LazyListState) -> Unit
 ) {
@@ -111,10 +113,10 @@ fun DraggableTabRow(
                                     topStart = 24.dp,
                                     topEnd = 24.dp
                                 )
-                            ) // Apply corner radius
+                            )
                             .clickable(
                                 interactionSource = interactionSource,
-                                indication = indication // Enables ripple effect within shape
+                                indication = indication
                             ) {
                                 coroutineScope.launch {
                                     pagerState.animateScrollToPage(tabIndex)

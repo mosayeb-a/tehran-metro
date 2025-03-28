@@ -26,6 +26,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -36,15 +37,17 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.ma.tehro.R
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.timelineview.TimelineView
 import com.ma.tehro.common.timelineview.TimelineView.SingleNode
+import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.toImageBitmap
+import com.ma.tehro.data.BilingualName
 import com.ma.tehro.data.Station
 import com.ma.tehro.data.repo.PathItem
 import com.ma.tehro.ui.line.stations.StationItem
@@ -72,7 +75,7 @@ fun PathFinder(
         topBar = {
             Column {
                 Appbar(fromEn = fromEn, toEn = toEn, onBack = onBack, fromFa = fromFa, toFa = toFa)
-                EstimatedTimeDisplay(state)
+                EstimatedTimeDisplay(estimatedTime = state.estimatedTime)
             }
         }
     ) { padding ->
@@ -120,13 +123,13 @@ fun PathFinder(
                                     isLastItem = index == state.shortestPath.size - 1,
                                     disabled = item.isPassthrough,
                                     lineNumber = item.lineNumber,
-                                    arrivalTime = state.stationTimes[item.station.name] // Pass the arrival time
+                                    arrivalTime = state.stationTimes[item.station.name]
                                 )
                                 Box(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .height(0.77.dp)
-                                        .background(getLineColorByNumber(item.lineNumber).copy(alpha = 0.9f))
+                                        .background(getLineColorByNumber(item.lineNumber))
                                 )
                             }
                         }
@@ -166,19 +169,47 @@ fun PathFinder(
 }
 
 @Composable
-fun EstimatedTimeDisplay(state: PathFinderState) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primary)
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-    ) {
-        Text(
-            text = "Estimated travel time: ${state.estimatedTime} minutes",
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onPrimary
-        )
-
+fun EstimatedTimeDisplay(estimatedTime: BilingualName?) {
+    estimatedTime?.let {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.primary)
+                .padding(horizontal = 6.dp, vertical = 4.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                horizontalAlignment = Alignment.Start
+            ) {
+                Text(
+                    text = "ESTIMATED TIME",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                Text(
+                    text = estimatedTime.en,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+            Column(
+                horizontalAlignment = Alignment.End
+            ) {
+                Text(
+                    text = "زمان تقریبی (تعویض خط ۸ دقیقه)",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+                CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+                    Text(
+                        text = estimatedTime.fa,
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+            }
+        }
     }
 }
 
@@ -251,19 +282,19 @@ fun StationRow(
     isLastItem: Boolean,
     disabled: Boolean = false,
     lineNumber: Int,
-    arrivalTime: String? = null // New parameter for arrival time
+    arrivalTime: String? = null
 ) {
     val color = getLineColorByNumber(lineNumber)
     Row(
         modifier = modifier
             .fillMaxWidth()
             .height(78.dp)
-            .alpha(if (disabled) 0.7f else 1f)
+            .alpha(if (disabled) 0.8f else 1f)
             .background(color)
     ) {
         SingleNode(
             modifier = Modifier.padding(start = 16.dp),
-            color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.9f),
+            color = MaterialTheme.colorScheme.onPrimary,
             nodeType = if (disabled) {
                 TimelineView.NodeType.SPACER
             } else {
@@ -277,22 +308,26 @@ fun StationRow(
         StationItem(
             modifier = Modifier.weight(1f),
             station = station,
-            lineNumber = lineNumber
+            lineNumber = lineNumber,
+            showTransferIndicator = false
         )
         if (arrivalTime != null) {
             Column(
                 modifier = Modifier
                     .padding(horizontal = 12.dp)
+                    .weight(1f)
                     .fillMaxHeight(),
-                horizontalAlignment = Alignment.CenterHorizontally,
+                horizontalAlignment = Alignment.End,
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = arrivalTime,
-                    style = MaterialTheme.typography.labelMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onPrimary,
-                    textAlign = TextAlign.Center
+                    text = "ساعت ${arrivalTime.toFarsiNumber()}",
+                    style = MaterialTheme.typography.bodySmall,
+                )
+                Text(
+                    text = "ARRIVES AT $arrivalTime",
+                    textAlign = TextAlign.Start,
+                    style = MaterialTheme.typography.bodySmall,
                 )
             }
         }

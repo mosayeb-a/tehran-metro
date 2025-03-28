@@ -21,12 +21,17 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.R
 import com.ma.tehro.common.Appbar
+import com.ma.tehro.common.createBilingualMessage
 
 @Composable
 fun Appbar(fromEn: String, toEn: String, fromFa: String, toFa: String, onBack: () -> Unit) {
     Column(modifier = Modifier.background(MaterialTheme.colorScheme.primary)) {
         Appbar(
-            title = "مسیر پیشنهادی" + "\n" + "Suggested Path",
+            modifier = Modifier.height(48.dp),
+            title = createBilingualMessage(
+                fa = "مسیر پیشنهادی",
+                en = "Suggested Path"
+            ),
             handleBack = true,
             onBackClick = onBack
         )
@@ -45,7 +50,7 @@ fun AppbarDetail(
 ) {
     Row(
         modifier = modifier
-            .padding(horizontal = 2.dp)
+            .padding(horizontal = 2.dp, vertical = 2.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically

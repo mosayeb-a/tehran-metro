@@ -2,7 +2,7 @@ package com.ma.tehro.common
 
 import com.ma.tehro.data.BranchConfig
 import com.ma.tehro.data.LineBranches
-import com.ma.tehro.data.StationName
+import com.ma.tehro.data.BilingualName
 
 val lineBranches = mapOf(
     1 to BranchConfig(
@@ -32,43 +32,43 @@ val lineBranches = mapOf(
 object LineEndpoints {
     private val get = mapOf(
         1 to LineBranches(
-            main = StationName("Tajrish", "تجریش") to StationName("Kahrizak", "کهریزک"),
-            branch = StationName("Tajrish", "تجریش") to StationName("Shahr-e Parand", "شهر پرند")
+            main = BilingualName("Tajrish", "تجریش") to BilingualName("Kahrizak", "کهریزک"),
+            branch = BilingualName("Tajrish", "تجریش") to BilingualName("Shahr-e Parand", "شهر پرند")
         ),
         2 to LineBranches(
-            main = StationName("Farhangsara", "فرهنگسرا") to StationName("Tehran (Sadeghiyeh)", "صادقیه")
+            main = BilingualName("Farhangsara", "فرهنگسرا") to BilingualName("Tehran (Sadeghiyeh)", "صادقیه")
         ),
         3 to LineBranches(
-            main = StationName("Qa'em", "قائم") to StationName("Azadegan", "آزادگان")
+            main = BilingualName("Qa'em", "قائم") to BilingualName("Azadegan", "آزادگان")
         ),
         4 to LineBranches(
-            main = StationName("Kolahdooz", "کلاهدوز") to StationName(
+            main = BilingualName("Kolahdooz", "کلاهدوز") to BilingualName(
                 "Allameh Jafari",
                 "علامه جعفری"
             ),
-            branch = StationName(
+            branch = BilingualName(
                 "Kolahdooz",
                 "کلاهدوز"
-            ) to StationName("Mehrabad Airport Terminal 4&6", "ترمینال ۴و۶ فرودگاه مهرآباد")
+            ) to BilingualName("Mehrabad Airport Terminal 4&6", "ترمینال ۴و۶ فرودگاه مهرآباد")
         ),
         5 to LineBranches(
-            main = StationName("Tehran (Sadeghiyeh)", "صادقیه") to StationName("Golshahr", "گلشهر"),
-            branch = StationName(
+            main = BilingualName("Tehran (Sadeghiyeh)", "صادقیه") to BilingualName("Golshahr", "گلشهر"),
+            branch = BilingualName(
                 "Tehran (Sadeghiyeh)",
                 "صادقیه"
-            ) to StationName("Shahid Sepahbod Qasem Soleimani", "شهید سپهبد قاسم سلیمانی")
+            ) to BilingualName("Shahid Sepahbod Qasem Soleimani", "شهید سپهبد قاسم سلیمانی")
         ),
         6 to LineBranches(
-            main = StationName("Haram-e Abdol Azim", "حرم عبدالعظیم") to StationName(
+            main = BilingualName("Haram-e Abdol Azim", "حرم عبدالعظیم") to BilingualName(
                 "Kouhsar",
                 "کوهسار"
             )
         ),
         7 to LineBranches(
-            main = StationName(
+            main = BilingualName(
                 "Varzeshgah-e Takhti",
                 "ورزشگاه تختی"
-            ) to StationName("Meydan-e Ketab", "میدان کتاب")
+            ) to BilingualName("Meydan-e Ketab", "میدان کتاب")
         )
     )
 

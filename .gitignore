@@ -14,3 +14,10 @@
 .cxx
 local.properties
 app/google-services.json
+
+fastlane/report.xml
+fastlane/test_output/
+fastlane/screenshots/
+.kotlin/
+.idea/
+.idea/inspectionProfiles/

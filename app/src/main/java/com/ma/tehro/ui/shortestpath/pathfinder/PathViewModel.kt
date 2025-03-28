@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.ma.tehro.common.LineEndpoints
 import com.ma.tehro.common.TimeUtils
 import com.ma.tehro.common.fractionToTime
+import com.ma.tehro.common.toFarsiNumber
+import com.ma.tehro.data.BilingualName
 import com.ma.tehro.data.repo.PathItem
 import com.ma.tehro.data.repo.PathRepository
 import com.ma.tehro.data.repo.TrainScheduleRepository
@@ -21,7 +23,7 @@ import javax.inject.Inject
 @Stable
 data class PathFinderState(
     val shortestPath: List<PathItem> = emptyList(),
-    val estimatedTime: String = "",
+    val estimatedTime: BilingualName? = null,
     val stationTimes: Map<String, String> = emptyMap()
 )
 
@@ -44,6 +46,7 @@ class PathViewModel @Inject constructor(
             _state.update { it.copy(shortestPath = path) }
 
             val estimatedTimes = calculateStationTimes(path)
+            println(estimatedTimes)
             _state.update { it.copy(stationTimes = estimatedTimes) }
         }
     }
@@ -68,17 +71,33 @@ class PathViewModel @Inject constructor(
 
                     lineChanges++
                 }
+
                 is PathItem.StationItem -> {
                     if (stationTimes.containsKey(item.station.name)) return@forEach
                     val stationName = item.station.name
-                    val scheduleInfo = trainScheduleRepository.getScheduleByStation(stationName, currentLine, false).run {
+                    val scheduleInfo = trainScheduleRepository.getScheduleByStation(
+                        stationName,
+                        currentLine,
+                        false
+                    ).run {
                         find { it.destination.en == currentDestination }
-                            ?: find { it.destination.en == LineEndpoints.getEn(currentLine, false)?.second }
-                            ?: find { it.destination.en == LineEndpoints.getEn(currentLine, true)?.second }
+                            ?: find {
+                                it.destination.en == LineEndpoints.getEn(
+                                    currentLine,
+                                    false
+                                )?.second
+                            }
+                            ?: find {
+                                it.destination.en == LineEndpoints.getEn(
+                                    currentLine,
+                                    true
+                                )?.second
+                            }
                     } ?: return@forEach
                     println("PathViewModel scheduleInfo: ${scheduleInfo.schedules.keys.firstOrNull()} for $stationName")
 
-                    val todaySchedule = TimeUtils.getScheduleTypeForCurrentDay(scheduleInfo.schedules.keys.toList())
+                    val todaySchedule =
+                        TimeUtils.getScheduleTypeForCurrentDay(scheduleInfo.schedules.keys.toList())
 
                     val schedules =
                         scheduleInfo.schedules[todaySchedule]?.sorted() ?: return@forEach
@@ -113,8 +132,9 @@ class PathViewModel @Inject constructor(
     private fun calculateFinalEstimateTime(
         stationTimes: Map<String, Double>,
         lineChanges: Int
-    ): String {
-        if (stationTimes.isEmpty()) return "0 minutes"
+    ): BilingualName {
+        if (stationTimes.isEmpty()) return BilingualName("0 min", "۰ دقیقه")
+
         val times = stationTimes.values
         val firstTime = times.minOrNull() ?: 0.0
         val lastTime = times.maxOrNull() ?: 0.0
@@ -134,9 +154,15 @@ class PathViewModel @Inject constructor(
         return if (totalMinutes >= 60) {
             val hours = totalMinutes / 60
             val minutes = totalMinutes % 60
-            String.format(Locale.US, "%d:%02d hours", hours, minutes)
+            BilingualName(
+                en = "$hours HOUR AND $minutes MINUTES",
+                fa = "${hours.toFarsiNumber()} ساعت و ${minutes.toFarsiNumber()} دقیقه"
+            )
         } else {
-            "$totalMinutes minutes"
+            BilingualName(
+                en = "$totalMinutes min",
+                fa = "${totalMinutes.toFarsiNumber()} دقیقه"
+            )
         }
     }
 }

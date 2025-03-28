@@ -26,7 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import com.ma.tehro.R
@@ -110,7 +110,8 @@ fun Stations(
 fun StationItem(
     modifier: Modifier = Modifier,
     station: Station,
-    lineNumber: Int
+    lineNumber: Int,
+    showTransferIndicator: Boolean = true,
 ) {
     val colors = station.lines
         .filter { it != lineNumber }
@@ -136,40 +137,42 @@ fun StationItem(
             Text(
                 text = station.translations.fa,
                 style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
                 color = Color.White
             )
             Text(
                 text = station.name,
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                color = Color.White
+                style = MaterialTheme.typography.titleMedium.copy(
+                    color = Color.White.copy(alpha = 0.9f)
+                ),
+                overflow = TextOverflow.Ellipsis
             )
         }
 
-        Box(
-            modifier = Modifier
-                .padding(start = 8.dp),
-            contentAlignment = Alignment.CenterEnd
-        ) {
-            colors.forEachIndexed { index, color ->
-                val circleSize = maxCircleSize - (index * circleSizeStep)
-                Box(
-                    modifier = Modifier
-                        .size(circleSize)
-                        .clip(CircleShape)
-                        .background(color)
-                        .align(Alignment.Center)
-                        .offset(y = (index * -8).dp)
-                ) {
-                    Icon(
+        if (showTransferIndicator) {
+            Box(
+                modifier = Modifier
+                    .padding(start = 8.dp),
+                contentAlignment = Alignment.CenterEnd
+            ) {
+                colors.forEachIndexed { index, color ->
+                    val circleSize = maxCircleSize - (index * circleSizeStep)
+                    Box(
                         modifier = Modifier
-                            .size(18.dp)
-                            .align(Alignment.Center),
-                        painter = painterResource(R.drawable.sync_alt_24px),
-                        contentDescription = "See stations by line",
-                        tint = Color.White
-                    )
+                            .size(circleSize)
+                            .clip(CircleShape)
+                            .background(color)
+                            .align(Alignment.Center)
+                            .offset(y = (index * -8).dp)
+                    ) {
+                        Icon(
+                            modifier = Modifier
+                                .size(18.dp)
+                                .align(Alignment.Center),
+                            painter = painterResource(R.drawable.sync_alt_24px),
+                            contentDescription = "See stations by line",
+                            tint = Color.White
+                        )
+                    }
                 }
             }
         }
