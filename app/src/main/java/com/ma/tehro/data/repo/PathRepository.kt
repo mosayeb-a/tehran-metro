@@ -2,6 +2,7 @@ package com.ma.tehro.data.repo
 
 import androidx.compose.runtime.Immutable
 import com.ma.tehro.common.LineEndpoints
+import com.ma.tehro.common.lineBranches
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.data.Station
 import java.util.PriorityQueue
@@ -72,18 +73,24 @@ class PathRepositoryImpl @Inject constructor(
             val currentStation = stations[currentStationName] ?: continue
             val nextStation = stations[nextStationName] ?: continue
 
-            val currentLinePosition =
-                currentStation.positionsInLine.firstOrNull { pos ->
-                    nextStation.positionsInLine.any { it.line == pos.line }
-                } ?: continue
+            val currentLinePosition = currentStation.positionsInLine.firstOrNull { pos ->
+                nextStation.positionsInLine.any { it.line == pos.line }
+            } ?: continue
 
-            val nextLinePosition =
-                nextStation.positionsInLine.first { it.line == currentLinePosition.line }
+            val nextLinePosition = nextStation.positionsInLine.first { it.line == currentLinePosition.line }
 
             if (currentLine != currentLinePosition.line) {
                 currentLine = currentLinePosition.line
-                val enEndpoints = LineEndpoints.getEn(currentLine) ?: continue
-                val faEndpoints = LineEndpoints.getFa(currentLine) ?: continue
+                val lastStationName = result.path.last()
+                val branchConfig = lineBranches[currentLine]
+                val useBranch = branchConfig?.let {
+                    val isLastStationBranch = lastStationName in it.branch
+                    val isLastStationBranchPoint = lastStationName == it.branchPoint
+                    isLastStationBranch && !isLastStationBranchPoint
+                } ?: false
+
+                val enEndpoints = LineEndpoints.getEn(line = currentLine, useBranch = useBranch) ?: continue
+                val faEndpoints = LineEndpoints.getFa(line = currentLine, useBranch = useBranch) ?: continue
 
                 if (currentLinePosition.position < nextLinePosition.position) {
                     directions.add(
@@ -131,7 +138,6 @@ class PathRepositoryImpl @Inject constructor(
 
         return directions
     }
-
     /**
      * Finds the optimal path between two metro stations considering both distance and line changes.
      *

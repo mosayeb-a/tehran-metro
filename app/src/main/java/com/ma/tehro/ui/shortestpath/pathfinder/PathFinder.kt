@@ -22,7 +22,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -34,7 +33,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
@@ -60,7 +58,7 @@ fun PathFinder(
     toFa: String,
     state: PathFinderState,
     onBack: () -> Unit,
-    onStationClick: (station: Station, lineNumber: Int) -> Unit
+    onStationClick: (station: Station, lineNumber: Int) -> Unit,
 ) {
     val titleIndices = remember(state.shortestPath) {
         state.shortestPath.mapIndexedNotNull { index, item ->
@@ -68,12 +66,14 @@ fun PathFinder(
         }
     }
 
-
     Scaffold(
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.primary,
         topBar = {
-            Appbar(fromEn = fromEn, toEn = toEn, onBack = onBack, fromFa = fromFa, toFa = toFa)
+            Column {
+                Appbar(fromEn = fromEn, toEn = toEn, onBack = onBack, fromFa = fromFa, toFa = toFa)
+                EstimatedTimeDisplay(state)
+            }
         }
     ) { padding ->
         Box(modifier = Modifier.fillMaxSize()) {
@@ -120,8 +120,14 @@ fun PathFinder(
                                     isLastItem = index == state.shortestPath.size - 1,
                                     disabled = item.isPassthrough,
                                     lineNumber = item.lineNumber,
+                                    arrivalTime = state.stationTimes[item.station.name] // Pass the arrival time
                                 )
-                                HorizontalDivider(thickness = 0.28.dp)
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(0.77.dp)
+                                        .background(getLineColorByNumber(item.lineNumber).copy(alpha = 0.9f))
+                                )
                             }
                         }
                     }
@@ -156,6 +162,23 @@ fun PathFinder(
                 }
             }
         }
+    }
+}
+
+@Composable
+fun EstimatedTimeDisplay(state: PathFinderState) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.primary)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+    ) {
+        Text(
+            text = "Estimated travel time: ${state.estimatedTime} minutes",
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onPrimary
+        )
+
     }
 }
 
@@ -227,7 +250,8 @@ fun StationRow(
     station: Station,
     isLastItem: Boolean,
     disabled: Boolean = false,
-    lineNumber: Int
+    lineNumber: Int,
+    arrivalTime: String? = null // New parameter for arrival time
 ) {
     val color = getLineColorByNumber(lineNumber)
     Row(
@@ -255,8 +279,7 @@ fun StationRow(
             station = station,
             lineNumber = lineNumber
         )
-
-        if (disabled) {
+        if (arrivalTime != null) {
             Column(
                 modifier = Modifier
                     .padding(horizontal = 12.dp)
@@ -265,11 +288,10 @@ fun StationRow(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "ایستگاه غیرفعال است\n" +
-                            "The station is inactive",
+                    text = arrivalTime,
                     style = MaterialTheme.typography.labelMedium,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     textAlign = TextAlign.Center
                 )
             }

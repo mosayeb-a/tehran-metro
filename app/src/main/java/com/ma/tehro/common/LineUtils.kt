@@ -1,7 +1,33 @@
 package com.ma.tehro.common
 
+import com.ma.tehro.data.BranchConfig
 import com.ma.tehro.data.LineBranches
 import com.ma.tehro.data.StationName
+
+val lineBranches = mapOf(
+    1 to BranchConfig(
+        branchPoint = "Shahed - BagherShahr",
+        branch = listOf(
+            "Namayeshgah-e Shahr-e Aftab",
+            "Vavan",
+            "Emam Khomeini Airport",
+            "Shahr-e Parand"
+        )
+    ),
+    4 to BranchConfig(
+        branchPoint = "Bimeh",
+        branch = listOf(
+            "Mehrabad Airport Terminal 1&2",
+            "Mehrabad Airport Terminal 4&6"
+        )
+    ),
+    5 to BranchConfig(
+        branchPoint = "Golshahr",
+        branch = listOf(
+            "Shahid Sepahbod Qasem Soleimani"
+        )
+    )
+)
 
 object LineEndpoints {
     private val get = mapOf(
