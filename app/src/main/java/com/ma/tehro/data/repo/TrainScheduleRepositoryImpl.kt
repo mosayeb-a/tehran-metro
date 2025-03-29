@@ -47,6 +47,8 @@ class TrainScheduleRepositoryImpl @Inject constructor(
         isBranch: Boolean,
     ): List<GroupedScheduleInfo> {
         val schedule = getLineSchedule(lineNum)
+        if (schedule.isEmpty()) return emptyList()
+
         val mainPathSchedule = schedule["1"]?.get(stationName)
         val branchPathSchedule = schedule["2"]?.get(stationName)
 
@@ -60,7 +62,9 @@ class TrainScheduleRepositoryImpl @Inject constructor(
         val endpointsEn = LineEndpoints.getEn(lineNum, useBranchEndpoints)
         val endpointsFa = LineEndpoints.getFa(lineNum, useBranchEndpoints)
 
-        if (endpointsEn == null || endpointsFa == null) { return emptyList() }
+        if (endpointsEn == null || endpointsFa == null) {
+            return emptyList()
+        }
 
         return scheduleData
             .map { (scheduleKey, schedule) ->
@@ -94,6 +98,7 @@ class TrainScheduleRepositoryImpl @Inject constructor(
     }
 
     private suspend fun loadScheduleInBackground(lineNum: Int): Map<String, Map<String, Map<String, Map<String, List<Double>>>>> {
+        if (lineNum == 0) return emptyMap()
         return withContext(Dispatchers.IO) {
             val inputStream = context.resources.openRawResource(scheduleResources[lineNum]!!)
             val schedule =
