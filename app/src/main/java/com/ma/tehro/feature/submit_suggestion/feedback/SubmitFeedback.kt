@@ -50,8 +50,8 @@ import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.isFarsi
 import com.ma.tehro.feature.submit_suggestion.SubmitInfoState
-import com.ma.tehro.feature.train_schedule.EmptyState
-import com.ma.tehro.feature.train_schedule.EmptyStatesFaces
+import com.ma.tehro.common.Message
+import com.ma.tehro.common.EmptyStatesFaces
 import kotlinx.coroutines.launch
 
 @Composable
@@ -127,16 +127,16 @@ fun SubmitFeedback(
                             }
 
                             viewState.isSubmissionSent -> {
-                                EmptyState(
-                                    faMessage = "پیشنهادت با موفقیت ثبت شد. از همراهیت سپاسگزاریم",
+                                Message(
+                                    faMessage = "پیشنهادت با موفقیت ثبت شد. از همراهیت سپاسگزاریم.",
                                     enMessage = "Your suggestion has been recorded successfully. Thanks for your support!",
                                     faces = EmptyStatesFaces.happy
                                 )
                             }
 
                             else -> {
-                                EmptyState(
-                                    faMessage = ".برای بهتر شدن برنامه، نظرات و پیشنهاداتت رو ارسال کن",
+                                Message(
+                                    faMessage = "برای بهتر شدن برنامه، نظرات و پیشنهاداتت رو ارسال کن.",
                                     enMessage = "Share your ideas to make the app better!",
                                     faces = EmptyStatesFaces.suggestion
                                 )

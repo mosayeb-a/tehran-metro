@@ -111,7 +111,7 @@ fun Lines(
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.help_fill),
-                            contentDescription = "submit info",
+                            contentDescription = "submit feedback",
                         )
                     }
                 }
@@ -203,14 +203,13 @@ fun LineItem(
                 text = lineName.fa,
                 style = MaterialTheme.typography.bodyLarge.copy(
                     fontSize = 18.sp,
-                    fontWeight = FontWeight.W500
+                    fontWeight = FontWeight.W600
                 ),
                 color = Color.White
             )
             Text(
                 text = lineName.en,
-                style = MaterialTheme.typography.bodyLarge.copy(
-                    fontSize = 16.sp,
+                style = MaterialTheme.typography.bodyMedium.copy(
                     fontWeight = FontWeight.W400
                 ),
                 color = Color.White.copy(alpha = 0.9f)

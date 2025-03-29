@@ -1,6 +1,6 @@
 package com.ma.tehro.common
 
-import android.icu.util.Calendar
+import java.util.Calendar
 import com.ma.tehro.data.ScheduleType
 
 object TimeUtils {
@@ -26,5 +26,30 @@ object TimeUtils {
             }
             else -> null
         }
+    }
+
+    fun remainingTime(target: Double): String {
+        val calendar = Calendar.getInstance()
+
+        val currentSeconds = calendar.get(Calendar.HOUR_OF_DAY) * 3600 +
+                calendar.get(Calendar.MINUTE) * 60 +
+                calendar.get(Calendar.SECOND)
+        val currentTimeFraction = currentSeconds / 86400.0
+
+        val remaining = target - currentTimeFraction
+        if (remaining <= 0) return "00:00:00"
+
+        val totalSeconds = (remaining * 86400).toInt()
+        val hours = totalSeconds / 3600
+        val minutes = (totalSeconds % 3600) / 60
+        val seconds = totalSeconds % 60
+
+        return StringBuilder(8)
+            .append(hours.toString().padStart(2, '0'))
+            .append(':')
+            .append(minutes.toString().padStart(2, '0'))
+            .append(':')
+            .append(seconds.toString().padStart(2, '0'))
+            .toString()
     }
 }
