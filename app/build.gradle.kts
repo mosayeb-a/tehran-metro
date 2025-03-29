@@ -14,12 +14,12 @@ plugins {
 
 android {
     namespace = "com.ma.tehro"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.ma.tehro"
         minSdk = 21
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 4
         versionName = "0.3.0"
 
@@ -38,7 +38,10 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        vectorDrawables.useSupportLibrary = true
+        vectorDrawables {
+            useSupportLibrary = true
+//            generatedDensities = []  // Disable unused densities
+        }
         resourceConfigurations += "en"
     }
 

@@ -41,5 +41,7 @@ dependencies {
     implementation("org.apache.poi:poi-ooxml:5.2.3")
     implementation(libs.kotlinx.serialization)
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.1")
-
+    testImplementation(kotlin("test"))
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
 }

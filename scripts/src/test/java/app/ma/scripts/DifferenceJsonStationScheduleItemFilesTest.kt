@@ -1,8 +1,6 @@
-package com.ma.tehro
+package app.ma.scripts
 
 import com.ma.tehro.data.Station
-import com.ma.tehro.scripts.getOrderedStationsByLine
-import com.ma.tehro.scripts.readJsonStationsAsText
 import org.junit.Test
 import kotlin.test.assertEquals
 
