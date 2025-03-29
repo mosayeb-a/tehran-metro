@@ -44,6 +44,7 @@ import com.ma.tehro.common.AppSnackbar
 import com.ma.tehro.common.LinesScreen
 import com.ma.tehro.common.MapScreen
 import com.ma.tehro.common.ObserveAsEvents
+import com.ma.tehro.common.PathDescriptionScreen
 import com.ma.tehro.common.PathFinderScreen
 import com.ma.tehro.common.StationDetailScreen
 import com.ma.tehro.common.StationSelectorScreen
@@ -63,6 +64,8 @@ import com.ma.tehro.feature.line.Lines
 import com.ma.tehro.feature.line.stations.Stations
 import com.ma.tehro.feature.map.StationsMap
 import com.ma.tehro.feature.map.StationsMapViewModel
+import com.ma.tehro.feature.shortestpath.guide.PathDescription
+import com.ma.tehro.feature.shortestpath.guide.PathDescriptionViewModel
 import com.ma.tehro.feature.shortestpath.pathfinder.PathViewModel
 import com.ma.tehro.feature.shortestpath.selection.StationSelectionViewModel
 import com.ma.tehro.feature.shortestpath.selection.StationSelector
@@ -275,6 +278,9 @@ class MainActivity : ComponentActivity() {
                                 },
                                 fromFa = args.startFaStation,
                                 toFa = args.faDestination,
+                                onInfoClick = {
+                                    navController.navigate(PathDescriptionScreen(viewModel.generateGuidSteps()))
+                                }
                             )
                         }
                         baseComposable<StationDetailScreen>(
@@ -314,6 +320,11 @@ class MainActivity : ComponentActivity() {
                                     viewModel.onScheduleTypeSelected(destination, scheduleType)
                                 }
                             )
+                        }
+                        baseComposable<PathDescriptionScreen> {
+                            val viewModel: PathDescriptionViewModel = hiltViewModel(it)
+                            val state by viewModel.uiState.collectAsStateWithLifecycle()
+                            PathDescription(viewState = state, onBackClick = {navController.popBackStack()})
                         }
                         baseComposable<SubmitFeedbackScreen> {
                             val viewModel: SubmitSuggestionViewModel = hiltViewModel(it)

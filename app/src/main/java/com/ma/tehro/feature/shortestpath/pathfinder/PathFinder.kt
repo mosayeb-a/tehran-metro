@@ -13,15 +13,21 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -40,6 +46,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import com.ma.tehro.R
 import com.ma.tehro.common.getLineColorByNumber
@@ -62,6 +69,7 @@ fun PathFinder(
     state: PathFinderState,
     onBack: () -> Unit,
     onStationClick: (station: Station, lineNumber: Int) -> Unit,
+    onInfoClick: () -> Unit,
 ) {
     val titleIndices = remember(state.shortestPath) {
         state.shortestPath.mapIndexedNotNull { index, item ->
@@ -74,7 +82,41 @@ fun PathFinder(
         containerColor = MaterialTheme.colorScheme.primary,
         topBar = {
             Column {
-                Appbar(fromEn = fromEn, toEn = toEn, onBack = onBack, fromFa = fromFa, toFa = toFa)
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(52.dp)
+                        .background(MaterialTheme.colorScheme.primary),
+                    verticalAlignment = Alignment.CenterVertically
+
+                ) {
+                    Appbar(
+                        modifier = Modifier.weight(1f),
+                        fromEn = fromEn,
+                        toEn = toEn,
+                        onBack = onBack,
+                        fromFa = fromFa,
+                        toFa = toFa
+                    )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .clickable{ onInfoClick() }
+                            .padding(horizontal = 6.dp ),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "راهنمای مسیر",
+                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp)
+                        )
+                        Spacer(Modifier.width(4.dp))
+                        Icon(
+                            imageVector = Icons.Default.Info,
+                            contentDescription = "info",
+                            modifier = Modifier.size(22.dp),
+                        )
+                    }
+                }
                 EstimatedTimeDisplay(estimatedTime = state.estimatedTime)
             }
         }

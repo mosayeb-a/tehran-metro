@@ -70,7 +70,7 @@ fun StationDetail(
                             onClick = { onSubmitInfoStationClicked(station, lineNumber) },
                         ) {
                             Icon(
-                                painter = painterResource(R.drawable.help_24px),
+                                painter = painterResource(R.drawable.help_fill),
                                 contentDescription = "submit station info",
                             )
                         }
