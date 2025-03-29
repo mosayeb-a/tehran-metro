@@ -1,6 +1,5 @@
 package com.ma.tehro.common
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.Indication
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
@@ -37,7 +36,6 @@ import com.ma.tehro.data.BilingualName
 import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue
 
-@SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun DraggableTabRow(
     modifier: Modifier = Modifier,
@@ -71,16 +69,14 @@ fun DraggableTabRow(
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.primary)
         ) {
-            val tabWidth = maxWidth / tabsList.size
+            with(this) {
+                val tabWidth = maxWidth / tabsList.size
 
-            val indicatorOffset =
-                remember(selectedTabIndex.value, pagerState.currentPageOffsetFraction) {
+                val indicatorOffset =
+                    remember(selectedTabIndex.value, pagerState.currentPageOffsetFraction) {
                     val currentTab = selectedTabIndex.value
                     val targetTab = when {
-                        pagerState.currentPageOffsetFraction > 0 -> (currentTab + 1).coerceAtMost(
-                            tabsList.size - 1
-                        )
-
+                        pagerState.currentPageOffsetFraction > 0 -> (currentTab + 1).coerceAtMost(tabsList.size - 1)
                         pagerState.currentPageOffsetFraction < 0 -> (currentTab - 1).coerceAtLeast(0)
                         else -> currentTab
                     }
@@ -95,64 +91,60 @@ fun DraggableTabRow(
                     )
                 }
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(lineColor),
-                horizontalArrangement = Arrangement.Start
-            ) {
-                tabsList.forEachIndexed { tabIndex, name ->
-                    val interactionSource =
-                        remember { MutableInteractionSource() }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(lineColor),
+                    horizontalArrangement = Arrangement.Start
+                ) {
+                    tabsList.forEachIndexed { tabIndex, name ->
+                        val interactionSource =
+                            remember { MutableInteractionSource() }
 
-                    Box(
-                        modifier = Modifier
-                            .width(tabWidth)
-                            .clip(
-                                RoundedCornerShape(
-                                    topStart = 24.dp,
-                                    topEnd = 24.dp
-                                )
-                            )
-                            .clickable(
-                                interactionSource = interactionSource,
-                                indication = indication
-                            ) {
-                                coroutineScope.launch {
-                                    pagerState.animateScrollToPage(tabIndex)
+                        Box(
+                            modifier = Modifier
+                                .width(tabWidth)
+                                .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
+                                .clickable(
+                                    interactionSource = interactionSource,
+                                    indication = indication
+                                ) {
+                                    coroutineScope.launch {
+                                        pagerState.animateScrollToPage(tabIndex)
+                                    }
                                 }
-                            }
-                            .padding(vertical = 8.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        BilingualText(
-                            fa = "به سمت ${name.fa}",
-                            en = "To ${name.en}",
-                            style = MaterialTheme.typography.bodySmall.copy(
-                                color = if (tabIndex == selectedTabIndex.value) {
-                                    MaterialTheme.colorScheme.onPrimary
-                                } else {
-                                    MaterialTheme.colorScheme.onPrimary.copy(alpha = .5f)
-                                },
-                            ),
-                            spaceBetween = (-3).dp,
-                            maxLine = 1
-                        )
+                                .padding(vertical = 8.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            BilingualText(
+                                fa = "به سمت ${name.fa}",
+                                en = "To ${name.en}",
+                                style = MaterialTheme.typography.bodySmall.copy(
+                                    color = if (tabIndex == selectedTabIndex.value) {
+                                        MaterialTheme.colorScheme.onPrimary
+                                    } else {
+                                        MaterialTheme.colorScheme.onPrimary.copy(alpha = .5f)
+                                    },
+                                ),
+                                spaceBetween = (-3).dp,
+                                maxLine = 1
+                            )
+                        }
                     }
                 }
-            }
 
-            Box(
-                modifier = Modifier
-                    .width(tabWidth)
-                    .align(Alignment.BottomStart)
-                    .offset(x = indicatorOffset)
-            ) {
-                TabIndicator(
+                Box(
                     modifier = Modifier
-                        .padding(horizontal = 34.dp)
-                        .fillMaxWidth()
-                )
+                        .width(tabWidth)
+                        .align(Alignment.BottomStart)
+                        .offset(x = indicatorOffset)
+                ) {
+                    TabIndicator(
+                        modifier = Modifier
+                            .padding(horizontal = 34.dp)
+                            .fillMaxWidth()
+                    )
+                }
             }
         }
 

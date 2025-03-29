@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
@@ -136,12 +137,12 @@ fun StationItem(
         ) {
             Text(
                 text = station.translations.fa,
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.W500),
                 color = Color.White
             )
             Text(
                 text = station.name,
-                style = MaterialTheme.typography.titleMedium.copy(
+                style = MaterialTheme.typography.bodyLarge.copy(
                     color = Color.White.copy(alpha = 0.9f)
                 ),
                 overflow = TextOverflow.Ellipsis

@@ -216,16 +216,18 @@ fun StationSelector(
                 }
             }
 
-            item(2){
+            item(2) {
                 Spacer(Modifier.height(16.dp))
             }
 
-            item(3) { StationDropdown(
-                query = "${viewState.selectedFaStartStation}\n${viewState.selectedEnStartStation}",
-                stations = viewState.stations,
-                onStationSelected = { en, fa -> onSelectedChange(true, en, fa) },
-                isFrom = true
-            ) }
+            item(3) {
+                StationDropdown(
+                    query = "${viewState.selectedFaStartStation}\n${viewState.selectedEnStartStation}",
+                    stations = viewState.stations,
+                    onStationSelected = { en, fa -> onSelectedChange(true, en, fa) },
+                    isFrom = true
+                )
+            }
 
             item(4) {
                 Spacer(modifier = Modifier.height(8.dp))
@@ -294,7 +296,7 @@ fun StationDropdown(
         dropdownItem = { entry ->
             Row(
                 modifier = Modifier
-                    .padding(horizontal = 8.dp, vertical = 4.dp)
+                    .padding(start = 16.dp)
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
@@ -326,7 +328,7 @@ fun StationDropdown(
                 Text(
                     text = if (isFrom) "مبدا" + "\n" + "FROM" else "مقصد" + "\n" + "TO",
                     modifier = Modifier
-                        .padding(start = 4.dp)
+                        .padding(start = 4.dp, bottom = 8.dp, top = 8.dp)
                         .align(Alignment.CenterVertically),
                     style = MaterialTheme.typography.labelMedium
                 )
