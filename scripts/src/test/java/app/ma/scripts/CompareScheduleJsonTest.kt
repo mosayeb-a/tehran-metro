@@ -1,7 +1,5 @@
-package com.ma.tehro
+package app.ma.scripts
 
-import com.ma.tehro.scripts.ScheduleOutput
-import com.ma.tehro.scripts.BASE_RAW_PATH
 import kotlinx.serialization.json.Json
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull

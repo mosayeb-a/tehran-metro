@@ -1,8 +1,7 @@
-package com.ma.tehro
+package app.ma.scripts
 
 import com.ma.tehro.data.Station
 import com.ma.tehro.data.repo.LineRepositoryImpl
-import com.ma.tehro.scripts.readJsonStationsAsText
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

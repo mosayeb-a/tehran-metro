@@ -1,10 +1,11 @@
-package com.ma.tehro
+package app.ma.scripts
 
 import com.ma.tehro.data.Station
 import com.ma.tehro.data.repo.PathItem
 import com.ma.tehro.data.repo.PathRepository
 import com.ma.tehro.data.repo.PathRepositoryImpl
-import com.ma.tehro.scripts.readJsonStationsAsText
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -138,7 +139,7 @@ class ShortestPathTest {
     }
 
     @Test
-    fun `from Mowlavi to Darvazeh Shemiran, disabled station shouldn't cause line change`() {
+    fun `from Mowlavi to Darvazeh Shemiran, disabled station shouldn't cause line change`() = runTest {
         val from = "Mowlavi"
         val to = "Darvazeh Shemiran"
         val result = repository.findShortestPathWithDirection(from, to)
@@ -147,11 +148,12 @@ class ShortestPathTest {
             .map { it.station.name }
             .toSet()
             .toList()
+
         println(actualStations)
         assertFalse { actualStations.contains("Shohada-ye Hefdah-e Shahrivar") }
     }
 
-    private fun assertShortestPath(from: String, to: String, expectedStations: List<String>) {
+    private fun assertShortestPath(from: String, to: String, expectedStations: List<String>) = runBlocking {
         val result = repository.findShortestPathWithDirection(from, to)
         val actualStations = result
             .filterIsInstance<PathItem.StationItem>()
