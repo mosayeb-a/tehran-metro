@@ -41,11 +41,9 @@ class PathViewModel @Inject constructor(
         val to = savedStateHandle.get<String>("enDestination")!!
         viewModelScope.launch {
             val path = pathRepository.findShortestPathWithDirection(from = from, to = to)
-            println("PathViewModel PathRepo: path with title-> $path ")
             _state.update { it.copy(shortestPath = path) }
 
             val estimatedTimes = calculateStationTimes(path)
-            println(estimatedTimes)
             _state.update { it.copy(stationTimes = estimatedTimes) }
         }
     }
@@ -163,5 +161,38 @@ class PathViewModel @Inject constructor(
                 fa = "${totalMinutes.toFarsiNumber()} دقیقه"
             )
         }
+    }
+
+    fun generateGuidSteps(): List<String> {
+        val pathDescription = mutableListOf<String>()
+        var firstStation: PathItem.StationItem? = null
+        var lastStation: PathItem.StationItem? = null
+        var isFirstSegment = true
+
+        _state.value.shortestPath.forEach { item ->
+            when (item) {
+                is PathItem.Title -> {
+                    lastStation?.let { pathDescription.add("l: ${it.station.translations.fa}") }
+                    firstStation = null
+                    lastStation = null
+                    pathDescription.add("t: ${item.fa}")
+                }
+
+                is PathItem.StationItem -> {
+                    if (firstStation == null) {
+                        firstStation = item
+                        if (isFirstSegment) {
+                            pathDescription.add("f: ${item.station.translations.fa}")
+                            isFirstSegment = false
+                        }
+                    }
+                    lastStation = item
+                }
+            }
+        }
+
+        lastStation?.let { pathDescription.add("l: ${it.station.translations.fa}") }
+
+        return pathDescription
     }
 }

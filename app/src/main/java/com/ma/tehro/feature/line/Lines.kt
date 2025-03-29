@@ -110,7 +110,7 @@ fun Lines(
                         onClick = { onSubmitFeedbackClick() },
                     ) {
                         Icon(
-                            painter = painterResource(R.drawable.help_24px),
+                            painter = painterResource(R.drawable.help_fill),
                             contentDescription = "submit info",
                         )
                     }

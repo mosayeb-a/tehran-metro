@@ -1,11 +1,9 @@
 package com.ma.tehro.feature.shortestpath.pathfinder
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.HorizontalDivider
@@ -24,10 +22,9 @@ import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.createBilingualMessage
 
 @Composable
-fun Appbar(fromEn: String, toEn: String, fromFa: String, toFa: String, onBack: () -> Unit) {
-    Column(modifier = Modifier.background(MaterialTheme.colorScheme.primary)) {
+fun Appbar(modifier: Modifier=Modifier,fromEn: String, toEn: String, fromFa: String, toFa: String, onBack: () -> Unit) {
+    Column(modifier) {
         Appbar(
-            modifier = Modifier.height(48.dp),
             title = createBilingualMessage(
                 fa = "مسیر پیشنهادی",
                 en = "Suggested Path"

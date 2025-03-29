@@ -39,3 +39,16 @@ data class TrainScheduleScreen(
 
 @Serializable
 object SubmitFeedbackScreen
+
+/**
+ * order of path list->
+ * static:
+ * f: first station of list
+ * repetitive:
+ * l: last station of the line
+ * t: title of line changes contains destination
+ * static:
+ * l: last station of list
+ */
+@Serializable
+data class PathDescriptionScreen(val path: List<String>)
