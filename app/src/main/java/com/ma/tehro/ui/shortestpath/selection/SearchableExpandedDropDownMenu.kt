@@ -1,13 +1,15 @@
 package com.ma.tehro.ui.shortestpath.selection
 
+
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredSizeIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.KeyboardArrowDown
@@ -26,10 +28,11 @@ import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -38,7 +41,6 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDirection
@@ -47,6 +49,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.isFarsi
 import com.ma.tehro.data.Station
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
 
 @Composable
 fun <T> SearchableExpandedDropDownMenu(
@@ -64,75 +69,71 @@ fun <T> SearchableExpandedDropDownMenu(
     showDefaultSelectedItem: Boolean = false,
     defaultItemIndex: Int = 0,
     initialValue: String = "",
-    defaultItem: (T) -> Unit,
-    onSearchTextFieldClicked: () -> Unit,
-    startContent: @Composable (() -> Unit) = { },
+    defaultItem: (T) -> Unit = {},
+    onSearchTextFieldClicked: () -> Unit = {},
+    startContent: @Composable (() -> Unit) = {},
     searchPredicate: (String, T) -> Boolean = { searchText, item ->
         item.toString().contains(searchText, ignoreCase = true)
     }
 ) {
-    var selectedOptionText by remember { mutableStateOf(initialValue) }
+
+    var selectedOptionText by rememberSaveable { mutableStateOf(initialValue) }
     var searchedOption by rememberSaveable { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
-    var filteredItems = mutableListOf<T>()
-    val keyboardController = LocalSoftwareKeyboardController.current
-    val focusRequester = remember { FocusRequester() }
-    val itemHeights = remember { mutableStateMapOf<Int, Int>() }
-    val baseHeight = 260.dp
-    val density = LocalDensity.current
-
-    if (showDefaultSelectedItem) {
-        selectedOptionText = selectedOptionText.ifEmpty { listOfItems[defaultItemIndex].toString() }
-
-        defaultItem(
-            listOfItems[defaultItemIndex],
-        )
+    var debouncedSearch by remember { mutableStateOf("") }
+    val filteredItems by remember(debouncedSearch, listOfItems) {
+        derivedStateOf {
+            if (debouncedSearch.isEmpty()) listOfItems
+            else listOfItems.filter { searchPredicate(debouncedSearch, it) }
+        }
     }
 
-    LaunchedEffect(initialValue) { selectedOptionText = initialValue }
+    val coroutineScope = rememberCoroutineScope()
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val focusRequester = remember { FocusRequester() }
 
-    val maxHeight = remember(itemHeights.toMap()) {
-        if (itemHeights.keys.toSet() != listOfItems.indices.toSet()) {
 
-            return@remember baseHeight
+    if (showDefaultSelectedItem && selectedOptionText.isEmpty()) {
+        LaunchedEffect(Unit) {
+            selectedOptionText = listOfItems[defaultItemIndex].toString()
+            defaultItem(listOfItems[defaultItemIndex])
         }
-        val baseHeightInt = with(density) { baseHeight.toPx().toInt() }
+    }
 
 
-        var sum = with(density) { DropdownMenuVerticalPadding.toPx().toInt() } * 2
-        for ((_, itemSize) in itemHeights.toSortedMap()) {
-            sum += itemSize
-            if (sum >= baseHeightInt) {
-                return@remember with(density) { (sum - itemSize / 2).toDp() }
-            }
+    LaunchedEffect(searchedOption) {
+        coroutineScope.launch {
+            delay(300)
+            debouncedSearch = searchedOption
         }
+    }
 
-        baseHeight
+
+    val placeholderText by remember(selectedOptionText) {
+        derivedStateOf {
+            val parts = selectedOptionText.split("\n")
+            parts.getOrNull(0) to parts.getOrNull(1)
+        }
     }
 
     Column(
         modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         OutlinedTextField(
-            modifier = modifier
+            modifier = Modifier
                 .height(76.dp)
                 .fillMaxWidth(),
             colors = colors,
             value = "",
             readOnly = readOnly,
             enabled = enable,
-            onValueChange = { selectedOptionText = it },
-            leadingIcon = {
-                startContent.invoke()
-            },
+            onValueChange = {},
+            leadingIcon = { startContent() },
             placeholder = {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
+                Column(modifier = Modifier.fillMaxWidth()) {
                     Text(
-                        text = selectedOptionText.split("\n").getOrNull(0) ?: "",
+                        text = placeholderText.first ?: "",
                         style = MaterialTheme.typography.bodyMedium,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
@@ -140,7 +141,7 @@ fun <T> SearchableExpandedDropDownMenu(
                         modifier = Modifier.weight(1f)
                     )
                     Text(
-                        text = selectedOptionText.split("\n").getOrNull(1) ?: "",
+                        text = placeholderText.second ?: "",
                         style = MaterialTheme.typography.bodyMedium,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
@@ -153,117 +154,82 @@ fun <T> SearchableExpandedDropDownMenu(
             trailingIcon = {
                 IconToggleButton(
                     checked = expanded,
-                    onCheckedChange = {
-                        expanded = it
-                    },
+                    onCheckedChange = { expanded = it }
                 ) {
-                    if (expanded) {
-                        Icon(
-                            imageVector = openedIcon,
-                            contentDescription = null,
-                        )
-                    } else {
-                        Icon(
-                            imageVector = closedIcon,
-                            contentDescription = null,
-                        )
-                    }
+                    Icon(
+                        imageVector = if (expanded) openedIcon else closedIcon,
+                        contentDescription = null
+                    )
                 }
             },
             shape = RoundedCornerShape(parentTextFieldCornerRadius),
             isError = isError,
-            interactionSource = remember { MutableInteractionSource() }
-                .also { interactionSource ->
-                    LaunchedEffect(interactionSource) {
-//                        keyboardController?.show()
-                        interactionSource.interactions.collect {
-                            if (it is PressInteraction.Release) {
-                                expanded = !expanded
-                            }
-                        }
+            interactionSource = remember { MutableInteractionSource() }.also { source ->
+                LaunchedEffect(source) {
+                    source.interactions.collect {
+                        if (it is PressInteraction.Release) expanded = !expanded
                     }
-                },
+                }
+            }
         )
+
         if (expanded) {
             DropdownMenu(
                 modifier = Modifier
                     .fillMaxWidth(0.75f)
-                    .requiredSizeIn(maxHeight = maxHeight),
+                    .heightIn(max = 260.dp),
                 expanded = expanded,
-                onDismissRequest = { expanded = false },
+                onDismissRequest = { expanded = false }
             ) {
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(10.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     OutlinedTextField(
-                        modifier = modifier
+                        modifier = Modifier
                             .fillMaxWidth()
                             .padding(16.dp)
                             .focusRequester(focusRequester),
                         value = searchedOption,
-                        colors = OutlinedTextFieldDefaults
-                            .colors(
-                                focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                                cursorColor = MaterialTheme.colorScheme.onPrimary,
-                            ),
-                        onValueChange = { selectedSport ->
-                            searchedOption = selectedSport
-                            filteredItems = listOfItems.filter { item ->
-                                searchPredicate(searchedOption, item)
-                            }.toMutableList()
-                        },
+                        onValueChange = { searchedOption = it },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                            cursorColor = MaterialTheme.colorScheme.onPrimary
+                        ),
                         textStyle = LocalTextStyle.current.copy(
                             textDirection = if (isFarsi(searchedOption)) TextDirection.Rtl else TextDirection.Ltr,
-                            textAlign = if (isFarsi(searchedOption)) TextAlign.Right else TextAlign.Left,
+                            textAlign = if (isFarsi(searchedOption)) TextAlign.Right else TextAlign.Left
                         ),
-                        leadingIcon = {
-                            Icon(imageVector = Icons.Outlined.Search, contentDescription = null)
-                        },
+                        leadingIcon = { Icon(Icons.Outlined.Search, null) },
                         maxLines = 1,
-                        placeholder = {
-                            Text(text = "Search")
-                        },
-                        interactionSource = remember { MutableInteractionSource() }
-                            .also { interactionSource ->
-                                LaunchedEffect(interactionSource) {
-                                    focusRequester.requestFocus()
-                                    interactionSource.interactions.collect {
-                                        if (it is PressInteraction.Release) {
-                                            onSearchTextFieldClicked()
-                                        }
-                                    }
+                        placeholder = { Text("Search") },
+                        interactionSource = remember { MutableInteractionSource() }.also { source ->
+                            LaunchedEffect(source) {
+                                focusRequester.requestFocus()
+                                source.interactions.collect {
+                                    if (it is PressInteraction.Release) onSearchTextFieldClicked()
                                 }
-                            },
+                            }
+                        }
                     )
 
-                    val items = if (filteredItems.isEmpty()) {
-                        listOfItems
-                    } else {
-                        filteredItems
-                    }
-
-                    items.forEach { selectedItem ->
-                        DropdownMenuItem(
-                            onClick = {
-                                keyboardController?.hide()
-                                if (selectedItem is Map.Entry<*, *> && selectedItem.value is Station) {
-                                    val station = selectedItem.value as Station
-                                    selectedOptionText =
-                                        "${station.name}\n${station.translations.fa}"
-                                    onDropDownItemSelected(selectedItem)
-                                }
-                                searchedOption = ""
-                                expanded = false
-                            },
-                            text = {
-                                dropdownItem(selectedItem)
-                            },
-                        )
+                    filteredItems.forEach { selectedItem ->
+                            DropdownMenuItem(
+                                contentPadding = PaddingValues(vertical = 10.dp),
+                                onClick = {
+                                    keyboardController?.hide()
+                                    if (selectedItem is Map.Entry<*, *> && selectedItem.value is Station) {
+                                        val station = selectedItem.value as Station
+                                        selectedOptionText = "${station.name}\n${station.translations.fa}"
+                                        onDropDownItemSelected(selectedItem)
+                                    }
+                                    searchedOption = ""
+                                    expanded = false
+                                },
+                                text = { dropdownItem(selectedItem) }
+                            )
+                        }
                     }
                 }
             }
-        }
     }
 }
-
-private val DropdownMenuVerticalPadding = 8.dp
