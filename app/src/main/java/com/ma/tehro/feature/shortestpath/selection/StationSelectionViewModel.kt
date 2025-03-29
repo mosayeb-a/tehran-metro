@@ -20,9 +20,9 @@ import kotlin.coroutines.cancellation.CancellationException
 
 @Immutable
 data class StationSelectionState(
-    val selectedEnStartStation: String = "Tajrish",
+    val selectedEnStartStation: String = "",
     val selectedFaStartStation: String = "",
-    val selectedEnDestStation: String = "Shahr-e Parand",
+    val selectedEnDestStation: String = "",
     val selectedFaDestStation: String = "",
     val stations: Map<String, Station> = emptyMap(),
     val findNearestLocationProgress: Boolean = false,
@@ -58,21 +58,17 @@ class StationSelectionViewModel @Inject constructor(
     fun findNearestStation(forceRefresh: Boolean = false) {
         viewModelScope.launch {
             if (!forceRefresh && _uiState.value.nearestStations.isNotEmpty()) {
-                val message = createBilingualMessage(
-                    fa = "محاسبه دوباره نزدیک‌ترین ایستگاه؟",
-                    en = "Recalculate nearest station?"
-                )
-
-                val actionLabel = createBilingualMessage(
-                    fa = "محاسبه دوباره",
-                    en = "Recalculate"
-                )
-
                 UiMessageManager.sendEvent(
                     UiMessage(
-                        message = message,
+                        message = createBilingualMessage(
+                            fa = "محاسبه دوباره نزدیک‌ترین ایستگاه؟",
+                            en = "Recalculate nearest station?"
+                        ),
                         action = Action(
-                            name = actionLabel,
+                            name = createBilingualMessage(
+                                fa = "محاسبه دوباره",
+                                en = "Recalculate"
+                            ),
                             action = { findNearestStation(forceRefresh = true) }
                         )
                     )

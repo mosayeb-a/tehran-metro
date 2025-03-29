@@ -24,3 +24,7 @@
     public static *** i(...);
     public static *** w(...);
 }
+-assumenosideeffects class java.lang.System {
+    public static java.io.PrintStream out;
+    public static java.io.PrintStream err;
+}

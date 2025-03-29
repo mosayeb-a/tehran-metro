@@ -20,8 +20,8 @@ android {
         applicationId = "com.ma.tehro"
         minSdk = 21
         targetSdk = 36
-        versionCode = 4
-        versionName = "0.3.0"
+        versionCode = 5
+        versionName = "0.5.0"
 
 
         val properties = Properties().apply {
@@ -40,7 +40,6 @@ android {
 
         vectorDrawables {
             useSupportLibrary = true
-//            generatedDensities = []  // Disable unused densities
         }
         resourceConfigurations += "en"
     }
@@ -79,9 +78,6 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
     }
     packaging {
         resources {

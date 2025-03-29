@@ -331,7 +331,7 @@ fun StationRow(
         modifier = modifier
             .fillMaxWidth()
             .height(78.dp)
-            .alpha(if (disabled) 0.8f else 1f)
+            .alpha(if (disabled) 0.93f else 1f)
             .background(color)
     ) {
         SingleNode(
