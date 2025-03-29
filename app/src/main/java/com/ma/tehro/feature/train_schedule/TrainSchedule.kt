@@ -35,6 +35,9 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.DraggableTabRow
+import com.ma.tehro.common.Message
+import com.ma.tehro.common.EmptyStatesFaces
+import com.ma.tehro.common.TimeUtils.remainingTime
 import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.fractionToTime
 import com.ma.tehro.common.getLineColorByNumber
@@ -94,7 +97,7 @@ fun TrainSchedule(
             }
 
             else ->
-                EmptyState(
+                Message(
                     modifier = Modifier.fillMaxSize(),
                     faMessage = "هیچ زمان‌بندی‌ای برای این ایستگاه ثبت نشده. به‌احتمالِ زیاد، ایستگاه غیرفعال است",
                     enMessage = "No schedule is available for this station. It is most likely inactive.",
@@ -353,31 +356,6 @@ private fun ScheduleTypeChips(
             )
         }
     }
-}
-
-fun remainingTime(target: Double): String {
-    val calendar = android.icu.util.Calendar.getInstance()
-
-    val currentSeconds = calendar.get(android.icu.util.Calendar.HOUR_OF_DAY) * 3600 +
-            calendar.get(android.icu.util.Calendar.MINUTE) * 60 +
-            calendar.get(android.icu.util.Calendar.SECOND)
-    val currentTimeFraction = currentSeconds / 86400.0
-
-    val remaining = target - currentTimeFraction
-    if (remaining <= 0) return "00:00:00"
-
-    val totalSeconds = (remaining * 86400).toInt()
-    val hours = totalSeconds / 3600
-    val minutes = (totalSeconds % 3600) / 60
-    val seconds = totalSeconds % 60
-
-    return StringBuilder(8)
-        .append(hours.toString().padStart(2, '0'))
-        .append(':')
-        .append(minutes.toString().padStart(2, '0'))
-        .append(':')
-        .append(seconds.toString().padStart(2, '0'))
-        .toString()
 }
 
 private fun bilingualScheduleTypeTitle(scheduleType: ScheduleType): String {

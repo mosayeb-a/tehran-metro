@@ -102,7 +102,7 @@ fun PathFinder(
                         modifier = Modifier
                             .fillMaxHeight()
                             .clickable{ onInfoClick() }
-                            .padding(horizontal = 6.dp ),
+                            .padding(end = 8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
@@ -217,7 +217,7 @@ fun EstimatedTimeDisplay(estimatedTime: BilingualName?) {
             modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.primary)
-                .padding(horizontal = 6.dp, vertical = 4.dp),
+                .padding(horizontal = 10.dp, vertical = 4.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -364,12 +364,12 @@ fun StationRow(
             ) {
                 Text(
                     text = "ساعت ${arrivalTime.toFarsiNumber()}",
-                    style = MaterialTheme.typography.bodySmall,
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
                 )
                 Text(
                     text = "ARRIVES AT $arrivalTime",
                     textAlign = TextAlign.Start,
-                    style = MaterialTheme.typography.bodySmall,
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 10.sp),
                 )
             }
         }

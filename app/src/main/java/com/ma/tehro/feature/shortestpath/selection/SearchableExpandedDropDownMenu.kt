@@ -41,6 +41,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDirection
@@ -81,17 +82,17 @@ fun <T> SearchableExpandedDropDownMenu(
     var searchedOption by rememberSaveable { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
     var debouncedSearch by remember { mutableStateOf("") }
-    val filteredItems by remember(debouncedSearch, listOfItems) {
-        derivedStateOf {
-            if (debouncedSearch.isEmpty()) listOfItems
-            else listOfItems.filter { searchPredicate(debouncedSearch, it) }
-        }
-    }
 
     val coroutineScope = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusRequester = remember { FocusRequester() }
 
+    val displayedItems by remember(debouncedSearch, listOfItems) {
+        derivedStateOf {
+            if (debouncedSearch.isEmpty()) listOfItems.take(40)
+            else listOfItems.filter { searchPredicate(debouncedSearch, it) }
+        }
+    }
 
     if (showDefaultSelectedItem && selectedOptionText.isEmpty()) {
         LaunchedEffect(Unit) {
@@ -103,7 +104,7 @@ fun <T> SearchableExpandedDropDownMenu(
 
     LaunchedEffect(searchedOption) {
         coroutineScope.launch {
-            delay(300)
+            delay(250)
             debouncedSearch = searchedOption
         }
     }
@@ -174,16 +175,16 @@ fun <T> SearchableExpandedDropDownMenu(
         )
 
         if (expanded) {
+            val screenHeightDp = LocalConfiguration.current.screenHeightDp.dp
+            val dynamicHeight = maxOf(screenHeightDp * 0.6f, 260.dp)
             DropdownMenu(
                 modifier = Modifier
                     .fillMaxWidth(0.75f)
-                    .heightIn(max = 260.dp),
+                    .height(dynamicHeight),
                 expanded = expanded,
                 onDismissRequest = { expanded = false }
             ) {
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(10.dp)
-                ) {
+                Column{
                     OutlinedTextField(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -212,24 +213,25 @@ fun <T> SearchableExpandedDropDownMenu(
                         }
                     )
 
-                    filteredItems.forEach { selectedItem ->
-                            DropdownMenuItem(
-                                contentPadding = PaddingValues(vertical = 10.dp),
-                                onClick = {
-                                    keyboardController?.hide()
-                                    if (selectedItem is Map.Entry<*, *> && selectedItem.value is Station) {
-                                        val station = selectedItem.value as Station
-                                        selectedOptionText = "${station.name}\n${station.translations.fa}"
-                                        onDropDownItemSelected(selectedItem)
-                                    }
-                                    searchedOption = ""
-                                    expanded = false
-                                },
-                                text = { dropdownItem(selectedItem) }
-                            )
-                        }
+                    displayedItems.forEach { selectedItem ->
+                        DropdownMenuItem(
+                            contentPadding = PaddingValues(vertical = 10.dp),
+                            onClick = {
+                                keyboardController?.hide()
+                                if (selectedItem is Map.Entry<*, *> && selectedItem.value is Station) {
+                                    val station = selectedItem.value as Station
+                                    selectedOptionText =
+                                        "${station.name}\n${station.translations.fa}"
+                                    onDropDownItemSelected(selectedItem)
+                                }
+                                searchedOption = ""
+                                expanded = false
+                            },
+                            text = { dropdownItem(selectedItem) }
+                        )
                     }
                 }
             }
+        }
     }
 }
