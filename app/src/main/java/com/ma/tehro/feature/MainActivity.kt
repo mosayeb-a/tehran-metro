@@ -2,17 +2,19 @@ package com.ma.tehro.feature
 
 import android.Manifest
 import android.content.IntentSender
+import android.graphics.Color
 import android.location.LocationManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
@@ -22,8 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.toArgb
 import androidx.core.app.ActivityCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -55,8 +55,6 @@ import com.ma.tehro.common.TrainScheduleScreen
 import com.ma.tehro.common.hasLocationPermission
 import com.ma.tehro.common.messenger.UiMessageManager
 import com.ma.tehro.common.navTypeOf
-import com.ma.tehro.common.setNavigationBarColor
-import com.ma.tehro.common.setStatusBarColor
 import com.ma.tehro.data.Station
 import com.ma.tehro.feature.detail.StationDetail
 import com.ma.tehro.feature.line.LineViewModel
@@ -73,8 +71,6 @@ import com.ma.tehro.feature.shortestpath.pathfinder.PathFinder
 import com.ma.tehro.feature.submit_suggestion.SubmitSuggestionViewModel
 import com.ma.tehro.feature.submit_suggestion.feedback.SubmitFeedback
 import com.ma.tehro.feature.submit_suggestion.station.SubmitStationInfo
-import com.ma.tehro.feature.theme.DarkGray
-import com.ma.tehro.feature.theme.Gray
 import com.ma.tehro.feature.theme.TehroTheme
 import com.ma.tehro.feature.train_schedule.TrainSchedule
 import com.ma.tehro.feature.train_schedule.TrainScheduleViewModel
@@ -99,8 +95,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setStatusBarColor(window, Gray.toArgb())
-        setNavigationBarColor(window, DarkGray.toArgb())
+        enableEdgeToEdge(SystemBarStyle.dark(Color.TRANSPARENT))
 
         settingsClient = LocationServices.getSettingsClient(this)
         locationSettingsRequest = LocationSettingsRequest.Builder()
@@ -143,9 +138,11 @@ class MainActivity : ComponentActivity() {
                         )
                     },
                 ) { innerPadding ->
+                    // This is just to silence linter complain about not use of inner padding
+                    // as each screen has it's own Scaffold also (which should be suboptimal)
+                    // thus the one here doesn't need to apply the paddings.
+                    innerPadding.let {}
                     NavHost(
-                        modifier = Modifier
-                            .padding(innerPadding),
                         navController = navController,
                         startDestination = LinesScreen,
                     ) {
