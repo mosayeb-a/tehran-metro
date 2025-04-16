@@ -20,6 +20,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
@@ -30,6 +32,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,9 +44,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.R
@@ -216,7 +221,7 @@ fun LineItem(
             )
         }
         Icon(
-            painter = painterResource(R.drawable.arrow_forward_24px),
+            imageVector = Icons.AutoMirrored.Default.ArrowForward,
             contentDescription = "See stations by line",
             tint = Color.White
         )
@@ -252,46 +257,48 @@ fun BranchSelectionDialog(
             color = MaterialTheme.colorScheme.secondaryContainer,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 22.dp, horizontal = 14.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Text(
-                    text = createBilingualMessage(
-                        fa = "انتخاب مسیر",
-                        en = "SELECT PATH"
-                    ),
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.bodyLarge.copy(color = Color.White),
-                    modifier = Modifier.fillMaxWidth()
-                )
+            CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 22.dp, horizontal = 14.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    Text(
+                        text = createBilingualMessage(
+                            fa = "انتخاب مسیر",
+                            en = "SELECT PATH"
+                        ),
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.bodyLarge.copy(color = Color.White),
+                        modifier = Modifier.fillMaxWidth()
+                    )
 
-                PathSelectionItem(
-                    faEndpoints = mainFaEndpoints,
-                    enEndpoints = mainEnEndpoints,
-                    backgroundColor = getLineColorByNumber(line).copy(alpha = .9f),
-                    interactionSource = mainInteractionSource,
-                    indication = indication,
-                    onClick = {
-                        onSelect(false)
-                        onDismiss()
-                    }
-                )
+                    PathSelectionItem(
+                        faEndpoints = mainFaEndpoints,
+                        enEndpoints = mainEnEndpoints,
+                        backgroundColor = getLineColorByNumber(line).copy(alpha = .9f),
+                        interactionSource = mainInteractionSource,
+                        indication = indication,
+                        onClick = {
+                            onSelect(false)
+                            onDismiss()
+                        }
+                    )
 
-                PathSelectionItem(
-                    faEndpoints = branchFaEndpoints,
-                    enEndpoints = branchEnEndpoints,
-                    backgroundColor = getLineColorByNumber(line),
-                    interactionSource = branchInteractionSource,
-                    indication = indication,
-                    onClick = {
-                        onSelect(true)
-                        onDismiss()
-                    }
-                )
+                    PathSelectionItem(
+                        faEndpoints = branchFaEndpoints,
+                        enEndpoints = branchEnEndpoints,
+                        backgroundColor = getLineColorByNumber(line),
+                        interactionSource = branchInteractionSource,
+                        indication = indication,
+                        onClick = {
+                            onSelect(true)
+                            onDismiss()
+                        }
+                    )
+                }
             }
         }
     }
@@ -330,7 +337,7 @@ private fun PathSelectionItem(
             modifier = Modifier.fillMaxWidth()
         )
         Icon(
-            painter = painterResource(R.drawable.arrow_forward_24px),
+            imageVector = Icons.AutoMirrored.Default.ArrowForward,
             contentDescription = "See stations by line",
             tint = Color.White,
             modifier = Modifier
