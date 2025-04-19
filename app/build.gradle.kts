@@ -119,5 +119,8 @@ dependencies {
     implementation(libs.osmdroid.android)
     implementation("com.google.android.gms:play-services-location:21.3.0")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+    implementation(libs.kotlinx.datetime)
+
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
 }

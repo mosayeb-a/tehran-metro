@@ -8,53 +8,68 @@ import com.ma.tehro.data.BilingualName
 import com.ma.tehro.data.repo.PathItem
 import com.ma.tehro.data.repo.TrainScheduleRepository
 import javax.inject.Inject
-import kotlin.collections.get
 
+/**
+ * Calculates train arrival times for stations along a given path, including transfer times between lines.
+ *
+ * @property trainScheduleRepository Repository for accessing train schedule data
+ */
 class PathTimeCalculator @Inject constructor(
-    private val trainScheduleRepository: TrainScheduleRepository
+    private val trainScheduleRepository: TrainScheduleRepository,
 ) {
+    /**
+     * Calculates station arrival times and total estimated journey time for a given path.
+     *
+     * @param path List of path items (titles and stations)
+     * @param lineChangeDelayMinutes Time to add for line changes (default: 8 minutes)
+     * @return Pair of station arrival times and total estimated journey time
+     */
     suspend fun calculateStationTimes(
         path: List<PathItem>,
+        lineChangeDelayMinutes: Int = 8
     ): Pair<Map<String, String>, BilingualName> {
-        val stationTimes = mutableMapOf<String, Double>()
-        var currentTime = 0.0
         var lineChanges = 0
         var currentLine = 0
         var currentDestination = ""
+        val stationTimes = mutableMapOf<String, Double>()
+        var currentTime = 0.0
 
-        path.forEach { item ->
+        path.forEachIndexed { index, item ->
             when (item) {
                 is PathItem.Title -> {
                     currentLine = item.en.substringAfter("Line ")
-                        .substringBefore(":").toIntOrNull() ?: return@forEach
+                        .substringBefore(":").toIntOrNull() ?: return@forEachIndexed
+
                     currentDestination = item.en.substringAfter(":")
                         .removePrefix("To ").trim()
                     lineChanges++
+
+                    val delayFraction = lineChangeDelayMinutes.toDouble() / (24 * 60.0)
+                    currentTime += delayFraction
                 }
 
                 is PathItem.StationItem -> {
-                    if (stationTimes.containsKey(item.station.name)) return@forEach
-                    val stationName = item.station.name
+                    if (stationTimes.containsKey(item.station.name)) return@forEachIndexed
 
                     val scheduleInfo = trainScheduleRepository.getScheduleByStation(
-                        stationName, currentLine, false
+                        item.station.name, currentLine, false
                     ).run {
                         find { it.destination.en == currentDestination }
                             ?: find { it.destination.en == LineEndpoints.getEn(currentLine, false)?.second }
                             ?: find { it.destination.en == LineEndpoints.getEn(currentLine, true)?.second }
-                    } ?: return@forEach
+                    } ?: return@forEachIndexed
 
-                    val todaySchedule =
-                        TimeUtils.getScheduleTypeForCurrentDay(scheduleInfo.schedules.keys.toList())
+                    val todaySchedule = TimeUtils.getScheduleTypeForCurrentDay(scheduleInfo.schedules.keys.toList())
+                    val schedules = scheduleInfo.schedules[todaySchedule]?.sorted() ?: return@forEachIndexed
 
-                    val schedules = scheduleInfo.schedules[todaySchedule]?.sorted() ?: return@forEach
-
-                    val referenceTime = if (currentTime == 0.0)
+                    val referenceTime = if (currentTime == 0.0) {
                         TimeUtils.getCurrentTimeAsDouble()
-                    else currentTime
+                    } else {
+                        currentTime
+                    }
 
-                    val nextTime = schedules.firstOrNull { it > referenceTime } ?: schedules.first()
-                    stationTimes[stationName] = nextTime
+                    val nextTime = schedules.firstOrNull { it >= referenceTime } ?: schedules.first()
+                    stationTimes[item.station.name] = nextTime
                     currentTime = nextTime
                 }
             }
@@ -64,6 +79,13 @@ class PathTimeCalculator @Inject constructor(
         return stationTimes.mapValues { fractionToTime(it.value) } to estimate
     }
 
+    /**
+     * Calculates the total estimated journey time based on station times and line changes.
+     *
+     * @param stationTimes Map of station names to their arrival times (as day fractions)
+     * @param lineChanges Number of line changes in the journey
+     * @return Bilingual estimated time (English and Farsi)
+     */
     private fun calculateFinalEstimateTime(
         stationTimes: Map<String, Double>,
         lineChanges: Int
