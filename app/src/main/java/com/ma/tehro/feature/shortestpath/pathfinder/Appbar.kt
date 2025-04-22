@@ -3,9 +3,14 @@ package com.ma.tehro.feature.shortestpath.pathfinder
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -22,7 +27,14 @@ import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.createBilingualMessage
 
 @Composable
-fun Appbar(modifier: Modifier=Modifier,fromEn: String, toEn: String, fromFa: String, toFa: String, onBack: () -> Unit) {
+fun Appbar(
+    modifier: Modifier = Modifier,
+    fromEn: String,
+    toEn: String,
+    fromFa: String,
+    toFa: String,
+    onBack: () -> Unit
+) {
     Column(modifier) {
         Appbar(
             title = createBilingualMessage(
