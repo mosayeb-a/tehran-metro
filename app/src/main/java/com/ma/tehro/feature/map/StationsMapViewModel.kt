@@ -1,11 +1,11 @@
 package com.ma.tehro.feature.map
 
+import com.ma.tehro.services.LocationClient
 import android.location.Location
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ma.tehro.data.Station
-import com.ma.tehro.services.LocationClient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

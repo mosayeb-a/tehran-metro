@@ -1,9 +1,9 @@
 package com.ma.tehro.di
 
+import com.ma.tehro.services.DefaultLocationClient
+import com.ma.tehro.services.LocationClient
 import android.app.Application
 import android.content.Context
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.ma.tehro.R
 import com.ma.tehro.data.Station
 import com.ma.tehro.data.repo.DataCorrectionRepository
@@ -14,8 +14,6 @@ import com.ma.tehro.data.repo.PathRepository
 import com.ma.tehro.data.repo.PathRepositoryImpl
 import com.ma.tehro.data.repo.TrainScheduleRepository
 import com.ma.tehro.data.repo.TrainScheduleRepositoryImpl
-import com.ma.tehro.services.DefaultLocationClient
-import com.ma.tehro.services.LocationClient
 import com.ma.tehro.services.LocationTracker
 import com.ma.tehro.services.LocationTrackerImpl
 import dagger.Module
@@ -66,18 +64,10 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideFusedLocationClient(
-        @ApplicationContext context: Context
-    ): FusedLocationProviderClient {
-        return LocationServices.getFusedLocationProviderClient(context)
-    }
-
-    @Provides
-    @Singleton
     fun provideLocationClient(
-        fusedLocationClient: FusedLocationProviderClient
+        @ApplicationContext context: Context,
     ): LocationClient {
-        return DefaultLocationClient(fusedLocationClient)
+        return DefaultLocationClient(context)
     }
 
     @Provides

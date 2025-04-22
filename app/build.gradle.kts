@@ -117,7 +117,6 @@ dependencies {
     implementation(libs.firebase.analytics)
 
     implementation(libs.osmdroid.android)
-    implementation("com.google.android.gms:play-services-location:21.3.0")
 
     implementation(libs.kotlinx.datetime)
 
