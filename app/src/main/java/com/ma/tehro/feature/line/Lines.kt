@@ -140,10 +140,10 @@ fun Lines(
                 }
             )
         }
-    ) { innerpadding ->
+    ) { innerPadding ->
         LazyColumn(
             state = lazyListState,
-            modifier = Modifier.padding(innerpadding)
+            contentPadding = innerPadding
         ) {
             items(lines, key = { it }) { line ->
                 LineItem(

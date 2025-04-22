@@ -185,43 +185,6 @@ fun fractionToTime(fraction: Double): String {
     return String.format(Locale.US, "%02d:%02d:%02d", hours, minutes, seconds)
 }
 
-fun setStatusBarColor(window: Window, color: Int) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
-        window.decorView.setOnApplyWindowInsetsListener { view, insets ->
-            val statusBarInsets = insets.getInsets(android.view.WindowInsets.Type.statusBars())
-            view.setBackgroundColor(color)
-            view.setPadding(0, statusBarInsets.top, 0, 0)
-            insets
-        }
-    } else {
-        window.statusBarColor = color
-    }
-
-
-    WindowCompat.getInsetsController(window, window.decorView).apply {
-        isAppearanceLightStatusBars = false
-    }
-}
-
-fun setNavigationBarColor(window: Window, color: Int) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
-        window.decorView.setOnApplyWindowInsetsListener { view, insets ->
-            val navigationBarInsets =
-                insets.getInsets(android.view.WindowInsets.Type.navigationBars())
-            view.setPadding(0, 0, 0, navigationBarInsets.bottom)
-            insets
-        }
-        window.navigationBarColor = color
-    } else {
-        window.navigationBarColor = color
-    }
-
-
-    WindowCompat.getInsetsController(window, window.decorView).apply {
-        isAppearanceLightNavigationBars = false
-    }
-}
-
 fun isFarsi(text: String): Boolean {
     if (text.isEmpty()) return false
     val firstChar = text.trim().firstOrNull() ?: return false
