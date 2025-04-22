@@ -25,17 +25,17 @@ class LineRepositoryImpl @Inject constructor(
             .sortedBy { station ->
                 station.positionsInLine.find { it.line == line }?.position
             }
-            .takeWhile { it.name != branchConfig.branchPoint }
+            .takeWhile { it.name != branchConfig.branchPoint.en }
             .toMutableList()
             .apply {
-                stations[branchConfig.branchPoint]?.let { add(it) }
+                stations[branchConfig.branchPoint.en]?.let { add(it) }
             }
 
         val remainingStations = if (useBranch) {
             branchConfig.branch.mapNotNull { stations[it] }
         } else {
             getDefaultOrderedStations(line)
-                .dropWhile { it.name != branchConfig.branchPoint }
+                .dropWhile { it.name != branchConfig.branchPoint.en }
                 .drop(1)
                 .filter { it.name !in branchConfig.branch }
         }
