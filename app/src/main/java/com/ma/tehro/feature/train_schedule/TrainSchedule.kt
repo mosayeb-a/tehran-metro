@@ -1,6 +1,5 @@
 package com.ma.tehro.feature.train_schedule
 
-import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,19 +9,24 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -30,23 +34,19 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.DraggableTabRow
-import com.ma.tehro.common.Message
 import com.ma.tehro.common.EmptyStatesFaces
+import com.ma.tehro.common.Message
 import com.ma.tehro.common.TimeUtils.remainingTime
 import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.fractionToTime
 import com.ma.tehro.common.getLineColorByNumber
-import com.ma.tehro.common.setStatusBarColor
 import com.ma.tehro.common.toFarsiNumber
-import com.ma.tehro.data.ScheduleType
 import com.ma.tehro.data.BilingualName
+import com.ma.tehro.data.ScheduleType
 import com.ma.tehro.data.repo.GroupedScheduleInfo
-import com.ma.tehro.feature.theme.Gray
 import kotlinx.coroutines.launch
 
 @Composable
@@ -59,36 +59,44 @@ fun TrainSchedule(
     onScheduleTypeSelected: (BilingualName, ScheduleType?) -> Unit
 ) {
     val lineColor = remember { getLineColorByNumber(lineNumber) }
-    val window = (LocalView.current.context as Activity).window
 
-    DisposableEffect(lineColor) {
-        setStatusBarColor(window, lineColor.toArgb())
-        onDispose {
-            setStatusBarColor(window, Gray.toArgb())
+    // quick fix
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            Column(
+                // quick fix
+                modifier = Modifier
+                    .background(lineColor)
+                    .windowInsetsPadding(
+                        WindowInsets.systemBars.only(WindowInsetsSides.Top)
+                    )
+            ) {
+                Appbar(
+                    title = createBilingualMessage(
+                        fa = "زمان‌بندی حرکت قطار برای ایستگاه $faStationName",
+                        en = "train schedule for ${state.stationName}"
+                    ),
+                    handleBack = true,
+                    onBackClick = onBack,
+                    modifier = Modifier.height(43.dp),
+                    backgroundColor = lineColor
+                )
+                if (state.schedules.isNotEmpty()) {
+                    Content(
+                        schedules = state.schedules,
+                        processedSchedules = state.processedSchedules,
+                        onScheduleTypeSelected = onScheduleTypeSelected,
+                        selectedScheduleTypes = state.selectedScheduleTypes,
+                        lineColor = lineColor,
+                        currentTimeAsDouble = state.currentTimeAsDouble
+                    )
+                }
+            }
         }
-    }
-
-    Column(modifier = modifier) {
-        Appbar(
-            title = createBilingualMessage(
-                fa = "زمان‌بندی حرکت قطار برای ایستگاه $faStationName",
-                en = "train schedule for ${state.stationName}"
-            ),
-            handleBack = true,
-            onBackClick = onBack,
-            modifier = Modifier.height(43.dp),
-            backgroundColor = lineColor
-        )
+    ) { padding ->
+        padding.let {}
         when {
-            state.schedules.isNotEmpty() -> AppBarDetail(
-                schedules = state.schedules,
-                processedSchedules = state.processedSchedules,
-                onScheduleTypeSelected = onScheduleTypeSelected,
-                selectedScheduleTypes = state.selectedScheduleTypes,
-                lineColor = lineColor,
-                currentTimeAsDouble = state.currentTimeAsDouble
-            )
-
             state.isLoading -> Box(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
@@ -108,7 +116,7 @@ fun TrainSchedule(
 }
 
 @Composable
-fun AppBarDetail(
+fun Content(
     modifier: Modifier = Modifier,
     schedules: List<GroupedScheduleInfo>,
     processedSchedules: Map<BilingualName, List<ScheduleSection>>,
@@ -120,7 +128,9 @@ fun AppBarDetail(
     val destinations = remember(schedules) { schedules.map { it.destination } }
 
     DraggableTabRow(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .background(MaterialTheme.colorScheme.primary)
+            .fillMaxWidth(),
         tabsList = destinations,
         lineColor = lineColor,
         onTabSelected = { page, lazyListState ->
@@ -200,7 +210,8 @@ private fun ScheduleList(
             HorizontalDivider()
 
             LazyColumn(
-                state = lazyListState,
+                state = lazyListState,//            .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Top)),
+
                 contentPadding = PaddingValues(vertical = 8.dp)
             ) {
                 val sectionsToShow = if (selectedType != null) {
