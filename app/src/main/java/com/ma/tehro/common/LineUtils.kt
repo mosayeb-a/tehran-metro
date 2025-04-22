@@ -6,7 +6,7 @@ import com.ma.tehro.data.BilingualName
 
 val lineBranches = mapOf(
     1 to BranchConfig(
-        branchPoint = "Shahed - BagherShahr",
+        branchPoint = BilingualName("Shahed - BagherShahr", "شاهد - باقرشهر"),
         branch = listOf(
             "Namayeshgah-e Shahr-e Aftab",
             "Vavan",
@@ -15,14 +15,14 @@ val lineBranches = mapOf(
         )
     ),
     4 to BranchConfig(
-        branchPoint = "Bimeh",
+        branchPoint = BilingualName("Bimeh", "بیمه"),
         branch = listOf(
             "Mehrabad Airport Terminal 1&2",
             "Mehrabad Airport Terminal 4&6"
         )
     ),
     5 to BranchConfig(
-        branchPoint = "Golshahr",
+        branchPoint = BilingualName("Golshahr", "گلشهر"),
         branch = listOf(
             "Shahid Sepahbod Qasem Soleimani"
         )
@@ -33,10 +33,16 @@ object LineEndpoints {
     private val get = mapOf(
         1 to LineBranches(
             main = BilingualName("Tajrish", "تجریش") to BilingualName("Kahrizak", "کهریزک"),
-            branch = BilingualName("Tajrish", "تجریش") to BilingualName("Shahr-e Parand", "شهر پرند")
+            branch = BilingualName("Tajrish", "تجریش") to BilingualName(
+                "Shahr-e Parand",
+                "شهر پرند"
+            )
         ),
         2 to LineBranches(
-            main = BilingualName("Farhangsara", "فرهنگسرا") to BilingualName("Tehran (Sadeghiyeh)", "صادقیه")
+            main = BilingualName("Farhangsara", "فرهنگسرا") to BilingualName(
+                "Tehran (Sadeghiyeh)",
+                "صادقیه"
+            )
         ),
         3 to LineBranches(
             main = BilingualName("Qa'em", "قائم") to BilingualName("Azadegan", "آزادگان")
@@ -52,7 +58,10 @@ object LineEndpoints {
             ) to BilingualName("Mehrabad Airport Terminal 4&6", "ترمینال ۴و۶ فرودگاه مهرآباد")
         ),
         5 to LineBranches(
-            main = BilingualName("Tehran (Sadeghiyeh)", "صادقیه") to BilingualName("Golshahr", "گلشهر"),
+            main = BilingualName("Tehran (Sadeghiyeh)", "صادقیه") to BilingualName(
+                "Golshahr",
+                "گلشهر"
+            ),
             branch = BilingualName(
                 "Tehran (Sadeghiyeh)",
                 "صادقیه"

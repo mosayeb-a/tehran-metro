@@ -40,123 +40,173 @@ class PathRepositoryImpl @Inject constructor(
 
     override fun getStations(): Map<String, Station> = stations
 
+    /**
+     * Finds the shortest path between two metro stations with direction and line titles.
+     *
+     * This function uses the shortest path computed by [findShortestPath], which employs Dijkstra's
+     * algorithm to minimize the total cost. The cost is calculated as:
+     * - **Station Cost**: Each station traversal costs 3 points (configurable via stationCost).
+     * - **Line Change Cost**: Each line change costs 6 points (configurable via lineChangeCost).
+     * - **Total Cost Formula**: (number of stations × stationCost) + (number of line changes × lineChangeCost)
+     *
+     * The function enhances the path by:
+     * - adding titles for each line segment (e.g: "Line 1: To Kahrizak").
+     * - handling branch stations:
+     *   - If the first station is a branch station, the title uses the branch point (e.g., "To Shahed - BagherShahr").
+     *   - If the last station is a branch station, a new segment is created (e.g., "To Shahr-e Parand").
+     * - determining direction (forward/backward) using station positions in positionsInLine.
+     *
+     * @param from The starting station name.
+     * @param to The destination station name.
+     * @return A list of [PathItem] objects representing the path with titles and stations.
+     */
     override suspend fun findShortestPathWithDirection(from: String, to: String): List<PathItem> {
-        val result = findShortestPath(stations, from, to)
-        if (result.path.isEmpty()) return emptyList()
-
-        val directions = mutableListOf<PathItem>()
+        val path = findShortestPath(stations, from, to).path
+        val result = mutableListOf<PathItem>()
         var currentLine: Int? = null
-        var previousStation: Station? = null
-        val firstStation = stations[result.path.first()] ?: return emptyList()
-        val secondStation = if (result.path.size > 1) stations[result.path[1]] else null
+        var isBranchSegment = false
 
-        val initialLine = if (secondStation != null) {
-            firstStation.positionsInLine.firstOrNull { firstPos ->
-                secondStation.positionsInLine.any { it.line == firstPos.line }
-            }?.line ?: firstStation.lines.first()
-        } else {
-            firstStation.lines.first()
-        }
-
-        directions.add(
-            PathItem.StationItem(
-                station = firstStation,
-                isPassthrough = firstStation.disabled,
-                lineNumber = initialLine
-            )
+        fun createTitle(line: Int, enDirection: String, faDirection: String) = PathItem.Title(
+            en = "Line $line: To $enDirection",
+            fa = "خط ${line.toFarsiNumber()}: به سمت $faDirection"
         )
 
-        for (i in 0 until result.path.size - 1) {
-            val currentStationName = result.path[i]
-            val nextStationName = result.path[i + 1]
+        fun getDirectionEndpoints(
+            line: Int,
+            useBranch: Boolean,
+            isForward: Boolean
+        ): Pair<String, String>? {
+            val enEndpoints = LineEndpoints.getEn(line, useBranch) ?: return null
+            val faEndpoints = LineEndpoints.getFa(line, useBranch) ?: return null
+            return if (isForward) enEndpoints.second to faEndpoints.second
+            else enEndpoints.first to faEndpoints.first
+        }
 
-            val currentStation = stations[currentStationName] ?: continue
-            val nextStation = stations[nextStationName] ?: continue
+        path.forEachIndexed { index, stationName ->
+            val currentStation = stations[stationName]!!
+            val nextStation = path.getOrNull(index + 1)?.let { stations[it] }
+            val sharedLines = nextStation?.lines?.intersect(currentStation.lines)?.takeIf { it.isNotEmpty() }
 
-            val currentLinePosition = currentStation.positionsInLine.firstOrNull { pos ->
-                nextStation.positionsInLine.any { it.line == pos.line }
-            } ?: continue
-
-            val nextLinePosition = nextStation.positionsInLine.first { it.line == currentLinePosition.line }
-
-            if (currentLine != currentLinePosition.line) {
-                currentLine = currentLinePosition.line
-                val lastStationName = result.path.last()
+            // initialize the line and title if not set
+            // Formula: If no line is set and there are shared lines, select the first line and determine
+            // the direction. For branch starts, use the branch point; otherwise, use main/branch endpoints.
+            if (currentLine == null && sharedLines != null) {
+                currentLine = sharedLines.first()
                 val branchConfig = lineBranches[currentLine]
-                val useBranch = branchConfig?.let {
-                    val isLastStationBranch = lastStationName in it.branch
-                    val isLastStationBranchPoint = lastStationName == it.branchPoint
-                    isLastStationBranch && !isLastStationBranchPoint
-                } ?: false
+                val isBranchStart = branchConfig?.branch?.contains(currentStation.name) == true
+                isBranchSegment = isBranchStart && LineEndpoints.hasBranch(currentLine)
 
-                val enEndpoints = LineEndpoints.getEn(line = currentLine, useBranch = useBranch) ?: continue
-                val faEndpoints = LineEndpoints.getFa(line = currentLine, useBranch = useBranch) ?: continue
+                val isForward = currentStation.positionsInLine.firstOrNull { it.line == currentLine }
+                    ?.let { currentPos ->
+                        nextStation.positionsInLine.firstOrNull { it.line == currentLine }
+                            ?.let { nextPos -> currentPos.position < nextPos.position }
+                    } != false
 
-                if (currentLinePosition.position < nextLinePosition.position) {
-                    directions.add(
-                        PathItem.Title(
-                            fa = "خط ${currentLine.toFarsiNumber()}: به سمت ${faEndpoints.second}",
-                            en = "Line $currentLine: To ${enEndpoints.second}"
-                        )
-                    )
+                val (enDirection, faDirection) = if (isBranchStart) {
+                    branchConfig.branchPoint.en to branchConfig.branchPoint.fa
                 } else {
-                    directions.add(
-                        PathItem.Title(
-                            fa = "خط ${currentLine.toFarsiNumber()}: به سمت ${faEndpoints.first}",
-                            en = "Line $currentLine: To ${enEndpoints.first}"
-                        )
-                    )
+                    getDirectionEndpoints(currentLine, isBranchSegment, isForward) ?: return@forEachIndexed
                 }
 
-                if (previousStation != null) {
-                    directions.add(
+                result.add(createTitle(currentLine, enDirection, faDirection))
+            }
+
+            // add the current station to the path
+            // formula: Each station is added with its line number and passthrough status (disabled stations
+            // are marked as passthrough). if no line is set, use -1 as a fallback.
+            result.add(
+                PathItem.StationItem(
+                    station = currentStation,
+                    isPassthrough = currentStation.disabled,
+                    lineNumber = currentLine ?: -1
+                )
+            )
+
+            // handle branch transitions (branch to main or main to branch)
+            // formula: check if the current station is a branch point and adjust the segment type
+            // (branch or main). add a new title and re-add the branch point for the new segment.
+            if (currentLine != null && nextStation != null) {
+                val branchConfig = lineBranches[currentLine]
+                val isLastBranch = branchConfig?.branch?.contains(nextStation.name) == true
+                val isBranchPoint = branchConfig?.branchPoint?.en == currentStation.name
+
+                // transition from branch to main line (e.g: from "Namayeshgah-e Shahr-e Aftab" to main line)
+                if (isBranchSegment && isBranchPoint) {
+                    isBranchSegment = false
+                    val isForward = currentStation.positionsInLine.firstOrNull { it.line == currentLine }
+                        ?.let { currentPos ->
+                            nextStation.positionsInLine.firstOrNull { it.line == currentLine }
+                                ?.let { nextPos -> currentPos.position < nextPos.position }
+                        } != false
+
+                    val (enDirection, faDirection) = getDirectionEndpoints(currentLine, false, isForward)
+                        ?: return@forEachIndexed
+
+                    result.add(createTitle(currentLine, enDirection, faDirection))
+                    result.add(
                         PathItem.StationItem(
                             station = currentStation,
                             isPassthrough = currentStation.disabled,
-                            lineNumber = currentLinePosition.line
+                            lineNumber = currentLine
+                        )
+                    )
+                }
+
+                // transition to branch (e.g: to "Shahr-e Parand" when reaching "Shahed - BagherShahr")
+                if (isLastBranch && isBranchPoint) {
+                    isBranchSegment = true
+                    val (enDirection, faDirection) = getDirectionEndpoints(currentLine, true, true)
+                        ?: return@forEachIndexed
+
+                    result.add(createTitle(currentLine, enDirection, faDirection))
+                    result.add(
+                        PathItem.StationItem(
+                            station = currentStation,
+                            isPassthrough = currentStation.disabled,
+                            lineNumber = currentLine
                         )
                     )
                 }
             }
 
-            if (previousStation == null || previousStation.name != nextStation.name) {
-                directions.add(
+            // handle line changes (non-branch)
+            // formula: If the next station is on a different line, switch to the new line, determine
+            // the direction, and add a new title. for branch starts, use the branch point; otherwise,
+            // use main/branch endpoints.
+            if (nextStation != null && sharedLines?.contains(currentLine) != true) {
+                val newLine = sharedLines?.firstOrNull() ?: return@forEachIndexed
+                currentLine = newLine
+
+                val branchConfig = lineBranches[newLine]
+                val isBranchStart = branchConfig?.branch?.contains(currentStation.name) == true
+                isBranchSegment = isBranchStart && LineEndpoints.hasBranch(newLine)
+
+                val isForward = currentStation.positionsInLine.firstOrNull { it.line == newLine }
+                    ?.let { currentPos ->
+                        nextStation.positionsInLine.firstOrNull { it.line == newLine }
+                            ?.let { nextPos -> currentPos.position < nextPos.position }
+                    } != false
+
+                val (enDirection, faDirection) = if (isBranchStart) {
+                    branchConfig.branchPoint.en to branchConfig.branchPoint.fa
+                } else {
+                    getDirectionEndpoints(newLine, isBranchSegment, isForward) ?: return@forEachIndexed
+                }
+
+                result.add(createTitle(newLine, enDirection, faDirection))
+                result.add(
                     PathItem.StationItem(
-                        station = nextStation,
-                        isPassthrough = nextStation.disabled,
-                        lineNumber = currentLinePosition.line
+                        station = currentStation,
+                        isPassthrough = currentStation.disabled,
+                        lineNumber = newLine
                     )
                 )
             }
-
-            previousStation = nextStation
         }
 
-        if (directions.size > 1) {
-            directions.swap(0, 1)
-        }
-
-        return directions
+        return result
     }
-    /**
-     * Finds the optimal path between two metro stations considering both distance and line changes.
-     *
-     * This implementation uses Dijkstra's algorithm with a priority queue to find the path that
-     * minimizes the total cost, where cost is calculated based on:
-     * - Number of stations traveled (stationCost per station)
-     * - Number of line changes required (lineChangeCost per change)
-     *
-     * Cost Calculation:
-     * - Base cost per station: 3 points (configurable via stationCost)
-     * - Additional cost for line change: 6 points (configurable via lineChangeCost)
-     * - Total path cost = (number of stations × stationCost) + (number of line changes × lineChangeCost)
-     *
-     * Example:
-     * Path with 5 stations and 1 line change:
-     * - Station cost: 5 × 3 = 15
-     * - Line change cost: 1 × 6 = 6
-     * - Total cost: 21
-     **/
+
     private fun countLineChanges(path: List<String>, stations: Map<String, Station>): Int {
         var lineChanges = 0
         var currentLine: Int? = null
@@ -179,22 +229,32 @@ class PathRepositoryImpl @Inject constructor(
         return lineChanges
     }
 
-    private fun findShortestPath(
+    /**
+     * The pathfinding formula is implemented in two stages:
+     *  -shortest path calculation:
+     *      -uses dijkstra's algorithm to find the path with the minimum total cost.
+     * -cost formula (number of stations × stationCost) + (number of line changes × lineChangeCost).
+     * example: for a path with 5 stations and 1 line change:
+     *  station cost: 5 × 3 = 15
+     *  line change cost: 1 × 6 = 6
+     *  total cost: 15 + 6 = 21
+     * the algorithm considers all possible lines between stations and penalizes line changes to prefer paths with fewer transfers.
+     */
+    fun findShortestPath(
         stations: Map<String, Station>,
         from: String,
         to: String,
         stationCost: Int = 3,
-        lineChangeCost: Int = 6 // we can set it to 10
+        lineChangeCost: Int = 6
     ): PathResult {
         val queue = PriorityQueue<PathCost>(64, compareBy { it.cost })
-//        private val visited = ConcurrentHashMap<Pair<String, Int?>, Int>()
         val visited = mutableMapOf<Pair<String, Int?>, Int>()
 
         queue.add(PathCost(path = listOf(from), cost = 0, currentLine = null))
 
         while (queue.isNotEmpty()) {
-            val current = queue.poll()
-            val currentStationName = current!!.path.last()
+            val current = queue.poll()!!
+            val currentStationName = current.path.last()
 
             if (currentStationName == to) {
                 val lineChanges = countLineChanges(current.path, stations)
@@ -233,11 +293,5 @@ class PathRepositoryImpl @Inject constructor(
         }
 
         return PathResult(path = emptyList(), lineChanges = 0)
-    }
-
-    private fun MutableList<PathItem>.swap(index1: Int, index2: Int) {
-        val temp = this[index1]
-        this[index1] = this[index2]
-        this[index2] = temp
     }
 }
