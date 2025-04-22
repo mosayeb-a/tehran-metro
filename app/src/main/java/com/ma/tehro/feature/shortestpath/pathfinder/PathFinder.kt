@@ -89,6 +89,7 @@ fun PathFinder(
             Column(
                 // quick fix
                 modifier = Modifier
+                    .background(MaterialTheme.colorScheme.primary)
                     .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Top)
                 )
             ) {
