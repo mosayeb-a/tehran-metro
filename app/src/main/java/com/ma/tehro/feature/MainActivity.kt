@@ -1,13 +1,14 @@
 package com.ma.tehro.feature
 
 import android.Manifest
-import android.content.IntentSender
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
+import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.EnterTransition
@@ -24,7 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
-import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
@@ -34,12 +35,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.LocationSettingsRequest
-import com.google.android.gms.location.Priority
-import com.google.android.gms.location.SettingsClient
 import com.ma.tehro.common.AppSnackbar
 import com.ma.tehro.common.LinesScreen
 import com.ma.tehro.common.MapScreen
@@ -52,7 +47,6 @@ import com.ma.tehro.common.StationsScreen
 import com.ma.tehro.common.SubmitFeedbackScreen
 import com.ma.tehro.common.SubmitStationInfoScreen
 import com.ma.tehro.common.TrainScheduleScreen
-import com.ma.tehro.common.hasLocationPermission
 import com.ma.tehro.common.messenger.UiMessageManager
 import com.ma.tehro.common.navTypeOf
 import com.ma.tehro.common.setNavigationBarColor
@@ -66,10 +60,10 @@ import com.ma.tehro.feature.map.StationsMap
 import com.ma.tehro.feature.map.StationsMapViewModel
 import com.ma.tehro.feature.shortestpath.guide.PathDescription
 import com.ma.tehro.feature.shortestpath.guide.PathDescriptionViewModel
+import com.ma.tehro.feature.shortestpath.pathfinder.PathFinder
 import com.ma.tehro.feature.shortestpath.pathfinder.PathViewModel
 import com.ma.tehro.feature.shortestpath.selection.StationSelectionViewModel
 import com.ma.tehro.feature.shortestpath.selection.StationSelector
-import com.ma.tehro.feature.shortestpath.pathfinder.PathFinder
 import com.ma.tehro.feature.submit_suggestion.SubmitSuggestionViewModel
 import com.ma.tehro.feature.submit_suggestion.feedback.SubmitFeedback
 import com.ma.tehro.feature.submit_suggestion.station.SubmitStationInfo
@@ -86,27 +80,23 @@ import kotlin.reflect.typeOf
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private var pendingGpsCallback: (() -> Unit)? = null
-    private val locationRequest: LocationRequest by lazy {
-        LocationRequest.Builder(1000L)
-            .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
-            .setMinUpdateIntervalMillis(500L)
-            .build()
-    }
 
-    private lateinit var locationSettingsRequest: LocationSettingsRequest
-    private lateinit var settingsClient: SettingsClient
+    private val requestLocationPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            pendingGpsCallback?.let { it() }
+        } else {
+            Toast.makeText(this, "دسترسی به موقعیت مکانی رد شد.", Toast.LENGTH_SHORT).show()
+        }
+        pendingGpsCallback = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setStatusBarColor(window, Gray.toArgb())
         setNavigationBarColor(window, DarkGray.toArgb())
-
-        settingsClient = LocationServices.getSettingsClient(this)
-        locationSettingsRequest = LocationSettingsRequest.Builder()
-            .addLocationRequest(locationRequest)
-            .setAlwaysShow(true)
-            .build()
 
         setContent {
             TehroTheme {
@@ -144,8 +134,7 @@ class MainActivity : ComponentActivity() {
                     },
                 ) { innerPadding ->
                     NavHost(
-                        modifier = Modifier
-                            .padding(innerPadding),
+                        modifier = Modifier.padding(innerPadding),
                         navController = navController,
                         startDestination = LinesScreen,
                     ) {
@@ -153,23 +142,12 @@ class MainActivity : ComponentActivity() {
                             val metroViewModel: LineViewModel = hiltViewModel(it)
                             Lines(
                                 onlineClick = { line, isBranch ->
-                                    navController.navigate(
-                                        StationsScreen(
-                                            line,
-                                            isBranch
-                                        )
-                                    )
+                                    navController.navigate(StationsScreen(line, isBranch))
                                 },
                                 lines = metroViewModel.getLines(),
-                                onFindPathClicked = {
-                                    navController.navigate(StationSelectorScreen)
-                                },
-                                onMapClick = {
-                                    navController.navigate(MapScreen)
-                                },
-                                onSubmitFeedbackClick = {
-                                    navController.navigate(SubmitFeedbackScreen)
-                                }
+                                onFindPathClicked = { navController.navigate(StationSelectorScreen) },
+                                onMapClick = { navController.navigate(MapScreen) },
+                                onSubmitFeedbackClick = { navController.navigate(SubmitFeedbackScreen) }
                             )
                         }
                         baseComposable<MapScreen> {
@@ -177,15 +155,10 @@ class MainActivity : ComponentActivity() {
                             StationsMap(
                                 onFindCurrentLocationClick = {
                                     if (hasLocationPermission()) {
-                                        checkAndPromptEnableGPS {
-                                            viewModel.getCurrentLocation()
-                                        }
+                                        ensureGpsEnabled { viewModel.getCurrentLocation() }
                                     } else {
-                                        ActivityCompat.requestPermissions(
-                                            this@MainActivity,
-                                            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                                            100
-                                        )
+                                        pendingGpsCallback = { ensureGpsEnabled { viewModel.getCurrentLocation() } }
+                                        requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
                                     }
                                 },
                                 viewState = viewModel.uiState.collectAsStateWithLifecycle().value,
@@ -204,11 +177,7 @@ class MainActivity : ComponentActivity() {
                                 onBackClick = { navController.popBackStack() },
                                 onStationClick = { station, line ->
                                     navController.navigate(
-                                        StationDetailScreen(
-                                            station = station,
-                                            lineNumber = line,
-                                            useBranch = args.useBranch
-                                        )
+                                        StationDetailScreen(station = station, lineNumber = line, useBranch = args.useBranch)
                                     )
                                 },
                             )
@@ -243,17 +212,11 @@ class MainActivity : ComponentActivity() {
                                 },
                                 findNearestStationAsStart = {
                                     if (hasLocationPermission()) {
-                                        checkAndPromptEnableGPS {
-                                            viewModel.findNearestStation()
-                                        }
-
-
+                                        ensureGpsEnabled { viewModel.findNearestStation() }
                                     } else {
-                                        ActivityCompat.requestPermissions(
-                                            this@MainActivity,
-                                            arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                                            100
-                                        )
+
+                                        pendingGpsCallback = { ensureGpsEnabled { viewModel.findNearestStation() } }
+                                        requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
                                     }
                                 },
                             )
@@ -269,11 +232,7 @@ class MainActivity : ComponentActivity() {
                                 toEn = args.enDestination,
                                 onStationClick = { station, line ->
                                     navController.navigate(
-                                        StationDetailScreen(
-                                            station = station,
-                                            lineNumber = line,
-                                            useBranch = false
-                                        )
+                                        StationDetailScreen(station = station, lineNumber = line, useBranch = false)
                                     )
                                 },
                                 fromFa = args.startFaStation,
@@ -324,17 +283,13 @@ class MainActivity : ComponentActivity() {
                         baseComposable<PathDescriptionScreen> {
                             val viewModel: PathDescriptionViewModel = hiltViewModel(it)
                             val state by viewModel.uiState.collectAsStateWithLifecycle()
-                            PathDescription(viewState = state, onBackClick = {navController.popBackStack()})
+                            PathDescription(viewState = state, onBackClick = { navController.popBackStack() })
                         }
                         baseComposable<SubmitFeedbackScreen> {
                             val viewModel: SubmitSuggestionViewModel = hiltViewModel(it)
                             val state by viewModel.state.collectAsStateWithLifecycle()
                             SubmitFeedback(
-                                onSendMessageClicked = { message ->
-                                    viewModel.sendSimpleFeedback(
-                                        message
-                                    )
-                                },
+                                onSendMessageClicked = { message -> viewModel.sendSimpleFeedback(message) },
                                 viewState = state,
                                 onBack = { navController.popBackStack() }
                             )
@@ -359,56 +314,33 @@ class MainActivity : ComponentActivity() {
     }
 
     private val enableLocationLauncher = registerForActivityResult(
-        ActivityResultContracts.StartIntentSenderForResult()
-    ) { result ->
-        when (result.resultCode) {
-            RESULT_OK -> {
-                val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
-                val isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-                if (isGpsEnabled) {
-                    pendingGpsCallback?.invoke()
-                }
-            }
-
-            else -> {
-                Toast.makeText(
-                    this,
-                    "GPS is required to find the nearest station",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            pendingGpsCallback?.invoke()
+        } else {
+            Toast.makeText(this, "برای یافتن نزدیک ترین ایستگاه، روشن بودن GPS ضروری است.", Toast.LENGTH_SHORT).show()
         }
         pendingGpsCallback = null
     }
 
-    private fun checkAndPromptEnableGPS(onSuccess: () -> Unit) {
-        pendingGpsCallback = onSuccess
+    private fun ensureGpsEnabled(onSuccess: () -> Unit) {
+        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            onSuccess()
+        } else {
+            pendingGpsCallback = onSuccess
+            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            enableLocationLauncher.launch(intent)
+        }
+    }
 
-        settingsClient.checkLocationSettings(locationSettingsRequest)
-            .addOnSuccessListener {
-
-                onSuccess()
-                pendingGpsCallback = null
-            }
-            .addOnFailureListener { exception ->
-                if (exception is ResolvableApiException) {
-                    try {
-
-                        enableLocationLauncher.launch(
-                            IntentSenderRequest.Builder(exception.resolution).build()
-                        )
-                    } catch (sendEx: IntentSender.SendIntentException) {
-                        pendingGpsCallback = null
-                    }
-                } else {
-                    pendingGpsCallback = null
-                    Toast.makeText(
-                        this,
-                        "Unable to enable GPS",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
+    private fun hasLocationPermission(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
     }
 }
 
