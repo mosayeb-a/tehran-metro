@@ -190,3 +190,23 @@ fun isFarsi(text: String): Boolean {
     val firstChar = text.trim().firstOrNull() ?: return false
     return firstChar in '\u0600'..'\u06FF'
 }
+
+
+fun setNavigationBarColor(window: Window, color: Int) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+        window.decorView.setOnApplyWindowInsetsListener { view, insets ->
+            val navigationBarInsets =
+                insets.getInsets(android.view.WindowInsets.Type.navigationBars())
+            view.setPadding(0, 0, 0, navigationBarInsets.bottom)
+            insets
+        }
+        window.navigationBarColor = color
+    } else {
+        window.navigationBarColor = color
+    }
+
+
+    WindowCompat.getInsetsController(window, window.decorView).apply {
+        isAppearanceLightNavigationBars = false
+    }
+}

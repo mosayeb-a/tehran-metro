@@ -3,7 +3,6 @@ package com.ma.tehro.feature
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.IntentSender
 import android.graphics.Color
 import android.location.LocationManager
 import android.os.Bundle
@@ -13,12 +12,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
@@ -28,10 +25,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.content.ContextCompat
-import androidx.core.app.ActivityCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
@@ -71,6 +66,7 @@ import com.ma.tehro.feature.shortestpath.selection.StationSelector
 import com.ma.tehro.feature.submit_suggestion.SubmitSuggestionViewModel
 import com.ma.tehro.feature.submit_suggestion.feedback.SubmitFeedback
 import com.ma.tehro.feature.submit_suggestion.station.SubmitStationInfo
+import com.ma.tehro.feature.theme.Gray
 import com.ma.tehro.feature.theme.TehroTheme
 import com.ma.tehro.feature.train_schedule.TrainSchedule
 import com.ma.tehro.feature.train_schedule.TrainScheduleViewModel
@@ -97,7 +93,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        enableEdgeToEdge(SystemBarStyle.dark(Color.TRANSPARENT))
+        enableEdgeToEdge(
+            SystemBarStyle.dark(Color.TRANSPARENT),
+            SystemBarStyle.dark(Gray.toArgb())
+        )
 
         setContent {
             TehroTheme {
@@ -139,7 +138,6 @@ class MainActivity : ComponentActivity() {
                     // thus the one here doesn't need to apply the paddings.
                     innerPadding.let {}
                     NavHost(
-                        modifier = Modifier.padding(innerPadding),
                         navController = navController,
                         startDestination = LinesScreen,
                     ) {
@@ -152,7 +150,11 @@ class MainActivity : ComponentActivity() {
                                 lines = metroViewModel.getLines(),
                                 onFindPathClicked = { navController.navigate(StationSelectorScreen) },
                                 onMapClick = { navController.navigate(MapScreen) },
-                                onSubmitFeedbackClick = { navController.navigate(SubmitFeedbackScreen) }
+                                onSubmitFeedbackClick = {
+                                    navController.navigate(
+                                        SubmitFeedbackScreen
+                                    )
+                                }
                             )
                         }
                         baseComposable<MapScreen> {
@@ -162,7 +164,8 @@ class MainActivity : ComponentActivity() {
                                     if (hasLocationPermission()) {
                                         ensureGpsEnabled { viewModel.getCurrentLocation() }
                                     } else {
-                                        pendingGpsCallback = { ensureGpsEnabled { viewModel.getCurrentLocation() } }
+                                        pendingGpsCallback =
+                                            { ensureGpsEnabled { viewModel.getCurrentLocation() } }
                                         requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
                                     }
                                 },
@@ -182,7 +185,11 @@ class MainActivity : ComponentActivity() {
                                 onBackClick = { navController.popBackStack() },
                                 onStationClick = { station, line ->
                                     navController.navigate(
-                                        StationDetailScreen(station = station, lineNumber = line, useBranch = args.useBranch)
+                                        StationDetailScreen(
+                                            station = station,
+                                            lineNumber = line,
+                                            useBranch = args.useBranch
+                                        )
                                     )
                                 },
                             )
@@ -220,7 +227,8 @@ class MainActivity : ComponentActivity() {
                                         ensureGpsEnabled { viewModel.findNearestStation() }
                                     } else {
 
-                                        pendingGpsCallback = { ensureGpsEnabled { viewModel.findNearestStation() } }
+                                        pendingGpsCallback =
+                                            { ensureGpsEnabled { viewModel.findNearestStation() } }
                                         requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
                                     }
                                 },
@@ -237,7 +245,11 @@ class MainActivity : ComponentActivity() {
                                 toEn = args.enDestination,
                                 onStationClick = { station, line ->
                                     navController.navigate(
-                                        StationDetailScreen(station = station, lineNumber = line, useBranch = false)
+                                        StationDetailScreen(
+                                            station = station,
+                                            lineNumber = line,
+                                            useBranch = false
+                                        )
                                     )
                                 },
                                 fromFa = args.startFaStation,
@@ -288,13 +300,19 @@ class MainActivity : ComponentActivity() {
                         baseComposable<PathDescriptionScreen> {
                             val viewModel: PathDescriptionViewModel = hiltViewModel(it)
                             val state by viewModel.uiState.collectAsStateWithLifecycle()
-                            PathDescription(viewState = state, onBackClick = { navController.popBackStack() })
+                            PathDescription(
+                                viewState = state,
+                                onBackClick = { navController.popBackStack() })
                         }
                         baseComposable<SubmitFeedbackScreen> {
                             val viewModel: SubmitSuggestionViewModel = hiltViewModel(it)
                             val state by viewModel.state.collectAsStateWithLifecycle()
                             SubmitFeedback(
-                                onSendMessageClicked = { message -> viewModel.sendSimpleFeedback(message) },
+                                onSendMessageClicked = { message ->
+                                    viewModel.sendSimpleFeedback(
+                                        message
+                                    )
+                                },
                                 viewState = state,
                                 onBack = { navController.popBackStack() }
                             )
@@ -325,7 +343,11 @@ class MainActivity : ComponentActivity() {
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             pendingGpsCallback?.invoke()
         } else {
-            Toast.makeText(this, "برای یافتن نزدیک ترین ایستگاه، روشن بودن GPS ضروری است.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                "برای یافتن نزدیک ترین ایستگاه، روشن بودن GPS ضروری است.",
+                Toast.LENGTH_SHORT
+            ).show()
         }
         pendingGpsCallback = null
     }
