@@ -208,8 +208,8 @@ fun LineItem(
                 color = Color.White
             )
             Text(
-                text = lineName.en,
-                style = MaterialTheme.typography.bodyMedium.copy(
+                text = lineName.en.uppercase(),
+                style = MaterialTheme.typography.bodySmall.copy(
                     fontWeight = FontWeight.W400
                 ),
                 color = Color.White.copy(alpha = 0.9f)
@@ -255,19 +255,29 @@ fun BranchSelectionDialog(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 22.dp, horizontal = 14.dp),
+                    .padding(vertical = 18.dp, horizontal = 14.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Text(
-                    text = createBilingualMessage(
-                        fa = "انتخاب مسیر",
-                        en = "SELECT PATH"
-                    ),
+                    text = "انتخاب مسیر",
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.bodyLarge.copy(color = Color.White),
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        color = Color.White,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.W500
+                    ),
                     modifier = Modifier.fillMaxWidth()
                 )
+                Text(
+                    text = "SELECT PATH",
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        fontSize = 11.sp
+                    ),
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Spacer(Modifier.height(12.dp))
 
                 PathSelectionItem(
                     faEndpoints = mainFaEndpoints,
@@ -280,6 +290,8 @@ fun BranchSelectionDialog(
                         onDismiss()
                     }
                 )
+
+                Spacer(Modifier.height(16.dp))
 
                 PathSelectionItem(
                     faEndpoints = branchFaEndpoints,

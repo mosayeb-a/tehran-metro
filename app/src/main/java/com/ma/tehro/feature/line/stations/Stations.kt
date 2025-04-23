@@ -29,6 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.times
 import com.ma.tehro.R
 import com.ma.tehro.common.Appbar
@@ -141,9 +142,10 @@ fun StationItem(
                 color = Color.White
             )
             Text(
-                text = station.name,
-                style = MaterialTheme.typography.bodyLarge.copy(
-                    color = Color.White.copy(alpha = 0.9f)
+                text = station.name.uppercase(),
+                style = MaterialTheme.typography.bodyMedium.copy(
+                    color = Color.White.copy(alpha = 0.9f),
+                    fontSize = 11.sp
                 ),
                 overflow = TextOverflow.Ellipsis
             )

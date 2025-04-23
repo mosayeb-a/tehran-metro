@@ -129,15 +129,13 @@ fun SubmitFeedback(
                             viewState.isSubmissionSent -> {
                                 Message(
                                     faMessage = "پیشنهادت با موفقیت ثبت شد. از همراهیت سپاسگزاریم.",
-                                    enMessage = "Your suggestion has been recorded successfully. Thanks for your support!",
                                     faces = EmptyStatesFaces.happy
                                 )
                             }
 
                             else -> {
                                 Message(
-                                    faMessage = "برای بهتر شدن برنامه، نظرات و پیشنهاداتت رو ارسال کن.",
-                                    enMessage = "Share your ideas to make the app better!",
+                                    faMessage = "برای بهتر شدن برنامه، نظرات و پیشنهادتت رو ارسال کن.",
                                     faces = EmptyStatesFaces.suggestion
                                 )
                             }

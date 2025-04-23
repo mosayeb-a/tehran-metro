@@ -125,7 +125,7 @@ fun <T> SearchableExpandedDropDownMenu(
             placeholder = {
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Text(
-                        text = placeholderText.first ?: "",
+                        text = placeholderText.second ?: "",
                         style = MaterialTheme.typography.bodyMedium,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
@@ -133,7 +133,7 @@ fun <T> SearchableExpandedDropDownMenu(
                         modifier = Modifier.weight(1f)
                     )
                     Text(
-                        text = placeholderText.second ?: "",
+                        text = placeholderText.first ?: "",
                         style = MaterialTheme.typography.bodyMedium,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
