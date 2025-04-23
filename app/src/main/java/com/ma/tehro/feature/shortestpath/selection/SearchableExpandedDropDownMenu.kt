@@ -1,28 +1,32 @@
 package com.ma.tehro.feature.shortestpath.selection
 
-
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.KeyboardArrowDown
 import androidx.compose.material.icons.outlined.KeyboardArrowUp
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconToggleButton
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
@@ -35,10 +39,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
@@ -46,13 +47,13 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import com.ma.tehro.common.isFarsi
 import com.ma.tehro.data.Station
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
 
 @Composable
 fun <T> SearchableExpandedDropDownMenu(
@@ -62,7 +63,6 @@ fun <T> SearchableExpandedDropDownMenu(
     readOnly: Boolean = true,
     openedIcon: ImageVector = Icons.Outlined.KeyboardArrowUp,
     closedIcon: ImageVector = Icons.Outlined.KeyboardArrowDown,
-    parentTextFieldCornerRadius: Dp = 12.dp,
     colors: TextFieldColors = TextFieldDefaults.colors(),
     onDropDownItemSelected: (T) -> Unit = {},
     dropdownItem: @Composable (T) -> Unit,
@@ -71,13 +71,9 @@ fun <T> SearchableExpandedDropDownMenu(
     defaultItemIndex: Int = 0,
     initialValue: String = "",
     defaultItem: (T) -> Unit = {},
-    onSearchTextFieldClicked: () -> Unit = {},
     startContent: @Composable (() -> Unit) = {},
-    searchPredicate: (String, T) -> Boolean = { searchText, item ->
-        item.toString().contains(searchText, ignoreCase = true)
-    }
+    searchPredicate: (String, T) -> Boolean
 ) {
-
     var selectedOptionText by rememberSaveable { mutableStateOf(initialValue) }
     var searchedOption by rememberSaveable { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
@@ -85,11 +81,11 @@ fun <T> SearchableExpandedDropDownMenu(
 
     val coroutineScope = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current
-    val focusRequester = remember { FocusRequester() }
+    val listState = rememberLazyListState()
 
     val displayedItems by remember(debouncedSearch, listOfItems) {
         derivedStateOf {
-            if (debouncedSearch.isEmpty()) listOfItems.take(40)
+            if (debouncedSearch.isEmpty()) listOfItems
             else listOfItems.filter { searchPredicate(debouncedSearch, it) }
         }
     }
@@ -101,14 +97,12 @@ fun <T> SearchableExpandedDropDownMenu(
         }
     }
 
-
     LaunchedEffect(searchedOption) {
         coroutineScope.launch {
             delay(250)
             debouncedSearch = searchedOption
         }
     }
-
 
     val placeholderText by remember(selectedOptionText) {
         derivedStateOf {
@@ -117,14 +111,11 @@ fun <T> SearchableExpandedDropDownMenu(
         }
     }
 
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+    Box(modifier = modifier.height(IntrinsicSize.Min)) {
         OutlinedTextField(
             modifier = Modifier
-                .height(76.dp)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .height(76.dp),
             colors = colors,
             value = "",
             readOnly = readOnly,
@@ -163,7 +154,7 @@ fun <T> SearchableExpandedDropDownMenu(
                     )
                 }
             },
-            shape = RoundedCornerShape(parentTextFieldCornerRadius),
+            shape = RoundedCornerShape(12.dp),
             isError = isError,
             interactionSource = remember { MutableInteractionSource() }.also { source ->
                 LaunchedEffect(source) {
@@ -173,23 +164,27 @@ fun <T> SearchableExpandedDropDownMenu(
                 }
             }
         )
+    }
 
-        if (expanded) {
-            val screenHeightDp = LocalConfiguration.current.screenHeightDp.dp
-            val dynamicHeight = maxOf(screenHeightDp * 0.6f, 260.dp)
-            DropdownMenu(
+    if (expanded) {
+        Dialog(
+            onDismissRequest = { expanded = false },
+            properties = DialogProperties(
+                usePlatformDefaultWidth = false
+            )
+        ) {
+            Surface(
                 modifier = Modifier
-                    .fillMaxWidth(0.75f)
-                    .height(dynamicHeight),
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
+                    .fillMaxWidth(0.9f)
+                    .heightIn(max = LocalConfiguration.current.screenHeightDp.dp * 0.8f),
+                shape = RoundedCornerShape(18.dp),
+                color = MaterialTheme.colorScheme.secondaryContainer
             ) {
-                Column{
+                Column {
                     OutlinedTextField(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(16.dp)
-                            .focusRequester(focusRequester),
+                            .padding(16.dp),
                         value = searchedOption,
                         onValueChange = { searchedOption = it },
                         colors = OutlinedTextFieldDefaults.colors(
@@ -200,35 +195,47 @@ fun <T> SearchableExpandedDropDownMenu(
                             textDirection = if (isFarsi(searchedOption)) TextDirection.Rtl else TextDirection.Ltr,
                             textAlign = if (isFarsi(searchedOption)) TextAlign.Right else TextAlign.Left
                         ),
-                        leadingIcon = { Icon(Icons.Outlined.Search, null) },
+                        leadingIcon = { Icon(Icons.Outlined.Search, "search") },
                         maxLines = 1,
                         placeholder = { Text("Search") },
-                        interactionSource = remember { MutableInteractionSource() }.also { source ->
-                            LaunchedEffect(source) {
-                                focusRequester.requestFocus()
-                                source.interactions.collect {
-                                    if (it is PressInteraction.Release) onSearchTextFieldClicked()
+                        shape = RoundedCornerShape(16.dp),
+                    )
+
+                    LazyColumn(
+                        state = listState,
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        items(
+                            items = displayedItems,
+                            key = { it.toString() }
+                        ) { item ->
+                            Column {
+                                DropdownMenuItem(
+                                    text = { dropdownItem(item) },
+                                    onClick = {
+                                        keyboardController?.hide()
+                                        if (item is Map.Entry<*, *> && item.value is Station) {
+                                            val station = item.value as Station
+                                            selectedOptionText =
+                                                "${station.name}\n${station.translations.fa}"
+                                            onDropDownItemSelected(item as T)
+                                        }
+                                        searchedOption = ""
+                                        expanded = false
+                                    },
+                                    contentPadding = PaddingValues(
+                                        horizontal = 16.dp,
+                                        vertical = 12.dp
+                                    )
+                                )
+                                if (item != displayedItems.last()) {
+                                    HorizontalDivider(
+                                        modifier = Modifier.padding(horizontal = 16.dp),
+                                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
+                                    )
                                 }
                             }
                         }
-                    )
-
-                    displayedItems.forEach { selectedItem ->
-                        DropdownMenuItem(
-                            contentPadding = PaddingValues(vertical = 10.dp),
-                            onClick = {
-                                keyboardController?.hide()
-                                if (selectedItem is Map.Entry<*, *> && selectedItem.value is Station) {
-                                    val station = selectedItem.value as Station
-                                    selectedOptionText =
-                                        "${station.name}\n${station.translations.fa}"
-                                    onDropDownItemSelected(selectedItem)
-                                }
-                                searchedOption = ""
-                                expanded = false
-                            },
-                            text = { dropdownItem(selectedItem) }
-                        )
                     }
                 }
             }
