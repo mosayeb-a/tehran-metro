@@ -4,7 +4,9 @@ import androidx.compose.runtime.Stable
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import com.ma.tehro.common.LineEndpoints
+import com.ma.tehro.common.PathFinderScreen
 import com.ma.tehro.common.TimeUtils
 import com.ma.tehro.common.fractionToTime
 import com.ma.tehro.common.toFarsiNumber
@@ -38,14 +40,21 @@ class PathViewModel @Inject constructor(
     val state: StateFlow<PathFinderState> get() = _state
 
     init {
-        val from = savedStateHandle.get<String>("startEnStation")!!
-        val to = savedStateHandle.get<String>("enDestination")!!
-
+        val args = savedStateHandle.toRoute<PathFinderScreen>()
+        println(args)
+        println(fractionToTime(args.currentTime))
         viewModelScope.launch {
-            val path = pathRepository.findShortestPathWithDirection(from, to)
+            val path = pathRepository
+                .findShortestPathWithDirection(args.startEnStation, args.enDestination)
             _state.update { it.copy(shortestPath = path) }
 
-            val (stationTimes, estimate) = pathTimeCalculator.calculateStationTimes(path)
+            val (stationTimes, estimate) = pathTimeCalculator
+                .calculateStationTimes(
+                    path = path,
+                    lineChangeDelayMinutes = args.lineChangeDelayMinutes,
+                    dayOfWeek = args.dayOfWeek,
+                    currentTime = args.currentTime
+                )
             _state.update {
                 it.copy(
                     stationTimes = stationTimes,
