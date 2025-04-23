@@ -264,7 +264,8 @@ class MainActivity : ComponentActivity() {
                                 toFa = args.faDestination,
                                 onInfoClick = {
                                     navController.navigate(PathDescriptionScreen(viewModel.generateGuidSteps()))
-                                }
+                                },
+                                lineChangeDelayMinutes = args.lineChangeDelayMinutes
                             )
                         }
                         baseComposable<StationDetailScreen>(

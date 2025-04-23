@@ -14,30 +14,20 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -49,7 +39,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
@@ -59,7 +48,6 @@ import com.ma.tehro.common.timelineview.TimelineView
 import com.ma.tehro.common.timelineview.TimelineView.SingleNode
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.toImageBitmap
-import com.ma.tehro.data.BilingualName
 import com.ma.tehro.data.Station
 import com.ma.tehro.data.repo.PathItem
 import com.ma.tehro.feature.line.stations.StationItem
@@ -75,6 +63,7 @@ fun PathFinder(
     onBack: () -> Unit,
     onStationClick: (station: Station, lineNumber: Int) -> Unit,
     onInfoClick: () -> Unit,
+    lineChangeDelayMinutes:Int ,
 ) {
     val titleIndices = remember(state.shortestPath) {
         state.shortestPath.mapIndexedNotNull { index, item ->
@@ -84,52 +73,18 @@ fun PathFinder(
 
     Scaffold(
         modifier = modifier,
-        containerColor = MaterialTheme.colorScheme.primary,
+        containerColor = MaterialTheme.colorScheme.secondary,
         topBar = {
-            Column(
-                // quick fix
-                modifier = Modifier
-                    .background(MaterialTheme.colorScheme.primary)
-                    .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Top)
-                )
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(52.dp)
-                        .background(MaterialTheme.colorScheme.primary),
-                    verticalAlignment = Alignment.CenterVertically
-
-                ) {
-                    Appbar(
-                        modifier = Modifier.weight(1f),
-                        fromEn = fromEn,
-                        toEn = toEn,
-                        onBack = onBack,
-                        fromFa = fromFa,
-                        toFa = toFa
-                    )
-                    Row(
-                        modifier = Modifier
-                            .fillMaxHeight()
-                            .clickable { onInfoClick() }
-                            .padding(end = 8.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Text(
-                            text = "راهنمای مسیر",
-                            style = MaterialTheme.typography.labelSmall.copy(fontSize = 11.sp)
-                        )
-                        Spacer(Modifier.width(4.dp))
-                        Icon(
-                            imageVector = Icons.Default.Info,
-                            contentDescription = "info",
-                            modifier = Modifier.size(22.dp),
-                        )
-                    }
-                }
-                EstimatedTimeDisplay(estimatedTime = state.estimatedTime)
-            }
+            Appbar(
+                fromEn = fromEn,
+                toEn = toEn,
+                onBack = onBack,
+                fromFa = fromFa,
+                toFa = toFa,
+                onPathGuideClick = onInfoClick,
+                estimatedTime = state.estimatedTime,
+                lineChangeDelayMinutes = lineChangeDelayMinutes
+            )
         }
     ) { padding ->
         Box(modifier = Modifier.fillMaxSize()) {
@@ -182,7 +137,7 @@ fun PathFinder(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .height(0.77.dp)
-                                        .background(getLineColorByNumber(item.lineNumber))
+                                        .background(getLineColorByNumber(item.lineNumber).copy(alpha = 0.9f))
                                 )
                             }
                         }
@@ -211,55 +166,10 @@ fun PathFinder(
                             modifier = Modifier.fillMaxWidth(),
                             en = title.en,
                             fa = title.fa,
-                            isFirstItem = false,
+                            isFirstItem = title == state.shortestPath[0],
                             lineNumber = title.en[5].digitToInt()
                         )
                     }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun EstimatedTimeDisplay(estimatedTime: BilingualName?) {
-    estimatedTime?.let {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.primary)
-                .padding(horizontal = 10.dp, vertical = 4.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(
-                horizontalAlignment = Alignment.Start
-            ) {
-                Text(
-                    text = "ESTIMATED TIME",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-                Text(
-                    text = estimatedTime.en,
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-            }
-            Column(
-                horizontalAlignment = Alignment.End
-            ) {
-                Text(
-                    text = "زمان تقریبی (تعویض خط ۸ دقیقه)",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-                CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
-                    Text(
-                        text = estimatedTime.fa,
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
                 }
             }
         }
@@ -296,35 +206,44 @@ fun PinableTitle(
         modifier = modifier
             .fillMaxWidth()
             .height(42.dp)
-            .background(MaterialTheme.colorScheme.secondary),
+            .background(MaterialTheme.colorScheme.secondary)
+            .padding(start = 12.dp, end = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         SingleNode(
-            modifier = Modifier.padding(start = 12.dp),
+            modifier = Modifier,
             color = lineColor,
             nodeType = if (isFirstItem) TimelineView.NodeType.FIRST else TimelineView.NodeType.MIDDLE,
             nodeSize = 36f,
             isChecked = true,
             lineWidth = 0.8f,
-            iconBitmap = if (isFirstItem) iconImageBitmap else iconImageBitmap
+            iconBitmap = iconImageBitmap
         )
+        Spacer(Modifier.width(6.dp))
         Text(
             text = en,
-            style = MaterialTheme.typography.labelMedium,
+            style = MaterialTheme.typography.labelSmall.copy(
+                color = MaterialTheme.colorScheme.onPrimary.copy(
+                    alpha = .85f
+                )
+            ),
             modifier = Modifier
-                .padding(start = 8.dp)
                 .weight(1f),
+            maxLines = 2,
             textAlign = TextAlign.Start
         )
         Text(
             text = fa,
-            style = MaterialTheme.typography.labelMedium,
+            style = MaterialTheme.typography.labelSmall.copy(
+                color = MaterialTheme.colorScheme.onPrimary.copy(
+                    alpha = .85f
+                )
+            ),
             modifier = Modifier
-                .padding(end = 8.dp)
                 .weight(1f),
+            maxLines = 2,
             textAlign = TextAlign.End,
-
-            )
+        )
     }
 }
 
@@ -344,9 +263,9 @@ fun StationRow(
             .height(78.dp)
             .alpha(if (disabled) 0.93f else 1f)
             .background(color)
+            .padding(horizontal = 16.dp)
     ) {
         SingleNode(
-            modifier = Modifier.padding(start = 16.dp),
             color = MaterialTheme.colorScheme.onPrimary,
             nodeType = if (disabled) {
                 TimelineView.NodeType.SPACER
@@ -367,7 +286,6 @@ fun StationRow(
         if (arrivalTime != null) {
             Column(
                 modifier = Modifier
-                    .padding(horizontal = 12.dp)
                     .weight(1f)
                     .fillMaxHeight(),
                 horizontalAlignment = Alignment.End,

@@ -22,9 +22,9 @@ import kotlin.coroutines.cancellation.CancellationException
 
 @Immutable
 data class StationSelectionState(
-    val selectedEnStartStation: String = "",
+    val selectedEnStartStation: String = "Ayatollah Taleghani",
     val selectedFaStartStation: String = "",
-    val selectedEnDestStation: String = "",
+    val selectedEnDestStation: String = "Darvazeh Shemiran",
     val selectedFaDestStation: String = "",
     val stations: Map<String, Station> = emptyMap(),
     val findNearestLocationProgress: Boolean = false,
