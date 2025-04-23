@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.sp
 fun Message(
     modifier: Modifier = Modifier,
     faMessage: String,
-    enMessage: String,
+    enMessage: String?= null ,
     faces: List<String>,
 ) {
     val selectedFace = remember { faces.random() }
@@ -42,7 +42,7 @@ fun Message(
             Spacer(Modifier.height(18.dp))
             BilingualText(
                 fa = faMessage,
-                en = enMessage,
+                en = enMessage?:"",
                 spaceBetween = 4.dp,
                 style = MaterialTheme.typography.bodyLarge
             )

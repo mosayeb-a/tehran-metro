@@ -30,13 +30,14 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.ma.tehro.R
 import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.calculateLineName
-import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.data.Station
 
@@ -129,12 +130,14 @@ fun StationDetail(
                         contentDescription = "train schedule"
                     )
                     Text(
-                        text = createBilingualMessage(
-                            fa = "زمان‌بندی حرکت قطار",
-                            en = "SCHEDULE"
-                        ),
+                        text = "زمان‌بندی حرکت قطار",
+                        style = MaterialTheme.typography.labelSmall,
+                        textAlign = TextAlign.Center
+                    )
+                    Text(
+                        text ="SCHEDULE",
                         style = MaterialTheme.typography.labelSmall
-                            .copy(color = Color.White.copy(alpha = .8f)),
+                            .copy(color = Color.White.copy(alpha = .8f), fontSize = 10.sp),
                         textAlign = TextAlign.Center
                     )
                 }
@@ -258,15 +261,18 @@ fun AppbarDetail(
                         .wrapContentWidth()
                         .fillMaxWidth(),
                     text = fa,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        fontWeight = FontWeight.W500,
+                        fontSize = 20.sp
+                    ),
                     textAlign = TextAlign.Center
                 )
                 Text(
                     modifier = Modifier
                         .wrapContentWidth()
                         .fillMaxWidth(),
-                    text = en,
-                    style = MaterialTheme.typography.titleMedium,
+                    text = en.uppercase(),
+                    style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp),
                     textAlign = TextAlign.Center
                 )
             }

@@ -44,9 +44,11 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.ma.tehro.R
 import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.createBilingualMessage
@@ -347,14 +349,27 @@ fun StationDropdown(
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Text(
-                    text = "${entry.value.translations.fa}\n${entry.value.name}",
-                    style = MaterialTheme.typography.bodyMedium,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                    textAlign = TextAlign.Start,
-                    modifier = Modifier.fillMaxWidth()
-                )
+                Column {
+                    Text(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = entry.value.translations.fa,
+                        style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.W500),
+                        color = Color.White,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                        textAlign = TextAlign.Start,
+                    )
+                    Text(
+                        text = entry.value.name.uppercase(),
+                        modifier = Modifier.fillMaxWidth(),
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            color = Color.White.copy(alpha = 0.9f),
+                            fontSize = 11.sp
+                        ),
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
             }
         },
         defaultItem = { defaultStation ->
