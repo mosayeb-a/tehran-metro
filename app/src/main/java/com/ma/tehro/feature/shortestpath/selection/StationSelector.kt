@@ -334,7 +334,6 @@ fun StationDropdown(
                 )
             }
         },
-        onSearchTextFieldClicked = {},
         colors = TextFieldDefaults.colors(
             focusedContainerColor = Color.White,
             unfocusedContainerColor = Color.White,
@@ -345,8 +344,19 @@ fun StationDropdown(
             cursorColor = Color.Black
         ),
         searchPredicate = { searchText, entry ->
-            entry.value.name.contains(searchText, ignoreCase = true) ||
-                    entry.value.translations.fa.contains(searchText, ignoreCase = true)
+            val queryWords = normalizeWords(searchText)
+            val targetWords = normalizeWords(entry.value.name) + normalizeWords(entry.value.translations.fa)
+
+            queryWords.all { queryWord ->
+                targetWords.any { targetWord ->
+                    targetWord.contains(queryWord)
+                }
+            }
         }
     )
+}
+private fun normalizeWords(text: String): List<String> {
+    return text.trim()
+        .split("\\s+".toRegex())
+        .map { it.lowercase() }
 }
