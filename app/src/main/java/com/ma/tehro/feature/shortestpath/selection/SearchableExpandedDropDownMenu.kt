@@ -154,7 +154,7 @@ fun <T> SearchableExpandedDropDownMenu(
                     )
                 }
             },
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(32.dp),
             isError = isError,
             interactionSource = remember { MutableInteractionSource() }.also { source ->
                 LaunchedEffect(source) {

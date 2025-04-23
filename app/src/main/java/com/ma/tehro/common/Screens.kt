@@ -1,6 +1,8 @@
 package com.ma.tehro.common
 
+import com.ma.tehro.data.ScheduleType
 import com.ma.tehro.data.Station
+import kotlinx.datetime.DayOfWeek
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -17,7 +19,10 @@ data class PathFinderScreen(
     val startEnStation: String,
     val startFaStation: String,
     val enDestination: String,
-    val faDestination: String
+    val faDestination: String,
+    val dayOfWeek: Int,
+    val currentTime: Double,
+    val lineChangeDelayMinutes: Int
 )
 
 @Serializable

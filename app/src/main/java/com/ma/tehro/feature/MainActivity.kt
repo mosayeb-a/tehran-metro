@@ -203,14 +203,18 @@ class MainActivity : ComponentActivity() {
                                 onSelectedChange = { isFrom, query, fa ->
                                     viewModel.onSelectedChange(isFrom, query, fa)
                                 },
-                                onFindPathClick = { startEn, destEn, startFa, destFa ->
+                                onFindPathClick = { startEn, destEn, startFa, destFa, lineChangeDelayMinutes, dayOfWeek, currentTime ->
                                     navController.navigate(
                                         PathFinderScreen(
                                             startEnStation = startEn,
                                             startFaStation = startFa,
                                             enDestination = destEn,
-                                            faDestination = destFa
-                                        )
+                                            faDestination = destFa,
+                                            dayOfWeek = dayOfWeek,
+                                            currentTime = currentTime,
+                                            lineChangeDelayMinutes = lineChangeDelayMinutes,
+
+                                            )
                                     )
                                 },
                                 onNearestStationChanged = {
@@ -232,7 +236,11 @@ class MainActivity : ComponentActivity() {
                                         requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
                                     }
                                 },
-                            )
+                                onLineChangeDelayChanged = { viewModel.onLineChangeDelayChanged(it) },
+                                onTimeChanged = { viewModel.onTimeChanged(it) },
+                                onDayOfWeekChanged = { viewModel.onDayOfWeekChanged(it) },
+
+                                )
                         }
                         baseComposable<PathFinderScreen> { backStackEntry ->
                             val viewModel: PathViewModel = hiltViewModel(backStackEntry)

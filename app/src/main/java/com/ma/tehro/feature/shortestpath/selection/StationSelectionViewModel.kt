@@ -3,6 +3,7 @@ package com.ma.tehro.feature.shortestpath.selection
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ma.tehro.common.TimeUtils
 import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.messenger.Action
 import com.ma.tehro.common.messenger.UiMessage
@@ -15,6 +16,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.util.Calendar
 import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 
@@ -27,6 +29,9 @@ data class StationSelectionState(
     val stations: Map<String, Station> = emptyMap(),
     val findNearestLocationProgress: Boolean = false,
     val nearestStations: List<NearestStation> = emptyList(),
+    val lineChangeDelayMinutes: Int = 8,
+    val dayOfWeek: Int = Calendar.getInstance().get(Calendar.DAY_OF_WEEK),
+    val currentTime: Double = TimeUtils.getCurrentTimeAsDouble(),
 )
 
 @HiltViewModel
@@ -52,6 +57,18 @@ class StationSelectionViewModel @Inject constructor(
             selectedEnDestStation = if (!isFrom) enStation else _uiState.value.selectedEnDestStation,
             selectedFaDestStation = if (!isFrom) faStation else _uiState.value.selectedFaDestStation
         )
+    }
+
+    fun onLineChangeDelayChanged(minutes: Int) {
+        _uiState.value = _uiState.value.copy(lineChangeDelayMinutes = minutes)
+    }
+
+    fun onTimeChanged(time: Double) {
+        _uiState.value = _uiState.value.copy(currentTime = time)
+    }
+
+    fun onDayOfWeekChanged(day: Int) {
+        _uiState.value = _uiState.value.copy(dayOfWeek = day)
     }
 
 

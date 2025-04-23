@@ -15,12 +15,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -30,13 +31,16 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -50,15 +54,22 @@ import com.ma.tehro.common.timelineview.TimelineView
 import com.ma.tehro.common.timelineview.TimelineView.SingleNode
 import com.ma.tehro.data.Station
 import com.ma.tehro.services.NearestStation
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Composable
 fun StationSelector(
     viewState: StationSelectionState,
-    onFindPathClick: (fromEn: String, toEn: String, fromFa: String, toFa: String) -> Unit,
+    onFindPathClick: (
+        fromEn: String, toEn: String, fromFa: String, toFa: String,
+        lineChangeDelayMinutes: Int, dayOfWeek: Int, currentTime: Double
+    ) -> Unit,
     onSelectedChange: (isFrom: Boolean, query: String, faQuery: String) -> Unit,
     onBack: () -> Unit,
     findNearestStationAsStart: () -> Unit,
-    onNearestStationChanged: (NearestStation?) -> Unit
+    onNearestStationChanged: (NearestStation?) -> Unit,
+    onLineChangeDelayChanged: (Int) -> Unit,
+    onTimeChanged: (Double) -> Unit,
+    onDayOfWeekChanged: (Int) -> Unit
 ) {
     var expandedMenu by remember { mutableStateOf(false) }
     val rotationAngle by animateFloatAsState(
@@ -66,8 +77,17 @@ fun StationSelector(
         animationSpec = tween(durationMillis = 300),
         label = "rotate arrow"
     )
+    val lazyListState = rememberLazyListState()
+    var isExtended by remember { mutableStateOf(true) }
+    LaunchedEffect(lazyListState) {
+        snapshotFlow { lazyListState.isScrollInProgress }
+            .distinctUntilChanged()
+            .collect { isScrolling ->
+                isExtended = !isScrolling
+            }
+    }
     Scaffold(
-        containerColor = MaterialTheme.colorScheme.primary,
+        containerColor = MaterialTheme.colorScheme.secondary,
         topBar = {
             Column {
                 Appbar(
@@ -77,21 +97,62 @@ fun StationSelector(
                 )
                 HorizontalDivider()
             }
+        },
+        floatingActionButton = {
+            ExtendedFloatingActionButton(
+                modifier = Modifier.alpha(
+                    if (viewState.selectedEnStartStation.isNotEmpty() && viewState.selectedEnDestStation.isNotEmpty())
+                        1f else 0.5f
+                ),
+                onClick = {
+                    if (viewState.selectedEnStartStation.isNotEmpty() && viewState.selectedEnDestStation.isNotEmpty()) {
+                        onFindPathClick(
+                            viewState.selectedEnStartStation,
+                            viewState.selectedEnDestStation,
+                            viewState.selectedFaStartStation,
+                            viewState.selectedFaDestStation,
+                            viewState.lineChangeDelayMinutes,
+                            viewState.dayOfWeek,
+                            viewState.currentTime
+                        )
+                    }
+                },
+                containerColor = MaterialTheme.colorScheme.tertiary,
+                expanded = isExtended,
+                icon = {
+                    Icon(
+                        painter = painterResource(R.drawable.route),
+                        contentDescription = "path finder",
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
+                },
+                text = {
+                    if (isExtended) {
+                        Text(
+                            text = createBilingualMessage(fa = "یافتن مسیر", en = "Find Path"),
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+            )
         }
     ) {
         LazyColumn(
             modifier = Modifier
-                .padding(top = 16.dp)
-                .padding(it)
-                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth(),
+            contentPadding = it,
+            state = lazyListState
         ) {
-            item(1) {
+            item(0) { Spacer(Modifier.height(16.dp)) }
+            item("nearest_stations") {
                 Row(
-                    modifier = Modifier.height(IntrinsicSize.Min),
-                    verticalAlignment = Alignment.CenterVertically
+                    modifier = Modifier
+                        .height(IntrinsicSize.Min),
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     TextButton(
-                        modifier = Modifier.padding(start = 12.dp),
                         onClick = {
                             findNearestStationAsStart()
                         },
@@ -216,11 +277,11 @@ fun StationSelector(
                 }
             }
 
-            item(2) {
-                Spacer(Modifier.height(16.dp))
+            item(1) {
+                Spacer(Modifier.height(8.dp))
             }
 
-            item(3) {
+            item("start_station") {
                 StationDropdown(
                     query = "${viewState.selectedFaStartStation}\n${viewState.selectedEnStartStation}",
                     stations = viewState.stations,
@@ -229,11 +290,11 @@ fun StationSelector(
                 )
             }
 
-            item(4) {
-                Spacer(modifier = Modifier.height(8.dp))
+            item(2) {
+                Spacer(modifier = Modifier.height(16.dp))
             }
 
-            item(5) {
+            item("end_station") {
                 StationDropdown(
                     query = "${viewState.selectedFaDestStation}\n${viewState.selectedEnDestStation}",
                     stations = viewState.stations,
@@ -241,35 +302,22 @@ fun StationSelector(
                     onStationSelected = { en, fa -> onSelectedChange(false, en, fa) }
                 )
             }
-
-            item(6) {
-                Spacer(modifier = Modifier.height(16.dp))
+            item(3) {
+                Spacer(modifier = Modifier.height(28.dp))
             }
 
-            item(7) {
-                Button(
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .fillMaxWidth()
-                        .height(76.dp),
-                    onClick = {
-                        onFindPathClick(
-                            viewState.selectedEnStartStation,
-                            viewState.selectedEnDestStation,
-                            viewState.selectedFaStartStation,
-                            viewState.selectedFaDestStation,
-                        )
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.tertiary,
-                        disabledContainerColor = MaterialTheme.colorScheme.tertiary.copy(alpha = .5f)
-                    ),
-                    enabled = viewState.selectedEnStartStation.isNotEmpty() &&
-                            viewState.selectedEnDestStation.isNotEmpty()
-                ) {
-                    Text(text = createBilingualMessage(fa = "یافتن مسیر", en = "Find Path"))
-                }
+            item("addition_setting") {
+                AdditionalInfo(
+                    lineChangeDelay = viewState.lineChangeDelayMinutes,
+                    currentTime = viewState.currentTime,
+                    dayOfWeek = viewState.dayOfWeek,
+                    onLineChangeDelayChanged = { onLineChangeDelayChanged(it) },
+                    onTimeChanged = { onTimeChanged(it) },
+                    onDayOfWeekChanged = { onDayOfWeekChanged(it) }
+                )
             }
+
+            item { Spacer(Modifier.height(73.dp)) }
         }
     }
 }
@@ -286,7 +334,6 @@ fun StationDropdown(
     SearchableExpandedDropDownMenu(
         listOfItems = stations.entries.toList(),
         modifier = Modifier
-            .padding(horizontal = 6.dp)
             .fillMaxWidth(),
         onDropDownItemSelected = { entry ->
             selectedStation = entry.key
@@ -345,7 +392,8 @@ fun StationDropdown(
         ),
         searchPredicate = { searchText, entry ->
             val queryWords = normalizeWords(searchText)
-            val targetWords = normalizeWords(entry.value.name) + normalizeWords(entry.value.translations.fa)
+            val targetWords =
+                normalizeWords(entry.value.name) + normalizeWords(entry.value.translations.fa)
 
             queryWords.all { queryWord ->
                 targetWords.any { targetWord ->
@@ -355,6 +403,7 @@ fun StationDropdown(
         }
     )
 }
+
 private fun normalizeWords(text: String): List<String> {
     return text.trim()
         .split("\\s+".toRegex())

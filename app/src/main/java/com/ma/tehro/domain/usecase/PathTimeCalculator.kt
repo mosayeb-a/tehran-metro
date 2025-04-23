@@ -26,13 +26,15 @@ class PathTimeCalculator @Inject constructor(
      */
     suspend fun calculateStationTimes(
         path: List<PathItem>,
-        lineChangeDelayMinutes: Int = 8
+        lineChangeDelayMinutes: Int,
+        dayOfWeek: Int,
+        currentTime: Double? = null,
     ): Pair<Map<String, String>, BilingualName> {
         var lineChanges = 0
         var currentLine = 0
         var currentDestination = ""
         val stationTimes = mutableMapOf<String, Double>()
-        var currentTime = 0.0
+        var timeTracker = currentTime ?: 0.0
 
         path.forEachIndexed { index, item ->
             when (item) {
@@ -45,7 +47,7 @@ class PathTimeCalculator @Inject constructor(
                     lineChanges++
 
                     val delayFraction = lineChangeDelayMinutes.toDouble() / (24 * 60.0)
-                    currentTime += delayFraction
+                    timeTracker += delayFraction
                 }
 
                 is PathItem.StationItem -> {
@@ -55,22 +57,33 @@ class PathTimeCalculator @Inject constructor(
                         item.station.name, currentLine, false
                     ).run {
                         find { it.destination.en == currentDestination }
-                            ?: find { it.destination.en == LineEndpoints.getEn(currentLine, false)?.second }
-                            ?: find { it.destination.en == LineEndpoints.getEn(currentLine, true)?.second }
+                            ?: find {
+                                it.destination.en == LineEndpoints.getEn(currentLine, false)?.second
+                            }
+                            ?: find {
+                                it.destination.en == LineEndpoints.getEn(currentLine, true)?.second
+                            }
                     } ?: return@forEachIndexed
 
-                    val todaySchedule = TimeUtils.getScheduleTypeForCurrentDay(scheduleInfo.schedules.keys.toList())
-                    val schedules = scheduleInfo.schedules[todaySchedule]?.sorted() ?: return@forEachIndexed
+                    val todaySchedule =
+                        TimeUtils.getScheduleTypeForCurrentDay(
+                            scheduleTypes = scheduleInfo.schedules.keys.toList(),
+                            dayOfWeek = dayOfWeek
+                        )
 
-                    val referenceTime = if (currentTime == 0.0) {
-                        TimeUtils.getCurrentTimeAsDouble()
+                    val schedules = scheduleInfo.schedules[todaySchedule]?.sorted()
+                        ?: return@forEachIndexed
+
+                    val referenceTime = if (timeTracker == 0.0) {
+                        currentTime ?: TimeUtils.getCurrentTimeAsDouble()
                     } else {
-                        currentTime
+                        timeTracker
                     }
 
-                    val nextTime = schedules.firstOrNull { it >= referenceTime } ?: schedules.first()
+                    val nextTime =
+                        schedules.firstOrNull { it >= referenceTime } ?: schedules.first()
                     stationTimes[item.station.name] = nextTime
-                    currentTime = nextTime
+                    timeTracker = nextTime
                 }
             }
         }
