@@ -4,6 +4,7 @@ import android.view.ViewTreeObserver
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,7 +33,6 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,12 +47,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.ma.tehro.R
 import com.ma.tehro.common.Appbar
+import com.ma.tehro.common.EmptyStatesFaces
+import com.ma.tehro.common.Message
 import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.isFarsi
 import com.ma.tehro.feature.submit_suggestion.SubmitInfoState
-import com.ma.tehro.common.Message
-import com.ma.tehro.common.EmptyStatesFaces
-import kotlinx.coroutines.launch
 
 @Composable
 fun SubmitFeedback(
@@ -63,34 +62,12 @@ fun SubmitFeedback(
     var messageText by remember { mutableStateOf("") }
     val imeState = rememberImeState()
     val lazyListState = rememberLazyListState()
-    val scope = rememberCoroutineScope()
 
-    LaunchedEffect(imeState.value) {
-        if (imeState.value) {
-            scope.launch {
-                lazyListState.animateScrollToItem(
-                    index = 1,
-                    scrollOffset = 0,
-                )
-            }
-        }
-    }
     LaunchedEffect(viewState.isSubmissionSent) {
         if (viewState.isSubmissionSent) {
             messageText = ""
         }
     }
-    LaunchedEffect(messageText) {
-        if (messageText.count { it == '\n' } > 0) {
-            scope.launch {
-                lazyListState.animateScrollToItem(
-                    index = 1,
-                    scrollOffset = 0
-                )
-            }
-        }
-    }
-
 
     Scaffold(
         topBar = {
@@ -102,23 +79,28 @@ fun SubmitFeedback(
         },
         modifier = Modifier.fillMaxSize()
     ) { paddingValues ->
-        Box(
+        Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .imePadding()
+                .padding(
+                    bottom = if (imeState.value) 0.dp else paddingValues.calculateBottomPadding()
+                )
         ) {
+
             LazyColumn(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .imePadding(),
+                    .weight(1f)
+                    .fillMaxWidth()
+                    .padding(top = paddingValues.calculateTopPadding()),
                 state = lazyListState,
-                verticalArrangement = Arrangement.SpaceBetween
+                verticalArrangement = Arrangement.Center
             ) {
                 item("state") {
                     Box(
                         modifier = Modifier
-                            .fillParentMaxHeight(0.85f)
-                            .fillMaxWidth(),
+                            .fillMaxWidth()
+                            .fillParentMaxHeight(0.85f),
                         contentAlignment = Alignment.Center
                     ) {
                         when {
@@ -142,19 +124,18 @@ fun SubmitFeedback(
                         }
                     }
                 }
-
-                item("input") {
-                    MessageInput(
-                        messageText = messageText,
-                        onMessageChange = { messageText = it },
-                        onSendClick = {
-                            if (messageText.isNotBlank()) {
-                                onSendMessageClicked(messageText)
-                            }
-                        }
-                    )
-                }
             }
+
+
+            MessageInput(
+                messageText = messageText,
+                onMessageChange = { messageText = it },
+                onSendClick = {
+                    if (messageText.isNotBlank()) {
+                        onSendMessageClicked(messageText)
+                    }
+                }
+            )
         }
     }
 }
@@ -221,7 +202,6 @@ private fun MessageInput(
                         style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
                         textAlign = TextAlign.End
                     )
-
                 },
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
@@ -254,5 +234,4 @@ private fun MessageInput(
             }
         }
     }
-
 }
