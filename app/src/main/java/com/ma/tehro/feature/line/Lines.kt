@@ -1,5 +1,6 @@
 package com.ma.tehro.feature.line
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Indication
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
@@ -20,20 +21,26 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BasicAlertDialog
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
@@ -54,6 +61,7 @@ import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.feature.theme.Blue
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 
 @Composable
 fun Lines(
@@ -62,121 +70,141 @@ fun Lines(
     onFindPathClicked: () -> Unit,
     onlineClick: (line: Int, seeBranchStations: Boolean) -> Unit,
     onMapClick: () -> Unit,
-    onSubmitFeedbackClick: () -> Unit
+    onSubmitFeedbackClick: () -> Unit,
+    onPathFinderClick: () -> Unit
 ) {
     val screenHeight = LocalConfiguration.current.screenHeightDp
     val itemHeight = remember(screenHeight, lines.size) {
-        ((screenHeight / (lines.size + 1)
-            .coerceAtLeast(1)) * 1.2f).coerceAtLeast(74f)
+        ((screenHeight / (lines.size + 1)).coerceAtLeast(1) * 1.2f).coerceAtLeast(74f)
     }
-    var showBranchDialog by remember { mutableStateOf(false) }
-    var selectedLine by remember { mutableStateOf<Int?>(null) }
 
     val lazyListState = rememberLazyListState()
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val coroutineScope = rememberCoroutineScope()
+
+    var showBranchDialog by remember { mutableStateOf(false) }
+    var selectedLine by remember { mutableStateOf<Int?>(null) }
     var isExtended by remember { mutableStateOf(true) }
+
     LaunchedEffect(lazyListState) {
         snapshotFlow { lazyListState.isScrollInProgress }
             .distinctUntilChanged()
-            .collect { isScrolling ->
-                isExtended = !isScrolling
-            }
+            .collect { isScrolling -> isExtended = !isScrolling }
     }
 
-    Scaffold(
-        modifier = modifier,
-        topBar = {
-            Appbar(
-                title = "فهرست خطوط\nlines list",
-                backgroundColor = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.fillMaxWidth(),
-                content = {
-                    IconButton(
-                        modifier = Modifier
-                            .padding(end = 6.dp)
-                            .fillMaxHeight()
-                            .width(46.dp),
-                        onClick = onMapClick,
-                    ) {
-                        Icon(
-                            painter = painterResource(R.drawable.map_24px),
-                            contentDescription = "show map screen",
-                        )
-                    }
-                    IconButton(
-                        modifier = Modifier
-                            .padding(end = 6.dp)
-                            .fillMaxHeight()
-                            .width(46.dp),
-                        onClick = { onSubmitFeedbackClick() },
-                    ) {
-                        Icon(
-                            painter = painterResource(R.drawable.help_fill),
-                            contentDescription = "submit feedback",
-                        )
-                    }
-                }
-            )
-        },
-        floatingActionButton = {
-            ExtendedFloatingActionButton(
-                onClick = onFindPathClicked,
-                containerColor = Blue,
-                expanded = isExtended,
-                icon = {
-                    Icon(
-                        painter = painterResource(R.drawable.route),
-                        contentDescription = "path finder",
-                        tint = MaterialTheme.colorScheme.onPrimary
-                    )
+    BackHandler(enabled = drawerState.isOpen) {
+        coroutineScope.launch { drawerState.close() }
+    }
+
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            DrawerContent(
+                onMapClick = {
+                    coroutineScope.launch { drawerState.close() }
+                    onMapClick()
                 },
-                text = {
-                    if (isExtended) {
-                        Text(
-                            text = createBilingualMessage(fa = "مسیریابی", en = "ROUTING"),
-                            color = MaterialTheme.colorScheme.onPrimary,
-                            textAlign = TextAlign.Center
-                        )
-                    }
+                onSubmitFeedbackClick = {
+                    coroutineScope.launch { drawerState.close() }
+                    onSubmitFeedbackClick()
+                },
+                onPathFinderClick = {
+                    coroutineScope.launch { drawerState.close() }
+                    onPathFinderClick()
+                },
+                onLinesClick = {
+                    coroutineScope.launch { drawerState.close() }
                 }
             )
         }
-    ) { innerPadding ->
-        LazyColumn(
-            state = lazyListState,
-            contentPadding = innerPadding
-        ) {
-            items(lines, key = { it }) { line ->
-                LineItem(
-                    lineNumber = line,
-                    lineColor = getLineColorByNumber(line),
-                    onClick = {
-                        if (LineEndpoints.hasBranch(line)) {
-                            selectedLine = line
-                            showBranchDialog = true
-                        } else {
-                            onlineClick(line, false)
+    ) {
+        Scaffold(
+            modifier = modifier,
+            topBar = {
+                Appbar(
+                    title = "فهرست خطوط\nlines list",
+                    backgroundColor = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.fillMaxWidth(),
+                    startIcon = {
+                        IconButton(
+                            onClick = {
+                                coroutineScope.launch { drawerState.open() }
+                            },
+                            modifier = Modifier
+                                .padding(end = 6.dp)
+                                .fillMaxHeight()
+                                .width(46.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Menu,
+                                contentDescription = "open drawer"
+                            )
                         }
+                    }
+                )
+            },
+            floatingActionButton = {
+                ExtendedFloatingActionButton(
+                    onClick = onFindPathClicked,
+                    containerColor = Blue,
+                    expanded = isExtended,
+                    icon = {
+                        Icon(
+                            painter = painterResource(R.drawable.route),
+                            contentDescription = "path finder",
+                            tint = MaterialTheme.colorScheme.onPrimary
+                        )
                     },
-                    itemHeight = itemHeight
+                    text = {
+                        if (isExtended) {
+                            Text(
+                                text = createBilingualMessage(fa = "مسیریابی", en = "ROUTING"),
+                                color = MaterialTheme.colorScheme.onPrimary,
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                    }
                 )
             }
-            item("spacer") {
-                Spacer(modifier = Modifier.height(itemHeight.dp - (itemHeight.dp / 4)))
+        ) { innerPadding ->
+            LazyColumn(
+                state = lazyListState,
+                contentPadding = innerPadding
+            ) {
+                items(lines, key = { it }) { line ->
+                    LineItem(
+                        lineNumber = line,
+                        lineColor = getLineColorByNumber(line),
+                        onClick = {
+                            if (LineEndpoints.hasBranch(line)) {
+                                selectedLine = line
+                                showBranchDialog = true
+                            } else {
+                                onlineClick(line, false)
+                            }
+                        },
+                        itemHeight = itemHeight
+                    )
+                }
+                item {
+                    Spacer(modifier = Modifier.height(itemHeight.dp - (itemHeight.dp / 4)))
+                }
             }
         }
-    }
 
-    if (showBranchDialog && selectedLine != null) {
-        BranchSelectionDialog(
-            line = selectedLine!!,
-            onDismiss = { showBranchDialog = false },
-            onSelect = { useBranch ->
-                onlineClick(selectedLine!!, useBranch)
-                showBranchDialog = false
-            }
-        )
+        if (showBranchDialog && selectedLine != null) {
+            BranchSelectionDialog(
+                line = selectedLine!!,
+                onDismiss = { showBranchDialog = false },
+                onSelect = { useBranch ->
+                    onlineClick(selectedLine!!, useBranch)
+                    showBranchDialog = false
+                }
+            )
+        }
     }
 }
+
 
 @Composable
 fun LineItem(

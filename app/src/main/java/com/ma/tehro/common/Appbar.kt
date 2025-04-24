@@ -32,6 +32,7 @@ fun Appbar(
     onBackClick: () -> Unit = {},
     modifier: Modifier = Modifier,
     backgroundColor: Color = MaterialTheme.colorScheme.primary,
+    startIcon: (@Composable () -> Unit)? = null,
     content: (@Composable RowScope.() -> Unit)? = null
 ) {
     Row(
@@ -40,7 +41,7 @@ fun Appbar(
             .background(backgroundColor)
             .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Top))
             .height(56.dp)
-            .padding(start = if (handleBack) 0.dp else 16.dp),
+            .padding(start = if (handleBack || startIcon != null) 0.dp else 16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -52,7 +53,8 @@ fun Appbar(
                     tint = Color.White
                 )
             }
-        }
+        } else startIcon?.invoke()
+
         Text(
             text = title.uppercase(),
             style = MaterialTheme.typography.bodySmall,

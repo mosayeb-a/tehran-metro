@@ -154,6 +154,9 @@ class MainActivity : ComponentActivity() {
                                     navController.navigate(
                                         SubmitFeedbackScreen
                                     )
+                                },
+                                onPathFinderClick = {
+                                    navController.navigate(StationSelectorScreen)
                                 }
                             )
                         }
