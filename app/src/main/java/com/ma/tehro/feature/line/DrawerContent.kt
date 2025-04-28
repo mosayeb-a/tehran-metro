@@ -33,10 +33,11 @@ import com.ma.tehro.data.BilingualName
 
 @Composable
 fun DrawerContent(
-    onMapClick: () -> Unit,
+    onCityMapClick: () -> Unit,
     onSubmitFeedbackClick: () -> Unit,
     onPathFinderClick: () -> Unit,
     onLinesClick: () -> Unit,
+    onMetroMapClick: () -> Unit
 ) {
     LazyColumn(
         modifier = Modifier
@@ -71,7 +72,7 @@ fun DrawerContent(
                     fa = "ایستگاها در نقشه شهر",
                     en = "STATION ON CITY MAP"
                 ),
-                onClick = onMapClick,
+                onClick = onCityMapClick,
                 icon = R.drawable.my_location_24px
             )
         }
@@ -81,7 +82,7 @@ fun DrawerContent(
                     fa = "نقشه مترو",
                     en = "METRO MAP"
                 ),
-                onClick = {},
+                onClick = onMetroMapClick,
                 icon = R.drawable.map_24px
             )
         }

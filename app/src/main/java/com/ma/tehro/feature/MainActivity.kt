@@ -40,6 +40,7 @@ import com.ma.tehro.common.AppSnackbar
 import com.ma.tehro.common.LinesScreen
 import com.ma.tehro.common.MapScreen
 import com.ma.tehro.common.ObserveAsEvents
+import com.ma.tehro.common.OfficialMetroMapScreen
 import com.ma.tehro.common.PathDescriptionScreen
 import com.ma.tehro.common.PathFinderScreen
 import com.ma.tehro.common.StationDetailScreen
@@ -55,8 +56,9 @@ import com.ma.tehro.feature.detail.StationDetail
 import com.ma.tehro.feature.line.LineViewModel
 import com.ma.tehro.feature.line.Lines
 import com.ma.tehro.feature.line.stations.Stations
-import com.ma.tehro.feature.map.StationsMap
-import com.ma.tehro.feature.map.StationsMapViewModel
+import com.ma.tehro.feature.map.city.StationsMap
+import com.ma.tehro.feature.map.city.StationsMapViewModel
+import com.ma.tehro.feature.map.official_pic.OfficialMapPicture
 import com.ma.tehro.feature.shortestpath.guide.PathDescription
 import com.ma.tehro.feature.shortestpath.guide.PathDescriptionViewModel
 import com.ma.tehro.feature.shortestpath.pathfinder.PathFinder
@@ -157,6 +159,9 @@ class MainActivity : ComponentActivity() {
                                 },
                                 onPathFinderClick = {
                                     navController.navigate(StationSelectorScreen)
+                                },
+                                onMetroMapClick={
+                                    navController.navigate(OfficialMetroMapScreen)
                                 }
                             )
                         }
@@ -340,6 +345,11 @@ class MainActivity : ComponentActivity() {
                                 state = viewModel.state.collectAsStateWithLifecycle().value,
                                 station = args.station,
                                 lineNumber = args.lineNumber
+                            )
+                        }
+                        baseComposable<OfficialMetroMapScreen> { backStackEntry ->
+                            OfficialMapPicture(
+                                onBack = { navController.popBackStack() },
                             )
                         }
                     }
