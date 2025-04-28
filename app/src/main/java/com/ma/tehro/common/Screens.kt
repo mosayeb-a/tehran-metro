@@ -1,8 +1,6 @@
 package com.ma.tehro.common
 
-import com.ma.tehro.data.ScheduleType
 import com.ma.tehro.data.Station
-import kotlinx.datetime.DayOfWeek
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -57,3 +55,6 @@ object SubmitFeedbackScreen
  */
 @Serializable
 data class PathDescriptionScreen(val path: List<String>)
+
+@Serializable
+object OfficialMetroMapScreen

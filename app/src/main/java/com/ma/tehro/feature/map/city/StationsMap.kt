@@ -1,4 +1,4 @@
-package com.ma.tehro.feature.map
+package com.ma.tehro.feature.map.city
 
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.layout.Box

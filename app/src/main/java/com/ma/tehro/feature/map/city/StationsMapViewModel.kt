@@ -1,4 +1,4 @@
-package com.ma.tehro.feature.map
+package com.ma.tehro.feature.map.city
 
 import com.ma.tehro.services.LocationClient
 import android.location.Location

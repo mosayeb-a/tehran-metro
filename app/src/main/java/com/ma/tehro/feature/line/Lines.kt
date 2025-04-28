@@ -71,7 +71,8 @@ fun Lines(
     onlineClick: (line: Int, seeBranchStations: Boolean) -> Unit,
     onMapClick: () -> Unit,
     onSubmitFeedbackClick: () -> Unit,
-    onPathFinderClick: () -> Unit
+    onPathFinderClick: () -> Unit,
+    onMetroMapClick: () -> Unit,
 ) {
     val screenHeight = LocalConfiguration.current.screenHeightDp
     val itemHeight = remember(screenHeight, lines.size) {
@@ -100,7 +101,7 @@ fun Lines(
         drawerState = drawerState,
         drawerContent = {
             DrawerContent(
-                onMapClick = {
+                onCityMapClick = {
                     coroutineScope.launch { drawerState.close() }
                     onMapClick()
                 },
@@ -114,7 +115,12 @@ fun Lines(
                 },
                 onLinesClick = {
                     coroutineScope.launch { drawerState.close() }
-                }
+                },
+                onMetroMapClick = {
+                    coroutineScope.launch { drawerState.close() }
+                    onMetroMapClick()
+                },
+                
             )
         }
     ) {
