@@ -104,11 +104,15 @@ fun StationSelector(
         floatingActionButton = {
             ExtendedFloatingActionButton(
                 modifier = Modifier.alpha(
-                    if (viewState.selectedEnStartStation.isNotEmpty() && viewState.selectedEnDestStation.isNotEmpty())
+                    if ((viewState.selectedEnStartStation.isNotEmpty() && viewState.selectedEnDestStation.isNotEmpty())
+                        && viewState.selectedEnStartStation != viewState.selectedEnDestStation
+                    )
                         1f else 0.5f
                 ),
                 onClick = {
-                    if (viewState.selectedEnStartStation.isNotEmpty() && viewState.selectedEnDestStation.isNotEmpty()) {
+                    if (viewState.selectedEnStartStation.isNotEmpty() && viewState.selectedEnDestStation.isNotEmpty()
+                        && viewState.selectedEnStartStation != viewState.selectedEnDestStation
+                    ) {
                         onFindPathClick(
                             viewState.selectedEnStartStation,
                             viewState.selectedEnDestStation,

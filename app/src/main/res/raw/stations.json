@@ -3338,13 +3338,13 @@
   "Daneshgah-e Tarbiat Modarres": {
     "name": "Daneshgah-e Tarbiat Modarres",
     "translations": {
-      "fa": "تقاطع بزرگراه شهید چمران و بزرگراه جلال آل‌احمد"
+      "fa": "دانشگاه تربیت مدرس"
     },
     "lines": [
       6,
       7
     ],
-    "address": "هفتم تیر",
+    "address": "تقاطع بزرگراه شهید چمران و بزرگراه جلال آل‌احمد",
     "disabled": false,
     "relations": [
       "Karagar",
