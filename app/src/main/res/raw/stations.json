@@ -354,11 +354,11 @@
     "latitude": "35.701316",
     "address": "خیابان انقلاب اسلامی ، تقاطع سعدی شمالی و شهید مفتح",
     "disabled": false,
-    "wc": false,
+    "wc": true,
     "coffeeShop": false,
     "groceryStore": false,
     "fastFood": false,
-    "atm": false,
+    "atm": true,
     "relations": [
       "Ayatollah Taleghani",
       "Ferdowsi",
@@ -628,7 +628,7 @@
     "disabled": false,
     "wc": true,
     "coffeeShop": false,
-    "groceryStore": false,
+    "groceryStore": true,
     "fastFood": false,
     "atm": false,
     "relations": [
@@ -956,11 +956,11 @@
     "latitude": "35.733397",
     "address": "تقاطع بزرگراه رسالت و شهید باقری",
     "disabled": false,
-    "wc": false,
+    "wc": true,
     "coffeeShop": false,
-    "groceryStore": false,
+    "groceryStore": true,
     "fastFood": false,
-    "atm": false,
+    "atm": true,
     "relations": [
       "Tehranpars",
       "Daneshgah-e Elm va Sanat"
@@ -2447,11 +2447,11 @@
     "latitude": "35.700802",
     "address": "میدان آزادی - ابتدای بزرگراه شهید برادران رحمانی",
     "disabled": false,
-    "wc": false,
+    "wc": true,
     "coffeeShop": false,
-    "groceryStore": false,
+    "groceryStore":true,
     "fastFood": false,
-    "atm": false,
+    "atm": true,
     "relations": [
       "Ostad Mo'in",
       "Bimeh"
@@ -3431,6 +3431,7 @@
     "lines": [
       6
     ],
+    "address": "تقاطع بزرگراه اشرفی اصفهانی و خیابان پیامبر",
     "disabled": false,
     "relations": [
       "Yadegar-e Imam",
@@ -3806,7 +3807,9 @@
     "lines": [
       7
     ],
+    "address":	"بزرگراه شهید چمران (اتوبان پارک وی)",
     "disabled": false,
+    "wc": true,
     "relations": [
       "Daneshgah-e Tarbiat Modarres",
       "Milad Tower"
