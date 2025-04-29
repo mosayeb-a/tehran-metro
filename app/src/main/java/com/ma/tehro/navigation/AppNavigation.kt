@@ -33,6 +33,7 @@ import com.ma.tehro.feature.detail.StationDetail
 import com.ma.tehro.feature.line.LineViewModel
 import com.ma.tehro.feature.line.Lines
 import com.ma.tehro.feature.line.stations.Stations
+import com.ma.tehro.feature.line.stations.StationsViewModel
 import com.ma.tehro.feature.map.city.StationsMap
 import com.ma.tehro.feature.map.city.StationsMapViewModel
 import com.ma.tehro.feature.map.official_pic.OfficialMapPicture
@@ -62,12 +63,13 @@ fun AppNavigation(
         modifier = modifier
     ) {
         baseComposable<LinesScreen> {
-            val metroViewModel: LineViewModel = hiltViewModel(it)
+            val lineViewModel: LineViewModel = hiltViewModel(it)
+            val state by lineViewModel.uiState.collectAsStateWithLifecycle()
             Lines(
                 onlineClick = { line, isBranch ->
                     navController.navigate(StationsScreen(line, isBranch))
                 },
-                lines = metroViewModel.getLines(),
+                lines = state.lines,
                 onFindPathClicked = { navController.navigate(StationSelectorScreen) },
                 onMapClick = { navController.navigate(MapScreen) },
                 onSubmitFeedbackClick = {
@@ -78,7 +80,7 @@ fun AppNavigation(
                 onPathFinderClick = {
                     navController.navigate(StationSelectorScreen)
                 },
-                onMetroMapClick={
+                onMetroMapClick = {
                     navController.navigate(OfficialMetroMapScreen)
                 }
             )
@@ -95,15 +97,13 @@ fun AppNavigation(
             )
         }
         baseComposable<StationsScreen> { backStackEntry ->
-            val metroViewModel: LineViewModel = hiltViewModel(backStackEntry)
+            val stationsViewModel: StationsViewModel = hiltViewModel(backStackEntry)
+            val state by stationsViewModel.uiState.collectAsStateWithLifecycle()
             val args = backStackEntry.toRoute<StationsScreen>()
             Stations(
                 lineNumber = args.lineNumber,
                 useBranch = args.useBranch,
-                orderedStations = metroViewModel.getOrderedStationsInLineByPosition(
-                    args.lineNumber,
-                    args.useBranch
-                ),
+                orderedStations = state.stations,
                 onBackClick = { navController.popBackStack() },
                 onStationClick = { station, line ->
                     navController.navigate(
