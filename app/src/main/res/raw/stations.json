@@ -3071,7 +3071,7 @@
     "lines": [
       6
     ],
-    "disabled": true,
+    "disabled": false,
     "relations": [
       "Shahid Rezaei",
       "Shohada-ye Hefdah-e Shahrivar"
@@ -3193,7 +3193,7 @@
     "lines": [
       6
     ],
-    "disabled": true,
+    "disabled": false,
     "relations": [
       "Sarbaz",
       "Shohada-ye Haftom-e Tir"
@@ -3338,12 +3338,13 @@
   "Daneshgah-e Tarbiat Modarres": {
     "name": "Daneshgah-e Tarbiat Modarres",
     "translations": {
-      "fa": "دانشگاه تربیت مدرس"
+      "fa": "تقاطع بزرگراه شهید چمران و بزرگراه جلال آل‌احمد"
     },
     "lines": [
       6,
       7
     ],
+    "address": "هفتم تیر",
     "disabled": false,
     "relations": [
       "Karagar",
@@ -3491,7 +3492,7 @@
     "lines": [
       6
     ],
-    "disabled": true,
+    "disabled": false,
     "relations": [
       "Ayatollah Kashani",
       "Shahran"
@@ -3511,7 +3512,7 @@
     "lines": [
       6
     ],
-    "disabled": true,
+    "disabled": false,
     "relations": [
       "Shahr-e Ziba",
       "Shohada-ye Kan"
@@ -3531,7 +3532,7 @@
     "lines": [
       6
     ],
-    "disabled": true,
+    "disabled": false,
     "relations": [
       "Shahran",
       "Kouhsar"
@@ -3551,7 +3552,7 @@
     "lines": [
       6
     ],
-    "disabled": true,
+    "disabled": false,
     "relations": [
       "Shohada-ye Kan"
     ],
