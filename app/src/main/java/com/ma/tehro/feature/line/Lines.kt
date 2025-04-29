@@ -368,10 +368,11 @@ private fun PathSelectionItem(
             ) {
                 onClick()
             }
-            .padding(10.dp)
+            .padding(16.dp)
     ) {
         BilingualText(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth(),
             fa = "${faEndpoints?.first} / ${faEndpoints?.second}",
             en = "${enEndpoints?.first?.uppercase()} / ${enEndpoints?.second?.uppercase()}",
             style = MaterialTheme.typography.bodyMedium,
@@ -384,8 +385,8 @@ private fun PathSelectionItem(
             contentDescription = "See stations by line",
             tint = Color.White,
             modifier = Modifier
-                .padding(end = 8.dp)
-                .size(24.dp)
+                .padding(end = 2.dp)
+                .size(16.dp)
                 .align(Alignment.CenterEnd)
         )
     }

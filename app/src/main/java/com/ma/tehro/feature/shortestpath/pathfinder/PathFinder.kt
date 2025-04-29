@@ -63,7 +63,7 @@ fun PathFinder(
     onBack: () -> Unit,
     onStationClick: (station: Station, lineNumber: Int) -> Unit,
     onInfoClick: () -> Unit,
-    lineChangeDelayMinutes:Int ,
+    lineChangeDelayMinutes: Int,
 ) {
     val titleIndices = remember(state.shortestPath) {
         state.shortestPath.mapIndexedNotNull { index, item ->
@@ -202,14 +202,34 @@ fun PinableTitle(
     val lineColor = remember(lineNumber) {
         getLineColorByNumber(lineNumber)
     }
+
     Row(
         modifier = modifier
             .fillMaxWidth()
             .height(42.dp)
             .background(MaterialTheme.colorScheme.secondary)
-            .padding(start = 12.dp, end = 16.dp),
+            .padding(start = 12.dp, end = 12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
+        Text(
+            text = en,
+            style = MaterialTheme.typography.labelSmall.copy(
+                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = .85f)
+            ),
+            modifier = Modifier.weight(1f),
+            maxLines = 2,
+            textAlign = TextAlign.Start
+        )
+        Text(
+            text = fa,
+            style = MaterialTheme.typography.labelSmall.copy(
+                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = .85f)
+            ),
+            modifier = Modifier.weight(1f),
+            maxLines = 2,
+            textAlign = TextAlign.End,
+        )
+        Spacer(Modifier.width(6.dp))
         SingleNode(
             modifier = Modifier,
             color = lineColor,
@@ -218,31 +238,6 @@ fun PinableTitle(
             isChecked = true,
             lineWidth = 0.8f,
             iconBitmap = iconImageBitmap
-        )
-        Spacer(Modifier.width(6.dp))
-        Text(
-            text = en,
-            style = MaterialTheme.typography.labelSmall.copy(
-                color = MaterialTheme.colorScheme.onPrimary.copy(
-                    alpha = .85f
-                )
-            ),
-            modifier = Modifier
-                .weight(1f),
-            maxLines = 2,
-            textAlign = TextAlign.Start
-        )
-        Text(
-            text = fa,
-            style = MaterialTheme.typography.labelSmall.copy(
-                color = MaterialTheme.colorScheme.onPrimary.copy(
-                    alpha = .85f
-                )
-            ),
-            modifier = Modifier
-                .weight(1f),
-            maxLines = 2,
-            textAlign = TextAlign.End,
         )
     }
 }
