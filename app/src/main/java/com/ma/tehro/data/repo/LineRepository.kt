@@ -6,13 +6,13 @@ import javax.inject.Inject
 
 interface LineRepository {
     fun getOrderedStationsByLine(line: Int, useBranch: Boolean): List<Station>
-    fun getLines(): List<Int>
+    val getLines :List<Int>
 }
 
 class LineRepositoryImpl @Inject constructor(
     private val stations: Map<String, Station>
 ) : LineRepository {
-    override fun getLines(): List<Int> = listOf(1, 2, 3, 4, 5, 6, 7)
+    override val getLines: List<Int> = listOf(1, 2, 3, 4, 5, 6, 7)
 
     override fun getOrderedStationsByLine(
         line: Int,
