@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -30,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.R
 import com.ma.tehro.common.Appbar
-import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.data.BilingualName
 
@@ -48,10 +48,8 @@ fun Appbar(
 ) {
     Column(modifier) {
         Appbar(
-            title = createBilingualMessage(
-                fa = "مسیر پیشنهادی",
-                en = "Suggested Path"
-            ),
+            fa = "مسیر پیشنهادی",
+            en = "Suggested Path",
             handleBack = true,
             onBackClick = onBack
         ) {
@@ -161,37 +159,55 @@ fun AppbarDetail(
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = toFa + "\n" + toEn.uppercase(),
-            style = MaterialTheme.typography.labelSmall.copy(
-                color = MaterialTheme.colorScheme.onPrimary.copy(
-                    alpha = .8f
-                )
-            ),
-            textAlign = TextAlign.Center,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis
-        )
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(
+                text = toFa,
+                style = MaterialTheme.typography.labelSmall.copy(
+                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
+                ),
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+            Text(
+                text = toEn.uppercase(),
+                style = MaterialTheme.typography.labelSmall.copy(
+                    fontSize = 10.sp,
+                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f)
+                ),
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+        }
         Icon(
             modifier = Modifier
                 .padding(horizontal = 2.dp)
                 .size(16.dp),
-            painter = painterResource(R.drawable.arrow_back_24px),
+            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             contentDescription = "Going to ..",
-            tint = MaterialTheme.colorScheme.onPrimary.copy(
-                alpha = .8f
+            tint = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
+        )
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(
+                text = fromFa,
+                style = MaterialTheme.typography.labelSmall.copy(
+                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
+                ),
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
-        )
-        Text(
-            text = fromFa + "\n" + fromEn.uppercase(),
-            style = MaterialTheme.typography.labelSmall.copy(
-                color = MaterialTheme.colorScheme.onPrimary.copy(
-                    alpha = .8f
-                )
-            ),
-            textAlign = TextAlign.Center,
-            maxLines = 2,
-            overflow = TextOverflow.Ellipsis
-        )
+            Text(
+                text = fromEn.uppercase(),
+                style = MaterialTheme.typography.labelSmall.copy(
+                    fontSize = 10.sp,
+                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
+                ),
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+        }
     }
 }

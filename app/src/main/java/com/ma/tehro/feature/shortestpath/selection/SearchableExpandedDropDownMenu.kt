@@ -50,6 +50,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.ma.tehro.common.BilingualText
 import com.ma.tehro.common.isFarsi
 import com.ma.tehro.data.Station
 import kotlinx.coroutines.delay
@@ -193,11 +194,20 @@ fun <T> SearchableExpandedDropDownMenu(
                         ),
                         textStyle = LocalTextStyle.current.copy(
                             textDirection = if (isFarsi(searchedOption)) TextDirection.Rtl else TextDirection.Ltr,
-                            textAlign = if (isFarsi(searchedOption)) TextAlign.Right else TextAlign.Left
+                            textAlign = if (isFarsi(searchedOption)) TextAlign.Right else TextAlign.Left,
+                            color = MaterialTheme.colorScheme.onSecondary
                         ),
                         leadingIcon = { Icon(Icons.Outlined.Search, "search") },
                         maxLines = 1,
-                        placeholder = { Text("Search") },
+                        placeholder = {
+                            Text(
+                                modifier = Modifier.fillMaxWidth(),
+                                text = "جستجو",
+                                style = MaterialTheme.typography.labelLarge,
+                                textAlign = TextAlign.End
+                            )
+                        },
+
                         shape = RoundedCornerShape(16.dp),
                     )
 

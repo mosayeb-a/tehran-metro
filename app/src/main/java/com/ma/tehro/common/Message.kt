@@ -2,17 +2,23 @@ package com.ma.tehro.common
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -20,7 +26,6 @@ import androidx.compose.ui.unit.sp
 fun Message(
     modifier: Modifier = Modifier,
     faMessage: String,
-    enMessage: String?= null ,
     faces: List<String>,
 ) {
     val selectedFace = remember { faces.random() }
@@ -40,12 +45,18 @@ fun Message(
                 modifier = Modifier,
             )
             Spacer(Modifier.height(18.dp))
-            BilingualText(
-                fa = faMessage,
-                en = enMessage?:"",
-                spaceBetween = 4.dp,
-                style = MaterialTheme.typography.bodyLarge
-            )
+
+            CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+                Text(
+                    text = faMessage,
+                    style = LocalTextStyle.current.copy(
+                        color = Color.White,
+                        fontWeight = FontWeight.W500
+                    ),
+                    textAlign = TextAlign.Center
+                )
+
+            }
         }
     }
 }

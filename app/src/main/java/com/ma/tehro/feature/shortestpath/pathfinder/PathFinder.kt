@@ -263,8 +263,40 @@ fun StationRow(
             .height(78.dp)
             .alpha(if (disabled) 0.93f else 1f)
             .background(color)
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = 16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
+        // 🟠 Arrival Time FIRST (at right side)
+        if (arrivalTime != null) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight(),
+                horizontalAlignment = Alignment.Start, // changed to Start
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "ساعت ${arrivalTime.toFarsiNumber()}",
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
+                )
+                Text(
+                    text = "AT $arrivalTime",
+                    textAlign = TextAlign.Start,
+                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 10.sp),
+                )
+            }
+        }
+
+        // 🟠 Station Name SECOND (in center)
+        StationItem(
+            modifier = Modifier.weight(2f),
+            station = station,
+            lineNumber = lineNumber,
+            showTransferIndicator = false
+        )
+
+        // 🟠 SingleNode LAST (at left side)
         SingleNode(
             color = MaterialTheme.colorScheme.onPrimary,
             nodeType = if (disabled) {
@@ -274,33 +306,9 @@ fun StationRow(
             },
             nodeSize = 20f,
             isChecked = !disabled,
-            lineWidth = 0.8f
+            lineWidth = 0.8f,
+            modifier = Modifier.padding(start = 16.dp) // give a start padding
         )
-
-        StationItem(
-            modifier = Modifier.weight(1f),
-            station = station,
-            lineNumber = lineNumber,
-            showTransferIndicator = false
-        )
-        if (arrivalTime != null) {
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxHeight(),
-                horizontalAlignment = Alignment.End,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = "ساعت ${arrivalTime.toFarsiNumber()}",
-                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
-                )
-                Text(
-                    text = "ARRIVES AT $arrivalTime",
-                    textAlign = TextAlign.Start,
-                    style = MaterialTheme.typography.bodySmall.copy(fontSize = 10.sp),
-                )
-            }
-        }
     }
 }
+
