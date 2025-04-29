@@ -25,10 +25,8 @@ import com.ma.tehro.common.getLineColorByNumber
 fun PathDescription(viewState: PathDescriptionState, onBackClick: () -> Unit) {
     Column {
         Appbar(
-            title = createBilingualMessage(
-                fa = "راهنمای مسیر",
-                en = "Path Description"
-            ),
+            fa = "راهنمای مسیر",
+            en = "Path Description",
             handleBack = true,
             onBackClick = onBackClick,
         )

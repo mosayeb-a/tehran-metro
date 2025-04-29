@@ -10,11 +10,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.TextSelectionColors
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.Send
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -39,17 +40,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.unit.dp
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.ma.tehro.R
 import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.EmptyStatesFaces
 import com.ma.tehro.common.Message
-import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.isFarsi
 import com.ma.tehro.feature.submit_suggestion.SubmitInfoState
 
@@ -72,7 +70,8 @@ fun SubmitFeedback(
     Scaffold(
         topBar = {
             Appbar(
-                title = createBilingualMessage(fa = "ارسال پیشنهاد", en = "submit suggestion"),
+                fa = "ارسال پیشنهاد",
+                en = "submit suggestion",
                 handleBack = true,
                 onBackClick = onBack
             )
@@ -221,13 +220,10 @@ private fun MessageInput(
 
             FloatingActionButton(
                 onClick = onSendClick,
-                modifier = Modifier
-                    .size(54.dp)
-                    .clip(RoundedCornerShape(24.dp)),
                 containerColor = MaterialTheme.colorScheme.tertiary
             ) {
                 Icon(
-                    painter = painterResource(R.drawable.send),
+                    imageVector = Icons.AutoMirrored.Rounded.Send,
                     contentDescription = "Send",
                     tint = Color.White
                 )

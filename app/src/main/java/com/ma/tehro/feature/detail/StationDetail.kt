@@ -57,7 +57,8 @@ fun StationDetail(
         topBar = {
             Column(modifier = Modifier.background(MaterialTheme.colorScheme.primary)) {
                 Appbar(
-                    title = lineName,
+                    fa = lineName.fa,
+                    en = lineName.en,
                     handleBack = true,
                     onBackClick = onBack,
                     modifier = Modifier
@@ -135,7 +136,7 @@ fun StationDetail(
                         textAlign = TextAlign.Center
                     )
                     Text(
-                        text ="SCHEDULE",
+                        text = "SCHEDULE",
                         style = MaterialTheme.typography.labelSmall
                             .copy(color = Color.White.copy(alpha = .8f), fontSize = 10.sp),
                         textAlign = TextAlign.Center
@@ -206,12 +207,28 @@ fun FacilityItem(
             .height(52.dp)
             .padding(top = 4.dp)
             .alpha(if (isDisabled) 0.5f else 1f),
-        horizontalArrangement = Arrangement.Start,
+        horizontalArrangement = Arrangement.End,
         verticalAlignment = Alignment.CenterVertically
     ) {
+        Column(
+            horizontalAlignment = Alignment.End
+        ) {
+            Text(
+                text = fa,
+                style = MaterialTheme.typography.labelSmall
+            )
+            Spacer(Modifier.height(2.dp))
+            Text(
+                text = en.uppercase(),
+                style = MaterialTheme.typography.labelSmall
+            )
+        }
+
+        Spacer(Modifier.width(12.dp))
+
         Box(
             modifier = Modifier
-                .padding(end = 8.dp)
+                .padding()
                 .size(36.dp)
                 .clip(CircleShape)
                 .background(MaterialTheme.colorScheme.onPrimary),
@@ -224,19 +241,9 @@ fun FacilityItem(
                 tint = MaterialTheme.colorScheme.primary
             )
         }
-        Column {
-            Text(
-                text = fa,
-                style = MaterialTheme.typography.labelSmall
-            )
-            Spacer(Modifier.height(2.dp))
-            Text(
-                text = en.uppercase(),
-                style = MaterialTheme.typography.labelSmall
-            )
-        }
     }
 }
+
 
 @Composable
 fun AppbarDetail(

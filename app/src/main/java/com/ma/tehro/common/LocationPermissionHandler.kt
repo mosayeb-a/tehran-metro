@@ -88,7 +88,7 @@ class LocationPermissionHandler(
     private fun showSettingsDialog() {
         AlertDialog.Builder(activity)
             .setTitle("نیاز به دسترسی موقعیت مکانی")
-            .setMessage("برای استفاده از این ویژگی، لطفا در تنظیمات برنامه دسترسی موقعیت مکانی را فعال کنید.")
+            .setMessage("برای استفاده از این ویژگی، لطفا در تنظیمات برنامه، دسترسی موقعیت مکانی را فعال کنید.")
             .setPositiveButton("تنظیمات") { _, _ ->
                 val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
                     data = Uri.fromParts("package", activity.packageName, null)

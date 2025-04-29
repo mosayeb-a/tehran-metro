@@ -22,6 +22,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.automirrored.rounded.ArrowForward
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.BasicAlertDialog
 import androidx.compose.material3.DrawerValue
@@ -51,13 +53,14 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.R
 import com.ma.tehro.common.Appbar
+import com.ma.tehro.common.BilingualText
 import com.ma.tehro.common.LineEndpoints
 import com.ma.tehro.common.calculateBilingualLineName
-import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.feature.theme.Blue
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -120,15 +123,16 @@ fun Lines(
                     coroutineScope.launch { drawerState.close() }
                     onMetroMapClick()
                 },
-                
-            )
+
+                )
         }
     ) {
         Scaffold(
             modifier = modifier,
             topBar = {
                 Appbar(
-                    title = "فهرست خطوط\nlines list",
+                    fa = "فهرست خطوط",
+                    en = "lines list",
                     backgroundColor = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.fillMaxWidth(),
                     startIcon = {
@@ -163,10 +167,12 @@ fun Lines(
                     },
                     text = {
                         if (isExtended) {
-                            Text(
-                                text = createBilingualMessage(fa = "مسیریابی", en = "ROUTING"),
-                                color = MaterialTheme.colorScheme.onPrimary,
-                                textAlign = TextAlign.Center
+                            BilingualText(
+                                fa = "مسیریابی",
+                                en = "ROUTING",
+                                style = MaterialTheme.typography.bodyMedium,
+                                maxLine = 2,
+                                textAlign = TextAlign.Center,
                             )
                         }
                     }
@@ -232,6 +238,7 @@ fun LineItem(
     ) {
         Column(
             modifier = Modifier.weight(1f),
+            horizontalAlignment = Alignment.End
         ) {
             Text(
                 text = lineName.fa,
@@ -239,24 +246,32 @@ fun LineItem(
                     fontSize = 18.sp,
                     fontWeight = FontWeight.W600
                 ),
-                color = Color.White
+                color = Color.White,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.End
             )
             Text(
                 text = lineName.en.uppercase(),
                 style = MaterialTheme.typography.bodySmall.copy(
+                    fontSize = 10.sp,
                     fontWeight = FontWeight.W400
                 ),
-                color = Color.White.copy(alpha = 0.9f)
+                color = Color.White.copy(alpha = 0.9f),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.End
             )
         }
+        Spacer(Modifier.width(8.dp))
         Icon(
-            painter = painterResource(R.drawable.arrow_forward_24px),
+            imageVector = Icons.AutoMirrored.Rounded.ArrowForward,
             contentDescription = "See stations by line",
+            modifier = Modifier.size(28.dp),
             tint = Color.White
         )
     }
 }
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -292,23 +307,12 @@ fun BranchSelectionDialog(
                     .padding(vertical = 18.dp, horizontal = 14.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Text(
-                    text = "انتخاب مسیر",
+                BilingualText(
+                    fa = "انتخاب مسیر",
+                    en = "SELECT PATH",
+                    style = MaterialTheme.typography.bodyLarge,
+                    maxLine = 2,
                     textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.bodyLarge.copy(
-                        color = Color.White,
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.W500
-                    ),
-                    modifier = Modifier.fillMaxWidth()
-                )
-                Text(
-                    text = "SELECT PATH",
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.bodyMedium.copy(
-                        fontSize = 11.sp
-                    ),
-                    modifier = Modifier.fillMaxWidth()
                 )
 
                 Spacer(Modifier.height(12.dp))
@@ -366,17 +370,17 @@ private fun PathSelectionItem(
             }
             .padding(10.dp)
     ) {
-        Text(
-            text = createBilingualMessage(
-                fa = "${faEndpoints?.first} / ${faEndpoints?.second}",
-                en = "${enEndpoints?.first} / ${enEndpoints?.second}"
-            ),
-            style = MaterialTheme.typography.bodyMedium.copy(color = Color.White),
+        BilingualText(
+            modifier = Modifier.fillMaxWidth(),
+            fa = "${faEndpoints?.first} / ${faEndpoints?.second}",
+            en = "${enEndpoints?.first?.uppercase()} / ${enEndpoints?.second?.uppercase()}",
+            style = MaterialTheme.typography.bodyMedium,
+            maxLine = 2,
             textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
         )
+
         Icon(
-            painter = painterResource(R.drawable.arrow_forward_24px),
+            imageVector = Icons.AutoMirrored.Filled.ArrowForward,
             contentDescription = "See stations by line",
             tint = Color.White,
             modifier = Modifier

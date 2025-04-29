@@ -17,6 +17,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
@@ -44,14 +46,12 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.ma.tehro.R
 import com.ma.tehro.common.Appbar
-import com.ma.tehro.common.createBilingualMessage
+import com.ma.tehro.common.BilingualText
 import com.ma.tehro.common.timelineview.TimelineView
 import com.ma.tehro.common.timelineview.TimelineView.SingleNode
 import com.ma.tehro.data.Station
@@ -93,7 +93,8 @@ fun StationSelector(
         topBar = {
             Column {
                 Appbar(
-                    title = createBilingualMessage("مسیریابی", "Path Finder"),
+                    fa = "مسیریابی",
+                    en = "Path Finder",
                     handleBack = true,
                     onBackClick = onBack
                 )
@@ -130,10 +131,12 @@ fun StationSelector(
                 },
                 text = {
                     if (isExtended) {
-                        Text(
-                            text = createBilingualMessage(fa = "یافتن مسیر", en = "Find Path"),
-                            color = MaterialTheme.colorScheme.onPrimary,
-                            textAlign = TextAlign.Center
+                        BilingualText(
+                            fa = "یافتن مسیر",
+                            en = "FIND PATH",
+                            style = MaterialTheme.typography.bodyMedium,
+                            maxLine = 2,
+                            textAlign = TextAlign.Center,
                         )
                     }
                 }
@@ -178,9 +181,12 @@ fun StationSelector(
                                 painter = painterResource(R.drawable.location_on_24px),
                                 contentDescription = "find nearby stations"
                             )
-                            Text(
-                                text = "یافتن نزدیک‌ترین ایستگاه\nFind nearest stations",
-                                style = MaterialTheme.typography.labelMedium
+                            BilingualText(
+                                fa = "یافتن نزدیک‌ترین ایستگاه",
+                                en = "FIND NEAREST STATIONS",
+                                style = MaterialTheme.typography.labelMedium,
+                                maxLine = 2,
+                                textAlign = TextAlign.Start,
                             )
 
                             if (viewState.findNearestLocationProgress && viewState.nearestStations.isEmpty()) {
@@ -220,7 +226,7 @@ fun StationSelector(
                                     modifier = Modifier
                                         .size(24.dp)
                                         .rotate(rotationAngle),
-                                    painter = painterResource(R.drawable.arrow_drop_down_24px),
+                                    imageVector = Icons.Default.ArrowDropDown,
                                     contentDescription = "more nearby station"
                                 )
                             }
@@ -343,34 +349,16 @@ fun StationDropdown(
         },
         initialValue = query,
         dropdownItem = { entry ->
-            Row(
+            BilingualText(
                 modifier = Modifier
-                    .padding(start = 16.dp)
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Column {
-                    Text(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = entry.value.translations.fa,
-                        style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.W500),
-                        color = Color.White,
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis,
-                        textAlign = TextAlign.Start,
-                    )
-                    Text(
-                        text = entry.value.name.uppercase(),
-                        modifier = Modifier.fillMaxWidth(),
-                        style = MaterialTheme.typography.bodyMedium.copy(
-                            color = Color.White.copy(alpha = 0.9f),
-                            fontSize = 11.sp
-                        ),
-                        maxLines = 2,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
-            }
+                    .fillMaxWidth()
+                    .padding(end = 16.dp),
+                fa = entry.value.translations.fa,
+                en = entry.value.name.uppercase(),
+                style = MaterialTheme.typography.bodyLarge,
+                maxLine = 2,
+                textAlign = TextAlign.End
+            )
         },
         defaultItem = { defaultStation ->
             selectedStation = defaultStation.key
@@ -380,7 +368,7 @@ fun StationDropdown(
                 modifier = Modifier.padding(horizontal = 16.dp),
             ) {
                 SingleNode(
-                    color = MaterialTheme.colorScheme.primary.copy(alpha = .8f),
+                    color = MaterialTheme.colorScheme.secondary.copy(alpha = .9f),
                     nodeType = if (isFrom) TimelineView.NodeType.FIRST else TimelineView.NodeType.LAST,
                     nodeSize = 20f,
                     isChecked = true,
@@ -392,7 +380,10 @@ fun StationDropdown(
                     modifier = Modifier
                         .padding(start = 4.dp, bottom = 8.dp, top = 8.dp)
                         .align(Alignment.CenterVertically),
-                    style = MaterialTheme.typography.labelMedium
+                    style = MaterialTheme.typography.labelSmall.copy(
+                        color = MaterialTheme.colorScheme.secondary.copy(alpha = .45f),
+                    ),
+                    textAlign = TextAlign.Center
                 )
             }
         },

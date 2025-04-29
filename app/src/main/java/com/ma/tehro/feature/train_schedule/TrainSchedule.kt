@@ -73,10 +73,8 @@ fun TrainSchedule(
                     )
             ) {
                 Appbar(
-                    title = createBilingualMessage(
-                        fa = "زمان‌بندی حرکت قطار برای ایستگاه $faStationName",
-                        en = "train schedule for ${state.stationName}"
-                    ),
+                    fa = "زمان‌بندی حرکت قطار برای ایستگاه $faStationName",
+                    en = "train schedule for ${state.stationName}",
                     handleBack = true,
                     onBackClick = onBack,
                     modifier = Modifier.height(43.dp),
@@ -108,7 +106,7 @@ fun TrainSchedule(
                 Message(
                     modifier = Modifier.fillMaxSize(),
                     faMessage = "هیچ زمان‌بندی‌ای برای این ایستگاه ثبت نشده. به‌احتمالِ زیاد، ایستگاه غیرفعال است",
-                    enMessage = "No schedule is available for this station. It is most likely inactive.",
+//                    enMessage = "No schedule is available for this station. It is most likely inactive.",
                     faces = EmptyStatesFaces.sad
                 )
         }

@@ -27,6 +27,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,8 +37,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.Appbar
 import com.ma.tehro.common.createBilingualMessage
@@ -85,10 +88,8 @@ fun SubmitStationInfo(
         topBar = {
             Column {
                 Appbar(
-                    title = createBilingualMessage(
-                        fa ="ارسال اصلاحیه برای ایستگاه ${station.translations.fa}",
-                        en = "submit station correction for ${station.name}"
-                    ),
+                    fa = "ارسال اصلاحیه برای ایستگاه ${station.translations.fa}",
+                    en = "submit station correction for ${station.name}",
                     handleBack = true,
                     onBackClick = onBack
                 )
@@ -117,12 +118,12 @@ fun SubmitStationInfo(
                             .padding(4.dp)
                             .fillMaxWidth(),
                     )
-                    Text(
-                        text = "Help us keep metro data up to date! Your submission will be reviewed and applied in the next update.",
-                        textAlign = TextAlign.Left,
-                        style = MaterialTheme.typography.titleSmall,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+//                    Text(
+//                        text = "Help us keep metro data up to date! Your submission will be reviewed and applied in the next update.",
+//                        textAlign = TextAlign.Left,
+//                        style = MaterialTheme.typography.titleSmall,
+//                        modifier = Modifier.fillMaxWidth()
+//                    )
                 }
             }
             item { Spacer(Modifier.height(12.dp)) }
@@ -320,35 +321,37 @@ fun CorrectionEditText(
     maxLines: Int = 1,
     trailingIcon: @Composable (() -> Unit)? = null,
 ) {
-    OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
-        label = {
-            Text(
-                text = label,
-                textAlign = TextAlign.Center,
-            )
-        },
-        trailingIcon = trailingIcon,
-        modifier = modifier.fillMaxWidth(),
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedTextColor = Color.White,
-            focusedBorderColor = Color.White,
-            focusedLabelColor = Color.White,
-            focusedLeadingIconColor = Color.White,
-            focusedTrailingIconColor = Color.White,
-            cursorColor = Color.White,
-            focusedContainerColor = Color.Transparent,
-            unfocusedContainerColor = Color.Transparent,
-            selectionColors = TextSelectionColors(
-                handleColor = Color.White,
-                backgroundColor = Color.White.copy(alpha = 0.3f)
-            )
-        ),
-        maxLines = maxLines,
-        shape = RoundedCornerShape(12.dp),
-        keyboardOptions = keyboardOptions
-    )
+    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+        OutlinedTextField(
+            value = value,
+            onValueChange = onValueChange,
+            label = {
+                Text(
+                    text = label,
+                    textAlign = TextAlign.Center,
+                )
+            },
+            trailingIcon = trailingIcon,
+            modifier = modifier.fillMaxWidth(),
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedTextColor = Color.White,
+                focusedBorderColor = Color.White,
+                focusedLabelColor = Color.White,
+                focusedLeadingIconColor = Color.White,
+                focusedTrailingIconColor = Color.White,
+                cursorColor = Color.White,
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                selectionColors = TextSelectionColors(
+                    handleColor = Color.White,
+                    backgroundColor = Color.White.copy(alpha = 0.3f)
+                )
+            ),
+            maxLines = maxLines,
+            shape = RoundedCornerShape(12.dp),
+            keyboardOptions = keyboardOptions
+        )
+    }
 }
 
 @Composable

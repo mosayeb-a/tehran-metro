@@ -80,7 +80,7 @@ fun getLineColorByNumber(lineNumber: Int): Color {
     }
 }
 
-fun calculateLineName(lineNumber: Int, useBranch: Boolean = false): String {
+fun calculateLineName(lineNumber: Int, useBranch: Boolean = false): BilingualName {
     val enEndpoints = LineEndpoints.getEn(lineNumber, useBranch)
     val faEndpoints = LineEndpoints.getFa(lineNumber, useBranch)
 
@@ -90,10 +90,10 @@ fun calculateLineName(lineNumber: Int, useBranch: Boolean = false): String {
         "Line" to "خط"
     }
 
-    return """
-        ${pathType.second} ${lineNumber.toFarsiNumber()} - ${faEndpoints?.first}/${faEndpoints?.second}
-        ${pathType.first} $lineNumber - ${enEndpoints?.first}/${enEndpoints?.second}
-    """.trimIndent()
+    return BilingualName(
+        en ="${pathType.first} $lineNumber - ${enEndpoints?.first}/${enEndpoints?.second}",
+        fa = "${pathType.second} ${lineNumber.toFarsiNumber()} - ${faEndpoints?.first}/${faEndpoints?.second}"
+    )
 }
 
 fun calculateBilingualLineName(lineNumber: Int, useBranch: Boolean = false): BilingualName {

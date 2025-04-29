@@ -25,7 +25,8 @@ fun OfficialMapPicture(modifier: Modifier = Modifier, onBack: () -> Unit) {
         modifier = modifier,
         topBar = {
             Appbar(
-                title = "نقشه مترو\nmetro map",
+                fa  = "نقشه مترو",
+                en  = "metro map",
                 backgroundColor = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.fillMaxWidth(),
                 handleBack = true,

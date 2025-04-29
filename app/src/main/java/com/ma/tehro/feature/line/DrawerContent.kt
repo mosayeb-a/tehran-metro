@@ -3,6 +3,7 @@ package com.ma.tehro.feature.line
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,22 +14,21 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.automirrored.rounded.Send
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.ma.tehro.R
 import com.ma.tehro.common.Appbar
+import com.ma.tehro.common.BilingualText
 import com.ma.tehro.data.BilingualName
 
 @Composable
@@ -45,7 +45,7 @@ fun DrawerContent(
             .fillMaxHeight()
             .background(MaterialTheme.colorScheme.secondary)
     ) {
-        item("appbar") { Appbar("") }
+        item("appbar") { Appbar("", "") }
         item("lines") {
             DrawerItem(
                 label = BilingualName(
@@ -93,7 +93,7 @@ fun DrawerContent(
                     en = "SUBMIT FEEDBACK"
                 ),
                 onClick = onSubmitFeedbackClick,
-                icon = R.drawable.send
+                imageVector = Icons.AutoMirrored.Rounded.Send
             )
         }
     }
@@ -111,39 +111,31 @@ fun DrawerItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable { onClick() }
-                .padding(12.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .padding(end = 16.dp, top = 12.dp, bottom = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.End
         ) {
-            IconButton(onClick = onClick) {
-                if (icon != null) {
-                    Icon(
-                        painter = painterResource(icon),
-                        contentDescription = label.fa,
-                        tint = Color.White
-                    )
-                } else {
-                    Icon(
-                        imageVector = imageVector!!,
-                        contentDescription = label.fa,
-                        tint = Color.White
-                    )
-                }
-            }
-            Spacer(Modifier.width(4.dp))
-            Column {
-                Text(
-                    text = label.fa,
-                    style = MaterialTheme.typography.bodyMedium.copy(
-                        color = MaterialTheme.colorScheme.onSecondary,
-                        fontWeight = FontWeight.W500,
-                    )
+            BilingualText(
+                fa = label.fa,
+                en = label.en,
+                style = MaterialTheme.typography.bodyMedium,
+                maxLine = 2,
+                textAlign = TextAlign.End
+            )
+
+            Spacer(Modifier.width(16.dp))
+
+            if (icon != null) {
+                Icon(
+                    painter = painterResource(icon),
+                    contentDescription = label.fa,
+                    tint = Color.White
                 )
-                Text(
-                    text = label.en,
-                    style = MaterialTheme.typography.bodySmall.copy(
-                        fontSize = 10.sp,
-                        color = MaterialTheme.colorScheme.onSecondary.copy(alpha = .8f)
-                    )
+            } else if (imageVector != null) {
+                Icon(
+                    imageVector = imageVector,
+                    contentDescription = label.fa,
+                    tint = Color.White
                 )
             }
         }

@@ -32,6 +32,7 @@ import androidx.compose.material3.TimePicker
 import androidx.compose.material3.TimePickerDefaults
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,8 +42,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color.Companion.Red
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -135,15 +138,15 @@ fun AdditionalInfo(
             CustomOutlinedTextField(
                 modifier = Modifier.weight(1f),
                 value = fractionToTime(currentTime),
-                hint = "انتخاب زمان دلخواه",
-                onClick = { showTimePicker = true }
+                hint = "انتخاب زمان",
+                onClick = { showTimePicker = true },
             )
             Spacer(modifier = Modifier.width(12.dp))
 
             Box(modifier = Modifier.weight(1f)) {
                 CustomOutlinedTextField(
                     value = days.first { it.second == dayOfWeek }.first,
-                    hint = "انتخاب روز دلخواه",
+                    hint = "انتخاب روز",
                     onClick = { expanded = true },
                     modifier = Modifier.fillMaxWidth(),
                     trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) }
@@ -205,26 +208,29 @@ private fun CustomOutlinedTextField(
     trailingIcon: @Composable (() -> Unit)? = null
 ) {
     Box(modifier = modifier) {
-        OutlinedTextField(
-            value = value,
-            onValueChange = {},
-            readOnly = true,
-            label = { Text(hint) },
-            modifier = Modifier
-                .fillMaxWidth(),
-            trailingIcon = trailingIcon,
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                disabledBorderColor = MaterialTheme.colorScheme.onSurface,
-                disabledTextColor = MaterialTheme.colorScheme.onSurface,
-                focusedTextColor = MaterialTheme.colorScheme.onPrimary,
-                unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary
-            ),
-            shape = RoundedCornerShape(16.dp),
-            textStyle = MaterialTheme.typography.bodyMedium
-        )
-
+        CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+            OutlinedTextField(
+                value = value,
+                onValueChange = {},
+                readOnly = true,
+                label = {
+                    Text(text = hint)
+                },
+                modifier = Modifier
+                    .fillMaxWidth(),
+                trailingIcon = trailingIcon,
+                colors = OutlinedTextFieldDefaults.colors(
+                    unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
+                    focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                    disabledBorderColor = MaterialTheme.colorScheme.onSurface,
+                    disabledTextColor = MaterialTheme.colorScheme.onSurface,
+                    focusedTextColor = MaterialTheme.colorScheme.onPrimary,
+                    unfocusedLabelColor = MaterialTheme.colorScheme.onPrimary
+                ),
+                shape = RoundedCornerShape(20.dp),
+                textStyle = MaterialTheme.typography.bodyMedium
+            )
+        }
         Box(
             modifier = Modifier
                 .padding(top = 8.dp)

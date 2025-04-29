@@ -30,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import com.ma.tehro.data.BilingualName
@@ -127,7 +128,8 @@ fun DraggableTabRow(
                                     },
                                 ),
                                 spaceBetween = (-3).dp,
-                                maxLine = 1
+                                maxLine = 1,
+                                textAlign = TextAlign.Center
                             )
                         }
                     }
