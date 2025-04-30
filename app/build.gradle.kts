@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt.plugin)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -45,12 +46,10 @@ android {
     productFlavors {
         create("play") {
             dimension = "distribution"
-            applicationIdSuffix = ".play"
             versionNameSuffix = "-play"
         }
         create("fdroid") {
             dimension = "distribution"
-            applicationIdSuffix = ".fdroid"
             versionNameSuffix = "-fdroid"
         }
     }
@@ -95,7 +94,13 @@ android {
         }
     }
 }
-
+androidComponents {
+    beforeVariants { variant ->
+        if (variant.flavorName == "play") {
+            apply(plugin = "com.google.gms.google-services")
+        }
+    }
+}
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -134,13 +139,4 @@ dependencies {
 
     "playImplementation"(platform(libs.firebase.bom))
     "playImplementation"(libs.firebase.analytics)
-}
-afterEvaluate {
-    val playBuild = gradle.startParameter.taskNames.any {
-        it.contains("Play", ignoreCase = true)
-    }
-
-    if (playBuild) {
-        apply(plugin = "com.google.gms.google-services")
-    }
 }
