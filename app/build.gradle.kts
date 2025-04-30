@@ -38,10 +38,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        vectorDrawables {
-            useSupportLibrary = true
-        }
-        resourceConfigurations += "en"
+
+        vectorDrawables.useSupportLibrary = true
+        androidResources.localeFilters += listOf("en")
     }
 
     signingConfigs {
