@@ -8,8 +8,6 @@ plugins {
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt.plugin)
-    alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.google.services)
 }
 
 android {
@@ -43,6 +41,19 @@ android {
         androidResources.localeFilters += listOf("en")
     }
 
+    flavorDimensions += "distribution"
+    productFlavors {
+        create("play") {
+            dimension = "distribution"
+            applicationIdSuffix = ".play"
+            versionNameSuffix = "-play"
+        }
+        create("fdroid") {
+            dimension = "distribution"
+            applicationIdSuffix = ".fdroid"
+            versionNameSuffix = "-fdroid"
+        }
+    }
     signingConfigs {
         create("release") {
             val localProperties = gradleLocalProperties(rootDir, providers)
@@ -112,9 +123,6 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
 
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics)
-
     implementation(libs.osmdroid.android)
 
     implementation(libs.kotlinx.datetime)
@@ -123,4 +131,16 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
 
     implementation(libs.coil.kt.coil.compose)
+
+    "playImplementation"(platform(libs.firebase.bom))
+    "playImplementation"(libs.firebase.analytics)
+}
+afterEvaluate {
+    val playBuild = gradle.startParameter.taskNames.any {
+        it.contains("Play", ignoreCase = true)
+    }
+
+    if (playBuild) {
+        apply(plugin = "com.google.gms.google-services")
+    }
 }

@@ -117,7 +117,7 @@ fun About(
                         .padding(vertical = 4.dp, horizontal = 8.dp)
                 ) {
                     BilingualText(
-                        fa = "نگارش ${BuildConfig.VERSION_NAME.toString().toFarsiNumber()}",
+                        fa = "نگارش ${BuildConfig.VERSION_NAME.toFarsiNumber()}",
                         en = "VERSION ${BuildConfig.VERSION_NAME}",
                         enSize = 8.sp,
                         enAlpha = .7f,
