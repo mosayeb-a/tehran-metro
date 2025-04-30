@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.automirrored.rounded.Send
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -37,7 +38,8 @@ fun DrawerContent(
     onSubmitFeedbackClick: () -> Unit,
     onPathFinderClick: () -> Unit,
     onLinesClick: () -> Unit,
-    onMetroMapClick: () -> Unit
+    onMetroMapClick: () -> Unit,
+    onAboutClick: () -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier
@@ -84,6 +86,16 @@ fun DrawerContent(
                 ),
                 onClick = onMetroMapClick,
                 icon = R.drawable.map_24px
+            )
+        }
+        item("about") {
+            DrawerItem(
+                label = BilingualName(
+                    fa = "درباره",
+                    en = "َABOUT"
+                ),
+                onClick = onAboutClick,
+                imageVector = Icons.Default.Info
             )
         }
         item("submit_feedback") {

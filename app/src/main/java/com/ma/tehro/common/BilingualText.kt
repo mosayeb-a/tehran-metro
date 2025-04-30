@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -25,6 +26,8 @@ fun BilingualText(
     style: TextStyle = LocalTextStyle.current,
     maxLine: Int = Int.MAX_VALUE,
     spaceBetween: Dp = (-2).dp,
+    enSize: TextUnit = 11.sp,
+    enAlpha: Float = .9f,
     textAlign: TextAlign = TextAlign.Start,
     overflow: TextOverflow = TextOverflow.Ellipsis,
 ) {
@@ -56,8 +59,8 @@ fun BilingualText(
         Text(
             text = en,
             style = style.copy(
-                fontSize = 11.sp,
-                color = Color.White.copy(alpha = 0.9f)
+                fontSize = enSize,
+                color = Color.White.copy(alpha = enAlpha)
             ),
             textAlign = textAlign,
             maxLines = linesPerText,
