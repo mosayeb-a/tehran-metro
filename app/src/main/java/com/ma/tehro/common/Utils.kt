@@ -1,12 +1,7 @@
 package com.ma.tehro.common
 
-import android.Manifest
-import android.content.Context
-import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.view.Window
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.geometry.Size
@@ -17,9 +12,7 @@ import androidx.compose.ui.graphics.drawscope.CanvasDrawScope
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.toColorInt
-import androidx.core.view.WindowCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
@@ -122,18 +115,6 @@ fun Int.toFarsiNumber(): String = this.toString().toFarsiNumber()
 
 fun Double.toFarsiNumber(): String = this.toString().toFarsiNumber()
 
-
-fun Context.hasLocationPermission(): Boolean {
-    return ContextCompat.checkSelfPermission(
-        this,
-        Manifest.permission.ACCESS_COARSE_LOCATION
-    ) == PackageManager.PERMISSION_GRANTED &&
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-}
-
 fun calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
     val earthRadius = 6371e3
 
@@ -189,24 +170,4 @@ fun isFarsi(text: String): Boolean {
     if (text.isEmpty()) return false
     val firstChar = text.trim().firstOrNull() ?: return false
     return firstChar in '\u0600'..'\u06FF'
-}
-
-
-fun setNavigationBarColor(window: Window, color: Int) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
-        window.decorView.setOnApplyWindowInsetsListener { view, insets ->
-            val navigationBarInsets =
-                insets.getInsets(android.view.WindowInsets.Type.navigationBars())
-            view.setPadding(0, 0, 0, navigationBarInsets.bottom)
-            insets
-        }
-        window.navigationBarColor = color
-    } else {
-        window.navigationBarColor = color
-    }
-
-
-    WindowCompat.getInsetsController(window, window.decorView).apply {
-        isAppearanceLightNavigationBars = false
-    }
 }
