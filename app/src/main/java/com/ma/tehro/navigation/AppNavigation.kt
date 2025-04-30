@@ -15,6 +15,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
+import com.ma.tehro.common.AboutScreen
 import com.ma.tehro.common.LinesScreen
 import com.ma.tehro.common.LocationPermissionHandler
 import com.ma.tehro.common.MapScreen
@@ -29,6 +30,7 @@ import com.ma.tehro.common.SubmitStationInfoScreen
 import com.ma.tehro.common.TrainScheduleScreen
 import com.ma.tehro.common.navTypeOf
 import com.ma.tehro.data.Station
+import com.ma.tehro.feature.about.About
 import com.ma.tehro.feature.detail.StationDetail
 import com.ma.tehro.feature.line.LineViewModel
 import com.ma.tehro.feature.line.Lines
@@ -82,7 +84,8 @@ fun AppNavigation(
                 },
                 onMetroMapClick = {
                     navController.navigate(OfficialMetroMapScreen)
-                }
+                },
+                onAboutClick = { navController.navigate(AboutScreen) }
             )
         }
         baseComposable<MapScreen> {
@@ -259,6 +262,11 @@ fun AppNavigation(
         baseComposable<OfficialMetroMapScreen> { backStackEntry ->
             OfficialMapPicture(
                 onBack = { navController.popBackStack() },
+            )
+        }
+        baseComposable<AboutScreen> {
+            About(
+                onBack = { navController.popBackStack() }
             )
         }
     }

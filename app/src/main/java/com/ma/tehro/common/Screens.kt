@@ -58,3 +58,6 @@ data class PathDescriptionScreen(val path: List<String>)
 
 @Serializable
 object OfficialMetroMapScreen
+
+@Serializable
+object AboutScreen
