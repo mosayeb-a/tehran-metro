@@ -19,8 +19,8 @@ android {
         applicationId = "com.ma.tehro"
         minSdk = 21
         targetSdk = 36
-        versionCode = 6
-        versionName = "0.8.0"
+        versionCode = 7
+        versionName = "0.8.1"
 
 
         val properties = Properties().apply {

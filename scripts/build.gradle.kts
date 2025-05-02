@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "app.ma.scripts"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
@@ -22,15 +22,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-        }
-    }
-    flavorDimensions += "distribution"
-    productFlavors {
-        create("play") {
-            dimension = "distribution"
-        }
-        create("fdroid") {
-            dimension = "distribution"
         }
     }
     compileOptions {
