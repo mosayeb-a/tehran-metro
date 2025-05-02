@@ -42,17 +42,6 @@ android {
         androidResources.localeFilters += listOf("en")
     }
 
-    flavorDimensions += "distribution"
-    productFlavors {
-        create("play") {
-            dimension = "distribution"
-            versionNameSuffix = "-play"
-        }
-        create("fdroid") {
-            dimension = "distribution"
-            versionNameSuffix = "-fdroid"
-        }
-    }
     signingConfigs {
         create("release") {
             val localProperties = gradleLocalProperties(rootDir, providers)
@@ -94,13 +83,6 @@ android {
         }
     }
 }
-androidComponents {
-    beforeVariants { variant ->
-        if (variant.flavorName == "play") {
-            apply(plugin = "com.google.gms.google-services")
-        }
-    }
-}
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -136,7 +118,4 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
 
     implementation(libs.coil.kt.coil.compose)
-
-    "playImplementation"(platform(libs.firebase.bom))
-    "playImplementation"(libs.firebase.analytics)
 }
