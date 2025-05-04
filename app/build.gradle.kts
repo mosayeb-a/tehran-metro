@@ -22,17 +22,18 @@ android {
         versionCode = 7
         versionName = "0.8.1"
 
-
-        val properties = Properties().apply {
-            load(File(rootDir, "local.properties").inputStream())
+        val localPropertiesFile = File(rootDir, "local.properties")
+        val properties = Properties()
+        if (localPropertiesFile.exists()) {
+            properties.load(localPropertiesFile.inputStream())
         }
         val fields = mapOf(
-            "github_token" to properties.getProperty("github_token"),
-            "stations_gist_id" to properties.getProperty("stations_gist_id"),
-            "feedbacks_gist_id" to properties.getProperty("feedbacks_gist_id")
+            "github_token" to properties.getProperty("github_token", ""),
+            "stations_gist_id" to properties.getProperty("stations_gist_id", ""),
+            "feedbacks_gist_id" to properties.getProperty("feedbacks_gist_id", "")
         )
         fields.forEach { (name, value) ->
-            buildConfigField("String", name, value)
+            buildConfigField("String", name, "\"$value\"")
         }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -42,16 +43,34 @@ android {
         androidResources.localeFilters += listOf("en")
     }
 
-    signingConfigs {
-        create("release") {
-            val localProperties = gradleLocalProperties(rootDir, providers)
+    val localProperties = gradleLocalProperties(rootDir, providers)
 
-            storeFile = file(localProperties.getProperty("store_file"))
-            storePassword = localProperties.getProperty("store_password")
-            keyAlias = localProperties.getProperty("key_alias")
-            keyPassword = localProperties.getProperty("key_password")
+    signingConfigs {
+        val releaseKeystorePath = localProperties.getProperty("store_file")?.takeIf { it.isNotBlank() }
+        val fallbackKeystore = File(rootDir, "debug.keystore")
+
+        if (releaseKeystorePath != null) {
+            val releaseKeystore = file(releaseKeystorePath)
+            if (releaseKeystore.exists()) {
+                create("release") {
+                    storeFile = releaseKeystore
+                    storePassword = localProperties.getProperty("store_password")
+                    keyAlias = localProperties.getProperty("key_alias")
+                    keyPassword = localProperties.getProperty("key_password")
+                }
+            }
+        }
+
+        if (signingConfigs.findByName("release") == null && fallbackKeystore.exists()) {
+            create("fallback") {
+                storeFile = fallbackKeystore
+                storePassword = "android"
+                keyAlias = "androiddebugkey"
+                keyPassword = "android"
+            }
         }
     }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
@@ -61,8 +80,20 @@ android {
                 "proguard-rules.pro"
             )
 
-
-            signingConfig = signingConfigs.getByName("release")
+            signingConfig = when {
+                signingConfigs.findByName("release") != null -> {
+                    println("using real signing config for release.")
+                    signingConfigs.getByName("release")
+                }
+                signingConfigs.findByName("fallback") != null -> {
+                    println("using fallback debug signing for release.")
+                    signingConfigs.getByName("fallback")
+                }
+                else -> {
+                    println("no signing config found. release may fail.")
+                    null
+                }
+            }
         }
     }
 
@@ -81,6 +112,10 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+    composeCompiler {
+        reportsDestination = layout.buildDirectory.dir("compose_compiler")
+        metricsDestination = layout.buildDirectory.dir("compose_compiler")
     }
 }
 dependencies {
