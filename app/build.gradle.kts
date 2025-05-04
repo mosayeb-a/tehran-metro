@@ -19,8 +19,8 @@ android {
         applicationId = "com.ma.tehro"
         minSdk = 21
         targetSdk = 36
-        versionCode = 7
-        versionName = "0.8.1"
+        versionCode = 8
+        versionName = "0.8.2"
 
         val localPropertiesFile = File(rootDir, "local.properties")
         val properties = Properties()
