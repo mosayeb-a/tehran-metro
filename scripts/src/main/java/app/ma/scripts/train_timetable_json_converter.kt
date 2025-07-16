@@ -10,14 +10,14 @@ import java.io.File
 import java.util.Locale
 
 const val FIRST_ROW = 4
-const val FIRST_COL = 2
-const val NORMAL_0 = "تجريش عادي"
+const val FIRST_COL = 3
+const val NORMAL_0 = "گلشهر- عادي"
 const val THURSDAY_1 = "تجريش پنجشنبه"
 const val FRIDAY_2 = "تجريش جمعه"
-const val NORMAL_3 = "كهريزك عادي"
+const val NORMAL_3 = "صادقيه - عادي"
 const val THURSDAY_4 = "كهريزك پنجشنبه"
 const val FRIDAY_5 = "كهريزك جمعه"
-const val FILE_NAME = "train_timetable_1"
+const val FILE_NAME = "train_timetable_5"
 
 @Serializable
 data class Timetable(val timetable: List<Double> = emptyList())
@@ -25,11 +25,11 @@ data class Timetable(val timetable: List<Double> = emptyList())
 @Serializable
 data class Schedule(
     @SerialName(NORMAL_0) var normal0: Timetable = Timetable(),
-    @SerialName(THURSDAY_1) var thursday1: Timetable = Timetable(),
-    @SerialName(FRIDAY_2) var friday2: Timetable = Timetable(),
+//    @SerialName(THURSDAY_1) var thursday1: Timetable = Timetable(),
+//    @SerialName(FRIDAY_2) var friday2: Timetable = Timetable(),
     @SerialName(NORMAL_3) var normal3: Timetable = Timetable(),
-    @SerialName(THURSDAY_4) var thursday4: Timetable = Timetable(),
-    @SerialName(FRIDAY_5) var friday6: Timetable = Timetable()
+//    @SerialName(THURSDAY_4) var thursday4: Timetable = Timetable(),
+//    @SerialName(FRIDAY_5) var friday6: Timetable = Timetable()
 )
 
 @Serializable
@@ -64,14 +64,16 @@ fun main() {
     }
     println("total stations found: ${stationNames.size}")
 
-    for (sheetIndex in 0..5) {
+    for (sheetIndex in 0..1) {
         println("\n" + "=".repeat(50))
         println("processing sheet ${sheetIndex + 1} (${getScheduleNameForSheet(sheetIndex)})")
         println("=".repeat(50))
 
         val sheet = workbook.getSheetAt(sheetIndex)
+        println("sheetName: ${sheet.sheetName}")
         // todo based on xls file it changed
-        val rowIndex = if (sheetIndex <= 1) 4 else 5
+//        val rowIndex = if (sheetIndex <= 1) 4 else 5
+        val rowIndex = FIRST_ROW
         val row = sheet.getRow(rowIndex)
         val lastRow = 200
 
@@ -126,13 +128,14 @@ fun main() {
                             }
                         }
 
+                        // todo based on xls file it changed
                         val updatedSchedule = when (sheetIndex) {
                             0 -> existingSchedule.copy(normal0 = Timetable(timeList))
-                            1 -> existingSchedule.copy(thursday1 = Timetable(timeList))
-                            2 -> existingSchedule.copy(friday2 = Timetable(timeList))
-                            3 -> existingSchedule.copy(normal3 = Timetable(timeList))
-                            4 -> existingSchedule.copy(thursday4 = Timetable(timeList))
-                            5 -> existingSchedule.copy(friday6 = Timetable(timeList))
+//                            1 -> existingSchedule.copy(thursday1 = Timetable(timeList))
+//                            2 -> existingSchedule.copy(friday2 = Timetable(timeList))
+                            1 -> existingSchedule.copy(normal3 = Timetable(timeList))
+//                            4 -> existingSchedule.copy(thursday4 = Timetable(timeList))
+//                            5 -> existingSchedule.copy(friday6 = Timetable(timeList))
                             else -> existingSchedule
                         }
 
@@ -167,26 +170,28 @@ fun main() {
 
     for (station in stationNames) {
         println("\nstatistics for $station:")
+        // todo based on xls file it changed
         scheduleOutput.stations[station]?.let { schedule ->
             println("$NORMAL_0: ${schedule.normal0.timetable.size} times")
-            println("$THURSDAY_1: ${schedule.thursday1.timetable.size} times")
-            println("$FRIDAY_2: ${schedule.friday2.timetable.size} times")
+//            println("$THURSDAY_1: ${schedule.thursday1.timetable.size} times")
+//            println("$FRIDAY_2: ${schedule.friday2.timetable.size} times")
             println("$NORMAL_3: ${schedule.normal3.timetable.size} times")
-            println("$THURSDAY_4: ${schedule.thursday4.timetable.size} times")
-            println("$FRIDAY_5: ${schedule.friday6.timetable.size} times")
+//            println("$THURSDAY_4: ${schedule.thursday4.timetable.size} times")
+//            println("$FRIDAY_5: ${schedule.friday6.timetable.size} times")
         }
     }
 
     println("=".repeat(50))
 }
 
+// todo based on xls file it changed
 fun getScheduleNameForSheet(sheetIndex: Int): String = when (sheetIndex) {
     0 -> NORMAL_0
-    1 -> THURSDAY_1
-    2 -> FRIDAY_2
-    3 -> NORMAL_3
-    4 -> THURSDAY_4
-    5 -> FRIDAY_5
+//    1 -> THURSDAY_1
+//    2 -> FRIDAY_2
+    2 -> NORMAL_3
+//    4 -> THURSDAY_4
+//    5 -> FRIDAY_5
     else -> "unknown"
 }
 
