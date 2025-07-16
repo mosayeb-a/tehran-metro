@@ -5,19 +5,16 @@ import com.ma.tehro.common.AppException
 import com.ma.tehro.data.Station
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
-import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import java.net.HttpURLConnection
 import java.net.URL
 import javax.inject.Inject
+import kotlin.time.ExperimentalTime
 
 interface DataCorrectionRepository {
     suspend fun submitStationCorrection(station: Station)
@@ -41,8 +38,9 @@ class DataCorrectionRepositoryImpl @Inject constructor(
         updateGist(stationsGistId, station, "gistfile1.txt")
     }
 
+    @OptIn(ExperimentalTime::class)
     override suspend fun submitFeedback(message: String) {
-        val now = Clock.System.now()
+        val now = kotlin.time.Clock.System.now()
             .toLocalDateTime(TimeZone.of("Asia/Tehran"))
             .toString()
             .substringBefore('.')

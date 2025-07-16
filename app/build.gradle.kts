@@ -32,6 +32,7 @@ android {
             "stations_gist_id" to properties.getProperty("stations_gist_id", ""),
             "feedbacks_gist_id" to properties.getProperty("feedbacks_gist_id", "")
         )
+        //noinspection WrongGradleMethod
         fields.forEach { (name, value) ->
             buildConfigField("String", name, "\"$value\"")
         }
