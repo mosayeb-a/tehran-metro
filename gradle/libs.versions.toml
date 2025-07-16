@@ -1,23 +1,22 @@
 [versions]
-agp = "8.9.2"
-coilComposeVersion = "2.5.0"
-kotlin = "2.0.21"
+agp = "8.11.1"
+kotlin = "2.2.0"
 coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-kotlinTest = "2.0.21"
-kotlinxDatetime = "0.4.1"
-lifecycleRuntimeKtx = "2.8.7"
+kotlinTest = "2.2.0"
+kotlinxDatetime = "0.7.1"
+lifecycleRuntimeKtx = "2.9.1"
 activityCompose = "1.10.1"
-composeBom = "2025.04.01"
-ksp = "2.0.21-1.0.25"
-nav-version = "2.8.9"
-hilt = "2.52"
+composeBom = "2025.06.01"
+ksp = "2.2.0-2.0.2"
+nav-version = "2.9.1"
+hilt = "2.56.2"
 hilt_navigation_compose = "1.2.0"
 osmdroidAndroid = "6.1.16"
-mockk = "1.14.0"
-kotlinxCoroutinesTest = "1.10.1"
+mockk = "1.14.4"
+kotlinxCoroutinesTest = "1.10.2"
 coil = "3.2.0"
 
 [libraries]
@@ -44,7 +43,7 @@ androidx-navigation-ui = { group = "androidx.navigation", name = "navigation-ui-
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlinTest" }
 
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
-kotlinx-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3"
+kotlinx-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1"
 
 #hilt
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
