@@ -10,8 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import coil.compose.AsyncImage
-import coil.request.ImageRequest
+import coil3.compose.AsyncImage
+import coil3.request.ImageRequest
+import coil3.size.Size
 import com.ma.tehro.R
 import com.ma.tehro.common.Appbar
 import com.ma.tehro.feature.map.official_pic.zoombox.gesture.condition.WithinXBoundsTouchCondition
@@ -43,8 +44,7 @@ fun OfficialMapPicture(modifier: Modifier = Modifier, onBack: () -> Unit) {
             AsyncImage(
                 model = ImageRequest.Builder(context)
                     .data(R.drawable.map)
-                    .size(coil.size.Size.ORIGINAL)
-                    .crossfade(true)
+                    .size(Size.ORIGINAL)
                     .build(),
                 contentDescription = "metro map pic",
                 modifier = Modifier
