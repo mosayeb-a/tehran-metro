@@ -107,7 +107,7 @@ fun AppNavigation(
                 lineNumber = args.lineNumber,
                 useBranch = args.useBranch,
                 orderedStations = state.stations,
-                onBackClick = { navController.popBackStack() },
+                onBackClick = { navController.navigateUp() },
                 onStationClick = { station, line ->
                     navController.navigate(
                         StationDetailScreen(
@@ -123,7 +123,7 @@ fun AppNavigation(
             val viewModel: StationSelectionViewModel = hiltViewModel(backStackEntry)
             val state by viewModel.uiState.collectAsStateWithLifecycle()
             StationSelector(
-                onBack = { navController.popBackStack() },
+                onBack = { navController.navigateUp() },
                 viewState = state,
                 onSelectedChange = { isFrom, query, fa ->
                     viewModel.onSelectedChange(isFrom, query, fa)
@@ -168,7 +168,7 @@ fun AppNavigation(
             val args: PathFinderScreen = backStackEntry.toRoute()
             PathFinder(
                 state = state,
-                onBack = { navController.popBackStack() },
+                onBack = { navController.navigateUp() },
                 fromEn = args.startEnStation,
                 toEn = args.enDestination,
                 onStationClick = { station, line ->
@@ -197,7 +197,7 @@ fun AppNavigation(
             val args = backStackEntry.toRoute<StationDetailScreen>()
             StationDetail(
                 station = args.station,
-                onBack = { navController.popBackStack() },
+                onBack = { navController.navigateUp() },
                 lineNumber = args.lineNumber,
                 useBranch = args.useBranch,
                 onSubmitInfoStationClicked = { station, line ->
@@ -223,7 +223,7 @@ fun AppNavigation(
                 state = state,
                 faStationName = args.faStationName,
                 lineNumber = args.lineNumber,
-                onBack = { navController.popBackStack() },
+                onBack = { navController.navigateUp() },
                 onScheduleTypeSelected = { destination, scheduleType ->
                     viewModel.onScheduleTypeSelected(destination, scheduleType)
                 }
@@ -234,7 +234,7 @@ fun AppNavigation(
             val state by viewModel.uiState.collectAsStateWithLifecycle()
             PathDescription(
                 viewState = state,
-                onBackClick = { navController.popBackStack() })
+                onBackClick = { navController.navigateUp() })
         }
         baseComposable<SubmitFeedbackScreen> {
             val viewModel: SubmitSuggestionViewModel = hiltViewModel(it)
@@ -246,7 +246,7 @@ fun AppNavigation(
                     )
                 },
                 viewState = state,
-                onBack = { navController.popBackStack() }
+                onBack = { navController.navigateUp() }
             )
         }
         baseComposable<SubmitStationInfoScreen>(
@@ -255,7 +255,7 @@ fun AppNavigation(
             val viewModel: SubmitSuggestionViewModel = hiltViewModel(backStackEntry)
             val args: SubmitStationInfoScreen = backStackEntry.toRoute()
             SubmitStationInfo(
-                onBack = { navController.popBackStack() },
+                onBack = { navController.navigateUp() },
                 onSubmitInfo = { viewModel.submitStationCorrection(it) },
                 state = viewModel.state.collectAsStateWithLifecycle().value,
                 station = args.station,
@@ -264,12 +264,12 @@ fun AppNavigation(
         }
         baseComposable<OfficialMetroMapScreen> { backStackEntry ->
             OfficialMapPicture(
-                onBack = { navController.popBackStack() },
+                onBack = { navController.navigateUp() },
             )
         }
         baseComposable<AboutScreen> {
             About(
-                onBack = { navController.popBackStack() }
+                onBack = { navController.navigateUp() }
             )
         }
     }
