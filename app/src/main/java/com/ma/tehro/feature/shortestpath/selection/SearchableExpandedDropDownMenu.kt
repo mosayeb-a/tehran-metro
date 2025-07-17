@@ -50,7 +50,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.ma.tehro.common.BilingualText
 import com.ma.tehro.common.isFarsi
 import com.ma.tehro.data.Station
 import kotlinx.coroutines.delay

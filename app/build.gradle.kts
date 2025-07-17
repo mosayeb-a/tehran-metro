@@ -127,7 +127,8 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
+//    implementation(libs.androidx.material3)
+    implementation("androidx.compose.material3:material3:1.4.0-alpha18")
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
     androidTestImplementation(libs.androidx.junit)
@@ -154,4 +155,5 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
 
     implementation(libs.coil.compose)
+    implementation(libs.androidx.material.icons.extended)
 }

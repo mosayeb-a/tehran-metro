@@ -1,4 +1,4 @@
-package com.ma.tehro.common.messenger
+package com.ma.tehro.common.ui
 
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow

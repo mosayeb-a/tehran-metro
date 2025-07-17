@@ -35,10 +35,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.ma.tehro.common.Appbar
-import com.ma.tehro.common.DraggableTabRow
-import com.ma.tehro.common.EmptyStatesFaces
-import com.ma.tehro.common.Message
+import com.ma.tehro.common.ui.Appbar
+import com.ma.tehro.common.ui.DraggableTabRow
+import com.ma.tehro.common.ui.EmptyStatesFaces
+import com.ma.tehro.common.ui.Message
 import com.ma.tehro.common.TimeUtils.remainingTime
 import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.fractionToTime

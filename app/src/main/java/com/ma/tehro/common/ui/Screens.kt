@@ -1,4 +1,4 @@
-package com.ma.tehro.common
+package com.ma.tehro.common.ui
 
 import com.ma.tehro.data.Station
 import kotlinx.serialization.Serializable

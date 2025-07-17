@@ -5,15 +5,11 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
-import com.ma.tehro.common.LineEndpoints
-import com.ma.tehro.common.PathFinderScreen
-import com.ma.tehro.common.TimeUtils
+import com.ma.tehro.common.ui.PathFinderScreen
 import com.ma.tehro.common.fractionToTime
-import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.data.BilingualName
 import com.ma.tehro.data.repo.PathItem
 import com.ma.tehro.data.repo.PathRepository
-import com.ma.tehro.data.repo.TrainScheduleRepository
 import com.ma.tehro.domain.usecase.PathTimeCalculator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

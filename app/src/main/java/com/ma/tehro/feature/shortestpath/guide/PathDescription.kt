@@ -17,8 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ma.tehro.common.Appbar
-import com.ma.tehro.common.createBilingualMessage
+import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.getLineColorByNumber
 
 @Composable

@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ma.tehro.common.TimeUtils
 import com.ma.tehro.common.createBilingualMessage
-import com.ma.tehro.common.messenger.Action
-import com.ma.tehro.common.messenger.UiMessage
-import com.ma.tehro.common.messenger.UiMessageManager
+import com.ma.tehro.common.ui.Action
+import com.ma.tehro.common.ui.UiMessage
+import com.ma.tehro.common.ui.UiMessageManager
 import com.ma.tehro.data.Station
 import com.ma.tehro.data.repo.PathRepository
 import com.ma.tehro.services.LocationTracker
