@@ -36,7 +36,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.R
-import com.ma.tehro.common.Appbar
+import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.calculateLineName
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.data.Station

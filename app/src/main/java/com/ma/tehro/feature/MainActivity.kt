@@ -15,10 +15,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.toArgb
 import androidx.navigation.compose.rememberNavController
-import com.ma.tehro.common.AppSnackbar
+import com.ma.tehro.common.ui.AppSnackbar
 import com.ma.tehro.common.LocationPermissionHandler
 import com.ma.tehro.common.ObserveAsEvents
-import com.ma.tehro.common.messenger.UiMessageManager
+import com.ma.tehro.common.ui.UiMessageManager
 import com.ma.tehro.feature.theme.DarkGray
 import com.ma.tehro.feature.theme.TehroTheme
 import com.ma.tehro.navigation.AppNavigation

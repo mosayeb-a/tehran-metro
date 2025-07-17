@@ -1,12 +1,11 @@
-package com.ma.tehro.common
+package com.ma.tehro.common.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.LocalTextStyle
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -35,10 +34,10 @@ fun BilingualText(
         if (maxLine == Int.MAX_VALUE) Int.MAX_VALUE else (maxLine / 2).coerceAtLeast(1)
 
     val horizontalAlignment = when (textAlign) {
-        TextAlign.Center -> androidx.compose.ui.Alignment.CenterHorizontally
-        TextAlign.Start, TextAlign.Left -> androidx.compose.ui.Alignment.Start
-        TextAlign.End, TextAlign.Right -> androidx.compose.ui.Alignment.End
-        else -> androidx.compose.ui.Alignment.CenterHorizontally
+        TextAlign.Center -> Alignment.CenterHorizontally
+        TextAlign.Start, TextAlign.Left -> Alignment.Start
+        TextAlign.End, TextAlign.Right -> Alignment.End
+        else -> Alignment.CenterHorizontally
     }
 
     Column(

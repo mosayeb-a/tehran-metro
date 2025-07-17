@@ -1,4 +1,4 @@
-package com.ma.tehro.common
+package com.ma.tehro.common.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

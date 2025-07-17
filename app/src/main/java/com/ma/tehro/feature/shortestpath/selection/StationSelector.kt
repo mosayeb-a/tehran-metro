@@ -50,8 +50,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.R
-import com.ma.tehro.common.Appbar
-import com.ma.tehro.common.BilingualText
+import com.ma.tehro.common.ui.Appbar
+import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.common.timelineview.TimelineView
 import com.ma.tehro.common.timelineview.TimelineView.SingleNode
 import com.ma.tehro.data.Station

@@ -45,9 +45,9 @@ import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.unit.dp
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.ma.tehro.common.Appbar
-import com.ma.tehro.common.EmptyStatesFaces
-import com.ma.tehro.common.Message
+import com.ma.tehro.common.ui.Appbar
+import com.ma.tehro.common.ui.EmptyStatesFaces
+import com.ma.tehro.common.ui.Message
 import com.ma.tehro.common.isFarsi
 import com.ma.tehro.feature.submit_suggestion.SubmitInfoState
 

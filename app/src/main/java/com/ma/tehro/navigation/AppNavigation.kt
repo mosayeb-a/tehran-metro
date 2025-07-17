@@ -15,20 +15,20 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import com.ma.tehro.common.AboutScreen
-import com.ma.tehro.common.LinesScreen
 import com.ma.tehro.common.LocationPermissionHandler
-import com.ma.tehro.common.MapScreen
-import com.ma.tehro.common.OfficialMetroMapScreen
-import com.ma.tehro.common.PathDescriptionScreen
-import com.ma.tehro.common.PathFinderScreen
-import com.ma.tehro.common.StationDetailScreen
-import com.ma.tehro.common.StationSelectorScreen
-import com.ma.tehro.common.StationsScreen
-import com.ma.tehro.common.SubmitFeedbackScreen
-import com.ma.tehro.common.SubmitStationInfoScreen
-import com.ma.tehro.common.TrainScheduleScreen
 import com.ma.tehro.common.navTypeOf
+import com.ma.tehro.common.ui.AboutScreen
+import com.ma.tehro.common.ui.LinesScreen
+import com.ma.tehro.common.ui.MapScreen
+import com.ma.tehro.common.ui.OfficialMetroMapScreen
+import com.ma.tehro.common.ui.PathDescriptionScreen
+import com.ma.tehro.common.ui.PathFinderScreen
+import com.ma.tehro.common.ui.StationDetailScreen
+import com.ma.tehro.common.ui.StationSelectorScreen
+import com.ma.tehro.common.ui.StationsScreen
+import com.ma.tehro.common.ui.SubmitFeedbackScreen
+import com.ma.tehro.common.ui.SubmitStationInfoScreen
+import com.ma.tehro.common.ui.TrainScheduleScreen
 import com.ma.tehro.data.Station
 import com.ma.tehro.feature.about.About
 import com.ma.tehro.feature.detail.StationDetail
@@ -185,7 +185,10 @@ fun AppNavigation(
                 onInfoClick = {
                     navController.navigate(PathDescriptionScreen(viewModel.generateGuidSteps()))
                 },
-                lineChangeDelayMinutes = args.lineChangeDelayMinutes
+                lineChangeDelayMinutes = args.lineChangeDelayMinutes,
+                onMetroImageClick = {
+                    navController.navigate(OfficialMetroMapScreen)
+                }
             )
         }
         baseComposable<StationDetailScreen>(

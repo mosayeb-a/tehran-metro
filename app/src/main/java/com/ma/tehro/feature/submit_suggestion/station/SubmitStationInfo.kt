@@ -42,7 +42,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import com.ma.tehro.common.Appbar
+import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.data.Station

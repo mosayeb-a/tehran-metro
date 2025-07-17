@@ -31,8 +31,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import com.ma.tehro.R
-import com.ma.tehro.common.Appbar
-import com.ma.tehro.common.BilingualText
+import com.ma.tehro.common.ui.Appbar
+import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.common.calculateLineName
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.timelineview.TimelineView

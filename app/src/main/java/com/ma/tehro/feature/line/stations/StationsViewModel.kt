@@ -3,7 +3,7 @@ package com.ma.tehro.feature.line.stations
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.navigation.toRoute
-import com.ma.tehro.common.StationsScreen
+import com.ma.tehro.common.ui.StationsScreen
 import com.ma.tehro.data.Station
 import com.ma.tehro.data.repo.LineRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

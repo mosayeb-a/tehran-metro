@@ -14,7 +14,7 @@ import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import coil3.size.Size
 import com.ma.tehro.R
-import com.ma.tehro.common.Appbar
+import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.feature.map.official_pic.zoombox.gesture.condition.WithinXBoundsTouchCondition
 import com.ma.tehro.feature.map.official_pic.zoombox.gesture.transform.TransformGestureHandler
 import com.ma.tehro.feature.map.official_pic.zoombox.zoomable
