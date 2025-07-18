@@ -47,20 +47,18 @@ fun BilingualText(
     ) {
         Text(
             text = fa,
-            style = style.copy(
-                color = Color.White,
-                fontWeight = FontWeight.W500
-            ),
+            color = Color.White,
+            style = style,
+            fontWeight = FontWeight.W500,
             textAlign = textAlign,
             maxLines = linesPerText,
             overflow = overflow,
         )
         Text(
             text = en,
-            style = style.copy(
-                fontSize = enSize,
-                color = Color.White.copy(alpha = enAlpha)
-            ),
+            style = style,
+            color = Color.White.copy(alpha = enAlpha),
+            fontSize = enSize,
             textAlign = textAlign,
             maxLines = linesPerText,
             overflow = overflow,
