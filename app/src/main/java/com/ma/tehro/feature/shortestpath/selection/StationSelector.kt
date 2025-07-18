@@ -23,7 +23,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -33,16 +32,13 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -50,13 +46,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.R
-import com.ma.tehro.common.ui.Appbar
-import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.common.timelineview.TimelineView
 import com.ma.tehro.common.timelineview.TimelineView.SingleNode
+import com.ma.tehro.common.ui.Appbar
+import com.ma.tehro.common.ui.BilingualText
+import com.ma.tehro.common.ui.ExtendedFab
 import com.ma.tehro.data.Station
 import com.ma.tehro.services.NearestStation
-import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Composable
 fun StationSelector(
@@ -80,14 +76,6 @@ fun StationSelector(
         label = "rotate arrow"
     )
     val lazyListState = rememberLazyListState()
-    var isExtended by remember { mutableStateOf(true) }
-    LaunchedEffect(lazyListState) {
-        snapshotFlow { lazyListState.isScrollInProgress }
-            .distinctUntilChanged()
-            .collect { isScrolling ->
-                isExtended = !isScrolling
-            }
-    }
     Scaffold(
         containerColor = MaterialTheme.colorScheme.secondary,
         topBar = {
@@ -102,47 +90,25 @@ fun StationSelector(
             }
         },
         floatingActionButton = {
-            ExtendedFloatingActionButton(
-                modifier = Modifier.alpha(
-                    if ((viewState.selectedEnStartStation.isNotEmpty() && viewState.selectedEnDestStation.isNotEmpty())
-                        && viewState.selectedEnStartStation != viewState.selectedEnDestStation
-                    )
-                        1f else 0.5f
-                ),
-                onClick = {
-                    if (viewState.selectedEnStartStation.isNotEmpty() && viewState.selectedEnDestStation.isNotEmpty()
-                        && viewState.selectedEnStartStation != viewState.selectedEnDestStation
-                    ) {
-                        onFindPathClick(
-                            viewState.selectedEnStartStation,
-                            viewState.selectedEnDestStation,
-                            viewState.selectedFaStartStation,
-                            viewState.selectedFaDestStation,
-                            viewState.lineChangeDelayMinutes,
-                            viewState.dayOfWeek,
-                            viewState.currentTime
-                        )
-                    }
-                },
+            ExtendedFab(
+                lazyListState = lazyListState,
+                enabled = viewState.selectedEnStartStation.isNotEmpty() &&
+                        viewState.selectedEnDestStation.isNotEmpty() &&
+                        viewState.selectedEnStartStation != viewState.selectedEnDestStation,
                 containerColor = MaterialTheme.colorScheme.tertiary,
-                expanded = isExtended,
-                icon = {
-                    Icon(
-                        painter = painterResource(R.drawable.route),
-                        contentDescription = "path finder",
-                        tint = MaterialTheme.colorScheme.onPrimary
+                iconRes = R.drawable.route,
+                faText = "یافتن مسیر",
+                enText = "FIND PATH",
+                onClick = {
+                    onFindPathClick(
+                        viewState.selectedEnStartStation,
+                        viewState.selectedEnDestStation,
+                        viewState.selectedFaStartStation,
+                        viewState.selectedFaDestStation,
+                        viewState.lineChangeDelayMinutes,
+                        viewState.dayOfWeek,
+                        viewState.currentTime
                     )
-                },
-                text = {
-                    if (isExtended) {
-                        BilingualText(
-                            fa = "یافتن مسیر",
-                            en = "FIND PATH",
-                            style = MaterialTheme.typography.bodyMedium,
-                            maxLine = 2,
-                            textAlign = TextAlign.Center,
-                        )
-                    }
                 }
             )
         }

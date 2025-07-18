@@ -171,3 +171,13 @@ fun isFarsi(text: String): Boolean {
     val firstChar = text.trim().firstOrNull() ?: return false
     return firstChar in '\u0600'..'\u06FF'
 }
+
+
+fun Color.darken(factor: Float = 0.85f): Color {
+    return Color(
+        red = (red * factor).coerceIn(0f, 1f),
+        green = (green * factor).coerceIn(0f, 1f),
+        blue = (blue * factor).coerceIn(0f, 1f),
+        alpha = alpha
+    )
+}
