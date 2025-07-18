@@ -1,4 +1,4 @@
-package com.ma.tehro.feature.shortestpath.selection
+package com.ma.tehro.feature.shortestpath.selection.components
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
@@ -44,10 +44,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.ma.tehro.common.isFarsi
@@ -78,6 +80,10 @@ fun <T> SearchableExpandedDropDownMenu(
     var searchedOption by rememberSaveable { mutableStateOf("") }
     var expanded by remember { mutableStateOf(false) }
     var debouncedSearch by remember { mutableStateOf("") }
+
+    LaunchedEffect(initialValue) {
+        selectedOptionText = initialValue
+    }
 
     val coroutineScope = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -125,19 +131,22 @@ fun <T> SearchableExpandedDropDownMenu(
             placeholder = {
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Text(
-                        text = placeholderText.second ?: "",
+                        text = placeholderText.first ?: "",
                         style = MaterialTheme.typography.bodyMedium,
+                        fontSize = 17.sp,
+                        fontWeight = FontWeight.W500,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         color = Color.Black,
                         modifier = Modifier.weight(1f)
                     )
                     Text(
-                        text = placeholderText.first ?: "",
+                        text = placeholderText.second?.uppercase() ?: "",
                         style = MaterialTheme.typography.bodyMedium,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
-                        color = Color.Black,
+                        fontSize = 11.sp,
+                        color = Color.Black.copy(alpha = .9f),
                         textAlign = TextAlign.End,
                         modifier = Modifier.weight(1f)
                     )
@@ -206,7 +215,6 @@ fun <T> SearchableExpandedDropDownMenu(
                                 textAlign = TextAlign.End
                             )
                         },
-
                         shape = RoundedCornerShape(16.dp),
                     )
 
@@ -226,7 +234,7 @@ fun <T> SearchableExpandedDropDownMenu(
                                         if (item is Map.Entry<*, *> && item.value is Station) {
                                             val station = item.value as Station
                                             selectedOptionText =
-                                                "${station.name}\n${station.translations.fa}"
+                                                "${station.translations.fa}\n${station.name}"
                                             onDropDownItemSelected(item as T)
                                         }
                                         searchedOption = ""

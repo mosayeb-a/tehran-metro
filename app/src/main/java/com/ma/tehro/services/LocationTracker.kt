@@ -42,15 +42,13 @@ data class NearestStation(
     val station: Station,
     val distanceInMeters: Double,
 ) {
-    val distanceTextFa: String
-        get() = when {
-            distanceInMeters < 1000 -> "${distanceInMeters.toFarsiNumber()} متر"
-            else -> "${"%.1f".format(distanceInMeters / 1000).toFarsiNumber()} کیلومتر"
+    val distanceNumberFa: String
+        get() = if (distanceInMeters < 1000) {
+            distanceInMeters.toInt().toFarsiNumber()
+        } else {
+            "%.1f".format(distanceInMeters / 1000).toFarsiNumber()
         }
 
-    val distanceTextEn: String
-        get() = when {
-            distanceInMeters < 1000 -> "${distanceInMeters.toInt()} m"
-            else -> "%.1f km".format(distanceInMeters / 1000)
-        }
+    val distanceUnitFa: String
+        get() = if (distanceInMeters < 1000) "متر" else "کیلومتر"
 }

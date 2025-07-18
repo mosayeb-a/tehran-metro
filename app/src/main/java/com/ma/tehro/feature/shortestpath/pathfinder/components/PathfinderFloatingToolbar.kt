@@ -26,6 +26,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.FloatingToolbarScrollBehavior
+import androidx.compose.material3.HorizontalFloatingToolbarWithFabOverride
+import androidx.compose.material3.HorizontalFloatingToolbarWithFabOverrideScope
+import androidx.compose.material3.IconButton
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -48,12 +51,12 @@ fun PathfinderFloatingToolbar(
             .offset(y = -ScreenOffset),
         expanded = true,
         colors = FloatingToolbarDefaults.standardFloatingToolbarColors(
-            toolbarContainerColor = MaterialTheme.colorScheme.primary,
-            toolbarContentColor = MaterialTheme.colorScheme.onPrimary
+            toolbarContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+            toolbarContentColor = MaterialTheme.colorScheme.onSecondaryContainer
         ),
         expandedShadowElevation = 4.dp,
         content = {
-            FilledIconButton(
+            IconButton(
                 modifier = Modifier.size(48.dp),
                 onClick = {
                     coroutineScope.launch {
@@ -63,18 +66,18 @@ fun PathfinderFloatingToolbar(
             ) {
                 Icon(
                     Icons.Filled.ArrowUpward,
-                    contentDescription = "Scroll to top",
+                    contentDescription = "ScrolFilledl to top",
                 )
             }
             Spacer(Modifier.width(4.dp))
-            FilledIconButton(
+            IconButton(
                 modifier = Modifier.size(48.dp),
                 onClick = onInfoClick,
             ) {
                 Icon(Icons.Filled.Info, contentDescription = "Info")
             }
             Spacer(Modifier.width(4.dp))
-            FilledIconButton(
+            IconButton(
                 modifier = Modifier.size(48.dp),
                 onClick = onImageClick,
             ) {

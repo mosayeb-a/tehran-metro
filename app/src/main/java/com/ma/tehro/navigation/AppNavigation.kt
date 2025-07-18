@@ -142,16 +142,8 @@ fun AppNavigation(
                             )
                     )
                 },
-                onNearestStationChanged = {
-                    if (it != null) {
-                        viewModel.onSelectedChange(
-                            isFrom = true,
-                            enStation = it.station.name,
-                            faStation = it.station.translations.fa
-                        )
-                    }
-                },
-                findNearestStationAsStart = {
+                onNearestStationChanged = { viewModel.onNearestStationSelected(it) },
+                onFindNearestStationAsStart = {
                     locationPermissionHandler.checkLocationPermission {
                         viewModel.findNearestStation()
                     }

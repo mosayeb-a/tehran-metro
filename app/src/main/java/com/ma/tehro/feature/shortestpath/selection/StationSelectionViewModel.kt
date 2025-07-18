@@ -4,7 +4,6 @@ import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ma.tehro.common.TimeUtils
-import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.ui.Action
 import com.ma.tehro.common.ui.UiMessage
 import com.ma.tehro.common.ui.UiMessageManager
@@ -15,6 +14,7 @@ import com.ma.tehro.services.NearestStation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import javax.inject.Inject
@@ -32,6 +32,7 @@ data class StationSelectionState(
     val lineChangeDelayMinutes: Int = 8,
     val dayOfWeek: Int = Calendar.getInstance().get(Calendar.DAY_OF_WEEK),
     val currentTime: Double = TimeUtils.getCurrentTimeAsDouble(),
+    val selectedNearestStation: NearestStation? = null
 )
 
 @HiltViewModel
@@ -51,12 +52,24 @@ class StationSelectionViewModel @Inject constructor(
     }
 
     fun onSelectedChange(isFrom: Boolean, enStation: String, faStation: String) {
-        _uiState.value = _uiState.value.copy(
-            selectedEnStartStation = if (isFrom) enStation else _uiState.value.selectedEnStartStation,
-            selectedFaStartStation = if (isFrom) faStation else _uiState.value.selectedFaStartStation,
-            selectedEnDestStation = if (!isFrom) enStation else _uiState.value.selectedEnDestStation,
-            selectedFaDestStation = if (!isFrom) faStation else _uiState.value.selectedFaDestStation
-        )
+        _uiState.update {
+            it.copy(
+                selectedEnStartStation = if (isFrom) enStation else _uiState.value.selectedEnStartStation,
+                selectedFaStartStation = if (isFrom) faStation else _uiState.value.selectedFaStartStation,
+                selectedEnDestStation = if (!isFrom) enStation else _uiState.value.selectedEnDestStation,
+                selectedFaDestStation = if (!isFrom) faStation else _uiState.value.selectedFaDestStation,
+            )
+        }
+    }
+
+    fun onNearestStationSelected(nearestStation: NearestStation) {
+        _uiState.update {
+            it.copy(
+                selectedEnStartStation = nearestStation.station.name,
+                selectedFaStartStation = nearestStation.station.translations.fa,
+                selectedNearestStation = nearestStation
+            )
+        }
     }
 
     fun onLineChangeDelayChanged(minutes: Int) {
@@ -75,21 +88,7 @@ class StationSelectionViewModel @Inject constructor(
     fun findNearestStation(forceRefresh: Boolean = false) {
         viewModelScope.launch {
             if (!forceRefresh && _uiState.value.nearestStations.isNotEmpty()) {
-                UiMessageManager.sendEvent(
-                    UiMessage(
-                        message = createBilingualMessage(
-                            fa = "محاسبه دوباره نزدیک‌ترین ایستگاه؟",
-                            en = "Recalculate nearest station?"
-                        ),
-                        action = Action(
-                            name = createBilingualMessage(
-                                fa = "محاسبه دوباره",
-                                en = "Recalculate"
-                            ),
-                            action = { findNearestStation(forceRefresh = true) }
-                        )
-                    )
-                )
+                // for now just do nothing: it should handle try again functionality
                 return@launch
             }
 
@@ -100,11 +99,8 @@ class StationSelectionViewModel @Inject constructor(
                 )
                 val nearestStations = locationTracker.getNearestStationByCurrentLocation()
                 if (nearestStations.isNotEmpty()) {
-                    val closestStation = nearestStations.first()
                     _uiState.value = _uiState.value.copy(
                         nearestStations = nearestStations,
-                        selectedEnStartStation = closestStation.station.name,
-                        selectedFaStartStation = closestStation.station.translations.fa,
                         findNearestLocationProgress = false
                     )
                 }

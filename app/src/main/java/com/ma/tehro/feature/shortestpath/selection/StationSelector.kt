@@ -1,59 +1,40 @@
 package com.ma.tehro.feature.shortestpath.selection
 
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TextFieldDefaults
-import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import com.ma.tehro.R
-import com.ma.tehro.common.timelineview.TimelineView
-import com.ma.tehro.common.timelineview.TimelineView.SingleNode
 import com.ma.tehro.common.ui.Appbar
-import com.ma.tehro.common.ui.BilingualText
-import com.ma.tehro.common.ui.ExtendedFab
-import com.ma.tehro.data.Station
+import com.ma.tehro.feature.shortestpath.selection.components.SelectionToolbar
+import com.ma.tehro.feature.shortestpath.selection.components.LineChangeDelay
+import com.ma.tehro.feature.shortestpath.selection.components.TimePickerDialog
+import com.ma.tehro.feature.shortestpath.selection.components.DaySelectorSheet
+import com.ma.tehro.feature.shortestpath.selection.components.NearestStationSheet
+import com.ma.tehro.feature.shortestpath.selection.components.StationDropdown
 import com.ma.tehro.services.NearestStation
 
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StationSelector(
     viewState: StationSelectionState,
@@ -63,19 +44,18 @@ fun StationSelector(
     ) -> Unit,
     onSelectedChange: (isFrom: Boolean, query: String, faQuery: String) -> Unit,
     onBack: () -> Unit,
-    findNearestStationAsStart: () -> Unit,
-    onNearestStationChanged: (NearestStation?) -> Unit,
+    onFindNearestStationAsStart: () -> Unit,
+    onNearestStationChanged: (NearestStation) -> Unit,
     onLineChangeDelayChanged: (Int) -> Unit,
     onTimeChanged: (Double) -> Unit,
     onDayOfWeekChanged: (Int) -> Unit
 ) {
-    var expandedMenu by remember { mutableStateOf(false) }
-    val rotationAngle by animateFloatAsState(
-        targetValue = if (expandedMenu) 180f else 0f,
-        animationSpec = tween(durationMillis = 300),
-        label = "rotate arrow"
-    )
+    var showNearestStations by remember { mutableStateOf(false) }
+    var hasTriggeredNearestSearch by remember { mutableStateOf(false) }
     val lazyListState = rememberLazyListState()
+    var showDaySelector by remember { mutableStateOf(false) }
+    var showTimePicker by remember { mutableStateOf(false) }
+
     Scaffold(
         containerColor = MaterialTheme.colorScheme.secondary,
         topBar = {
@@ -89,17 +69,66 @@ fun StationSelector(
                 HorizontalDivider()
             }
         },
-        floatingActionButton = {
-            ExtendedFab(
-                lazyListState = lazyListState,
-                enabled = viewState.selectedEnStartStation.isNotEmpty() &&
-                        viewState.selectedEnDestStation.isNotEmpty() &&
-                        viewState.selectedEnStartStation != viewState.selectedEnDestStation,
-                containerColor = MaterialTheme.colorScheme.tertiary,
-                iconRes = R.drawable.route,
-                faText = "یافتن مسیر",
-                enText = "FIND PATH",
-                onClick = {
+    ) {
+        Box(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxSize()
+        ) {
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth(),
+                contentPadding = it,
+                state = lazyListState
+            ) {
+                item { Spacer(Modifier.height(28.dp)) }
+
+                item {
+                    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+                        StationDropdown(
+                            query = "${viewState.selectedFaStartStation}\n${viewState.selectedEnStartStation}",
+                            stations = viewState.stations,
+                            onStationSelected = { en, fa -> onSelectedChange(true, en, fa) },
+                            isFrom = true
+                        )
+                    }
+                }
+
+                item {
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
+
+                item {
+                    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+                        StationDropdown(
+                            query = "${viewState.selectedFaDestStation}\n${viewState.selectedEnDestStation}",
+                            stations = viewState.stations,
+                            isFrom = false,
+                            onStationSelected = { en, fa -> onSelectedChange(false, en, fa) }
+                        )
+                    }
+                }
+                item {
+                    Spacer(modifier = Modifier.height(28.dp))
+                }
+
+                item(viewState.lineChangeDelayMinutes) {
+                    LineChangeDelay(
+                        lineChangeDelay = viewState.lineChangeDelayMinutes,
+                        onLineChangeDelayChanged = { onLineChangeDelayChanged(it) },
+                    )
+                }
+
+                item { Spacer(Modifier.height(73.dp)) }
+            }
+            SelectionToolbar(
+                modifier = Modifier.align(Alignment.BottomEnd),
+                onFindPathClick = {
+                    println(
+                        "selectedEnStartStation: ${viewState.selectedEnStartStation}" + "\n" +
+                                "selectedEnDestStation: ${viewState.selectedEnDestStation}" + "\n" +
+                                "selectedFaStartStation: ${viewState.selectedFaStartStation}" + "\n" +
+                                "selectedFaDestStation: ${viewState.selectedFaDestStation}" + "\n"
+                    )
                     onFindPathClick(
                         viewState.selectedEnStartStation,
                         viewState.selectedEnDestStation,
@@ -109,279 +138,55 @@ fun StationSelector(
                         viewState.dayOfWeek,
                         viewState.currentTime
                     )
-                }
+                },
+                onTimeChangeClick = { showTimePicker = true },
+                onDayOfWeekClick = { showDaySelector = true },
+                onFindNearestStationClick = {
+                    if (!viewState.findNearestLocationProgress) {
+                        onFindNearestStationAsStart()
+                        hasTriggeredNearestSearch = true
+                    }
+                    showNearestStations = true
+                },
+                fabEnabled = viewState.selectedEnStartStation.isNotEmpty() &&
+                        viewState.selectedEnDestStation.isNotEmpty() &&
+                        viewState.selectedEnStartStation != viewState.selectedEnDestStation,
             )
-        }
-    ) {
-        LazyColumn(
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .fillMaxWidth(),
-            contentPadding = it,
-            state = lazyListState
-        ) {
-            item(0) { Spacer(Modifier.height(16.dp)) }
-            item("nearest_stations") {
-                Row(
-                    modifier = Modifier
-                        .height(IntrinsicSize.Min),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    TextButton(
-                        onClick = {
-                            findNearestStationAsStart()
-                        },
-                        shape = RoundedCornerShape(
-                            topStart = 36.dp,
-                            bottomStart = 36.dp,
-                            topEnd = if (viewState.nearestStations.isEmpty()) 36.dp else 0.dp,
-                            bottomEnd = if (viewState.nearestStations.isEmpty()) 36.dp else 0.dp
-                        ),
-                        enabled = !viewState.findNearestLocationProgress,
-                        colors = ButtonDefaults.buttonColors(
-                            contentColor = MaterialTheme.colorScheme.onPrimary,
-                            disabledContentColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = .6f)
-                        ),
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(4.dp)
-                        ) {
-                            Icon(
-                                painter = painterResource(R.drawable.location_on_24px),
-                                contentDescription = "find nearby stations"
-                            )
-                            BilingualText(
-                                fa = "یافتن نزدیک‌ترین ایستگاه",
-                                en = "FIND NEAREST STATIONS",
-                                style = MaterialTheme.typography.labelMedium,
-                                maxLine = 2,
-                                textAlign = TextAlign.Start,
-                            )
 
-                            if (viewState.findNearestLocationProgress && viewState.nearestStations.isEmpty()) {
-                                CircularProgressIndicator(
-                                    modifier = Modifier.size(18.dp),
-                                    color = MaterialTheme.colorScheme.onPrimary,
-                                )
-                            }
-                        }
-                    }
-                    if (!viewState.findNearestLocationProgress && viewState.nearestStations.isNotEmpty()) {
-                        VerticalDivider(modifier = Modifier.fillMaxHeight())
-                        Box {
-                            TextButton(
-                                modifier = Modifier.padding(end = 12.dp),
-                                onClick = { expandedMenu = true },
-                                shape = RoundedCornerShape(
-                                    topStart = 0.dp,
-                                    bottomStart = 0.dp,
-                                    topEnd = 36.dp,
-                                    bottomEnd = 36.dp
-                                ),
-                                colors = ButtonDefaults.buttonColors(
-                                    contentColor = MaterialTheme.colorScheme.onPrimary,
-                                    disabledContentColor = MaterialTheme.colorScheme.onPrimary.copy(
-                                        alpha = .6f
-                                    )
-                                ),
-                            ) {
-                                Text(
-                                    text = viewState.nearestStations.first()
-                                        .let { info -> "${info.station.name}\n${info.station.translations.fa}" },
-                                    style = MaterialTheme.typography.labelMedium
-                                )
-                                Spacer(Modifier.width(2.dp))
-                                Icon(
-                                    modifier = Modifier
-                                        .size(24.dp)
-                                        .rotate(rotationAngle),
-                                    imageVector = Icons.Default.ArrowDropDown,
-                                    contentDescription = "more nearby station"
-                                )
-                            }
-                            if (expandedMenu) {
-                                DropdownMenu(
-                                    expanded = expandedMenu,
-                                    onDismissRequest = {
-                                        expandedMenu = false
-                                    },
-                                ) {
-                                    viewState.nearestStations.forEach { info ->
-                                        DropdownMenuItem(
-                                            onClick = {
-                                                expandedMenu = false
-                                                onNearestStationChanged(info)
-                                            },
-                                            text = {
-                                                Row(
-                                                    modifier = Modifier
-                                                        .padding(vertical = 4.dp)
-                                                        .fillMaxWidth(),
-                                                    verticalAlignment = Alignment.CenterVertically,
-                                                    horizontalArrangement = Arrangement.SpaceBetween
-                                                ) {
-                                                    Column(
-                                                        modifier = Modifier.weight(1f)
-                                                    ) {
-                                                        Text(
-                                                            text = info.station.translations.fa,
-                                                            style = MaterialTheme.typography.bodyMedium,
-                                                            maxLines = 1,
-                                                            overflow = TextOverflow.Ellipsis,
-                                                        )
-                                                        Text(
-                                                            text = info.station.name,
-                                                            style = MaterialTheme.typography.bodyMedium,
-                                                            maxLines = 1,
-                                                            overflow = TextOverflow.Ellipsis,
-                                                        )
-                                                    }
-                                                    Text(
-                                                        modifier = Modifier
-                                                            .padding(start = 8.dp),
-                                                        text = "فاصله: ${info.distanceTextFa}\ndistance: ${info.distanceTextEn}",
-                                                        style = MaterialTheme.typography.bodySmall,
-                                                        textAlign = TextAlign.End
-                                                    )
-                                                }
-                                            },
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            item(1) {
-                Spacer(Modifier.height(8.dp))
-            }
-
-            item("start_station") {
-                StationDropdown(
-                    query = "${viewState.selectedFaStartStation}\n${viewState.selectedEnStartStation}",
-                    stations = viewState.stations,
-                    onStationSelected = { en, fa -> onSelectedChange(true, en, fa) },
-                    isFrom = true
+            if (showNearestStations) {
+                NearestStationSheet(
+                    nearestStations = viewState.nearestStations,
+                    isLoading = viewState.findNearestLocationProgress && hasTriggeredNearestSearch,
+                    onStationSelected = { station ->
+                        onNearestStationChanged(station)
+                        showNearestStations = false
+                    },
+                    selectedStation = viewState.selectedNearestStation,
+                    onDismiss = { showNearestStations = false }
                 )
             }
 
-            item(2) {
-                Spacer(modifier = Modifier.height(16.dp))
-            }
-
-            item("end_station") {
-                StationDropdown(
-                    query = "${viewState.selectedFaDestStation}\n${viewState.selectedEnDestStation}",
-                    stations = viewState.stations,
-                    isFrom = false,
-                    onStationSelected = { en, fa -> onSelectedChange(false, en, fa) }
-                )
-            }
-            item(3) {
-                Spacer(modifier = Modifier.height(28.dp))
-            }
-
-            item("addition_setting") {
-                AdditionalInfo(
-                    lineChangeDelay = viewState.lineChangeDelayMinutes,
-                    currentTime = viewState.currentTime,
-                    dayOfWeek = viewState.dayOfWeek,
-                    onLineChangeDelayChanged = { onLineChangeDelayChanged(it) },
-                    onTimeChanged = { onTimeChanged(it) },
-                    onDayOfWeekChanged = { onDayOfWeekChanged(it) }
+            if (showDaySelector) {
+                DaySelectorSheet(
+                    selectedDay = viewState.dayOfWeek,
+                    onDismiss = { showDaySelector = false },
+                    onDaySelected = { day -> onDayOfWeekChanged(day) }
                 )
             }
 
-            item { Spacer(Modifier.height(73.dp)) }
+
+            if (showTimePicker) {
+                TimePickerDialog(
+                    onDismissRequest = { showTimePicker = false },
+                    onConfirm = { hour, minute ->
+                        val newTime = (hour * 3600 + minute * 60).toDouble() / 86400.0
+                        onTimeChanged(newTime)
+                        showTimePicker = false
+                    },
+                    initialHour = (viewState.currentTime * 24).toInt(),
+                    initialMinute = ((viewState.currentTime * 24 * 60) % 60).toInt()
+                )
+            }
         }
     }
-}
-
-@Composable
-fun StationDropdown(
-    query: String,
-    stations: Map<String, Station>,
-    onStationSelected: (en: String, fa: String) -> Unit,
-    isFrom: Boolean,
-) {
-    var selectedStation by rememberSaveable { mutableStateOf(query.split("\n").getOrNull(1)) }
-
-    SearchableExpandedDropDownMenu(
-        listOfItems = stations.entries.toList(),
-        modifier = Modifier
-            .fillMaxWidth(),
-        onDropDownItemSelected = { entry ->
-            selectedStation = entry.key
-            onStationSelected(entry.key, entry.value.translations.fa)
-        },
-        initialValue = query,
-        dropdownItem = { entry ->
-            BilingualText(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(end = 16.dp),
-                fa = entry.value.translations.fa,
-                en = entry.value.name.uppercase(),
-                style = MaterialTheme.typography.bodyLarge,
-                maxLine = 2,
-                textAlign = TextAlign.End
-            )
-        },
-        defaultItem = { defaultStation ->
-            selectedStation = defaultStation.key
-        },
-        startContent = {
-            Row(
-                modifier = Modifier.padding(horizontal = 16.dp),
-            ) {
-                SingleNode(
-                    color = MaterialTheme.colorScheme.secondary.copy(alpha = .9f),
-                    nodeType = if (isFrom) TimelineView.NodeType.FIRST else TimelineView.NodeType.LAST,
-                    nodeSize = 20f,
-                    isChecked = true,
-                    lineWidth = 5.2f,
-                    isDashed = true
-                )
-                Text(
-                    text = if (isFrom) "مبدا" + "\n" + "FROM" else "مقصد" + "\n" + "TO",
-                    modifier = Modifier
-                        .padding(start = 4.dp, bottom = 8.dp, top = 8.dp)
-                        .align(Alignment.CenterVertically),
-                    style = MaterialTheme.typography.labelSmall.copy(
-                        color = MaterialTheme.colorScheme.secondary.copy(alpha = .45f),
-                    ),
-                    textAlign = TextAlign.Center
-                )
-            }
-        },
-        colors = TextFieldDefaults.colors(
-            focusedContainerColor = Color.White,
-            unfocusedContainerColor = Color.White,
-            focusedIndicatorColor = Color.Black,
-            unfocusedIndicatorColor = Color.Black,
-            focusedTextColor = Color.Black,
-            unfocusedTextColor = Color.Black,
-            cursorColor = Color.Black
-        ),
-        searchPredicate = { searchText, entry ->
-            val queryWords = normalizeWords(searchText)
-            val targetWords =
-                normalizeWords(entry.value.name) + normalizeWords(entry.value.translations.fa)
-
-            queryWords.all { queryWord ->
-                targetWords.any { targetWord ->
-                    targetWord.contains(queryWord)
-                }
-            }
-        }
-    )
-}
-
-private fun normalizeWords(text: String): List<String> {
-    return text.trim()
-        .split("\\s+".toRegex())
-        .map { it.lowercase() }
 }

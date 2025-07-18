@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 
 
 @Composable
-fun ExtendedFab(
+fun ExtendableFab(
     lazyListState: LazyListState,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
