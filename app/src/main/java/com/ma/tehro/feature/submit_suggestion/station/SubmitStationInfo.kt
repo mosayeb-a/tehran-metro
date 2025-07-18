@@ -12,15 +12,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.TextSelectionColors
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -28,25 +28,37 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.ma.tehro.R
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.getLineColorByNumber
+import com.ma.tehro.common.ui.BilingualText
+import com.ma.tehro.common.ui.ExtendedFab
 import com.ma.tehro.data.Station
 import com.ma.tehro.feature.submit_suggestion.SubmitInfoState
+import com.ma.tehro.feature.submit_suggestion.station.components.CorrectionEditText
+import com.ma.tehro.feature.submit_suggestion.station.components.FacilitateCheckbox
+import com.ma.tehro.feature.theme.Blue
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Composable
 fun SubmitStationInfo(
@@ -84,7 +96,38 @@ fun SubmitStationInfo(
             atm != (station.atm ?: false) ||
             selectedLine != station.lines.joinToString(", ")
 
+    val lazyListState = rememberLazyListState()
+
     Scaffold(
+        floatingActionButton = {
+            ExtendedFab(
+                lazyListState = lazyListState,
+                enabled = !state.isLoading && isChanged,
+                iconRes = R.drawable.route,
+                faText = "ارسال اطلاعات",
+                enText = "SUBMIT INFO",
+                onClick = {
+                    onSubmitInfo(
+                        Station(
+                            name = name,
+                            translations = station.translations.copy(fa = translations),
+                            longitude = longitude.takeIf { it.isNotEmpty() },
+                            latitude = latitude.takeIf { it.isNotEmpty() },
+                            address = address.takeIf { it.isNotEmpty() },
+                            disabled = disabled,
+                            lines = station.lines,
+                            wc = wc,
+                            coffeeShop = coffeeShop,
+                            groceryStore = groceryStore,
+                            fastFood = fastFood,
+                            atm = atm,
+                            relations = station.relations,
+                            positionsInLine = station.positionsInLine
+                        )
+                    )
+                }
+            )
+        },
         topBar = {
             Column {
                 Appbar(
@@ -100,30 +143,25 @@ fun SubmitStationInfo(
         LazyColumn(
             modifier = Modifier
                 .padding(paddingValues)
-                .padding(horizontal = 8.dp)
+                .padding(horizontal = 16.dp)
         ) {
             item { Spacer(Modifier.height(16.dp)) }
             item("title") {
                 Column(
                     modifier = Modifier
-                        .clip(RoundedCornerShape(8.dp))
+                        .clip(RoundedCornerShape(18.dp))
                         .background(getLineColorByNumber(lineNumber).copy(alpha = .61f))
                         .padding(6.dp)
                 ) {
                     Text(
                         text = "در به‌روزرسانی داده‌های مترو به ما کمک کنید! اطلاعات ارسالی شما بررسی می شود و درصورت درست بودن، در نسخه بعدی اعمال خواهد شد",
                         textAlign = TextAlign.Right,
-                        style = MaterialTheme.typography.titleSmall,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontSize = 17.sp,
                         modifier = Modifier
-                            .padding(4.dp)
+                            .padding(6.dp)
                             .fillMaxWidth(),
                     )
-//                    Text(
-//                        text = "Help us keep metro data up to date! Your submission will be reviewed and applied in the next update.",
-//                        textAlign = TextAlign.Left,
-//                        style = MaterialTheme.typography.titleSmall,
-//                        modifier = Modifier.fillMaxWidth()
-//                    )
                 }
             }
             item { Spacer(Modifier.height(12.dp)) }
@@ -203,184 +241,75 @@ fun SubmitStationInfo(
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        MyCheckbox(
-                            label = createBilingualMessage(fa = "غیرفعال", en = "Disabled"),
-                            checked = disabled,
-                            onCheckedChange = { disabled = it },
-                            modifier = Modifier.weight(1f)
-                        )
-                        MyCheckbox(
-                            label = createBilingualMessage(fa = "دستشویی", en = "WC"),
-                            checked = wc,
-                            onCheckedChange = { wc = it },
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        MyCheckbox(
-                            label = createBilingualMessage(fa = "کافی‌شاپ", en = "Coffee Shop"),
-                            checked = coffeeShop,
-                            onCheckedChange = { coffeeShop = it },
-                            modifier = Modifier.weight(1f)
-                        )
-                        MyCheckbox(
-                            label = createBilingualMessage(fa = "سوپرمارکت", en = "Grocery Store"),
-                            checked = groceryStore,
-                            onCheckedChange = { groceryStore = it },
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        MyCheckbox(
-                            label = createBilingualMessage(fa = "فست‌فود", en = "Fast Food"),
-                            checked = fastFood,
-                            onCheckedChange = { fastFood = it },
-                            modifier = Modifier.weight(1f)
-                        )
-                        MyCheckbox(
-                            label = createBilingualMessage(fa = "خودپرداز", en = "ATM"),
-                            checked = atm,
-                            onCheckedChange = { atm = it },
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-                }
-            }
-            item { Spacer(Modifier.height(16.dp)) }
-
-            item("submit") {
-                Button(
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .fillMaxWidth()
-                        .height(76.dp),
-                    onClick = {
-                        onSubmitInfo(
-                            Station(
-                                name = name,
-                                translations = station.translations.copy(fa = translations),
-                                longitude = longitude.takeIf { it.isNotEmpty() },
-                                latitude = latitude.takeIf { it.isNotEmpty() },
-                                address = address.takeIf { it.isNotEmpty() },
-                                disabled = disabled,
-                                lines = station.lines,
-                                wc = wc,
-                                coffeeShop = coffeeShop,
-                                groceryStore = groceryStore,
-                                fastFood = fastFood,
-                                atm = atm,
-                                relations = station.relations,
-                                positionsInLine = station.positionsInLine
+                    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(16.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            FacilitateCheckbox(
+                                fa = "غیرفعال",
+                                en = "Disabled",
+                                checked = disabled,
+                                onCheckedChange = { disabled = it },
+                                modifier = Modifier.weight(1f)
                             )
-                        )
-                    },
-                    enabled = !state.isLoading && isChanged,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.tertiary,
-                        disabledContainerColor = MaterialTheme.colorScheme.tertiary.copy(alpha = .5f)
-                    ),
-                ) {
-                    if (state.isLoading) {
-                        CircularProgressIndicator(color = MaterialTheme.colorScheme.onPrimary)
-                    } else {
-                        Text(
-                            createBilingualMessage(
-                                fa = "ارسال اطلاعات",
-                                en = "Submit Information"
-                            ), textAlign = TextAlign.Center
-                        )
+                            FacilitateCheckbox(
+                                fa = "دستشویی",
+                                en = "WC",
+                                checked = wc,
+                                onCheckedChange = { wc = it },
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(16.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            FacilitateCheckbox(
+                                fa = "کافی‌شاپ",
+                                en = "Coffee Shop",
+                                checked = coffeeShop,
+                                onCheckedChange = { coffeeShop = it },
+                                modifier = Modifier.weight(1f)
+                            )
+                            FacilitateCheckbox(
+                                fa = "سوپرمارکت",
+                                en = "Grocery Store",
+                                checked = groceryStore,
+                                onCheckedChange = { groceryStore = it },
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(16.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            FacilitateCheckbox(
+                                fa = "فست‌فود",
+                                en = "Fast Food",
+                                checked = fastFood,
+                                onCheckedChange = { fastFood = it },
+                                modifier = Modifier.weight(1f)
+                            )
+                            FacilitateCheckbox(
+                                fa = "خودپرداز",
+                                en = "ATM",
+                                checked = atm,
+                                onCheckedChange = { atm = it },
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
                     }
                 }
             }
-            item { Spacer(Modifier.height(56.dp)) }
+            item { Spacer(Modifier.height(87.dp)) }
         }
     }
 }
 
 
-@Composable
-fun CorrectionEditText(
-    modifier: Modifier = Modifier,
-    value: String,
-    onValueChange: (value: String) -> Unit,
-    label: String,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    maxLines: Int = 1,
-    trailingIcon: @Composable (() -> Unit)? = null,
-) {
-    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
-        OutlinedTextField(
-            value = value,
-            onValueChange = onValueChange,
-            label = {
-                Text(
-                    text = label,
-                    textAlign = TextAlign.Center,
-                )
-            },
-            trailingIcon = trailingIcon,
-            modifier = modifier.fillMaxWidth(),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedTextColor = Color.White,
-                focusedBorderColor = Color.White,
-                focusedLabelColor = Color.White,
-                focusedLeadingIconColor = Color.White,
-                focusedTrailingIconColor = Color.White,
-                cursorColor = Color.White,
-                focusedContainerColor = Color.Transparent,
-                unfocusedContainerColor = Color.Transparent,
-                selectionColors = TextSelectionColors(
-                    handleColor = Color.White,
-                    backgroundColor = Color.White.copy(alpha = 0.3f)
-                )
-            ),
-            maxLines = maxLines,
-            shape = RoundedCornerShape(12.dp),
-            keyboardOptions = keyboardOptions
-        )
-    }
-}
-
-@Composable
-fun MyCheckbox(
-    modifier: Modifier = Modifier,
-    label: String,
-    checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit
-) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier
-            .clickable(
-                onClick = { onCheckedChange(!checked) },
-                indication = null,
-                interactionSource = remember { MutableInteractionSource() }
-            )
-            .padding(4.dp)
-    ) {
-        Checkbox(
-            checked = checked,
-            onCheckedChange = null,
-            colors = CheckboxDefaults.colors(
-                checkmarkColor = MaterialTheme.colorScheme.primary,
-                checkedColor = MaterialTheme.colorScheme.onPrimary,
-                uncheckedColor = MaterialTheme.colorScheme.onPrimary
-            )
-        )
-        Spacer(Modifier.width(8.dp))
-        Text(text = label, style = MaterialTheme.typography.labelMedium)
-    }
-}

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -62,6 +63,7 @@ import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.common.LineEndpoints
 import com.ma.tehro.common.calculateBilingualLineName
 import com.ma.tehro.common.getLineColorByNumber
+import com.ma.tehro.common.ui.ExtendedFab
 import com.ma.tehro.feature.theme.Blue
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
@@ -89,13 +91,6 @@ fun Lines(
 
     var showBranchDialog by remember { mutableStateOf(false) }
     var selectedLine by remember { mutableStateOf<Int?>(null) }
-    var isExtended by remember { mutableStateOf(true) }
-
-    LaunchedEffect(lazyListState) {
-        snapshotFlow { lazyListState.isScrollInProgress }
-            .distinctUntilChanged()
-            .collect { isScrolling -> isExtended = !isScrolling }
-    }
 
     BackHandler(enabled = drawerState.isOpen) {
         coroutineScope.launch { drawerState.close() }
@@ -158,28 +153,13 @@ fun Lines(
                 )
             },
             floatingActionButton = {
-                ExtendedFloatingActionButton(
-                    onClick = onFindPathClicked,
+                ExtendedFab(
+                    lazyListState = lazyListState,
                     containerColor = Blue,
-                    expanded = isExtended,
-                    icon = {
-                        Icon(
-                            painter = painterResource(R.drawable.route),
-                            contentDescription = "path finder",
-                            tint = MaterialTheme.colorScheme.onPrimary
-                        )
-                    },
-                    text = {
-                        if (isExtended) {
-                            BilingualText(
-                                fa = "مسیریابی",
-                                en = "ROUTING",
-                                style = MaterialTheme.typography.bodyMedium,
-                                maxLine = 2,
-                                textAlign = TextAlign.Center,
-                            )
-                        }
-                    }
+                    iconRes = R.drawable.route,
+                    faText = "مسیریابی",
+                    enText = "ROUTING",
+                    onClick = onFindPathClicked
                 )
             }
         ) { innerPadding ->
