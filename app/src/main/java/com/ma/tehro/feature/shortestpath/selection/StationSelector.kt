@@ -25,13 +25,13 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.ui.Appbar
+import com.ma.tehro.domain.NearestStation
 import com.ma.tehro.feature.shortestpath.selection.components.SelectionToolbar
 import com.ma.tehro.feature.shortestpath.selection.components.LineChangeDelay
 import com.ma.tehro.feature.shortestpath.selection.components.TimePickerDialog
 import com.ma.tehro.feature.shortestpath.selection.components.DaySelectorSheet
 import com.ma.tehro.feature.shortestpath.selection.components.NearestStationSheet
 import com.ma.tehro.feature.shortestpath.selection.components.StationDropdown
-import com.ma.tehro.services.NearestStation
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -48,7 +48,8 @@ fun StationSelector(
     onNearestStationChanged: (NearestStation) -> Unit,
     onLineChangeDelayChanged: (Int) -> Unit,
     onTimeChanged: (Double) -> Unit,
-    onDayOfWeekChanged: (Int) -> Unit
+    onDayOfWeekChanged: (Int) -> Unit,
+    onFindNearestStationsByPlace: () -> Unit,
 ) {
     var showNearestStations by remember { mutableStateOf(false) }
     var hasTriggeredNearestSearch by remember { mutableStateOf(false) }
@@ -123,12 +124,6 @@ fun StationSelector(
             SelectionToolbar(
                 modifier = Modifier.align(Alignment.BottomEnd),
                 onFindPathClick = {
-                    println(
-                        "selectedEnStartStation: ${viewState.selectedEnStartStation}" + "\n" +
-                                "selectedEnDestStation: ${viewState.selectedEnDestStation}" + "\n" +
-                                "selectedFaStartStation: ${viewState.selectedFaStartStation}" + "\n" +
-                                "selectedFaDestStation: ${viewState.selectedFaDestStation}" + "\n"
-                    )
                     onFindPathClick(
                         viewState.selectedEnStartStation,
                         viewState.selectedEnDestStation,
@@ -148,6 +143,7 @@ fun StationSelector(
                     }
                     showNearestStations = true
                 },
+                onFindNearestStationsByPlaceClick = onFindNearestStationsByPlace,
                 fabEnabled = viewState.selectedEnStartStation.isNotEmpty() &&
                         viewState.selectedEnDestStation.isNotEmpty() &&
                         viewState.selectedEnStartStation != viewState.selectedEnDestStation,

@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.BilingualText
-import com.ma.tehro.services.NearestStation
+import com.ma.tehro.domain.NearestStation
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -40,7 +40,7 @@ fun NearestStationSheet(
     isLoading: Boolean,
     selectedStation: NearestStation?,
     onStationSelected: (NearestStation) -> Unit,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
 ) {
     ModalBottomSheet(
         sheetState = rememberModalBottomSheetState(
@@ -91,7 +91,9 @@ fun NearestStationsBottomSheetContent(
             LazyColumn(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                items(nearestStations.size, key = { nearestStations[it].station.name }) { index ->
+                items(
+                    nearestStations.size,
+                    key = { nearestStations[it].station.name }) { index ->
                     val station = nearestStations[index]
                     val isSelected = selectedStation?.station?.name == station.station.name
 
@@ -150,13 +152,13 @@ fun NearestStationsBottomSheetContent(
 
                                 Spacer(Modifier.width(8.dp))
 
-                                    Text(
-                                        text = (index + 1).toFarsiNumber(),
-                                        style = MaterialTheme.typography.titleLarge.copy(
-                                            fontWeight = FontWeight.Black
-                                        ),
-                                        color = MaterialTheme.colorScheme.onSurface
-                                    )
+                                Text(
+                                    text = (index + 1).toFarsiNumber(),
+                                    style = MaterialTheme.typography.titleLarge.copy(
+                                        fontWeight = FontWeight.Black
+                                    ),
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
                             }
                         }
                     }

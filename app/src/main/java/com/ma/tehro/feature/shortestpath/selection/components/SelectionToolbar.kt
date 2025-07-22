@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Business
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Timer
@@ -35,6 +36,7 @@ fun SelectionToolbar(
     onTimeChangeClick: () -> Unit,
     onDayOfWeekClick: () -> Unit,
     onFindNearestStationClick: () -> Unit,
+    onFindNearestStationsByPlaceClick: () -> Unit,
     fabEnabled: Boolean = true
 ) {
     var expanded by rememberSaveable { mutableStateOf(true) }
@@ -71,6 +73,12 @@ fun SelectionToolbar(
             toolbarContentColor = MaterialTheme.colorScheme.onSecondaryContainer,
         ),
         content = {
+            IconButton(
+                modifier = Modifier.size(48.dp),
+                onClick = {onFindNearestStationsByPlaceClick()}
+            ) {
+                Icon(Icons.Filled.Business, contentDescription = "")
+            }
             IconButton(
                 modifier = Modifier.size(48.dp),
                 onClick = onFindNearestStationClick

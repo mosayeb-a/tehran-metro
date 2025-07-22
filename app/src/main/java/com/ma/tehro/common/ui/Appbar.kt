@@ -59,7 +59,7 @@ fun Appbar(
             modifier = Modifier.weight(1f),
             fa = fa,
             en = en.uppercase(),
-            style = MaterialTheme.typography.bodySmall,
+            style = MaterialTheme.typography.bodyMedium,
             maxLine = 2,
             textAlign = TextAlign.Start,
         )

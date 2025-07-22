@@ -19,8 +19,8 @@ import com.ma.tehro.common.ui.AppSnackbar
 import com.ma.tehro.common.LocationPermissionHandler
 import com.ma.tehro.common.ObserveAsEvents
 import com.ma.tehro.common.ui.UiMessageManager
-import com.ma.tehro.feature.theme.DarkGray
-import com.ma.tehro.feature.theme.TehroTheme
+import com.ma.tehro.common.ui.theme.DarkGray
+import com.ma.tehro.common.ui.theme.TehroTheme
 import com.ma.tehro.navigation.AppNavigation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

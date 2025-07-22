@@ -1,4 +1,4 @@
-package com.ma.tehro.feature.theme
+package com.ma.tehro.common.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable

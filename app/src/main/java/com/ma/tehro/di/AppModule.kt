@@ -5,6 +5,11 @@ import com.ma.tehro.services.LocationClient
 import android.app.Application
 import android.content.Context
 import com.ma.tehro.R
+import com.ma.tehro.data.Place
+import com.ma.tehro.data.PlaceCategory
+import com.ma.tehro.data.PlaceCategorySerializer
+import com.ma.tehro.data.PlaceType
+import com.ma.tehro.data.PlaceTypeSerializer
 import com.ma.tehro.data.Station
 import com.ma.tehro.data.repo.DataCorrectionRepository
 import com.ma.tehro.data.repo.DataCorrectionRepositoryImpl
@@ -12,6 +17,8 @@ import com.ma.tehro.data.repo.LineRepository
 import com.ma.tehro.data.repo.LineRepositoryImpl
 import com.ma.tehro.data.repo.PathRepository
 import com.ma.tehro.data.repo.PathRepositoryImpl
+import com.ma.tehro.data.repo.PlacesRepository
+import com.ma.tehro.data.repo.PlacesRepositoryImpl
 import com.ma.tehro.data.repo.TrainScheduleRepository
 import com.ma.tehro.data.repo.TrainScheduleRepositoryImpl
 import com.ma.tehro.services.LocationTracker
@@ -21,7 +28,12 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.modules.SerializersModule
 import javax.inject.Singleton
 
 @Module
@@ -34,18 +46,51 @@ class AppModule {
             ignoreUnknownKeys = true
             isLenient = true
             encodeDefaults = true
+            serializersModule = SerializersModule {
+                contextual(PlaceType::class, PlaceTypeSerializer)
+                contextual(PlaceCategory::class, PlaceCategorySerializer)
+            }
         }
     }
 
     @Provides
     @Singleton
-    fun provideStations(context: Application, json: Json): Map<String, Station> {
-        val stationsJson = context.resources.openRawResource(R.raw.stations)
-            .bufferedReader()
-            .use { it.readText() }
-
-        return json.decodeFromString(stationsJson)
+    fun provideStations(
+        context: Application,
+        json: Json,
+        ioDispatcher: CoroutineDispatcher
+    ): Map<String, Station> = runBlocking {
+        withContext(ioDispatcher) {
+            val stationsJson = context.resources.openRawResource(R.raw.stations)
+                .bufferedReader()
+                .use { it.readText() }
+            json.decodeFromString(stationsJson)
+        }
     }
+
+    @Provides
+    @Singleton
+    fun providePlaces(
+        context: Application,
+        json: Json,
+        ioDispatcher: CoroutineDispatcher
+    ): List<Place> = runBlocking {
+        withContext(ioDispatcher) {
+            val placesJson = context.resources.openRawResource(R.raw.places)
+                .bufferedReader()
+                .use { it.readText() }
+            json.decodeFromString(placesJson)
+        }
+    }
+    @Provides
+    @Singleton
+    fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
+
+
+    @Provides
+    @Singleton
+    fun providePlacesRepo(places: List<Place>): PlacesRepository =
+        PlacesRepositoryImpl(places)
 
     @Provides
     @Singleton
