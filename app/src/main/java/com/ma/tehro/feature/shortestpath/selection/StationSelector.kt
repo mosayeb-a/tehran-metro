@@ -56,6 +56,7 @@ fun StationSelector(
     val lazyListState = rememberLazyListState()
     var showDaySelector by remember { mutableStateOf(false) }
     var showTimePicker by remember { mutableStateOf(false) }
+    var showPlacesSheet by remember { mutableStateOf(false) }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.secondary,

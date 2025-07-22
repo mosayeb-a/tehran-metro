@@ -29,7 +29,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.feature.shortestpath.AppSearchBar
 import com.ma.tehro.feature.shortestpath.selection.components.NearestStationSheet
@@ -75,7 +74,7 @@ fun PlaceSelection(
     ) { paddingValues ->
         LazyColumn(
             modifier = Modifier
-                .padding(top = 170.dp)
+                .padding(top = 166.dp)
                 .fillMaxWidth(),
             contentPadding = PaddingValues(
                 bottom = paddingValues.calculateBottomPadding(),
@@ -113,15 +112,16 @@ fun PlaceSelection(
                         Text(
                             modifier = Modifier
                                 .fillMaxWidth(),
-                            text = place.name.toFarsiNumber(),
+                            text = place.name,
                             style = MaterialTheme.typography.bodyMedium,
                             fontSize = 16.sp,
                             textAlign = TextAlign.End,
                             fontWeight = FontWeight.W500
                         )
                     }
-                    HorizontalDivider()
-                }
+                    HorizontalDivider(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)
+                    )                }
             }
         }
     }
