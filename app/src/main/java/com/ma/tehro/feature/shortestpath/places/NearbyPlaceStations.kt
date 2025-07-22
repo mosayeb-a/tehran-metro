@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.feature.shortestpath.AppSearchBar
 import com.ma.tehro.feature.shortestpath.selection.components.NearestStationSheet
@@ -112,7 +113,7 @@ fun PlaceSelection(
                         Text(
                             modifier = Modifier
                                 .fillMaxWidth(),
-                            text = place.name,
+                            text = place.name.toFarsiNumber(),
                             style = MaterialTheme.typography.bodyMedium,
                             fontSize = 16.sp,
                             textAlign = TextAlign.End,
