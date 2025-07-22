@@ -8,27 +8,25 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.material.icons.filled.Image
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.FloatingToolbarDefaults
 import androidx.compose.material3.FloatingToolbarDefaults.ScreenOffset
+import androidx.compose.material3.FloatingToolbarScrollBehavior
 import androidx.compose.material3.HorizontalFloatingToolbar
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.material3.FloatingToolbarScrollBehavior
-import androidx.compose.material3.HorizontalFloatingToolbarWithFabOverride
-import androidx.compose.material3.HorizontalFloatingToolbarWithFabOverrideScope
-import androidx.compose.material3.IconButton
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
@@ -73,13 +71,15 @@ fun PathfinderFloatingToolbar(
             IconButton(
                 modifier = Modifier.size(48.dp),
                 onClick = onInfoClick,
+                colors = IconButtonDefaults.iconButtonColors(contentColor = Color.White)
             ) {
-                Icon(Icons.Filled.Info, contentDescription = "Info")
+                Icon(Icons.Filled.Info, contentDescription = "Info", tint =Color.White )
             }
             Spacer(Modifier.width(4.dp))
             IconButton(
                 modifier = Modifier.size(48.dp),
                 onClick = onImageClick,
+                colors = IconButtonDefaults.iconButtonColors(contentColor = Color.White)
             ) {
                 Icon(Icons.Filled.Image, contentDescription = "Metro image")
             }

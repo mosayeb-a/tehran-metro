@@ -45,7 +45,7 @@ fun ExtendableFab(
         expanded = isExtended,
         icon = {
             Icon(
-                painter = painterResource(id = iconRes),
+                painter = painterResource(iconRes),
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onPrimary
             )

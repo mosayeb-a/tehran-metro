@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.domain.NearestStation
 import com.ma.tehro.feature.shortestpath.selection.components.SelectionToolbar
-import com.ma.tehro.feature.shortestpath.selection.components.LineChangeDelay
+import com.ma.tehro.feature.shortestpath.selection.components.LineChangeDelaySlider
 import com.ma.tehro.feature.shortestpath.selection.components.TimePickerDialog
 import com.ma.tehro.feature.shortestpath.selection.components.DaySelectorSheet
 import com.ma.tehro.feature.shortestpath.selection.components.NearestStationSheet
@@ -112,10 +112,10 @@ fun StationSelector(
                     Spacer(modifier = Modifier.height(28.dp))
                 }
 
-                item(viewState.lineChangeDelayMinutes) {
-                    LineChangeDelay(
+                item {
+                    LineChangeDelaySlider(
                         lineChangeDelay = viewState.lineChangeDelayMinutes,
-                        onLineChangeDelayChanged = { onLineChangeDelayChanged(it) },
+                        onLineChangeDelayChanged = { delay -> onLineChangeDelayChanged(delay) },
                     )
                 }
 
