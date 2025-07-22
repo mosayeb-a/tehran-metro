@@ -9,8 +9,8 @@ import com.ma.tehro.common.ui.UiMessage
 import com.ma.tehro.common.ui.UiMessageManager
 import com.ma.tehro.data.Station
 import com.ma.tehro.data.repo.PathRepository
+import com.ma.tehro.domain.NearestStation
 import com.ma.tehro.services.LocationTracker
-import com.ma.tehro.services.NearestStation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -32,13 +32,13 @@ data class StationSelectionState(
     val lineChangeDelayMinutes: Int = 8,
     val dayOfWeek: Int = Calendar.getInstance().get(Calendar.DAY_OF_WEEK),
     val currentTime: Double = TimeUtils.getCurrentTimeAsDouble(),
-    val selectedNearestStation: NearestStation? = null
+    val selectedNearestStation: NearestStation? = null,
 )
 
 @HiltViewModel
 class StationSelectionViewModel @Inject constructor(
-    private val repository: PathRepository,
-    private val locationTracker: LocationTracker
+    private val pathRepository: PathRepository,
+    private val locationTracker: LocationTracker,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(StationSelectionState())
@@ -46,7 +46,7 @@ class StationSelectionViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val result = repository.getStations()
+            val result = pathRepository.getStations()
             _uiState.value = _uiState.value.copy(stations = result)
         }
     }
@@ -83,7 +83,6 @@ class StationSelectionViewModel @Inject constructor(
     fun onDayOfWeekChanged(day: Int) {
         _uiState.value = _uiState.value.copy(dayOfWeek = day)
     }
-
 
     fun findNearestStation(forceRefresh: Boolean = false) {
         viewModelScope.launch {

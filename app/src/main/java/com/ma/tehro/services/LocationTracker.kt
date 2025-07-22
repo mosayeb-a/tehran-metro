@@ -4,6 +4,7 @@ import android.location.Location
 import com.ma.tehro.common.calculateDistance
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.data.Station
+import com.ma.tehro.domain.NearestStation
 import javax.inject.Inject
 
 
@@ -36,19 +37,4 @@ class LocationTrackerImpl @Inject constructor(
             .sortedBy { it.distanceInMeters }
             .take(3)
     }
-}
-
-data class NearestStation(
-    val station: Station,
-    val distanceInMeters: Double,
-) {
-    val distanceNumberFa: String
-        get() = if (distanceInMeters < 1000) {
-            distanceInMeters.toInt().toFarsiNumber()
-        } else {
-            "%.1f".format(distanceInMeters / 1000).toFarsiNumber()
-        }
-
-    val distanceUnitFa: String
-        get() = if (distanceInMeters < 1000) "متر" else "کیلومتر"
 }

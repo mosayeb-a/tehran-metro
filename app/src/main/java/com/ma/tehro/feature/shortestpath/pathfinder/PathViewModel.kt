@@ -37,8 +37,6 @@ class PathViewModel @Inject constructor(
 
     init {
         val args = savedStateHandle.toRoute<PathFinderScreen>()
-        println(args)
-        println(fractionToTime(args.currentTime))
         viewModelScope.launch {
             val path = pathRepository
                 .findShortestPathWithDirection(args.startEnStation, args.enDestination)

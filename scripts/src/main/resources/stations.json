@@ -1,0 +1,3911 @@
+{
+  "Tajrish": {
+    "name": "Tajrish",
+    "translations": {
+      "fa": "تجریش"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.433643000000004",
+    "latitude": "35.804501",
+    "address": "خیابان شریعتی-ضلع جنوب غربی میدان قدس",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Gheytariyeh"
+    ],
+    "positionsInLine": [
+      {
+        "position": 1,
+        "line": 1
+      }
+    ]
+  },
+  "Gheytariyeh": {
+    "name": "Gheytariyeh",
+    "translations": {
+      "fa": "قیطریه"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.435252",
+    "latitude": "35.793119",
+    "address": "خیابان دکترشریعتی - روبه روی پل رومی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Tajrish",
+      "Shahid Sadr"
+    ],
+    "positionsInLine": [
+      {
+        "position": 2,
+        "line": 1
+      }
+    ]
+  },
+  "Shahid Sadr": {
+    "name": "Shahid Sadr",
+    "translations": {
+      "fa": "شهید صدر"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.435639",
+    "latitude": "35.785374",
+    "address": "100 متر بعد از تقاطع بزرگراه شهید صدر و خیابان دکتر شریعتی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Gheytariyeh",
+      "Qolhak"
+    ],
+    "positionsInLine": [
+      {
+        "position": 3,
+        "line": 1
+      }
+    ]
+  },
+  "Qolhak": {
+    "name": "Qolhak",
+    "translations": {
+      "fa": "قلهک"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.4379137",
+    "latitude": "35.7726822",
+    "address": "خیابان دکترشریعتی، بالاتر از دو راهی قلهک، نرسیده به خیابان دولت",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahid Sadr",
+      "Doctor Shariati"
+    ],
+    "positionsInLine": [
+      {
+        "position": 4,
+        "line": 1
+      }
+    ]
+  },
+  "Doctor Shariati": {
+    "name": "Doctor Shariati",
+    "translations": {
+      "fa": "دکتر شریعتی"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.4440981",
+    "latitude": "35.7626452",
+    "address": "خیابان دکتر شریعتی، بالاتر از بلوار میرداماد",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Qolhak",
+      "Mirdamad"
+    ],
+    "positionsInLine": [
+      {
+        "position": 5,
+        "line": 1
+      }
+    ]
+  },
+  "Mirdamad": {
+    "name": "Mirdamad",
+    "translations": {
+      "fa": "میرداماد"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.43375",
+    "latitude": "35.76006",
+    "address": "بلوار میرداماد، جنب پمپ بنزین، زیر ساختمان رز میرداماد",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Doctor Shariati",
+      "Shahid Haghani"
+    ],
+    "positionsInLine": [
+      {
+        "position": 6,
+        "line": 1
+      }
+    ]
+  },
+  "Shahid Haghani": {
+    "name": "Shahid Haghani",
+    "translations": {
+      "fa": "شهید حقانی"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.4257773",
+    "latitude": "35.7565207",
+    "address": "بزرگراه شهید حقانی - جنب پارک طالقانی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Mirdamad",
+      "Shahid Hemmat"
+    ],
+    "positionsInLine": [
+      {
+        "position": 7,
+        "line": 1
+      }
+    ]
+  },
+  "Shahid Hemmat": {
+    "name": "Shahid Hemmat",
+    "translations": {
+      "fa": "شهید همت"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.427372",
+    "latitude": "35.748228",
+    "address": "بزرگراه شهید همت ، جنب سازمان فرهنگ و ارتباطات اسلامی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahid Haghani",
+      "Mosalla-ye Imam Khomeini"
+    ],
+    "positionsInLine": [
+      {
+        "position": 8,
+        "line": 1
+      }
+    ]
+  },
+  "Mosalla-ye Imam Khomeini": {
+    "name": "Mosalla-ye Imam Khomeini",
+    "translations": {
+      "fa": "مصلی امام خمینی"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.427082",
+    "latitude": "35.74073",
+    "address": "بزرگراه رسالت ، شمال مصلی ، روبروی سازمان فرهنگ و ارتباطات اسلامی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahid Hemmat",
+      "Shahid Beheshti"
+    ],
+    "positionsInLine": [
+      {
+        "position": 9,
+        "line": 1
+      }
+    ]
+  },
+  "Shahid Beheshti": {
+    "name": "Shahid Beheshti",
+    "translations": {
+      "fa": "شهید بهشتی"
+    },
+    "lines": [
+      1,
+      3
+    ],
+    "longitude": "51.42704",
+    "latitude": "35.731037",
+    "address": "تقاطع خیابان های شهید بهشتی و شهید مفتح",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Mosalla-ye Imam Khomeini",
+      "Sohrevardi",
+      "Mirza-ye Shirazi",
+      "Shahid Mofattah"
+    ],
+    "positionsInLine": [
+      {
+        "position": 10,
+        "line": 1
+      },
+      {
+        "position": 12,
+        "line": 3
+      }
+    ]
+  },
+  "Shahid Mofattah": {
+    "name": "Shahid Mofattah",
+    "translations": {
+      "fa": "شهید مفتح"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.427632",
+    "latitude": "35.724453",
+    "address": "تقاطع خیابان های استاد شهید مطهری و شهید مفتح",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahid Beheshti",
+      "Shohada-ye Haftom-e Tir"
+    ],
+    "positionsInLine": [
+      {
+        "position": 11,
+        "line": 1
+      }
+    ]
+  },
+  "Ayatollah Taleghani": {
+    "name": "Ayatollah Taleghani",
+    "translations": {
+      "fa": "آیت‌الله طالقانی"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.425495",
+    "latitude": "35.707161",
+    "address": "تقاطع خیابان آیت اله طالقانی و خیابان شهید مفتح",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shohada-ye Haftom-e Tir",
+      "Darvazeh Dolat"
+    ],
+    "positionsInLine": [
+      {
+        "position": 13,
+        "line": 1
+      }
+    ]
+  },
+  "Darvazeh Dolat": {
+    "name": "Darvazeh Dolat",
+    "translations": {
+      "fa": "دروازه دولت"
+    },
+    "lines": [
+      1,
+      4
+    ],
+    "longitude": "51.425849",
+    "latitude": "35.701316",
+    "address": "خیابان انقلاب اسلامی ، تقاطع سعدی شمالی و شهید مفتح",
+    "disabled": false,
+    "wc": true,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": true,
+    "relations": [
+      "Ayatollah Taleghani",
+      "Ferdowsi",
+      "Darvazeh Shemiran",
+      "Sa'adi"
+    ],
+    "positionsInLine": [
+      {
+        "position": 14,
+        "line": 1
+      },
+      {
+        "position": 8,
+        "line": 4
+      }
+    ]
+  },
+  "Sa'adi": {
+    "name": "Sa'adi",
+    "translations": {
+      "fa": "سعدی"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.4244163",
+    "latitude": "35.6934793",
+    "address": "میدان استقلال - (میدان مخبرالدوله)",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Darvazeh Dolat",
+      "Imam Khomeini"
+    ],
+    "positionsInLine": [
+      {
+        "position": 15,
+        "line": 1
+      }
+    ]
+  },
+  "Imam Khomeini": {
+    "name": "Imam Khomeini",
+    "translations": {
+      "fa": "امام خمینی"
+    },
+    "lines": [
+      1,
+      2
+    ],
+    "longitude": "51.421171",
+    "latitude": "35.686433",
+    "address": "میدان امام خمینی (ره)",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Sa'adi",
+      "Hasan Abad",
+      "Mellat",
+      "Panzdah-e Khordad"
+    ],
+    "positionsInLine": [
+      {
+        "position": 16,
+        "line": 1
+      },
+      {
+        "position": 14,
+        "line": 2
+      }
+    ]
+  },
+  "Panzdah-e Khordad": {
+    "name": "Panzdah-e Khordad",
+    "translations": {
+      "fa": "پانزده خرداد"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.417287",
+    "latitude": "35.678276",
+    "address": "تقاطع خیابان های پانزد خرداد و خیام - چهارراه گلوبندک",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Imam Khomeini",
+      "Khayyam"
+    ],
+    "positionsInLine": [
+      {
+        "position": 17,
+        "line": 1
+      }
+    ]
+  },
+  "Khayyam": {
+    "name": "Khayyam",
+    "translations": {
+      "fa": "خیام"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.416568",
+    "latitude": "35.673073",
+    "address": "خیابان خیام شمالی ، پایین تر از چهارراه گلوبندک ، جنب امامزاده",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Panzdah-e Khordad",
+      "Meydan-e Mohammadiyeh"
+    ],
+    "positionsInLine": [
+      {
+        "position": 18,
+        "line": 1
+      }
+    ]
+  },
+  "Meydan-e Mohammadiyeh": {
+    "name": "Meydan-e Mohammadiyeh",
+    "translations": {
+      "fa": "میدان محمدیه"
+    },
+    "lines": [
+      1,
+      7
+    ],
+    "longitude": "51.415488",
+    "latitude": "35.667753",
+    "address": "میدان محمدیه(اعدام) ، تقاطع خیابان خیام و مولوی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Khayyam",
+      "Mahdiyeh",
+      "Mowlavi",
+      "Shoush"
+    ],
+    "positionsInLine": [
+      {
+        "position": 19,
+        "line": 1
+      },
+      {
+        "position": 8,
+        "line": 7
+      }
+    ]
+  },
+  "Shoush": {
+    "name": "Shoush",
+    "translations": {
+      "fa": "شوش"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.414154",
+    "latitude": "35.65754",
+    "address": "تقاطع خیابان های شوش و خیام",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Meydan-e Mohammadiyeh",
+      "Payaneh Jonoub(Jonoub Terminal)"
+    ],
+    "positionsInLine": [
+      {
+        "position": 20,
+        "line": 1
+      }
+    ]
+  },
+  "Payaneh Jonoub(Jonoub Terminal)": {
+    "name": "Payaneh Jonoub(Jonoub Terminal)",
+    "translations": {
+      "fa": "پایانه جنوبی"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.416289",
+    "latitude": "35.650688",
+    "address": "خیابان عباسی ، ضلع شمال غربی پایانه جنوب",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shoush",
+      "Shahid Bokharaei"
+    ],
+    "positionsInLine": [
+      {
+        "position": 21,
+        "line": 1
+      }
+    ]
+  },
+  "Shahid Bokharaei": {
+    "name": "Shahid Bokharaei",
+    "translations": {
+      "fa": "شهید بخارایی"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.414787",
+    "latitude": "35.640609",
+    "address": "خیابان شهید رجایی ، خیابان ابریشم ، 100متری شهید همدانی",
+    "disabled": false,
+    "wc": true,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Payaneh Jonoub(Jonoub Terminal)",
+      "Aliabad"
+    ],
+    "positionsInLine": [
+      {
+        "position": 22,
+        "line": 1
+      }
+    ]
+  },
+  "Aliabad": {
+    "name": "Aliabad",
+    "translations": {
+      "fa": "علی‌آباد"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.416203",
+    "latitude": "35.629256",
+    "address": "جاده قدیم قم- سه راه پالایشگاه - خیابان شهید گلشنی",
+    "disabled": false,
+    "wc": true,
+    "coffeeShop": false,
+    "groceryStore": true,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahid Bokharaei",
+      "Javanmard-e Ghassab"
+    ],
+    "positionsInLine": [
+      {
+        "position": 23,
+        "line": 1
+      }
+    ]
+  },
+  "Javanmard-e Ghassab": {
+    "name": "Javanmard-e Ghassab",
+    "translations": {
+      "fa": "جوانمرد قصاب"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.420141",
+    "latitude": "35.609764",
+    "address": "بلوار شهید دستواره جنوبی - بین میدان مادر و نماز",
+    "disabled": false,
+    "wc": true,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Aliabad",
+      "Shahr-e Rey"
+    ],
+    "positionsInLine": [
+      {
+        "position": 24,
+        "line": 1
+      }
+    ]
+  },
+  "Shahr-e Rey": {
+    "name": "Shahr-e Rey",
+    "translations": {
+      "fa": "شهر ری"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.422287",
+    "latitude": "35.594672",
+    "address": "شهر ری ، میدان فرمانداری ، خیابان مدرس",
+    "disabled": false,
+    "wc": true,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Javanmard-e Ghassab",
+      "Palayeshgah"
+    ],
+    "positionsInLine": [
+      {
+        "position": 25,
+        "line": 1
+      }
+    ]
+  },
+  "Palayeshgah": {
+    "name": "Palayeshgah",
+    "translations": {
+      "fa": "پالایشگاه"
+    },
+    "lines": [
+      1
+    ],
+    "disabled": false,
+    "relations": [
+      "Shahr-e Rey",
+      "Shahed - BagherShahr"
+    ],
+    "positionsInLine": [
+      {
+        "position": 26,
+        "line": 1
+      }
+    ]
+  },
+  "Shahed - BagherShahr": {
+    "name": "Shahed - BagherShahr",
+    "translations": {
+      "fa": "شاهد - باقرشهر"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.382606",
+    "latitude": "35.546998",
+    "address": "اتوبان شهید کاظمی، روبه روی درب شمالی بهشت زهرا",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Palayeshgah",
+      "Namayeshgah-e Shahr-e Aftab",
+      "Holy Shrine of Imam Khomeini"
+    ],
+    "positionsInLine": [
+      {
+        "position": 27,
+        "line": 1
+      }
+    ]
+  },
+  "Namayeshgah-e Shahr-e Aftab": {
+    "name": "Namayeshgah-e Shahr-e Aftab",
+    "translations": {
+      "fa": "نمایشگاه شهر آفتاب"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.349032",
+    "latitude": "35.539811",
+    "address": "شهر آفتاب",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahed - BagherShahr",
+      "Vavan"
+    ],
+    "positionsInLine": [
+      {
+        "position": 28,
+        "line": 1
+      }
+    ]
+  },
+  "Vavan": {
+    "name": "Vavan",
+    "translations": {
+      "fa": "واوان"
+    },
+    "lines": [
+      1
+    ],
+    "disabled": true,
+    "relations": [
+      "Namayeshgah-e Shahr-e Aftab",
+      "Emam Khomeini Airport"
+    ],
+    "positionsInLine": [
+      {
+        "position": 29,
+        "line": 1
+      }
+    ]
+  },
+  "Emam Khomeini Airport": {
+    "name": "Emam Khomeini Airport",
+    "translations": {
+      "fa": "فرودگاه امام خمینی"
+    },
+    "lines": [
+      1
+    ],
+    "disabled": false,
+    "relations": [
+      "Vavan",
+      "Shahr-e Parand"
+    ],
+    "positionsInLine": [
+      {
+        "position": 30,
+        "line": 1
+      }
+    ]
+  },
+  "Shahr-e Parand": {
+    "name": "Shahr-e Parand",
+    "translations": {
+      "fa": "شهر پرند"
+    },
+    "lines": [
+      1
+    ],
+    "disabled": true,
+    "relations": [
+      "Emam Khomeini Airport"
+    ],
+    "positionsInLine": [
+      {
+        "position": 31,
+        "line": 1
+      }
+    ]
+  },
+  "Holy Shrine of Imam Khomeini": {
+    "name": "Holy Shrine of Imam Khomeini",
+    "translations": {
+      "fa": "حرم مطهر امام خمینی"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.373036",
+    "latitude": "35.545077",
+    "address": "ضلع شرقی حرم امام خمینی - بلوار اصلی بهشت زهرا",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahed - BagherShahr",
+      "Kahrizak"
+    ],
+    "positionsInLine": [
+      {
+        "position": 32,
+        "line": 1
+      }
+    ]
+  },
+  "Kahrizak": {
+    "name": "Kahrizak",
+    "translations": {
+      "fa": "کهریزک"
+    },
+    "lines": [
+      1
+    ],
+    "longitude": "51.369292",
+    "latitude": "35.521574",
+    "address": "جاده قدیم قم - بعداز درب اصلی بهشت زهرا (س) - جنب پارک لاله",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Holy Shrine of Imam Khomeini"
+    ],
+    "positionsInLine": [
+      {
+        "position": 33,
+        "line": 1
+      }
+    ]
+  },
+  "Farhangsara": {
+    "name": "Farhangsara",
+    "translations": {
+      "fa": "فرهنگسرا"
+    },
+    "lines": [
+      2
+    ],
+    "longitude": "51.546757",
+    "latitude": "35.729687",
+    "address": "تهرانپارس، اول خیابان درختی ، روبه روی فرهنگسرای اشراق",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Tehranpars"
+    ],
+    "positionsInLine": [
+      {
+        "position": 1,
+        "line": 2
+      }
+    ]
+  },
+  "Tehranpars": {
+    "name": "Tehranpars",
+    "translations": {
+      "fa": "تهرانپارس"
+    },
+    "lines": [
+      2
+    ],
+    "longitude": "51.5285321",
+    "latitude": "35.7316491",
+    "address": "بزرگراه رسالت بعد از چهارراه تیرانداز نبش اخوت",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Farhangsara",
+      "Shahid Bagheri"
+    ],
+    "positionsInLine": [
+      {
+        "position": 2,
+        "line": 2
+      }
+    ]
+  },
+  "Shahid Bagheri": {
+    "name": "Shahid Bagheri",
+    "translations": {
+      "fa": "شهید باقری"
+    },
+    "lines": [
+      2
+    ],
+    "longitude": "51.516856",
+    "latitude": "35.733397",
+    "address": "تقاطع بزرگراه رسالت و شهید باقری",
+    "disabled": false,
+    "wc": true,
+    "coffeeShop": false,
+    "groceryStore": true,
+    "fastFood": false,
+    "atm": true,
+    "relations": [
+      "Tehranpars",
+      "Daneshgah-e Elm va Sanat"
+    ],
+    "positionsInLine": [
+      {
+        "position": 3,
+        "line": 2
+      }
+    ]
+  },
+  "Daneshgah-e Elm va Sanat": {
+    "name": "Daneshgah-e Elm va Sanat",
+    "translations": {
+      "fa": "دانشگاه علم و صنعت"
+    },
+    "lines": [
+      2
+    ],
+    "longitude": "51.504786",
+    "latitude": "35.734425",
+    "address": "بزرگراه رسالت، چهار راه دردشت",
+    "disabled": false,
+    "wc": true,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahid Bagheri",
+      "Sarsabz"
+    ],
+    "positionsInLine": [
+      {
+        "position": 4,
+        "line": 2
+      }
+    ]
+  },
+  "Sarsabz": {
+    "name": "Sarsabz",
+    "translations": {
+      "fa": "سرسبز"
+    },
+    "lines": [
+      2
+    ],
+    "longitude": "51.494873",
+    "latitude": "35.73547",
+    "address": "بزگراه رسالت، چهارراه شهید آیت",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Daneshgah-e Elm va Sanat",
+      "Janbazan"
+    ],
+    "positionsInLine": [
+      {
+        "position": 5,
+        "line": 2
+      }
+    ]
+  },
+  "Janbazan": {
+    "name": "Janbazan",
+    "translations": {
+      "fa": "جانبازان"
+    },
+    "lines": [
+      2
+    ],
+    "longitude": "51.484081",
+    "latitude": "35.733088",
+    "address": "خیابان شهید مدنی، بالاتر از خیابان گلبرگ",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Sarsabz",
+      "Fadak"
+    ],
+    "positionsInLine": [
+      {
+        "position": 6,
+        "line": 2
+      }
+    ]
+  },
+  "Fadak": {
+    "name": "Fadak",
+    "translations": {
+      "fa": "فدک"
+    },
+    "lines": [
+      2
+    ],
+    "longitude": "51.4756353",
+    "latitude": "35.7264805",
+    "address": "خیابان شهید مدنی، روبروی ساختمان های مسکونی دادگستری",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Janbazan",
+      "Sabalan"
+    ],
+    "positionsInLine": [
+      {
+        "position": 7,
+        "line": 2
+      }
+    ]
+  },
+  "Sabalan": {
+    "name": "Sabalan",
+    "translations": {
+      "fa": "سبلان"
+    },
+    "lines": [
+      2
+    ],
+    "longitude": "51.464531",
+    "latitude": "35.71826",
+    "address": "تقاطع خیابان های شهید مدنی و سبلان",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Fadak",
+      "Shahid Madani"
+    ],
+    "positionsInLine": [
+      {
+        "position": 8,
+        "line": 2
+      }
+    ]
+  },
+  "Shahid Madani": {
+    "name": "Shahid Madani",
+    "translations": {
+      "fa": "شهید مدنی"
+    },
+    "lines": [
+      2
+    ],
+    "longitude": "51.453459",
+    "latitude": "35.70913",
+    "address": "خیابان شهید مدنی، بالاتر از بیمارستان امام حسین (ع)",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Sabalan",
+      "Imam Hussein"
+    ],
+    "positionsInLine": [
+      {
+        "position": 9,
+        "line": 2
+      }
+    ]
+  },
+  "Imam Hussein": {
+    "name": "Imam Hussein",
+    "translations": {
+      "fa": "امام حسین"
+    },
+    "lines": [
+      2,
+      6
+    ],
+    "longitude": "51.445702",
+    "latitude": "35.702188",
+    "address": "میدان امام حسین (ع) - تقاطع خیابان انقلاب اسلامی و شهید مدنی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahid Madani",
+      "Sarbaz",
+      "Meydan-e Shohada",
+      "Darvazeh Shemiran"
+    ],
+    "positionsInLine": [
+      {
+        "position": 10,
+        "line": 2
+      },
+      {
+        "position": 13,
+        "line": 6
+      }
+    ]
+  },
+  "Darvazeh Shemiran": {
+    "name": "Darvazeh Shemiran",
+    "translations": {
+      "fa": "دروازه شمیران"
+    },
+    "lines": [
+      2,
+      4
+    ],
+    "longitude": "51.437709",
+    "latitude": "35.699338",
+    "address": "خیابان بهارستان، میدان ابن سینا",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Imam Hussein",
+      "Meydan-e Shohada",
+      "Darvazeh Dolat",
+      "Baharistan"
+    ],
+    "positionsInLine": [
+      {
+        "position": 7,
+        "line": 4
+      },
+      {
+        "position": 11,
+        "line": 2
+      }
+    ]
+  },
+  "Baharistan": {
+    "name": "Baharistan",
+    "translations": {
+      "fa": "بهارستان"
+    },
+    "lines": [
+      2
+    ],
+    "longitude": "51.432946",
+    "latitude": "35.692263",
+    "address": "خیابان بهارستان، جنب ساختمان وزارت فرهنگ و ارشاد اسلامی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Darvazeh Shemiran",
+      "Mellat"
+    ],
+    "positionsInLine": [
+      {
+        "position": 12,
+        "line": 2
+      }
+    ]
+  },
+  "Mellat": {
+    "name": "Mellat",
+    "translations": {
+      "fa": "ملت"
+    },
+    "lines": [
+      2
+    ],
+    "longitude": "51.4277635",
+    "latitude": "35.6889986",
+    "address": "خیابان اکباتان، سه راهی ملت - اکباتان",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Baharistan",
+      "Imam Khomeini"
+    ],
+    "positionsInLine": [
+      {
+        "position": 13,
+        "line": 2
+      }
+    ]
+  },
+  "Hasan Abad": {
+    "name": "Hasan Abad",
+    "translations": {
+      "fa": "حسن آباد"
+    },
+    "lines": [
+      2
+    ],
+    "longitude": "51.4088914",
+    "latitude": "35.6863779",
+    "address": "میدان حسن آباد",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Imam Khomeini",
+      "Daneshgah-e Imam Ali"
+    ],
+    "positionsInLine": [
+      {
+        "position": 15,
+        "line": 2
+      }
+    ]
+  },
+  "Daneshgah-e Imam Ali": {
+    "name": "Daneshgah-e Imam Ali",
+    "translations": {
+      "fa": "دانشگاه امام علی"
+    },
+    "lines": [
+      2
+    ],
+    "longitude": "51.3990645",
+    "latitude": "35.6874007",
+    "address": "خیابان امام خمینی (ره)، روبروی مجلس",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Hasan Abad",
+      "Meydan-e Horr"
+    ],
+    "positionsInLine": [
+      {
+        "position": 16,
+        "line": 2
+      }
+    ]
+  },
+  "Meydan-e Horr": {
+    "name": "Meydan-e Horr",
+    "translations": {
+      "fa": "میدان حر"
+    },
+    "lines": [
+      2
+    ],
+    "longitude": "51.3884",
+    "latitude": "35.691008",
+    "address": "خیابان کارگر جنوبی، تقاطع پاستور و دانشگاه جنگ",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Daneshgah-e Imam Ali",
+      "Shahid Navab-e Safavi"
+    ],
+    "positionsInLine": [
+      {
+        "position": 17,
+        "line": 2
+      }
+    ]
+  },
+  "Shahid Navab-e Safavi": {
+    "name": "Shahid Navab-e Safavi",
+    "translations": {
+      "fa": "شهید نواب صفوی"
+    },
+    "lines": [
+      2,
+      7
+    ],
+    "longitude": "51.378229",
+    "latitude": "35.69526",
+    "address": "تقاطع بزرگراه شهید نواب صفوی و خیابان آذربایجان",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Meydan-e Horr",
+      "Towhid",
+      "Roudaki",
+      "Shademan"
+    ],
+    "positionsInLine": [
+      {
+        "position": 18,
+        "line": 2
+      },
+      {
+        "position": 14,
+        "line": 7
+      }
+    ]
+  },
+  "Shademan": {
+    "name": "Shademan",
+    "translations": {
+      "fa": "شادمان"
+    },
+    "lines": [
+      2,
+      4
+    ],
+    "longitude": "51.363809",
+    "latitude": "35.700627",
+    "address": "تقاطع خیابان های آزادی و آذربایجان",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahid Navab-e Safavi",
+      "Towhid",
+      "Doctor Habibollah",
+      "Daneshgah-e Sharif"
+    ],
+    "positionsInLine": [
+      {
+        "position": 13,
+        "line": 4
+      },
+      {
+        "position": 19,
+        "line": 2
+      }
+    ]
+  },
+  "Daneshgah-e Sharif": {
+    "name": "Daneshgah-e Sharif",
+    "translations": {
+      "fa": "دانشگاه شریف"
+    },
+    "lines": [
+      2
+    ],
+    "longitude": "51.353638",
+    "latitude": "35.70575",
+    "address": "خیابان حبیب الهی - شهید تیموری",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shademan",
+      "Tarasht"
+    ],
+    "positionsInLine": [
+      {
+        "position": 20,
+        "line": 2
+      }
+    ]
+  },
+  "Tarasht": {
+    "name": "Tarasht",
+    "translations": {
+      "fa": "طرشت"
+    },
+    "lines": [
+      2
+    ],
+    "longitude": "51.34351",
+    "latitude": "35.716134",
+    "address": "خیابان محمدعلی جناح، بلوار شهید گلاب، بلوار شهید چوب تراش",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Daneshgah-e Sharif",
+      "Tehran (Sadeghiyeh)"
+    ],
+    "positionsInLine": [
+      {
+        "position": 21,
+        "line": 2
+      }
+    ]
+  },
+  "Tehran (Sadeghiyeh)": {
+    "name": "Tehran (Sadeghiyeh)",
+    "translations": {
+      "fa": "تهران (صادقیه)"
+    },
+    "lines": [
+      2,
+      5
+    ],
+    "longitude": "51.330979",
+    "latitude": "35.717598",
+    "address": "بزرگراه محمد علی جناح، خیابان سازمان آب",
+    "disabled": false,
+    "wc": true,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Tarasht",
+      "Eram-e Sabz"
+    ],
+    "positionsInLine": [
+      {
+        "position": 22,
+        "line": 2
+      },
+      {
+        "position": 1,
+        "line": 5
+      }
+    ]
+  },
+  "Qa'em": {
+    "name": "Qa'em",
+    "translations": {
+      "fa": "قائم"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.521684",
+    "latitude": "35.799759",
+    "address": "بلوار نیروی هوایی، میدان اول شهرک",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahid Mahallati"
+    ],
+    "positionsInLine": [
+      {
+        "position": 1,
+        "line": 3
+      }
+    ]
+  },
+  "Shahid Mahallati": {
+    "name": "Shahid Mahallati",
+    "translations": {
+      "fa": "شهید محلاتی"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.508169",
+    "latitude": "35.797925",
+    "address": "بزرگراه لشگرک - تقاطع بلوار ارتش - ابتدای شهرک شهید محلاتی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Qa'em",
+      "Aghdasiyeh"
+    ],
+    "positionsInLine": [
+      {
+        "position": 2,
+        "line": 3
+      }
+    ]
+  },
+  "Aghdasiyeh": {
+    "name": "Aghdasiyeh",
+    "translations": {
+      "fa": "اقدسیه"
+    },
+    "lines": [
+      3
+    ],
+    "disabled": false,
+    "relations": [
+      "Shahid Mahallati",
+      "Nobonyad"
+    ],
+    "positionsInLine": [
+      {
+        "position": 3,
+        "line": 3
+      }
+    ]
+  },
+  "Nobonyad": {
+    "name": "Nobonyad",
+    "translations": {
+      "fa": "نوبنیاد"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.478029",
+    "latitude": "35.790987",
+    "address": "نوبنیاد، ابتدای اقدسیه",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Aghdasiyeh",
+      "Hoseinabad"
+    ],
+    "positionsInLine": [
+      {
+        "position": 4,
+        "line": 3
+      }
+    ]
+  },
+  "Hoseinabad": {
+    "name": "Hoseinabad",
+    "translations": {
+      "fa": "حسین‌آباد"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.47852",
+    "latitude": "35.779428",
+    "address": "تقاطع خیابان مغان و بزرگراه شهید صیاد شیرازی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Nobonyad",
+      "Meydan-e Heravi"
+    ],
+    "positionsInLine": [
+      {
+        "position": 5,
+        "line": 3
+      }
+    ]
+  },
+  "Meydan-e Heravi": {
+    "name": "Meydan-e Heravi",
+    "translations": {
+      "fa": "میدان هروی"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.473219",
+    "latitude": "35.771831",
+    "address": "اتوبان صیاد شیرازی٬ بالاتر از خیابان موسوی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Hoseinabad",
+      "Shahid Zeynoddin"
+    ],
+    "positionsInLine": [
+      {
+        "position": 6,
+        "line": 3
+      }
+    ]
+  },
+  "Shahid Zeynoddin": {
+    "name": "Shahid Zeynoddin",
+    "translations": {
+      "fa": "شهید زین‌الدین"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.4659032",
+    "latitude": "35.7595603",
+    "address": "بزرگراه صیاد شیرازی، تقاطع بزرگراه شهید زین‌الدین",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Meydan-e Heravi",
+      "Khajeh Abdollah-e Ansari"
+    ],
+    "positionsInLine": [
+      {
+        "position": 7,
+        "line": 3
+      }
+    ]
+  },
+  "Khajeh Abdollah-e Ansari": {
+    "name": "Khajeh Abdollah-e Ansari",
+    "translations": {
+      "fa": "خواجه عبدالله انصاری"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.462922",
+    "latitude": "35.743739",
+    "address": "بلوار خواجه عبدالله انصاری",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahid Zeynoddin",
+      "Shahid Sayyad Shirazi"
+    ],
+    "positionsInLine": [
+      {
+        "position": 8,
+        "line": 3
+      }
+    ]
+  },
+  "Shahid Sayyad Shirazi": {
+    "name": "Shahid Sayyad Shirazi",
+    "translations": {
+      "fa": "شهید صیاد شیرازی"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.458594",
+    "latitude": "35.735349",
+    "address": "تفاطع بزگراه صیاد شیرازی و مسیل باختر",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Khajeh Abdollah-e Ansari",
+      "Shahid Ghodousi"
+    ],
+    "positionsInLine": [
+      {
+        "position": 9,
+        "line": 3
+      }
+    ]
+  },
+  "Shahid Ghodousi": {
+    "name": "Shahid Ghodousi",
+    "translations": {
+      "fa": "شهید قدوسی"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.4445",
+    "latitude": "35.731553",
+    "address": "\tخیابان شریعتی - تقاطع خیابان شهید بهشتی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahid Sayyad Shirazi",
+      "Sohrevardi"
+    ],
+    "positionsInLine": [
+      {
+        "position": 10,
+        "line": 3
+      }
+    ]
+  },
+  "Sohrevardi": {
+    "name": "Sohrevardi",
+    "translations": {
+      "fa": "سهروردی"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.435852",
+    "latitude": "35.731066",
+    "address": "خیابان عباس آباد، روبروی بلوار یوسفی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahid Ghodousi",
+      "Shahid Beheshti"
+    ],
+    "positionsInLine": [
+      {
+        "position": 11,
+        "line": 3
+      }
+    ]
+  },
+  "Mirza-ye Shirazi": {
+    "name": "Mirza-ye Shirazi",
+    "translations": {
+      "fa": "میرزا شیرازی"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.417448",
+    "latitude": "35.728365",
+    "address": "خیابان بهشتی، مابین میرزای شیرازی و قائم مقام فرهانی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahid Beheshti",
+      "Meydan-e Jahad"
+    ],
+    "positionsInLine": [
+      {
+        "position": 13,
+        "line": 3
+      }
+    ]
+  },
+  "Meydan-e Jahad": {
+    "name": "Meydan-e Jahad",
+    "translations": {
+      "fa": "میدان جهاد"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.408803",
+    "latitude": "35.721672",
+    "address": "خیابان ولیعصر، تقاطع خیابان دکتر فاطمی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Mirza-ye Shirazi",
+      "Meydan-e Hazrat Vali Asr"
+    ],
+    "positionsInLine": [
+      {
+        "position": 14,
+        "line": 3
+      }
+    ]
+  },
+  "Teatr-e Shahr": {
+    "name": "Teatr-e Shahr",
+    "translations": {
+      "fa": "تئاتر شهر"
+    },
+    "lines": [
+      3,
+      4
+    ],
+    "longitude": "51.405831",
+    "latitude": "35.700954",
+    "address": "خیابان انقلاب اسلامی، چهارراه ولیعصر(عج)",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": true,
+    "groceryStore": true,
+    "fastFood": true,
+    "atm": false,
+    "relations": [
+      "Meydan-e Hazrat Vali Asr",
+      "Ferdowsi",
+      "Meydan-e Enghelab-e Eslami",
+      "Moniriyeh"
+    ],
+    "positionsInLine": [
+      {
+        "position": 16,
+        "line": 3
+      },
+      {
+        "position": 10,
+        "line": 4
+      }
+    ]
+  },
+  "Moniriyeh": {
+    "name": "Moniriyeh",
+    "translations": {
+      "fa": "منیریه"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.401594",
+    "latitude": "35.681087",
+    "address": "خیابان ولیعصر(عج) میدان منیریه",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Teatr-e Shahr",
+      "Mahdiyeh"
+    ],
+    "positionsInLine": [
+      {
+        "position": 17,
+        "line": 3
+      }
+    ]
+  },
+  "Mahdiyeh": {
+    "name": "Mahdiyeh",
+    "translations": {
+      "fa": "مهدیه"
+    },
+    "lines": [
+      3,
+      7
+    ],
+    "disabled": false,
+    "relations": [
+      "Moniriyeh",
+      "Meydan-e Mohammadiyeh",
+      "Helal Ahmar",
+      "Rahahan"
+    ],
+    "positionsInLine": [
+      {
+        "position": 18,
+        "line": 3
+      },
+      {
+        "position": 9,
+        "line": 7
+      }
+    ]
+  },
+  "Rahahan": {
+    "name": "Rahahan",
+    "translations": {
+      "fa": "راه آهن"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.3984659",
+    "latitude": "35.6595573",
+    "address": "میدان راه آهن",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Mahdiyeh",
+      "Javadiyeh"
+    ],
+    "positionsInLine": [
+      {
+        "position": 19,
+        "line": 3
+      }
+    ]
+  },
+  "Javadiyeh": {
+    "name": "Javadiyeh",
+    "translations": {
+      "fa": "جوادیه"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.388215",
+    "latitude": "35.659075",
+    "address": "حد فاصل پل جوادیه و میدان رباط کریم",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Rahahan",
+      "Zamzam"
+    ],
+    "positionsInLine": [
+      {
+        "position": 20,
+        "line": 3
+      }
+    ]
+  },
+  "Zamzam": {
+    "name": "Zamzam",
+    "translations": {
+      "fa": "زمزم"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.3733202",
+    "latitude": "35.6525844",
+    "address": "بزرگراه شهید چراغی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Javadiyeh",
+      "Shahrak-e Shariaty"
+    ],
+    "positionsInLine": [
+      {
+        "position": 21,
+        "line": 3
+      }
+    ]
+  },
+  "Shahrak-e Shariaty": {
+    "name": "Shahrak-e Shariaty",
+    "translations": {
+      "fa": "شهرک شریعتی"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.3677387",
+    "latitude": "35.6435696",
+    "address": "بزرگراه شهید چراغی، جوانه",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Zamzam",
+      "Abdol Abad"
+    ],
+    "positionsInLine": [
+      {
+        "position": 22,
+        "line": 3
+      }
+    ]
+  },
+  "Abdol Abad": {
+    "name": "Abdol Abad",
+    "translations": {
+      "fa": "عبدل آباد"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.359773",
+    "latitude": "35.638159",
+    "address": "بزرگراه شهید چراغی،ابتدای خیابان ورزش",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahrak-e Shariaty",
+      "Nemat Abad"
+    ],
+    "positionsInLine": [
+      {
+        "position": 23,
+        "line": 3
+      }
+    ]
+  },
+  "Nemat Abad": {
+    "name": "Nemat Abad",
+    "translations": {
+      "fa": "نعمت آباد"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.34703",
+    "latitude": "35.63392",
+    "address": " بزرگراه سعیدی ، روبروی خیابان سهیل",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Abdol Abad",
+      "Azadegan"
+    ],
+    "positionsInLine": [
+      {
+        "position": 24,
+        "line": 3
+      }
+    ]
+  },
+  "Azadegan": {
+    "name": "Azadegan",
+    "translations": {
+      "fa": "آزادگان"
+    },
+    "lines": [
+      3
+    ],
+    "longitude": "51.335533",
+    "latitude": "35.627216",
+    "address": "بزرگراه سعیدی، نرسیده به بزرگراه آزادگان ابتدای شهید حیدری",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Nemat Abad"
+    ],
+    "positionsInLine": [
+      {
+        "position": 25,
+        "line": 3
+      }
+    ]
+  },
+  "Shahid Kolahdooz": {
+    "name": "Shahid Kolahdooz",
+    "translations": {
+      "fa": "شهید کلاهدوز"
+    },
+    "lines": [
+      4
+    ],
+    "longitude": "51.498563",
+    "latitude": "35.698954",
+    "address": "ابتدای بزرگراه شهید دوران،بالاتر از بانک سپه",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Niroohavaii"
+    ],
+    "positionsInLine": [
+      {
+        "position": 1,
+        "line": 4
+      }
+    ]
+  },
+  "Niroohavaii": {
+    "name": "Niroohavaii",
+    "translations": {
+      "fa": "نیروهوایی"
+    },
+    "lines": [
+      4
+    ],
+    "longitude": "51.4886226",
+    "latitude": "35.6926988",
+    "address": "خیابان پیروزی- بین خیابانهای چهارم و پنجم نیرو هوایی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahid Kolahdooz",
+      "Nabard"
+    ],
+    "positionsInLine": [
+      {
+        "position": 2,
+        "line": 4
+      }
+    ]
+  },
+  "Nabard": {
+    "name": "Nabard",
+    "translations": {
+      "fa": "نبرد"
+    },
+    "lines": [
+      4
+    ],
+    "longitude": "51.4777301",
+    "latitude": "35.6913253",
+    "address": "خیابان پیروزی ، چهار راه کوکاکولا ، جنب مجتمع تجاری کسا",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Niroohavaii",
+      "Piroozi"
+    ],
+    "positionsInLine": [
+      {
+        "position": 3,
+        "line": 4
+      }
+    ]
+  },
+  "Piroozi": {
+    "name": "Piroozi",
+    "translations": {
+      "fa": "پیروزی"
+    },
+    "lines": [
+      4
+    ],
+    "longitude": "51.46775",
+    "latitude": "35.691356",
+    "address": "خیابان پیروزی –قبل از خیابان شهید حسن پورمند",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Nabard",
+      "Ebn-e Sina"
+    ],
+    "positionsInLine": [
+      {
+        "position": 4,
+        "line": 4
+      }
+    ]
+  },
+  "Ebn-e Sina": {
+    "name": "Ebn-e Sina",
+    "translations": {
+      "fa": "ابن سینا"
+    },
+    "lines": [
+      4
+    ],
+    "longitude": "51.4579435",
+    "latitude": "35.6907927",
+    "address": "خیابان پیروزی ،چهارصد دستگاه( تقاطع اتوبان امام علی (ع) و پیروزی)",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Piroozi",
+      "Meydan-e Shohada"
+    ],
+    "positionsInLine": [
+      {
+        "position": 5,
+        "line": 4
+      }
+    ]
+  },
+  "Ferdowsi": {
+    "name": "Ferdowsi",
+    "translations": {
+      "fa": "فردوسی"
+    },
+    "lines": [
+      4
+    ],
+    "longitude": "51.418569",
+    "latitude": "35.701255",
+    "address": "میدان فردوسی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Darvazeh Dolat",
+      "Teatr-e Shahr"
+    ],
+    "positionsInLine": [
+      {
+        "position": 9,
+        "line": 4
+      }
+    ]
+  },
+  "Meydan-e Enghelab-e Eslami": {
+    "name": "Meydan-e Enghelab-e Eslami",
+    "translations": {
+      "fa": "میدان انقلاب اسلامی"
+    },
+    "lines": [
+      4
+    ],
+    "longitude": "51.392176",
+    "latitude": "35.701255",
+    "address": "میدان انقلاب اسلامی،ابتدای خیابان آزادی، کوچه شهید جنتی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": true,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": true,
+    "relations": [
+      "Teatr-e Shahr",
+      "Towhid"
+    ],
+    "positionsInLine": [
+      {
+        "position": 11,
+        "line": 4
+      }
+    ]
+  },
+  "Towhid": {
+    "name": "Towhid",
+    "translations": {
+      "fa": "توحید"
+    },
+    "lines": [
+      4,
+      7
+    ],
+    "longitude": "51.378572",
+    "latitude": "35.700767",
+    "address": "خیابان آزادی - شمال شرقی تقاطع خیابان آزادی و شهید نواب صفوی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Meydan-e Enghelab-e Eslami",
+      "Modafean-e Salamat",
+      "Shahid Navab-e Safavi",
+      "Shademan"
+    ],
+    "positionsInLine": [
+      {
+        "position": 12,
+        "line": 4
+      },
+      {
+        "position": 15,
+        "line": 7
+      }
+    ]
+  },
+  "Doctor Habibollah": {
+    "name": "Doctor Habibollah",
+    "translations": {
+      "fa": "دکتر حبیب‌الله"
+    },
+    "lines": [
+      4
+    ],
+    "longitude": "51.356079",
+    "latitude": "35.700653",
+    "address": "خیابان آزادی - نرسیده به خیابان دکتر حبیب اله",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shademan",
+      "Ostad Mo'in"
+    ],
+    "positionsInLine": [
+      {
+        "position": 14,
+        "line": 4
+      }
+    ]
+  },
+  "Ostad Mo'in": {
+    "name": "Ostad Mo'in",
+    "translations": {
+      "fa": "استاد معین"
+    },
+    "lines": [
+      4
+    ],
+    "longitude": "51.34461",
+    "latitude": "35.700131",
+    "address": "خیابان آزادی- قبل از میدان آزادی - تقاطع خیابان نور بخش",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Doctor Habibollah",
+      "Meydan-e Azadi"
+    ],
+    "positionsInLine": [
+      {
+        "position": 15,
+        "line": 4
+      }
+    ]
+  },
+  "Meydan-e Azadi": {
+    "name": "Meydan-e Azadi",
+    "translations": {
+      "fa": "میدان آزادی"
+    },
+    "lines": [
+      4
+    ],
+    "longitude": "51.332492",
+    "latitude": "35.700802",
+    "address": "میدان آزادی - ابتدای بزرگراه شهید برادران رحمانی",
+    "disabled": false,
+    "wc": true,
+    "coffeeShop": false,
+    "groceryStore":true,
+    "fastFood": false,
+    "atm": true,
+    "relations": [
+      "Ostad Mo'in",
+      "Bimeh"
+    ],
+    "positionsInLine": [
+      {
+        "position": 16,
+        "line": 4
+      }
+    ]
+  },
+  "Bimeh": {
+    "name": "Bimeh",
+    "translations": {
+      "fa": "بیمه"
+    },
+    "lines": [
+      4
+    ],
+    "longitude": "51.32036",
+    "latitude": "35.699546",
+    "address": "بزرگراه شهید لشگری، ابتدای بیمه",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": true,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": true,
+    "relations": [
+      "Meydan-e Azadi",
+      "Shahrak-e Ekbatan",
+      "Mehrabad Airport Terminal 1&2"
+    ],
+    "positionsInLine": [
+      {
+        "position": 17,
+        "line": 4
+      }
+    ]
+  },
+  "Mehrabad Airport Terminal 1&2": {
+    "name": "Mehrabad Airport Terminal 1&2",
+    "translations": {
+      "fa": "پایانه ۱ و ۲ فرودگاه مهرآباد"
+    },
+    "lines": [
+      4
+    ],
+    "longitude": "51.3196823",
+    "latitude": "35.690689",
+    "address": "میدان آزادی، پایانه ۲ فرودگاه مهرآباد",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Bimeh",
+      "Mehrabad Airport Terminal 4&6"
+    ],
+    "positionsInLine": [
+      {
+        "position": 22,
+        "line": 4
+      }
+    ]
+  },
+  "Mehrabad Airport Terminal 4&6": {
+    "name": "Mehrabad Airport Terminal 4&6",
+    "translations": {
+      "fa": "پایانه ۴ و ۶ فرودگاه مهرآباد"
+    },
+    "lines": [
+      4
+    ],
+    "longitude": "51.3271795",
+    "latitude": "35.6886266",
+    "address": "میدان آزادی، پایانه ۶ فرودگاه مهرآباد",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Mehrabad Airport Terminal 1&2"
+    ],
+    "positionsInLine": [
+      {
+        "position": 23,
+        "line": 4
+      }
+    ]
+  },
+  "Shahrak-e Ekbatan": {
+    "name": "Shahrak-e Ekbatan",
+    "translations": {
+      "fa": "شهرک اکباتان"
+    },
+    "lines": [
+      4
+    ],
+    "longitude": "51.3074478",
+    "latitude": "35.705557400000004",
+    "address": "فاز دو شهرک اکباتان- روبروی بلوک 13",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Bimeh",
+      "Eram-e Sabz"
+    ],
+    "positionsInLine": [
+      {
+        "position": 18,
+        "line": 4
+      }
+    ]
+  },
+  "Allameh Jafari": {
+    "name": "Allameh Jafari",
+    "translations": {
+      "fa": "علامه جعفری"
+    },
+    "lines": [
+      4
+    ],
+    "disabled": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": true,
+    "relations": [
+      "Eram-e Sabz"
+    ],
+    "positionsInLine": [
+      {
+        "position": 20,
+        "line": 4
+      }
+    ]
+  },
+  "Eram-e Sabz": {
+    "name": "Eram-e Sabz",
+    "translations": {
+      "fa": "ارم سبز"
+    },
+    "lines": [
+      4,
+      5
+    ],
+    "longitude": "51.301979",
+    "latitude": "35.717476",
+    "address": "ارم سبز",
+    "disabled": false,
+    "wc": true,
+    "coffeeShop": true,
+    "groceryStore": true,
+    "fastFood": true,
+    "atm": true,
+    "relations": [
+      "Tehran (Sadeghiyeh)",
+      "Varzeshgah-e Azadi",
+      "Allameh Jafari",
+      "Shahrak-e Ekbatan"
+    ],
+    "positionsInLine": [
+      {
+        "position": 19,
+        "line": 4
+      },
+      {
+        "position": 2,
+        "line": 5
+      }
+    ]
+  },
+  "Varzeshgah-e Azadi": {
+    "name": "Varzeshgah-e Azadi",
+    "translations": {
+      "fa": "ورزشگاه آزادی"
+    },
+    "lines": [
+      5
+    ],
+    "longitude": "51.281208",
+    "latitude": "35.716727",
+    "address": "اتوبان کرج - جنب مجموعه ورزشی آزادی",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Eram-e Sabz",
+      "Chitgar"
+    ],
+    "positionsInLine": [
+      {
+        "position": 3,
+        "line": 5
+      }
+    ]
+  },
+  "Chitgar": {
+    "name": "Chitgar",
+    "translations": {
+      "fa": "چیتگر"
+    },
+    "lines": [
+      5
+    ],
+    "longitude": "51.243904",
+    "latitude": "35.717563",
+    "address": "کیلومتر 8 اتوبان تهران کرج ، روبروی کارخانه بهنوش ، بلوار کوهک",
+    "disabled": false,
+    "wc": true,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Varzeshgah-e Azadi",
+      "Iran Khodro"
+    ],
+    "positionsInLine": [
+      {
+        "position": 4,
+        "line": 5
+      }
+    ]
+  },
+  "Iran Khodro": {
+    "name": "Iran Khodro",
+    "translations": {
+      "fa": "ایران‌خودرو"
+    },
+    "lines": [
+      5
+    ],
+    "longitude": "51.196654",
+    "latitude": "35.725402",
+    "address": "کیلومتر 14 اتوبان تهران کرج ، جنب باشگاه ایران خودرو",
+    "disabled": false,
+    "wc": true,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Chitgar",
+      "Vardavard"
+    ],
+    "positionsInLine": [
+      {
+        "position": 5,
+        "line": 5
+      }
+    ]
+  },
+  "Vardavard": {
+    "name": "Vardavard",
+    "translations": {
+      "fa": "وردآورد"
+    },
+    "lines": [
+      5
+    ],
+    "longitude": "51.1509866",
+    "latitude": "35.7444768",
+    "address": "کیلومتر 16 بزرگراه تهران کرج - خیابان دارو پخش",
+    "disabled": false,
+    "wc": true,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Iran Khodro",
+      "Garmdareh"
+    ],
+    "positionsInLine": [
+      {
+        "position": 6,
+        "line": 5
+      }
+    ]
+  },
+  "Garmdareh": {
+    "name": "Garmdareh",
+    "translations": {
+      "fa": "گرم‌دره"
+    },
+    "lines": [
+      5
+    ],
+    "longitude": "51.08193",
+    "latitude": "35.751002",
+    "address": "کیلومتر ۲۳ بزرگراه تهران-کرج، جنب اردوگاه آموزشی قدس",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Vardavard",
+      "Atmosphere"
+    ],
+    "positionsInLine": [
+      {
+        "position": 7,
+        "line": 5
+      }
+    ]
+  },
+  "Atmosphere": {
+    "name": "Atmosphere",
+    "translations": {
+      "fa": "اتمسفر"
+    },
+    "lines": [
+      5
+    ],
+    "longitude": "51.0469759",
+    "latitude": "35.7662914",
+    "address": "کیلومتر 27 جاده مخصوص تهران کرج اتمسفر",
+    "disabled": false,
+    "wc": true,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Garmdareh",
+      "Karaj"
+    ],
+    "positionsInLine": [
+      {
+        "position": 8,
+        "line": 5
+      }
+    ]
+  },
+  "Karaj": {
+    "name": "Karaj",
+    "translations": {
+      "fa": "کرج"
+    },
+    "lines": [
+      5
+    ],
+    "longitude": "51.0026979",
+    "latitude": "35.7870098",
+    "address": "کرج ، پل فردیس ، جنب میدان شهید سلطانی ، ابتدای جاده ملارد",
+    "disabled": false,
+    "wc": true,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Atmosphere",
+      "Mohammadshahr"
+    ],
+    "positionsInLine": [
+      {
+        "position": 9,
+        "line": 5
+      }
+    ]
+  },
+  "Mohammadshahr": {
+    "name": "Mohammadshahr",
+    "translations": {
+      "fa": "محمدشهر"
+    },
+    "lines": [
+      5
+    ],
+    "longitude": "50.964729",
+    "latitude": "35.800951",
+    "address": "اتوبان ( تهران - کرج ) جاده محمد شهر",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Karaj",
+      "Golshahr"
+    ],
+    "positionsInLine": [
+      {
+        "position": 10,
+        "line": 5
+      }
+    ]
+  },
+  "Golshahr": {
+    "name": "Golshahr",
+    "translations": {
+      "fa": "گلشهر"
+    },
+    "lines": [
+      5
+    ],
+    "longitude": "50.933079",
+    "latitude": "35.824877",
+    "address": "کرج-45 متری گلشهر- خیابان اختر غربی",
+    "disabled": false,
+    "wc": true,
+    "coffeeShop": true,
+    "groceryStore": true,
+    "fastFood": true,
+    "atm": true,
+    "relations": [
+      "Mohammadshahr",
+      "Shahid Sepahbod Qasem Soleimani"
+    ],
+    "positionsInLine": [
+      {
+        "position": 11,
+        "line": 5
+      }
+    ]
+  },
+  "Shahid Sepahbod Qasem Soleimani": {
+    "name": "Shahid Sepahbod Qasem Soleimani",
+    "translations": {
+      "fa": "شهید سپهبد قاسم سلیمانی"
+    },
+    "lines": [
+      5
+    ],
+    "disabled": true,
+    "relations": [
+      "Golshahr"
+    ],
+    "positionsInLine": [
+      {
+        "position": 12,
+        "line": 5
+      }
+    ]
+  },
+  "Haram-e Hazrat-e Abdol Azim": {
+    "name": "Haram-e Hazrat-e Abdol Azim",
+    "translations": {
+      "fa": "حرم حضرت عبدالعظیم"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": true,
+    "relations": [
+      "Meydan-e Hazrat-e Abdol Azim"
+    ],
+    "positionsInLine": [
+      {
+        "position": 1,
+        "line": 6
+      }
+    ]
+  },
+  "Meydan-e Hazrat-e Abdol Azim": {
+    "name": "Meydan-e Hazrat-e Abdol Azim",
+    "translations": {
+      "fa": "میدان حضرت عبدالعظیم"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": true,
+    "relations": [
+      "Haram-e Hazrat-e Abdol Azim",
+      "Ebn-e Babviyeh"
+    ],
+    "positionsInLine": [
+      {
+        "position": 2,
+        "line": 6
+      }
+    ]
+  },
+  "Ebn-e Babviyeh": {
+    "name": "Ebn-e Babviyeh",
+    "translations": {
+      "fa": "ابن بابویه"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": true,
+    "relations": [
+      "Meydan-e Hazrat-e Abdol Azim",
+      "Cheshmeh Ali"
+    ],
+    "positionsInLine": [
+      {
+        "position": 3,
+        "line": 6
+      }
+    ]
+  },
+  "Cheshmeh Ali": {
+    "name": "Cheshmeh Ali",
+    "translations": {
+      "fa": "چشمه علی"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": true,
+    "relations": [
+      "Ebn-e Babviyeh",
+      "Shohada-ye Dowlat Abad"
+    ],
+    "positionsInLine": [
+      {
+        "position": 4,
+        "line": 6
+      }
+    ]
+  },
+  "Shohada-ye Dowlat Abad": {
+    "name": "Shohada-ye Dowlat Abad",
+    "translations": {
+      "fa": "شهدای دولت‌آباد"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": false,
+    "relations": [
+      "Cheshmeh Ali",
+      "Kiyan Shahr"
+    ],
+    "positionsInLine": [
+      {
+        "position": 5,
+        "line": 6
+      }
+    ]
+  },
+  "Kiyan Shahr": {
+    "name": "Kiyan Shahr",
+    "translations": {
+      "fa": "کیان شهر"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": false,
+    "relations": [
+      "Shohada-ye Dowlat Abad",
+      "Be'sat"
+    ],
+    "positionsInLine": [
+      {
+        "position": 6,
+        "line": 6
+      }
+    ]
+  },
+  "Be'sat": {
+    "name": "Be'sat",
+    "translations": {
+      "fa": "بعثت"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": false,
+    "relations": [
+      "Kiyan Shahr",
+      "Shahid Rezaei"
+    ],
+    "positionsInLine": [
+      {
+        "position": 7,
+        "line": 6
+      }
+    ]
+  },
+  "Shahid Rezaei": {
+    "name": "Shahid Rezaei",
+    "translations": {
+      "fa": "شهید رضایی"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": false,
+    "relations": [
+      "Be'sat",
+      "Meydan-e Khorasan"
+    ],
+    "positionsInLine": [
+      {
+        "position": 8,
+        "line": 6
+      }
+    ]
+  },
+  "Meydan-e Khorasan": {
+    "name": "Meydan-e Khorasan",
+    "translations": {
+      "fa": "میدان خراسان"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": false,
+    "relations": [
+      "Shahid Rezaei",
+      "Shohada-ye Hefdah-e Shahrivar"
+    ],
+    "positionsInLine": [
+      {
+        "position": 9,
+        "line": 6
+      }
+    ]
+  },
+  "Shohada-ye Hefdah-e Shahrivar": {
+    "name": "Shohada-ye Hefdah-e Shahrivar",
+    "translations": {
+      "fa": "شهدای هفده شهریور"
+    },
+    "lines": [
+      6,
+      7
+    ],
+    "disabled": true,
+    "relations": [
+      "Meydan-e Khorasan",
+      "Amirkabir",
+      "Chehel Tan-e Doulab",
+      "Meydan-e Ghiyam"
+    ],
+    "positionsInLine": [
+      {
+        "position": 5,
+        "line": 7
+      },
+      {
+        "position": 10,
+        "line": 6
+      }
+    ]
+  },
+  "Amirkabir": {
+    "name": "Amirkabir",
+    "translations": {
+      "fa": "امیرکبیر"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": false,
+    "relations": [
+      "Shohada-ye Hefdah-e Shahrivar",
+      "Meydan-e Shohada"
+    ],
+    "positionsInLine": [
+      {
+        "position": 11,
+        "line": 6
+      }
+    ]
+  },
+  "Meydan-e Shohada": {
+    "name": "Meydan-e Shohada",
+    "translations": {
+      "fa": "میدان شهدا"
+    },
+    "lines": [
+      4,
+      6
+    ],
+    "longitude": "51.447237",
+    "latitude": "35.690381",
+    "address": "خیابان پیروزی تقاطع 17 شهریور،نرسیده به میدان شهدا، جنب اداره برق",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Amirkabir",
+      "Ebn-e Sina",
+      "Darvazeh Shemiran",
+      "Imam Hussein"
+    ],
+    "positionsInLine": [
+      {
+        "position": 6,
+        "line": 4
+      },
+      {
+        "position": 12,
+        "line": 6
+      }
+    ]
+  },
+  "Sarbaz": {
+    "name": "Sarbaz",
+    "translations": {
+      "fa": "سرباز"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": true,
+    "relations": [
+      "Imam Hussein",
+      "Bahar Shiraz (Khanevadeh Hospital)"
+    ],
+    "positionsInLine": [
+      {
+        "position": 14,
+        "line": 6
+      }
+    ]
+  },
+  "Bahar Shiraz (Khanevadeh Hospital)": {
+    "name": "Bahar Shiraz (Khanevadeh Hospital)",
+    "translations": {
+      "fa": "بهار شیراز (بیمارستان خانواده)"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": false,
+    "relations": [
+      "Sarbaz",
+      "Shohada-ye Haftom-e Tir"
+    ],
+    "positionsInLine": [
+      {
+        "position": 15,
+        "line": 6
+      }
+    ]
+  },
+  "Shohada-ye Haftom-e Tir": {
+    "name": "Shohada-ye Haftom-e Tir",
+    "translations": {
+      "fa": "شهدای هفتم تیر"
+    },
+    "lines": [
+      1,
+      6
+    ],
+    "longitude": "51.426042",
+    "latitude": "35.715986",
+    "address": "میدان هفت تیر",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Bahar Shiraz (Khanevadeh Hospital)",
+      "Shahid Nejatollahi",
+      "Shahid Mofattah",
+      "Ayatollah Taleghani"
+    ],
+    "positionsInLine": [
+      {
+        "position": 12,
+        "line": 1
+      },
+      {
+        "position": 16,
+        "line": 6
+      }
+    ]
+  },
+  "Shahid Nejatollahi": {
+    "name": "Shahid Nejatollahi",
+    "translations": {
+      "fa": "شهید نجات اللهی"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": true,
+    "relations": [
+      "Shohada-ye Haftom-e Tir",
+      "Meydan-e Hazrat Vali Asr"
+    ],
+    "positionsInLine": [
+      {
+        "position": 17,
+        "line": 6
+      }
+    ]
+  },
+  "Meydan-e Hazrat Vali Asr": {
+    "name": "Meydan-e Hazrat Vali Asr",
+    "translations": {
+      "fa": "میدان حضرت ولیعصر"
+    },
+    "lines": [
+      3,
+      6
+    ],
+    "longitude": "51.4070255",
+    "latitude": "35.7115282",
+    "address": "خیابان ولیعصر، میدان ولیعصر",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Shahid Nejatollahi",
+      "Meydan-e Jahad",
+      "Teatr-e Shahr",
+      "Bustan-e Laleh"
+    ],
+    "positionsInLine": [
+      {
+        "position": 15,
+        "line": 3
+      },
+      {
+        "position": 18,
+        "line": 6
+      }
+    ]
+  },
+  "Bustan-e Laleh": {
+    "name": "Bustan-e Laleh",
+    "translations": {
+      "fa": "بوستان لاله"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": false,
+    "relations": [
+      "Meydan-e Hazrat Vali Asr",
+      "Karagar"
+    ],
+    "positionsInLine": [
+      {
+        "position": 19,
+        "line": 6
+      }
+    ]
+  },
+  "Karagar": {
+    "name": "Karagar",
+    "translations": {
+      "fa": "کارگر"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": false,
+    "relations": [
+      "Bustan-e Laleh",
+      "Daneshgah-e Tarbiat Modarres"
+    ],
+    "positionsInLine": [
+      {
+        "position": 20,
+        "line": 6
+      }
+    ]
+  },
+  "Daneshgah-e Tarbiat Modarres": {
+    "name": "Daneshgah-e Tarbiat Modarres",
+    "translations": {
+      "fa": "دانشگاه تربیت مدرس"
+    },
+    "lines": [
+      6,
+      7
+    ],
+    "address": "تقاطع بزرگراه شهید چمران و بزرگراه جلال آل‌احمد",
+    "disabled": false,
+    "relations": [
+      "Karagar",
+      "Boostan-e Goftegou",
+      "Modafean-e Salamat",
+      "Shahrak-e Azmayesh"
+    ],
+    "positionsInLine": [
+      {
+        "position": 17,
+        "line": 7
+      },
+      {
+        "position": 21,
+        "line": 6
+      }
+    ]
+  },
+  "Shahrak-e Azmayesh": {
+    "name": "Shahrak-e Azmayesh",
+    "translations": {
+      "fa": "شهرک آزمایش"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": false,
+    "relations": [
+      "Daneshgah-e Tarbiat Modarres",
+      "Marzdaran"
+    ],
+    "positionsInLine": [
+      {
+        "position": 22,
+        "line": 6
+      }
+    ]
+  },
+  "Marzdaran": {
+    "name": "Marzdaran",
+    "translations": {
+      "fa": "مرزداران"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": false,
+    "relations": [
+      "Shahrak-e Azmayesh",
+      "Yadegar-e Imam"
+    ],
+    "positionsInLine": [
+      {
+        "position": 23,
+        "line": 6
+      }
+    ]
+  },
+  "Yadegar-e Imam": {
+    "name": "Yadegar-e Imam",
+    "translations": {
+      "fa": "یادگار امام"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": false,
+    "relations": [
+      "Marzdaran",
+      "Shahid Ashrafi Esfahani"
+    ],
+    "positionsInLine": [
+      {
+        "position": 24,
+        "line": 6
+      }
+    ]
+  },
+  "Shahid Ashrafi Esfahani": {
+    "name": "Shahid Ashrafi Esfahani",
+    "translations": {
+      "fa": "شهید اشرفی اصفهانی"
+    },
+    "lines": [
+      6
+    ],
+    "address": "تقاطع بزرگراه اشرفی اصفهانی و خیابان پیامبر",
+    "disabled": false,
+    "relations": [
+      "Yadegar-e Imam",
+      "Shahid Sattari"
+    ],
+    "positionsInLine": [
+      {
+        "position": 25,
+        "line": 6
+      }
+    ]
+  },
+  "Shahid Sattari": {
+    "name": "Shahid Sattari",
+    "translations": {
+      "fa": "شهید ستاری"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": false,
+    "relations": [
+      "Shahid Ashrafi Esfahani",
+      "Ayatollah Kashani"
+    ],
+    "positionsInLine": [
+      {
+        "position": 26,
+        "line": 6
+      }
+    ]
+  },
+  "Ayatollah Kashani": {
+    "name": "Ayatollah Kashani",
+    "translations": {
+      "fa": "آیت‌الله کاشانی"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": true,
+    "relations": [
+      "Shahid Sattari",
+      "Shahr-e Ziba",
+      "Allameh Jafari"
+    ],
+    "positionsInLine": [
+      {
+        "position": 27,
+        "line": 6
+      }
+    ]
+  },
+  "Shahr-e Ziba": {
+    "name": "Shahr-e Ziba",
+    "translations": {
+      "fa": "شهر زیبا"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": false,
+    "relations": [
+      "Ayatollah Kashani",
+      "Shahran"
+    ],
+    "positionsInLine": [
+      {
+        "position": 28,
+        "line": 6
+      }
+    ]
+  },
+  "Shahran": {
+    "name": "Shahran",
+    "translations": {
+      "fa": "شهران"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": false,
+    "relations": [
+      "Shahr-e Ziba",
+      "Shohada-ye Kan"
+    ],
+    "positionsInLine": [
+      {
+        "position": 29,
+        "line": 6
+      }
+    ]
+  },
+  "Shohada-ye Kan": {
+    "name": "Shohada-ye Kan",
+    "translations": {
+      "fa": "شهدای کن"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": false,
+    "relations": [
+      "Shahran",
+      "Kouhsar"
+    ],
+    "positionsInLine": [
+      {
+        "position": 30,
+        "line": 6
+      }
+    ]
+  },
+  "Kouhsar": {
+    "name": "Kouhsar",
+    "translations": {
+      "fa": "کوهسار"
+    },
+    "lines": [
+      6
+    ],
+    "disabled": false,
+    "relations": [
+      "Shohada-ye Kan"
+    ],
+    "positionsInLine": [
+      {
+        "position": 31,
+        "line": 6
+      }
+    ]
+  },
+  "Varzeshgah-e Takhti": {
+    "name": "Varzeshgah-e Takhti",
+    "translations": {
+      "fa": "ورزشگاه تختی"
+    },
+    "lines": [
+      7
+    ],
+    "disabled": true,
+    "relations": [
+      "Basij"
+    ],
+    "positionsInLine": [
+      {
+        "position": 1,
+        "line": 7
+      }
+    ]
+  },
+  "Basij": {
+    "name": "Basij",
+    "translations": {
+      "fa": "بسیج"
+    },
+    "lines": [
+      7
+    ],
+    "longitude": "51.489404",
+    "latitude": "35.667159",
+    "address": "محدوده بزرگراه بسیج - افسریه",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Varzeshgah-e Takhti",
+      "Ahang"
+    ],
+    "positionsInLine": [
+      {
+        "position": 2,
+        "line": 7
+      }
+    ]
+  },
+  "Ahang": {
+    "name": "Ahang",
+    "translations": {
+      "fa": "آهنگ"
+    },
+    "lines": [
+      7
+    ],
+    "disabled": false,
+    "relations": [
+      "Basij",
+      "Chehel Tan-e Doulab"
+    ],
+    "positionsInLine": [
+      {
+        "position": 3,
+        "line": 7
+      }
+    ]
+  },
+  "Chehel Tan-e Doulab": {
+    "name": "Chehel Tan-e Doulab",
+    "translations": {
+      "fa": "چهل تن دولاب"
+    },
+    "lines": [
+      7
+    ],
+    "disabled": false,
+    "relations": [
+      "Ahang",
+      "Shohada-ye Hefdah-e Shahrivar"
+    ],
+    "positionsInLine": [
+      {
+        "position": 4,
+        "line": 7
+      }
+    ]
+  },
+  "Meydan-e Ghiyam": {
+    "name": "Meydan-e Ghiyam",
+    "translations": {
+      "fa": "میدان قیام"
+    },
+    "lines": [
+      7
+    ],
+    "disabled": false,
+    "relations": [
+      "Shohada-ye Hefdah-e Shahrivar",
+      "Mowlavi"
+    ],
+    "positionsInLine": [
+      {
+        "position": 6,
+        "line": 7
+      }
+    ]
+  },
+  "Mowlavi": {
+    "name": "Mowlavi",
+    "translations": {
+      "fa": "مولوی"
+    },
+    "lines": [
+      7
+    ],
+    "disabled": false,
+    "relations": [
+      "Meydan-e Ghiyam",
+      "Meydan-e Mohammadiyeh"
+    ],
+    "positionsInLine": [
+      {
+        "position": 7,
+        "line": 7
+      }
+    ]
+  },
+  "Helal Ahmar": {
+    "name": "Helal Ahmar",
+    "translations": {
+      "fa": "هلال احمر"
+    },
+    "lines": [
+      7
+    ],
+    "disabled": false,
+    "relations": [
+      "Mahdiyeh",
+      "Beryanak"
+    ],
+    "positionsInLine": [
+      {
+        "position": 10,
+        "line": 7
+      }
+    ]
+  },
+  "Beryanak": {
+    "name": "Beryanak",
+    "translations": {
+      "fa": "بریانک"
+    },
+    "lines": [
+      7
+    ],
+    "disabled": false,
+    "relations": [
+      "Helal Ahmar",
+      "Komeyl"
+    ],
+    "positionsInLine": [
+      {
+        "position": 11,
+        "line": 7
+      }
+    ]
+  },
+  "Komeyl": {
+    "name": "Komeyl",
+    "translations": {
+      "fa": "کمیل"
+    },
+    "lines": [
+      7
+    ],
+    "longitude": "51.380143",
+    "latitude": "35.682491",
+    "address": "محدوده بزرگراه شهیدنواب صفوی با جنوب خیابان کمیل",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Beryanak",
+      "Roudaki"
+    ],
+    "positionsInLine": [
+      {
+        "position": 12,
+        "line": 7
+      }
+    ]
+  },
+  "Roudaki": {
+    "name": "Roudaki",
+    "translations": {
+      "fa": "رودکی"
+    },
+    "lines": [
+      7
+    ],
+    "disabled": false,
+    "relations": [
+      "Komeyl",
+      "Shahid Navab-e Safavi"
+    ],
+    "positionsInLine": [
+      {
+        "position": 13,
+        "line": 7
+      }
+    ]
+  },
+  "Modafean-e Salamat": {
+    "name": "Modafean-e Salamat",
+    "translations": {
+      "fa": "مدافعان سلامت"
+    },
+    "lines": [
+      7
+    ],
+    "disabled": false,
+    "relations": [
+      "Towhid",
+      "Daneshgah-e Tarbiat Modarres"
+    ],
+    "positionsInLine": [
+      {
+        "position": 16,
+        "line": 7
+      }
+    ]
+  },
+  "Boostan-e Goftegou": {
+    "name": "Boostan-e Goftegou",
+    "translations": {
+      "fa": "بوستان گفتگو"
+    },
+    "lines": [
+      7
+    ],
+    "address":	"بزرگراه شهید چمران (اتوبان پارک وی)",
+    "disabled": false,
+    "wc": true,
+    "relations": [
+      "Daneshgah-e Tarbiat Modarres",
+      "Milad Tower"
+    ],
+    "positionsInLine": [
+      {
+        "position": 18,
+        "line": 7
+      }
+    ]
+  },
+  "Milad Tower": {
+    "name": "Milad Tower",
+    "translations": {
+      "fa": "برج میلاد"
+    },
+    "lines": [
+      7
+    ],
+    "disabled": false,
+    "relations": [
+      "Boostan-e Goftegou",
+      "Meydan-e San'at"
+    ],
+    "positionsInLine": [
+      {
+        "position": 19,
+        "line": 7
+      }
+    ]
+  },
+  "Meydan-e San'at": {
+    "name": "Meydan-e San'at",
+    "translations": {
+      "fa": "میدان صنعت"
+    },
+    "lines": [
+      7
+    ],
+    "longitude": "51.367808",
+    "latitude": "35.754386",
+    "address": "محدوده ضلع شمالی میدان صنعت",
+    "disabled": false,
+    "wc": false,
+    "coffeeShop": false,
+    "groceryStore": false,
+    "fastFood": false,
+    "atm": false,
+    "relations": [
+      "Milad Tower",
+      "Shahid Dadman"
+    ],
+    "positionsInLine": [
+      {
+        "position": 20,
+        "line": 7
+      }
+    ]
+  },
+  "Shahid Dadman": {
+    "name": "Shahid Dadman",
+    "translations": {
+      "fa": "شهید دادمان"
+    },
+    "lines": [
+      7
+    ],
+    "disabled": false,
+    "relations": [
+      "Meydan-e San'at",
+      "Meydan-e Ketab"
+    ],
+    "positionsInLine": [
+      {
+        "position": 21,
+        "line": 7
+      }
+    ]
+  },
+  "Meydan-e Ketab": {
+    "name": "Meydan-e Ketab",
+    "translations": {
+      "fa": "میدان کتاب"
+    },
+    "lines": [
+      7
+    ],
+    "disabled": false,
+    "relations": [
+      "Shahid Dadman"
+    ],
+    "positionsInLine": [
+      {
+        "position": 22,
+        "line": 7
+      }
+    ]
+  }
+}

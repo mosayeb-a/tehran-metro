@@ -17,15 +17,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.KeyboardArrowDown
 import androidx.compose.material.icons.outlined.KeyboardArrowUp
-import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconToggleButton
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldColors
@@ -46,14 +43,13 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.ma.tehro.common.isFarsi
 import com.ma.tehro.data.Station
+import com.ma.tehro.feature.shortestpath.AppSearchBar
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -190,32 +186,12 @@ fun <T> SearchableExpandedDropDownMenu(
                 color = MaterialTheme.colorScheme.secondaryContainer
             ) {
                 Column {
-                    OutlinedTextField(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
+                    AppSearchBar(
+                        modifier= Modifier
+                            .padding(vertical = 16.dp),
                         value = searchedOption,
                         onValueChange = { searchedOption = it },
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
-                            cursorColor = MaterialTheme.colorScheme.onPrimary
-                        ),
-                        textStyle = LocalTextStyle.current.copy(
-                            textDirection = if (isFarsi(searchedOption)) TextDirection.Rtl else TextDirection.Ltr,
-                            textAlign = if (isFarsi(searchedOption)) TextAlign.Right else TextAlign.Left,
-                            color = MaterialTheme.colorScheme.onSecondary
-                        ),
-                        leadingIcon = { Icon(Icons.Outlined.Search, "search") },
-                        maxLines = 1,
-                        placeholder = {
-                            Text(
-                                modifier = Modifier.fillMaxWidth(),
-                                text = "جستجو",
-                                style = MaterialTheme.typography.labelLarge,
-                                textAlign = TextAlign.End
-                            )
-                        },
-                        shape = RoundedCornerShape(16.dp),
+                        placeholder = "جست‌وجوی ایستگاه‌ دلخواه",
                     )
 
                     LazyColumn(

@@ -1,8 +1,8 @@
-package app.ma.scripts
+package app.ma.scripts.schedule
 
+import app.ma.scripts.common.RES_PATH
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.apache.poi.ss.usermodel.CellType
 import org.apache.poi.ss.usermodel.WorkbookFactory
@@ -36,7 +36,7 @@ data class Schedule(
 data class ScheduleOutput(val stations: MutableMap<String, Schedule> = mutableMapOf())
 
 fun main() {
-    val filePath = "$BASE_RAW_PATH$FILE_NAME.xls"
+    val filePath = "${RES_PATH}$FILE_NAME.xls"
     val file = File(filePath)
     val workbook = WorkbookFactory.create(file)
     val scheduleOutput = ScheduleOutput()
@@ -156,7 +156,7 @@ fun main() {
             prettyPrint = true
             encodeDefaults = true
         }
-        File(BASE_RAW_PATH + FILE_NAME + "_json_test.json").writeText(
+        File(RES_PATH + FILE_NAME + "_json_test.json").writeText(
             json.encodeToString(
                 scheduleOutput
             )

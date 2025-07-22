@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Canvas
 import androidx.compose.ui.graphics.Color
@@ -13,15 +14,18 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.graphics.toColorInt
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavController
 import androidx.navigation.NavType
 import com.ma.tehro.data.BilingualName
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.util.Locale
 import kotlin.math.asin
@@ -84,7 +88,7 @@ fun calculateLineName(lineNumber: Int, useBranch: Boolean = false): BilingualNam
     }
 
     return BilingualName(
-        en ="${pathType.first} $lineNumber - ${enEndpoints?.first}/${enEndpoints?.second}",
+        en = "${pathType.first} $lineNumber - ${enEndpoints?.first}/${enEndpoints?.second}",
         fa = "${pathType.second} ${lineNumber.toFarsiNumber()} - ${faEndpoints?.first}/${faEndpoints?.second}"
     )
 }
@@ -180,4 +184,14 @@ fun Color.darken(factor: Float = 0.85f): Color {
         blue = (blue * factor).coerceIn(0f, 1f),
         alpha = alpha
     )
+}
+
+@Composable
+inline fun <reified T : ViewModel> NavBackStackEntry.sharedViewModel(navController: NavController): T {
+    val navGraphRoute = destination.parent?.route ?: return hiltViewModel()
+    val parentEntry = remember(this) {
+        navController.getBackStackEntry(navGraphRoute)
+    }
+
+    return hiltViewModel(parentEntry)
 }

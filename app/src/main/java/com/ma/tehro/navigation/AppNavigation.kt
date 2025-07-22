@@ -23,6 +23,7 @@ import com.ma.tehro.common.ui.MapScreen
 import com.ma.tehro.common.ui.OfficialMetroMapScreen
 import com.ma.tehro.common.ui.PathDescriptionScreen
 import com.ma.tehro.common.ui.PathFinderScreen
+import com.ma.tehro.common.ui.NearbyPlaceStationsScreen
 import com.ma.tehro.common.ui.StationDetailScreen
 import com.ma.tehro.common.ui.StationSelectorScreen
 import com.ma.tehro.common.ui.StationsScreen
@@ -43,6 +44,8 @@ import com.ma.tehro.feature.shortestpath.guide.PathDescription
 import com.ma.tehro.feature.shortestpath.guide.PathDescriptionViewModel
 import com.ma.tehro.feature.shortestpath.pathfinder.PathFinder
 import com.ma.tehro.feature.shortestpath.pathfinder.PathViewModel
+import com.ma.tehro.feature.shortestpath.places.PlaceSelection
+import com.ma.tehro.feature.shortestpath.places.PlaceSelectionViewModel
 import com.ma.tehro.feature.shortestpath.selection.StationSelectionViewModel
 import com.ma.tehro.feature.shortestpath.selection.StationSelector
 import com.ma.tehro.feature.submit_suggestion.SubmitSuggestionViewModel
@@ -50,6 +53,7 @@ import com.ma.tehro.feature.submit_suggestion.feedback.SubmitFeedback
 import com.ma.tehro.feature.submit_suggestion.station.SubmitStationInfo
 import com.ma.tehro.feature.train_schedule.TrainSchedule
 import com.ma.tehro.feature.train_schedule.TrainScheduleViewModel
+import kotlin.let
 import kotlin.reflect.KType
 import kotlin.reflect.typeOf
 
@@ -122,6 +126,17 @@ fun AppNavigation(
         baseComposable<StationSelectorScreen> { backStackEntry ->
             val viewModel: StationSelectionViewModel = hiltViewModel(backStackEntry)
             val state by viewModel.uiState.collectAsStateWithLifecycle()
+            val savedStateHandle = backStackEntry.savedStateHandle
+            val selectedStation =
+                savedStateHandle.get<Map<String, String>>("selected_start_station")
+            selectedStation?.let { stationMap ->
+                viewModel.onSelectedChange(
+                    isFrom = true,
+                    enStation = stationMap["en"] ?: "",
+                    faStation = stationMap["fa"] ?: ""
+                )
+                savedStateHandle.remove<Map<String, String>>("selected_start_station")
+            }
             StationSelector(
                 onBack = { navController.navigateUp() },
                 viewState = state,
@@ -151,8 +166,8 @@ fun AppNavigation(
                 onLineChangeDelayChanged = { viewModel.onLineChangeDelayChanged(it) },
                 onTimeChanged = { viewModel.onTimeChanged(it) },
                 onDayOfWeekChanged = { viewModel.onDayOfWeekChanged(it) },
-
-                )
+                onFindNearestStationsByPlace = { navController.navigate(NearbyPlaceStationsScreen) }
+            )
         }
         baseComposable<PathFinderScreen> { backStackEntry ->
             val viewModel: PathViewModel = hiltViewModel(backStackEntry)
@@ -262,6 +277,28 @@ fun AppNavigation(
         baseComposable<AboutScreen> {
             About(
                 onBack = { navController.navigateUp() }
+            )
+        }
+        baseComposable<NearbyPlaceStationsScreen> {
+            val viewModel: PlaceSelectionViewModel = hiltViewModel(it)
+            val state by viewModel.state.collectAsStateWithLifecycle()
+            PlaceSelection(
+                viewState = state,
+                onBack = { navController.navigateUp() },
+                onPlaceClick = { lat, long ->
+                    viewModel.getNearbyStations(lat, long)
+                },
+                onStationSelected = { en, fa ->
+                    navController.previousBackStackEntry?.savedStateHandle?.set(
+                        key = "selected_start_station",
+                        value = mapOf(
+                            "en" to en,
+                            "fa" to fa
+                        )
+                    )
+                    navController.popBackStack()
+                },
+                onSearchQueryChanged = { q -> viewModel.onSearchQueryChanged(q) },
             )
         }
     }

@@ -61,3 +61,6 @@ object OfficialMetroMapScreen
 
 @Serializable
 object AboutScreen
+
+@Serializable
+object NearbyPlaceStationsScreen
