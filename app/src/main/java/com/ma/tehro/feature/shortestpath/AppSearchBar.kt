@@ -3,9 +3,12 @@ package com.ma.tehro.feature.shortestpath
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.selection.LocalTextSelectionColors
+import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
@@ -19,7 +22,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.input.ImeAction
@@ -29,6 +34,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.isFarsi
+import kotlinx.coroutines.launch
 
 @Composable
 fun AppSearchBar(
@@ -38,48 +44,97 @@ fun AppSearchBar(
     placeholder: String,
 ) {
     val isRtl = remember(value) { isFarsi(value) }
+    val customTextSelectionColors = TextSelectionColors(
+        handleColor = MaterialTheme.colorScheme.onPrimary,
+        backgroundColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.4f)
+    )
 
-    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+    CompositionLocalProvider(
+        LocalLayoutDirection provides if (isRtl) LayoutDirection.Rtl else LayoutDirection.Ltr,
+        LocalTextSelectionColors provides customTextSelectionColors
+    ) {
+        val focusRequester = remember { androidx.compose.ui.focus.FocusRequester() }
+        val keyboardController =
+            androidx.compose.ui.platform.LocalSoftwareKeyboardController.current
+        val coroutineScope = rememberCoroutineScope()
+
         OutlinedTextField(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
             value = value,
             onValueChange = onValueChange,
-            label = {
-                Text(
-                    text = placeholder,
-                    color = MaterialTheme.colorScheme.onPrimary,
-                    style = MaterialTheme.typography.labelMedium
+            singleLine = true,
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = "Search",
+                    modifier = Modifier
+                        .size(24.dp)
                 )
             },
-            textStyle = LocalTextStyle.current.copy(
-                textDirection = TextDirection.Rtl,
-                textAlign = if (isRtl) TextAlign.Right else TextAlign.Right,
-                fontSize = 16.sp,
-                color = Color.White
+            trailingIcon = {
+                androidx.compose.animation.AnimatedVisibility(
+                    visible = value.isNotBlank(),
+                    enter = androidx.compose.animation.fadeIn(
+                        animationSpec = androidx.compose.animation.core.tween(
+                            200
+                        )
+                    ),
+                    exit = androidx.compose.animation.fadeOut(
+                        animationSpec = androidx.compose.animation.core.tween(
+                            200
+                        )
+                    )
+                ) {
+                    IconButton(
+                        onClick = {
+                            onValueChange("")
+                            coroutineScope.launch {
+                                focusRequester.requestFocus()
+                                keyboardController?.show()
+                            }
+                        },
+                        modifier = Modifier.padding(2.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Clear,
+                            contentDescription = "Clear"
+                        )
+                    }
+                }
+            },
+            textStyle = MaterialTheme.typography.bodyMedium.copy(
+                color = MaterialTheme.colorScheme.onPrimary,
+                textDirection = TextDirection.Content,
+                textAlign = if (isRtl) TextAlign.Right else TextAlign.Start,
             ),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.outline,
-                cursorColor = MaterialTheme.colorScheme.onPrimary
+                cursorColor = MaterialTheme.colorScheme.onPrimary,
             ),
-            leadingIcon = {
-                Icon(Icons.Filled.Search, contentDescription = "Search")
+            shape = MaterialTheme.shapes.extraLarge,
+            placeholder = {
+                Text(
+                    text = placeholder,
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        textAlign = if (isRtl) TextAlign.Right else TextAlign.Start,
+                        textDirection = TextDirection.Content,
+                    ),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.fillMaxWidth()
+                )
             },
-            trailingIcon = {
-                if (value.isNotEmpty()) {
-                    IconButton(onClick = { onValueChange("") }) {
-                        Icon(Icons.Default.Clear, contentDescription = "Clear Search")
-                    }
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .focusRequester(focusRequester),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Search
+            ),
+            keyboardActions = KeyboardActions(
+                onSearch = {
+                    keyboardController?.hide()
                 }
-            },
-            singleLine = true,
-            shape = RoundedCornerShape(24.dp),
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
-            keyboardActions = KeyboardActions(onSearch = {
-                // Optional: Add search action
-            })
+            )
         )
     }
 }

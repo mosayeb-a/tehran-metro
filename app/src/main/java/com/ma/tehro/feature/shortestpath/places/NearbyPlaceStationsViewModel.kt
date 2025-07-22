@@ -56,7 +56,7 @@ class PlaceSelectionViewModel @Inject constructor(
     }
 
     fun onSearchQueryChanged(query: String) {
-        searchQueryFlow.value = query
+        searchQueryFlow.value = query.trim()
         _state.update { it.copy(searchQuery = query) }
     }
 
