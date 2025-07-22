@@ -92,7 +92,7 @@ fun DrawerContent(
             DrawerItem(
                 label = BilingualName(
                     fa = "درباره",
-                    en = "َABOUT"
+                    en = "ABOUT"
                 ),
                 onClick = onAboutClick,
                 imageVector = Icons.Default.Info
