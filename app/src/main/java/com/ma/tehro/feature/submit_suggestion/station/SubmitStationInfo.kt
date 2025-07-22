@@ -2,17 +2,25 @@ package com.ma.tehro.feature.submit_suggestion.station
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.Send
+import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -31,10 +39,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ma.tehro.R
-import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.getLineColorByNumber
-import com.ma.tehro.common.ui.ExtendableFab
+import com.ma.tehro.common.ui.Appbar
+import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.data.Station
 import com.ma.tehro.feature.submit_suggestion.SubmitInfoState
 import com.ma.tehro.feature.submit_suggestion.station.components.CorrectionEditText
@@ -76,37 +83,14 @@ fun SubmitStationInfo(
             atm != (station.atm ?: false) ||
             selectedLine != station.lines.joinToString(", ")
 
-    val lazyListState = rememberLazyListState()
-
     Scaffold(
         floatingActionButton = {
-            ExtendableFab(
-                lazyListState = lazyListState,
-                enabled = !state.isLoading && isChanged,
-                iconRes = R.drawable.route,
-                faText = "ارسال اطلاعات",
-                enText = "SUBMIT INFO",
-                onClick = {
-                    onSubmitInfo(
-                        Station(
-                            name = name,
-                            translations = station.translations.copy(fa = translations),
-                            longitude = longitude.takeIf { it.isNotEmpty() },
-                            latitude = latitude.takeIf { it.isNotEmpty() },
-                            address = address.takeIf { it.isNotEmpty() },
-                            disabled = disabled,
-                            lines = station.lines,
-                            wc = wc,
-                            coffeeShop = coffeeShop,
-                            groceryStore = groceryStore,
-                            fastFood = fastFood,
-                            atm = atm,
-                            relations = station.relations,
-                            positionsInLine = station.positionsInLine
-                        )
-                    )
-                }
-            )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+
+            }
         },
         topBar = {
             Column {
@@ -125,6 +109,7 @@ fun SubmitStationInfo(
                 .padding(paddingValues)
                 .padding(horizontal = 16.dp)
         ) {
+
             item { Spacer(Modifier.height(16.dp)) }
             item("title") {
                 Column(
@@ -145,7 +130,7 @@ fun SubmitStationInfo(
                 }
             }
             item { Spacer(Modifier.height(12.dp)) }
-            item("name") {
+            item {
                 CorrectionEditText(
                     value = name,
                     onValueChange = { name = it },
@@ -154,7 +139,7 @@ fun SubmitStationInfo(
                 )
             }
             item { Spacer(Modifier.height(4.dp)) }
-            item("fa_name") {
+            item {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -178,7 +163,7 @@ fun SubmitStationInfo(
             }
             item { Spacer(Modifier.height(4.dp)) }
 
-            item("address") {
+            item {
                 CorrectionEditText(
                     value = address,
                     onValueChange = { address = it },
@@ -188,7 +173,7 @@ fun SubmitStationInfo(
                 )
             }
             item { Spacer(Modifier.height(4.dp)) }
-            item("lat_long") {
+            item {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -216,14 +201,18 @@ fun SubmitStationInfo(
 
             item { Spacer(Modifier.height(16.dp)) }
 
-            item("checkbox") {
+            item {
                 Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
                         Row(
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier
+                                .wrapContentWidth()
+                                .align(Alignment.CenterHorizontally),
                             horizontalArrangement = Arrangement.spacedBy(16.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -232,19 +221,21 @@ fun SubmitStationInfo(
                                 en = "Disabled",
                                 checked = disabled,
                                 onCheckedChange = { disabled = it },
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
                             )
                             FacilitateCheckbox(
                                 fa = "دستشویی",
                                 en = "WC",
                                 checked = wc,
                                 onCheckedChange = { wc = it },
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
                             )
                         }
 
                         Row(
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier
+                                .wrapContentWidth()
+                                .align(Alignment.CenterHorizontally),
                             horizontalArrangement = Arrangement.spacedBy(16.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -253,19 +244,21 @@ fun SubmitStationInfo(
                                 en = "Coffee Shop",
                                 checked = coffeeShop,
                                 onCheckedChange = { coffeeShop = it },
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
                             )
                             FacilitateCheckbox(
                                 fa = "سوپرمارکت",
                                 en = "Grocery Store",
                                 checked = groceryStore,
                                 onCheckedChange = { groceryStore = it },
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
                             )
                         }
 
                         Row(
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier
+                                .wrapContentWidth()
+                                .align(Alignment.CenterHorizontally),
                             horizontalArrangement = Arrangement.spacedBy(16.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
@@ -274,20 +267,47 @@ fun SubmitStationInfo(
                                 en = "Fast Food",
                                 checked = fastFood,
                                 onCheckedChange = { fastFood = it },
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
                             )
                             FacilitateCheckbox(
                                 fa = "خودپرداز",
                                 en = "ATM",
                                 checked = atm,
                                 onCheckedChange = { atm = it },
-                                modifier = Modifier.weight(1f)
+                                modifier = Modifier
                             )
                         }
                     }
                 }
             }
-            item { Spacer(Modifier.height(87.dp)) }
+
+            item { Spacer(Modifier.height(12.dp)) }
+
+            item {
+                Button(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    onClick = { onSubmitInfo(station) },
+                    enabled = !state.isLoading && isChanged,
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp)
+                ) {
+                    BilingualText(
+                        fa = "ارسال اطلاعات",
+                        en = "SUBMIT INFO",
+                        style = MaterialTheme.typography.bodyMedium,
+                        maxLine = 2,
+                        textAlign = TextAlign.Center,
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Rounded.Send,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+            }
+
+            item { Spacer(Modifier.height(58.dp)) }
         }
     }
 }

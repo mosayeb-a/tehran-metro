@@ -17,6 +17,7 @@ import androidx.compose.material3.FloatingToolbarDefaults.ScreenOffset
 import androidx.compose.material3.HorizontalFloatingToolbar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,6 +25,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.R
@@ -53,7 +55,7 @@ fun SelectionToolbar(
                 containerColor = if (fabEnabled)
                     MaterialTheme.colorScheme.tertiary
                 else
-                    MaterialTheme.colorScheme.secondaryContainer.copy(alpha = .6f),
+                    MaterialTheme.colorScheme.secondaryContainer.copy(alpha = .7f),
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.route),
@@ -75,25 +77,29 @@ fun SelectionToolbar(
         content = {
             IconButton(
                 modifier = Modifier.size(48.dp),
-                onClick = {onFindNearestStationsByPlaceClick()}
+                onClick = {onFindNearestStationsByPlaceClick()},
+                colors = IconButtonDefaults.iconButtonColors(contentColor = Color.White)
             ) {
                 Icon(Icons.Filled.Business, contentDescription = "")
             }
             IconButton(
                 modifier = Modifier.size(48.dp),
-                onClick = onFindNearestStationClick
+                onClick = onFindNearestStationClick,
+                colors = IconButtonDefaults.iconButtonColors(contentColor = Color.White)
             ) {
                 Icon(Icons.Filled.LocationOn, contentDescription = "")
             }
             IconButton(
                 modifier = Modifier.size(48.dp),
-                onClick = { onDayOfWeekClick() }
+                onClick = { onDayOfWeekClick() },
+                colors = IconButtonDefaults.iconButtonColors(contentColor = Color.White)
             ) {
                 Icon(Icons.Filled.CalendarMonth, contentDescription = "")
             }
             IconButton(
                 modifier = Modifier.size(48.dp),
-                onClick = { onTimeChangeClick() }
+                onClick = { onTimeChangeClick() },
+                colors = IconButtonDefaults.iconButtonColors(contentColor = Color.White)
             ) {
                 Icon(Icons.Filled.Timer, contentDescription = "")
             }
