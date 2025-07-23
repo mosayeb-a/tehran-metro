@@ -39,7 +39,6 @@ fun SelectionToolbar(
     onDayOfWeekClick: () -> Unit,
     onFindNearestStationClick: () -> Unit,
     onFindNearestStationsByPlaceClick: () -> Unit,
-    fabEnabled: Boolean = true
 ) {
     var expanded by rememberSaveable { mutableStateOf(true) }
 
@@ -48,14 +47,9 @@ fun SelectionToolbar(
         floatingActionButton = {
             FloatingToolbarDefaults.VibrantFloatingActionButton(
                 onClick = {
-                    if (fabEnabled) {
-                        onFindPathClick()
-                    }
+                    onFindPathClick()
                 },
-                containerColor = if (fabEnabled)
-                    MaterialTheme.colorScheme.tertiary
-                else
-                    MaterialTheme.colorScheme.secondaryContainer.copy(alpha = .7f),
+                containerColor = MaterialTheme.colorScheme.tertiary
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.route),
@@ -77,7 +71,7 @@ fun SelectionToolbar(
         content = {
             IconButton(
                 modifier = Modifier.size(48.dp),
-                onClick = {onFindNearestStationsByPlaceClick()},
+                onClick = { onFindNearestStationsByPlaceClick() },
                 colors = IconButtonDefaults.iconButtonColors(contentColor = Color.White)
             ) {
                 Icon(Icons.Filled.Business, contentDescription = "")
