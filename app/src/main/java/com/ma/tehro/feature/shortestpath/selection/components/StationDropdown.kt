@@ -23,6 +23,8 @@ fun StationDropdown(
     stations: Map<String, Station>,
     onStationSelected: (en: String, fa: String) -> Unit,
     isFrom: Boolean,
+    nodeColor: Color,
+    nodeScale: Float
 ) {
     SearchableExpandedDropDownMenu(
         listOfItems = stations.entries.toList(),
@@ -49,12 +51,13 @@ fun StationDropdown(
                 modifier = Modifier.padding(horizontal = 16.dp),
             ) {
                 SingleNode(
-                    color = MaterialTheme.colorScheme.secondary.copy(alpha = .9f),
+                    color = nodeColor,
                     nodeType = if (isFrom) TimelineView.NodeType.FIRST else TimelineView.NodeType.LAST,
                     nodeSize = 20f,
                     isChecked = true,
                     lineWidth = 5.2f,
-                    isDashed = true
+                    isDashed = true,
+                    scale = nodeScale
                 )
                 Text(
                     text = if (isFrom) "مبدا" + "\n" + "FROM" else "مقصد" + "\n" + "TO",
@@ -62,7 +65,7 @@ fun StationDropdown(
                         .padding(start = 4.dp, bottom = 8.dp, top = 8.dp)
                         .align(Alignment.CenterVertically),
                     style = MaterialTheme.typography.labelSmall.copy(
-                        color = MaterialTheme.colorScheme.secondary.copy(alpha = .45f),
+                        color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.45f),
                     ),
                     textAlign = TextAlign.Center
                 )
