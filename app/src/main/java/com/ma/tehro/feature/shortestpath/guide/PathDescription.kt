@@ -74,7 +74,7 @@ fun StepGuideItem(modifier: Modifier, step: String, lineColor: Int) {
         Spacer(Modifier.width(8.dp))
         Text(
             text = message,
-            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.W500),
+            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.W500),
             modifier = Modifier
                 .weight(1f)
                 .align(Alignment.CenterVertically)

@@ -19,6 +19,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.Send
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -289,6 +290,7 @@ fun SubmitStationInfo(
                         .fillMaxWidth(),
                     onClick = { onSubmitInfo(station) },
                     enabled = !state.isLoading && isChanged,
+                    colors  = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiary),
                     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp)
                 ) {
                     BilingualText(

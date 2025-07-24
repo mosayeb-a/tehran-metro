@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.Appbar
+import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.data.BilingualName
 
 @Composable
@@ -93,21 +94,16 @@ fun EstimatedTimeDisplay(estimatedTime: BilingualName?, lineChangeDelayMinutes: 
             ) {
                 Text(
                     text = "زمان تقریبی (تعویض خط ${lineChangeDelayMinutes.toFarsiNumber()} دقیقه)",
-                    style = MaterialTheme.typography.labelSmall.copy(
-                        fontSize = 11.sp,
-                        color = MaterialTheme.colorScheme.onPrimary.copy(
-                            alpha = .9f
-                        )
-                    ),
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = .9f),
+                    style = MaterialTheme.typography.labelSmall,
                 )
                 CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
                     Text(
                         text = estimatedTime.fa,
-                        style = MaterialTheme.typography.labelSmall.copy(
-                            color = MaterialTheme.colorScheme.onPrimary.copy(
-                                alpha = .9f
-                            )
-                        )
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.onPrimary.copy(alpha = .9f),
+                        style = MaterialTheme.typography.labelSmall,
                     )
                 }
             }
@@ -131,27 +127,13 @@ fun AppbarDetail(
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(
-                text = toFa,
-                style = MaterialTheme.typography.labelSmall.copy(
-                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
-                ),
-                textAlign = TextAlign.Center,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-            Text(
-                text = toEn.uppercase(),
-                style = MaterialTheme.typography.labelSmall.copy(
-                    fontSize = 10.sp,
-                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f)
-                ),
-                textAlign = TextAlign.Center,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-        }
+        BilingualText(
+            fa = toFa,
+            en = toEn.uppercase(),
+            style = MaterialTheme.typography.labelSmall,
+            enAlpha = .7f,
+            textAlign = TextAlign.Center
+        )
         Icon(
             modifier = Modifier
                 .padding(horizontal = 2.dp)
@@ -160,26 +142,12 @@ fun AppbarDetail(
             contentDescription = "Going to ..",
             tint = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
         )
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(
-                text = fromFa,
-                style = MaterialTheme.typography.labelSmall.copy(
-                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
-                ),
-                textAlign = TextAlign.Center,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-            Text(
-                text = fromEn.uppercase(),
-                style = MaterialTheme.typography.labelSmall.copy(
-                    fontSize = 10.sp,
-                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
-                ),
-                textAlign = TextAlign.Center,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-        }
+        BilingualText(
+            fa = fromFa,
+            en = fromEn.uppercase(),
+            style = MaterialTheme.typography.labelSmall,
+            enAlpha = .7f,
+            textAlign = TextAlign.Center
+        )
     }
 }

@@ -13,7 +13,6 @@ private val AppColorScheme = darkColorScheme(
     onSecondary = Color.White,
     tertiary = Blue,
     onTertiary = Color.White,
-    error = Red
 )
 
 @Composable

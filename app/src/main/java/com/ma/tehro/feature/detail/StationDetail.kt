@@ -39,7 +39,10 @@ import com.ma.tehro.R
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.calculateLineName
 import com.ma.tehro.common.getLineColorByNumber
+import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.data.Station
+import com.ma.tehro.feature.detail.components.AppbarDetail
+import com.ma.tehro.feature.detail.components.FacilityItem
 
 @Composable
 fun StationDetail(
@@ -130,16 +133,12 @@ fun StationDetail(
                         painter = painterResource(R.drawable.directions_subway_24px),
                         contentDescription = "train schedule"
                     )
-                    Text(
-                        text = "زمان‌بندی حرکت قطار",
+                    BilingualText(
+                        fa = "زمان‌بندی حرکت قطار",
+                        en = "TRAIN SCHEDULE",
                         style = MaterialTheme.typography.labelSmall,
-                        textAlign = TextAlign.Center
-                    )
-                    Text(
-                        text = "SCHEDULE",
-                        style = MaterialTheme.typography.labelSmall
-                            .copy(color = Color.White.copy(alpha = .8f), fontSize = 10.sp),
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        enSize = 11.sp
                     )
                 }
             }
@@ -153,11 +152,12 @@ fun StationDetail(
                 ) {
                     Text(
                         text = "FACILITIES",
-                        style = MaterialTheme.typography.labelSmall
+                        style = MaterialTheme.typography.labelMedium
                     )
                     Text(
                         text = "امکانات",
-                        style = MaterialTheme.typography.labelSmall
+                        style = MaterialTheme.typography.labelMedium,
+                        fontSize = 14.sp
                     )
                 }
             }
@@ -191,119 +191,3 @@ data class FacilityItemData(
     val en: String,
     val icon: Int
 )
-
-@Composable
-fun FacilityItem(
-    modifier: Modifier = Modifier,
-    fa: String,
-    en: String,
-    icon: Int,
-    isDisabled: Boolean
-) {
-    Row(
-        modifier = modifier
-            .padding(16.dp)
-            .fillMaxWidth()
-            .height(52.dp)
-            .padding(top = 4.dp)
-            .alpha(if (isDisabled) 0.5f else 1f),
-        horizontalArrangement = Arrangement.End,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Column(
-            horizontalAlignment = Alignment.End
-        ) {
-            Text(
-                text = fa,
-                style = MaterialTheme.typography.labelSmall
-            )
-            Spacer(Modifier.height(2.dp))
-            Text(
-                text = en.uppercase(),
-                style = MaterialTheme.typography.labelSmall
-            )
-        }
-
-        Spacer(Modifier.width(12.dp))
-
-        Box(
-            modifier = Modifier
-                .padding()
-                .size(36.dp)
-                .clip(CircleShape)
-                .background(MaterialTheme.colorScheme.onPrimary),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                modifier = Modifier.size(24.dp),
-                painter = painterResource(icon),
-                contentDescription = "facility icon",
-                tint = MaterialTheme.colorScheme.primary
-            )
-        }
-    }
-}
-
-
-@Composable
-fun AppbarDetail(
-    modifier: Modifier = Modifier,
-    text: String,
-    fa: String,
-    en: String,
-    lineColor: Color
-) {
-    Column(modifier = modifier) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(lineColor)
-                .padding(26.dp),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(modifier = Modifier) {
-                Text(
-                    modifier = Modifier
-                        .wrapContentWidth()
-                        .fillMaxWidth(),
-                    text = fa,
-                    style = MaterialTheme.typography.bodyLarge.copy(
-                        fontWeight = FontWeight.W500,
-                        fontSize = 20.sp
-                    ),
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    modifier = Modifier
-                        .wrapContentWidth()
-                        .fillMaxWidth(),
-                    text = en.uppercase(),
-                    style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp),
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-        Row(
-            modifier = Modifier
-                .padding(start = 4.dp, end = 4.dp, bottom = 4.dp)
-                .fillMaxWidth()
-                .height(26.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = text,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.labelMedium,
-                modifier = Modifier.wrapContentWidth()
-            )
-            Icon(
-                modifier = Modifier.size(18.dp),
-                painter = painterResource(R.drawable.location_on_24px),
-                contentDescription = "address"
-            )
-        }
-    }
-}
