@@ -2,6 +2,7 @@ package com.ma.tehro.feature.shortestpath.places
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ma.tehro.common.normalizeWords
 import com.ma.tehro.domain.NearestStation
 import com.ma.tehro.domain.usecase.CategorizedPlaces
 import com.ma.tehro.domain.usecase.GetNearbyPlaceStations
@@ -63,17 +64,26 @@ class PlaceSelectionViewModel @Inject constructor(
     private fun search(query: String) {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }
-            val filtered = if (query.isBlank()) {
+
+            val queryWords = normalizeWords(query)
+
+            val filtered = if (queryWords.isEmpty()) {
                 originalPlaces
             } else {
                 originalPlaces.map { category ->
-                    category.copy(
-                        places = category.places.filter { place ->
-                            place.name.contains(query, ignoreCase = true)
+                    val filteredPlaces = category.places.filter { place ->
+                        val targetWords = normalizeWords(place.name)
+
+                        queryWords.all { queryWord ->
+                            targetWords.any { targetWord ->
+                                targetWord.contains(queryWord)
+                            }
                         }
-                    )
+                    }
+                    category.copy(places = filteredPlaces)
                 }.filter { it.places.isNotEmpty() }
             }
+
             _state.update { it.copy(isLoading = false, places = filtered) }
         }
     }
