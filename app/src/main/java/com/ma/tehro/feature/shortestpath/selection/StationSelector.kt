@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.ui.Appbar
+import com.ma.tehro.common.ui.theme.Red
 import com.ma.tehro.domain.NearestStation
 import com.ma.tehro.feature.shortestpath.selection.components.DaySelectorSheet
 import com.ma.tehro.feature.shortestpath.selection.components.LineChangeDelaySlider
@@ -68,13 +69,13 @@ fun StationSelector(
     val destScale = remember { Animatable(1f) }
 
     val startNodeColor by animateColorAsState(
-        targetValue = if (triggerStartPulse) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.secondary.copy(
+        targetValue = if (triggerStartPulse) Red  else MaterialTheme.colorScheme.secondary.copy(
             alpha = 0.9f
         ),
         animationSpec = tween(durationMillis = 300)
     )
     val destNodeColor by animateColorAsState(
-        targetValue = if (triggerDestPulse) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.secondary.copy(
+        targetValue = if (triggerDestPulse) Red else MaterialTheme.colorScheme.secondary.copy(
             alpha = 0.9f
         ),
         animationSpec = tween(durationMillis = 300)

@@ -19,6 +19,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.ma.tehro.R
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.timelineview.TimelineView
@@ -61,19 +62,19 @@ fun PinableTitle(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = en,
-            style = MaterialTheme.typography.labelSmall.copy(
-                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = .85f)
-            ),
+            text = en.uppercase(),
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onPrimary.copy(alpha = .85f),
+            fontSize = 11.sp,
             modifier = Modifier.weight(1f),
             maxLines = 2,
             textAlign = TextAlign.Start
         )
         Text(
             text = fa,
-            style = MaterialTheme.typography.labelSmall.copy(
-                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = .85f)
-            ),
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.onPrimary.copy(alpha = .85f),
+            fontSize = 12.sp,
             modifier = Modifier.weight(1f),
             maxLines = 2,
             textAlign = TextAlign.End,

@@ -61,6 +61,7 @@ fun PathfinderFloatingToolbar(
                         lazyListState.animateScrollToItem(0)
                     }
                 },
+                colors = IconButtonDefaults.iconButtonColors(contentColor = Color.White)
             ) {
                 Icon(
                     Icons.Filled.ArrowUpward,

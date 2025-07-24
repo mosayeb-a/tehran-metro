@@ -46,7 +46,7 @@ fun DaySelectorSheet(
         DaySelectorBottomSheetContent(
             dayOfWeek = selectedDay,
             onDayOfWeekChangeClick = onDaySelected,
-            onDismiss =onDismiss
+            onDismiss = onDismiss
         )
     }
 }
@@ -62,13 +62,13 @@ fun DaySelectorBottomSheetContent(
 
     val days = remember {
         listOf(
-            Pair("شنبه" to "Saturday", Calendar.SATURDAY),
-            Pair("یکشنبه" to "Sunday", Calendar.SUNDAY),
-            Pair("دوشنبه" to "Monday", Calendar.MONDAY),
-            Pair("سه‌شنبه" to "Tuesday", Calendar.TUESDAY),
-            Pair("چهارشنبه" to "Wednesday", Calendar.WEDNESDAY),
-            Pair("پنج‌شنبه" to "Thursday", Calendar.THURSDAY),
-            Pair("جمعه" to "Friday", Calendar.FRIDAY)
+            Pair("شنبه" to "SATURDAY", Calendar.SATURDAY),
+            Pair("یکشنبه" to "SUNDAY", Calendar.SUNDAY),
+            Pair("دوشنبه" to "MONDAY", Calendar.MONDAY),
+            Pair("سه‌شنبه" to "TUESDAY", Calendar.TUESDAY),
+            Pair("چهارشنبه" to "WEDNESDAY", Calendar.WEDNESDAY),
+            Pair("پنج‌شنبه" to "THURSDAY", Calendar.THURSDAY),
+            Pair("جمعه" to "FRIDAY", Calendar.FRIDAY)
         )
     }
 

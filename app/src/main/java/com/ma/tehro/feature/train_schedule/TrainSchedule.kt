@@ -60,7 +60,6 @@ fun TrainSchedule(
 ) {
     val lineColor = remember { getLineColorByNumber(lineNumber) }
 
-    // quick fix
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -106,7 +105,6 @@ fun TrainSchedule(
                 Message(
                     modifier = Modifier.fillMaxSize(),
                     faMessage = "هیچ زمان‌بندی‌ای برای این ایستگاه ثبت نشده. به‌احتمالِ زیاد، ایستگاه غیرفعال است",
-//                    enMessage = "No schedule is available for this station. It is most likely inactive.",
                     faces = EmptyStatesFaces.sad
                 )
         }
@@ -208,8 +206,7 @@ private fun ScheduleList(
             HorizontalDivider()
 
             LazyColumn(
-                state = lazyListState,//            .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Top)),
-
+                state = lazyListState,
                 contentPadding = PaddingValues(vertical = 8.dp)
             ) {
                 val sectionsToShow = if (selectedType != null) {

@@ -103,7 +103,7 @@ class PathTimeCalculator @Inject constructor(
         stationTimes: Map<String, Double>,
         lineChanges: Int
     ): BilingualName {
-        if (stationTimes.isEmpty()) return BilingualName("0 min", "۰ دقیقه")
+        if (stationTimes.isEmpty()) return BilingualName("0 MIN", "۰ دقیقه")
 
         val times = stationTimes.values
         val first = times.minOrNull() ?: 0.0
@@ -124,7 +124,7 @@ class PathTimeCalculator @Inject constructor(
                 "${h.toFarsiNumber()} ساعت و ${m.toFarsiNumber()} دقیقه"
             )
         } else {
-            BilingualName("$totalMin min", "${totalMin.toFarsiNumber()} دقیقه")
+            BilingualName("$totalMin MIN", "${totalMin.toFarsiNumber()} دقیقه")
         }
     }
 }
