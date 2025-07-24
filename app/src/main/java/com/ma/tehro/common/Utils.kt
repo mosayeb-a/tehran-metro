@@ -195,3 +195,10 @@ inline fun <reified T : ViewModel> NavBackStackEntry.sharedViewModel(navControll
 
     return hiltViewModel(parentEntry)
 }
+
+
+fun normalizeWords(text: String): List<String> {
+    return text.trim()
+        .split("\\s+".toRegex())
+        .map { it.lowercase() }
+}

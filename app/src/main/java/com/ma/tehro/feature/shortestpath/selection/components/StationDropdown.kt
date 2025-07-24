@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.ma.tehro.common.normalizeWords
 import com.ma.tehro.common.timelineview.TimelineView
 import com.ma.tehro.common.timelineview.TimelineView.SingleNode
 import com.ma.tehro.common.ui.BilingualText
@@ -92,10 +93,4 @@ fun StationDropdown(
             }
         }
     )
-}
-
-private fun normalizeWords(text: String): List<String> {
-    return text.trim()
-        .split("\\s+".toRegex())
-        .map { it.lowercase() }
 }
