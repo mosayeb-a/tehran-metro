@@ -1,6 +1,10 @@
 package com.ma.tehro.feature.map.city
 
+import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.net.Uri
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,12 +23,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import com.ma.tehro.R
 import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.osm_map.CameraProperty
@@ -56,7 +62,6 @@ fun StationsMap(
     }
 
     val currentLocation = viewState.currentLocation
-
 
     LaunchedEffect(currentLocation) {
         currentLocation?.let {
@@ -90,7 +95,7 @@ fun StationsMap(
             }
         },
         modifier = Modifier.fillMaxSize(),
-    ) {
+    ) { paddingValues ->
         val context = LocalContext.current
         val mapProperties = remember {
             DefaultMapProperties.copy(
@@ -102,7 +107,6 @@ fun StationsMap(
         }
 
         val overlayManagerState = rememberOverlayManagerState()
-
 
         val stationMarkers = viewState.stations.values.mapNotNull { station ->
             val lat = station.latitude?.toDoubleOrNull()
@@ -121,40 +125,67 @@ fun StationsMap(
             rememberMarkerState(geoPoint = GeoPoint(it.latitude, it.longitude))
         }
 
-        OpenStreetMap(
+        Box(
             modifier = Modifier
-                .padding(it)
-                .fillMaxSize(),
-            cameraState = cameraState,
-            properties = mapProperties,
-            overlayManagerState = overlayManagerState,
-            onMapLongClick = {
-                println(it)
-            },
-            onFirstLoadListener = {},
+                .padding(paddingValues)
+                .fillMaxSize()
         ) {
-            val markerIcon: Drawable? =
-                ContextCompat.getDrawable(context, R.drawable.location_on_24px)
-            stationMarkers.forEachIndexed { index, (_, station) ->
-                Marker(
-                    icon = markerIcon,
-                    state = markerStates[index],
-                    title = createBilingualMessage(fa = station.translations.fa, en = station.name),
-                    infoWindowContent = { data ->
-                        StationInfoWindow(data)
-                    }
-                )
+            OpenStreetMap(
+                modifier = Modifier.fillMaxSize(),
+                cameraState = cameraState,
+                properties = mapProperties,
+                overlayManagerState = overlayManagerState,
+                onMapLongClick = {
+                    println(it)
+                },
+                onFirstLoadListener = {},
+            ) {
+                val markerIcon: Drawable? =
+                    ContextCompat.getDrawable(context, R.drawable.location_on_24px)
+                stationMarkers.forEachIndexed { index, (_, station) ->
+                    Marker(
+                        icon = markerIcon,
+                        state = markerStates[index],
+                        title = createBilingualMessage(
+                            fa = station.translations.fa,
+                            en = station.name
+                        ),
+                        infoWindowContent = { data ->
+                            StationInfoWindow(data)
+                        }
+                    )
+                }
+
+                currentLocationMarkerState?.let { state ->
+                    Marker(
+                        state = state,
+                        title = "Your Location",
+                        infoWindowContent = { data ->
+                            StationInfoWindow(data)
+                        }
+                    )
+                }
             }
 
-            currentLocationMarkerState?.let { state ->
-                Marker(
-                    state = state,
-                    title = "Your Location",
-                    infoWindowContent = { data ->
-                        StationInfoWindow(data)
-                    }
-                )
-            }
+            Text(
+                text = "© OpenStreetMap contributors",
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
+                    .padding(4.dp)
+                    .background(
+                        color = MaterialTheme.colorScheme.background.copy(alpha = 0.6f),
+                        shape = RoundedCornerShape(4.dp)
+                    )
+                    .clickable {
+                        val intent = Intent(
+                            Intent.ACTION_VIEW,
+                            "https://www.openstreetmap.org/copyright".toUri()
+                        )
+                        context.startActivity(intent)
+                    },
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.onBackground
+            )
         }
     }
 }
