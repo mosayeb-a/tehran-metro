@@ -1,6 +1,6 @@
-package com.ma.tehro.feature
+package com.ma.tehro.app
 
-
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
@@ -15,9 +15,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.toArgb
 import androidx.navigation.compose.rememberNavController
-import com.ma.tehro.common.ui.AppSnackbar
 import com.ma.tehro.common.LocationPermissionHandler
 import com.ma.tehro.common.ObserveAsEvents
+import com.ma.tehro.common.ui.AppSnackbar
 import com.ma.tehro.common.ui.UiMessageManager
 import com.ma.tehro.common.ui.theme.DarkGray
 import com.ma.tehro.common.ui.theme.TehroTheme
@@ -34,8 +34,8 @@ class MainActivity : ComponentActivity() {
         locationPermissionHandler = LocationPermissionHandler(this)
 
         enableEdgeToEdge(
-            SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
-            SystemBarStyle.dark(DarkGray.toArgb())
+            SystemBarStyle.Companion.dark(Color.TRANSPARENT),
+            SystemBarStyle.Companion.dark(DarkGray.toArgb())
         )
 
         setContent {

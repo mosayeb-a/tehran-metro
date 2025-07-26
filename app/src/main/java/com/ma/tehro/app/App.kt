@@ -1,4 +1,4 @@
-package com.ma.tehro
+package com.ma.tehro.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
