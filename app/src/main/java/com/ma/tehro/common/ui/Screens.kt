@@ -1,6 +1,7 @@
 package com.ma.tehro.common.ui
 
 import com.ma.tehro.data.Station
+import com.ma.tehro.domain.Step
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -54,7 +55,7 @@ object SubmitFeedbackScreen
  * l: last station of list
  */
 @Serializable
-data class PathDescriptionScreen(val path: List<String>)
+data class PathDescriptionScreen(val steps: List<Step>)
 
 @Serializable
 object OfficialMetroMapScreen

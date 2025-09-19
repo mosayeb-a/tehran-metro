@@ -20,10 +20,10 @@ import com.ma.tehro.common.navTypeOf
 import com.ma.tehro.common.ui.AboutScreen
 import com.ma.tehro.common.ui.LinesScreen
 import com.ma.tehro.common.ui.MapScreen
+import com.ma.tehro.common.ui.NearbyPlaceStationsScreen
 import com.ma.tehro.common.ui.OfficialMetroMapScreen
 import com.ma.tehro.common.ui.PathDescriptionScreen
 import com.ma.tehro.common.ui.PathFinderScreen
-import com.ma.tehro.common.ui.NearbyPlaceStationsScreen
 import com.ma.tehro.common.ui.StationDetailScreen
 import com.ma.tehro.common.ui.StationSelectorScreen
 import com.ma.tehro.common.ui.StationsScreen
@@ -31,6 +31,7 @@ import com.ma.tehro.common.ui.SubmitFeedbackScreen
 import com.ma.tehro.common.ui.SubmitStationInfoScreen
 import com.ma.tehro.common.ui.TrainScheduleScreen
 import com.ma.tehro.data.Station
+import com.ma.tehro.domain.Step
 import com.ma.tehro.feature.about.About
 import com.ma.tehro.feature.detail.StationDetail
 import com.ma.tehro.feature.line.LineViewModel
@@ -41,7 +42,6 @@ import com.ma.tehro.feature.map.city.StationsMap
 import com.ma.tehro.feature.map.city.StationsMapViewModel
 import com.ma.tehro.feature.map.official_pic.OfficialMapPicture
 import com.ma.tehro.feature.shortestpath.guide.PathDescription
-import com.ma.tehro.feature.shortestpath.guide.PathDescriptionViewModel
 import com.ma.tehro.feature.shortestpath.pathfinder.PathFinder
 import com.ma.tehro.feature.shortestpath.pathfinder.PathViewModel
 import com.ma.tehro.feature.shortestpath.places.PlaceSelection
@@ -53,7 +53,6 @@ import com.ma.tehro.feature.submit_suggestion.feedback.SubmitFeedback
 import com.ma.tehro.feature.submit_suggestion.station.SubmitStationInfo
 import com.ma.tehro.feature.train_schedule.TrainSchedule
 import com.ma.tehro.feature.train_schedule.TrainScheduleViewModel
-import kotlin.let
 import kotlin.reflect.KType
 import kotlin.reflect.typeOf
 
@@ -236,12 +235,14 @@ fun AppNavigation(
                 }
             )
         }
-        baseComposable<PathDescriptionScreen> {
-            val viewModel: PathDescriptionViewModel = hiltViewModel(it)
-            val state by viewModel.uiState.collectAsStateWithLifecycle()
+        baseComposable<PathDescriptionScreen>(
+            typeMap = mapOf(typeOf<List<Step>>() to navTypeOf<List<Step>>())
+        ) {
+            val args = it.toRoute<PathDescriptionScreen>()
             PathDescription(
-                viewState = state,
-                onBackClick = { navController.navigateUp() })
+                steps = args.steps,
+                onBackClick = { navController.navigateUp() }
+            )
         }
         baseComposable<SubmitFeedbackScreen> {
             val viewModel: SubmitSuggestionViewModel = hiltViewModel(it)

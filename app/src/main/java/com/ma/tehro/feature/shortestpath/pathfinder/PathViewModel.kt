@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.ma.tehro.common.ui.PathFinderScreen
-import com.ma.tehro.common.fractionToTime
 import com.ma.tehro.data.BilingualName
 import com.ma.tehro.data.repo.PathItem
 import com.ma.tehro.data.repo.PathRepository
+import com.ma.tehro.domain.Step
 import com.ma.tehro.domain.usecase.PathTimeCalculator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -59,26 +59,39 @@ class PathViewModel @Inject constructor(
     }
 
 
-    fun generateGuidSteps(): List<String> {
-        val pathDescription = mutableListOf<String>()
+    fun generateGuidSteps(): List<Step> {
+        val steps = mutableListOf<Step>()
         var firstStation: PathItem.StationItem? = null
         var lastStation: PathItem.StationItem? = null
+        var currentLineTitle: String? = null
         var isFirstSegment = true
 
         _state.value.shortestPath.forEach { item ->
             when (item) {
                 is PathItem.Title -> {
-                    lastStation?.let { pathDescription.add("l: ${it.station.translations.fa}") }
+                    lastStation?.let {
+                        steps.add(
+                            Step.ChangeLine(
+                                stationName = it.station.translations.fa,
+                                newLineTitle = item.fa
+                            )
+                        )
+                    }
                     firstStation = null
                     lastStation = null
-                    pathDescription.add("t: ${item.fa}")
+                    currentLineTitle = item.fa
                 }
 
                 is PathItem.StationItem -> {
                     if (firstStation == null) {
                         firstStation = item
                         if (isFirstSegment) {
-                            pathDescription.add("f: ${item.station.translations.fa}")
+                            steps.add(
+                                Step.FirstStation(
+                                    stationName = item.station.translations.fa,
+                                    lineTitle = currentLineTitle ?: ""
+                                )
+                            )
                             isFirstSegment = false
                         }
                     }
@@ -87,8 +100,10 @@ class PathViewModel @Inject constructor(
             }
         }
 
-        lastStation?.let { pathDescription.add("l: ${it.station.translations.fa}") }
-
-        return pathDescription
+        lastStation?.let {
+            steps.add(Step.LastStation(stationName = it.station.translations.fa))
+        }
+        steps.add(Step.Destination)
+        return steps
     }
 }
