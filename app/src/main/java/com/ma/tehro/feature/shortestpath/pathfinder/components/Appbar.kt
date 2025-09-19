@@ -132,7 +132,8 @@ fun AppbarDetail(
             en = toEn.uppercase(),
             style = MaterialTheme.typography.labelSmall,
             enAlpha = .7f,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            maxLine = 1
         )
         Icon(
             modifier = Modifier
@@ -147,7 +148,8 @@ fun AppbarDetail(
             en = fromEn.uppercase(),
             style = MaterialTheme.typography.labelSmall,
             enAlpha = .7f,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            maxLine = 1
         )
     }
 }
