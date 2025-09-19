@@ -7,22 +7,19 @@
 [<img src="https://github.com/user-attachments/assets/32c2bc23-3cf2-4a83-a65a-72a09da7b5ad" height="50" alt="Get it on Myket"/>](https://myket.ir/app/com.ma.tehro)
 [<img src="https://github.com/user-attachments/assets/af5cf982-da34-455b-b3d2-a48870f1e04c" height="50" alt="Get it on Github"/>](https://github.com/mosayeb-a/tehran-metro/releases)
 
-
-
-<img src="https://github.com/user-attachments/assets/54b32c9f-b7b1-4c4a-8f9a-2867e567fa17" width="150" style="display: inline-block; margin-right: 10px;"/>
-<img src="https://github.com/user-attachments/assets/99d90ad5-6198-4501-991e-1d4844f8111a" width="150" style="display: inline-block; margin-right: 10px;"/>
-<img src="https://github.com/user-attachments/assets/9d76133e-db29-4cd6-83f5-d11112682227" width="150" style="display: inline-block; margin-right: 10px;"/>
-<img src="https://github.com/user-attachments/assets/82ac94a0-f53f-47db-a15e-68598e6b260b" width="150" style="display: inline-block; margin-right: 10px;"/>
-<img src="https://github.com/user-attachments/assets/91f8d39b-8c24-4420-b2fd-d1558a8d6f72" width="150" style="display: inline-block; margin-right: 10px;"/>
-<img src="https://github.com/user-attachments/assets/58a8e994-32bc-4d07-b139-91e88c7a0cba" width="150" style="display: inline-block; margin-right: 10px;"/>
-
-
-<img src="https://github.com/user-attachments/assets/2b698891-b9c2-4079-a9d0-a84126756741" width="150" style="display: inline-block; margin-right: 10px;"/>
-<img src="https://github.com/user-attachments/assets/ed5bd501-ea52-4c57-8ab3-97fb0ff6749a" width="150" style="display: inline-block; margin-right: 10px;"/>
-
-<img src="https://github.com/user-attachments/assets/3b37e083-c3a0-4fe5-a33d-d7e3d96ed787" width="150" style="display: inline-block; margin-right: 10px;"/>
-<img src="https://github.com/user-attachments/assets/1645d33e-d3ed-4d60-b0f2-906e486d6d80" width="150" style="display: inline-block; margin-right: 10px;"/>
-
+<p>
+  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/01_lines.png" width="150">
+  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/02_pathfinder.png" width="150">
+  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/03_station_selection.png" width="150">
+  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/04_detail.png" width="150">
+  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/05_places.png" width="150">
+  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/06_stations.png" width="150">
+  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/07_path_guide.png" width="150">
+  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/08_station_schedule.png" width="150">
+  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/09_map.png" width="150">
+  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/10_station_submission.png" width="150">
+  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/11_feedback.png" width="150">
+</p>
 
 the project is developed using **compose** for building UIs and implements algorithms for optimized route calculations.
 
