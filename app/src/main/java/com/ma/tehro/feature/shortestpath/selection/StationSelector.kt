@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.ui.Appbar
+import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.common.ui.theme.Red
 import com.ma.tehro.domain.NearestStation
 import com.ma.tehro.feature.shortestpath.selection.components.DaySelectorSheet
@@ -69,7 +70,7 @@ fun StationSelector(
     val destScale = remember { Animatable(1f) }
 
     val startNodeColor by animateColorAsState(
-        targetValue = if (triggerStartPulse) Red  else MaterialTheme.colorScheme.secondary.copy(
+        targetValue = if (triggerStartPulse) Red else MaterialTheme.colorScheme.secondary.copy(
             alpha = 0.9f
         ),
         animationSpec = tween(durationMillis = 300)
@@ -141,9 +142,11 @@ fun StationSelector(
                 .fillMaxSize()
         ) {
             LazyColumn(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .drawVerticalScrollbar(lazyListState),
                 contentPadding = it,
-                state = lazyListState
+                state = lazyListState,
             ) {
                 item { Spacer(Modifier.height(28.dp)) }
 

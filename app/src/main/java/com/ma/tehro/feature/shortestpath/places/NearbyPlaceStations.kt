@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material3.HorizontalDivider
@@ -30,6 +31,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.ui.Appbar
+import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.feature.shortestpath.AppSearchBar
 import com.ma.tehro.feature.shortestpath.selection.components.NearestStationSheet
 
@@ -43,6 +45,7 @@ fun PlaceSelection(
     onBack: () -> Unit,
 ) {
     var showBottomSheet by remember { mutableStateOf(false) }
+    val lazyListState = rememberLazyListState()
 
     Scaffold(
         modifier = modifier,
@@ -75,7 +78,8 @@ fun PlaceSelection(
         LazyColumn(
             modifier = Modifier
                 .padding(top = 166.dp)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .drawVerticalScrollbar(lazyListState),
             contentPadding = PaddingValues(
                 bottom = paddingValues.calculateBottomPadding(),
                 start = paddingValues.calculateLeftPadding(LayoutDirection.Rtl),

@@ -1,0 +1,1815 @@
+<svg version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 120 120">
+    <style>text { font: 1px Helvetica; font-weight: 600; white-space: pre; dominant-baseline:
+        central; } line { stroke-width: 1; fill: none; stroke-linecap: round; stroke-linejoin:
+        round; } .c0 { stroke: #ed3833 } .c1 { stroke: #ed71a7 } .c2 { stroke: #3b885d } .c3 {
+        stroke: #1255a0 } .c4 { stroke: #4bbdef } .c5 { stroke: #fbd349 } .c6 { stroke: #882c81 }
+    </style>
+    <defs>
+        <g id="wm-xf">
+            <circle
+                r="1.2"
+                fill="#000" />
+            <circle
+                r="0.9"
+                fill="#fff" />
+            <circle
+                r="0.6"
+                fill="#000" />
+            <circle
+                r="0.3"
+                fill="#fff" />
+        </g>
+        <g id="wm">
+            <circle
+                r="0.6"
+                fill="#000" />
+            <circle
+                r="0.3"
+                fill="#fff" />
+        </g>
+    </defs>
+    <line
+        class="c0"
+        x1="2"
+        y1="113"
+        x2="52"
+        y2="113" />
+    <line
+        class="c0"
+        x1="70"
+        y1="25"
+        x2="76"
+        y2="19" />
+    <line
+        class="c0"
+        x1="52"
+        y1="113"
+        x2="60"
+        y2="105" />
+    <line
+        class="c0"
+        x1="69"
+        y1="105"
+        x2="70"
+        y2="104" />
+    <line
+        class="c0"
+        x1="6"
+        y1="74"
+        x2="10"
+        y2="74" />
+    <line
+        class="c0"
+        x1="70"
+        y1="62"
+        x2="70"
+        y2="113" />
+    <line
+        class="c0"
+        x1="70"
+        y1="54"
+        x2="70"
+        y2="60" />
+    <line
+        class="c0"
+        x1="69"
+        y1="105"
+        x2="70"
+        y2="106" />
+    <line
+        class="c0"
+        x1="76"
+        y1="3"
+        x2="76"
+        y2="19" />
+    <line
+        class="c0"
+        x1="70"
+        y1="25"
+        x2="70"
+        y2="52" />
+    <line
+        class="c0"
+        x1="60"
+        y1="105"
+        x2="70"
+        y2="105" />
+    <circle
+        cx="12"
+        cy="74"
+        r="1"
+        fill="#ed3833" />
+    <line
+        class="c1"
+        x1="71"
+        y1="45"
+        x2="85"
+        y2="45" />
+    <line
+        class="c1"
+        x1="86"
+        y1="62"
+        x2="86"
+        y2="72" />
+    <line
+        class="c1"
+        x1="86"
+        y1="105"
+        x2="94"
+        y2="113" />
+    <line
+        class="c1"
+        x1="6"
+        y1="89"
+        x2="10"
+        y2="89" />
+    <line
+        class="c1"
+        x1="53"
+        y1="45"
+        x2="57"
+        y2="45" />
+    <line
+        class="c1"
+        x1="41"
+        y1="33"
+        x2="53"
+        y2="45" />
+    <line
+        class="c1"
+        x1="86"
+        y1="74"
+        x2="86"
+        y2="105" />
+    <line
+        class="c1"
+        x1="19"
+        y1="21"
+        x2="31"
+        y2="33" />
+    <line
+        class="c1"
+        x1="85"
+        y1="45"
+        x2="86"
+        y2="46" />
+    <line
+        class="c1"
+        x1="31"
+        y1="33"
+        x2="41"
+        y2="33" />
+    <line
+        class="c1"
+        x1="86"
+        y1="46"
+        x2="86"
+        y2="60" />
+    <line
+        class="c1"
+        x1="59"
+        y1="45"
+        x2="69"
+        y2="45" />
+    <line
+        class="c1"
+        x1="2"
+        y1="21"
+        x2="19"
+        y2="21" />
+    <circle
+        cx="12"
+        cy="89"
+        r="1"
+        fill="#ed71a7" />
+    <line
+        class="c2"
+        x1="2"
+        y1="39"
+        x2="26"
+        y2="39" />
+    <line
+        class="c2"
+        x1="6"
+        y1="86"
+        x2="10"
+        y2="86" />
+    <circle
+        cx="12"
+        cy="86"
+        r="1"
+        fill="#3b885d" />
+    <line
+        class="c3"
+        x1="79"
+        y1="52"
+        x2="95"
+        y2="36" />
+    <line
+        class="c3"
+        x1="6"
+        y1="77"
+        x2="10"
+        y2="77" />
+    <line
+        class="c3"
+        x1="49"
+        y1="61"
+        x2="70"
+        y2="61" />
+    <line
+        class="c3"
+        x1="70"
+        y1="61"
+        x2="77"
+        y2="54" />
+    <line
+        class="c3"
+        x1="27"
+        y1="39"
+        x2="49"
+        y2="61" />
+    <line
+        class="c3"
+        x1="95"
+        y1="36"
+        x2="112"
+        y2="36" />
+    <circle
+        cx="12"
+        cy="77"
+        r="1"
+        fill="#1255a0" />
+    <line
+        class="c4"
+        x1="71"
+        y1="37"
+        x2="78"
+        y2="37" />
+    <line
+        class="c4"
+        x1="58"
+        y1="54"
+        x2="58"
+        y2="60" />
+    <line
+        class="c4"
+        x1="91"
+        y1="10"
+        x2="95"
+        y2="10" />
+    <line
+        class="c4"
+        x1="58"
+        y1="41"
+        x2="62"
+        y2="37" />
+    <line
+        class="c4"
+        x1="95"
+        y1="10"
+        x2="100"
+        y2="15" />
+    <line
+        class="c4"
+        x1="47"
+        y1="89"
+        x2="58"
+        y2="78" />
+    <line
+        class="c4"
+        x1="44"
+        y1="104"
+        x2="47"
+        y2="101" />
+    <line
+        class="c4"
+        x1="58"
+        y1="46"
+        x2="58"
+        y2="52" />
+    <line
+        class="c4"
+        x1="58"
+        y1="74"
+        x2="58"
+        y2="78" />
+    <line
+        class="c4"
+        x1="78"
+        y1="37"
+        x2="100"
+        y2="15" />
+    <line
+        class="c4"
+        x1="47"
+        y1="89"
+        x2="47"
+        y2="101" />
+    <line
+        class="c4"
+        x1="58"
+        y1="41"
+        x2="58"
+        y2="44" />
+    <line
+        class="c4"
+        x1="100"
+        y1="15"
+        x2="112"
+        y2="15" />
+    <line
+        class="c4"
+        x1="62"
+        y1="37"
+        x2="69"
+        y2="37" />
+    <line
+        class="c4"
+        x1="6"
+        y1="80"
+        x2="10"
+        y2="80" />
+    <line
+        class="c4"
+        x1="58"
+        y1="62"
+        x2="58"
+        y2="72" />
+    <circle
+        cx="12"
+        cy="80"
+        r="1"
+        fill="#4bbdef" />
+    <line
+        class="c5"
+        x1="23"
+        y1="40"
+        x2="23"
+        y2="47" />
+    <line
+        class="c5"
+        x1="19"
+        y1="51"
+        x2="23"
+        y2="47" />
+    <line
+        class="c5"
+        x1="19"
+        y1="51"
+        x2="19"
+        y2="63" />
+    <line
+        class="c5"
+        x1="78"
+        y1="53"
+        x2="86"
+        y2="61" />
+    <line
+        class="c5"
+        x1="12"
+        y1="22"
+        x2="12"
+        y2="28" />
+    <line
+        class="c5"
+        x1="6"
+        y1="83"
+        x2="10"
+        y2="83" />
+    <line
+        class="c5"
+        x1="19"
+        y1="52"
+        x2="20"
+        y2="53" />
+    <line
+        class="c5"
+        x1="86"
+        y1="61"
+        x2="112"
+        y2="61" />
+    <line
+        class="c5"
+        x1="42"
+        y1="53"
+        x2="78"
+        y2="53" />
+    <line
+        class="c5"
+        x1="12"
+        y1="15"
+        x2="12"
+        y2="20" />
+    <line
+        class="c5"
+        x1="12"
+        y1="28"
+        x2="22"
+        y2="38" />
+    <line
+        class="c5"
+        x1="19"
+        y1="54"
+        x2="20"
+        y2="53" />
+    <line
+        class="c5"
+        x1="19"
+        y1="53"
+        x2="40"
+        y2="53" />
+    <circle
+        cx="12"
+        cy="83"
+        r="1"
+        fill="#fbd349" />
+    <line
+        class="c6"
+        x1="46"
+        y1="54"
+        x2="46"
+        y2="57" />
+    <line
+        class="c6"
+        x1="46"
+        y1="67"
+        x2="52"
+        y2="73" />
+    <line
+        class="c6"
+        x1="41"
+        y1="34"
+        x2="41"
+        y2="45" />
+    <line
+        class="c6"
+        x1="71"
+        y1="73"
+        x2="112"
+        y2="73" />
+    <line
+        class="c6"
+        x1="46"
+        y1="50"
+        x2="46"
+        y2="52" />
+    <line
+        class="c6"
+        x1="52"
+        y1="73"
+        x2="69"
+        y2="73" />
+    <line
+        class="c6"
+        x1="41"
+        y1="45"
+        x2="46"
+        y2="50" />
+    <line
+        class="c6"
+        x1="41"
+        y1="3"
+        x2="41"
+        y2="32" />
+    <line
+        class="c6"
+        x1="46"
+        y1="59"
+        x2="46"
+        y2="67" />
+    <line
+        class="c6"
+        x1="6"
+        y1="92"
+        x2="10"
+        y2="92" />
+    <circle
+        cx="58"
+        cy="45"
+        r="1"
+        fill="#882c81" />
+    <circle
+        cx="12"
+        cy="92"
+        r="1"
+        fill="#882c81" />
+
+    <use
+        x="2"
+        y="21"
+        href="#wm" />
+    <text
+        x="2.75"
+        y="21"
+        transform="rotate(-45 2, 21)">كوهسار
+    </text>
+    <use
+        x="2"
+        y="39"
+        href="#wm" />
+    <text
+        x="2.75"
+        y="39"
+        transform="rotate(-45 2, 39)">شهيد سپهبد قاسم سليمانى
+    </text>
+    <use
+        x="2"
+        y="113"
+        href="#wm" />
+    <text
+        x="2.75"
+        y="113"
+        transform="rotate(-45 2, 113)">شهر پرند
+    </text>
+    <use
+        x="4"
+        y="39"
+        href="#wm" />
+    <text
+        x="4.75"
+        y="39"
+        transform="rotate(-45 4, 39)">گلشهر
+    </text>
+    <use
+        x="6"
+        y="21"
+        href="#wm" />
+    <text
+        x="6.75"
+        y="21"
+        transform="rotate(-45 6, 21)">شهداي كن
+    </text>
+    <use
+        x="6"
+        y="39"
+        href="#wm" />
+    <text
+        x="6.75"
+        y="39"
+        transform="rotate(-45 6, 39)">مهحمد شهر
+    </text>
+    <use
+        x="8"
+        y="39"
+        href="#wm" />
+    <text
+        x="8.75"
+        y="39"
+        transform="rotate(-45 8, 39)">كرج
+    </text>
+    <use
+        x="9"
+        y="21"
+        href="#wm" />
+    <text
+        x="9.75"
+        y="21"
+        transform="rotate(-45 9, 21)">شهر زيبا
+    </text>
+    <use
+        x="10"
+        y="39"
+        href="#wm" />
+    <text
+        x="10.75"
+        y="39"
+        transform="rotate(-45 10, 39)">اتمسفر
+    </text>
+    <use
+        x="12"
+        y="15"
+        href="#wm" />
+    <text
+        x="11.25"
+        y="15"
+        text-anchor="end">چهارباغ
+    </text>
+    <use
+        x="12"
+        y="21"
+        href="#wm-xf" />
+    <text
+        x="13.5"
+        y="21"
+        transform="rotate(-45 12, 21)">آيتالله كاشانى
+    </text>
+    <use
+        x="12"
+        y="28"
+        href="#wm" />
+    <text
+        x="11.25"
+        y="28"
+        text-anchor="end">علامه جعفری
+    </text>
+    <use
+        x="12"
+        y="39"
+        href="#wm" />
+    <text
+        x="12.75"
+        y="39"
+        transform="rotate(-45 12, 39)">گرم دره
+    </text>
+    <use
+        x="12"
+        y="74"
+        href="#wm" />
+    <text
+        x="12.75"
+        y="74">خط ١
+    </text>
+    <use
+        x="12"
+        y="77"
+        href="#wm" />
+    <text
+        x="12.75"
+        y="77">خط ٢
+    </text>
+    <use
+        x="12"
+        y="80"
+        href="#wm" />
+    <text
+        x="12.75"
+        y="80">خط ٣
+    </text>
+    <use
+        x="12"
+        y="83"
+        href="#wm" />
+    <text
+        x="12.75"
+        y="83">خط ۴
+    </text>
+    <use
+        x="12"
+        y="86"
+        href="#wm" />
+    <text
+        x="12.75"
+        y="86">خط ٥
+    </text>
+    <use
+        x="12"
+        y="89"
+        href="#wm" />
+    <text
+        x="12.75"
+        y="89">خط ۶
+    </text>
+    <use
+        x="12"
+        y="92"
+        href="#wm" />
+    <text
+        x="12.75"
+        y="92">خط ٧
+    </text>
+    <use
+        x="14"
+        y="39"
+        href="#wm" />
+    <text
+        x="14.75"
+        y="39"
+        transform="rotate(-45 14, 39)">ورد آورد
+    </text>
+    <use
+        x="15"
+        y="21"
+        href="#wm" />
+    <text
+        x="15.75"
+        y="21"
+        transform="rotate(-45 15, 21)">شهيد ستارى
+    </text>
+    <use
+        x="16"
+        y="39"
+        href="#wm" />
+    <text
+        x="16.75"
+        y="39"
+        transform="rotate(-45 16, 39)">ايران خدرو
+    </text>
+    <use
+        x="18"
+        y="39"
+        href="#wm" />
+    <text
+        x="18.75"
+        y="39"
+        transform="rotate(-45 18, 39)">چيتگر
+    </text>
+    <use
+        x="19"
+        y="21"
+        href="#wm" />
+    <text
+        x="19.75"
+        y="21"
+        transform="rotate(-45 19, 21)">شهيد اشرفى اصفهانى
+    </text>
+    <use
+        x="19"
+        y="53"
+        href="#wm-xf" />
+    <text
+        x="17.5"
+        y="53"
+        text-anchor="end">بيمه
+    </text>
+    <use
+        x="19"
+        y="58"
+        href="#wm" />
+    <text
+        x="18.25"
+        y="58"
+        text-anchor="end">پايانه ١ و ٢ فرودگاه مهرآباد
+    </text>
+    <use
+        x="19"
+        y="63"
+        href="#wm" />
+    <text
+        x="18.25"
+        y="63"
+        text-anchor="end">پايانه ۴ و ۶ فرودگاه مهرآباد
+    </text>
+    <use
+        x="20"
+        y="39"
+        href="#wm" />
+    <text
+        x="20.75"
+        y="39"
+        transform="rotate(-45 20, 39)">ورزشگاه آرادى
+    </text>
+    <use
+        x="23"
+        y="25"
+        href="#wm" />
+    <text
+        x="23.75"
+        y="25"
+        transform="rotate(-45 23, 25)">يادگار امام
+    </text>
+    <use
+        x="23"
+        y="39"
+        href="#wm-xf" />
+    <text
+        x="24.5"
+        y="39"
+        transform="rotate(-45 23, 39)">ارم سبز
+    </text>
+    <use
+        x="23"
+        y="47"
+        href="#wm" />
+    <text
+        x="22.25"
+        y="47"
+        text-anchor="end">شهرک اكباتان
+    </text>
+    <use
+        x="25"
+        y="53"
+        href="#wm" />
+    <text
+        x="24.25"
+        y="53"
+        text-anchor="end"
+        transform="rotate(-45 25, 53)">ميدان آزادى
+    </text>
+    <use
+        x="27"
+        y="29"
+        href="#wm" />
+    <text
+        x="27.75"
+        y="29"
+        transform="rotate(-45 27, 29)">مرزداران
+    </text>
+    <use
+        x="27"
+        y="39"
+        href="#wm-xf" />
+    <text
+        x="28.5"
+        y="39">تهران (صادقيه)
+    </text>
+    <use
+        x="27"
+        y="113"
+        href="#wm" />
+    <text
+        x="27.75"
+        y="113"
+        transform="rotate(-45 27, 113)">فرودگاه امام خميني
+    </text>
+    <use
+        x="30"
+        y="53"
+        href="#wm" />
+    <text
+        x="29.25"
+        y="53"
+        text-anchor="end"
+        transform="rotate(-45 30, 53)">استاد معين
+    </text>
+    <use
+        x="31"
+        y="33"
+        href="#wm" />
+    <text
+        x="31.75"
+        y="33"
+        transform="rotate(-45 31, 33)">شهرک آزمايش
+    </text>
+    <use
+        x="31"
+        y="43"
+        href="#wm" />
+    <text
+        x="30.25"
+        y="43"
+        text-anchor="end">طرشت
+    </text>
+    <use
+        x="35"
+        y="47"
+        href="#wm" />
+    <text
+        x="34.25"
+        y="47"
+        text-anchor="end">دنشگاه شريف
+    </text>
+    <use
+        x="35"
+        y="53"
+        href="#wm" />
+    <text
+        x="34.25"
+        y="53"
+        text-anchor="end"
+        transform="rotate(-45 35, 53)">دكتر حبيب الله
+    </text>
+    <use
+        x="41"
+        y="3"
+        href="#wm" />
+    <text
+        x="41.75"
+        y="3">ميدان كتاب
+    </text>
+    <use
+        x="41"
+        y="9"
+        href="#wm" />
+    <text
+        x="41.75"
+        y="9">شهيد دادمات
+    </text>
+    <use
+        x="41"
+        y="15"
+        href="#wm" />
+    <text
+        x="41.75"
+        y="15">ميدان صنعت
+    </text>
+    <use
+        x="41"
+        y="21"
+        href="#wm" />
+    <text
+        x="41.75"
+        y="21">برج ميلاد تهران
+    </text>
+    <use
+        x="41"
+        y="27"
+        href="#wm" />
+    <text
+        x="41.75"
+        y="27">بوستان گفتگو
+    </text>
+    <use
+        x="41"
+        y="33"
+        href="#wm-xf" />
+    <text
+        x="42.5"
+        y="33">دانشگاه تربيت مدرس
+    </text>
+    <use
+        x="41"
+        y="45"
+        href="#wm" />
+    <text
+        x="41.75"
+        y="45">مدافعان سلامت
+    </text>
+    <use
+        x="41"
+        y="53"
+        href="#wm-xf" />
+    <text
+        x="42.5"
+        y="53"
+        transform="rotate(-45 41, 53)">شادمان
+    </text>
+    <use
+        x="44"
+        y="104"
+        href="#wm" />
+    <text
+        x="43.25"
+        y="104"
+        text-anchor="end">آزادگان
+    </text>
+    <use
+        x="46"
+        y="53"
+        href="#wm-xf" />
+    <text
+        x="47.5"
+        y="53"
+        transform="rotate(45 46, 53)">توحيد
+    </text>
+    <use
+        x="46"
+        y="58"
+        href="#wm-xf" />
+    <text
+        x="44.5"
+        y="58"
+        text-anchor="end">شهيد نواب صفوى
+    </text>
+    <use
+        x="46"
+        y="63"
+        href="#wm" />
+    <text
+        x="45.25"
+        y="63"
+        text-anchor="end">رودكى
+    </text>
+    <use
+        x="46"
+        y="67"
+        href="#wm" />
+    <text
+        x="45.25"
+        y="67"
+        text-anchor="end">كميل
+    </text>
+    <use
+        x="47"
+        y="89"
+        href="#wm" />
+    <text
+        x="46.25"
+        y="89"
+        text-anchor="end">زمزم
+    </text>
+    <use
+        x="47"
+        y="93"
+        href="#wm" />
+    <text
+        x="46.25"
+        y="93"
+        text-anchor="end">شهرک شريعتى
+    </text>
+    <use
+        x="47"
+        y="97"
+        href="#wm" />
+    <text
+        x="46.25"
+        y="97"
+        text-anchor="end">عبدل آباد
+    </text>
+    <use
+        x="47"
+        y="101"
+        href="#wm" />
+    <text
+        x="46.25"
+        y="101"
+        text-anchor="end">نعمت آباد
+    </text>
+    <use
+        x="49"
+        y="61"
+        href="#wm" />
+    <text
+        x="49.75"
+        y="61"
+        transform="rotate(45 49, 61)">ميدان حر
+    </text>
+    <use
+        x="49"
+        y="70"
+        href="#wm" />
+    <text
+        x="48.25"
+        y="70"
+        text-anchor="end">بريانک
+    </text>
+    <use
+        x="52"
+        y="53"
+        href="#wm" />
+    <text
+        x="51.25"
+        y="53"
+        text-anchor="end"
+        transform="rotate(45 52, 53)">ميدان انقلاب اسلامى
+    </text>
+    <use
+        x="52"
+        y="73"
+        href="#wm" />
+    <text
+        x="51.25"
+        y="73"
+        text-anchor="end">هلال احمر
+    </text>
+    <use
+        x="52"
+        y="84"
+        href="#wm" />
+    <text
+        x="51.25"
+        y="84"
+        text-anchor="end">جواديه
+    </text>
+    <use
+        x="52"
+        y="113"
+        href="#wm" />
+    <text
+        x="52.75"
+        y="113">واروان
+    </text>
+    <use
+        x="54"
+        y="61"
+        href="#wm" />
+    <text
+        x="54.75"
+        y="61"
+        transform="rotate(-45 54, 61)">دانشگاه امام على
+    </text>
+    <use
+        x="58"
+        y="45"
+        href="#wm-xf" />
+    <text
+        x="56.5"
+        y="45"
+        text-anchor="end"
+        transform="rotate(45 58, 45)">ميدان حضرت ولى عصر
+    </text>
+    <use
+        x="58"
+        y="53"
+        href="#wm-xf" />
+    <text
+        x="59.5"
+        y="53"
+        transform="rotate(-45 58, 53)">تئاتر شهر
+    </text>
+    <use
+        x="58"
+        y="67"
+        href="#wm" />
+    <text
+        x="58.75"
+        y="67">منيريه
+    </text>
+    <use
+        x="58"
+        y="73"
+        href="#wm-xf" />
+    <text
+        x="59.5"
+        y="73"
+        transform="rotate(-45 58, 73)">مهديه
+    </text>
+    <use
+        x="58"
+        y="78"
+        href="#wm" />
+    <text
+        x="57.25"
+        y="78"
+        text-anchor="end">راه آهن
+    </text>
+    <use
+        x="59"
+        y="40"
+        href="#wm" />
+    <text
+        x="58.25"
+        y="40"
+        text-anchor="end"
+        transform="rotate(45 59, 40)">ميدان جهاد
+    </text>
+    <use
+        x="60"
+        y="105"
+        href="#wm" />
+    <text
+        x="59.25"
+        y="105"
+        text-anchor="end">نمايشگاه شهر آفتاب
+    </text>
+    <use
+        x="62"
+        y="37"
+        href="#wm" />
+    <text
+        x="61.25"
+        y="37"
+        text-anchor="end"
+        transform="rotate(45 62, 37)">ميرزاى شرازى
+    </text>
+    <use
+        x="64"
+        y="53"
+        href="#wm" />
+    <text
+        x="64.75"
+        y="53"
+        transform="rotate(-45 64, 53)">فردوسى
+    </text>
+    <use
+        x="64"
+        y="61"
+        href="#wm" />
+    <text
+        x="63.25"
+        y="61"
+        text-anchor="end"
+        transform="rotate(-45 64, 61)">حسن آباد
+    </text>
+    <use
+        x="70"
+        y="25"
+        href="#wm" />
+    <text
+        x="69.25"
+        y="25"
+        text-anchor="end">شهيد حقانى
+    </text>
+    <use
+        x="70"
+        y="29"
+        href="#wm" />
+    <text
+        x="69.25"
+        y="29"
+        text-anchor="end">شهيد همت
+    </text>
+    <use
+        x="70"
+        y="33"
+        href="#wm" />
+    <text
+        x="69.25"
+        y="33"
+        text-anchor="end">مصلى امام خمينى
+    </text>
+    <use
+        x="70"
+        y="37"
+        href="#wm-xf" />
+    <text
+        x="71.5"
+        y="37"
+        transform="rotate(-45 70, 37)">شهيد بهشتى
+    </text>
+    <use
+        x="70"
+        y="41"
+        href="#wm" />
+    <text
+        x="69.25"
+        y="41"
+        text-anchor="end">شهيد مفتح
+    </text>
+    <use
+        x="70"
+        y="45"
+        href="#wm-xf" />
+    <text
+        x="71.5"
+        y="45"
+        transform="rotate(-45 70, 45)">شهداى هتم تير
+    </text>
+    <use
+        x="70"
+        y="49"
+        href="#wm" />
+    <text
+        x="70.75"
+        y="49">طالقانى
+    </text>
+    <use
+        x="70"
+        y="53"
+        href="#wm-xf" />
+    <text
+        x="68.5"
+        y="53"
+        text-anchor="end"
+        transform="rotate(-45 70, 53)">دروازه دولت
+    </text>
+    <use
+        x="70"
+        y="57"
+        href="#wm" />
+    <text
+        x="70.75"
+        y="57"
+        transform="rotate(-45 70, 57)">سعيدى
+    </text>
+    <use
+        x="70"
+        y="61"
+        href="#wm-xf" />
+    <text
+        x="71.5"
+        y="61">امام خميني
+    </text>
+    <use
+        x="70"
+        y="65"
+        href="#wm" />
+    <text
+        x="70.75"
+        y="65">پانزده خرداد
+    </text>
+    <use
+        x="70"
+        y="69"
+        href="#wm" />
+    <text
+        x="70.75"
+        y="69">خيام
+    </text>
+    <use
+        x="70"
+        y="73"
+        href="#wm-xf" />
+    <text
+        x="68.5"
+        y="73"
+        text-anchor="end"
+        transform="rotate(-45 70, 73)">ميدان محمدية
+    </text>
+    <use
+        x="70"
+        y="77"
+        href="#wm" />
+    <text
+        x="70.75"
+        y="77">شوش
+    </text>
+    <use
+        x="70"
+        y="81"
+        href="#wm" />
+    <text
+        x="70.75"
+        y="81">پايانه جنوب
+    </text>
+    <use
+        x="70"
+        y="85"
+        href="#wm" />
+    <text
+        x="70.75"
+        y="85">شهيد بخارايى
+    </text>
+    <use
+        x="70"
+        y="89"
+        href="#wm" />
+    <text
+        x="70.75"
+        y="89">على آباد
+    </text>
+    <use
+        x="70"
+        y="93"
+        href="#wm" />
+    <text
+        x="70.75"
+        y="93">جوانمرد قصاب
+    </text>
+    <use
+        x="70"
+        y="97"
+        href="#wm" />
+    <text
+        x="70.75"
+        y="97">شهر رى
+    </text>
+    <use
+        x="70"
+        y="101"
+        href="#wm" />
+    <text
+        x="70.75"
+        y="101">پالايشگاه
+    </text>
+    <use
+        x="70"
+        y="105"
+        href="#wm-xf" />
+    <text
+        x="71.5"
+        y="105">شهرد-باقر شهر
+    </text>
+    <use
+        x="70"
+        y="109"
+        href="#wm" />
+    <text
+        x="70.75"
+        y="109">حرم مطهر امام خميني
+    </text>
+    <use
+        x="70"
+        y="113"
+        href="#wm" />
+    <text
+        x="70.75"
+        y="113">كهريزک
+    </text>
+    <use
+        x="73"
+        y="22"
+        href="#wm" />
+    <text
+        x="72.25"
+        y="22"
+        text-anchor="end">ميرداماد
+    </text>
+    <use
+        x="73"
+        y="58"
+        href="#wm" />
+    <text
+        x="73.75"
+        y="58">ملت
+    </text>
+    <use
+        x="75"
+        y="56"
+        href="#wm" />
+    <text
+        x="75.75"
+        y="56">بهارستان
+    </text>
+    <use
+        x="75"
+        y="73"
+        href="#wm" />
+    <text
+        x="75.75"
+        y="73"
+        transform="rotate(-45 75, 73)">مولوى
+    </text>
+    <use
+        x="76"
+        y="3"
+        href="#wm" />
+    <text
+        x="76.75"
+        y="3">تجريش
+    </text>
+    <use
+        x="76"
+        y="7"
+        href="#wm" />
+    <text
+        x="76.75"
+        y="7">قيتريه
+    </text>
+    <use
+        x="76"
+        y="11"
+        href="#wm" />
+    <text
+        x="76.75"
+        y="11">شهيد صدر
+    </text>
+    <use
+        x="76"
+        y="15"
+        href="#wm" />
+    <text
+        x="76.75"
+        y="15">قلهک
+    </text>
+    <use
+        x="76"
+        y="19"
+        href="#wm" />
+    <text
+        x="76.75"
+        y="19">دكتر سريعتى
+    </text>
+    <use
+        x="78"
+        y="37"
+        href="#wm" />
+    <text
+        x="78.75"
+        y="37">سهرذردى
+    </text>
+    <use
+        x="78"
+        y="53"
+        href="#wm-xf" />
+    <text
+        x="79.5"
+        y="53">دروازه شميران
+    </text>
+    <use
+        x="81"
+        y="34"
+        href="#wm" />
+    <text
+        x="81.75"
+        y="34">شهيد قدوسى
+    </text>
+    <use
+        x="81"
+        y="73"
+        href="#wm" />
+    <text
+        x="80.25"
+        y="73"
+        text-anchor="end"
+        transform="rotate(-45 81, 73)">ميدانن قيام
+    </text>
+    <use
+        x="84"
+        y="31"
+        href="#wm" />
+    <text
+        x="84.75"
+        y="31">شهيد صياد شيرازى
+    </text>
+    <use
+        x="86"
+        y="45"
+        href="#wm-xf" />
+    <text
+        x="87.5"
+        y="45">امام حسين
+    </text>
+    <use
+        x="86"
+        y="61"
+        href="#wm-xf" />
+    <text
+        x="87.5"
+        y="61"
+        transform="rotate(-45 86, 61)">ميدان شهدا
+    </text>
+    <use
+        x="86"
+        y="67"
+        href="#wm" />
+    <text
+        x="86.75"
+        y="67">امير كبير
+    </text>
+    <use
+        x="86"
+        y="77"
+        href="#wm" />
+    <text
+        x="86.75"
+        y="77">ميدان خراسان
+    </text>
+    <use
+        x="86"
+        y="81"
+        href="#wm" />
+    <text
+        x="86.75"
+        y="81">شهيد رضايى
+    </text>
+    <use
+        x="86"
+        y="85"
+        href="#wm" />
+    <text
+        x="86.75"
+        y="85">نعثت
+    </text>
+    <use
+        x="86"
+        y="89"
+        href="#wm" />
+    <text
+        x="86.75"
+        y="89">كيان شهر
+    </text>
+    <use
+        x="86"
+        y="95"
+        href="#wm" />
+    <text
+        x="86.75"
+        y="95">دولت آباد
+    </text>
+    <use
+        x="86"
+        y="100"
+        href="#wm" />
+    <text
+        x="86.75"
+        y="100">چشمه على
+    </text>
+    <use
+        x="86"
+        y="105"
+        href="#wm" />
+    <text
+        x="86.75"
+        y="105">ابن بابويه
+    </text>
+    <use
+        x="87"
+        y="28"
+        href="#wm" />
+    <text
+        x="87.75"
+        y="28">خواجه عندالله انصارى
+    </text>
+    <use
+        x="89"
+        y="42"
+        href="#wm" />
+    <text
+        x="89.75"
+        y="42">شهيد مدنى
+    </text>
+    <use
+        x="90"
+        y="25"
+        href="#wm" />
+    <text
+        x="90.75"
+        y="25">شهيد زين الدين
+    </text>
+    <use
+        x="90"
+        y="109"
+        href="#wm" />
+    <text
+        x="90.75"
+        y="109">ميدان حضرت عبد العظيم
+    </text>
+    <use
+        x="91"
+        y="10"
+        href="#wm" />
+    <text
+        x="90.25"
+        y="10"
+        text-anchor="end">شهید باهنر
+    </text>
+    <use
+        x="91"
+        y="40"
+        href="#wm" />
+    <text
+        x="91.75"
+        y="40">سبلان
+    </text>
+    <use
+        x="91"
+        y="73"
+        href="#wm" />
+    <text
+        x="91.75"
+        y="73"
+        transform="rotate(-45 91, 73)">دولاب
+    </text>
+    <use
+        x="92"
+        y="61"
+        href="#wm" />
+    <text
+        x="92.75"
+        y="61"
+        transform="rotate(-45 92, 61)">ابن سينا
+    </text>
+    <use
+        x="93"
+        y="22"
+        href="#wm" />
+    <text
+        x="93.75"
+        y="22">ميدان هروى
+    </text>
+    <use
+        x="93"
+        y="38"
+        href="#wm" />
+    <text
+        x="93.75"
+        y="38">فدک
+    </text>
+    <use
+        x="94"
+        y="113"
+        href="#wm" />
+    <text
+        x="94.75"
+        y="113">حرم حضرت عبد العظيم
+    </text>
+    <use
+        x="95"
+        y="36"
+        href="#wm" />
+    <text
+        x="94.25"
+        y="36"
+        text-anchor="end">جانبازان
+    </text>
+    <use
+        x="96"
+        y="11"
+        href="#wm" />
+    <text
+        x="96.75"
+        y="11">شهران
+    </text>
+    <use
+        x="96"
+        y="19"
+        href="#wm" />
+    <text
+        x="96.75"
+        y="19">حسين آباد
+    </text>
+    <use
+        x="97"
+        y="61"
+        href="#wm" />
+    <text
+        x="97.75"
+        y="61"
+        transform="rotate(-45 97, 61)">پيروزى
+    </text>
+    <use
+        x="98"
+        y="36"
+        href="#wm" />
+    <text
+        x="98.75"
+        y="36"
+        transform="rotate(-45 98, 36)">سرسبز
+    </text>
+    <use
+        x="98"
+        y="73"
+        href="#wm" />
+    <text
+        x="98.75"
+        y="73"
+        transform="rotate(-45 98, 73)">آهنگ
+    </text>
+    <use
+        x="100"
+        y="15"
+        href="#wm-xf" />
+    <text
+        x="98.5"
+        y="15"
+        text-anchor="end">نوبنياد
+    </text>
+    <use
+        x="101"
+        y="36"
+        href="#wm" />
+    <text
+        x="101.75"
+        y="36"
+        transform="rotate(-45 101, 36)">دانشگله علمو صنعت
+    </text>
+    <use
+        x="102"
+        y="61"
+        href="#wm" />
+    <text
+        x="102.75"
+        y="61"
+        transform="rotate(-45 102, 61)">نبرد
+    </text>
+    <use
+        x="104"
+        y="15"
+        href="#wm" />
+    <text
+        x="104.75"
+        y="15"
+        transform="rotate(-45 104, 15)">اقدسيه
+    </text>
+    <use
+        x="105"
+        y="73"
+        href="#wm" />
+    <text
+        x="105.75"
+        y="73"
+        transform="rotate(-45 105, 73)">بسيج
+    </text>
+    <use
+        x="106"
+        y="36"
+        href="#wm" />
+    <text
+        x="106.75"
+        y="36"
+        transform="rotate(-45 106, 36)">شهيد باقرى
+    </text>
+    <use
+        x="107"
+        y="61"
+        href="#wm" />
+    <text
+        x="107.75"
+        y="61"
+        transform="rotate(-45 107, 61)">نيرو هوايى
+    </text>
+    <use
+        x="108"
+        y="15"
+        href="#wm" />
+    <text
+        x="108.75"
+        y="15"
+        transform="rotate(-45 108, 15)">شهيد محلاتى
+    </text>
+    <use
+        x="109"
+        y="36"
+        href="#wm" />
+    <text
+        x="109.75"
+        y="36"
+        transform="rotate(-45 109, 36)">تهرانپرس
+    </text>
+    <use
+        x="112"
+        y="15"
+        href="#wm" />
+    <text
+        x="112.75"
+        y="15">قائم
+    </text>
+    <use
+        x="112"
+        y="36"
+        href="#wm" />
+    <text
+        x="112.75"
+        y="36">فرهنگسرا
+    </text>
+    <use
+        x="112"
+        y="61"
+        href="#wm" />
+    <text
+        x="112.75"
+        y="61">شهيد كلاهدوز
+    </text>
+    <use
+        x="112"
+        y="73"
+        href="#wm" />
+    <text
+        x="112.75"
+        y="73">ورزشگاه تختی
+    </text>
+</svg>
+

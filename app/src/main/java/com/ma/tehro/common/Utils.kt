@@ -171,7 +171,7 @@ fun fractionToTime(fraction: Double): String {
 }
 
 fun isFarsi(text: String): Boolean {
-    if (text.isEmpty()) return false
+    if (text.isEmpty()) return true
     val firstChar = text.trim().firstOrNull() ?: return false
     return firstChar in '\u0600'..'\u06FF'
 }

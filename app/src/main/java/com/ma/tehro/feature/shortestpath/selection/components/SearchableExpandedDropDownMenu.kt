@@ -48,6 +48,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.data.Station
 import com.ma.tehro.feature.shortestpath.AppSearchBar
 import kotlinx.coroutines.delay
@@ -187,7 +188,7 @@ fun <T> SearchableExpandedDropDownMenu(
             ) {
                 Column {
                     AppSearchBar(
-                        modifier= Modifier
+                        modifier = Modifier
                             .padding(vertical = 16.dp),
                         value = searchedOption,
                         onValueChange = { searchedOption = it },
@@ -196,7 +197,9 @@ fun <T> SearchableExpandedDropDownMenu(
 
                     LazyColumn(
                         state = listState,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier
+                            .weight(1f)
+                            .drawVerticalScrollbar(listState)
                     ) {
                         items(
                             items = displayedItems,
