@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.BilingualText
+import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.domain.NearestStation
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)

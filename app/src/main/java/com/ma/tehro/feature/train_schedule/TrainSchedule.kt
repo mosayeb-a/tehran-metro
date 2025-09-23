@@ -44,6 +44,7 @@ import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.fractionToTime
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.toFarsiNumber
+import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.data.BilingualName
 import com.ma.tehro.data.ScheduleType
 import com.ma.tehro.data.repo.GroupedScheduleInfo
@@ -206,6 +207,7 @@ private fun ScheduleList(
             HorizontalDivider()
 
             LazyColumn(
+                modifier = Modifier.drawVerticalScrollbar(lazyListState),
                 state = lazyListState,
                 contentPadding = PaddingValues(vertical = 8.dp)
             ) {

@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -37,6 +38,7 @@ import com.ma.tehro.common.calculateLineName
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.timelineview.TimelineView
 import com.ma.tehro.common.timelineview.TimelineView.SingleNode
+import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.data.Station
 
 @Composable
@@ -49,6 +51,7 @@ fun Stations(
 ) {
     val lineColor = remember { getLineColorByNumber(lineNumber) }
     val lineName = remember(lineNumber) { calculateLineName(lineNumber, useBranch) }
+    val lazyListState = rememberLazyListState()
 
     Scaffold(
         topBar = {
@@ -63,6 +66,8 @@ fun Stations(
             modifier = Modifier
                 .padding(it)
                 .fillMaxWidth()
+                .drawVerticalScrollbar(lazyListState),
+            state = lazyListState
         ) {
             itemsIndexed(
                 orderedStations,

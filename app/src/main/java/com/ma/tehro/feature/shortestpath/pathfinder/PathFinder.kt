@@ -16,7 +16,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -35,6 +34,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.ma.tehro.common.getLineColorByNumber
+import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.data.Station
 import com.ma.tehro.data.repo.PathItem
 import com.ma.tehro.feature.shortestpath.pathfinder.components.Appbar
@@ -92,6 +92,7 @@ fun PathFinder(
                 }
             }
             LazyColumn(
+                modifier = Modifier.drawVerticalScrollbar(lazyListState),
                 contentPadding = padding,
                 state = lazyListState
             ) {
