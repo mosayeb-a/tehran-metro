@@ -54,7 +54,7 @@ fun PathFinder(
     onBack: () -> Unit,
     onStationClick: (station: Station, lineNumber: Int) -> Unit,
     onInfoClick: () -> Unit,
-    onMetroImageClick: () -> Unit,
+    onMetroMapClick: (shortestPath: List<String>) -> Unit,
     lineChangeDelayMinutes: Int,
 ) {
     val titleIndices = remember(state.shortestPath) {
@@ -176,7 +176,15 @@ fun PathFinder(
                     .align(Alignment.BottomCenter),
                 lazyListState = lazyListState,
                 onInfoClick = onInfoClick,
-                onImageClick = onMetroImageClick,
+                onMapClick = {
+                    val statoins = state.shortestPath.mapNotNull { item ->
+                        (item as? PathItem.StationItem)?.station?.translations?.fa
+                    }
+                    println("shortest path fa: $statoins")
+                    onMetroMapClick(
+                        statoins
+                    )
+                },
                 scrollBehavior = exitAlwaysScrollBehavior
             )
         }

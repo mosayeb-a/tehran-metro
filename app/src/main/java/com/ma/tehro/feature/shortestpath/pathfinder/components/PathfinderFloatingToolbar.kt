@@ -35,7 +35,7 @@ fun PathfinderFloatingToolbar(
     modifier: Modifier = Modifier,
     lazyListState: LazyListState,
     onInfoClick: () -> Unit,
-    onImageClick: () -> Unit,
+    onMapClick: () -> Unit,
     scrollBehavior: FloatingToolbarScrollBehavior
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -79,7 +79,7 @@ fun PathfinderFloatingToolbar(
             Spacer(Modifier.width(4.dp))
             IconButton(
                 modifier = Modifier.size(48.dp),
-                onClick = onImageClick,
+                onClick = onMapClick,
                 colors = IconButtonDefaults.iconButtonColors(contentColor = Color.White)
             ) {
                 Icon(Icons.Filled.Image, contentDescription = "Metro image")

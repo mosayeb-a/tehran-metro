@@ -58,7 +58,7 @@ object SubmitFeedbackScreen
 data class PathDescriptionScreen(val steps: List<Step>)
 
 @Serializable
-object OfficialMetroMapScreen
+data class MapViewerScreen(val shortestPath: List<String>?)
 
 @Serializable
 object AboutScreen

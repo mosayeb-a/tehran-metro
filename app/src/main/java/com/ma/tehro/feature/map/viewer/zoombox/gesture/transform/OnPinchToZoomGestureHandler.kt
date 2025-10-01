@@ -1,8 +1,8 @@
-package com.ma.tehro.feature.map.official_pic.zoombox.gesture.transform
+package com.ma.tehro.feature.map.viewer.zoombox.gesture.transform
 
 import androidx.compose.ui.geometry.Offset
-import com.ma.tehro.feature.map.official_pic.zoombox.ZoomState
-import com.ma.tehro.feature.map.official_pic.zoombox.util.minMax
+import com.ma.tehro.feature.map.viewer.zoombox.ZoomState
+import com.ma.tehro.feature.map.viewer.zoombox.util.minMax
 
 class OnPinchToZoomGestureHandler : OnPinchGestureHandler {
 

@@ -1,11 +1,30 @@
 <svg version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 120 120">
-    <style>text { font: 1px Helvetica; font-weight: 600; white-space: pre; dominant-baseline:
-        central; } line { stroke-width: 1; fill: none; stroke-linecap: round; stroke-linejoin:
-        round; } .c0 { stroke: #ed3833 } .c1 { stroke: #ed71a7 } .c2 { stroke: #3b885d } .c3 {
-        stroke: #1255a0 } .c4 { stroke: #4bbdef } .c5 { stroke: #fbd349 } .c6 { stroke: #882c81 }
+    <style>
+        text {
+        font-size: 1.0px;
+        font-family: Vazir;
+        font-weight: 600;
+        fill: #ffffff;
+        white-space: pre;
+        dominant-baseline: central;
+        }
+        line {
+        stroke-width: 1;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        }
+        .c0 { stroke: #ed3833 }
+        .c1 { stroke: #ed71a7 }
+        .c2 { stroke: #3b885d }
+        .c3 { stroke: #1255a0 }
+        .c4 { stroke: #4bbdef }
+        .c5 { stroke: #fbd349 }
+        .c6 { stroke: #882c81 }
     </style>
+
     <defs>
         <g id="wm-xf">
             <circle
@@ -504,7 +523,7 @@
     <text
         x="2.75"
         y="21"
-        transform="rotate(-45 2, 21)">كوهسار
+        transform="rotate(-45 2, 21)">کوهسار
     </text>
     <use
         x="2"
@@ -513,7 +532,7 @@
     <text
         x="2.75"
         y="39"
-        transform="rotate(-45 2, 39)">شهيد سپهبد قاسم سليمانى
+        transform="rotate(-45 2, 39)">شهید سپهبد قاسم سلیمانی
     </text>
     <use
         x="2"
@@ -540,7 +559,7 @@
     <text
         x="6.75"
         y="21"
-        transform="rotate(-45 6, 21)">شهداي كن
+        transform="rotate(-45 6, 21)">شهدای کن
     </text>
     <use
         x="6"
@@ -549,7 +568,7 @@
     <text
         x="6.75"
         y="39"
-        transform="rotate(-45 6, 39)">مهحمد شهر
+        transform="rotate(-45 6, 39)">محمدشهر
     </text>
     <use
         x="8"
@@ -558,7 +577,7 @@
     <text
         x="8.75"
         y="39"
-        transform="rotate(-45 8, 39)">كرج
+        transform="rotate(-45 8, 39)">کرج
     </text>
     <use
         x="9"
@@ -567,7 +586,7 @@
     <text
         x="9.75"
         y="21"
-        transform="rotate(-45 9, 21)">شهر زيبا
+        transform="rotate(-45 9, 21)">شهر زیبا
     </text>
     <use
         x="10"
@@ -594,7 +613,7 @@
     <text
         x="13.5"
         y="21"
-        transform="rotate(-45 12, 21)">آيتالله كاشانى
+        transform="rotate(-45 12, 21)">آیت‌الله کاشانی
     </text>
     <use
         x="12"
@@ -612,7 +631,7 @@
     <text
         x="12.75"
         y="39"
-        transform="rotate(-45 12, 39)">گرم دره
+        transform="rotate(-45 12, 39)">گرم‌دره
     </text>
     <use
         x="12"
@@ -677,7 +696,7 @@
     <text
         x="14.75"
         y="39"
-        transform="rotate(-45 14, 39)">ورد آورد
+        transform="rotate(-45 14, 39)">وردآورد
     </text>
     <use
         x="15"
@@ -686,7 +705,7 @@
     <text
         x="15.75"
         y="21"
-        transform="rotate(-45 15, 21)">شهيد ستارى
+        transform="rotate(-45 15, 21)">شهید ستاری
     </text>
     <use
         x="16"
@@ -695,7 +714,7 @@
     <text
         x="16.75"
         y="39"
-        transform="rotate(-45 16, 39)">ايران خدرو
+        transform="rotate(-45 16, 39)">ایران‌خودرو
     </text>
     <use
         x="18"
@@ -704,7 +723,7 @@
     <text
         x="18.75"
         y="39"
-        transform="rotate(-45 18, 39)">چيتگر
+        transform="rotate(-45 18, 39)">چیتگر
     </text>
     <use
         x="19"
@@ -713,7 +732,7 @@
     <text
         x="19.75"
         y="21"
-        transform="rotate(-45 19, 21)">شهيد اشرفى اصفهانى
+        transform="rotate(-45 19, 21)">شهید اشرفی اصفهانی
     </text>
     <use
         x="19"
@@ -722,7 +741,7 @@
     <text
         x="17.5"
         y="53"
-        text-anchor="end">بيمه
+        text-anchor="end">بیمه
     </text>
     <use
         x="19"
@@ -731,7 +750,7 @@
     <text
         x="18.25"
         y="58"
-        text-anchor="end">پايانه ١ و ٢ فرودگاه مهرآباد
+        text-anchor="end">پایانه ۱ و ۲ فرودگاه مهرآباد
     </text>
     <use
         x="19"
@@ -740,7 +759,7 @@
     <text
         x="18.25"
         y="63"
-        text-anchor="end">پايانه ۴ و ۶ فرودگاه مهرآباد
+        text-anchor="end">پایانه ۴ و ۶ فرودگاه مهرآباد
     </text>
     <use
         x="20"
@@ -749,7 +768,7 @@
     <text
         x="20.75"
         y="39"
-        transform="rotate(-45 20, 39)">ورزشگاه آرادى
+        transform="rotate(-45 20, 39)">ورزشگاه آزادی
     </text>
     <use
         x="23"
@@ -758,7 +777,7 @@
     <text
         x="23.75"
         y="25"
-        transform="rotate(-45 23, 25)">يادگار امام
+        transform="rotate(-45 23, 25)">یادگار امام
     </text>
     <use
         x="23"
@@ -776,7 +795,7 @@
     <text
         x="22.25"
         y="47"
-        text-anchor="end">شهرک اكباتان
+        text-anchor="end">شهرک اکباتان
     </text>
     <use
         x="25"
@@ -786,7 +805,7 @@
         x="24.25"
         y="53"
         text-anchor="end"
-        transform="rotate(-45 25, 53)">ميدان آزادى
+        transform="rotate(-45 25, 53)">میدان آزادی
     </text>
     <use
         x="27"
@@ -803,7 +822,7 @@
         href="#wm-xf" />
     <text
         x="28.5"
-        y="39">تهران (صادقيه)
+        y="39">تهران (صادقیه)
     </text>
     <use
         x="27"
@@ -812,7 +831,7 @@
     <text
         x="27.75"
         y="113"
-        transform="rotate(-45 27, 113)">فرودگاه امام خميني
+        transform="rotate(-45 27, 113)">فرودگاه امام خمینی
     </text>
     <use
         x="30"
@@ -822,7 +841,7 @@
         x="29.25"
         y="53"
         text-anchor="end"
-        transform="rotate(-45 30, 53)">استاد معين
+        transform="rotate(-45 30, 53)">استاد معین
     </text>
     <use
         x="31"
@@ -831,7 +850,7 @@
     <text
         x="31.75"
         y="33"
-        transform="rotate(-45 31, 33)">شهرک آزمايش
+        transform="rotate(-45 31, 33)">شهرک آزمایش
     </text>
     <use
         x="31"
@@ -849,7 +868,7 @@
     <text
         x="34.25"
         y="47"
-        text-anchor="end">دنشگاه شريف
+        text-anchor="end">دانشگاه شریف
     </text>
     <use
         x="35"
@@ -859,7 +878,7 @@
         x="34.25"
         y="53"
         text-anchor="end"
-        transform="rotate(-45 35, 53)">دكتر حبيب الله
+        transform="rotate(-45 35, 53)">دکتر حبیب‌الله
     </text>
     <use
         x="41"
@@ -867,7 +886,7 @@
         href="#wm" />
     <text
         x="41.75"
-        y="3">ميدان كتاب
+        y="3">میدان کتاب
     </text>
     <use
         x="41"
@@ -875,7 +894,7 @@
         href="#wm" />
     <text
         x="41.75"
-        y="9">شهيد دادمات
+        y="9">شهید دادمان
     </text>
     <use
         x="41"
@@ -883,7 +902,7 @@
         href="#wm" />
     <text
         x="41.75"
-        y="15">ميدان صنعت
+        y="15">میدان صنعت
     </text>
     <use
         x="41"
@@ -891,7 +910,7 @@
         href="#wm" />
     <text
         x="41.75"
-        y="21">برج ميلاد تهران
+        y="21">برج میلاد
     </text>
     <use
         x="41"
@@ -907,7 +926,7 @@
         href="#wm-xf" />
     <text
         x="42.5"
-        y="33">دانشگاه تربيت مدرس
+        y="33">دانشگاه تربیت مدرس
     </text>
     <use
         x="41"
@@ -942,7 +961,7 @@
     <text
         x="47.5"
         y="53"
-        transform="rotate(45 46, 53)">توحيد
+        transform="rotate(45 46, 53)">توحید
     </text>
     <use
         x="46"
@@ -951,7 +970,7 @@
     <text
         x="44.5"
         y="58"
-        text-anchor="end">شهيد نواب صفوى
+        text-anchor="end">شهید نواب صفوی
     </text>
     <use
         x="46"
@@ -960,7 +979,7 @@
     <text
         x="45.25"
         y="63"
-        text-anchor="end">رودكى
+        text-anchor="end">رودکی
     </text>
     <use
         x="46"
@@ -969,7 +988,7 @@
     <text
         x="45.25"
         y="67"
-        text-anchor="end">كميل
+        text-anchor="end">کمیل
     </text>
     <use
         x="47"
@@ -987,7 +1006,7 @@
     <text
         x="46.25"
         y="93"
-        text-anchor="end">شهرک شريعتى
+        text-anchor="end">شهرک شریعتی
     </text>
     <use
         x="47"
@@ -1014,7 +1033,7 @@
     <text
         x="49.75"
         y="61"
-        transform="rotate(45 49, 61)">ميدان حر
+        transform="rotate(45 49, 61)">میدان حر
     </text>
     <use
         x="49"
@@ -1023,7 +1042,7 @@
     <text
         x="48.25"
         y="70"
-        text-anchor="end">بريانک
+        text-anchor="end">بریانک
     </text>
     <use
         x="52"
@@ -1033,7 +1052,7 @@
         x="51.25"
         y="53"
         text-anchor="end"
-        transform="rotate(45 52, 53)">ميدان انقلاب اسلامى
+        transform="rotate(45 52, 53)">میدان انقلاب اسلامی
     </text>
     <use
         x="52"
@@ -1051,7 +1070,7 @@
     <text
         x="51.25"
         y="84"
-        text-anchor="end">جواديه
+        text-anchor="end">جوادیه
     </text>
     <use
         x="52"
@@ -1059,7 +1078,7 @@
         href="#wm" />
     <text
         x="52.75"
-        y="113">واروان
+        y="113">واوان
     </text>
     <use
         x="54"
@@ -1068,7 +1087,7 @@
     <text
         x="54.75"
         y="61"
-        transform="rotate(-45 54, 61)">دانشگاه امام على
+        transform="rotate(-45 54, 61)">دانشگاه امام علی
     </text>
     <use
         x="58"
@@ -1078,7 +1097,7 @@
         x="56.5"
         y="45"
         text-anchor="end"
-        transform="rotate(45 58, 45)">ميدان حضرت ولى عصر
+        transform="rotate(45 58, 45)">میدان حضرت ولیعصر
     </text>
     <use
         x="58"
@@ -1095,7 +1114,7 @@
         href="#wm" />
     <text
         x="58.75"
-        y="67">منيريه
+        y="67">منیریه
     </text>
     <use
         x="58"
@@ -1104,7 +1123,7 @@
     <text
         x="59.5"
         y="73"
-        transform="rotate(-45 58, 73)">مهديه
+        transform="rotate(-45 58, 73)">مهدیه
     </text>
     <use
         x="58"
@@ -1123,7 +1142,7 @@
         x="58.25"
         y="40"
         text-anchor="end"
-        transform="rotate(45 59, 40)">ميدان جهاد
+        transform="rotate(45 59, 40)">میدان جهاد
     </text>
     <use
         x="60"
@@ -1132,7 +1151,7 @@
     <text
         x="59.25"
         y="105"
-        text-anchor="end">نمايشگاه شهر آفتاب
+        text-anchor="end">نمایشگاه شهر آفتاب
     </text>
     <use
         x="62"
@@ -1142,7 +1161,7 @@
         x="61.25"
         y="37"
         text-anchor="end"
-        transform="rotate(45 62, 37)">ميرزاى شرازى
+        transform="rotate(45 62, 37)">میرزا شیرازی
     </text>
     <use
         x="64"
@@ -1151,7 +1170,7 @@
     <text
         x="64.75"
         y="53"
-        transform="rotate(-45 64, 53)">فردوسى
+        transform="rotate(-45 64, 53)">فردوسی
     </text>
     <use
         x="64"
@@ -1170,7 +1189,7 @@
     <text
         x="69.25"
         y="25"
-        text-anchor="end">شهيد حقانى
+        text-anchor="end">شهید حقانی
     </text>
     <use
         x="70"
@@ -1179,7 +1198,7 @@
     <text
         x="69.25"
         y="29"
-        text-anchor="end">شهيد همت
+        text-anchor="end">شهید همت
     </text>
     <use
         x="70"
@@ -1188,7 +1207,7 @@
     <text
         x="69.25"
         y="33"
-        text-anchor="end">مصلى امام خمينى
+        text-anchor="end">مصلی امام خمینی
     </text>
     <use
         x="70"
@@ -1197,7 +1216,7 @@
     <text
         x="71.5"
         y="37"
-        transform="rotate(-45 70, 37)">شهيد بهشتى
+        transform="rotate(-45 70, 37)">شهید بهشتی
     </text>
     <use
         x="70"
@@ -1206,7 +1225,7 @@
     <text
         x="69.25"
         y="41"
-        text-anchor="end">شهيد مفتح
+        text-anchor="end">شهید مفتح
     </text>
     <use
         x="70"
@@ -1215,7 +1234,7 @@
     <text
         x="71.5"
         y="45"
-        transform="rotate(-45 70, 45)">شهداى هتم تير
+        transform="rotate(-45 70, 45)">شهدای هفتم تیر
     </text>
     <use
         x="70"
@@ -1223,7 +1242,7 @@
         href="#wm" />
     <text
         x="70.75"
-        y="49">طالقانى
+        y="49">آیت‌الله طالقانی
     </text>
     <use
         x="70"
@@ -1242,7 +1261,7 @@
     <text
         x="70.75"
         y="57"
-        transform="rotate(-45 70, 57)">سعيدى
+        transform="rotate(-45 70, 57)">سعدی
     </text>
     <use
         x="70"
@@ -1250,7 +1269,7 @@
         href="#wm-xf" />
     <text
         x="71.5"
-        y="61">امام خميني
+        y="61">امام خمینی
     </text>
     <use
         x="70"
@@ -1266,7 +1285,7 @@
         href="#wm" />
     <text
         x="70.75"
-        y="69">خيام
+        y="69">خیام
     </text>
     <use
         x="70"
@@ -1276,7 +1295,7 @@
         x="68.5"
         y="73"
         text-anchor="end"
-        transform="rotate(-45 70, 73)">ميدان محمدية
+        transform="rotate(-45 70, 73)">میدان محمدیه
     </text>
     <use
         x="70"
@@ -1292,7 +1311,7 @@
         href="#wm" />
     <text
         x="70.75"
-        y="81">پايانه جنوب
+        y="81">پایانه جنوبی
     </text>
     <use
         x="70"
@@ -1300,7 +1319,7 @@
         href="#wm" />
     <text
         x="70.75"
-        y="85">شهيد بخارايى
+        y="85">شهید بخارایی
     </text>
     <use
         x="70"
@@ -1308,7 +1327,7 @@
         href="#wm" />
     <text
         x="70.75"
-        y="89">على آباد
+        y="89">علی‌آباد
     </text>
     <use
         x="70"
@@ -1324,7 +1343,7 @@
         href="#wm" />
     <text
         x="70.75"
-        y="97">شهر رى
+        y="97">شهر ری
     </text>
     <use
         x="70"
@@ -1332,7 +1351,7 @@
         href="#wm" />
     <text
         x="70.75"
-        y="101">پالايشگاه
+        y="101">پالایشگاه
     </text>
     <use
         x="70"
@@ -1340,7 +1359,7 @@
         href="#wm-xf" />
     <text
         x="71.5"
-        y="105">شهرد-باقر شهر
+        y="105">شاهد - باقرشهر
     </text>
     <use
         x="70"
@@ -1348,7 +1367,7 @@
         href="#wm" />
     <text
         x="70.75"
-        y="109">حرم مطهر امام خميني
+        y="109">حرم مطهر امام خمینی
     </text>
     <use
         x="70"
@@ -1356,7 +1375,7 @@
         href="#wm" />
     <text
         x="70.75"
-        y="113">كهريزک
+        y="113">کهریزک
     </text>
     <use
         x="73"
@@ -1365,7 +1384,7 @@
     <text
         x="72.25"
         y="22"
-        text-anchor="end">ميرداماد
+        text-anchor="end">میرداماد
     </text>
     <use
         x="73"
@@ -1390,7 +1409,7 @@
     <text
         x="75.75"
         y="73"
-        transform="rotate(-45 75, 73)">مولوى
+        transform="rotate(-45 75, 73)">مولوی
     </text>
     <use
         x="76"
@@ -1398,7 +1417,7 @@
         href="#wm" />
     <text
         x="76.75"
-        y="3">تجريش
+        y="3">تجریش
     </text>
     <use
         x="76"
@@ -1406,7 +1425,7 @@
         href="#wm" />
     <text
         x="76.75"
-        y="7">قيتريه
+        y="7">قیطریه
     </text>
     <use
         x="76"
@@ -1414,7 +1433,7 @@
         href="#wm" />
     <text
         x="76.75"
-        y="11">شهيد صدر
+        y="11">شهید صدر
     </text>
     <use
         x="76"
@@ -1430,7 +1449,7 @@
         href="#wm" />
     <text
         x="76.75"
-        y="19">دكتر سريعتى
+        y="19">دکتر شریعتی
     </text>
     <use
         x="78"
@@ -1438,7 +1457,7 @@
         href="#wm" />
     <text
         x="78.75"
-        y="37">سهرذردى
+        y="37">سهروردی
     </text>
     <use
         x="78"
@@ -1446,7 +1465,7 @@
         href="#wm-xf" />
     <text
         x="79.5"
-        y="53">دروازه شميران
+        y="53">دروازه شمیران
     </text>
     <use
         x="81"
@@ -1454,7 +1473,7 @@
         href="#wm" />
     <text
         x="81.75"
-        y="34">شهيد قدوسى
+        y="34">شهید قدوسی
     </text>
     <use
         x="81"
@@ -1472,7 +1491,7 @@
         href="#wm" />
     <text
         x="84.75"
-        y="31">شهيد صياد شيرازى
+        y="31">شهید صیاد شیرازی
     </text>
     <use
         x="86"
@@ -1480,7 +1499,7 @@
         href="#wm-xf" />
     <text
         x="87.5"
-        y="45">امام حسين
+        y="45">امام حسین
     </text>
     <use
         x="86"
@@ -1489,7 +1508,7 @@
     <text
         x="87.5"
         y="61"
-        transform="rotate(-45 86, 61)">ميدان شهدا
+        transform="rotate(-45 86, 61)">میدان شهدا
     </text>
     <use
         x="86"
@@ -1497,7 +1516,7 @@
         href="#wm" />
     <text
         x="86.75"
-        y="67">امير كبير
+        y="67">امیرکبیر
     </text>
     <use
         x="86"
@@ -1505,7 +1524,7 @@
         href="#wm" />
     <text
         x="86.75"
-        y="77">ميدان خراسان
+        y="77">میدان خراسان
     </text>
     <use
         x="86"
@@ -1513,7 +1532,7 @@
         href="#wm" />
     <text
         x="86.75"
-        y="81">شهيد رضايى
+        y="81">شهید رضایی
     </text>
     <use
         x="86"
@@ -1521,7 +1540,7 @@
         href="#wm" />
     <text
         x="86.75"
-        y="85">نعثت
+        y="85">بعثت
     </text>
     <use
         x="86"
@@ -1529,7 +1548,7 @@
         href="#wm" />
     <text
         x="86.75"
-        y="89">كيان شهر
+        y="89">کیان شهر
     </text>
     <use
         x="86"
@@ -1537,7 +1556,7 @@
         href="#wm" />
     <text
         x="86.75"
-        y="95">دولت آباد
+        y="95">شهدای دولت‌آباد
     </text>
     <use
         x="86"
@@ -1545,7 +1564,7 @@
         href="#wm" />
     <text
         x="86.75"
-        y="100">چشمه على
+        y="100">چشمه علی
     </text>
     <use
         x="86"
@@ -1553,7 +1572,7 @@
         href="#wm" />
     <text
         x="86.75"
-        y="105">ابن بابويه
+        y="105">ابن بابویه
     </text>
     <use
         x="87"
@@ -1561,7 +1580,7 @@
         href="#wm" />
     <text
         x="87.75"
-        y="28">خواجه عندالله انصارى
+        y="28">خواجه عبدالله انصاری
     </text>
     <use
         x="89"
@@ -1569,7 +1588,7 @@
         href="#wm" />
     <text
         x="89.75"
-        y="42">شهيد مدنى
+        y="42">شهید مدنی
     </text>
     <use
         x="90"
@@ -1577,7 +1596,7 @@
         href="#wm" />
     <text
         x="90.75"
-        y="25">شهيد زين الدين
+        y="25">شهید زین‌الدین
     </text>
     <use
         x="90"
@@ -1585,7 +1604,7 @@
         href="#wm" />
     <text
         x="90.75"
-        y="109">ميدان حضرت عبد العظيم
+        y="109">میدان حضرت عبدالعظیم
     </text>
     <use
         x="91"
@@ -1611,7 +1630,7 @@
     <text
         x="91.75"
         y="73"
-        transform="rotate(-45 91, 73)">دولاب
+        transform="rotate(-45 91, 73)">چهل تن دولاب
     </text>
     <use
         x="92"
@@ -1620,7 +1639,7 @@
     <text
         x="92.75"
         y="61"
-        transform="rotate(-45 92, 61)">ابن سينا
+        transform="rotate(-45 92, 61)">ابن سینا
     </text>
     <use
         x="93"
@@ -1628,7 +1647,7 @@
         href="#wm" />
     <text
         x="93.75"
-        y="22">ميدان هروى
+        y="22">میدان هروی
     </text>
     <use
         x="93"
@@ -1644,7 +1663,7 @@
         href="#wm" />
     <text
         x="94.75"
-        y="113">حرم حضرت عبد العظيم
+        y="113">حرم حضرت عبدالعظیم
     </text>
     <use
         x="95"
@@ -1669,7 +1688,7 @@
         href="#wm" />
     <text
         x="96.75"
-        y="19">حسين آباد
+        y="19">حسین‌آباد
     </text>
     <use
         x="97"
@@ -1678,7 +1697,7 @@
     <text
         x="97.75"
         y="61"
-        transform="rotate(-45 97, 61)">پيروزى
+        transform="rotate(-45 97, 61)">پیروزی
     </text>
     <use
         x="98"
@@ -1705,7 +1724,7 @@
     <text
         x="98.5"
         y="15"
-        text-anchor="end">نوبنياد
+        text-anchor="end">نوبنیاد
     </text>
     <use
         x="101"
@@ -1714,7 +1733,7 @@
     <text
         x="101.75"
         y="36"
-        transform="rotate(-45 101, 36)">دانشگله علمو صنعت
+        transform="rotate(-45 101, 36)">دانشگاه علم و صنعت
     </text>
     <use
         x="102"
@@ -1732,7 +1751,7 @@
     <text
         x="104.75"
         y="15"
-        transform="rotate(-45 104, 15)">اقدسيه
+        transform="rotate(-45 104, 15)">اقدسیه
     </text>
     <use
         x="105"
@@ -1750,7 +1769,7 @@
     <text
         x="106.75"
         y="36"
-        transform="rotate(-45 106, 36)">شهيد باقرى
+        transform="rotate(-45 106, 36)">شهید باقری
     </text>
     <use
         x="107"
@@ -1759,7 +1778,7 @@
     <text
         x="107.75"
         y="61"
-        transform="rotate(-45 107, 61)">نيرو هوايى
+        transform="rotate(-45 107, 61)">نیروهوایی
     </text>
     <use
         x="108"
@@ -1768,7 +1787,7 @@
     <text
         x="108.75"
         y="15"
-        transform="rotate(-45 108, 15)">شهيد محلاتى
+        transform="rotate(-45 108, 15)">شهید محلاتی
     </text>
     <use
         x="109"
@@ -1777,7 +1796,7 @@
     <text
         x="109.75"
         y="36"
-        transform="rotate(-45 109, 36)">تهرانپرس
+        transform="rotate(-45 109, 36)">تهرانپارس
     </text>
     <use
         x="112"
@@ -1801,7 +1820,7 @@
         href="#wm" />
     <text
         x="112.75"
-        y="61">شهيد كلاهدوز
+        y="61">شهید کلاهدوز
     </text>
     <use
         x="112"

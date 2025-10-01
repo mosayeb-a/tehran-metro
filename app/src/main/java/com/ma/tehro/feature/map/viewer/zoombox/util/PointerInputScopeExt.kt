@@ -1,4 +1,4 @@
-package com.ma.tehro.feature.map.official_pic.zoombox.util
+package com.ma.tehro.feature.map.viewer.zoombox.util
 
 import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.calculateCentroid
@@ -12,8 +12,8 @@ import androidx.compose.ui.input.pointer.PointerEvent
 import androidx.compose.ui.input.pointer.PointerInputScope
 import androidx.compose.ui.input.pointer.changedToUp
 import androidx.compose.ui.input.pointer.positionChanged
-import com.ma.tehro.feature.map.official_pic.zoombox.ZoomState
-import com.ma.tehro.feature.map.official_pic.zoombox.gesture.condition.TouchCondition
+import com.ma.tehro.feature.map.viewer.zoombox.ZoomState
+import com.ma.tehro.feature.map.viewer.zoombox.gesture.condition.TouchCondition
 import kotlin.math.PI
 import kotlin.math.abs
 

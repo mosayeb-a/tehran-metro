@@ -1,4 +1,4 @@
-package com.ma.tehro.feature.map.official_pic.zoombox
+package com.ma.tehro.feature.map.viewer.zoombox
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
