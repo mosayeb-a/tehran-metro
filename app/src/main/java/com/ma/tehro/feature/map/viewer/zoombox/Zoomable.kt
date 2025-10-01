@@ -1,4 +1,4 @@
-package com.ma.tehro.feature.map.official_pic.zoombox
+package com.ma.tehro.feature.map.viewer.zoombox
 
 import androidx.compose.foundation.gestures.rememberTransformableState
 import androidx.compose.runtime.rememberCoroutineScope
@@ -12,8 +12,8 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInParent
 import androidx.compose.ui.zIndex
-import com.ma.tehro.feature.map.official_pic.zoombox.gesture.tap.TapHandler
-import com.ma.tehro.feature.map.official_pic.zoombox.gesture.transform.TransformGestureHandler
+import com.ma.tehro.feature.map.viewer.zoombox.gesture.tap.TapHandler
+import com.ma.tehro.feature.map.viewer.zoombox.gesture.transform.TransformGestureHandler
 
 fun Modifier.zoomable(
     zoomRange: ClosedFloatingPointRange<Float> = 1f..3f,

@@ -155,5 +155,6 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
 
     implementation(libs.coil.compose)
+    implementation(libs.coil.svg)
     implementation(libs.androidx.material.icons.extended)
 }

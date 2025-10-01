@@ -1,4 +1,4 @@
-package com.ma.tehro.feature.map.official_pic.zoombox.util
+package com.ma.tehro.feature.map.viewer.zoombox.util
 
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.AnimationState
@@ -9,7 +9,7 @@ import androidx.compose.foundation.gestures.TransformableState
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.unit.IntSize
-import com.ma.tehro.feature.map.official_pic.zoombox.ZoomState
+import com.ma.tehro.feature.map.viewer.zoombox.ZoomState
 
 suspend fun TransformableState.animateZoomBy(
     previousZoomState: ZoomState,

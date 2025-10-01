@@ -1,9 +1,9 @@
-package com.ma.tehro.feature.map.official_pic.zoombox.gesture.condition
+package com.ma.tehro.feature.map.viewer.zoombox.gesture.condition
 
 import androidx.compose.ui.input.pointer.PointerEvent
 import androidx.compose.ui.input.pointer.PointerInputScope
-import com.ma.tehro.feature.map.official_pic.zoombox.ZoomState
-import com.ma.tehro.feature.map.official_pic.zoombox.util.Calculator
+import com.ma.tehro.feature.map.viewer.zoombox.ZoomState
+import com.ma.tehro.feature.map.viewer.zoombox.util.Calculator
 
 class WithinXBoundsTouchCondition : TouchCondition {
 

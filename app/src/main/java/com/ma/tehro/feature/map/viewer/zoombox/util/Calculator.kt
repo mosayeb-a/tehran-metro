@@ -1,4 +1,4 @@
-package com.ma.tehro.feature.map.official_pic.zoombox.util
+package com.ma.tehro.feature.map.viewer.zoombox.util
 
 import kotlin.math.max
 import kotlin.math.min

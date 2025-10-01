@@ -1,13 +1,13 @@
-package com.ma.tehro.feature.map.official_pic.zoombox.gesture.transform
+package com.ma.tehro.feature.map.viewer.zoombox.gesture.transform
 
 import androidx.compose.foundation.gestures.TransformableState
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.PointerInputScope
 import kotlinx.coroutines.CoroutineScope
-import com.ma.tehro.feature.map.official_pic.zoombox.ZoomState
-import com.ma.tehro.feature.map.official_pic.zoombox.gesture.condition.AnyTouchCondition
-import com.ma.tehro.feature.map.official_pic.zoombox.gesture.condition.TouchCondition
-import com.ma.tehro.feature.map.official_pic.zoombox.util.detectTransformGestures
+import com.ma.tehro.feature.map.viewer.zoombox.ZoomState
+import com.ma.tehro.feature.map.viewer.zoombox.gesture.condition.AnyTouchCondition
+import com.ma.tehro.feature.map.viewer.zoombox.gesture.condition.TouchCondition
+import com.ma.tehro.feature.map.viewer.zoombox.util.detectTransformGestures
 
 class TransformGestureHandler(
     private val onCancelledBehavior: OnCancelledBehavior = KeepWithinBoundsOnCancelledBehavior(),

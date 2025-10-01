@@ -1,4 +1,4 @@
-package com.ma.tehro.feature.map.official_pic.zoombox.gesture.tap
+package com.ma.tehro.feature.map.viewer.zoombox.gesture.tap
 
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.Spring
@@ -8,8 +8,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.pointer.PointerInputScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import com.ma.tehro.feature.map.official_pic.zoombox.ZoomState
-import com.ma.tehro.feature.map.official_pic.zoombox.util.animateZoomBy
+import com.ma.tehro.feature.map.viewer.zoombox.ZoomState
+import com.ma.tehro.feature.map.viewer.zoombox.util.animateZoomBy
 
 class ZoomOnDoubleTapHandler(
     private val zoomAnimationSpec: AnimationSpec<Float> = SpringSpec(
