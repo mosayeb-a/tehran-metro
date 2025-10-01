@@ -177,12 +177,10 @@ fun PathFinder(
                 lazyListState = lazyListState,
                 onInfoClick = onInfoClick,
                 onMapClick = {
-                    val statoins = state.shortestPath.mapNotNull { item ->
-                        (item as? PathItem.StationItem)?.station?.translations?.fa
-                    }
-                    println("shortest path fa: $statoins")
                     onMetroMapClick(
-                        statoins
+                        state.shortestPath.mapNotNull { item ->
+                            (item as? PathItem.StationItem)?.station?.translations?.fa
+                        }
                     )
                 },
                 scrollBehavior = exitAlwaysScrollBehavior
