@@ -64,7 +64,7 @@ fun AppNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = StationSelectorScreen,
+        startDestination = LinesScreen,
         modifier = modifier
     ) {
         baseComposable<LinesScreen> {
