@@ -3,8 +3,7 @@
     viewBox="0 0 120 120">
     <style>
         text {
-        font-size: 1.0px;
-        font-family: Vazir;
+        font-size: 1.2px;
         font-weight: 600;
         fill: #ffffff;
         white-space: pre;

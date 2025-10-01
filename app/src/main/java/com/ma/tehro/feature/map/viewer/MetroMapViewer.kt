@@ -1,5 +1,10 @@
 package com.ma.tehro.feature.map.viewer
 
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,6 +51,16 @@ fun MetroMapViewer(
         stations?.let { SvgStationParser.parseStations(context, it) } ?: emptyMap()
     }
 
+    val infiniteTransition = rememberInfiniteTransition()
+    val pulseScale by infiniteTransition.animateFloat(
+        initialValue = 1f,
+        targetValue = 1.4f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 800),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -79,7 +95,7 @@ fun MetroMapViewer(
                     model = ImageRequest.Builder(context)
                         .data(R.raw.tehran_map)
                         .decoderFactory(SvgDecoder.Factory(useViewBoundsAsIntrinsicSize = false))
-                        .size(Size(2000, 2000))
+                        .size(Size(3000, 3000))
                         .build(),
                     contentDescription = "metro map pic",
                     contentScale = ContentScale.Fit,
@@ -108,23 +124,52 @@ fun MetroMapViewer(
                                             x2 * baseScale + offsetX,
                                             y2 * baseScale + offsetY
                                         ),
-                                        strokeWidth = 0.5f * baseScale,
+                                        strokeWidth = 0.7f * baseScale,
                                         cap = StrokeCap.Round
                                     )
                                 }
                             }
                         }
 
-                        stations.forEach { station ->
+                        stations.forEachIndexed { index, station ->
                             stationCoordinates[station]?.let { (x, y) ->
-                                drawCircle(
-                                    color = Color.White,
-                                    radius = 0.7f * baseScale,
-                                    center = Offset(
-                                        x * baseScale + offsetX,
-                                        y * baseScale + offsetY
-                                    )
+                                val center = Offset(
+                                    x * baseScale + offsetX,
+                                    y * baseScale + offsetY
                                 )
+                                when (index) {
+                                    0 -> {
+                                        drawCircle(
+                                            color = Color.Green,
+                                            radius = 1.0f * baseScale * pulseScale,
+                                            center = center
+                                        )
+                                        drawCircle(
+                                            color = Color.White,
+                                            radius = 0.5f * baseScale,
+                                            center = center
+                                        )
+                                    }
+                                    stations.size - 1 -> {
+                                        drawCircle(
+                                            color = Color.Magenta,
+                                            radius = 1.0f * baseScale * pulseScale,
+                                            center = center
+                                        )
+                                        drawCircle(
+                                            color = Color.White,
+                                            radius = 0.5f * baseScale,
+                                            center = center
+                                        )
+                                    }
+                                    else -> {
+                                        drawCircle(
+                                            color = Color.White,
+                                            radius = 0.7f * baseScale,
+                                            center = center
+                                        )
+                                    }
+                                }
                             }
                         }
                     }
