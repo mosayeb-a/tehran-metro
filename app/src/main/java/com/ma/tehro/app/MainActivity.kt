@@ -14,6 +14,8 @@ import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.compose.rememberNavController
 import com.ma.tehro.common.LocationPermissionHandler
 import com.ma.tehro.common.ObserveAsEvents
@@ -42,11 +44,18 @@ class MainActivity : ComponentActivity() {
             TehroTheme {
                 val snackbarHostState = remember { SnackbarHostState() }
                 val scope = rememberCoroutineScope()
+
+                val keyboardController = LocalSoftwareKeyboardController.current
+                val focusManager = LocalFocusManager.current
+
                 ObserveAsEvents(
                     flow = UiMessageManager.events,
                     snackbarHostState
                 ) { event ->
                     scope.launch {
+                        focusManager.clearFocus(force = true)
+                        keyboardController?.hide()
+
                         snackbarHostState.currentSnackbarData?.dismiss()
                         val result = snackbarHostState.showSnackbar(
                             message = event.message,

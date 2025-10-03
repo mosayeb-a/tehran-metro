@@ -1,6 +1,5 @@
 package com.ma.tehro.feature.shortestpath
 
-
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -23,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
@@ -38,6 +38,7 @@ fun AppSearchBar(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     placeholder: String,
+    color : Color = MaterialTheme.colorScheme.secondaryContainer
 ) {
     val isRtl = remember(value) { isFarsi(value) }
     val customTextSelectionColors = TextSelectionColors(
@@ -103,8 +104,8 @@ fun AppSearchBar(
                 textAlign = if (isRtl) TextAlign.Right else TextAlign.Start,
             ),
             colors = OutlinedTextFieldDefaults.colors(
-                unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-                focusedContainerColor = MaterialTheme.colorScheme.surface,
+                unfocusedContainerColor = color,
+                focusedContainerColor = color,
                 focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
                 unfocusedBorderColor = MaterialTheme.colorScheme.outline,
                 cursorColor = MaterialTheme.colorScheme.onPrimary,
