@@ -43,7 +43,7 @@ fun Appbar(
         Appbar(
             fa = "مسیر پیشنهادی",
             en = "Suggested Path",
-            handleBack = true,
+            
             onBackClick = onBack
         )
         AppbarDetail(fromEn = fromEn, toEn = toEn, fromFa = fromFa, toFa = toFa)

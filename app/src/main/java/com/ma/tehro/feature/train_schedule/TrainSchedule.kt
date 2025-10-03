@@ -66,7 +66,7 @@ fun TrainSchedule(
                 Appbar(
                     fa = "زمان‌بندی حرکت قطار برای ایستگاه $faStationName",
                     en = "train schedule for ${state.stationName}",
-                    handleBack = true,
+                    
                     onBackClick = onBack,
                     modifier = Modifier.height(43.dp),
                     backgroundColor = lineColor

@@ -129,7 +129,7 @@ fun StationSelector(
                 Appbar(
                     fa = "مسیریابی",
                     en = "Path Finder",
-                    handleBack = true,
+                    
                     onBackClick = onBack
                 )
                 HorizontalDivider()

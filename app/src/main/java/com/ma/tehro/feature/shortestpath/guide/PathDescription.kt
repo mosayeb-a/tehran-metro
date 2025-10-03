@@ -90,7 +90,7 @@ fun PathDescription(steps: List<Step>, onBackClick: () -> Unit) {
             Appbar(
                 fa = "راهنمای مسیر",
                 en = "Path Description",
-                handleBack = true,
+                
                 onBackClick = onBackClick,
             ) {
                 IconButton(
