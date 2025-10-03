@@ -72,7 +72,7 @@ fun SubmitFeedback(
             Appbar(
                 fa = "ارسال پیشنهاد",
                 en = "submit suggestion",
-                handleBack = true,
+                
                 onBackClick = onBack
             )
         },

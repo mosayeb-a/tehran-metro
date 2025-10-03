@@ -7,7 +7,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -59,31 +60,32 @@ fun PlaceSelection(
                 Appbar(
                     fa = "انتخاب مکان برای مشاهده ایستگاه‌های نزدیک",
                     en = "select a place to see near stations",
-                    handleBack = true,
                     onBackClick = onBack
                 )
-                Spacer(Modifier.height(8.dp))
-                AppSearchBar(
-                    modifier = Modifier
-                        .padding(vertical = 6.dp),
-                    value = viewState.searchQuery,
-                    onValueChange = { query -> onSearchQueryChanged(query) },
-                    placeholder = "جست‌وجوی مکان دلخواه",
-                )
-                Spacer(Modifier.height(4.dp))
                 HorizontalDivider()
             }
+        },
+        bottomBar = {
+            AppSearchBar(
+                modifier = Modifier
+                    .imePadding()
+                    .navigationBarsPadding()
+                    .padding(bottom = 16.dp),
+                value = viewState.searchQuery,
+                onValueChange = { query -> onSearchQueryChanged(query) },
+                placeholder = "جست‌وجوی مکان دلخواه",
+            )
         }
     ) { paddingValues ->
         LazyColumn(
             modifier = Modifier
-                .padding(top = 166.dp)
+                .padding(top = paddingValues.calculateTopPadding())
                 .fillMaxWidth()
                 .drawVerticalScrollbar(lazyListState),
             contentPadding = PaddingValues(
                 bottom = paddingValues.calculateBottomPadding(),
                 start = paddingValues.calculateLeftPadding(LayoutDirection.Rtl),
-                end = paddingValues.calculateRightPadding(LayoutDirection.Rtl)
+                end = paddingValues.calculateRightPadding(LayoutDirection.Rtl),
             )
         ) {
             viewState.places.forEach { items ->
@@ -125,7 +127,8 @@ fun PlaceSelection(
                     }
                     HorizontalDivider(
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f)
-                    )                }
+                    )
+                }
             }
         }
     }

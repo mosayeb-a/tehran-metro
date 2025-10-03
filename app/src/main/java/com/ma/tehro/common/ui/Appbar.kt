@@ -26,11 +26,10 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun Appbar(
+    modifier: Modifier = Modifier,
     fa: String,
     en: String,
-    handleBack: Boolean = false,
-    onBackClick: () -> Unit = {},
-    modifier: Modifier = Modifier,
+    onBackClick: (() -> Unit)? = null,
     backgroundColor: Color = MaterialTheme.colorScheme.primary,
     startIcon: (@Composable () -> Unit)? = null,
     content: (@Composable RowScope.() -> Unit)? = null
@@ -41,11 +40,11 @@ fun Appbar(
             .background(backgroundColor)
             .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Top))
             .height(56.dp)
-            .padding(start = if (handleBack || startIcon != null) 0.dp else 16.dp),
+            .padding(start = if (onBackClick != null || startIcon != null) 0.dp else 16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        if (handleBack) {
+        if (onBackClick != null) {
             IconButton(onClick = onBackClick) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Rounded.ArrowBack,

@@ -69,7 +69,7 @@ fun MetroMapViewer(
                 en = "metro map",
                 backgroundColor = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.fillMaxWidth(),
-                handleBack = true,
+                
                 onBackClick = onBack
             )
         }

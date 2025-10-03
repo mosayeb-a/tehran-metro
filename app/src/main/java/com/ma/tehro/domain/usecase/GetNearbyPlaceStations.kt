@@ -27,7 +27,7 @@ class GetNearbyPlaceStations @Inject constructor(
                 }
             }
             .sortedBy { it.distanceInMeters }
-            .take(40)
+            .take(5)
             .toList()
     }
 

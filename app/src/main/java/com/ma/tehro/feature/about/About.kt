@@ -59,7 +59,7 @@ fun About(
             Appbar(
                 fa = "درباره",
                 en = "ABOUT",
-                handleBack = true,
+                
                 onBackClick = onBack
             )
         }

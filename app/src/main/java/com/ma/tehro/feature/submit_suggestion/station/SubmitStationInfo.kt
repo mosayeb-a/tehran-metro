@@ -98,7 +98,7 @@ fun SubmitStationInfo(
                 Appbar(
                     fa = "ارسال اصلاحیه برای ایستگاه ${station.translations.fa}",
                     en = "submit station correction for ${station.name}",
-                    handleBack = true,
+                    
                     onBackClick = onBack
                 )
                 HorizontalDivider()

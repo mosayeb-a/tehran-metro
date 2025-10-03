@@ -62,7 +62,7 @@ fun StationDetail(
                 Appbar(
                     fa = lineName.fa,
                     en = lineName.en,
-                    handleBack = true,
+                    
                     onBackClick = onBack,
                     modifier = Modifier
                         .fillMaxWidth()

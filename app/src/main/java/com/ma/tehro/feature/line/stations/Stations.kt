@@ -58,7 +58,7 @@ fun Stations(
             Appbar(
                 fa = lineName.fa,
                 en = lineName.en,
-                handleBack = true,
+                
                 onBackClick = onBackClick
             )
         }) {

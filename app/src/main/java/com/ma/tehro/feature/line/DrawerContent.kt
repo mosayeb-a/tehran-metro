@@ -47,7 +47,7 @@ fun DrawerContent(
             .fillMaxHeight()
             .background(MaterialTheme.colorScheme.secondary)
     ) {
-        item("appbar") { Appbar("", "") }
+        item("appbar") { Appbar(fa = "", en = "") }
         item("lines") {
             DrawerItem(
                 label = BilingualName(
