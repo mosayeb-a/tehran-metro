@@ -1,13 +1,9 @@
 package com.ma.tehro.feature.train_schedule
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -15,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.only
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,29 +20,25 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.DraggableTabRow
 import com.ma.tehro.common.ui.EmptyStatesFaces
 import com.ma.tehro.common.ui.Message
-import com.ma.tehro.common.TimeUtils.remainingTime
-import com.ma.tehro.common.createBilingualMessage
-import com.ma.tehro.common.fractionToTime
-import com.ma.tehro.common.getLineColorByNumber
-import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.data.BilingualName
 import com.ma.tehro.data.ScheduleType
 import com.ma.tehro.data.repo.GroupedScheduleInfo
+import com.ma.tehro.feature.train_schedule.components.ScheduleTypeChips
+import com.ma.tehro.feature.train_schedule.components.TimeListItem
 import kotlinx.coroutines.launch
 
 @Composable
@@ -241,161 +232,5 @@ private fun ScheduleList(
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun TimeListItem(
-    time: Double,
-    currentTimeAsDouble: Double,
-    isCurrentDaySchedule: Boolean,
-    isFirstActiveTime: Boolean,
-    modifier: Modifier = Modifier,
-) {
-    val isPastTime = time <= currentTimeAsDouble
-    val contentAlpha = when {
-        !isCurrentDaySchedule -> 0.5f
-        isPastTime -> 0.5f
-        else -> 1f
-    }
-
-    val remainingTimeText = when {
-        !isCurrentDaySchedule -> ""
-        isPastTime -> ""
-        isFirstActiveTime -> {
-            LaunchedEffect(Unit) {
-                snapshotFlow { remainingTime(time) }
-
-                    .collect { }
-            }
-            remainingTime(time)
-        }
-
-        else -> {
-            remember(time) {
-                remainingTime(time)
-            }
-        }
-    }
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(
-                if (isFirstActiveTime && isCurrentDaySchedule)
-                    MaterialTheme.colorScheme.error.copy(alpha = 0.2f)
-                else Color.Transparent
-            )
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Column(
-            modifier = Modifier.weight(1f),
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = "ARRIVES AT ${fractionToTime(time)}",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = contentAlpha)
-            )
-            Spacer(Modifier.height(4.dp))
-            if (remainingTimeText.isNotEmpty()) {
-                Text(
-                    text = "$remainingTimeText REMAINING",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = if (isFirstActiveTime)
-                        MaterialTheme.colorScheme.error
-                    else
-                        MaterialTheme.colorScheme.onSurface.copy(alpha = contentAlpha)
-                )
-            }
-        }
-
-        Column(
-            modifier = Modifier.weight(1f),
-            horizontalAlignment = Alignment.End
-        ) {
-            Text(
-                text = "ساعت ${fractionToTime(time).toFarsiNumber()}",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = contentAlpha)
-            )
-            Spacer(Modifier.height(4.dp))
-            if (remainingTimeText.isNotEmpty()) {
-                Text(
-                    text = "زمان باقی مانده ${remainingTimeText.toFarsiNumber()}",
-                    style = MaterialTheme.typography.labelSmall,
-                    color = if (isFirstActiveTime)
-                        MaterialTheme.colorScheme.error
-                    else
-                        MaterialTheme.colorScheme.onSurface.copy(alpha = contentAlpha)
-                )
-            }
-        }
-    }
-    HorizontalDivider()
-}
-
-@OptIn(ExperimentalLayoutApi::class)
-@Composable
-private fun ScheduleTypeChips(
-    scheduleTypes: List<ScheduleType>,
-    selectedType: ScheduleType?,
-    onScheduleTypeSelected: (ScheduleType?) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    FlowRow(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primary)
-            .padding(bottom = 8.dp, top = 10.dp, start = 0.dp, end = 0.dp),
-        horizontalArrangement = Arrangement.SpaceAround,
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        scheduleTypes.forEach { scheduleType ->
-            ScheduleDaySelection(
-                isSelected = selectedType == scheduleType,
-                onClick = {
-                    if (selectedType != scheduleType) {
-                        onScheduleTypeSelected(scheduleType)
-                    }
-                },
-                label = bilingualScheduleTypeTitle(scheduleType)
-            )
-        }
-    }
-}
-
-private fun bilingualScheduleTypeTitle(scheduleType: ScheduleType): String {
-    return when (scheduleType) {
-        ScheduleType.SATURDAY_TO_WEDNESDAY -> createBilingualMessage(
-            fa = "شنبه تا چهارشنبه",
-            en = "Saturday to Wednesday"
-        )
-
-        ScheduleType.THURSDAY -> createBilingualMessage(
-            fa = "پنجشنبه",
-            en = "Thursday"
-        )
-
-        ScheduleType.FRIDAY -> createBilingualMessage(
-            fa = "جمعه",
-            en = "Friday"
-        )
-
-        ScheduleType.ALL_DAY -> createBilingualMessage(
-            fa = "همه روزه",
-            en = "All Days"
-        )
-
-        ScheduleType.SATURDAY_TO_THURSDAY -> createBilingualMessage(
-            fa = "شنبه تا پنجشنبه",
-            en = "Saturday to Thursday"
-        )
-
-        ScheduleType.HOLIDAYS_AND_FRIDAY -> createBilingualMessage(
-            fa = "جمعه و تعطیلات",
-            en = "Holidays And Friday"
-        )
     }
 }
