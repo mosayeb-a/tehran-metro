@@ -23,13 +23,14 @@ data class GroupedScheduleInfo(
     val schedules: Map<ScheduleType, List<Double>>
 )
 
+typealias TrainScheduleData = Map<String, Map<String, Map<String, List<Double>>>>
+
 class TrainScheduleRepositoryImpl @Inject constructor(
     private val context: Context,
     private val json: Json
 ) : TrainScheduleRepository {
 
-    private val scheduleCache =
-        mutableMapOf<Int, Map<String, Map<String, Map<String, Map<String, List<Double>>>>>>()
+    private val scheduleCache = mutableMapOf<Int, TrainScheduleData>()
 
     private val scheduleResources = mapOf(
         1 to R.raw.train_schedule_1,
@@ -67,7 +68,7 @@ class TrainScheduleRepositoryImpl @Inject constructor(
         }
 
         return scheduleData
-            .map { (scheduleKey, schedule) ->
+            .map { (scheduleKey, times) ->
                 val scheduleType = ScheduleType.fromScheduleKey(scheduleKey)
                 val towardsStation = scheduleKey.substringBefore(scheduleType?.id?.toString() ?: "")
                 val (validEn, validFa) = when (towardsStation) {
@@ -79,7 +80,7 @@ class TrainScheduleRepositoryImpl @Inject constructor(
                 Triple(
                     BilingualName(validEn, validFa),
                     scheduleType,
-                    schedule["timetable"] ?: emptyList()
+                    times
                 )
             }
             .groupBy { it.first }
@@ -93,16 +94,16 @@ class TrainScheduleRepositoryImpl @Inject constructor(
             }
     }
 
-    private suspend fun getLineSchedule(lineNum: Int): Map<String, Map<String, Map<String, Map<String, List<Double>>>>> {
+    private suspend fun getLineSchedule(lineNum: Int): TrainScheduleData {
         return scheduleCache[lineNum] ?: loadScheduleInBackground(lineNum)
     }
 
-    private suspend fun loadScheduleInBackground(lineNum: Int): Map<String, Map<String, Map<String, Map<String, List<Double>>>>> {
+    private suspend fun loadScheduleInBackground(lineNum: Int): TrainScheduleData {
         if (lineNum == 0) return emptyMap()
         return withContext(Dispatchers.IO) {
             val inputStream = context.resources.openRawResource(scheduleResources[lineNum]!!)
             val schedule =
-                json.decodeFromString<Map<String, Map<String, Map<String, Map<String, List<Double>>>>>>(
+                json.decodeFromString<TrainScheduleData>(
                     inputStream.bufferedReader().use { it.readText() }
                 )
             scheduleCache[lineNum] = schedule
