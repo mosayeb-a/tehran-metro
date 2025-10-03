@@ -1,4 +1,4 @@
-package com.ma.tehro.feature.train_schedule
+package com.ma.tehro.feature.train_schedule.components
 
 import androidx.compose.foundation.Indication
 import androidx.compose.foundation.LocalIndication
