@@ -1,6 +1,6 @@
 package app.ma.scripts
 
-import app.ma.scripts.schedule.ScheduleOutput
+import app.ma.scripts.schedule.model.ScheduleOutput
 import kotlinx.serialization.json.Json
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
