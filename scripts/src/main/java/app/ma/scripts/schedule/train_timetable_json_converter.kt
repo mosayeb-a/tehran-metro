@@ -1,207 +1,461 @@
 package app.ma.scripts.schedule
 
-import app.ma.scripts.common.RES_PATH
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
-import org.apache.poi.ss.usermodel.CellType
-import org.apache.poi.ss.usermodel.WorkbookFactory
-import java.io.File
-import java.util.Locale
+import app.ma.scripts.schedule.model.ScheduleConfig
+import app.ma.scripts.schedule.model.XlsConfig
 
-const val FIRST_ROW = 4
-const val FIRST_COL = 3
-const val NORMAL_0 = "گلشهر- عادي"
-const val THURSDAY_1 = "تجريش پنجشنبه"
-const val FRIDAY_2 = "تجريش جمعه"
-const val NORMAL_3 = "صادقيه - عادي"
-const val THURSDAY_4 = "كهريزك پنجشنبه"
-const val FRIDAY_5 = "كهريزك جمعه"
-const val FILE_NAME = "train_timetable_5"
+const val ROW_LINE1_TAJRISH = 4
+const val COL_LINE1_TAJRISH = 2
+const val ROW_LINE1_KAHRIZAK = 5
+const val COL_LINE1_KAHRIZAK = 2
+const val ROW_LINE1_BRANCH = 5
+const val COL_LINE1_BRANCH = 1
 
-@Serializable
-data class Timetable(val timetable: List<Double> = emptyList())
+const val ROW_LINE2 = 4
+const val COL_LINE2 = 2
 
-@Serializable
-data class Schedule(
-    @SerialName(NORMAL_0) var normal0: Timetable = Timetable(),
-//    @SerialName(THURSDAY_1) var thursday1: Timetable = Timetable(),
-//    @SerialName(FRIDAY_2) var friday2: Timetable = Timetable(),
-    @SerialName(NORMAL_3) var normal3: Timetable = Timetable(),
-//    @SerialName(THURSDAY_4) var thursday4: Timetable = Timetable(),
-//    @SerialName(FRIDAY_5) var friday6: Timetable = Timetable()
+const val ROW_LINE3 = 5
+const val COL_LINE3 = 3
+
+const val ROW_LINE4 = 5
+const val COL_LINE4_MAIN = 2
+const val COL_LINE4_BRANCH = 3
+
+const val ROW_LINE5 = 4
+const val ROW_LINE5_BRANCH = 5
+const val COL_LINE5 = 3
+
+const val ROW_LINE6 = 5
+const val COL_LINE6 = 3
+
+const val ROW_LINE7 = 5
+const val COL_LINE7 = 3
+
+val xlsConfigs = listOf(
+    // line 1
+    XlsConfig(
+        fileName = "train_timetable_1",
+        schedules = listOf(
+            ScheduleConfig(
+                sheetIndex = 0,
+                name = "تجريش عادي",
+                serialName = "Tajrish0",
+                firstRow = ROW_LINE1_TAJRISH,
+                firstCol = COL_LINE1_TAJRISH
+            ),
+            ScheduleConfig(
+                sheetIndex = 1,
+                name = "تجريش پنجشنبه",
+                serialName = "Tajrish1",
+                firstRow = ROW_LINE1_TAJRISH,
+                firstCol = COL_LINE1_TAJRISH
+            ),
+            ScheduleConfig(
+                sheetIndex = 2,
+                name = "تجریش جمعه",
+                serialName = "Tajrish2",
+                firstRow = ROW_LINE1_TAJRISH,
+                firstCol = COL_LINE1_TAJRISH
+            ),
+            ScheduleConfig(
+                sheetIndex = 3,
+                name = "كهريزك عادي",
+                serialName = "Kahrizak0",
+                firstRow = ROW_LINE1_KAHRIZAK,
+                firstCol = COL_LINE1_KAHRIZAK
+            ),
+            ScheduleConfig(
+                sheetIndex = 4,
+                name = "كهريزك پنجشنبه",
+                serialName = "Kahrizak1",
+                firstRow = ROW_LINE1_KAHRIZAK,
+                firstCol = COL_LINE1_KAHRIZAK
+            ),
+            ScheduleConfig(
+                sheetIndex = 5,
+                name = "کهریزک جمعه",
+                serialName = "Kahrizak2",
+                firstRow = ROW_LINE1_KAHRIZAK,
+                firstCol = COL_LINE1_KAHRIZAK
+            ),
+        )
+    ),
+    XlsConfig(
+        fileName = "train_timetable_branch_1",
+        schedules = listOf(
+            ScheduleConfig(
+                sheetIndex = 0,
+                name = "پرند",
+                serialName = "Shahr-e Parand3",
+                firstRow = ROW_LINE1_BRANCH,
+                firstCol = COL_LINE1_BRANCH
+            ),
+            ScheduleConfig(
+                sheetIndex = 1,
+                name = "شاهد",
+                serialName = "Shahed - BagherShahr3",
+                firstRow = ROW_LINE1_BRANCH,
+                firstCol = COL_LINE1_BRANCH
+            ),
+        )
+    ),
+    // line 2
+    XlsConfig(
+        fileName = "train_timetable_2",
+        schedules = listOf(
+            ScheduleConfig(
+                sheetIndex = 0,
+                name = "صادقيه عادي",
+                serialName = "Tehran (Sadeghiyeh)0",
+                firstRow = ROW_LINE2,
+                firstCol = COL_LINE2
+            ),
+            ScheduleConfig(
+                sheetIndex = 1,
+                name = "صادقيه پنج شنبه",
+                serialName = "Tehran (Sadeghiyeh)1",
+                firstRow = ROW_LINE2,
+                firstCol = COL_LINE2
+            ),
+            ScheduleConfig(
+                sheetIndex = 2,
+                name = "صادقيه جمعه",
+                serialName = "Tehran (Sadeghiyeh)2",
+                firstRow = ROW_LINE2,
+                firstCol = COL_LINE2
+            ),
+            ScheduleConfig(
+                sheetIndex = 3,
+                name = "فرهنگسرا عادي",
+                serialName = "Farhangsara0",
+                firstRow = ROW_LINE2,
+                firstCol = COL_LINE2
+            ),
+            ScheduleConfig(
+                sheetIndex = 4,
+                name = "فرهنگسرا پنج شنبه",
+                serialName = "Farhangsara1",
+                firstRow = ROW_LINE2,
+                firstCol = COL_LINE2
+            ),
+            ScheduleConfig(
+                sheetIndex = 5,
+                name = "فرهنگسرا جمعه",
+                serialName = "Farhangsara2",
+                firstRow = ROW_LINE2,
+                firstCol = COL_LINE2
+            ),
+        )
+    ),
+    // line 3
+    XlsConfig(
+        fileName = "train_timetable_3",
+        schedules = listOf(
+            ScheduleConfig(
+                sheetIndex = 0,
+                name = "آزادگان - عادی",
+                serialName = "Azadegan0",
+                firstRow = ROW_LINE3,
+                firstCol = COL_LINE3
+            ),
+            ScheduleConfig(
+                sheetIndex = 1,
+                name = "آزادگان - پنجشنبه",
+                serialName = "Azadegan1",
+                firstRow = ROW_LINE3,
+                firstCol = COL_LINE3
+            ),
+            ScheduleConfig(
+                sheetIndex = 2,
+                name = "آزادگان - جمعه",
+                serialName = "Azadegan2",
+                firstRow = ROW_LINE3,
+                firstCol = COL_LINE3
+            ),
+            ScheduleConfig(
+                sheetIndex = 3,
+                name = "قائم - عادی",
+                serialName = "Qa'em0",
+                firstRow = ROW_LINE3,
+                firstCol = COL_LINE3
+            ),
+            ScheduleConfig(
+                sheetIndex = 4,
+                name = "قائم - پنجشنبه",
+                serialName = "Qa'em1",
+                firstRow = ROW_LINE3,
+                firstCol = COL_LINE3
+            ),
+            ScheduleConfig(
+                sheetIndex = 5,
+                name = "قائم - جمعه",
+                serialName = "Qa'em2",
+                firstRow = ROW_LINE3,
+                firstCol = COL_LINE3
+            ),
+        )
+    ),
+    // line4
+    XlsConfig(
+        fileName = "train_timetable_4",
+        schedules = listOf(
+            ScheduleConfig(
+                sheetIndex = 0,
+                name = "علامه - عادي",
+                serialName = "Allameh Jafari0",
+                firstRow = ROW_LINE4,
+                firstCol = COL_LINE4_MAIN
+            ),
+            ScheduleConfig(
+                sheetIndex = 1,
+                name = "علامه - پنجشنبه",
+                serialName = "Allameh Jafari1",
+                firstRow = ROW_LINE4,
+                firstCol = COL_LINE4_MAIN
+            ),
+            ScheduleConfig(
+                sheetIndex = 2,
+                name = "علامه - جمعه",
+                serialName = "Allameh Jafari2",
+                firstRow = ROW_LINE4,
+                firstCol = COL_LINE4_MAIN
+            ),
+            ScheduleConfig(
+                sheetIndex = 3,
+                name = "شهيد كلاهدوز - عادي",
+                serialName = "Kolahdooz0",
+                firstRow = ROW_LINE4,
+                firstCol = COL_LINE4_MAIN
+            ),
+            ScheduleConfig(
+                sheetIndex = 4,
+                name = "شهيد كلاهدوز - پنجشنبه",
+                serialName = "Kolahdooz1",
+                firstRow = ROW_LINE4,
+                firstCol = COL_LINE4_MAIN
+            ),
+            ScheduleConfig(
+                sheetIndex = 5,
+                name = "شهيد كلاهدوز - جمعه",
+                serialName = "Kolahdooz2",
+                firstRow = ROW_LINE4,
+                firstCol = COL_LINE4_MAIN
+            ),
+        )
+    ),
+    XlsConfig(
+        fileName = "train_timetable_branch_4",
+        schedules = listOf(
+            ScheduleConfig(
+                sheetIndex = 0,
+                name = "بيمه عادي",
+                serialName = "Bimeh4",
+                firstRow = ROW_LINE4,
+                firstCol = COL_LINE4_BRANCH
+            ),
+            ScheduleConfig(
+                sheetIndex = 1,
+                name = "بيمه تعطيل",
+                serialName = "Bimeh5",
+                firstRow = ROW_LINE4,
+                firstCol = COL_LINE4_BRANCH
+            ),
+            ScheduleConfig(
+                sheetIndex = 2,
+                name = "مهرآباد- عادي",
+                serialName = "Mehrabad Airport Terminal 4&64",
+                firstRow = ROW_LINE4,
+                firstCol = COL_LINE4_MAIN
+            ),
+            ScheduleConfig(
+                sheetIndex = 3,
+                name = "مهرآباد تعطيل",
+                serialName = "Mehrabad Airport Terminal 4&65",
+                firstRow = ROW_LINE4,
+                firstCol = COL_LINE4_MAIN
+            ),
+        )
+    ),
+    // line 5
+    XlsConfig(
+        fileName = "train_timetable_5",
+        schedules = listOf(
+            ScheduleConfig(
+                sheetIndex = 0,
+                name = "گلشهر- عادي",
+                serialName = "Golshahr0",
+                firstRow = ROW_LINE5,
+                firstCol = COL_LINE5
+            ),
+            ScheduleConfig(
+                sheetIndex = 1,
+                name = "گلشهر- پنجشنبه",
+                serialName = "Golshahr1",
+                firstRow = ROW_LINE5,
+                firstCol = COL_LINE5
+            ),
+            ScheduleConfig(
+                sheetIndex = 2,
+                name = "گلشهر - جمعه و تعطيلات",
+                serialName = "Golshahr5",
+                firstRow = ROW_LINE5,
+                firstCol = COL_LINE5
+            ),
+            ScheduleConfig(
+                sheetIndex = 3,
+                name = "صادقيه - عادي",
+                serialName = "Tehran (Sadeghiyeh)0",
+                firstRow = ROW_LINE5,
+                firstCol = COL_LINE5
+            ),
+            ScheduleConfig(
+                sheetIndex = 4,
+                name = "صادقيه - پنجشنبه",
+                serialName = "Tehran (Sadeghiyeh)1",
+                firstRow = ROW_LINE5,
+                firstCol = COL_LINE5
+            ),
+            ScheduleConfig(
+                sheetIndex = 5,
+                name = "صادقيه - تعطيل",
+                serialName = "Tehran (Sadeghiyeh)5",
+                firstRow = ROW_LINE5,
+                firstCol = COL_LINE5
+            ),
+        )
+    ),
+    XlsConfig(
+        fileName = "train_timetable_branch_5",
+        schedules = listOf(
+            ScheduleConfig(
+                sheetIndex = 0,
+                name = "هشتگرد - عادي",
+                serialName = "Sepahbod Qasem Soleimani4",
+                firstRow = ROW_LINE5_BRANCH,
+                firstCol = COL_LINE5
+            ),
+            ScheduleConfig(
+                sheetIndex = 1,
+                name = "هشتگرد - تعطيل",
+                serialName = "Sepahbod Qasem Soleimani5",
+                firstRow = ROW_LINE5_BRANCH,
+                firstCol = COL_LINE5
+            ),
+            ScheduleConfig(
+                sheetIndex = 2,
+                name = "گلشهر - عادي",
+                serialName = "Golshahr4",
+                firstRow = ROW_LINE5_BRANCH,
+                firstCol = COL_LINE5
+            ),
+            ScheduleConfig(
+                sheetIndex = 3,
+                name = "گلشهر - تعطيل",
+                serialName = "Golshahr5",
+                firstRow = ROW_LINE5_BRANCH,
+                firstCol = COL_LINE5
+            ),
+        )
+    ),
+    // line 6
+    XlsConfig(
+        fileName = "train_timetable_6",
+        schedules = listOf(
+            ScheduleConfig(
+                sheetIndex = 0,
+                name = "شهيدآرمان - عادي",
+                serialName = "Kouhsar0",
+                firstRow = ROW_LINE6,
+                firstCol = COL_LINE6
+            ),
+            ScheduleConfig(
+                sheetIndex = 1,
+                name = "شهید آرمان - پنجشنبه",
+                serialName = "Kouhsar1",
+                firstRow = ROW_LINE6,
+                firstCol = COL_LINE6
+            ),
+            ScheduleConfig(
+                sheetIndex = 2,
+                name = "شهيدآرمان - تعطيل",
+                serialName = "Kouhsar5",
+                firstRow = ROW_LINE6,
+                firstCol = COL_LINE6
+            ),
+            ScheduleConfig(
+                sheetIndex = 3,
+                name = "دولت آباد - عادي",
+                serialName = "Shohada-ye Dowlat Abad0",
+                firstRow = ROW_LINE6,
+                firstCol = COL_LINE6
+            ),
+            ScheduleConfig(
+                sheetIndex = 4,
+                name = "دولت آّباد  - پنج شنبه",
+                serialName = "Shohada-ye Dowlat Abad1",
+                firstRow = ROW_LINE6,
+                firstCol = COL_LINE6
+            ),
+            ScheduleConfig(
+                sheetIndex = 5,
+                name = "دولت آباد - تعطيل",
+                serialName = "Shohada-ye Dowlat Abad5",
+                firstRow = ROW_LINE6,
+                firstCol = COL_LINE6
+            ),
+        )
+    ),
+    // line 7
+    XlsConfig(
+        fileName = "train_timetable_7",
+        schedules = listOf(
+            ScheduleConfig(
+                sheetIndex = 0,
+                name = "كتاب - عادي",
+                serialName = "Meydan-e Ketab0",
+                firstRow = ROW_LINE7,
+                firstCol = COL_LINE7
+            ),
+            ScheduleConfig(
+                sheetIndex = 1,
+                name = "کتاب- پنجشنبه",
+                serialName = "Meydan-e Ketab1",
+                firstRow = ROW_LINE7,
+                firstCol = COL_LINE7
+            ),
+            ScheduleConfig(
+                sheetIndex = 2,
+                name = "كتاب - تعطیل",
+                serialName = "Meydan-e Ketab5",
+                firstRow = ROW_LINE7,
+                firstCol = COL_LINE7
+            ),
+            ScheduleConfig(
+                sheetIndex = 3,
+                name = "بسيج - عادي",
+                serialName = "Basij0",
+                firstRow = ROW_LINE7,
+                firstCol = COL_LINE7
+            ),
+            ScheduleConfig(
+                sheetIndex = 4,
+                name = "بسیج- پنجشنبه",
+                serialName = "Basij1",
+                firstRow = ROW_LINE7,
+                firstCol = COL_LINE7
+            ),
+            ScheduleConfig(
+                sheetIndex = 5,
+                name = "بسيج - تعطيل",
+                serialName = "Basij5",
+                firstRow = ROW_LINE7,
+                firstCol = COL_LINE7
+            ),
+        )
+    ),
 )
 
-@Serializable
-data class ScheduleOutput(val stations: MutableMap<String, Schedule> = mutableMapOf())
-
 fun main() {
-    val filePath = "${RES_PATH}$FILE_NAME.xls"
-    val file = File(filePath)
-    val workbook = WorkbookFactory.create(file)
-    val scheduleOutput = ScheduleOutput()
-
-    println("reading station names from first sheet...")
-    val stationNames = mutableListOf<String>()
-    val firstSheet = workbook.getSheetAt(0)
-    // todo based on xls file it changed
-    val firstRow = firstSheet.getRow(FIRST_ROW)
-    // todo based on xls file it changed
-    // a:0 b:1 c:2 d:3
-    var colIndex = FIRST_COL
-
-    // reading the first row to get all the station names
-    while (colIndex <= firstRow.lastCellNum) {
-        val cell = firstRow.getCell(colIndex)
-        if (cell != null && cell.cellType == CellType.STRING) {
-            val stationName = cell.stringCellValue
-                .trim()
-                .replace(" ", "")
-            stationNames.add(stationName)
-            println("found station: $stationName (column ${colIndex + 1})")
-        }
-        colIndex++
+    xlsConfigs.forEach { config ->
+        XlsFileParser.parse(config)
     }
-    println("total stations found: ${stationNames.size}")
-
-    for (sheetIndex in 0..1) {
-        println("\n" + "=".repeat(50))
-        println("processing sheet ${sheetIndex + 1} (${getScheduleNameForSheet(sheetIndex)})")
-        println("=".repeat(50))
-
-        val sheet = workbook.getSheetAt(sheetIndex)
-        println("sheetName: ${sheet.sheetName}")
-        // todo based on xls file it changed
-//        val rowIndex = if (sheetIndex <= 1) 4 else 5
-        val rowIndex = FIRST_ROW
-        val row = sheet.getRow(rowIndex)
-        val lastRow = 200
-
-        if (row != null) {
-            for (station in stationNames) {
-                println("\nprocessing station: $station for ${getScheduleNameForSheet(sheetIndex)}")
-
-                // todo based on xls file it changed
-                var stationColIndex = FIRST_COL
-                var stationFound = false
-                while (stationColIndex <= row.lastCellNum) {
-                    val cell = row.getCell(stationColIndex)
-                    if (cell?.cellType == CellType.STRING && cell.stringCellValue
-                            .trim()
-                            .replace(" ", "") == station
-                    ) {
-                        stationFound = true
-                        println("found at column ${stationColIndex + 1}")
-
-                        val timeList = mutableListOf<Double>()
-                        val existingSchedule = scheduleOutput.stations[station] ?: Schedule()
-                        var validTimesCount = 0
-
-                        println("collecting times...")
-                        for (currRow in (rowIndex + 1)..lastRow) {
-                            val nextRow = sheet.getRow(currRow)
-                            val timeCell = nextRow?.getCell(stationColIndex)
-
-                            when (timeCell?.cellType) {
-                                CellType.NUMERIC -> {
-                                    val numericValue = timeCell.numericCellValue
-                                    timeList.add(numericValue)
-                                    validTimesCount++
-                                    if (validTimesCount <= 3 || validTimesCount >= timeList.size - 2) {
-                                        println(
-                                            "row ${currRow + 1}: ${
-                                                convertExcelTimeToString(
-                                                    numericValue
-                                                )
-                                            }"
-                                        )
-                                    } else if (validTimesCount == 4) {
-                                        println("showing first 3 and last 2 times only")
-                                    }
-                                }
-
-                                else -> {
-                                    if (timeCell != null) {
-                                        println("skipped non-numeric value at row ${currRow + 1}")
-                                    }
-                                }
-                            }
-                        }
-
-                        // todo based on xls file it changed
-                        val updatedSchedule = when (sheetIndex) {
-                            0 -> existingSchedule.copy(normal0 = Timetable(timeList))
-//                            1 -> existingSchedule.copy(thursday1 = Timetable(timeList))
-//                            2 -> existingSchedule.copy(friday2 = Timetable(timeList))
-                            1 -> existingSchedule.copy(normal3 = Timetable(timeList))
-//                            4 -> existingSchedule.copy(thursday4 = Timetable(timeList))
-//                            5 -> existingSchedule.copy(friday6 = Timetable(timeList))
-                            else -> existingSchedule
-                        }
-
-                        scheduleOutput.stations[station] = updatedSchedule
-                        println("updated ${getScheduleNameForSheet(sheetIndex)} for $station with $validTimesCount times")
-                        break
-                    }
-                    stationColIndex++
-                }
-                if (!stationFound) {
-                    println("station not found in this sheet")
-                }
-            }
-        }
-
-        println("\nsaving data to json...")
-        val json = Json {
-            prettyPrint = true
-            encodeDefaults = true
-        }
-        File(RES_PATH + FILE_NAME + "_json_test.json").writeText(
-            json.encodeToString(
-                scheduleOutput
-            )
-        )
-        println("data saved successfully")
-    }
-
-    println("\n" + "=".repeat(50))
-    println("final schedule statistics")
-    println("=".repeat(50))
-
-    for (station in stationNames) {
-        println("\nstatistics for $station:")
-        // todo based on xls file it changed
-        scheduleOutput.stations[station]?.let { schedule ->
-            println("$NORMAL_0: ${schedule.normal0.timetable.size} times")
-//            println("$THURSDAY_1: ${schedule.thursday1.timetable.size} times")
-//            println("$FRIDAY_2: ${schedule.friday2.timetable.size} times")
-            println("$NORMAL_3: ${schedule.normal3.timetable.size} times")
-//            println("$THURSDAY_4: ${schedule.thursday4.timetable.size} times")
-//            println("$FRIDAY_5: ${schedule.friday6.timetable.size} times")
-        }
-    }
-
-    println("=".repeat(50))
-}
-
-// todo based on xls file it changed
-fun getScheduleNameForSheet(sheetIndex: Int): String = when (sheetIndex) {
-    0 -> NORMAL_0
-//    1 -> THURSDAY_1
-//    2 -> FRIDAY_2
-    2 -> NORMAL_3
-//    4 -> THURSDAY_4
-//    5 -> FRIDAY_5
-    else -> "unknown"
-}
-
-fun convertExcelTimeToString(excelTime: Double): String {
-    val millisInDay = 24 * 60 * 60 * 1000
-    val totalMillis = Math.round(excelTime * millisInDay)
-
-    val hours = (totalMillis / (60 * 60 * 1000)) % 24
-    val minutes = (totalMillis / (60 * 1000)) % 60
-    val seconds = (totalMillis / 1000) % 60
-
-    return String.format(Locale.US, "%02d:%02d:%02d", hours, minutes, seconds)
 }
