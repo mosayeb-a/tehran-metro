@@ -98,7 +98,6 @@ fun Stations(
 
                     SingleNode(
                         modifier = Modifier.padding(end = 16.dp),
-                        color = MaterialTheme.colorScheme.onPrimary.copy(alpha = .8f),
                         nodeType = nodeType,
                         nodeSize = 20f,
                         isChecked = true,

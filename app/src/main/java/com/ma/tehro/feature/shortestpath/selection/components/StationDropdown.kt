@@ -52,7 +52,8 @@ fun StationDropdown(
                 modifier = Modifier.padding(horizontal = 16.dp),
             ) {
                 SingleNode(
-                    color = nodeColor,
+                    nodeColor = nodeColor,
+                    lineColor = nodeColor,
                     nodeType = if (isFrom) TimelineView.NodeType.FIRST else TimelineView.NodeType.LAST,
                     nodeSize = 20f,
                     isChecked = true,

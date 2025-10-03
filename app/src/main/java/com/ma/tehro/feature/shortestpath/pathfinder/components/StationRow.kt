@@ -45,7 +45,6 @@ fun StationRow(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        // 🟠 Arrival Time FIRST (at right side)
         if (arrivalTime != null) {
             Column(
                 modifier = Modifier
@@ -66,7 +65,6 @@ fun StationRow(
             }
         }
 
-        // 🟠 Station Name SECOND (in center)
         StationItem(
             modifier = Modifier.weight(2f),
             station = station,
@@ -74,9 +72,7 @@ fun StationRow(
             showTransferIndicator = false
         )
 
-        // 🟠 SingleNode LAST (at left side)
         SingleNode(
-            color = MaterialTheme.colorScheme.onPrimary,
             nodeType = if (disabled) {
                 TimelineView.NodeType.SPACER
             } else {
@@ -85,7 +81,7 @@ fun StationRow(
             nodeSize = 20f,
             isChecked = !disabled,
             lineWidth = 0.8f,
-            modifier = Modifier.padding(start = 16.dp) // give a start padding
+            modifier = Modifier.padding(start = 16.dp)
         )
     }
 }

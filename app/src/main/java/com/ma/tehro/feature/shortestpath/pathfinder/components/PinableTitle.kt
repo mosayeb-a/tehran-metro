@@ -82,7 +82,7 @@ fun PinableTitle(
         Spacer(Modifier.width(6.dp))
         SingleNode(
             modifier = Modifier,
-            color = lineColor,
+            nodeColor = lineColor,
             nodeType = if (isFirstItem) TimelineView.NodeType.FIRST else TimelineView.NodeType.MIDDLE,
             nodeSize = 36f,
             isChecked = true,
