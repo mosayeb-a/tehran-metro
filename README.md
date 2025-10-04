@@ -16,12 +16,11 @@
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/06_stations.png" width="150">
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/07_path_guide.png" width="150">
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/08_station_schedule.png" width="150">
+  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/12_map_viewer.png" width="150">
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/09_map.png" width="150">
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/10_station_submission.png" width="150">
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/11_feedback.png" width="150">
 </p>
-
-the project is developed using **compose** for building UIs and implements algorithms for optimized route calculations.
 
 ## Data Source
 The station data is sourced from a JSON file compiled by **Mostafa**. You can find the data [here](https://github.com/mostafa-kheibary/tehran-metro-data/).
