@@ -25,6 +25,9 @@
 ## Data Source
 The station data is sourced from a JSON file compiled by **Mostafa**. You can find the data [here](https://github.com/mostafa-kheibary/tehran-metro-data/).
 
+## Map
+This project uses a remix of the [Tehran Metro Map](https://metromapmaker.com/rate/GiWxNcFZ).
+
 ## License
 Tehran Metro is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 or any later version.
 
