@@ -203,11 +203,17 @@
         r="1"
         fill="#ed71a7" />
     <line
-        class="c2"
-        x1="2"
+        class="c2 "
+        x1="6"
         y1="39"
         x2="26"
         y2="39" />
+    <line
+        class="c2 "
+        x1="6"
+        y1="39"
+        x2="6"
+        y2="46" />
     <line
         class="c2"
         x1="6"
@@ -516,22 +522,30 @@
         fill="#882c81" />
 
     <use
-        x="2"
+        x="1"
         y="21"
         href="#wm" />
     <text
-        x="2.75"
+        x="1.75"
         y="21"
-        transform="rotate(-45 2, 21)">کوهسار
+        transform="rotate(-45 1, 21)">کوهسار
     </text>
     <use
-        x="2"
-        y="39"
+        x="4"
+        y="21"
         href="#wm" />
     <text
-        x="2.75"
-        y="39"
-        transform="rotate(-45 2, 39)">شهید سپهبد قاسم سلیمانی
+        x="4.75"
+        y="22.25"
+        text-anchor="middle">شهدای کن
+    </text>
+    <use
+        x="6"
+        y="46"
+        href="#wm" />
+    <text
+        x="6.75"
+        y="46">شهید سپهبد قاسم سلیمانی
     </text>
     <use
         x="2"
@@ -543,13 +557,12 @@
         transform="rotate(-45 2, 113)">شهر پرند
     </text>
     <use
-        x="4"
-        y="39"
+        x="6"
+        y="43"
         href="#wm" />
     <text
-        x="4.75"
-        y="39"
-        transform="rotate(-45 4, 39)">گلشهر
+        x="6.75"
+        y="43">گلشهر
     </text>
     <use
         x="6"
@@ -928,12 +941,31 @@
         y="33">دانشگاه تربیت مدرس
     </text>
     <use
-        x="41"
-        y="45"
+        x="46"
+        y="38"
         href="#wm" />
     <text
-        x="41.75"
-        y="45">مدافعان سلامت
+        x="45.25"
+        y="38"
+        text-anchor="end">کارگر
+    </text>
+    <use
+        x="50"
+        y="42"
+        href="#wm" />
+    <text
+        x="49.25"
+        y="42"
+        text-anchor="end">بوستان لاله
+    </text>
+    <use
+        x="41"
+        y="40"
+        href="#wm" />
+    <text
+        x="40.25"
+        y="40"
+        text-anchor="end">مدافعان سلامت
     </text>
     <use
         x="41"
@@ -1236,6 +1268,15 @@
         transform="rotate(-45 70, 45)">شهدای هفتم تیر
     </text>
     <use
+        x="78"
+        y="45"
+        href="#wm" />
+    <text
+        x="78.75"
+        y="46.25"
+        text-anchor="middle">بهار شیراز (بیمارستان خانواده)
+    </text>
+    <use
         x="70"
         y="49"
         href="#wm" />
@@ -1516,6 +1557,15 @@
     <text
         x="86.75"
         y="67">امیرکبیر
+    </text>
+    <use
+        x="86"
+        y="73"
+        href="#wm-xf" />
+    <text
+        x="87.5"
+        y="73"
+        transform="rotate(-45 86, 73)">شهدای هفده شهریور
     </text>
     <use
         x="86"
