@@ -178,9 +178,12 @@ fun PathFinder(
                 onInfoClick = onInfoClick,
                 onMapClick = {
                     onMetroMapClick(
-                        state.shortestPath.mapNotNull { item ->
-                            (item as? PathItem.StationItem)?.station?.translations?.fa
-                        }
+                        state.shortestPath
+                            .mapNotNull { item ->
+                                (item as? PathItem.StationItem)?.station
+                            }
+                            .filter { !it.disabled }
+                            .map { it.translations.fa }
                     )
                 },
                 scrollBehavior = exitAlwaysScrollBehavior

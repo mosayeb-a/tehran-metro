@@ -823,7 +823,7 @@
     "lines": [
       1
     ],
-    "disabled": true,
+    "disabled": false,
     "relations": [
       "Emam Khomeini Airport"
     ],
@@ -2893,7 +2893,7 @@
     "lines": [
       5
     ],
-    "disabled": true,
+    "disabled": false,
     "relations": [
       "Golshahr"
     ],
@@ -3472,7 +3472,7 @@
     "lines": [
       6
     ],
-    "disabled": true,
+    "disabled": false,
     "relations": [
       "Shahid Sattari",
       "Shahr-e Ziba",
