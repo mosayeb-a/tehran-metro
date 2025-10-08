@@ -28,6 +28,8 @@ import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.domain.Step
 import com.ma.tehro.feature.shortestpath.guide.components.StepGuideItem
 
+data class StepText(val symbol: String, val message: String)
+
 @Composable
 fun PathDescription(steps: List<Step>, onBackClick: () -> Unit) {
     val lastLine by remember(steps) {
@@ -35,7 +37,6 @@ fun PathDescription(steps: List<Step>, onBackClick: () -> Unit) {
             val lastChangeOrFirst = steps.lastOrNull {
                 it is Step.ChangeLine || it is Step.FirstStation
             }
-
             when (lastChangeOrFirst) {
                 is Step.ChangeLine -> lastChangeOrFirst.newLineTitle
                 is Step.FirstStation -> lastChangeOrFirst.lineTitle
@@ -47,39 +48,59 @@ fun PathDescription(steps: List<Step>, onBackClick: () -> Unit) {
                 .toIntOrNull() ?: 0
         }
     }
-    val stepsText by remember(steps) {
+    val stepTexts by remember(steps) {
         derivedStateOf {
-            steps.joinToString("\n") { step ->
-                val (symbol, message) = when (step) {
+            steps.map { step ->
+                when (step) {
                     is Step.FirstStation -> {
                         val lineNum =
                             step.lineTitle.substringAfter("خط ").substringBefore(":").trim()
-                        val direction =
-                            step.lineTitle.substringAfter(":").trim().takeIf { it.isNotEmpty() }
-                        ">" to buildString {
-                            append("وارد ایستگاه ${step.stationName} (خط $lineNum)")
-                            if (!direction.isNullOrBlank()) append(" و به سمت $direction")
-                            append(" سوار قطار شوید")
-                        }
+                        val direction = step.lineTitle.substringAfter(":").trim()
+                            .replace("به سمت ", "")
+                            .takeIf { it.isNotEmpty() }
+                        StepText(
+                            symbol = ">",
+                            message = buildString {
+                                append("وارد ایستگاه ${step.stationName} (خط $lineNum)")
+                                if (!direction.isNullOrBlank()) append(" و به سمت $direction")
+                                append(" سوار قطار شوید")
+                            }
+                        )
                     }
 
                     is Step.ChangeLine -> {
                         val lineNum =
                             step.newLineTitle.substringAfter("خط ").substringBefore(":").trim()
-                        val direction =
-                            step.newLineTitle.substringAfter(":").trim().takeIf { it.isNotEmpty() }
-                        "<>" to buildString {
-                            append("در ایستگاه ${step.stationName} از قطار پیاده شوید و به سمت ")
-                            append(direction ?: step.newLineTitle)
-                            append(" (خط $lineNum) خط عوض کنید")
-                        }
+                        val direction = step.newLineTitle.substringAfter(":").trim()
+                                .replace("به سمت ", "")
+                            .takeIf { it.isNotEmpty() }
+                        StepText(
+                            symbol = "<>",
+                            message = buildString {
+                                append("در ایستگاه ${step.stationName} از قطار پیاده شوید و به سمت ")
+                                append(direction ?: step.newLineTitle)
+                                append(" (خط $lineNum) خط عوض کنید")
+                            }
+                        )
                     }
 
-                    is Step.LastStation -> "<" to "در ایستگاه ${step.stationName} از قطار پیاده شوید"
-                    Step.Destination -> "*" to "شما به مقصد رسیدید"
+                    is Step.LastStation -> StepText(
+                        symbol = "<",
+                        message = "در ایستگاه ${step.stationName} از قطار پیاده شوید"
+                    )
+
+                    Step.Destination -> StepText(
+                        symbol = "*",
+                        message = "شما به مقصد رسیدید"
+                    )
                 }
-                "$symbol $message"
             }
+        }
+    }
+
+    val stepsText by remember(stepTexts) {
+        derivedStateOf {
+            stepTexts.joinToString("\n") { "${it.symbol} ${it.message}" }
         }
     }
 
@@ -90,11 +111,11 @@ fun PathDescription(steps: List<Step>, onBackClick: () -> Unit) {
             Appbar(
                 fa = "راهنمای مسیر",
                 en = "Path Description",
-                
                 onBackClick = onBackClick,
             ) {
                 IconButton(
                     onClick = {
+                        println("path desc: $stepsText")
                         val sendIntent = Intent().apply {
                             action = Intent.ACTION_SEND
                             putExtra(Intent.EXTRA_TEXT, stepsText)
@@ -117,10 +138,11 @@ fun PathDescription(steps: List<Step>, onBackClick: () -> Unit) {
         CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
             LazyColumn(modifier = Modifier.padding(innerPadding)) {
                 item("first_spacer") { Spacer(Modifier.height(18.dp)) }
-                items(steps) { step ->
+                items(stepTexts) { stepText ->
                     StepGuideItem(
                         modifier = Modifier.clickable {},
-                        step = step,
+                        symbol = stepText.symbol,
+                        message = stepText.message,
                         lineColor = lastLine
                     )
                 }
