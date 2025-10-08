@@ -1,6 +1,5 @@
 package com.ma.tehro.feature.shortestpath.guide.components
 
-
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,42 +16,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.getLineColorByNumber
-import com.ma.tehro.domain.Step
 
 @Composable
 fun StepGuideItem(
     modifier: Modifier,
-    step: Step,
+    symbol: String,
+    message: String,
     lineColor: Int
 ) {
-    val (symbol, message) = when (step) {
-        is Step.FirstStation -> {
-            val lineNum = step.lineTitle.substringAfter("خط ").substringBefore(":").trim()
-            val direction = step.lineTitle.substringAfter(":").trim().takeIf { it.isNotEmpty() }
-            ">" to buildString {
-                append("وارد ایستگاه ${step.stationName} (خط $lineNum)")
-                if (!direction.isNullOrBlank()) append(" و به سمت $direction")
-                append(" سوار قطار شوید")
-            }
-        }
-
-        is Step.ChangeLine -> {
-            val lineNum = step.newLineTitle.substringAfter("خط ").substringBefore(":").trim()
-            val direction = step.newLineTitle.substringAfter(":").trim().takeIf { it.isNotEmpty() }
-            "<>" to buildString {
-                append("در ایستگاه ${step.stationName} از قطار پیاده شوید و به سمت ")
-                append(direction ?: step.newLineTitle)
-                append(" (خط $lineNum) خط عوض کنید")
-            }
-        }
-
-        is Step.LastStation -> {
-            "<" to "در ایستگاه ${step.stationName} از قطار پیاده شوید"
-        }
-
-        Step.Destination -> "*" to "شما به مقصد رسیدید"
-    }
-
     Row(
         modifier = modifier
             .padding(horizontal = 16.dp, vertical = 12.dp)
