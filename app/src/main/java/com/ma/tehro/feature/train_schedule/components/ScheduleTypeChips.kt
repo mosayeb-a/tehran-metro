@@ -1,5 +1,6 @@
 package com.ma.tehro.feature.train_schedule.components
 
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -8,7 +9,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.data.ScheduleType
@@ -21,24 +25,26 @@ fun ScheduleTypeChips(
     onScheduleTypeSelected: (ScheduleType?) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    FlowRow(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primary)
-            .padding(bottom = 8.dp, top = 10.dp, start = 0.dp, end = 0.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-    ) {
-        scheduleTypes.forEach { scheduleType ->
-            ScheduleDaySelection(
-                isSelected = selectedType == scheduleType,
-                onClick = {
-                    if (selectedType != scheduleType) {
-                        onScheduleTypeSelected(scheduleType)
-                    }
-                },
-                label = bilingualScheduleTypeTitle(scheduleType)
-            )
+    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+        FlowRow(
+            modifier = modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.primary)
+                .padding(bottom = 8.dp, top = 10.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            scheduleTypes.forEach { scheduleType ->
+                ScheduleDaySelection(
+                    isSelected = selectedType == scheduleType,
+                    onClick = {
+                        if (selectedType != scheduleType) {
+                            onScheduleTypeSelected(scheduleType)
+                        }
+                    },
+                    label = bilingualScheduleTypeTitle(scheduleType)
+                )
+            }
         }
     }
 }
