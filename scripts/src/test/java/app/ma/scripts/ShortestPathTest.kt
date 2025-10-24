@@ -103,7 +103,7 @@ class ShortestPathTest {
         val expectedPath = listOf(
             "Bahar Shiraz (Khanevadeh Hospital)",
             "Shohada-ye Haftom-e Tir",
-            "Shahid Nejatollahi", // disabled
+            "Maryam-e Moghaddas", // disabled
             "Meydan-e Hazrat Vali Asr",
             "Teatr-e Shahr",
             "Meydan-e Enghelab-e Eslami",
