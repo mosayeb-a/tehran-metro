@@ -8,14 +8,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-interface SettingsRepository {
+interface PreferencesRepository {
     val selectedThemeFlow: Flow<String>
     suspend fun saveTheme(themeName: String)
 }
 
-class SettingsRepositoryImpl @Inject constructor(
+class PreferencesRepositoryImpl @Inject constructor(
     private val dataStore: DataStore<Preferences>
-) : SettingsRepository {
+) : PreferencesRepository {
     companion object {
         private val THEME_KEY = stringPreferencesKey("selected_theme")
     }

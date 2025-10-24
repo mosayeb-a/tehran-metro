@@ -61,10 +61,7 @@ data class PathDescriptionScreen(val steps: List<Step>)
 data class MapViewerScreen(val shortestPath: List<String>?)
 
 @Serializable
-object AboutScreen
-
-@Serializable
 object NearbyPlaceStationsScreen
 
 @Serializable
-object SettingsScreen
+object MoreScreen

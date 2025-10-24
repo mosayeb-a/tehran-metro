@@ -1,9 +1,9 @@
-package com.ma.tehro.feature.settings
+package com.ma.tehro.feature.more
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ma.tehro.common.ui.theme.AppThemes
-import com.ma.tehro.data.repo.SettingsRepository
+import com.ma.tehro.data.repo.PreferencesRepository
 import com.ma.tehro.domain.AppTheme
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,8 +12,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SettingsViewModel @Inject constructor(
-    private val settingsRepository: SettingsRepository
+class PreferencesViewModel @Inject constructor(
+    private val preferencesRepository: PreferencesRepository
 ) : ViewModel() {
 
     private val _currentTheme = MutableStateFlow<AppTheme?>(null)
@@ -21,7 +21,7 @@ class SettingsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            settingsRepository.selectedThemeFlow.collect { savedThemeName ->
+            preferencesRepository.selectedThemeFlow.collect { savedThemeName ->
                 val theme = AppThemes.find { it.name == savedThemeName } ?: AppThemes[0]
                 _currentTheme.value = theme
             }
@@ -31,7 +31,7 @@ class SettingsViewModel @Inject constructor(
     fun setTheme(theme: AppTheme) {
         _currentTheme.value = theme
         viewModelScope.launch {
-            settingsRepository.saveTheme(theme.name)
+            preferencesRepository.saveTheme(theme.name)
         }
     }
 }

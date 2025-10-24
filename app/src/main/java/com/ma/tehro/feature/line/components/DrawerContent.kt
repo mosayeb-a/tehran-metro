@@ -20,8 +20,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.Send
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.SettingsSuggest
+import androidx.compose.material.icons.filled.HdrStrong
 import androidx.compose.material.icons.rounded.FormatListNumbered
 import androidx.compose.material.icons.rounded.Map
 import androidx.compose.material.icons.rounded.MyLocation
@@ -47,8 +46,7 @@ fun DrawerContent(
     onPathFinderClick: () -> Unit,
     onLinesClick: () -> Unit,
     onMetroMapClick: () -> Unit,
-    onAboutClick: () -> Unit,
-    onSettingsClick: () -> Unit
+    onMoreClick: () -> Unit
 ) {
     LazyColumn(
         modifier = Modifier
@@ -57,7 +55,7 @@ fun DrawerContent(
             .background(MaterialTheme.colorScheme.secondary)
             .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Top))
     ) {
-        item{ Spacer(Modifier.height(56.dp)) }
+        item { Spacer(Modifier.height(56.dp)) }
 
         item("lines") {
             DrawerItem(
@@ -66,7 +64,7 @@ fun DrawerContent(
                     en = "LINES"
                 ),
                 onClick = onLinesClick,
-                imageVector =Icons.Rounded.FormatListNumbered
+                imageVector = Icons.Rounded.FormatListNumbered
             )
         }
         item("pathfinder") {
@@ -99,16 +97,6 @@ fun DrawerContent(
                 imageVector = Icons.Rounded.Map,
             )
         }
-        item("about") {
-            DrawerItem(
-                label = BilingualName(
-                    fa = "درباره",
-                    en = "ABOUT"
-                ),
-                onClick = onAboutClick,
-                imageVector = Icons.Default.Info
-            )
-        }
         item("submit_feedback") {
             DrawerItem(
                 label = BilingualName(
@@ -119,14 +107,14 @@ fun DrawerContent(
                 imageVector = Icons.AutoMirrored.Rounded.Send
             )
         }
-        item("settings") {
+        item("more") {
             DrawerItem(
                 label = BilingualName(
-                    fa = "تنظیمات",
-                    en = "SETTINGS"
+                    fa = "بیشتر",
+                    en = "MORE"
                 ),
-                onClick = onSettingsClick,
-                imageVector = Icons.Default.SettingsSuggest
+                onClick = onMoreClick,
+                imageVector = Icons.Default.HdrStrong
             )
         }
     }
