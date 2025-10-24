@@ -3225,7 +3225,7 @@
     "atm": false,
     "relations": [
       "Bahar Shiraz (Khanevadeh Hospital)",
-      "Shahid Nejatollahi",
+      "Maryam-e Moghaddas",
       "Shahid Mofattah",
       "Ayatollah Taleghani"
     ],
@@ -3240,15 +3240,15 @@
       }
     ]
   },
-  "Shahid Nejatollahi": {
-    "name": "Shahid Nejatollahi",
+  "Maryam-e Moghaddas": {
+    "name": "Maryam-e Moghaddas",
     "translations": {
-      "fa": "شهید نجات اللهی"
+      "fa": "مریم مقدس (س)"
     },
     "lines": [
       6
     ],
-    "disabled": true,
+    "disabled": false,
     "relations": [
       "Shohada-ye Haftom-e Tir",
       "Meydan-e Hazrat Vali Asr"
@@ -3279,7 +3279,7 @@
     "fastFood": false,
     "atm": false,
     "relations": [
-      "Shahid Nejatollahi",
+      "Maryam-e Moghaddas",
       "Meydan-e Jahad",
       "Teatr-e Shahr",
       "Bustan-e Laleh"
