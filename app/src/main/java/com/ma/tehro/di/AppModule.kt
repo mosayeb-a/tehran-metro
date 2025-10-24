@@ -23,8 +23,8 @@ import com.ma.tehro.data.repo.PathRepository
 import com.ma.tehro.data.repo.PathRepositoryImpl
 import com.ma.tehro.data.repo.PlacesRepository
 import com.ma.tehro.data.repo.PlacesRepositoryImpl
-import com.ma.tehro.data.repo.SettingsRepository
-import com.ma.tehro.data.repo.SettingsRepositoryImpl
+import com.ma.tehro.data.repo.PreferencesRepository
+import com.ma.tehro.data.repo.PreferencesRepositoryImpl
 import com.ma.tehro.data.repo.TrainScheduleRepository
 import com.ma.tehro.data.repo.TrainScheduleRepositoryImpl
 import com.ma.tehro.services.LocationTracker
@@ -154,7 +154,7 @@ class AppModule {
     @Provides
     fun provideSettingsRepository(
         dataStore: DataStore<Preferences>
-    ): SettingsRepository {
-        return SettingsRepositoryImpl(dataStore)
+    ): PreferencesRepository {
+        return PreferencesRepositoryImpl(dataStore)
     }
 }

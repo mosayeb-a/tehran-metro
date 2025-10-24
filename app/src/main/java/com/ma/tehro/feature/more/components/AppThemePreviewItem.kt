@@ -1,4 +1,4 @@
-package com.ma.tehro.feature.settings.components
+package com.ma.tehro.feature.more.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi

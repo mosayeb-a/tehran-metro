@@ -33,7 +33,7 @@ import com.ma.tehro.common.ui.AppSnackbar
 import com.ma.tehro.common.ui.UiMessageManager
 import com.ma.tehro.common.ui.theme.DarkGray
 import com.ma.tehro.common.ui.theme.TehroTheme
-import com.ma.tehro.feature.settings.SettingsViewModel
+import com.ma.tehro.feature.more.PreferencesViewModel
 import com.ma.tehro.navigation.AppNavigation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -52,8 +52,8 @@ class MainActivity : ComponentActivity() {
         )
 
         setContent {
-            val settingsViewModel: SettingsViewModel = hiltViewModel()
-            val currentTheme by settingsViewModel.currentTheme.collectAsStateWithLifecycle()
+            val preferencesViewModel: PreferencesViewModel = hiltViewModel()
+            val currentTheme by preferencesViewModel.currentTheme.collectAsStateWithLifecycle()
             if (currentTheme == null) {
                 Box(
                     contentAlignment = Alignment.Center,

@@ -48,8 +48,7 @@ fun Lines(
     onSubmitFeedbackClick: () -> Unit,
     onPathFinderClick: () -> Unit,
     onMetroMapClick: () -> Unit,
-    onAboutClick: () -> Unit,
-    onSettingsClick: () -> Unit,
+    onMoreClick: () -> Unit,
 ) {
     val screenHeight = LocalConfiguration.current.screenHeightDp
     val itemHeight = remember(screenHeight, lines.size) {
@@ -90,13 +89,9 @@ fun Lines(
                     coroutineScope.launch { drawerState.close() }
                     onMetroMapClick()
                 },
-                onAboutClick = {
+                onMoreClick = {
                     coroutineScope.launch { drawerState.close() }
-                    onAboutClick()
-                },
-                onSettingsClick = {
-                    coroutineScope.launch { drawerState.close() }
-                    onSettingsClick()
+                    onMoreClick()
                 }
             )
         }

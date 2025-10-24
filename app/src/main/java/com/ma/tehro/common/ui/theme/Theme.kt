@@ -53,10 +53,10 @@ private val OceanColorScheme = darkColorScheme(
 )
 
 val AppThemes = listOf(
-    AppTheme("Blue", BlueColorScheme),
-    AppTheme("Mocha", MochaColorScheme),
-    AppTheme("Forest", ForestColorScheme),
-    AppTheme("Ocean", OceanColorScheme)
+    AppTheme("آبی", BlueColorScheme),
+    AppTheme("موکا", MochaColorScheme),
+    AppTheme("جنگل", ForestColorScheme),
+    AppTheme("اقیانوس", OceanColorScheme)
 )
 
 @Composable
