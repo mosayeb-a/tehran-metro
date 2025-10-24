@@ -67,7 +67,7 @@ fun PathFinder(
 
     Scaffold(
         modifier = modifier.nestedScroll(exitAlwaysScrollBehavior),
-        containerColor = MaterialTheme.colorScheme.secondary,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             Appbar(
                 fromEn = fromEn,

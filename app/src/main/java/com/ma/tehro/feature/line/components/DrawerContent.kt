@@ -1,4 +1,4 @@
-package com.ma.tehro.feature.line
+package com.ma.tehro.feature.line.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
@@ -7,15 +7,24 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.automirrored.rounded.Send
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.SettingsSuggest
+import androidx.compose.material.icons.rounded.FormatListNumbered
+import androidx.compose.material.icons.rounded.Map
+import androidx.compose.material.icons.rounded.MyLocation
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -28,7 +37,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.R
-import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.data.BilingualName
 
@@ -40,14 +48,17 @@ fun DrawerContent(
     onLinesClick: () -> Unit,
     onMetroMapClick: () -> Unit,
     onAboutClick: () -> Unit,
+    onSettingsClick: () -> Unit
 ) {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth(.71f)
             .fillMaxHeight()
             .background(MaterialTheme.colorScheme.secondary)
+            .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Top))
     ) {
-        item("appbar") { Appbar(fa = "", en = "") }
+        item{ Spacer(Modifier.height(56.dp)) }
+
         item("lines") {
             DrawerItem(
                 label = BilingualName(
@@ -55,7 +66,7 @@ fun DrawerContent(
                     en = "LINES"
                 ),
                 onClick = onLinesClick,
-                imageVector = Icons.AutoMirrored.Filled.List
+                imageVector =Icons.Rounded.FormatListNumbered
             )
         }
         item("pathfinder") {
@@ -75,7 +86,7 @@ fun DrawerContent(
                     en = "STATION ON CITY MAP"
                 ),
                 onClick = onCityMapClick,
-                icon = R.drawable.my_location_24px
+                imageVector = Icons.Rounded.MyLocation,
             )
         }
         item("metro_map") {
@@ -85,7 +96,7 @@ fun DrawerContent(
                     en = "METRO MAP"
                 ),
                 onClick = onMetroMapClick,
-                icon = R.drawable.map_24px
+                imageVector = Icons.Rounded.Map,
             )
         }
         item("about") {
@@ -106,6 +117,16 @@ fun DrawerContent(
                 ),
                 onClick = onSubmitFeedbackClick,
                 imageVector = Icons.AutoMirrored.Rounded.Send
+            )
+        }
+        item("settings") {
+            DrawerItem(
+                label = BilingualName(
+                    fa = "تنظیمات",
+                    en = "SETTINGS"
+                ),
+                onClick = onSettingsClick,
+                imageVector = Icons.Default.SettingsSuggest
             )
         }
     }
@@ -151,6 +172,6 @@ fun DrawerItem(
                 )
             }
         }
-        HorizontalDivider()
+        HorizontalDivider(color = MaterialTheme.colorScheme.onBackground.copy(.3f))
     }
 }

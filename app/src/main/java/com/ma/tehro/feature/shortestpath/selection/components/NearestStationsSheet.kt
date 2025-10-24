@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.BilingualText
-import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.domain.NearestStation
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
@@ -49,7 +48,7 @@ fun NearestStationSheet(
         ),
         onDismissRequest = onDismiss,
         modifier = Modifier.fillMaxWidth(),
-        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+        containerColor = MaterialTheme.colorScheme.primaryContainer,
     ) {
         NearestStationsBottomSheetContent(
             nearestStations = nearestStations,
@@ -104,9 +103,9 @@ fun NearestStationsBottomSheetContent(
                             .clip(MaterialTheme.shapes.large)
                             .background(
                                 if (isSelected)
-                                    MaterialTheme.colorScheme.tertiary
+                                    MaterialTheme.colorScheme.primary
                                 else
-                                    MaterialTheme.colorScheme.secondaryContainer
+                                    MaterialTheme.colorScheme.primaryContainer
                             )
                             .clickable {
                                 onStationSelected(station)

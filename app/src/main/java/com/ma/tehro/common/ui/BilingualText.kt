@@ -29,6 +29,7 @@ fun BilingualText(
     enAlpha: Float = .9f,
     textAlign: TextAlign = TextAlign.Start,
     overflow: TextOverflow = TextOverflow.Ellipsis,
+    textColor: Color = Color.White
 ) {
     val linesPerText =
         if (maxLine == Int.MAX_VALUE) Int.MAX_VALUE else (maxLine / 2).coerceAtLeast(1)
@@ -47,7 +48,7 @@ fun BilingualText(
     ) {
         Text(
             text = fa,
-            color = Color.White,
+            color = textColor,
             style = style,
             fontWeight = FontWeight.W500,
             textAlign = textAlign,
@@ -57,7 +58,7 @@ fun BilingualText(
         Text(
             text = en,
             style = style,
-            color = Color.White.copy(alpha = enAlpha),
+            color = textColor.copy(alpha = enAlpha),
             fontSize = enSize,
             textAlign = textAlign,
             maxLines = linesPerText,

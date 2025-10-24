@@ -23,12 +23,13 @@ fun ExtendableFab(
     lazyListState: LazyListState,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    containerColor: Color = MaterialTheme.colorScheme.tertiary,
+    containerColor: Color = MaterialTheme.colorScheme.primary,
     disabledContainerColor: Color = MaterialTheme.colorScheme.surfaceVariant,
     iconRes: Int,
     faText: String,
     enText: String,
     onClick: () -> Unit,
+    textColor: Color
 ) {
     var isExtended by remember { mutableStateOf(true) }
 
@@ -58,6 +59,7 @@ fun ExtendableFab(
                     style = MaterialTheme.typography.bodyMedium,
                     maxLine = 2,
                     textAlign = TextAlign.Center,
+                    textColor = textColor
                 )
             }
         }

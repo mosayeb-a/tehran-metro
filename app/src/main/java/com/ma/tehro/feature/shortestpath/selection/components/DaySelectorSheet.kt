@@ -41,7 +41,7 @@ fun DaySelectorSheet(
         ),
         onDismissRequest = onDismiss,
         modifier = Modifier.fillMaxWidth(),
-        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+        containerColor = MaterialTheme.colorScheme.primaryContainer,
     ) {
         DaySelectorBottomSheetContent(
             dayOfWeek = selectedDay,
@@ -88,9 +88,9 @@ fun DaySelectorBottomSheetContent(
                         .clip(MaterialTheme.shapes.large)
                         .background(
                             if (selectedItem == value)
-                                MaterialTheme.colorScheme.tertiary
+                                MaterialTheme.colorScheme.primary
                             else
-                                MaterialTheme.colorScheme.secondaryContainer
+                                MaterialTheme.colorScheme.primaryContainer
                         )
                         .clickable {
                             selectedItem = value
@@ -103,14 +103,16 @@ fun DaySelectorBottomSheetContent(
                     Icon(
                         imageVector = Icons.AutoMirrored.Rounded.KeyboardArrowLeft,
                         contentDescription = "go",
-                        modifier = Modifier.padding(end = 12.dp)
+                        modifier = Modifier.padding(end = 12.dp),
+                        tint = if (selectedItem == value) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onPrimaryContainer
                     )
                     BilingualText(
                         fa = names.first,
                         en = names.second,
                         modifier = Modifier
                             .weight(1f),
-                        textAlign = TextAlign.End
+                        textAlign = TextAlign.End,
+                        textColor = if (selectedItem == value) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onPrimaryContainer
                     )
                 }
             }

@@ -29,7 +29,7 @@ fun ScheduleTypeChips(
         FlowRow(
             modifier = modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.primary)
+                .background(MaterialTheme.colorScheme.secondary)
                 .padding(bottom = 8.dp, top = 10.dp),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalArrangement = Arrangement.spacedBy(8.dp),

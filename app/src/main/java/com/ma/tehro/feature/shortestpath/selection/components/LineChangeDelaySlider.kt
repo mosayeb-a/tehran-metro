@@ -31,7 +31,7 @@ fun LineChangeDelaySlider(
         modifier = Modifier.fillMaxWidth(),
         text = "مدت زمان لازم برای تعویض خط",
         style = MaterialTheme.typography.bodyLarge,
-        color = MaterialTheme.colorScheme.onPrimary,
+        color = MaterialTheme.colorScheme.onBackground,
         textAlign = TextAlign.End
     )
     Row(
@@ -49,23 +49,23 @@ fun LineChangeDelaySlider(
             valueRange = 1f..20f,
             steps = 18,
             colors = SliderDefaults.colors(
-                thumbColor = MaterialTheme.colorScheme.onPrimary,
-                activeTrackColor = MaterialTheme.colorScheme.tertiary,
-                inactiveTrackColor = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.3f),
+                thumbColor = MaterialTheme.colorScheme.onBackground,
+                activeTrackColor = MaterialTheme.colorScheme.primary,
+                inactiveTrackColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
                 inactiveTickColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = .5f),
-                activeTickColor = MaterialTheme.colorScheme.onPrimary
+                activeTickColor = MaterialTheme.colorScheme.onBackground
             )
         )
         Spacer(Modifier.width(6.dp))
         Text(
             text = " دقیقه",
             style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
-            color = MaterialTheme.colorScheme.onSurface
+            color = MaterialTheme.colorScheme.onBackground
         )
         Text(
             text = " ${lineChangeDelay.toFarsiNumber()}",
             style = MaterialTheme.typography.bodyLarge
-                .copy(color = MaterialTheme.colorScheme.onPrimary, fontWeight = FontWeight.Bold)
+                .copy(color = MaterialTheme.colorScheme.onBackground, fontWeight = FontWeight.Bold)
         )
     }
 }

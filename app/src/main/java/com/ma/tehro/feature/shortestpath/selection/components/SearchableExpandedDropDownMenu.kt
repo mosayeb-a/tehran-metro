@@ -184,7 +184,7 @@ fun <T> SearchableExpandedDropDownMenu(
                     .fillMaxWidth(0.9f)
                     .heightIn(max = LocalConfiguration.current.screenHeightDp.dp * 0.8f),
                 shape = RoundedCornerShape(18.dp),
-                color = MaterialTheme.colorScheme.secondaryContainer
+                color = MaterialTheme.colorScheme.primaryContainer
             ) {
                 Column {
                     AppSearchBar(
@@ -227,7 +227,7 @@ fun <T> SearchableExpandedDropDownMenu(
                                 if (item != displayedItems.last()) {
                                     HorizontalDivider(
                                         modifier = Modifier.padding(horizontal = 16.dp),
-                                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
+                                        color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.12f)
                                     )
                                 }
                             }

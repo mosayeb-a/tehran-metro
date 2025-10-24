@@ -13,8 +13,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.Send
@@ -33,7 +31,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -108,14 +105,10 @@ fun SubmitStationInfo(
         LazyColumn(
             modifier = Modifier
                 .padding(paddingValues)
-                .padding(horizontal = 16.dp)
         ) {
-
-            item { Spacer(Modifier.height(16.dp)) }
             item("title") {
                 Column(
                     modifier = Modifier
-                        .clip(RoundedCornerShape(18.dp))
                         .background(getLineColorByNumber(lineNumber).copy(alpha = .61f))
                         .padding(6.dp)
                 ) {
@@ -125,7 +118,7 @@ fun SubmitStationInfo(
                         style = MaterialTheme.typography.bodyMedium,
                         fontSize = 17.sp,
                         modifier = Modifier
-                            .padding(6.dp)
+                            .padding(horizontal = 6.dp, vertical = 10.dp)
                             .fillMaxWidth(),
                     )
                 }
@@ -136,13 +129,17 @@ fun SubmitStationInfo(
                     value = name,
                     onValueChange = { name = it },
                     label = "نام انگلیسی",
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .fillMaxWidth()
                 )
             }
             item { Spacer(Modifier.height(4.dp)) }
             item {
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     CorrectionEditText(
@@ -170,13 +167,17 @@ fun SubmitStationInfo(
                     onValueChange = { address = it },
                     label = "آدرس",
                     maxLines = 2,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .fillMaxWidth()
                 )
             }
             item { Spacer(Modifier.height(4.dp)) }
             item {
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     CorrectionEditText(
@@ -205,6 +206,7 @@ fun SubmitStationInfo(
             item {
                 Column(
                     modifier = Modifier
+                        .padding(horizontal = 16.dp)
                         .fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(8.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -235,6 +237,7 @@ fun SubmitStationInfo(
 
                         Row(
                             modifier = Modifier
+                                .padding(horizontal = 16.dp)
                                 .wrapContentWidth()
                                 .align(Alignment.CenterHorizontally),
                             horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -258,6 +261,7 @@ fun SubmitStationInfo(
 
                         Row(
                             modifier = Modifier
+                                .padding(horizontal = 16.dp)
                                 .wrapContentWidth()
                                 .align(Alignment.CenterHorizontally),
                             horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -287,10 +291,11 @@ fun SubmitStationInfo(
             item {
                 Button(
                     modifier = Modifier
+                        .padding(horizontal = 16.dp)
                         .fillMaxWidth(),
                     onClick = { onSubmitInfo(station) },
                     enabled = !state.isLoading && isChanged,
-                    colors  = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiary),
+                    colors  = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp)
                 ) {
                     BilingualText(

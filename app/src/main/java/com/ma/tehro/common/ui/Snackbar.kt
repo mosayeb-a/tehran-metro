@@ -26,7 +26,7 @@ fun AppSnackbar(
         modifier = modifier
             .padding(start = 16.dp, end = 16.dp, bottom = 86.dp)
             .wrapContentSize(),
-        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        color = MaterialTheme.colorScheme.primaryContainer,
         shape = RoundedCornerShape(16.dp),
         tonalElevation = 6.dp
     ) {
@@ -40,20 +40,20 @@ fun AppSnackbar(
             Text(
                 text = data.visuals.message,
                 modifier = Modifier.weight(1f),
-                style = MaterialTheme.typography.labelMedium.copy(color = MaterialTheme.colorScheme.primary),
+                style = MaterialTheme.typography.labelMedium.copy(color = MaterialTheme.colorScheme.onPrimaryContainer),
             )
             data.visuals.actionLabel?.let { actionLabel ->
                 TextButton(
                     onClick = { data.performAction() },
                     colors = ButtonDefaults.textButtonColors(
-                        contentColor = MaterialTheme.colorScheme.tertiary
+                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
                     ),
                     shape = MaterialTheme.shapes.large,
                 ) {
                     Text(
                         text = actionLabel,
                         style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.primary,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
                         textAlign = TextAlign.Center
                     )
                 }

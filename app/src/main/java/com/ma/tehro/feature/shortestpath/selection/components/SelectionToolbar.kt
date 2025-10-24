@@ -49,12 +49,12 @@ fun SelectionToolbar(
                 onClick = {
                     onFindPathClick()
                 },
-                containerColor = MaterialTheme.colorScheme.tertiary
+                containerColor = MaterialTheme.colorScheme.primary
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.route),
                     contentDescription = "find shortest path",
-                    tint = MaterialTheme.colorScheme.onTertiary
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
             }
         },
@@ -65,8 +65,8 @@ fun SelectionToolbar(
             )
             .offset(y = -ScreenOffset),
         colors = FloatingToolbarDefaults.vibrantFloatingToolbarColors(
-            toolbarContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-            toolbarContentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+            toolbarContainerColor = MaterialTheme.colorScheme.primaryContainer,
+            toolbarContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
         ),
         content = {
             IconButton(

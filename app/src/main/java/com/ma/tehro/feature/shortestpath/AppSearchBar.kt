@@ -38,7 +38,7 @@ fun AppSearchBar(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     placeholder: String,
-    color : Color = MaterialTheme.colorScheme.secondaryContainer
+    color : Color = MaterialTheme.colorScheme.secondary
 ) {
     val isRtl = remember(value) { isFarsi(value) }
     val customTextSelectionColors = TextSelectionColors(
@@ -106,9 +106,9 @@ fun AppSearchBar(
             colors = OutlinedTextFieldDefaults.colors(
                 unfocusedContainerColor = color,
                 focusedContainerColor = color,
-                focusedBorderColor = MaterialTheme.colorScheme.onPrimary,
+                focusedBorderColor = MaterialTheme.colorScheme.onSecondary.copy(alpha = .75f),
                 unfocusedBorderColor = MaterialTheme.colorScheme.outline,
-                cursorColor = MaterialTheme.colorScheme.onPrimary,
+                cursorColor = MaterialTheme.colorScheme.onSecondary,
             ),
             shape = MaterialTheme.shapes.extraLarge,
             placeholder = {
