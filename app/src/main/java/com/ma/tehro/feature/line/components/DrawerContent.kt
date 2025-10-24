@@ -60,14 +60,14 @@ fun DrawerContent(
 
             item("lines") {
                 DrawerItem(
-                    BilingualName("فهرست خطوط", "LINES"),
+                    BilingualName(fa = "فهرست خطوط", en = "LINES"),
                     onLinesClick,
                     imageVector = Icons.Rounded.FormatListNumbered
                 )
             }
             item("pathfinder") {
                 DrawerItem(
-                    BilingualName("مسیریابی", "PATHFINDER"),
+                    BilingualName(fa = "مسیریابی", en = "PATHFINDER"),
                     onPathFinderClick,
                     icon = R.drawable.route
                 )
@@ -75,28 +75,28 @@ fun DrawerContent(
             item("station_on_city_map") {
                 DrawerItem(
                     BilingualName(
-                        "ایستگاها در نقشه شهر",
-                        "STATION ON CITY MAP"
+                        fa = "ایستگاها در نقشه شهر",
+                        en = "STATION ON CITY MAP"
                     ), onCityMapClick, imageVector = Icons.Rounded.MyLocation
                 )
             }
             item("metro_map") {
                 DrawerItem(
-                    BilingualName("نقشه مترو", "METRO MAP"),
+                    BilingualName(fa = "نقشه مترو", en = "METRO MAP"),
                     onMetroMapClick,
                     imageVector = Icons.Rounded.Map
                 )
             }
             item("submit_feedback") {
                 DrawerItem(
-                    BilingualName("ارسال پیشنهاد", "SUBMIT FEEDBACK"),
+                    BilingualName(fa = "ارسال پیشنهاد", en = "SUBMIT FEEDBACK"),
                     onSubmitFeedbackClick,
                     imageVector = Icons.AutoMirrored.Rounded.Send
                 )
             }
             item("more") {
                 DrawerItem(
-                    BilingualName("بیشتر", "MORE"),
+                    BilingualName(fa = "بیشتر", en = "MORE"),
                     onMoreClick,
                     imageVector = Icons.Default.HdrStrong
                 )
