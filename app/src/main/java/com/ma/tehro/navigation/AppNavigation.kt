@@ -61,7 +61,8 @@ import kotlin.reflect.typeOf
 fun AppNavigation(
     navController: NavHostController,
     locationPermissionHandler: LocationPermissionHandler,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    preferencesViewModel: PreferencesViewModel
 ) {
     NavHost(
         navController = navController,
@@ -302,8 +303,7 @@ fun AppNavigation(
         }
 
         baseComposable<MoreScreen> { backStackEntry ->
-            val viewModel: PreferencesViewModel = hiltViewModel(backStackEntry)
-            More(viewModel = viewModel)
+            More(viewModel = preferencesViewModel)
         }
     }
 }

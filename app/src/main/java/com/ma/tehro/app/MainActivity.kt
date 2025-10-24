@@ -109,6 +109,7 @@ class MainActivity : ComponentActivity() {
                         AppNavigation(
                             navController = navController,
                             locationPermissionHandler = locationPermissionHandler,
+                            preferencesViewModel = preferencesViewModel
                         )
                     }
                 }
