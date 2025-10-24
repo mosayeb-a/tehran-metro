@@ -14,6 +14,7 @@
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/04_detail.png" width="150">
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/05_places.png" width="150">
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/06_stations.png" width="150">
+  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/13_more.png" width="150">
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/07_path_guide.png" width="150">
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/08_station_schedule.png" width="150">
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/12_map_viewer.png" width="150">
