@@ -4,6 +4,10 @@ import com.ma.tehro.services.DefaultLocationClient
 import com.ma.tehro.services.LocationClient
 import android.app.Application
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.PreferenceDataStoreFactory
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStoreFile
 import com.ma.tehro.R
 import com.ma.tehro.data.Place
 import com.ma.tehro.data.PlaceCategory
@@ -19,6 +23,8 @@ import com.ma.tehro.data.repo.PathRepository
 import com.ma.tehro.data.repo.PathRepositoryImpl
 import com.ma.tehro.data.repo.PlacesRepository
 import com.ma.tehro.data.repo.PlacesRepositoryImpl
+import com.ma.tehro.data.repo.SettingsRepository
+import com.ma.tehro.data.repo.SettingsRepositoryImpl
 import com.ma.tehro.data.repo.TrainScheduleRepository
 import com.ma.tehro.data.repo.TrainScheduleRepositoryImpl
 import com.ma.tehro.services.LocationTracker
@@ -82,6 +88,7 @@ class AppModule {
             json.decodeFromString(placesJson)
         }
     }
+
     @Provides
     @Singleton
     fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
@@ -131,5 +138,23 @@ class AppModule {
         json: Json
     ): TrainScheduleRepository {
         return TrainScheduleRepositoryImpl(context, json)
+    }
+
+    @Singleton
+    @Provides
+    fun providePreferencesDataStore(
+        @ApplicationContext context: Context
+    ): DataStore<Preferences> {
+        return PreferenceDataStoreFactory.create {
+            context.preferencesDataStoreFile("app_settings")
+        }
+    }
+
+    @Singleton
+    @Provides
+    fun provideSettingsRepository(
+        dataStore: DataStore<Preferences>
+    ): SettingsRepository {
+        return SettingsRepositoryImpl(dataStore)
     }
 }

@@ -40,6 +40,7 @@ fun SubmitFeedback(
     }
 
     Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             Appbar(
                 fa = "ارسال پیشنهاد",

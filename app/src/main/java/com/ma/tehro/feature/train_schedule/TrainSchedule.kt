@@ -34,6 +34,7 @@ import com.ma.tehro.common.ui.DraggableTabRow
 import com.ma.tehro.common.ui.EmptyStatesFaces
 import com.ma.tehro.common.ui.Message
 import com.ma.tehro.common.ui.drawVerticalScrollbar
+import com.ma.tehro.common.ui.theme.LightGray
 import com.ma.tehro.data.BilingualName
 import com.ma.tehro.data.ScheduleType
 import com.ma.tehro.data.repo.GroupedScheduleInfo
@@ -56,17 +57,13 @@ fun TrainSchedule(
         modifier = modifier,
         topBar = {
             Column(
-                // quick fix
                 modifier = Modifier
                     .background(lineColor)
-                    .windowInsetsPadding(
-                        WindowInsets.systemBars.only(WindowInsetsSides.Top)
-                    )
+                    .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Top))
             ) {
                 Appbar(
                     fa = "زمان‌بندی حرکت قطار برای ایستگاه $faStationName",
                     en = "train schedule for ${state.stationName}",
-                    
                     onBackClick = onBack,
                     modifier = Modifier.height(43.dp),
                     backgroundColor = lineColor
@@ -90,7 +87,7 @@ fun TrainSchedule(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator(color = MaterialTheme.colorScheme.onPrimary)
+                CircularProgressIndicator(color = MaterialTheme.colorScheme.onBackground)
             }
 
             else ->
@@ -117,7 +114,7 @@ fun Content(
 
     DraggableTabRow(
         modifier = modifier
-            .background(MaterialTheme.colorScheme.primary)
+            .background(MaterialTheme.colorScheme.background)
             .fillMaxWidth(),
         tabsList = destinations,
         lineColor = lineColor,
@@ -151,8 +148,6 @@ private fun ScheduleList(
     currentTimeAsDouble: Double,
 ) {
     val coroutineScope = rememberCoroutineScope()
-
-
     LaunchedEffect(Unit) {
         val sectionsToShow = if (selectedType != null) {
             processedSections.filter { it.type == selectedType }
@@ -162,7 +157,6 @@ private fun ScheduleList(
 
         var targetIndex = 0
         var found = false
-
 
         sectionsToShow.forEach { section ->
             if (!found && section.isCurrentDay) {
@@ -195,7 +189,7 @@ private fun ScheduleList(
                 selectedType = selectedType,
                 onScheduleTypeSelected = onScheduleTypeSelected
             )
-            HorizontalDivider()
+            HorizontalDivider(color = LightGray.copy(alpha = 1f))
 
             LazyColumn(
                 modifier = Modifier.drawVerticalScrollbar(lazyListState),

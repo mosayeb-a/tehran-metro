@@ -45,7 +45,7 @@ fun TimePickerDialog(
         Box(
             modifier = Modifier
                 .clip(RoundedCornerShape(16.dp))
-                .background(MaterialTheme.colorScheme.secondaryContainer)
+                .background(MaterialTheme.colorScheme.primaryContainer)
                 .padding(16.dp)
         ) {
             Column(
@@ -57,15 +57,15 @@ fun TimePickerDialog(
                         state = timePickerState,
                         colors = TimePickerDefaults.colors(
                             clockDialColor = MaterialTheme.colorScheme.secondary,
-                            selectorColor = MaterialTheme.colorScheme.tertiary,
-                            timeSelectorSelectedContainerColor = MaterialTheme.colorScheme.tertiary,
+                            selectorColor = MaterialTheme.colorScheme.primary,
+                            timeSelectorSelectedContainerColor = MaterialTheme.colorScheme.primary,
                             timeSelectorSelectedContentColor = MaterialTheme.colorScheme.onPrimary,
                             timeSelectorUnselectedContainerColor = MaterialTheme.colorScheme.secondary.copy(
                                 alpha = .3f
                             ),
                             timeSelectorUnselectedContentColor = MaterialTheme.colorScheme.onSecondary,
-                            clockDialSelectedContentColor = MaterialTheme.colorScheme.onSecondary,
-                            clockDialUnselectedContentColor = MaterialTheme.colorScheme.onSurface,
+                            clockDialSelectedContentColor = MaterialTheme.colorScheme.onPrimary,
+                            clockDialUnselectedContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                             periodSelectorBorderColor = Red,
                         ),
                     )

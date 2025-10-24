@@ -65,3 +65,6 @@ object AboutScreen
 
 @Serializable
 object NearbyPlaceStationsScreen
+
+@Serializable
+object SettingsScreen

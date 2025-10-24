@@ -42,8 +42,8 @@ fun ScheduleDaySelection(
             .clip(RoundedCornerShape(cornerRadius))
             .background(
                 color = when {
-                    isSelected -> MaterialTheme.colorScheme.onPrimary
-                    !enabled -> MaterialTheme.colorScheme.onPrimary.copy(alpha = .2f)
+                    isSelected -> MaterialTheme.colorScheme.onSecondary
+                    !enabled -> MaterialTheme.colorScheme.onSecondary.copy(alpha = .2f)
                     else -> Color.Transparent
                 }
             )
@@ -51,8 +51,8 @@ fun ScheduleDaySelection(
                 width = 1.dp,
                 color = when {
                     isSelected -> Color.Transparent
-                    !enabled -> MaterialTheme.colorScheme.onPrimary.copy(alpha = .6f)
-                    else -> MaterialTheme.colorScheme.onPrimary.copy(alpha = .14f)
+                    !enabled -> MaterialTheme.colorScheme.onSecondary.copy(alpha = .6f)
+                    else -> MaterialTheme.colorScheme.onSecondary.copy(alpha = .14f)
                 },
                 shape = RoundedCornerShape(cornerRadius)
             )
@@ -66,9 +66,9 @@ fun ScheduleDaySelection(
         Text(
             text = label,
             color = when {
-                isSelected -> MaterialTheme.colorScheme.primary
-                !enabled -> MaterialTheme.colorScheme.primary
-                else -> MaterialTheme.colorScheme.onPrimary
+                isSelected -> MaterialTheme.colorScheme.secondary
+                !enabled -> MaterialTheme.colorScheme.secondary
+                else -> MaterialTheme.colorScheme.onSecondary
             },
             style = MaterialTheme.typography.bodySmall,
             textAlign = TextAlign.Center,

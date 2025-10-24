@@ -24,6 +24,7 @@ import com.ma.tehro.common.ui.NearbyPlaceStationsScreen
 import com.ma.tehro.common.ui.MapViewerScreen
 import com.ma.tehro.common.ui.PathDescriptionScreen
 import com.ma.tehro.common.ui.PathFinderScreen
+import com.ma.tehro.common.ui.SettingsScreen
 import com.ma.tehro.common.ui.StationDetailScreen
 import com.ma.tehro.common.ui.StationSelectorScreen
 import com.ma.tehro.common.ui.StationsScreen
@@ -41,6 +42,8 @@ import com.ma.tehro.feature.line.stations.StationsViewModel
 import com.ma.tehro.feature.map.city.StationsMap
 import com.ma.tehro.feature.map.city.StationsMapViewModel
 import com.ma.tehro.feature.map.viewer.MetroMapViewer
+import com.ma.tehro.feature.settings.Settings
+import com.ma.tehro.feature.settings.SettingsViewModel
 import com.ma.tehro.feature.shortestpath.guide.PathDescription
 import com.ma.tehro.feature.shortestpath.pathfinder.PathFinder
 import com.ma.tehro.feature.shortestpath.pathfinder.PathViewModel
@@ -88,7 +91,8 @@ fun AppNavigation(
                 onMetroMapClick = {
                     navController.navigate(MapViewerScreen(null))
                 },
-                onAboutClick = { navController.navigate(AboutScreen) }
+                onAboutClick = { navController.navigate(AboutScreen) },
+                onSettingsClick = { navController.navigate(SettingsScreen) }
             )
         }
         baseComposable<MapScreen> {
@@ -302,6 +306,14 @@ fun AppNavigation(
                     navController.popBackStack()
                 },
                 onSearchQueryChanged = { q -> viewModel.onSearchQueryChanged(q) },
+            )
+        }
+
+        baseComposable<SettingsScreen> { backStackEntry ->
+            val viewModel: SettingsViewModel = hiltViewModel(backStackEntry)
+            Settings(
+                viewModel = viewModel,
+                onBack = { navController.navigateUp() }
             )
         }
     }

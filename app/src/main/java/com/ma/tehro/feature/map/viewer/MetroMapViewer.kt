@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -67,9 +66,7 @@ fun MetroMapViewer(
             Appbar(
                 fa = "نقشه مترو",
                 en = "metro map",
-                backgroundColor = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.fillMaxWidth(),
-                
                 onBackClick = onBack
             )
         }

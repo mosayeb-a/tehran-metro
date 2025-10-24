@@ -14,7 +14,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.PeopleAlt
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -28,16 +28,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.ui.Appbar
-import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.domain.Step
 import com.ma.tehro.feature.shortestpath.guide.components.StepGuideItem
 
@@ -85,7 +82,7 @@ fun PathDescription(steps: List<Step>, onBackClick: () -> Unit) {
                         val lineNum =
                             step.newLineTitle.substringAfter("خط ").substringBefore(":").trim()
                         val direction = step.newLineTitle.substringAfter(":").trim()
-                                .replace("به سمت ", "")
+                            .replace("به سمت ", "")
                             .takeIf { it.isNotEmpty() }
                         StepText(
                             symbol = "<>",
@@ -130,7 +127,7 @@ fun PathDescription(steps: List<Step>, onBackClick: () -> Unit) {
         bottomBar = {
             Box(
                 modifier = Modifier
-                    .padding(bottom = 16.dp)
+                    .padding(bottom = 24.dp)
                     .fillMaxWidth()
                     .navigationBarsPadding(),
                 contentAlignment = Alignment.Center
@@ -146,22 +143,22 @@ fun PathDescription(steps: List<Step>, onBackClick: () -> Unit) {
                             Intent.createChooser(sendIntent, "share path")
                         )
                     },
-                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiary),
-                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 6.dp),
-                    contentPadding = PaddingValues(vertical = 12.dp, horizontal = 16.dp)
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                    elevation = ButtonDefaults.buttonElevation(defaultElevation = 1.dp),
+                    contentPadding = PaddingValues(vertical = 18.dp, horizontal = 16.dp)
                 ) {
                     Row {
                         Text(
                             text = "اشتراک‌گذاری مسیر",
-                            style = MaterialTheme.typography.bodySmall,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.W600
+                            fontSize = 17.sp,
+                            fontWeight = FontWeight.W300,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                         Spacer(Modifier.width(8.dp))
                         Icon(
-                            imageVector = Icons.Default.Share,
+                            imageVector = Icons.Default.PeopleAlt,
                             contentDescription = "share",
-                            tint = Color.White
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
                 }

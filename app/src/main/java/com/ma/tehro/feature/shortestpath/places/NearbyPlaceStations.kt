@@ -74,6 +74,7 @@ fun PlaceSelection(
                 value = viewState.searchQuery,
                 onValueChange = { query -> onSearchQueryChanged(query) },
                 placeholder = "جست‌وجوی مکان دلخواه",
+                color = MaterialTheme.colorScheme.primaryContainer
             )
         }
     ) { paddingValues ->
@@ -95,9 +96,10 @@ fun PlaceSelection(
                         style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(MaterialTheme.colorScheme.tertiary)
+                            .background(MaterialTheme.colorScheme.primary)
                             .padding(8.dp),
-                        textAlign = TextAlign.End
+                        textAlign = TextAlign.End,
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
                 }
                 items(items.places) { place ->
@@ -122,7 +124,7 @@ fun PlaceSelection(
                             style = MaterialTheme.typography.bodyMedium,
                             fontSize = 16.sp,
                             textAlign = TextAlign.End,
-                            fontWeight = FontWeight.W500
+                            fontWeight = FontWeight.W500,
                         )
                     }
                     HorizontalDivider(

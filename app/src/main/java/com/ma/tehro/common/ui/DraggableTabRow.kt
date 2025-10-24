@@ -68,7 +68,7 @@ fun DraggableTabRow(
         BoxWithConstraints(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.primary)
+                .background(MaterialTheme.colorScheme.background)
         ) {
             with(this) {
                 val tabWidth = maxWidth / tabsList.size
@@ -122,9 +122,9 @@ fun DraggableTabRow(
                                 en = "To ${name.en}",
                                 style = MaterialTheme.typography.bodySmall.copy(
                                     color = if (tabIndex == selectedTabIndex.value) {
-                                        MaterialTheme.colorScheme.onPrimary
+                                        MaterialTheme.colorScheme.onBackground
                                     } else {
-                                        MaterialTheme.colorScheme.onPrimary.copy(alpha = .5f)
+                                        MaterialTheme.colorScheme.onBackground.copy(alpha = .5f)
                                     },
                                 ),
                                 spaceBetween = (-3).dp,
@@ -164,7 +164,7 @@ fun DraggableTabRow(
 @Composable
 fun TabIndicator(
     modifier: Modifier = Modifier,
-    color: Color = MaterialTheme.colorScheme.onPrimary
+    color: Color = MaterialTheme.colorScheme.onBackground
 ) {
     Spacer(
         modifier

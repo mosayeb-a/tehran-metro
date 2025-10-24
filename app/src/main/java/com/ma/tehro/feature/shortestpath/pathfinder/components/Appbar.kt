@@ -19,13 +19,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.BilingualText
+import com.ma.tehro.common.ui.theme.LightGray
 import com.ma.tehro.data.BilingualName
 
 @Composable
@@ -43,11 +43,11 @@ fun Appbar(
         Appbar(
             fa = "مسیر پیشنهادی",
             en = "Suggested Path",
-            
+
             onBackClick = onBack
         )
         AppbarDetail(fromEn = fromEn, toEn = toEn, fromFa = fromFa, toFa = toFa)
-        HorizontalDivider()
+        HorizontalDivider(color = LightGray.copy(alpha = 1f))
         estimatedTime?.let {
             EstimatedTimeDisplay(
                 estimatedTime = estimatedTime,
@@ -63,7 +63,7 @@ fun EstimatedTimeDisplay(estimatedTime: BilingualName?, lineChangeDelayMinutes: 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.secondary)
+                .background(MaterialTheme.colorScheme.background)
                 .padding(horizontal = 16.dp, vertical = 6.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
@@ -74,18 +74,15 @@ fun EstimatedTimeDisplay(estimatedTime: BilingualName?, lineChangeDelayMinutes: 
                 Text(
                     text = "ESTIMATED TIME",
                     style = MaterialTheme.typography.labelSmall.copy(
-                        fontSize = 11.sp,
-                        color = MaterialTheme.colorScheme.onPrimary.copy(
-                            alpha = .9f
-                        )
+                        fontSize = 10.sp,
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = .9f)
                     ),
                 )
                 Text(
                     text = estimatedTime.en,
                     style = MaterialTheme.typography.labelSmall.copy(
-                        color = MaterialTheme.colorScheme.onPrimary.copy(
-                            alpha = .9f
-                        ),
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = .9f),
+                        fontSize = 10.sp,
                     ),
                 )
             }
@@ -95,14 +92,14 @@ fun EstimatedTimeDisplay(estimatedTime: BilingualName?, lineChangeDelayMinutes: 
                 Text(
                     text = "زمان تقریبی (تعویض خط ${lineChangeDelayMinutes.toFarsiNumber()} دقیقه)",
                     fontSize = 12.sp,
-                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = .9f),
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = .9f),
                     style = MaterialTheme.typography.labelSmall,
                 )
                 CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
                     Text(
                         text = estimatedTime.fa,
                         fontSize = 12.sp,
-                        color = MaterialTheme.colorScheme.onPrimary.copy(alpha = .9f),
+                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = .9f),
                         style = MaterialTheme.typography.labelSmall,
                     )
                 }
@@ -122,7 +119,7 @@ fun AppbarDetail(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primary)
+            .background(MaterialTheme.colorScheme.secondary)
             .padding(bottom = 4.dp, start = 4.dp, end = 4.dp),
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
@@ -132,6 +129,7 @@ fun AppbarDetail(
             en = toEn.uppercase(),
             style = MaterialTheme.typography.labelSmall,
             enAlpha = .7f,
+            enSize = 10.sp,
             textAlign = TextAlign.Center,
             maxLine = 1
         )
@@ -140,14 +138,15 @@ fun AppbarDetail(
                 .padding(horizontal = 2.dp)
                 .size(16.dp),
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-            contentDescription = "Going to ..",
-            tint = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.8f)
+            contentDescription = "",
+            tint = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.8f)
         )
         BilingualText(
             fa = fromFa,
             en = fromEn.uppercase(),
             style = MaterialTheme.typography.labelSmall,
             enAlpha = .7f,
+            enSize = 10.sp,
             textAlign = TextAlign.Center,
             maxLine = 1
         )

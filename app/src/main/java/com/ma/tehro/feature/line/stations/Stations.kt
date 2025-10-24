@@ -17,6 +17,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.SyncAlt
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -26,18 +28,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
-import com.ma.tehro.R
-import com.ma.tehro.common.ui.Appbar
-import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.common.calculateLineName
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.timelineview.TimelineView
 import com.ma.tehro.common.timelineview.TimelineView.SingleNode
+import com.ma.tehro.common.ui.Appbar
+import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.data.Station
 
@@ -210,7 +210,7 @@ private fun TransferIndicator(
                     modifier = Modifier
                         .size(iconSize)
                         .align(Alignment.Center),
-                    painter = painterResource(R.drawable.sync_alt_24px),
+                    imageVector = Icons.Rounded.SyncAlt,
                     contentDescription = contentDescription,
                     tint = Color.White
                 )

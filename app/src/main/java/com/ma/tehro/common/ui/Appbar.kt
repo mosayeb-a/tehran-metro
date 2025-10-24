@@ -30,7 +30,7 @@ fun Appbar(
     fa: String,
     en: String,
     onBackClick: (() -> Unit)? = null,
-    backgroundColor: Color = MaterialTheme.colorScheme.primary,
+    backgroundColor: Color = MaterialTheme.colorScheme.secondary,
     startIcon: (@Composable () -> Unit)? = null,
     content: (@Composable RowScope.() -> Unit)? = null
 ) {

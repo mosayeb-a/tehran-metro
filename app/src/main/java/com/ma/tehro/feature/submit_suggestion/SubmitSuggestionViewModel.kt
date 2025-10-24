@@ -3,7 +3,6 @@ package com.ma.tehro.feature.submit_suggestion
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ma.tehro.common.createBilingualMessage
 import com.ma.tehro.common.ui.Action
 import com.ma.tehro.common.ui.UiMessage
 import com.ma.tehro.common.ui.UiMessageManager
@@ -52,12 +51,9 @@ class SubmitSuggestionViewModel @Inject constructor(
             _state.update { it.copy(isLoading = false, isSubmissionSent = true) }
             UiMessageManager.sendEvent(
                 UiMessage(
-                    message = createBilingualMessage(
-                        fa = ".درخواست با موفقیت ارسال شد",
-                        en = "Request sent successfully."
-                    ),
+                    message = ".درخواست با موفقیت ارسال شد",
                     action = Action(
-                        name = createBilingualMessage(fa = "بستن", en = "Dismiss"),
+                        name = "بستن",
                         action = {}
                     )
                 )
@@ -66,12 +62,9 @@ class SubmitSuggestionViewModel @Inject constructor(
             _state.update { it.copy(isLoading = false) }
             UiMessageManager.sendEvent(
                 UiMessage(
-                    message = createBilingualMessage(
-                        fa = ".درخواست ارسال نشد،یه مشکلی رخ داده",
-                        en = "Message not sent due to an issue."
-                    ),
+                    message = ".درخواست ارسال نشد، یه مشکلی رخ داده",
                     action = Action(
-                        name = createBilingualMessage(fa = "تلاش دوباره", en = "Retry"),
+                        name = "تلاش دوباره",
                         action = {
                             viewModelScope.launch {
                                 submitWithMessage(

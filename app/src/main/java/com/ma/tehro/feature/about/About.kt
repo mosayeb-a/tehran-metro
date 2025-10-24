@@ -2,7 +2,6 @@ package com.ma.tehro.feature.about
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,7 +18,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.KeyboardArrowRight
 import androidx.compose.material3.Icon
@@ -41,9 +39,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.BuildConfig
 import com.ma.tehro.R
+import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.BilingualText
-import com.ma.tehro.common.toFarsiNumber
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -78,12 +76,7 @@ fun About(
                     painter = painterResource(id = R.drawable.ic_launcher_foreground),
                     contentDescription = "app icon",
                     modifier = Modifier
-                        .size(78.dp)
-                        .border(
-                            width = 6.dp,
-                            color = MaterialTheme.colorScheme.surfaceContainerHighest,
-                            shape = RoundedCornerShape(18.dp)
-                        ),
+                        .size(78.dp),
                     contentScale = ContentScale.FillBounds
                 )
             }
@@ -113,7 +106,7 @@ fun About(
                 Box(
                     modifier = Modifier
                         .clip(MaterialTheme.shapes.large)
-                        .background(MaterialTheme.colorScheme.surfaceContainerHighest.copy(alpha = .8f))
+                        .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = .8f))
                         .padding(vertical = 4.dp, horizontal = 8.dp)
                 ) {
                     BilingualText(
@@ -182,7 +175,7 @@ fun AboutSection(
         Row(
             modifier = modifier
                 .clip(MaterialTheme.shapes.large)
-                .background(MaterialTheme.colorScheme.surfaceContainerHighest)
+                .background(MaterialTheme.colorScheme.primaryContainer)
                 .clickable { onClick() }
                 .padding(8.dp),
             verticalAlignment = Alignment.Top

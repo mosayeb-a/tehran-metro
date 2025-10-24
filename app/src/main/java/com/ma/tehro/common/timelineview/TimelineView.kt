@@ -16,6 +16,8 @@ import com.ma.tehro.common.timelineview.SingleNodeDrawings.drawBottomLine
 import com.ma.tehro.common.timelineview.SingleNodeDrawings.drawNodeCircle
 import com.ma.tehro.common.timelineview.SingleNodeDrawings.drawSpacerLine
 import com.ma.tehro.common.timelineview.SingleNodeDrawings.drawTopLine
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.ColorFilter
 
 object TimelineView {
     enum class NodeType {
@@ -36,7 +38,8 @@ object TimelineView {
         iconBitmap: ImageBitmap? = null,
         scale: Float = 1f,
         lineColor: Color = MaterialTheme.colorScheme.onPrimary.copy(alpha = .3f),
-        nodeColor: Color = MaterialTheme.colorScheme.onPrimary.copy(alpha = .9f),
+        nodeColor: Color = Color.White.copy(alpha = .9f),
+        iconTint: Color = Color.White
     ) {
         Canvas(
             modifier = modifier
@@ -78,7 +81,8 @@ object TimelineView {
                         image = iconBitmap,
                         topLeft = topLeft,
                         alpha = 1f,
-                        style = Fill
+                        style = Fill,
+                        colorFilter = ColorFilter.tint(iconTint, BlendMode.SrcIn)
                     )
                 }
             }

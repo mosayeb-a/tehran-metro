@@ -49,7 +49,7 @@ fun PathfinderFloatingToolbar(
             .offset(y = -ScreenOffset),
         expanded = true,
         colors = FloatingToolbarDefaults.standardFloatingToolbarColors(
-            toolbarContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+            toolbarContainerColor = MaterialTheme.colorScheme.primaryContainer,
             toolbarContentColor = MaterialTheme.colorScheme.onSecondaryContainer
         ),
         expandedShadowElevation = 4.dp,

@@ -123,7 +123,7 @@ fun StationSelector(
     }
 
     Scaffold(
-        containerColor = MaterialTheme.colorScheme.secondary,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             Column {
                 Appbar(
@@ -132,7 +132,7 @@ fun StationSelector(
                     
                     onBackClick = onBack
                 )
-                HorizontalDivider()
+                HorizontalDivider(color = MaterialTheme.colorScheme.onBackground.copy(.45f))
             }
         },
     ) {
