@@ -38,7 +38,7 @@ private val ForestColorScheme = darkColorScheme(
     background = Color(0xFF2F3E46),
     onBackground = Color(0xFFE0E0E0),
     primaryContainer = lerp(Color(0xFF2F3E46), Color(0xFF81B29A), 0.4f),
-    onPrimaryContainer = Color.Black,
+    onPrimaryContainer = Color.White,
 )
 
 private val OceanColorScheme = darkColorScheme(
