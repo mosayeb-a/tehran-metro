@@ -304,6 +304,7 @@ fun SubmitStationInfo(
                         style = MaterialTheme.typography.bodyMedium,
                         maxLine = 2,
                         textAlign = TextAlign.Center,
+                        textColor = MaterialTheme.colorScheme.onPrimary,
                     )
                     Spacer(Modifier.width(8.dp))
                     Icon(

@@ -39,9 +39,9 @@ fun FacilitateCheckbox(
             checked = checked,
             onCheckedChange = null,
             colors = CheckboxDefaults.colors(
-                checkmarkColor = MaterialTheme.colorScheme.primary,
-                checkedColor = MaterialTheme.colorScheme.onPrimary,
-                uncheckedColor = MaterialTheme.colorScheme.onPrimary
+                checkmarkColor = MaterialTheme.colorScheme.onPrimary,
+                checkedColor = MaterialTheme.colorScheme.primary,
+                uncheckedColor = MaterialTheme.colorScheme.onBackground
             )
         )
         Spacer(Modifier.width(8.dp))
@@ -50,6 +50,5 @@ fun FacilitateCheckbox(
             en = en,
             style = MaterialTheme.typography.labelMedium
         )
-//        Text(text = label, style = MaterialTheme.typography.labelMedium)
     }
 }

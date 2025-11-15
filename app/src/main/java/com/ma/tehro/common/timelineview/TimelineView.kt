@@ -3,11 +3,12 @@ package com.ma.tehro.common.timelineview
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.scale
@@ -16,8 +17,6 @@ import com.ma.tehro.common.timelineview.SingleNodeDrawings.drawBottomLine
 import com.ma.tehro.common.timelineview.SingleNodeDrawings.drawNodeCircle
 import com.ma.tehro.common.timelineview.SingleNodeDrawings.drawSpacerLine
 import com.ma.tehro.common.timelineview.SingleNodeDrawings.drawTopLine
-import androidx.compose.ui.graphics.BlendMode
-import androidx.compose.ui.graphics.ColorFilter
 
 object TimelineView {
     enum class NodeType {
@@ -37,7 +36,7 @@ object TimelineView {
         lineWidth: Float = (nodeSize / 4).coerceAtMost(40f),
         iconBitmap: ImageBitmap? = null,
         scale: Float = 1f,
-        lineColor: Color = MaterialTheme.colorScheme.onPrimary.copy(alpha = .3f),
+        lineColor: Color = Color.White.copy(alpha = .3f),
         nodeColor: Color = Color.White.copy(alpha = .9f),
         iconTint: Color = Color.White
     ) {

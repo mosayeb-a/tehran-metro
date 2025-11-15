@@ -42,8 +42,8 @@ fun AppSearchBar(
 ) {
     val isRtl = remember(value) { isFarsi(value) }
     val customTextSelectionColors = TextSelectionColors(
-        handleColor = MaterialTheme.colorScheme.onPrimary,
-        backgroundColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.4f)
+        handleColor = MaterialTheme.colorScheme.onSecondary,
+        backgroundColor = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.4f)
     )
 
     CompositionLocalProvider(
@@ -99,7 +99,7 @@ fun AppSearchBar(
                 }
             },
             textStyle = MaterialTheme.typography.bodyMedium.copy(
-                color = MaterialTheme.colorScheme.onPrimary,
+                color = MaterialTheme.colorScheme.onSecondary,
                 textDirection = TextDirection.Content,
                 textAlign = if (isRtl) TextAlign.Right else TextAlign.Start,
             ),

@@ -74,7 +74,7 @@ fun EstimatedTimeDisplay(estimatedTime: BilingualName?, lineChangeDelayMinutes: 
                 Text(
                     text = "ESTIMATED TIME",
                     style = MaterialTheme.typography.labelSmall.copy(
-                        fontSize = 10.sp,
+                        fontSize = 11.sp,
                         color = MaterialTheme.colorScheme.onBackground.copy(alpha = .9f)
                     ),
                 )
@@ -82,7 +82,7 @@ fun EstimatedTimeDisplay(estimatedTime: BilingualName?, lineChangeDelayMinutes: 
                     text = estimatedTime.en,
                     style = MaterialTheme.typography.labelSmall.copy(
                         color = MaterialTheme.colorScheme.onBackground.copy(alpha = .9f),
-                        fontSize = 10.sp,
+                        fontSize = 11.sp,
                     ),
                 )
             }
