@@ -52,8 +52,8 @@ fun LineChangeDelaySlider(
                 thumbColor = MaterialTheme.colorScheme.onBackground,
                 activeTrackColor = MaterialTheme.colorScheme.primary,
                 inactiveTrackColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
-                inactiveTickColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = .5f),
-                activeTickColor = MaterialTheme.colorScheme.onBackground
+                inactiveTickColor = MaterialTheme.colorScheme.onBackground.copy(alpha = .5f),
+                activeTickColor = MaterialTheme.colorScheme.onPrimary
             )
         )
         Spacer(Modifier.width(6.dp))
@@ -65,7 +65,7 @@ fun LineChangeDelaySlider(
         Text(
             text = " ${lineChangeDelay.toFarsiNumber()}",
             style = MaterialTheme.typography.bodyLarge
-                .copy(color = MaterialTheme.colorScheme.onBackground, fontWeight = FontWeight.Bold)
+                .copy(color = MaterialTheme.colorScheme.onBackground, fontWeight = FontWeight.Bold,fontSize = 18.sp)
         )
     }
 }

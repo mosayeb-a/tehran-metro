@@ -2,10 +2,8 @@ package com.ma.tehro.feature.more
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,6 +31,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ma.tehro.R
@@ -90,24 +89,16 @@ fun More(
             item { Spacer(Modifier.height(14.dp)) }
 
             item {
-                Row(
+                Text(
                     modifier = Modifier
                         .padding(horizontal = 16.dp)
                         .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = "APP THEME",
-                        color = MaterialTheme.colorScheme.onBackground.copy(9f),
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                    Text(
-                        text = "نمای برنامه",
-                        color = MaterialTheme.colorScheme.onBackground,
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.W500
-                    )
-                }
+                    text = "نمای برنامه",
+                    color = MaterialTheme.colorScheme.onBackground,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.W500,
+                    textAlign = TextAlign.End
+                )
             }
             item { Spacer(Modifier.height(16.dp)) }
             item {
@@ -131,24 +122,16 @@ fun More(
             }
 
             item {
-                Row(
+                Text(
                     modifier = Modifier
                         .padding(horizontal = 16.dp)
                         .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        text = "ABOUT",
-                        color = MaterialTheme.colorScheme.onBackground.copy(9f),
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                    Text(
-                        text = "درباره",
-                        color = MaterialTheme.colorScheme.onBackground,
-                        style = MaterialTheme.typography.bodyMedium,
-                        fontWeight = FontWeight.W500
-                    )
-                }
+                    text = "درباره",
+                    color = MaterialTheme.colorScheme.onBackground,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.W500,
+                    textAlign = TextAlign.End
+                )
             }
 
             item { Spacer(Modifier.height(6.dp)) }
