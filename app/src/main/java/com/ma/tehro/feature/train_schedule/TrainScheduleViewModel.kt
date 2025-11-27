@@ -5,14 +5,19 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ma.tehro.common.TimeUtils
-import com.ma.tehro.data.ScheduleType
 import com.ma.tehro.data.BilingualName
+import com.ma.tehro.data.ScheduleType
 import com.ma.tehro.data.repo.GroupedScheduleInfo
 import com.ma.tehro.data.repo.TrainScheduleRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
-import javax.inject.Inject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 
 @Immutable
 data class ScheduleSection(
@@ -33,10 +38,9 @@ data class TrainScheduleState(
     val processedSchedules: Map<BilingualName, List<ScheduleSection>> = emptyMap(),
 )
 
-@HiltViewModel
-class TrainScheduleViewModel @Inject constructor(
+class TrainScheduleViewModel(
     savedStateHandle: SavedStateHandle,
-    private val repository: TrainScheduleRepository,
+    private val scheduleRepository: TrainScheduleRepository,
 ) : ViewModel() {
     private val _state = MutableStateFlow(TrainScheduleState())
     val state = _state.asStateFlow()
@@ -57,7 +61,7 @@ class TrainScheduleViewModel @Inject constructor(
 
     private fun loadSchedules(stationName: String, lineNumber: Int, isBranch: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
-            val schedules = repository.getScheduleByStation(stationName, lineNumber, isBranch)
+            val schedules = scheduleRepository.getScheduleByStation(stationName, lineNumber, isBranch)
             val currentDayType = TimeUtils.getScheduleTypeForCurrentDay(schedules.flatMap { it.schedules.keys })
             println(currentDayType)
             val currentTime = TimeUtils.getCurrentTimeAsDouble()

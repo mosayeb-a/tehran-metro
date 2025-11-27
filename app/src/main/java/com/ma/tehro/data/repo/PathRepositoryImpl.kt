@@ -1,22 +1,12 @@
 package com.ma.tehro.data.repo
 
-import androidx.compose.runtime.Immutable
 import com.ma.tehro.common.LineEndpoints
 import com.ma.tehro.common.lineBranches
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.data.Station
+import com.ma.tehro.domain.PathItem
+import com.ma.tehro.domain.repo.PathRepository
 import java.util.PriorityQueue
-import javax.inject.Inject
-
-@Immutable
-sealed class PathItem {
-    data class Title(val en: String, val fa: String) : PathItem()
-    data class StationItem(
-        val station: Station,
-        val isPassthrough: Boolean = false,
-        val lineNumber: Int
-    ) : PathItem()
-}
 
 data class PathResult(
     val path: List<String>,
@@ -29,12 +19,7 @@ data class PathCost(
     val currentLine: Int?
 )
 
-interface PathRepository {
-    suspend fun findShortestPathWithDirection(from: String, to: String): List<PathItem>
-    fun getStations(): Map<String, Station>
-}
-
-class PathRepositoryImpl @Inject constructor(
+class PathRepositoryImpl(
     private val stations: Map<String, Station>,
 ) : PathRepository {
 

@@ -3,6 +3,7 @@ package com.ma.tehro.data.repo
 import com.ma.tehro.BuildConfig
 import com.ma.tehro.common.AppException
 import com.ma.tehro.data.Station
+import com.ma.tehro.domain.repo.DataCorrectionRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.TimeZone
@@ -13,13 +14,7 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import java.net.HttpURLConnection
 import java.net.URL
-import javax.inject.Inject
 import kotlin.time.ExperimentalTime
-
-interface DataCorrectionRepository {
-    suspend fun submitStationCorrection(station: Station)
-    suspend fun submitFeedback(message: String)
-}
 
 @Serializable
 data class FeedbackEntry(
@@ -27,7 +22,7 @@ data class FeedbackEntry(
     val timestamp: String
 )
 
-class DataCorrectionRepositoryImpl @Inject constructor(
+class DataCorrectionRepositoryImpl(
     val json: Json
 ) : DataCorrectionRepository {
     private val token = BuildConfig.github_token
@@ -95,7 +90,11 @@ class DataCorrectionRepositoryImpl @Inject constructor(
         }
     }
 
-    private inline fun <reified T> updateGistContent(url: URL, fileName: String, currentItems: List<T>) {
+    private inline fun <reified T> updateGistContent(
+        url: URL,
+        fileName: String,
+        currentItems: List<T>
+    ) {
         val connection = (url.openConnection() as HttpURLConnection).apply {
             requestMethod = "PATCH"
             setRequestProperty("Authorization", "Bearer $token")
@@ -120,7 +119,8 @@ class DataCorrectionRepositoryImpl @Inject constructor(
             }
 
             if (connection.responseCode !in 200..299) {
-                val errorResponse = connection.errorStream?.bufferedReader()?.readText() ?: "unknown error"
+                val errorResponse =
+                    connection.errorStream?.bufferedReader()?.readText() ?: "unknown error"
                 throw AppException("HTTP Error: ${connection.responseCode} - $errorResponse")
             }
         } finally {

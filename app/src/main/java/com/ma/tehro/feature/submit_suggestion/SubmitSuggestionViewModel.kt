@@ -7,13 +7,11 @@ import com.ma.tehro.common.ui.Action
 import com.ma.tehro.common.ui.UiMessage
 import com.ma.tehro.common.ui.UiMessageManager
 import com.ma.tehro.data.Station
-import com.ma.tehro.data.repo.DataCorrectionRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.ma.tehro.domain.repo.DataCorrectionRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @Immutable
 data class SubmitInfoState(
@@ -21,23 +19,22 @@ data class SubmitInfoState(
     val isSubmissionSent: Boolean = false,
 )
 
-@HiltViewModel
-class SubmitSuggestionViewModel @Inject constructor(
-    private val repo: DataCorrectionRepository
+class SubmitSuggestionViewModel(
+    private val dataCorrectionRepository: DataCorrectionRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow(SubmitInfoState())
     val state = _state.asStateFlow()
 
     fun submitStationCorrection(station: Station) {
         viewModelScope.launch {
-            submitWithMessage(submitAction = { repo.submitStationCorrection(station) })
+            submitWithMessage(submitAction = { dataCorrectionRepository.submitStationCorrection(station) })
         }
     }
 
     fun sendSimpleFeedback(message: String) {
         viewModelScope.launch {
             submitWithMessage(
-                submitAction = { repo.submitFeedback(message.trim()) },
+                submitAction = { dataCorrectionRepository.submitFeedback(message.trim()) },
             )
         }
     }
@@ -58,7 +55,7 @@ class SubmitSuggestionViewModel @Inject constructor(
                     )
                 )
             )
-        } catch (e: Throwable) {
+        } catch (_: Throwable) {
             _state.update { it.copy(isLoading = false) }
             UiMessageManager.sendEvent(
                 UiMessage(

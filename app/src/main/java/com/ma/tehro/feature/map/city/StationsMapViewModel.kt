@@ -1,17 +1,15 @@
 package com.ma.tehro.feature.map.city
 
-import com.ma.tehro.services.LocationClient
 import android.location.Location
 import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ma.tehro.data.Station
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.ma.tehro.services.LocationClient
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @Immutable
 data class MapUiState(
@@ -20,8 +18,7 @@ data class MapUiState(
     val stations: Map<String, Station> = emptyMap()
 )
 
-@HiltViewModel
-class StationsMapViewModel @Inject constructor(
+class StationsMapViewModel(
     private val locationClient: LocationClient,
     private val stations: Map<String, Station>
 ) : ViewModel() {

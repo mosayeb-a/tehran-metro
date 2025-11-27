@@ -8,16 +8,14 @@ import com.ma.tehro.common.ui.Action
 import com.ma.tehro.common.ui.UiMessage
 import com.ma.tehro.common.ui.UiMessageManager
 import com.ma.tehro.data.Station
-import com.ma.tehro.data.repo.PathRepository
 import com.ma.tehro.domain.NearestStation
+import com.ma.tehro.domain.repo.PathRepository
 import com.ma.tehro.services.LocationTracker
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.Calendar
-import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 
 @Immutable
@@ -35,8 +33,7 @@ data class StationSelectionState(
     val selectedNearestStation: NearestStation? = null,
 )
 
-@HiltViewModel
-class StationSelectionViewModel @Inject constructor(
+class StationSelectionViewModel(
     private val pathRepository: PathRepository,
     private val locationTracker: LocationTracker,
 ) : ViewModel() {
@@ -103,7 +100,7 @@ class StationSelectionViewModel @Inject constructor(
                         findNearestLocationProgress = false
                     )
                 }
-            } catch (e: CancellationException) {
+            } catch (_: CancellationException) {
                 // do not expose this
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(

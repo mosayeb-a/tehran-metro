@@ -7,16 +7,14 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.ma.tehro.common.ui.PathFinderScreen
 import com.ma.tehro.data.BilingualName
-import com.ma.tehro.data.repo.PathItem
-import com.ma.tehro.data.repo.PathRepository
+import com.ma.tehro.domain.PathItem
 import com.ma.tehro.domain.Step
+import com.ma.tehro.domain.repo.PathRepository
 import com.ma.tehro.domain.usecase.PathTimeCalculator
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @Stable
 data class PathFinderState(
@@ -25,8 +23,7 @@ data class PathFinderState(
     val stationTimes: Map<String, String> = emptyMap()
 )
 
-@HiltViewModel
-class PathViewModel @Inject constructor(
+class PathViewModel(
     private val pathRepository: PathRepository,
     private val pathTimeCalculator: PathTimeCalculator,
     savedStateHandle: SavedStateHandle,

@@ -3,16 +3,13 @@ package com.ma.tehro.feature.more
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ma.tehro.common.ui.theme.AppThemes
-import com.ma.tehro.data.repo.PreferencesRepository
 import com.ma.tehro.domain.AppTheme
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.ma.tehro.domain.repo.PreferencesRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class PreferencesViewModel @Inject constructor(
+class PreferencesViewModel(
     private val preferencesRepository: PreferencesRepository
 ) : ViewModel() {
 

@@ -1,11 +1,9 @@
 package com.ma.tehro.domain.usecase
 
-import com.ma.tehro.data.Place
-import com.ma.tehro.data.PlaceCategory
-import com.ma.tehro.data.repo.PlacesRepository
-import javax.inject.Inject
+import com.ma.tehro.domain.CategorizedPlaces
+import com.ma.tehro.domain.repo.PlacesRepository
 
-class ShowPlacesByCategory @Inject constructor(
+class ShowPlacesByCategory(
     private val placesRepository: PlacesRepository
 ) {
     fun getPlacesByCategory(): List<CategorizedPlaces> {
@@ -20,8 +18,3 @@ class ShowPlacesByCategory @Inject constructor(
             .sortedBy { it.category.value }
     }
 }
-
-data class CategorizedPlaces(
-    val category: PlaceCategory,
-    val places: List<Place>
-)

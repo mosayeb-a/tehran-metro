@@ -3,11 +3,10 @@ package com.ma.tehro.feature.shortestpath.places
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ma.tehro.common.normalizeWords
+import com.ma.tehro.domain.CategorizedPlaces
 import com.ma.tehro.domain.NearestStation
-import com.ma.tehro.domain.usecase.CategorizedPlaces
 import com.ma.tehro.domain.usecase.GetNearbyPlaceStations
 import com.ma.tehro.domain.usecase.ShowPlacesByCategory
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,7 +16,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
 
 data class PlaceSelectionState(
@@ -28,8 +26,7 @@ data class PlaceSelectionState(
 )
 
 @OptIn(FlowPreview::class)
-@HiltViewModel
-class PlaceSelectionViewModel @Inject constructor(
+class PlaceSelectionViewModel(
     private val showPlacesByCategory: ShowPlacesByCategory,
     private val getNearbyPlaceStations: GetNearbyPlaceStations
 ) : ViewModel() {

@@ -8,7 +8,6 @@ import com.ma.tehro.data.BilingualName
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
-import javax.inject.Inject
 
 interface TrainScheduleRepository {
     suspend fun getScheduleByStation(
@@ -25,7 +24,7 @@ data class GroupedScheduleInfo(
 
 typealias TrainScheduleData = Map<String, Map<String, Map<String, List<Double>>>>
 
-class TrainScheduleRepositoryImpl @Inject constructor(
+class TrainScheduleRepositoryImpl(
     private val context: Context,
     private val json: Json
 ) : TrainScheduleRepository {

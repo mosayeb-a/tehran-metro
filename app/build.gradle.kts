@@ -7,7 +7,6 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.hilt.plugin)
     alias(libs.plugins.kotlin.serialization)
 }
 
@@ -127,7 +126,6 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
-//    implementation(libs.androidx.material3)
     implementation(libs.material3)
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.test)
@@ -143,10 +141,6 @@ dependencies {
     implementation(libs.androidx.navigation)
     implementation(libs.androidx.navigation.ui)
 
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
-    implementation(libs.hilt.navigation.compose)
-
     implementation(libs.osmdroid.android)
 
     implementation(libs.kotlinx.datetime)
@@ -159,4 +153,8 @@ dependencies {
     implementation(libs.androidx.material.icons.extended)
 
     implementation(libs.androidx.datastore.preferences)
+
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.android.compose)
 }
