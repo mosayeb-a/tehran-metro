@@ -1,19 +1,31 @@
 package com.ma.tehro.data.repo
 
 import com.ma.tehro.BuildConfig
-import com.ma.tehro.common.AppException
 import com.ma.tehro.data.Station
 import com.ma.tehro.domain.repo.DataCorrectionRepository
+import io.ktor.client.HttpClient
+import io.ktor.client.request.accept
+import io.ktor.client.request.bearerAuth
+import io.ktor.client.request.get
+import io.ktor.client.request.patch
+import io.ktor.client.request.setBody
+import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.ContentType
+import io.ktor.http.contentType
+import io.ktor.http.isSuccess
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.encodeToJsonElement
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import java.net.HttpURLConnection
-import java.net.URL
+import kotlinx.serialization.json.put
 import kotlin.time.ExperimentalTime
 
 @Serializable
@@ -23,8 +35,10 @@ data class FeedbackEntry(
 )
 
 class DataCorrectionRepositoryImpl(
-    val json: Json
+    private val httpClient: HttpClient,
+    private val json: Json
 ) : DataCorrectionRepository {
+
     private val token = BuildConfig.github_token
     private val stationsGistId = BuildConfig.stations_gist_id
     private val feedbacksGistId = BuildConfig.feedbacks_gist_id
@@ -41,90 +55,56 @@ class DataCorrectionRepositoryImpl(
             .substringBefore('.')
             .replace('T', ' ')
 
-        val feedback = FeedbackEntry(
-            message = message,
-            timestamp = now
-        )
+        val feedback = FeedbackEntry(message = message, timestamp = now)
         updateGist(feedbacksGistId, feedback, "feedbacks.json")
     }
 
     private suspend inline fun <reified T> updateGist(
         gistId: String,
-        content: T,
+        newItem: T,
         fileName: String
     ) = withContext(Dispatchers.IO) {
-        try {
-            val url = URL("https://api.github.com/gists/$gistId")
+        val response = httpClient.get("https://api.github.com/gists/$gistId") {
+            bearerAuth(token)
+            accept(ContentType.Application.Json)
+        }
 
-            val existingContent = getExistingContent(url)
+        val gistJson = json.parseToJsonElement(response.bodyAsText()).jsonObject
+        val currentContent = gistJson["files"]
+            ?.jsonObject
+            ?.get(fileName)
+            ?.jsonObject
+            ?.get("content")
+            ?.jsonPrimitive
+            ?.content ?: "[]"
 
-            val currentItems: MutableList<T> = try {
-                val fileContent = json.parseToJsonElement(existingContent)
-                    .jsonObject["files"]?.jsonObject?.get(fileName)
-                    ?.jsonObject?.get("content")?.jsonPrimitive?.content ?: "[]"
-
-                json.decodeFromString<MutableList<T>>(fileContent)
-            } catch (e: Exception) {
-                println(e)
-                mutableListOf()
-            }
-
-            currentItems.add(content)
-
-            updateGistContent(url, fileName, currentItems)
+        val currentList = try {
+            json.decodeFromString<JsonArray>(currentContent).toMutableList()
         } catch (e: Exception) {
-            println(e)
-            throw AppException(e.message ?: "Unknown error occurred")
-        }
-    }
-
-    private fun getExistingContent(url: URL): String {
-        val connection = (url.openConnection() as HttpURLConnection).apply {
-            requestMethod = "GET"
-            setRequestProperty("Authorization", "Bearer $token")
-            setRequestProperty("Accept", "application/vnd.github.v3+json")
+            mutableListOf()
         }
 
-        return connection.inputStream.bufferedReader().readText().also {
-            connection.disconnect()
-        }
-    }
+        currentList.add(json.encodeToJsonElement(newItem))
 
-    private inline fun <reified T> updateGistContent(
-        url: URL,
-        fileName: String,
-        currentItems: List<T>
-    ) {
-        val connection = (url.openConnection() as HttpURLConnection).apply {
-            requestMethod = "PATCH"
-            setRequestProperty("Authorization", "Bearer $token")
-            setRequestProperty("Accept", "application/vnd.github.v3+json")
-            setRequestProperty("Content-Type", "application/json")
-            doOutput = true
-        }
+        val updateResponse: HttpResponse =
+            httpClient.patch("https://api.github.com/gists/$gistId") {
+                bearerAuth(token)
+                contentType(ContentType.Application.Json)
+                accept(ContentType.Application.Json)
 
-        try {
-            val payload = json.encodeToString(
-                mapOf(
-                    "files" to mapOf(
-                        fileName to mapOf(
-                            "content" to json.encodeToString(currentItems)
-                        )
-                    )
+                setBody(
+                    buildJsonObject {
+                        put("files", buildJsonObject {
+                            put(fileName, buildJsonObject {
+                                put("content", json.encodeToString(currentList))
+                            })
+                        })
+                    }
                 )
-            )
-
-            connection.outputStream.use { output ->
-                output.write(payload.toByteArray())
             }
 
-            if (connection.responseCode !in 200..299) {
-                val errorResponse =
-                    connection.errorStream?.bufferedReader()?.readText() ?: "unknown error"
-                throw AppException("HTTP Error: ${connection.responseCode} - $errorResponse")
-            }
-        } finally {
-            connection.disconnect()
+        if (!updateResponse.status.isSuccess()) {
+            throw Exception()
         }
     }
 }

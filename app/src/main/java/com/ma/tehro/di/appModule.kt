@@ -34,6 +34,12 @@ import com.ma.tehro.services.DefaultLocationClient
 import com.ma.tehro.services.LocationClient
 import com.ma.tehro.services.LocationTracker
 import com.ma.tehro.services.LocationTrackerImpl
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.android.Android
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.request.header
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -55,6 +61,14 @@ val appModule = module {
             serializersModule = SerializersModule {
                 contextual(PlaceType::class, PlaceTypeSerializer)
                 contextual(PlaceCategory::class, PlaceCategorySerializer)
+            }
+        }
+    }
+
+    single {
+        HttpClient(Android) {
+            install(ContentNegotiation) {
+                json(json = get())
             }
         }
     }
