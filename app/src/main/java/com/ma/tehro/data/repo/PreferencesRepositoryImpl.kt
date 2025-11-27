@@ -4,16 +4,11 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
+import com.ma.tehro.domain.repo.PreferencesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
-interface PreferencesRepository {
-    val selectedThemeFlow: Flow<String>
-    suspend fun saveTheme(themeName: String)
-}
-
-class PreferencesRepositoryImpl @Inject constructor(
+class PreferencesRepositoryImpl(
     private val dataStore: DataStore<Preferences>
 ) : PreferencesRepository {
     companion object {

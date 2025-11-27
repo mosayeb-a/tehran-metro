@@ -2,14 +2,9 @@ package com.ma.tehro.data.repo
 
 import com.ma.tehro.common.lineBranches
 import com.ma.tehro.data.Station
-import javax.inject.Inject
+import com.ma.tehro.domain.repo.LineRepository
 
-interface LineRepository {
-    fun getOrderedStationsByLine(line: Int, useBranch: Boolean): List<Station>
-    val getLines :List<Int>
-}
-
-class LineRepositoryImpl @Inject constructor(
+class LineRepositoryImpl(
     private val stations: Map<String, Station>
 ) : LineRepository {
     override val getLines: List<Int> = listOf(1, 2, 3, 4, 5, 6, 7)

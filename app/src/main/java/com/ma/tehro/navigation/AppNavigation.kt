@@ -6,7 +6,6 @@ import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
@@ -54,6 +53,7 @@ import com.ma.tehro.feature.submit_suggestion.feedback.SubmitFeedback
 import com.ma.tehro.feature.submit_suggestion.station.SubmitStationInfo
 import com.ma.tehro.feature.train_schedule.TrainSchedule
 import com.ma.tehro.feature.train_schedule.TrainScheduleViewModel
+import org.koin.compose.viewmodel.koinViewModel
 import kotlin.reflect.KType
 import kotlin.reflect.typeOf
 
@@ -70,7 +70,7 @@ fun AppNavigation(
         modifier = modifier
     ) {
         baseComposable<LinesScreen> {
-            val lineViewModel: LineViewModel = hiltViewModel(it)
+            val lineViewModel: LineViewModel = koinViewModel()
             val state by lineViewModel.uiState.collectAsStateWithLifecycle()
             Lines(
                 onlineClick = { line, isBranch ->
@@ -94,7 +94,7 @@ fun AppNavigation(
             )
         }
         baseComposable<MapScreen> {
-            val viewModel: StationsMapViewModel = hiltViewModel(it)
+            val viewModel: StationsMapViewModel = koinViewModel()
             StationsMap(
                 onFindCurrentLocationClick = {
                     locationPermissionHandler.checkLocationPermission {
@@ -105,7 +105,7 @@ fun AppNavigation(
             )
         }
         baseComposable<StationsScreen> { backStackEntry ->
-            val stationsViewModel: StationsViewModel = hiltViewModel(backStackEntry)
+            val stationsViewModel: StationsViewModel = koinViewModel()
             val state by stationsViewModel.uiState.collectAsStateWithLifecycle()
             val args = backStackEntry.toRoute<StationsScreen>()
             Stations(
@@ -125,7 +125,7 @@ fun AppNavigation(
             )
         }
         baseComposable<StationSelectorScreen> { backStackEntry ->
-            val viewModel: StationSelectionViewModel = hiltViewModel(backStackEntry)
+            val viewModel: StationSelectionViewModel = koinViewModel()
             val state by viewModel.uiState.collectAsStateWithLifecycle()
             val savedStateHandle = backStackEntry.savedStateHandle
             val selectedStation =
@@ -171,7 +171,7 @@ fun AppNavigation(
             )
         }
         baseComposable<PathFinderScreen> { backStackEntry ->
-            val viewModel: PathViewModel = hiltViewModel(backStackEntry)
+            val viewModel: PathViewModel = koinViewModel()
             val state by viewModel.state.collectAsStateWithLifecycle()
             val args: PathFinderScreen = backStackEntry.toRoute()
             PathFinder(
@@ -224,7 +224,7 @@ fun AppNavigation(
             )
         }
         baseComposable<TrainScheduleScreen> {
-            val viewModel: TrainScheduleViewModel = hiltViewModel(it)
+            val viewModel: TrainScheduleViewModel = koinViewModel()
             val state by viewModel.state.collectAsStateWithLifecycle()
             val args = it.toRoute<TrainScheduleScreen>()
             TrainSchedule(
@@ -247,7 +247,7 @@ fun AppNavigation(
             )
         }
         baseComposable<SubmitFeedbackScreen> {
-            val viewModel: SubmitSuggestionViewModel = hiltViewModel(it)
+            val viewModel: SubmitSuggestionViewModel = koinViewModel()
             val state by viewModel.state.collectAsStateWithLifecycle()
             SubmitFeedback(
                 onSendMessageClicked = { message ->
@@ -262,7 +262,7 @@ fun AppNavigation(
         baseComposable<SubmitStationInfoScreen>(
             typeMap = mapOf(typeOf<Station>() to navTypeOf<Station>()),
         ) { backStackEntry ->
-            val viewModel: SubmitSuggestionViewModel = hiltViewModel(backStackEntry)
+            val viewModel: SubmitSuggestionViewModel = koinViewModel()
             val args: SubmitStationInfoScreen = backStackEntry.toRoute()
             SubmitStationInfo(
                 onBack = { navController.navigateUp() },
@@ -280,7 +280,7 @@ fun AppNavigation(
             )
         }
         baseComposable<NearbyPlaceStationsScreen> {
-            val viewModel: PlaceSelectionViewModel = hiltViewModel(it)
+            val viewModel: PlaceSelectionViewModel = koinViewModel()
             val state by viewModel.state.collectAsStateWithLifecycle()
             PlaceSelection(
                 viewState = state,

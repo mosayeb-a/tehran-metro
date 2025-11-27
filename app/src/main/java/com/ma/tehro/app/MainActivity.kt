@@ -24,7 +24,6 @@ import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import com.ma.tehro.common.LocationPermissionHandler
@@ -35,10 +34,9 @@ import com.ma.tehro.common.ui.theme.DarkGray
 import com.ma.tehro.common.ui.theme.TehroTheme
 import com.ma.tehro.feature.more.PreferencesViewModel
 import com.ma.tehro.navigation.AppNavigation
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private lateinit var locationPermissionHandler: LocationPermissionHandler
 
@@ -52,7 +50,7 @@ class MainActivity : ComponentActivity() {
         )
 
         setContent {
-            val preferencesViewModel: PreferencesViewModel = hiltViewModel()
+            val preferencesViewModel: PreferencesViewModel = koinViewModel()
             val currentTheme by preferencesViewModel.currentTheme.collectAsStateWithLifecycle()
             if (currentTheme == null) {
                 Box(

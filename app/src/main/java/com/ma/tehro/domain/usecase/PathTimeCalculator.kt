@@ -5,16 +5,15 @@ import com.ma.tehro.common.TimeUtils
 import com.ma.tehro.common.fractionToTime
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.data.BilingualName
-import com.ma.tehro.data.repo.PathItem
 import com.ma.tehro.data.repo.TrainScheduleRepository
-import javax.inject.Inject
+import com.ma.tehro.domain.PathItem
 
 /**
  * Calculates train arrival times for stations along a given path, including transfer times between lines.
  *
  * @property trainScheduleRepository Repository for accessing train schedule data
  */
-class PathTimeCalculator @Inject constructor(
+class PathTimeCalculator(
     private val trainScheduleRepository: TrainScheduleRepository,
 ) {
     /**

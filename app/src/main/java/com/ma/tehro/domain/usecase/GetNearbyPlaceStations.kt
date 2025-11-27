@@ -3,10 +3,9 @@ package com.ma.tehro.domain.usecase
 import com.ma.tehro.common.calculateDistance
 import com.ma.tehro.data.Station
 import com.ma.tehro.domain.NearestStation
-import javax.inject.Inject
 
 
-class GetNearbyPlaceStations @Inject constructor(
+class GetNearbyPlaceStations(
     val stations: Map<String, Station>
 ) {
     fun getStations(

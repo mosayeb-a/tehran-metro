@@ -20,7 +20,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.graphics.toColorInt
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
@@ -182,27 +181,6 @@ fun isFarsi(text: String): Boolean {
     val firstChar = text.trim().firstOrNull() ?: return false
     return firstChar in '\u0600'..'\u06FF'
 }
-
-
-fun Color.darken(factor: Float = 0.85f): Color {
-    return Color(
-        red = (red * factor).coerceIn(0f, 1f),
-        green = (green * factor).coerceIn(0f, 1f),
-        blue = (blue * factor).coerceIn(0f, 1f),
-        alpha = alpha
-    )
-}
-
-@Composable
-inline fun <reified T : ViewModel> NavBackStackEntry.sharedViewModel(navController: NavController): T {
-    val navGraphRoute = destination.parent?.route ?: return hiltViewModel()
-    val parentEntry = remember(this) {
-        navController.getBackStackEntry(navGraphRoute)
-    }
-
-    return hiltViewModel(parentEntry)
-}
-
 
 fun normalizeWords(text: String): List<String> {
     return text.trim()
