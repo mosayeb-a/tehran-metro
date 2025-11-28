@@ -1,7 +1,7 @@
 package com.ma.tehro.di
 
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
-import androidx.datastore.preferences.preferencesDataStoreFile
+import android.content.Context
+import androidx.datastore.preferences.preferencesDataStore
 import com.ma.tehro.R
 import com.ma.tehro.data.Place
 import com.ma.tehro.data.PlaceCategory
@@ -34,11 +34,13 @@ import com.ma.tehro.services.DefaultLocationClient
 import com.ma.tehro.services.LocationClient
 import com.ma.tehro.services.LocationTracker
 import com.ma.tehro.services.LocationTrackerImpl
+import com.russhwolf.settings.ExperimentalSettingsApi
+import com.russhwolf.settings.ExperimentalSettingsImplementation
+import com.russhwolf.settings.coroutines.FlowSettings
+import com.russhwolf.settings.datastore.DataStoreSettings
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.defaultRequest
-import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -52,6 +54,9 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
+private val Context.settingsStore by preferencesDataStore(name = "tehran_metro_preferences")
+
+@OptIn(ExperimentalSettingsApi::class, ExperimentalSettingsImplementation::class)
 val appModule = module {
     single {
         Json {
@@ -113,12 +118,7 @@ val appModule = module {
     single<LocationClient> { DefaultLocationClient(androidContext()) }
     single<LocationTracker> { LocationTrackerImpl(locationClient = get(), stations = get()) }
 
-    single {
-        PreferenceDataStoreFactory.create {
-            androidContext().preferencesDataStoreFile("app_settings")
-        }
-    }
-
+    single<FlowSettings> { DataStoreSettings(datastore = androidContext().settingsStore) }
     single<PreferencesRepository> { PreferencesRepositoryImpl(get()) }
 
     factory { PathTimeCalculator(trainScheduleRepository = get()) }

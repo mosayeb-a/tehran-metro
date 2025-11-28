@@ -152,6 +152,9 @@ dependencies {
     implementation(libs.coil.svg)
     implementation(libs.androidx.material.icons.extended)
 
+    implementation(libs.multiplatform.settings)
+    implementation(libs.multiplatform.settings.coroutines)
+    implementation(libs.multiplatform.settings.datastore)
     implementation(libs.androidx.datastore.preferences)
 
     implementation(libs.koin.core)

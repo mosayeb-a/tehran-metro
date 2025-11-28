@@ -1,27 +1,23 @@
 package com.ma.tehro.data.repo
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
 import com.ma.tehro.domain.repo.PreferencesRepository
+import com.russhwolf.settings.ExperimentalSettingsApi
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import com.russhwolf.settings.coroutines.FlowSettings
 
+@OptIn(ExperimentalSettingsApi::class)
 class PreferencesRepositoryImpl(
-    private val dataStore: DataStore<Preferences>
+    private val settings: FlowSettings
 ) : PreferencesRepository {
     companion object {
-        private val THEME_KEY = stringPreferencesKey("selected_theme")
+        private const val THEME_KEY = "selected_theme"
+        private const val DEFAULT_THEME = "Blue"
     }
 
-    override val selectedThemeFlow: Flow<String> = dataStore.data.map { preferences ->
-        preferences[THEME_KEY] ?: "Blue"
-    }
+    override val selectedThemeFlow: Flow<String> = settings
+        .getStringFlow(THEME_KEY, DEFAULT_THEME)
 
     override suspend fun saveTheme(themeName: String) {
-        dataStore.edit { preferences ->
-            preferences[THEME_KEY] = themeName
-        }
+        settings.putString(THEME_KEY, themeName)
     }
 }
