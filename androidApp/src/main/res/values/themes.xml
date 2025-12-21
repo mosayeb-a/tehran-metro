@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Tehro" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/blue</item>
+<!--        <item name="colorOnSecondary">@color/black</item>-->
+    </style>
+</resources>
