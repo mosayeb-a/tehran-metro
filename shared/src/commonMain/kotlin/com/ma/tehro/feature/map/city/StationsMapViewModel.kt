@@ -1,57 +1,61 @@
 package com.ma.tehro.feature.map.city
 
-import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ma.tehro.data.Station
 import com.ma.tehro.services.LocationClient
-import com.ma.tehro.services.PlatformLocation
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-@Immutable
 data class MapUiState(
-    var currentLocation: PlatformLocation? = null,
-    val isLoading: Boolean = false,
-    val stations: Map<String, Station> = emptyMap()
+    val centerLat: Double? = null,
+    val centerLon: Double? = null,
+    val zoom: Double = 11.0,
+    val markers: List<MapMarker> = emptyList(),
+    val isLocating: Boolean = false
 )
 
 class StationsMapViewModel(
     private val locationClient: LocationClient,
-    private val stations: Map<String, Station>
+    stations: Map<String, Station>
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(MapUiState())
-    val uiState: StateFlow<MapUiState> get() = _uiState
+    private val _uiState = MutableStateFlow(
+        MapUiState(
+            markers = stations.values.map { station ->
+                MapMarker(
+                    lat = station.latitude?.toDoubleOrNull() ?: 0.0,
+                    lon = station.longitude?.toDoubleOrNull() ?: 0.0,
+                    title = station.name,
+                    titleFa = station.translations.fa,
+                    line = station.lines.firstOrNull()
+                )
+            }.filter { it.lat != 0.0 && it.lon != 0.0 } // filter invalid coords
+        )
+    )
+    val uiState: StateFlow<MapUiState> = _uiState.asStateFlow()
 
-    init {
-        _uiState.update { it.copy(stations = stations) }
-    }
-
-    fun getCurrentLocation() {
+    fun locateMe() {
         viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true) }
+            _uiState.update { it.copy(isLocating = true) }
+
             try {
                 val location = locationClient.getCurrentLocation()
-                println("StationsMap current location received -> lat: ${location.latitude}, long: ${location.longitude}")
-                _uiState.value.currentLocation?.let {
-                    if (location.latitude == it.latitude && location.longitude == it.longitude) {
-                        return@launch
-                    }
-                }
 
-                _uiState.update { state ->
-                    state.copy(
-                        currentLocation = location,
-                        isLoading = false
+                _uiState.update { current ->
+                    current.copy(
+                        centerLat = location.latitude,
+                        centerLon = location.longitude,
+                        zoom = 15.0,
+                        isLocating = false
                     )
                 }
-
             } catch (e: Exception) {
-                _uiState.update { it.copy(isLoading = false) }
-                println("Error getting current location: ${e.message}")
+                _uiState.update { it.copy(isLocating = false) }
+                println("Location error: ${e.message}")
             }
         }
     }
