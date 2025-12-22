@@ -30,6 +30,7 @@ navigationCompose = "2.9.1"
 materialIconsCore = "1.7.3"
 kotlinxCoroutinesCore = "1.10.2"
 buildkonfig = "0.17.1"
+osmAndroidCompose = "0.0.5"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

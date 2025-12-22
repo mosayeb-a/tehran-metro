@@ -38,6 +38,7 @@ import com.ma.tehro.feature.line.stations.Stations
 import com.ma.tehro.feature.line.stations.StationsViewModel
 import com.ma.tehro.feature.map.city.StationsMap
 import com.ma.tehro.feature.map.city.StationsMapViewModel
+import com.ma.tehro.feature.map.city.StationsOnCityMap
 import com.ma.tehro.feature.map.viewer.MetroMapViewer
 import com.ma.tehro.feature.more.More
 import com.ma.tehro.feature.more.PreferencesViewModel
@@ -96,10 +97,10 @@ fun AppNavigation(
         }
         baseComposable<MapScreen> {
             val viewModel: StationsMapViewModel = koinViewModel()
-            StationsMap(
+            StationsOnCityMap(
                 onFindCurrentLocationClick = {
                     locationPermissionHandler.checkLocationPermission {
-                        viewModel.getCurrentLocation()
+                        viewModel.locateMe()
                     }
                 },
                 viewState = viewModel.uiState.collectAsStateWithLifecycle().value,
