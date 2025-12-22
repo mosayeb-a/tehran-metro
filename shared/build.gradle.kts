@@ -75,7 +75,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.androidx.lifecycle.viewModel)
 
-            implementation(libs.jetbrains.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.coroutines.core)
 
             implementation("io.github.pdvrieze.xmlutil:core:0.91.3")
             implementation("org.jetbrains.compose.material:material-icons-extended:1.7.3")
@@ -105,6 +105,8 @@ kotlin {
 
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.coroutines.test)
         }
     }
 }

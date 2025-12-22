@@ -1,8 +1,8 @@
 package app.ma.scripts.stations
 
 import app.ma.scripts.common.readJsonStationsAsText
-import app.ma.scripts.common.model.PositionInLine
-import app.ma.scripts.common.model.Station
+import com.ma.tehro.data.PositionInLine
+import com.ma.tehro.data.Station
 import kotlinx.serialization.json.Json
 import java.io.File
 
