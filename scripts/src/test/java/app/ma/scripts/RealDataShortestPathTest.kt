@@ -2,33 +2,24 @@ package app.ma.scripts
 
 import app.ma.scripts.common.readJsonStationsAsText
 import com.ma.tehro.data.Station
-import com.ma.tehro.data.repo.PathItem
-import com.ma.tehro.data.repo.PathRepository
 import com.ma.tehro.data.repo.PathRepositoryImpl
+import com.ma.tehro.domain.PathItem
+import com.ma.tehro.domain.repo.PathRepository
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.assertEquals
 import org.junit.Before
-import org.junit.Test
+import kotlin.test.DefaultAsserter.assertEquals
+import kotlin.test.Test
 import kotlin.test.assertFalse
 
-class ShortestPathTest {
-
-    /**
-     * Note: The test cases are tightly coupled to the data in the `stations.json` file.
-     * any changes to the file may cause the tests to fail.
-     *
-     * a potential solution is to avoid hardcoding the paths as static data. Instead,
-     * we could dynamically traverse the stations until we reach an intersection point
-     * or list only the intersecting stations.
-     */
+class RealDataShortestPathTest {
 
     private lateinit var repository: PathRepository
     private lateinit var stations: Map<String, Station>
 
     @Before
     fun setup() {
-        stations = readJsonStationsAsText("stations_updated2")
+        stations = readJsonStationsAsText("stations")
         repository = PathRepositoryImpl(stations)
     }
 
@@ -140,32 +131,34 @@ class ShortestPathTest {
     }
 
     @Test
-    fun `from Mowlavi to Darvazeh Shemiran, disabled station shouldn't cause line change`() = runTest {
-        val from = "Mowlavi"
-        val to = "Darvazeh Shemiran"
-        val result = repository.findShortestPathWithDirection(from, to)
-        val actualStations = result
-            .filterIsInstance<PathItem.StationItem>()
-            .map { it.station.name }
-            .toSet()
-            .toList()
+    fun `from Mowlavi to Darvazeh Shemiran, disabled station shouldn't cause line change`() =
+        runTest {
+            val from = "Mowlavi"
+            val to = "Darvazeh Shemiran"
+            val result = repository.findShortestPathWithDirection(from, to)
+            val actualStations = result
+                .filterIsInstance<PathItem.StationItem>()
+                .map { it.station.name }
+                .toSet()
+                .toList()
 
-        println(actualStations)
-        assertFalse { actualStations.contains("Shohada-ye Hefdah-e Shahrivar") }
-    }
+            println(actualStations)
+            assertFalse { actualStations.contains("Shohada-ye Hefdah-e Shahrivar") }
+        }
 
-    private fun assertShortestPath(from: String, to: String, expectedStations: List<String>) = runBlocking {
-        val result = repository.findShortestPathWithDirection(from, to)
-        val actualStations = result
-            .filterIsInstance<PathItem.StationItem>()
-            .map { it.station.name }
-            .toSet()
-            .toList()
+    private fun assertShortestPath(from: String, to: String, expectedStations: List<String>) =
+        runBlocking {
+            val result = repository.findShortestPathWithDirection(from, to)
+            val actualStations = result
+                .filterIsInstance<PathItem.StationItem>()
+                .map { it.station.name }
+                .toSet()
+                .toList()
 
-        assertEquals(
-            "Path from $from to $to should match expected stations",
-            expectedStations,
-            actualStations
-        )
-    }
+            assertEquals(
+                "Path from $from to $to should match expected stations",
+                expectedStations,
+                actualStations
+            )
+        }
 }
