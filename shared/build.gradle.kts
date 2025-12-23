@@ -94,6 +94,7 @@ kotlin {
                 implementation(libs.androidx.datastore.preferences)
 
                 implementation(libs.osmdroid.android)
+//                implementation("org.maplibre.gl:android-sdk:11.11.0")
             }
         }
 
