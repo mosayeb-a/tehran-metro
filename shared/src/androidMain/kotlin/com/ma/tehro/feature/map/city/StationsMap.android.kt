@@ -43,14 +43,17 @@ actual fun StationsMap(
         factory = { ctx ->
             MapView(ctx).apply {
                 setTileSource(TileSourceFactory.MAPNIK)
+
+                isTilesScaledToDpi = true
+                setTilesScaleFactor(1f)
+
                 setBuiltInZoomControls(false)
                 setMultiTouchControls(true)
 
-                isTilesScaledToDpi = true
                 isHorizontalMapRepetitionEnabled = false
                 isVerticalMapRepetitionEnabled = false
 
-                controller.setZoom(11.0)
+                controller.setZoom(14.0)
                 controller.setCenter(GeoPoint(35.6892, 51.3890))
 
                 overlays.clear()
@@ -123,7 +126,7 @@ actual fun StationsMap(
                     )
                     context.startActivity(intent)
                 }
-                .padding(2.dp ),
+                .padding(2.dp),
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onBackground
         )
