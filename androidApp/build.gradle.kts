@@ -1,6 +1,5 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -121,5 +120,5 @@ dependencies {
 
     implementation(libs.osmdroid.android)
 
-    implementation(project(":shared"))
+    implementation(projects.shared)
 }

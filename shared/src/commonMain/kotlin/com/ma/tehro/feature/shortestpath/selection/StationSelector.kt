@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.drawVerticalScrollbar
+import com.ma.tehro.common.ui.theme.LightGray
 import com.ma.tehro.common.ui.theme.Red
 import com.ma.tehro.domain.NearestStation
 import com.ma.tehro.feature.shortestpath.selection.components.DaySelectorSheet
@@ -132,7 +133,7 @@ fun StationSelector(
                     
                     onBackClick = onBack
                 )
-                HorizontalDivider(color = MaterialTheme.colorScheme.onBackground.copy(.45f))
+                HorizontalDivider(color = LightGray)
             }
         },
     ) {

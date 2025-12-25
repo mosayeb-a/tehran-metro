@@ -12,7 +12,6 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
@@ -21,6 +20,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "tehro"
-include(":androidApp")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+include(":androidApp",":webApp")
 include(":scripts")
 include(":shared")

@@ -18,6 +18,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 @Immutable
 data class ScheduleSection(
@@ -60,7 +62,7 @@ class TrainScheduleViewModel(
     }
 
     private fun loadSchedules(stationName: String, lineNumber: Int, isBranch: Boolean) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.Default) {
             val schedules = scheduleRepository.getScheduleByStation(stationName, lineNumber, isBranch)
             val currentDayType = TimeUtils.getScheduleTypeForCurrentDay(schedules.flatMap { it.schedules.keys })
             println(currentDayType)
@@ -100,7 +102,7 @@ class TrainScheduleViewModel(
     }
 
     fun onScheduleTypeSelected(destination: BilingualName, scheduleType: ScheduleType?) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.Default) {
             val currentState = state.value
             val schedule = currentState.schedules.find { it.destination == destination }
 
@@ -124,11 +126,12 @@ class TrainScheduleViewModel(
         }
     }
 
+    @OptIn(ExperimentalTime::class)
     private fun startTimeUpdates() {
         timeScope.launch {
             while (isActive) {
                 _state.update { it.copy(currentTimeAsDouble = TimeUtils.getCurrentTimeAsDouble()) }
-                delay(1000 - (System.currentTimeMillis() % 1000))
+                delay(1000 - (Clock.System.now().toEpochMilliseconds() % 1000))
             }
         }
     }
