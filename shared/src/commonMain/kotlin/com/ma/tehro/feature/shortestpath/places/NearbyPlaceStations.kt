@@ -32,8 +32,9 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.ui.Appbar
+import com.ma.tehro.common.ui.TehroHorizontalDivider
+import com.ma.tehro.common.ui.TehroSearchBar
 import com.ma.tehro.common.ui.drawVerticalScrollbar
-import com.ma.tehro.feature.shortestpath.AppSearchBar
 import com.ma.tehro.feature.shortestpath.selection.components.NearestStationSheet
 
 @Composable
@@ -62,11 +63,11 @@ fun PlaceSelection(
                     en = "select a place to see near stations",
                     onBackClick = onBack
                 )
-                HorizontalDivider()
+                TehroHorizontalDivider()
             }
         },
         bottomBar = {
-            AppSearchBar(
+            TehroSearchBar(
                 modifier = Modifier
                     .imePadding()
                     .navigationBarsPadding()

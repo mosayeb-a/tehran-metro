@@ -33,7 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.ma.tehro.common.ui.theme.AppThemes
+import com.ma.tehro.common.ui.theme.Themes
 import com.ma.tehro.feature.more.components.AboutItem
 import com.ma.tehro.feature.more.components.AppThemeItem
 import com.ma.thero.resources.Res
@@ -104,7 +104,7 @@ fun More(
             item { Spacer(Modifier.height(16.dp)) }
             item {
                 LazyRow {
-                    items(AppThemes, key = { it.name }) { theme ->
+                    items(Themes, key = { it.name }) { theme ->
                         AppThemeItem(
                             title = theme.name,
                             colorScheme = theme.colorScheme,

@@ -1,5 +1,9 @@
-package com.ma.tehro.feature.shortestpath
+package com.ma.tehro.common.ui
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,9 +25,11 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDirection
@@ -33,7 +39,7 @@ import com.ma.tehro.common.isFarsi
 import kotlinx.coroutines.launch
 
 @Composable
-fun AppSearchBar(
+fun TehroSearchBar(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
@@ -50,9 +56,9 @@ fun AppSearchBar(
         LocalLayoutDirection provides if (isRtl) LayoutDirection.Rtl else LayoutDirection.Ltr,
         LocalTextSelectionColors provides customTextSelectionColors
     ) {
-        val focusRequester = remember { androidx.compose.ui.focus.FocusRequester() }
+        val focusRequester = remember { FocusRequester() }
         val keyboardController =
-            androidx.compose.ui.platform.LocalSoftwareKeyboardController.current
+            LocalSoftwareKeyboardController.current
         val coroutineScope = rememberCoroutineScope()
 
         OutlinedTextField(
@@ -68,15 +74,15 @@ fun AppSearchBar(
                 )
             },
             trailingIcon = {
-                androidx.compose.animation.AnimatedVisibility(
+                AnimatedVisibility(
                     visible = value.isNotBlank(),
-                    enter = androidx.compose.animation.fadeIn(
-                        animationSpec = androidx.compose.animation.core.tween(
+                    enter = fadeIn(
+                        animationSpec = tween(
                             200
                         )
                     ),
-                    exit = androidx.compose.animation.fadeOut(
-                        animationSpec = androidx.compose.animation.core.tween(
+                    exit = fadeOut(
+                        animationSpec = tween(
                             200
                         )
                     )

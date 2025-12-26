@@ -50,7 +50,7 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.data.Station
-import com.ma.tehro.feature.shortestpath.AppSearchBar
+import com.ma.tehro.common.ui.TehroSearchBar
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -187,7 +187,7 @@ fun <T> SearchableExpandedDropDownMenu(
                 color = MaterialTheme.colorScheme.primaryContainer
             ) {
                 Column {
-                    AppSearchBar(
+                    TehroSearchBar(
                         modifier = Modifier
                             .padding(vertical = 16.dp),
                         value = searchedOption,
