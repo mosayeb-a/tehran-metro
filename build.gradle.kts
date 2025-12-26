@@ -9,4 +9,5 @@ plugins {
     alias(libs.plugins.compose.multiplatform) apply false
     alias(libs.plugins.buildkonfig) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
+    alias(libs.plugins.android.kotlin.multiplatform.library) apply false
 }
