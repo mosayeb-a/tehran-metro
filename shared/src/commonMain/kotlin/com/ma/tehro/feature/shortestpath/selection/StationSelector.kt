@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.ui.Appbar
+import com.ma.tehro.common.ui.TehroHorizontalDivider
 import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.common.ui.theme.LightGray
 import com.ma.tehro.common.ui.theme.Red
@@ -133,7 +134,7 @@ fun StationSelector(
                     
                     onBackClick = onBack
                 )
-                HorizontalDivider(color = LightGray)
+                TehroHorizontalDivider()
             }
         },
     ) {

@@ -25,11 +25,12 @@ import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.BilingualText
+import com.ma.tehro.common.ui.TehroHorizontalDivider
 import com.ma.tehro.common.ui.theme.LightGray
 import com.ma.tehro.data.BilingualName
 
 @Composable
-fun Appbar(
+fun PathFinderAppbar(
     modifier: Modifier = Modifier,
     fromEn: String,
     toEn: String,
@@ -43,11 +44,10 @@ fun Appbar(
         Appbar(
             fa = "مسیر پیشنهادی",
             en = "Suggested Path",
-
             onBackClick = onBack
         )
         AppbarDetail(fromEn = fromEn, toEn = toEn, fromFa = fromFa, toFa = toFa)
-        HorizontalDivider(color = LightGray.copy(alpha = 1f))
+        TehroHorizontalDivider()
         estimatedTime?.let {
             EstimatedTimeDisplay(
                 estimatedTime = estimatedTime,
@@ -58,7 +58,7 @@ fun Appbar(
 }
 
 @Composable
-fun EstimatedTimeDisplay(estimatedTime: BilingualName?, lineChangeDelayMinutes: Int) {
+private fun EstimatedTimeDisplay(estimatedTime: BilingualName?, lineChangeDelayMinutes: Int) {
     estimatedTime?.let {
         Row(
             modifier = Modifier
@@ -109,7 +109,7 @@ fun EstimatedTimeDisplay(estimatedTime: BilingualName?, lineChangeDelayMinutes: 
 }
 
 @Composable
-fun AppbarDetail(
+private fun AppbarDetail(
     modifier: Modifier = Modifier,
     fromEn: String,
     toEn: String,

@@ -37,7 +37,7 @@ import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.data.Station
 import com.ma.tehro.domain.PathItem
-import com.ma.tehro.feature.shortestpath.pathfinder.components.Appbar
+import com.ma.tehro.feature.shortestpath.pathfinder.components.PathFinderAppbar
 import com.ma.tehro.feature.shortestpath.pathfinder.components.PathfinderFloatingToolbar
 import com.ma.tehro.feature.shortestpath.pathfinder.components.PinableTitle
 import com.ma.tehro.feature.shortestpath.pathfinder.components.StationRow
@@ -69,7 +69,7 @@ fun PathFinder(
         modifier = modifier.nestedScroll(exitAlwaysScrollBehavior),
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
-            Appbar(
+            PathFinderAppbar(
                 fromEn = fromEn,
                 toEn = toEn,
                 onBack = onBack,

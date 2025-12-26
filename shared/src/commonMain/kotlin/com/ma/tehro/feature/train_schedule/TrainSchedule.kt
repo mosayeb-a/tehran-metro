@@ -33,6 +33,7 @@ import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.DraggableTabRow
 import com.ma.tehro.common.ui.EmptyStatesFaces
 import com.ma.tehro.common.ui.Message
+import com.ma.tehro.common.ui.TehroHorizontalDivider
 import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.common.ui.theme.LightGray
 import com.ma.tehro.data.BilingualName
@@ -189,7 +190,7 @@ private fun ScheduleList(
                 selectedType = selectedType,
                 onScheduleTypeSelected = onScheduleTypeSelected
             )
-            HorizontalDivider(color = LightGray.copy(alpha = 1f))
+            TehroHorizontalDivider()
 
             LazyColumn(
                 modifier = Modifier.drawVerticalScrollbar(lazyListState),

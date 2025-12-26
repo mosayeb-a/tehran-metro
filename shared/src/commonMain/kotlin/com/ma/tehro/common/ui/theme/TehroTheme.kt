@@ -6,7 +6,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
-import com.ma.tehro.domain.AppTheme
+import com.ma.tehro.domain.Theme
 
 private val BlueColorScheme = darkColorScheme(
     primary = Blue,
@@ -52,11 +52,11 @@ private val OceanColorScheme = darkColorScheme(
     onPrimaryContainer = Color.White,
 )
 
-val AppThemes = listOf(
-    AppTheme("آبی", BlueColorScheme),
-    AppTheme("موکا", MochaColorScheme),
-    AppTheme("جنگل", ForestColorScheme),
-    AppTheme("اقیانوس", OceanColorScheme)
+val Themes = listOf(
+    Theme("آبی", BlueColorScheme),
+    Theme("موکا", MochaColorScheme),
+    Theme("جنگل", ForestColorScheme),
+    Theme("اقیانوس", OceanColorScheme)
 )
 
 @Composable
