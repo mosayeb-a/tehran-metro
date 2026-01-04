@@ -21,6 +21,7 @@ import androidx.savedstate.SavedState
 import androidx.savedstate.read
 import androidx.savedstate.write
 import com.ma.tehro.data.BilingualName
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -201,3 +202,5 @@ fun getWindowHeight(): Dp {
         windowInfo.containerSize.height.toDp()
     }
 }
+
+expect val ioCoroutineDispatcher : CoroutineDispatcher

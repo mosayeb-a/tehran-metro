@@ -40,6 +40,17 @@ kotlin {
                 implementation(libs.kotlinx.browser)
 
                 implementation(projects.shared)
+
+                implementation(libs.compose.navigation)
+
+                implementation(libs.koin.core)
+                implementation(libs.koin.compose)
+                implementation(libs.koin.compose.viewmodel)
+
+                implementation(libs.kotlinx.serialization)
+
+                implementation(libs.androidx.lifecycle.runtimeCompose)
+                implementation(libs.androidx.lifecycle.viewModel)
             }
         }
     }
