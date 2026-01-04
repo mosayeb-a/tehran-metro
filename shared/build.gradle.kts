@@ -110,6 +110,7 @@ kotlin {
         wasmJsMain {
             dependencies {
                 implementation(libs.ktor.js)
+                implementation(libs.kotlinx.browser)
             }
         }
 
