@@ -17,21 +17,21 @@ plugins {
 }
 
 kotlin {
-    kotlin {
-        androidLibrary {
-            namespace = "com.ma.tehro.shared"
-            compileSdk = libs.versions.android.compileSdk.get().toInt()
-            minSdk = libs.versions.android.minSdk.get().toInt()
+    jvm()
 
-            withJava()
+    androidLibrary {
+        namespace = "com.ma.tehro.shared"
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
 
-            androidResources {
-                enable = true
-            }
+        withJava()
 
-            compilerOptions {
-                jvmTarget.set(JvmTarget.JVM_17)
-            }
+        androidResources {
+            enable = true
+        }
+
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
 
@@ -114,10 +114,12 @@ kotlin {
             }
         }
 
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-            implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.coroutines.test)
+        commonTest {
+            dependencies {
+                implementation(libs.kotlin.test)
+                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.kotlinx.coroutines.test)
+            }
         }
     }
 }
