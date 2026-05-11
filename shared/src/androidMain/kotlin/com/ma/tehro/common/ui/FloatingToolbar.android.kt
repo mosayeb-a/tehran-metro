@@ -18,40 +18,45 @@ actual fun FloatingToolbarContainer(
     fab: @Composable (() -> Unit)?,
 ) {
     val actualScrollBehavior = scrollBehavior as? FloatingToolbarScrollBehavior
-    val hasFab = fab != null
-
-    HorizontalFloatingToolbar(
-        expanded = true,
-        floatingActionButton = if (hasFab) {
-            {
+    if (fab != null) {
+        HorizontalFloatingToolbar(
+            expanded = true,
+            floatingActionButton = {
                 FloatingToolbarDefaults.VibrantFloatingActionButton(
                     onClick = {},
                     containerColor = MaterialTheme.colorScheme.primary
                 ) {
-                    fab()
+                    fab.invoke()
                 }
-            }
-        } else {
-            { }
-        },
-        modifier = modifier
-            .padding(
-                bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
-            )
-            .offset(y = -FloatingToolbarDefaults.ScreenOffset),
-        colors = if (hasFab) {
-            FloatingToolbarDefaults.vibrantFloatingToolbarColors(
+            },
+            modifier = modifier
+                .padding(
+                    bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+                )
+                .offset(y = -FloatingToolbarDefaults.ScreenOffset),
+            colors = FloatingToolbarDefaults.vibrantFloatingToolbarColors(
                 toolbarContainerColor = containerColor,
                 toolbarContentColor = contentColor
-            )
-        } else {
-            FloatingToolbarDefaults.standardFloatingToolbarColors(
+            ),
+            expandedShadowElevation = 0.dp,
+            content = content,
+            scrollBehavior = actualScrollBehavior
+        )
+    } else {
+        HorizontalFloatingToolbar(
+            expanded = true,
+            modifier = modifier
+                .padding(
+                    bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+                )
+                .offset(y = -FloatingToolbarDefaults.ScreenOffset),
+            colors = FloatingToolbarDefaults.standardFloatingToolbarColors(
                 toolbarContainerColor = containerColor,
                 toolbarContentColor = contentColor
-            )
-        },
-        expandedShadowElevation = if (hasFab) 0.dp else 4.dp,
-        content = content,
-        scrollBehavior = actualScrollBehavior
-    )
+            ),
+            expandedShadowElevation = 4.dp,
+            content = content,
+            scrollBehavior = actualScrollBehavior
+        )
+    }
 }
