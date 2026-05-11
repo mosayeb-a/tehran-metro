@@ -8,13 +8,12 @@ import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.ui.FloatingToolbarContainer
+import com.ma.tehro.common.ui.ToolbarIconButton
 import com.ma.thero.resources.Res
 import com.ma.thero.resources.route
 import org.jetbrains.compose.resources.painterResource
@@ -33,28 +32,38 @@ fun SelectionToolbar(
         containerColor = MaterialTheme.colorScheme.primaryContainer,
         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
         content = {
-            IconButton(modifier = Modifier.size(48.dp), onClick = onFindNearestStationsByPlaceClick) {
-                Icon(Icons.Filled.Business, contentDescription = null, tint = Color.White)
-            }
-            IconButton(modifier = Modifier.size(48.dp), onClick = onFindNearestStationClick) {
-                Icon(Icons.Filled.LocationOn, contentDescription = null, tint = Color.White)
-            }
-            IconButton(modifier = Modifier.size(48.dp), onClick = onDayOfWeekClick) {
-                Icon(Icons.Filled.CalendarMonth, contentDescription = null, tint = Color.White)
-            }
-            IconButton(modifier = Modifier.size(48.dp), onClick = onTimeChangeClick) {
-                Icon(Icons.Filled.Timer, contentDescription = null, tint = Color.White)
-            }
+            ToolbarIconButton(
+                icon = Icons.Filled.Business,
+                label = "مکان",
+                onClick = onFindNearestStationsByPlaceClick
+            )
+            ToolbarIconButton(
+                icon = Icons.Filled.LocationOn,
+                label = "ایستگاه",
+                onClick = onFindNearestStationClick
+            )
+            ToolbarIconButton(
+                icon = Icons.Filled.CalendarMonth,
+                label = "روز",
+                onClick = onDayOfWeekClick
+            )
+            ToolbarIconButton(
+                icon = Icons.Filled.Timer,
+                label = "زمان",
+                onClick = onTimeChangeClick
+            )
         },
         fab = {
             FloatingActionButton(
                 onClick = onFindPathClick,
                 containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+                modifier = Modifier.size(56.dp)
             ) {
                 Icon(
                     painter = painterResource(Res.drawable.route),
-                    contentDescription = "Find shortest path"
+                    contentDescription = "مسیر",
+                    modifier = Modifier.size(24.dp)
                 )
             }
         }
