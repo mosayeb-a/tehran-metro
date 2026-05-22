@@ -2,8 +2,8 @@ package com.ma.tehro.feature.shortestpath.pathfinder.components
 
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowUpward
-import androidx.compose.material.icons.filled.Image
+import androidx.compose.material.icons.rounded.ArrowUpward
+import androidx.compose.material.icons.rounded.Image
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
@@ -32,7 +32,7 @@ fun PathfinderFloatingToolbar(
         scrollBehavior = scrollBehavior,
         content = {
             ToolbarIconButton(
-                icon = Icons.Filled.ArrowUpward,
+                icon = Icons.Rounded.ArrowUpward,
                 label = "بالا",
                 onClick = { scope.launch { lazyListState.animateScrollToItem(0) } }
             )
@@ -42,7 +42,7 @@ fun PathfinderFloatingToolbar(
                 onClick = onInfoClick
             )
             ToolbarIconButton(
-                icon = Icons.Filled.Image,
+                icon = Icons.Rounded.Image,
                 label = "نقشه",
                 onClick = onMapClick
             )
