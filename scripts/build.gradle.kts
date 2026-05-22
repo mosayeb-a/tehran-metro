@@ -1,39 +1,23 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.android.library)
+    kotlin("jvm")
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.jetbrains.kotlin.android)
 }
 
-android {
-    namespace = "app.ma.scripts"
-    compileSdk = 35
+group = "app.ma"
+version = "1.0"
+//
+//repositories {
+//    mavenCentral()
+//    google()
+//}
 
-    defaultConfig {
-        minSdk = 24
+kotlin {
+    jvmToolchain(11)
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlin {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
-        }
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_11)
     }
 }
 
@@ -44,9 +28,15 @@ dependencies {
     implementation(libs.kotlinx.serialization)
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.1")
     testImplementation(libs.kotlin.test)
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation(libs.kotlinx.coroutines.test)
+    implementation(libs.kotlinx.coroutines.core)
     implementation("org.xerial:sqlite-jdbc:3.45.1.0")
+
+    implementation("io.ktor:ktor-client-core:2.3.7")
+    implementation("io.ktor:ktor-client-cio:2.3.7")
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.7")
+
+    implementation("org.jsoup:jsoup:1.17.2")
 
     implementation(project(":shared"))
 }
