@@ -29,49 +29,58 @@ class PathTimeCalculator(
         dayOfWeek: Int,
         currentTime: Double? = null,
     ): Pair<Map<String, String>, BilingualName> {
-        var lineChanges = 0
+        var transferCount = 0
         var currentLine = 0
         var currentDestination = ""
         val stationTimes = mutableMapOf<String, Double>()
         var timeTracker = currentTime ?: 0.0
+        var isFirstTitle = true
 
-        path.forEachIndexed { index, item ->
+        path.forEach { item ->
             when (item) {
                 is PathItem.Title -> {
                     currentLine = item.en.substringAfter("Line ")
-                        .substringBefore(":").toIntOrNull() ?: return@forEachIndexed
+                        .substringBefore(":").toIntOrNull() ?: return@forEach
 
                     currentDestination = item.en.substringAfter(":")
                         .removePrefix("To ").trim()
-                    lineChanges++
 
-                    val delayFraction = lineChangeDelayMinutes.toDouble() / (24 * 60.0)
-                    timeTracker += delayFraction
+                    if (!isFirstTitle) {
+                        transferCount++
+                        val delayFraction = lineChangeDelayMinutes.toDouble() / (24 * 60.0)
+                        timeTracker += delayFraction
+                    }
+                    isFirstTitle = false
                 }
 
                 is PathItem.StationItem -> {
-                    if (stationTimes.containsKey(item.station.name)) return@forEachIndexed
+                    if (stationTimes.containsKey(item.station.name)) return@forEach
 
                     val scheduleInfo = trainScheduleRepository.getScheduleByStation(
                         item.station.name, currentLine, false
                     ).run {
                         find { it.destination.en == currentDestination }
                             ?: find {
-                                it.destination.en == LineEndpoints.getEn(currentLine, false)?.second
+                                it.destination.en == LineEndpoints.getEn(
+                                    currentLine,
+                                    false
+                                )?.second
                             }
                             ?: find {
-                                it.destination.en == LineEndpoints.getEn(currentLine, true)?.second
+                                it.destination.en == LineEndpoints.getEn(
+                                    currentLine,
+                                    true
+                                )?.second
                             }
-                    } ?: return@forEachIndexed
+                    } ?: return@forEach
 
-                    val todaySchedule =
-                        TimeUtils.getScheduleTypeForCurrentDay(
-                            scheduleTypes = scheduleInfo.schedules.keys.toList(),
-                            dayOfWeek = dayOfWeek
-                        )
+                    val todaySchedule = TimeUtils.getScheduleTypeForCurrentDay(
+                        scheduleTypes = scheduleInfo.schedules.keys.toList(),
+                        dayOfWeek = dayOfWeek
+                    )
 
                     val schedules = scheduleInfo.schedules[todaySchedule]?.sorted()
-                        ?: return@forEachIndexed
+                        ?: return@forEach
 
                     val referenceTime = if (timeTracker == 0.0) {
                         currentTime ?: TimeUtils.getCurrentTimeAsDouble()
@@ -87,7 +96,7 @@ class PathTimeCalculator(
             }
         }
 
-        val estimate = calculateFinalEstimateTime(stationTimes, lineChanges - 1)
+        val estimate = calculateFinalEstimateTime(stationTimes, transferCount)
         return stationTimes.mapValues { fractionToTime(it.value) } to estimate
     }
 
@@ -100,7 +109,7 @@ class PathTimeCalculator(
      */
     private fun calculateFinalEstimateTime(
         stationTimes: Map<String, Double>,
-        lineChanges: Int
+        transferCount: Int
     ): BilingualName {
         if (stationTimes.isEmpty()) return BilingualName("0 MIN", "۰ دقیقه")
 
@@ -112,8 +121,13 @@ class PathTimeCalculator(
         val firstMin = (first * millisInDay / (60 * 1000)).toInt()
         val lastMin = (last * millisInDay / (60 * 1000)).toInt()
 
-        val diff = if (lastMin >= firstMin) lastMin - firstMin else (lastMin + 24 * 60) - firstMin
-        val totalMin = diff + (lineChanges * 8)
+        val diff = if (lastMin >= firstMin) {
+            lastMin - firstMin
+        } else {
+            (lastMin + 24 * 60) - firstMin
+        }
+
+        val totalMin = diff + (transferCount * 8)
 
         return if (totalMin >= 60) {
             val h = totalMin / 60

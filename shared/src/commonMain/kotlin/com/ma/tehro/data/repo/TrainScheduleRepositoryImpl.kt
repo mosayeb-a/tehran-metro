@@ -58,9 +58,7 @@ class TrainScheduleRepositoryImpl(
         val endpointsEn = LineEndpoints.getEn(lineNum, useBranchEndpoints)
         val endpointsFa = LineEndpoints.getFa(lineNum, useBranchEndpoints)
 
-        if (endpointsEn == null || endpointsFa == null) {
-            return emptyList()
-        }
+        if (endpointsEn == null || endpointsFa == null) return emptyList()
 
         return scheduleData
             .map { (scheduleKey, times) ->
