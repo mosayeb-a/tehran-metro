@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Station Mapper - Export for Android</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; color: #eee; }
+        .container { display: flex; height: 100vh; }
+        .sidebar { width: 400px; background: #16213e; padding: 20px; overflow-y: auto; border-right: 1px solid #0f3460; }
+        .sidebar h2 { font-size: 18px; margin-bottom: 15px; color: #e94560; }
+        .sidebar h3 { font-size: 14px; margin: 15px 0 10px; color: #0f3460; }
+        .stats { background: #0f3460; padding: 10px; border-radius: 8px; margin-bottom: 20px; }
+        .stats p { margin: 5px 0; font-size: 12px; }
+        .station-list { max-height: 200px; overflow-y: auto; font-size: 10px; border: 1px solid #0f3460; border-radius: 4px; }
+        .station-item { padding: 3px; margin: 2px 0; background: #1a1a2e; border-radius: 4px; cursor: pointer; font-family: monospace; font-size: 10px; }
+        .station-item:hover { background: #e94560; transform: translateX(5px); }
+        .station-item.selected { background: #e94560; border-left: 3px solid #fff; }
+        .station-item.mapped { background: #2ecc71; opacity: 0.7; }
+        .controls { margin-top: 15px; }
+        button { background: #e94560; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer; margin-right: 8px; font-size: 11px; }
+        button:hover { background: #ff6b6b; }
+        button.primary { background: #2ecc71; }
+        button.primary:hover { background: #27ae60; }
+        button.secondary { background: #3498db; }
+        button.secondary:hover { background: #2980b9; }
+        .map-container { flex: 1; background: #f0f0f0; overflow: auto; }
+        .map-wrapper { position: relative; display: inline-block; }
+        svg { display: block; width: auto; height: auto; max-width: none; background: white; }
+        .overlay-dot { position: absolute; width: 10px; height: 10px; background: #ff4444; border: 2px solid yellow; border-radius: 50%; transform: translate(-50%, -50%); pointer-events: auto; z-index: 100; cursor: pointer; }
+        .overlay-dot:hover { width: 16px; height: 16px; background: #e94560; }
+        .overlay-dot.mapped { background: #2ecc71; border: 2px solid white; }
+        .overlay-label { position: absolute; font-size: 8px; background: rgba(0,0,0,0.8); color: white; padding: 1px 3px; border-radius: 3px; white-space: nowrap; pointer-events: none; z-index: 101; font-family: monospace; }
+        .overlay-name { position: absolute; font-size: 9px; background: rgba(0,0,0,0.7); color: #2ecc71; padding: 2px 5px; border-radius: 3px; white-space: nowrap; pointer-events: none; z-index: 101; font-weight: bold; }
+        .info-panel { position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.8); padding: 10px; border-radius: 5px; font-size: 11px; z-index: 200; }
+        .slider-group { margin: 12px 0; padding: 8px; background: #0f3460; border-radius: 8px; }
+        .slider-group label { display: block; margin-bottom: 5px; font-size: 11px; }
+        input[type="range"] { width: 100%; margin: 5px 0; }
+        .offset-value { display: inline-block; background: #1a1a2e; padding: 2px 6px; border-radius: 3px; font-size: 10px; margin-left: 8px; }
+        .search-box { width: 100%; padding: 4px; margin-bottom: 8px; border-radius: 4px; border: none; background: #1a1a2e; color: white; font-size: 11px; }
+        .export-preview { background: #0f3460; padding: 8px; border-radius: 8px; margin-top: 12px; font-size: 10px; max-height: 150px; overflow: auto; }
+        .export-preview pre { color: #2ecc71; font-family: monospace; font-size: 9px; white-space: pre-wrap; }
+        .mapping-info { background: #2c3e50; padding: 8px; border-radius: 8px; margin: 8px 0; font-size: 10px; }
+        .selected-dot-controls { border-top: 1px solid #0f3460; margin-top: 10px; padding-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>🗺️ Station Mapper</h2>
+            
+            <div class="stats">
+                <p>📊 Extracted: <strong id="totalStations">0</strong> | Mapped: <strong id="mappedCount">0</strong></p>
+                <p>📝 Named Stations: <strong id="namedCount">0</strong></p>
+            </div>
+            
+            <div class="mapping-info">
+                <strong>📍 How to map:</strong><br>
+                1. Click a red dot or from left list<br>
+                2. Click a station name from right list<br>
+                3. Click "Map Selected"<br>
+                4. Export for Android when done
+            </div>
+            
+            <div class="controls">
+                <button onclick="exportForAndroid()" class="primary">📱 Export</button>
+                <button onclick="saveMappings()">💾 Save</button>
+                <button onclick="loadMappings()">📂 Load</button>
+                <button onclick="importExistingCoords()" class="secondary">📥 Import Coords</button>
+                <button onclick="clearAllMappings()">🗑️ Clear</button>
+                <button onclick="toggleAllDots()">👁️ Toggle</button>
+            </div>
+            
+            <div class="slider-group">
+                <label>📍 Global Offset <span id="offsetXVal" class="offset-value">0</span> X, <span id="offsetYVal" class="offset-value">0</span> Y</label>
+                <input type="range" id="offsetX" min="-100" max="100" value="0" step="1" oninput="updateOffsets()">
+                <input type="range" id="offsetY" min="-100" max="100" value="0" step="1" oninput="updateOffsets()">
+            </div>
+            
+            <div class="slider-group selected-dot-controls">
+                <label>🎯 Selected Dot Offset</label>
+                <label>Horizontal: <span id="selectedOffsetXVal" class="offset-value">0</span></label>
+                <input type="range" id="selectedOffsetX" min="-50" max="50" value="0" step="1" oninput="updateSelectedOffset()">
+                <label>Vertical: <span id="selectedOffsetYVal" class="offset-value">0</span></label>
+                <input type="range" id="selectedOffsetY" min="-50" max="50" value="0" step="1" oninput="updateSelectedOffset()">
+            </div>
+            
+            <div class="slider-group">
+                <label>⚫ Dot Size: <span id="dotSizeVal">10</span>px</label>
+                <input type="range" id="dotSize" min="6" max="20" value="10" step="1" oninput="updateDotSize()">
+            </div>
+            
+            <div style="display: flex; gap: 8px;">
+                <div style="flex: 1;">
+                    <h3>📍 Extracted Points</h3>
+                    <input type="text" id="extractedSearch" class="search-box" placeholder="Search..." onkeyup="filterExtracted()">
+                    <div class="station-list" id="extractedList"></div>
+                </div>
+                <div style="flex: 1;">
+                    <h3>📝 Station Names</h3>
+                    <input type="text" id="namedSearch" class="search-box" placeholder="Search..." onkeyup="filterNamed()">
+                    <div class="station-list" id="namedList"></div>
+                </div>
+            </div>
+            
+            <div class="controls" style="margin-top: 10px;">
+                <button onclick="mapSelected()" class="primary" style="width: 100%;">🗺️ Map Selected</button>
+            </div>
+            
+            <div class="export-preview">
+                <strong>📱 Export Preview:</strong>
+                <pre id="exportPreview">No mappings yet</pre>
+            </div>
+        </div>
+        
+        <div class="map-container" id="mapContainer">
+            <div class="map-wrapper" id="mapWrapper">
+                <div id="svgContainer"></div>
+                <div id="overlayContainer"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="info-panel" id="infoPanel">Loading...</div>
+
+    <script>
+        let extractedStations = [];
+        let namedStations = {};
+        let mappings = {};
+        let selectedExtractedIndex = null;
+        let selectedNamedId = null;
+        let svgWidth = 1984.25;
+        let svgHeight = 1417.32;
+        let globalOffsetX = 0;
+        let globalOffsetY = 0;
+        let individualOffsets = {};
+        let dotsVisible = true;
+        
+        async function loadSVG() {
+            return new Promise((resolve) => {
+                const svgContainer = document.getElementById('svgContainer');
+                fetch('metro-map.svg')
+                    .then(response => response.text())
+                    .then(svgText => {
+                        svgContainer.innerHTML = svgText;
+                        const svgElem = svgContainer.querySelector('svg');
+                        if (svgElem) {
+                            svgElem.style.backgroundColor = 'white';
+                            svgElem.style.display = 'block';
+                            const viewBox = svgElem.getAttribute('viewBox');
+                            if (viewBox) {
+                                const parts = viewBox.split(' ');
+                                svgWidth = parseFloat(parts[2]);
+                                svgHeight = parseFloat(parts[3]);
+                            }
+                        }
+                        resolve();
+                    });
+            });
+        }
+        
+        async function loadExtractedStations() {
+            try {
+                const response = await fetch('station_coords.json');
+                const data = await response.json();
+                extractedStations = data.stations || [];
+                document.getElementById('totalStations').textContent = extractedStations.length;
+                renderExtractedList();
+                return true;
+            } catch (error) {
+                console.error('Error loading extracted stations:', error);
+                return false;
+            }
+        }
+        
+        async function loadNamedStations() {
+            try {
+                const response = await fetch('stations.json');
+                namedStations = await response.json();
+                document.getElementById('namedCount').textContent = Object.keys(namedStations).length;
+                renderNamedList();
+                return true;
+            } catch (error) {
+                console.error('Error loading named stations:', error);
+                return false;
+            }
+        }
+        
+        function importExistingCoords() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'application/json';
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                const text = await file.text();
+                try {
+                    const data = JSON.parse(text);
+                    const coords = data.stations || data;
+                    let imported = 0;
+                    
+                    Object.entries(coords).forEach(([name, coord]) => {
+                        let closestIdx = -1;
+                        let minDist = Infinity;
+                        extractedStations.forEach((station, idx) => {
+                            const dist = Math.hypot(station.x - coord.x, station.y - coord.y);
+                            if (dist < minDist) {
+                                minDist = dist;
+                                closestIdx = idx;
+                            }
+                        });
+                        if (closestIdx !== -1 && minDist < 50) {
+                            mappings[closestIdx] = name;
+                            imported++;
+                        }
+                    });
+                    
+                    document.getElementById('mappedCount').textContent = Object.keys(mappings).length;
+                    renderExtractedList();
+                    drawOverlays();
+                    updateExportPreview();
+                    document.getElementById('infoPanel').innerHTML = `Imported ${imported} station mappings!`;
+                } catch (err) {
+                    alert('Invalid JSON file');
+                }
+            };
+            input.click();
+        }
+        
+        function saveMappings() {
+            const androidStations = {};
+            Object.entries(mappings).forEach(([index, name]) => {
+                const station = extractedStations[parseInt(index)];
+                if (station) {
+                    const individualOffset = individualOffsets[index] || {x: 0, y: 0};
+                    androidStations[name] = {
+                        x: Math.round(station.x + globalOffsetX + individualOffset.x),
+                        y: Math.round(station.y + globalOffsetY + individualOffset.y)
+                    };
+                }
+            });
+            const dataStr = JSON.stringify(androidStations, null, 2);
+            const blob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'station_coords_export.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            document.getElementById('infoPanel').innerHTML = `Saved ${Object.keys(androidStations).length} stations!`;
+        }
+        
+        async function loadMappings() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'application/json';
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                const text = await file.text();
+                try {
+                    const loadedCoords = JSON.parse(text);
+                    let loaded = 0;
+                    
+                    Object.entries(loadedCoords).forEach(([name, coords]) => {
+                        let closestIdx = -1;
+                        let minDist = Infinity;
+                        extractedStations.forEach((station, idx) => {
+                            const dist = Math.hypot(station.x - coords.x, station.y - coords.y);
+                            if (dist < minDist) {
+                                minDist = dist;
+                                closestIdx = idx;
+                            }
+                        });
+                        if (closestIdx !== -1 && minDist < 50) {
+                            mappings[closestIdx] = name;
+                            loaded++;
+                        }
+                    });
+                    
+                    document.getElementById('mappedCount').textContent = Object.keys(mappings).length;
+                    renderExtractedList();
+                    drawOverlays();
+                    updateExportPreview();
+                    document.getElementById('infoPanel').innerHTML = `Loaded ${loaded} mappings!`;
+                } catch (err) {
+                    alert('Invalid JSON file');
+                }
+            };
+            input.click();
+        }
+        
+        function exportForAndroid() {
+            const androidStations = {};
+            Object.entries(mappings).forEach(([index, name]) => {
+                const station = extractedStations[parseInt(index)];
+                if (station) {
+                    const individualOffset = individualOffsets[index] || {x: 0, y: 0};
+                    androidStations[name] = {
+                        x: Math.round(station.x + globalOffsetX + individualOffset.x),
+                        y: Math.round(station.y + globalOffsetY + individualOffset.y)
+                    };
+                }
+            });
+            
+            const output = { stations: androidStations, total: Object.keys(androidStations).length };
+            const dataStr = JSON.stringify(output, null, 2);
+            const blob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'map_station_coords.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            document.getElementById('infoPanel').innerHTML = `Exported ${Object.keys(androidStations).length} stations!`;
+            updateExportPreview();
+        }
+        
+        function updateExportPreview() {
+            const previewDiv = document.getElementById('exportPreview');
+            const androidStations = {};
+            Object.entries(mappings).forEach(([index, name]) => {
+                const station = extractedStations[parseInt(index)];
+                if (station) {
+                    const individualOffset = individualOffsets[index] || {x: 0, y: 0};
+                    androidStations[name] = {
+                        x: Math.round(station.x + globalOffsetX + individualOffset.x),
+                        y: Math.round(station.y + globalOffsetY + individualOffset.y)
+                    };
+                }
+            });
+            
+            if (Object.keys(androidStations).length === 0) {
+                previewDiv.innerHTML = 'No mappings yet.';
+            } else {
+                previewDiv.innerHTML = JSON.stringify(androidStations, null, 2);
+            }
+        }
+        
+        function clearAllMappings() {
+            if (confirm('Clear all mappings?')) {
+                mappings = {};
+                individualOffsets = {};
+                document.getElementById('mappedCount').textContent = '0';
+                renderExtractedList();
+                drawOverlays();
+                updateExportPreview();
+                document.getElementById('infoPanel').innerHTML = 'All mappings cleared';
+            }
+        }
+        
+        function mapSelected() {
+            if (selectedExtractedIndex !== null && selectedNamedId !== null) {
+                mappings[selectedExtractedIndex] = selectedNamedId;
+                document.getElementById('mappedCount').textContent = Object.keys(mappings).length;
+                renderExtractedList();
+                drawOverlays();
+                updateExportPreview();
+                document.getElementById('infoPanel').innerHTML = `Mapped: ${selectedNamedId}`;
+                selectedExtractedIndex = null;
+                selectedNamedId = null;
+                renderExtractedList();
+                renderNamedList();
+            } else {
+                document.getElementById('infoPanel').innerHTML = 'Select both an extracted point and a station name!';
+            }
+        }
+        
+        function renderExtractedList() {
+            const listDiv = document.getElementById('extractedList');
+            const searchTerm = document.getElementById('extractedSearch').value.toLowerCase();
+            listDiv.innerHTML = '';
+            
+            extractedStations.forEach((station, index) => {
+                const isMapped = mappings[index];
+                const mappedName = isMapped ? ` → ${isMapped}` : '';
+                const item = document.createElement('div');
+                item.className = `station-item ${isMapped ? 'mapped' : ''} ${selectedExtractedIndex === index ? 'selected' : ''}`;
+                item.innerHTML = `${index + 1}. (${station.x.toFixed(0)}, ${station.y.toFixed(0)})${mappedName}`;
+                item.onclick = () => {
+                    selectedExtractedIndex = index;
+                    renderExtractedList();
+                    renderNamedList();
+                    highlightStation(index);
+                    document.getElementById('selectedOffsetX').value = individualOffsets[index]?.x || 0;
+                    document.getElementById('selectedOffsetY').value = individualOffsets[index]?.y || 0;
+                    document.getElementById('selectedOffsetXVal').textContent = individualOffsets[index]?.x || 0;
+                    document.getElementById('selectedOffsetYVal').textContent = individualOffsets[index]?.y || 0;
+                };
+                listDiv.appendChild(item);
+            });
+        }
+        
+        function renderNamedList() {
+            const listDiv = document.getElementById('namedList');
+            const searchTerm = document.getElementById('namedSearch').value.toLowerCase();
+            listDiv.innerHTML = '';
+            
+            Object.keys(namedStations).forEach(name => {
+                if (name.toLowerCase().includes(searchTerm)) {
+                    const item = document.createElement('div');
+                    item.className = `station-item ${selectedNamedId === name ? 'selected' : ''}`;
+                    item.innerHTML = name;
+                    item.onclick = () => {
+                        selectedNamedId = name;
+                        renderNamedList();
+                        renderExtractedList();
+                    };
+                    listDiv.appendChild(item);
+                }
+            });
+        }
+        
+        function filterExtracted() { renderExtractedList(); }
+        function filterNamed() { renderNamedList(); }
+        
+        function drawOverlays() {
+            const overlayContainer = document.getElementById('overlayContainer');
+            overlayContainer.innerHTML = '';
+            const svgElem = document.querySelector('#svgContainer svg');
+            if (!svgElem) return;
+            
+            const svgRect = svgElem.getBoundingClientRect();
+            const scaleX = svgRect.width / svgWidth;
+            const scaleY = svgRect.height / svgHeight;
+            const dotSize = parseInt(document.getElementById('dotSize').value);
+            
+            extractedStations.forEach((station, index) => {
+                if (!dotsVisible) return;
+                const individualOffset = individualOffsets[index] || {x: 0, y: 0};
+                const screenX = (station.x + globalOffsetX + individualOffset.x) * scaleX;
+                const screenY = (station.y + globalOffsetY + individualOffset.y) * scaleY;
+                const isMapped = mappings[index];
+                
+                const dot = document.createElement('div');
+                dot.className = `overlay-dot ${isMapped ? 'mapped' : ''}`;
+                dot.style.left = screenX + 'px';
+                dot.style.top = screenY + 'px';
+                dot.style.width = dotSize + 'px';
+                dot.style.height = dotSize + 'px';
+                dot.onclick = () => {
+                    selectedExtractedIndex = index;
+                    renderExtractedList();
+                    highlightStation(index);
+                };
+                
+                const label = document.createElement('div');
+                label.className = 'overlay-label';
+                label.style.left = (screenX + 10) + 'px';
+                label.style.top = (screenY - 15) + 'px';
+                label.innerHTML = `${index + 1}`;
+                
+                overlayContainer.appendChild(dot);
+                overlayContainer.appendChild(label);
+                
+                if (isMapped) {
+                    const nameLabel = document.createElement('div');
+                    nameLabel.className = 'overlay-name';
+                    nameLabel.style.left = (screenX + 15) + 'px';
+                    nameLabel.style.top = screenY + 'px';
+                    nameLabel.innerHTML = mappings[index];
+                    overlayContainer.appendChild(nameLabel);
+                }
+            });
+        }
+        
+        function highlightStation(index) {
+            const dots = document.querySelectorAll('.overlay-dot');
+            dots.forEach((dot, idx) => {
+                if (idx === index) {
+                    dot.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    setTimeout(() => {
+                        if (dots[idx]) dots[idx].style.transform = 'translate(-50%, -50%) scale(1)';
+                    }, 500);
+                    const mapContainer = document.getElementById('mapContainer');
+                    const dotRect = dot.getBoundingClientRect();
+                    const containerRect = mapContainer.getBoundingClientRect();
+                    mapContainer.scrollLeft += dotRect.left - containerRect.left - containerRect.width / 2;
+                    mapContainer.scrollTop += dotRect.top - containerRect.top - containerRect.height / 2;
+                }
+            });
+        }
+        
+        function updateOffsets() {
+            globalOffsetX = parseInt(document.getElementById('offsetX').value);
+            globalOffsetY = parseInt(document.getElementById('offsetY').value);
+            document.getElementById('offsetXVal').textContent = globalOffsetX;
+            document.getElementById('offsetYVal').textContent = globalOffsetY;
+            drawOverlays();
+            updateExportPreview();
+        }
+        
+        function updateSelectedOffset() {
+            if (selectedExtractedIndex !== null) {
+                const offsetX = parseInt(document.getElementById('selectedOffsetX').value);
+                const offsetY = parseInt(document.getElementById('selectedOffsetY').value);
+                individualOffsets[selectedExtractedIndex] = {x: offsetX, y: offsetY};
+                document.getElementById('selectedOffsetXVal').textContent = offsetX;
+                document.getElementById('selectedOffsetYVal').textContent = offsetY;
+                drawOverlays();
+                updateExportPreview();
+            }
+        }
+        
+        function updateDotSize() {
+            const newSize = parseInt(document.getElementById('dotSize').value);
+            document.getElementById('dotSizeVal').textContent = newSize;
+            const dots = document.querySelectorAll('.overlay-dot');
+            dots.forEach(dot => { dot.style.width = newSize + 'px'; dot.style.height = newSize + 'px'; });
+        }
+        
+        function toggleAllDots() {
+            dotsVisible = !dotsVisible;
+            const elements = document.querySelectorAll('.overlay-dot, .overlay-label, .overlay-name');
+            elements.forEach(el => el.style.display = dotsVisible ? 'block' : 'none');
+        }
+        
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => { if (extractedStations.length > 0) drawOverlays(); }, 250);
+        });
+        
+        async function init() {
+            await loadSVG();
+            await loadExtractedStations();
+            await loadNamedStations();
+            drawOverlays();
+            updateExportPreview();
+            document.getElementById('infoPanel').innerHTML = `Ready! ${extractedStations.length} points loaded.`;
+        }
+        
+        init();
+    </script>
+</body>
+</html>

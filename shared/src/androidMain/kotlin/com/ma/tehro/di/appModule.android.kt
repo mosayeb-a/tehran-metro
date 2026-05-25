@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.ma.tehro.data.Place
 import com.ma.tehro.data.Station
+import com.ma.tehro.domain.MapStationCoordinate
 import com.ma.tehro.services.DefaultLocationClient
 import com.ma.tehro.services.LocationClient
 import com.ma.thero.resources.Res
@@ -21,6 +22,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.Module
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 private val Context.settingsStore by preferencesDataStore(name = "tehran_metro_preferences")
@@ -51,6 +53,23 @@ actual val platformModule: Module
                 withContext(ioDispatcher) {
                     val text = Res.readBytes("files/places.json").decodeToString()
                     json.decodeFromString(text)
+                }
+            }
+        }
+
+        single<Map<String, MapStationCoordinate>>(named("stationCoords")) {
+            val json: Json = get()
+            val ioDispatcher: CoroutineDispatcher = get()
+
+            runBlocking {
+                withContext(ioDispatcher) {
+                    try {
+                        val jsonString = Res.readBytes("files/map_station_coords.json").decodeToString()
+                        json.decodeFromString<Map<String, MapStationCoordinate>>(jsonString)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        emptyMap()
+                    }
                 }
             }
         }

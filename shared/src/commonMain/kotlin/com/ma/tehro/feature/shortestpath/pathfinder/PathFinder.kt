@@ -183,7 +183,7 @@ fun PathFinder(
                                 (item as? PathItem.StationItem)?.station
                             }
                             .filter { !it.disabled }
-                            .map { it.translations.fa }
+                            .map { it.name }
                     )
                 },
                 scrollBehavior = exitAlwaysScrollBehavior
