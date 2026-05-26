@@ -48,3 +48,6 @@ the output format:
   "station name": { "x": 1234, "y": 5678 }
 }
 ```
+
+to change svg text color to white, replace fill="rgb\(13\.729858%, 12\.159729%, 12\.548828%\)" or fill="#231f1f" with
+fill="white"
