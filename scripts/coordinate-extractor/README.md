@@ -45,9 +45,34 @@ the output format:
 
 ```json
 {
-  "station name": { "x": 1234, "y": 5678 }
+  "station name": {
+    "x": 1234,
+    "y": 5678
+  }
 }
 ```
 
-to change svg text color to white, replace fill="rgb\(13\.729858%, 12\.159729%, 12\.548828%\)" or fill="#231f1f" with
-fill="white"
+to change svg text color to white, replace `fill="rgb(13.729858%, 12.159729%, 12.548828%)"` or
+`fill="#231f1f"` with `fill="white"`
+
+## generate transparent png with white text
+
+if you prefer a png instead of svg, convert with transparency and white text:
+
+```bash
+# convert pdf to svg first
+pdftocairo -svg tehran-metro-map.pdf master-map.svg
+
+# make all text white
+sed -i 's/fill="rgb(13\.729858%, 12\.159729%, 12\.548828%)"/fill="white"/g' master-map.svg
+sed -i 's/fill="#231f1f"/fill="white"/g' master-map.svg
+
+# generate transparent png at different resolutions
+inkscape master-map.svg --export-png=map-2800px.png --export-width=2800 --export-background-opacity=0
+inkscape master-map.svg --export-png=map-3000px.png --export-width=3000 --export-background-opacity=0
+inkscape master-map.svg --export-png=map-3200px.png --export-width=3200 --export-background-opacity=0
+inkscape master-map.svg --export-png=map-3500px.png --export-width=3500 --export-background-opacity=0
+
+# compress pngs (optional)
+pngquant --quality=85-95 map-*.png
+```

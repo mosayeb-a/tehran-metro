@@ -1,11 +1,11 @@
 package com.ma.tehro.feature.map.viewer
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,13 +19,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
-import coil3.compose.AsyncImage
-import coil3.compose.LocalPlatformContext
-import coil3.request.ImageRequest
-import coil3.request.crossfade
-import coil3.svg.SvgDecoder
 import com.ma.tehro.common.STATION_COORDS_QUALIFIER
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.domain.MapStationCoordinate
@@ -36,6 +30,8 @@ import com.ma.tehro.feature.map.viewer.zoombox.gesture.condition.WithinXBoundsTo
 import com.ma.tehro.feature.map.viewer.zoombox.gesture.transform.TransformGestureHandler
 import com.ma.tehro.feature.map.viewer.zoombox.zoomable
 import com.ma.thero.resources.Res
+import com.ma.thero.resources.map
+import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.koinInject
 import org.koin.core.qualifier.named
 
@@ -64,15 +60,13 @@ fun MapViewer(
 ) {
     val stationCoords: Map<String, MapStationCoordinate> =
         koinInject(qualifier = named(STATION_COORDS_QUALIFIER))
-    val context = LocalPlatformContext.current
 
     var canvasSize by remember { mutableStateOf(Size.Zero) }
     val zoomState =
         remember { MutableZoomState(ZoomState(scale = 1f, offset = Offset.Zero, childRect = null)) }
-    var isLoading by remember { mutableStateOf(true) }
 
     val pathPoints = remember(stations) {
-        if (stations == null) return@remember emptyList<PathPoint>()
+        if (stations == null) return@remember emptyList()
 
         val result = mutableListOf<PathPoint>()
         for (i in 0 until stations.size - 1) {
@@ -80,10 +74,8 @@ fun MapViewer(
             val next = stations[i + 1]
             result.add(PathPoint.Real(current))
 
-            // try both directions: current->next and next->current
             val fake = fakePoints[current to next] ?: fakePoints[next to current]
             if (fake != null) {
-                // if we found the reverse direction, reverse the fake points
                 val orderedFake = if (fakePoints.containsKey(current to next)) {
                     fake
                 } else {
@@ -151,17 +143,7 @@ fun MapViewer(
                         )
                     )
             ) {
-                AsyncImage(
-                    model = ImageRequest.Builder(context)
-                        .data(Res.getUri("files/map.svg"))
-                        .decoderFactory(SvgDecoder.Factory(useViewBoundsAsIntrinsicSize = true))
-                        .size(coil3.size.Size(4000, 4000))
-                        .crossfade(true)
-                        .build(),
-                    contentDescription = "Metro Map",
-                    contentScale = ContentScale.Fit,
-                    onSuccess = { isLoading = false },
-                    onError = { isLoading = false },
+                Image(
                     modifier = Modifier
                         .fillMaxSize()
                         .onSizeChanged { size ->
@@ -169,18 +151,13 @@ fun MapViewer(
                                 width = size.width.toFloat(),
                                 height = size.height.toFloat()
                             )
-                        }
+                        },
+                    painter = painterResource(Res.drawable.map),
+                    contentDescription = null
                 )
 
-                if (isLoading) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.align(Alignment.Center),
-                        color = White
-                    )
-                }
-
                 Canvas(modifier = Modifier.fillMaxSize()) {
-                    if (!isLoading && scaledPoints.size >= 2) {
+                    if (scaledPoints.size >= 2) {
                         val path = androidx.compose.ui.graphics.Path()
                         path.moveTo(scaledPoints.first().x, scaledPoints.first().y)
                         for (i in 1 until scaledPoints.size) {
@@ -193,25 +170,23 @@ fun MapViewer(
                         )
                     }
 
-                    if (!isLoading) {
-                        scaledPoints.forEachIndexed { index, point ->
-                            if (isRealStation[index]) {
-                                drawCircle(
-                                    color = Color.Blue.copy(alpha = 0.3f),
-                                    radius = CIRCLE_RADIUS + 4f,
-                                    center = point
-                                )
-                                drawCircle(
-                                    color = Color.Blue,
-                                    radius = CIRCLE_RADIUS,
-                                    center = point
-                                )
-                                drawCircle(
-                                    color = White,
-                                    radius = CIRCLE_RADIUS / 2.5f,
-                                    center = point
-                                )
-                            }
+                    scaledPoints.forEachIndexed { index, point ->
+                        if (isRealStation[index]) {
+                            drawCircle(
+                                color = Color.Blue.copy(alpha = 0.3f),
+                                radius = CIRCLE_RADIUS + 4f,
+                                center = point
+                            )
+                            drawCircle(
+                                color = Color.Blue,
+                                radius = CIRCLE_RADIUS,
+                                center = point
+                            )
+                            drawCircle(
+                                color = White,
+                                radius = CIRCLE_RADIUS / 2.5f,
+                                center = point
+                            )
                         }
                     }
                 }
