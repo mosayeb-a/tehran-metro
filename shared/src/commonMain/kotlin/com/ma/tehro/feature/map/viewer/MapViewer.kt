@@ -1,5 +1,11 @@
 package com.ma.tehro.feature.map.viewer
 
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -37,8 +43,8 @@ import org.koin.core.qualifier.named
 
 private const val SVG_WIDTH = 1984.25f
 private const val SVG_HEIGHT = 1417.32f
-private const val CIRCLE_RADIUS = 4f
-private const val LINE_WIDTH = 4f
+private const val CIRCLE_RADIUS = 3.5f
+private const val LINE_WIDTH = 3.1f
 
 // fake points guide the path along metro lines when stations aren't directly connected
 // key is a pair (from, to) in the direction the fake points are defined
@@ -115,6 +121,15 @@ fun MapViewer(
         pathPoints.map { it is PathPoint.Real }
     }
 
+    val pulse by rememberInfiniteTransition().animateFloat(
+        initialValue = 1f,
+        targetValue = 1.5f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(800, easing = FastOutSlowInEasing),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+
     Scaffold(
         modifier = modifier,
         topBar = {
@@ -160,33 +175,66 @@ fun MapViewer(
                     if (scaledPoints.size >= 2) {
                         val path = androidx.compose.ui.graphics.Path()
                         path.moveTo(scaledPoints.first().x, scaledPoints.first().y)
+
                         for (i in 1 until scaledPoints.size) {
-                            path.lineTo(scaledPoints[i].x, scaledPoints[i].y)
+                            val prev = scaledPoints[i - 1]
+                            val curr = scaledPoints[i]
+
+                            val cp1x = prev.x + (curr.x - prev.x) * 0.3f
+                            val cp1y = prev.y + (curr.y - prev.y) * 0.3f
+                            val cp2x = curr.x - (curr.x - prev.x) * 0.3f
+                            val cp2y = curr.y - (curr.y - prev.y) * 0.3f
+
+                            path.cubicTo(cp1x, cp1y, cp2x, cp2y, curr.x, curr.y)
                         }
+
                         drawPath(
                             path = path,
-                            color = Color.Blue,
+                            color = White,
                             style = Stroke(width = LINE_WIDTH)
                         )
                     }
 
                     scaledPoints.forEachIndexed { index, point ->
                         if (isRealStation[index]) {
-                            drawCircle(
-                                color = Color.Blue.copy(alpha = 0.3f),
-                                radius = CIRCLE_RADIUS + 4f,
-                                center = point
-                            )
-                            drawCircle(
-                                color = Color.Blue,
-                                radius = CIRCLE_RADIUS,
-                                center = point
-                            )
-                            drawCircle(
-                                color = White,
-                                radius = CIRCLE_RADIUS / 2.5f,
-                                center = point
-                            )
+                            when (index) {
+                                0 -> {
+                                    drawCircle(
+                                        color = Color(0xFFC6FF00).copy(alpha = 0.3f),
+                                        radius = (CIRCLE_RADIUS + 4f) * pulse,
+                                        center = point
+                                    )
+                                    drawCircle(
+                                        color = Color(0xFFC6FF00),
+                                        radius = (CIRCLE_RADIUS + 1f) * pulse,
+                                        center = point
+                                    )
+                                }
+                                scaledPoints.size - 1 -> {
+                                    drawCircle(
+                                        color = Color(0xFFFFC107).copy(alpha = 0.3f),
+                                        radius = (CIRCLE_RADIUS + 4f) * pulse,
+                                        center = point
+                                    )
+                                    drawCircle(
+                                        color = Color(0xFFFFC107),
+                                        radius = (CIRCLE_RADIUS + 1f) * pulse,
+                                        center = point
+                                    )
+                                }
+                                else -> {
+                                    drawCircle(
+                                        color = White,
+                                        radius = CIRCLE_RADIUS,
+                                        center = point
+                                    )
+                                    drawCircle(
+                                        color = Color(0xFF044434),
+                                        radius = CIRCLE_RADIUS / 2f,
+                                        center = point
+                                    )
+                                }
+                            }
                         }
                     }
                 }
