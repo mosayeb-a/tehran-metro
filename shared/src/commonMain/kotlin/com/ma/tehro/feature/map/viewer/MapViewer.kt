@@ -29,6 +29,7 @@ import coil3.svg.SvgDecoder
 import com.ma.tehro.common.STATION_COORDS_QUALIFIER
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.domain.MapStationCoordinate
+import com.ma.tehro.domain.PathPoint
 import com.ma.tehro.feature.map.viewer.zoombox.MutableZoomState
 import com.ma.tehro.feature.map.viewer.zoombox.ZoomState
 import com.ma.tehro.feature.map.viewer.zoombox.gesture.condition.WithinXBoundsTouchCondition
@@ -42,6 +43,18 @@ private const val SVG_WIDTH = 1984.25f
 private const val SVG_HEIGHT = 1417.32f
 private const val CIRCLE_RADIUS = 4f
 private const val LINE_WIDTH = 4f
+
+// fake points guide the path along metro lines when stations aren't directly connected
+// key is a pair (from, to) in the direction the fake points are defined
+private val fakePoints = mapOf(
+    "Namayeshgah-e Shahr-e Aftab" to "Emam Khomeini Airport" to listOf(
+        PathPoint.Fake(1122, 1300)
+    ),
+    "Towhid" to "Modafean-e Salamat" to listOf(
+        PathPoint.Fake(968, 598),
+        PathPoint.Fake(917, 547)
+    )
+)
 
 @Composable
 fun MapViewer(
@@ -58,21 +71,56 @@ fun MapViewer(
         remember { MutableZoomState(ZoomState(scale = 1f, offset = Offset.Zero, childRect = null)) }
     var isLoading by remember { mutableStateOf(true) }
 
-    val scaledPoints = remember(stationCoords, canvasSize) {
+    val pathPoints = remember(stations) {
+        if (stations == null) return@remember emptyList<PathPoint>()
+
+        val result = mutableListOf<PathPoint>()
+        for (i in 0 until stations.size - 1) {
+            val current = stations[i]
+            val next = stations[i + 1]
+            result.add(PathPoint.Real(current))
+
+            // try both directions: current->next and next->current
+            val fake = fakePoints[current to next] ?: fakePoints[next to current]
+            if (fake != null) {
+                // if we found the reverse direction, reverse the fake points
+                val orderedFake = if (fakePoints.containsKey(current to next)) {
+                    fake
+                } else {
+                    fake.reversed()
+                }
+                result.addAll(orderedFake)
+            }
+        }
+        if (stations.isNotEmpty()) {
+            result.add(PathPoint.Real(stations.last()))
+        }
+        result
+    }
+
+    val scaledPoints = remember(pathPoints, stationCoords, canvasSize) {
         if (canvasSize.width == 0f || canvasSize.height == 0f) return@remember emptyList()
 
         val scale = minOf(canvasSize.width / SVG_WIDTH, canvasSize.height / SVG_HEIGHT)
         val offsetX = (canvasSize.width - SVG_WIDTH * scale) / 2
         val offsetY = (canvasSize.height - SVG_HEIGHT * scale) / 2
 
-        stations?.mapNotNull { name ->
-            stationCoords[name]?.let { point ->
+        pathPoints.mapNotNull { point ->
+            val coord = when (point) {
+                is PathPoint.Real -> stationCoords[point.name]
+                is PathPoint.Fake -> MapStationCoordinate(point.x, point.y)
+            }
+            coord?.let { c ->
                 Offset(
-                    point.x.toFloat() * scale + offsetX,
-                    point.y.toFloat() * scale + offsetY
+                    c.x.toFloat() * scale + offsetX,
+                    c.y.toFloat() * scale + offsetY
                 )
             }
-        } ?: emptyList()
+        }
+    }
+
+    val isRealStation = remember(pathPoints) {
+        pathPoints.map { it is PathPoint.Real }
     }
 
     Scaffold(
@@ -146,22 +194,24 @@ fun MapViewer(
                     }
 
                     if (!isLoading) {
-                        scaledPoints.forEach { point ->
-                            drawCircle(
-                                color = Color.Blue.copy(alpha = 0.3f),
-                                radius = CIRCLE_RADIUS + 4f,
-                                center = point
-                            )
-                            drawCircle(
-                                color = Color.Blue,
-                                radius = CIRCLE_RADIUS,
-                                center = point
-                            )
-                            drawCircle(
-                                color = White,
-                                radius = CIRCLE_RADIUS / 2.5f,
-                                center = point
-                            )
+                        scaledPoints.forEachIndexed { index, point ->
+                            if (isRealStation[index]) {
+                                drawCircle(
+                                    color = Color.Blue.copy(alpha = 0.3f),
+                                    radius = CIRCLE_RADIUS + 4f,
+                                    center = point
+                                )
+                                drawCircle(
+                                    color = Color.Blue,
+                                    radius = CIRCLE_RADIUS,
+                                    center = point
+                                )
+                                drawCircle(
+                                    color = White,
+                                    radius = CIRCLE_RADIUS / 2.5f,
+                                    center = point
+                                )
+                            }
                         }
                     }
                 }
