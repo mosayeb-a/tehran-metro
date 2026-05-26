@@ -7,3 +7,5 @@ const val COLOR_LINE_4 = 0xFFF0A634
 const val COLOR_LINE_5 = 0xFF49977C
 const val COLOR_LINE_6 = 0xFFE8629F
 const val COLOR_LINE_7 = 0xFF994CA1
+
+const val STATION_COORDS_QUALIFIER = "station_coords"

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import com.ma.tehro.common.STATION_COORDS_QUALIFIER
 import com.ma.tehro.data.Place
 import com.ma.tehro.data.Station
 import com.ma.tehro.domain.MapStationCoordinate
@@ -57,7 +58,7 @@ actual val platformModule: Module
             }
         }
 
-        single<Map<String, MapStationCoordinate>>(named("stationCoords")) {
+        single<Map<String, MapStationCoordinate>>(named(STATION_COORDS_QUALIFIER)) {
             val json: Json = get()
             val ioDispatcher: CoroutineDispatcher = get()
 
