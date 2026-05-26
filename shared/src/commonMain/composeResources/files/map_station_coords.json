@@ -31,6 +31,178 @@
     "x": 1253,
     "y": 416
   },
+  "Ayatollah Taleghani": {
+    "x": 1254,
+    "y": 600
+  },
+  "Shahid Mofattah": {
+    "x": 1254,
+    "y": 502
+  },
+  "Panzdah-e Khordad": {
+    "x": 1254,
+    "y": 817
+  },
+  "Sa'adi": {
+    "x": 1254,
+    "y": 707
+  },
+  "Khayyam": {
+    "x": 1254,
+    "y": 858
+  },
+  "Shoush": {
+    "x": 1254,
+    "y": 951
+  },
+  "Payaneh Jonoub(Jonoub Terminal)": {
+    "x": 1254,
+    "y": 993
+  },
+  "Shahid Bokharaei": {
+    "x": 1254,
+    "y": 1034
+  },
+  "Aliabad": {
+    "x": 1254,
+    "y": 1076
+  },
+  "Javanmard-e Ghassab": {
+    "x": 1254,
+    "y": 1118
+  },
+  "Shahr-e Rey": {
+    "x": 1254,
+    "y": 1159
+  },
+  "Palayeshgah": {
+    "x": 1254,
+    "y": 1201
+  },
+  "Shahed - BagherShahr": {
+    "x": 1254,
+    "y": 1251
+  },
+  "Holy Shrine of Imam Khomeini": {
+    "x": 1254,
+    "y": 1292
+  },
+  "Namayeshgah-e Shahr-e Aftab": {
+    "x": 1173,
+    "y": 1253
+  },
+  "Emam Khomeini Airport": {
+    "x": 1045,
+    "y": 1303
+  },
+  "Vavan": {
+    "x": 1122,
+    "y": 1301
+  },
+  "Kahrizak": {
+    "x": 1255,
+    "y": 1339
+  },
+  "Tajrish": {
+    "x": 1332,
+    "y": 73
+  },
+  "Shahr-e Parand": {
+    "x": 970,
+    "y": 1302
+  },
+  "Tehranpars": {
+    "x": 1823,
+    "y": 425
+  },
+  "Shahid Bagheri": {
+    "x": 1767,
+    "y": 425
+  },
+  "Daneshgah-e Elm va Sanat": {
+    "x": 1709,
+    "y": 425
+  },
+  "Sarsabz": {
+    "x": 1652,
+    "y": 425
+  },
+  "Janbazan": {
+    "x": 1610,
+    "y": 426
+  },
+  "Fadak": {
+    "x": 1575,
+    "y": 459
+  },
+  "Sabalan": {
+    "x": 1543,
+    "y": 491
+  },
+  "Shahid Madani": {
+    "x": 1506,
+    "y": 527
+  },
+  "Baharistan": {
+    "x": 1345,
+    "y": 689
+  },
+  "Mellat": {
+    "x": 1306,
+    "y": 727
+  },
+  "Hasan Abad": {
+    "x": 1175,
+    "y": 776
+  },
+  "Daneshgah-e Imam Ali": {
+    "x": 1051,
+    "y": 776
+  },
+  "Meydan-e Horr": {
+    "x": 1003,
+    "y": 756
+  },
+  "Daneshgah-e Sharif": {
+    "x": 847,
+    "y": 598
+  },
+  "Tarasht": {
+    "x": 799,
+    "y": 551
+  },
+  "Farhangsara": {
+    "x": 1887,
+    "y": 424
+  },
+  "Shahrak-e Shariaty": {
+    "x": 1015,
+    "y": 1059
+  },
+  "Abdol Abad": {
+    "x": 1014,
+    "y": 1106
+  },
+  "Nemat Abad": {
+    "x": 1015,
+    "y": 1151
+  },
+  "Zamzam": {
+    "x": 1050,
+    "y": 1025
+  },
+  "Javadiyeh": {
+    "x": 1075,
+    "y": 1000
+  },
+  "Moniriyeh": {
+    "x": 1104,
+    "y": 841
+  },
+  "Rahahan": {
+    "x": 1104,
+    "y": 968
+  },
   "Meydan-e Jahad": {
     "x": 1146,
     "y": 505
@@ -39,8 +211,384 @@
     "x": 1191,
     "y": 464
   },
-  "Shahid Beheshti": {
-    "x": 1256,
+  "Sohrevardi": {
+    "x": 1350,
     "y": 462
+  },
+  "Meydan-e Heravi": {
+    "x": 1592,
+    "y": 224
+  },
+  "Shahid Zeynoddin": {
+    "x": 1544,
+    "y": 273
+  },
+  "Khajeh Abdollah-e Ansari": {
+    "x": 1495,
+    "y": 320
+  },
+  "Shahid Sayyad Shirazi": {
+    "x": 1446,
+    "y": 370
+  },
+  "Shahid Ghodousi": {
+    "x": 1398,
+    "y": 417
+  },
+  "Shahid Mahallati": {
+    "x": 1816,
+    "y": 180
+  },
+  "Aghdasiyeh": {
+    "x": 1753,
+    "y": 180
+  },
+  "Nobonyad": {
+    "x": 1690,
+    "y": 180
+  },
+  "Hoseinabad": {
+    "x": 1632,
+    "y": 183
+  },
+  "Qa'em": {
+    "x": 1886,
+    "y": 179
+  },
+  "Azadegan": {
+    "x": 1016,
+    "y": 1203
+  },
+  "Teatr-e Shahr": {
+    "x": 1106,
+    "y": 649
+  },
+  "Meydan-e Hazrat Vali Asr": {
+    "x": 1102,
+    "y": 551
+  },
+  "Darvazeh Shemiran": {
+    "x": 1385,
+    "y": 650
+  },
+  "Shademan": {
+    "x": 897,
+    "y": 648
+  },
+  "Niroohavaii": {
+    "x": 1802,
+    "y": 732
+  },
+  "Nabard": {
+    "x": 1703,
+    "y": 732
+  },
+  "Piroozi": {
+    "x": 1619,
+    "y": 732
+  },
+  "Ebn-e Sina": {
+    "x": 1539,
+    "y": 732
+  },
+  "Ferdowsi": {
+    "x": 1174,
+    "y": 649
+  },
+  "Meydan-e Enghelab-e Eslami": {
+    "x": 1035,
+    "y": 649
+  },
+  "Doctor Habibollah": {
+    "x": 833,
+    "y": 649
+  },
+  "Ostad Mo'in": {
+    "x": 763,
+    "y": 649
+  },
+  "Meydan-e Azadi": {
+    "x": 700,
+    "y": 649
+  },
+  "Bimeh": {
+    "x": 650,
+    "y": 649
+  },
+  "Mehrabad Airport Terminal 1&2": {
+    "x": 650,
+    "y": 713
+  },
+  "Mehrabad Airport Terminal 4&6": {
+    "x": 650,
+    "y": 778
+  },
+  "Shahrak-e Ekbatan": {
+    "x": 650,
+    "y": 581
+  },
+  "Shahid Kolahdooz": {
+    "x": 1888,
+    "y": 730
+  },
+  "Allameh Jafari": {
+    "x": 556,
+    "y": 404
+  },
+  "Tehran (Sadeghiyeh)": {
+    "x": 760,
+    "y": 508
+  },
+  "Eram-e Sabz": {
+    "x": 648,
+    "y": 508
+  },
+  "Shahid Sepahbod Qasem Soleimani": {
+    "x": 136,
+    "y": 650
+  },
+  "Varzeshgah-e Azadi": {
+    "x": 588,
+    "y": 508
+  },
+  "Chitgar": {
+    "x": 537,
+    "y": 508
+  },
+  "Iran Khodro": {
+    "x": 487,
+    "y": 508
+  },
+  "Garmdareh": {
+    "x": 437,
+    "y": 508
+  },
+  "Vardavard": {
+    "x": 387,
+    "y": 508
+  },
+  "Atmosphere": {
+    "x": 336,
+    "y": 508
+  },
+  "Karaj": {
+    "x": 286,
+    "y": 508
+  },
+  "Mohammadshahr": {
+    "x": 236,
+    "y": 508
+  },
+  "Golshahr": {
+    "x": 186,
+    "y": 508
+  },
+  "Imam Hussein": {
+    "x": 1473,
+    "y": 559
+  },
+  "Meydan-e Shohada": {
+    "x": 1473,
+    "y": 731
+  },
+  "Shohada-ye Dowlat Abad": {
+    "x": 1473,
+    "y": 1124
+  },
+  "Kiyan Shahr": {
+    "x": 1473,
+    "y": 1081
+  },
+  "Be'sat": {
+    "x": 1473,
+    "y": 1038
+  },
+  "Shahid Rezaei": {
+    "x": 1473,
+    "y": 995
+  },
+  "Amirkabir": {
+    "x": 1473,
+    "y": 817
+  },
+  "Shahrak-e Azmayesh": {
+    "x": 825,
+    "y": 360
+  },
+  "Marzdaran": {
+    "x": 785,
+    "y": 321
+  },
+  "Yadegar-e Imam": {
+    "x": 745,
+    "y": 280
+  },
+  "Shahid Ashrafi Esfahani": {
+    "x": 690,
+    "y": 226
+  },
+  "Shahid Sattari": {
+    "x": 623,
+    "y": 225
+  },
+  "Shahr-e Ziba": {
+    "x": 418,
+    "y": 225
+  },
+  "Shahran": {
+    "x": 336,
+    "y": 225
+  },
+  "Shohada-ye Kan": {
+    "x": 245,
+    "y": 225
+  },
+  "Kouhsar": {
+    "x": 144,
+    "y": 225
+  },
+  "Haram-e Hazrat-e Abdol Azim": {
+    "x": 1577,
+    "y": 1313
+  },
+  "Ayatollah Kashani": {
+    "x": 556,
+    "y": 224
+  },
+  "Sarbaz": {
+    "x": 1399,
+    "y": 551
+  },
+  "Karagar": {
+    "x": 990,
+    "y": 440
+  },
+  "Bustan-e Laleh": {
+    "x": 1037,
+    "y": 488
+  },
+  "Meydan-e Khorasan": {
+    "x": 1473,
+    "y": 949
+  },
+  "Ebn-e Babviyeh": {
+    "x": 1473,
+    "y": 1208
+  },
+  "Cheshmeh Ali": {
+    "x": 1473,
+    "y": 1168
+  },
+  "Meydan-e Hazrat-e Abdol Azim": {
+    "x": 1526,
+    "y": 1264
+  },
+  "Bahar Shiraz (Khanevadeh Hospital)": {
+    "x": 1344,
+    "y": 551
+  },
+  "Mahdiyeh": {
+    "x": 1105,
+    "y": 908
+  },
+  "Meydan-e Mohammadiyeh": {
+    "x": 1256,
+    "y": 908
+  },
+  "Imam Khomeini": {
+    "x": 1256,
+    "y": 773
+  },
+  "Darvazeh Dolat": {
+    "x": 1255,
+    "y": 649
+  },
+  "Shahid Beheshti": {
+    "x": 1255,
+    "y": 462
+  },
+  "Shohada-ye Haftom-e Tir": {
+    "x": 1255,
+    "y": 551
+  },
+  "Shohada-ye Hefdah-e Shahrivar": {
+    "x": 1474,
+    "y": 907
+  },
+  "Shahid Navab-e Safavi": {
+    "x": 968,
+    "y": 718
+  },
+  "Towhid": {
+    "x": 968,
+    "y": 649
+  },
+  "Basij": {
+    "x": 1802,
+    "y": 908
+  },
+  "Ahang": {
+    "x": 1733,
+    "y": 908
+  },
+  "Chehel Tan-e Doulab": {
+    "x": 1644,
+    "y": 908
+  },
+  "Meydan-e Ghiyam": {
+    "x": 1409,
+    "y": 908
+  },
+  "Mowlavi": {
+    "x": 1335,
+    "y": 908
+  },
+  "Helal Ahmar": {
+    "x": 1051,
+    "y": 906
+  },
+  "Daneshgah-e Tarbiat Modarres": {
+    "x": 916,
+    "y": 360
+  },
+  "Beryanak": {
+    "x": 1007,
+    "y": 863
+  },
+  "Komeyl": {
+    "x": 967,
+    "y": 824
+  },
+  "Roudaki": {
+    "x": 968,
+    "y": 780
+  },
+  "Modafean-e Salamat": {
+    "x": 915,
+    "y": 434
+  },
+  "Boostan-e Goftegou": {
+    "x": 916,
+    "y": 301
+  },
+  "Milad Tower": {
+    "x": 916,
+    "y": 244
+  },
+  "Meydan-e San'at": {
+    "x": 916,
+    "y": 188
+  },
+  "Shahid Dadman": {
+    "x": 916,
+    "y": 127
+  },
+  "Varzeshgah-e Takhti": {
+    "x": 1885,
+    "y": 906
+  },
+  "Meydan-e Ketab": {
+    "x": 915,
+    "y": 76
   }
 }
