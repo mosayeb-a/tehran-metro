@@ -58,7 +58,7 @@ fun MapViewer(
         remember { MutableZoomState(ZoomState(scale = 1f, offset = Offset.Zero, childRect = null)) }
     var isLoading by remember { mutableStateOf(true) }
 
-    val scaledPoints = remember(stations, stationCoords, canvasSize) {
+    val scaledPoints = remember(stationCoords, canvasSize) {
         if (canvasSize.width == 0f || canvasSize.height == 0f) return@remember emptyList()
 
         val scale = minOf(canvasSize.width / SVG_WIDTH, canvasSize.height / SVG_HEIGHT)
