@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -26,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,6 +38,7 @@ import com.ma.tehro.domain.NearestStation
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
 @Composable
 fun NearestStationSheet(
+    locationName: String,
     nearestStations: List<NearestStation>,
     isLoading: Boolean,
     selectedStation: NearestStation?,
@@ -51,6 +54,7 @@ fun NearestStationSheet(
         containerColor = MaterialTheme.colorScheme.primaryContainer,
     ) {
         NearestStationsBottomSheetContent(
+            locationName = locationName,
             nearestStations = nearestStations,
             isLoading = isLoading,
             onStationSelected = onStationSelected,
@@ -60,10 +64,10 @@ fun NearestStationSheet(
     }
 }
 
-
 @Composable
 fun NearestStationsBottomSheetContent(
     modifier: Modifier = Modifier,
+    locationName: String,
     selectedStation: NearestStation?,
     nearestStations: List<NearestStation>,
     isLoading: Boolean,
@@ -88,6 +92,22 @@ fun NearestStationsBottomSheetContent(
                 )
             }
         } else {
+            CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+                Text(
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .fillMaxWidth(),
+                    text = "نزدیک‌ترین ایستگاه‌ها به «$locationName»",
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp
+                    ),
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+
             LazyColumn(
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -167,4 +187,3 @@ fun NearestStationsBottomSheetContent(
         }
     }
 }
-
