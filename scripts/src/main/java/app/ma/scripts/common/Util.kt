@@ -6,12 +6,17 @@ import java.util.Locale
 
 const val RES_PATH = "scripts/src/main/resources/"
 
-fun readJsonStationsAsText(fileName: String): MutableMap<String, Station> {
+inline fun <reified T> readJsonStationsAsText(fileName: String): T {
     val inputStream = object {}.javaClass.classLoader!!
         .getResourceAsStream("$fileName.json")
 
+    val json = Json {
+        ignoreUnknownKeys = true
+        isLenient = true
+    }
+
     val fileContent = inputStream.bufferedReader(Charsets.UTF_8).use { it.readText() }
-    return Json.decodeFromString(fileContent)
+    return json.decodeFromString(fileContent)
 }
 
 fun convertExcelTimeToString(excelTime: Double): String {

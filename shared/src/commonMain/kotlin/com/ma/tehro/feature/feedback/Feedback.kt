@@ -1,4 +1,4 @@
-package com.ma.tehro.feature.submit_suggestion.feedback
+package com.ma.tehro.feature.feedback
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,13 +22,12 @@ import androidx.compose.ui.Modifier
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.EmptyStatesFaces
 import com.ma.tehro.common.ui.Message
-import com.ma.tehro.feature.submit_suggestion.SubmitInfoState
-import com.ma.tehro.feature.submit_suggestion.feedback.components.MessageInput
+import com.ma.tehro.feature.feedback.components.MessageInput
 
 @Composable
-fun SubmitFeedback(
-    onSendMessageClicked: (message: String) -> Unit,
-    viewState: SubmitInfoState,
+fun Feedback(
+    onSendMessage: (message: String) -> Unit,
+    viewState: FeedbackState,
     onBack: () -> Unit
 ) {
     var messageText by remember { mutableStateOf("") }
@@ -57,7 +56,7 @@ fun SubmitFeedback(
                 onMessageChange = { messageText = it },
                 onSendClick = {
                     if (messageText.isNotBlank()) {
-                        onSendMessageClicked(messageText)
+                        onSendMessage(messageText)
                     }
                 }
             )

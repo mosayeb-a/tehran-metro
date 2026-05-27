@@ -4,7 +4,6 @@ import com.ma.tehro.data.PlaceCategory
 import com.ma.tehro.data.PlaceCategorySerializer
 import com.ma.tehro.data.PlaceType
 import com.ma.tehro.data.PlaceTypeSerializer
-import com.ma.tehro.data.Station
 import com.ma.tehro.data.repo.DataCorrectionRepositoryImpl
 import com.ma.tehro.data.repo.LineRepositoryImpl
 import com.ma.tehro.data.repo.PathRepositoryImpl
@@ -27,11 +26,10 @@ import com.ma.tehro.feature.more.PreferencesViewModel
 import com.ma.tehro.feature.shortestpath.pathfinder.PathViewModel
 import com.ma.tehro.feature.shortestpath.places.PlaceSelectionViewModel
 import com.ma.tehro.feature.shortestpath.selection.StationSelectionViewModel
-import com.ma.tehro.feature.submit_suggestion.SubmitSuggestionViewModel
+import com.ma.tehro.feature.feedback.FeedbackViewModel
 import com.ma.tehro.feature.train_schedule.TrainScheduleViewModel
 import com.ma.tehro.services.LocationTracker
 import com.ma.tehro.services.LocationTrackerImpl
-import com.ma.thero.resources.Res
 import com.russhwolf.settings.ExperimentalSettingsApi
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
@@ -116,8 +114,8 @@ val appModule = module {
             locationTracker = get()
         )
     }
-    viewModel<SubmitSuggestionViewModel> {
-        SubmitSuggestionViewModel(dataCorrectionRepository = get())
+    viewModel<FeedbackViewModel> {
+        FeedbackViewModel(dataCorrectionRepository = get())
     }
     viewModel<TrainScheduleViewModel> {
         TrainScheduleViewModel(savedStateHandle = get(), scheduleRepository = get())

@@ -27,11 +27,11 @@ import com.ma.tehro.common.ui.StationDetailScreen
 import com.ma.tehro.common.ui.StationSelectorScreen
 import com.ma.tehro.common.ui.StationsScreen
 import com.ma.tehro.common.ui.SubmitFeedbackScreen
-import com.ma.tehro.common.ui.SubmitStationInfoScreen
 import com.ma.tehro.common.ui.TrainScheduleScreen
 import com.ma.tehro.data.Station
 import com.ma.tehro.domain.Step
 import com.ma.tehro.feature.detail.StationDetail
+import com.ma.tehro.feature.feedback.Feedback
 import com.ma.tehro.feature.line.LineViewModel
 import com.ma.tehro.feature.line.Lines
 import com.ma.tehro.feature.line.stations.Stations
@@ -48,9 +48,7 @@ import com.ma.tehro.feature.shortestpath.places.PlaceSelection
 import com.ma.tehro.feature.shortestpath.places.PlaceSelectionViewModel
 import com.ma.tehro.feature.shortestpath.selection.StationSelectionViewModel
 import com.ma.tehro.feature.shortestpath.selection.StationSelector
-import com.ma.tehro.feature.submit_suggestion.SubmitSuggestionViewModel
-import com.ma.tehro.feature.submit_suggestion.feedback.SubmitFeedback
-import com.ma.tehro.feature.submit_suggestion.station.SubmitStationInfo
+import com.ma.tehro.feature.feedback.FeedbackViewModel
 import com.ma.tehro.feature.train_schedule.TrainSchedule
 import com.ma.tehro.feature.train_schedule.TrainScheduleViewModel
 import org.koin.compose.viewmodel.koinViewModel
@@ -113,7 +111,7 @@ fun AppNavigation(
                 lineNumber = args.lineNumber,
                 useBranch = args.useBranch,
                 orderedStations = state.stations,
-                onBackClick = { navController.navigateUp() },
+                onBackClick = navController::navigateUp,
                 onStationClick = { station, line ->
                     navController.navigate(
                         StationDetailScreen(
@@ -143,7 +141,7 @@ fun AppNavigation(
                 savedStateHandle.remove<Map<String, String>>("selected_start_station")
             }
             StationSelector(
-                onBack = { navController.navigateUp() },
+                onBack = navController::navigateUp,
                 viewState = state,
                 stations = filteredStations,
                 searchQuery = searchQuery,
@@ -180,7 +178,7 @@ fun AppNavigation(
             val args: PathFinderScreen = backStackEntry.toRoute()
             PathFinder(
                 state = state,
-                onBack = { navController.navigateUp() },
+                onBack = navController::navigateUp,
                 fromEn = args.startEnStation,
                 toEn = args.enDestination,
                 onStationClick = { station, line ->
@@ -209,12 +207,9 @@ fun AppNavigation(
             val args = backStackEntry.toRoute<StationDetailScreen>()
             StationDetail(
                 station = args.station,
-                onBack = { navController.navigateUp() },
+                onBack = navController::navigateUp,
                 lineNumber = args.lineNumber,
                 useBranch = args.useBranch,
-                onSubmitInfoStationClicked = { station, line ->
-                    navController.navigate(SubmitStationInfoScreen(station, line))
-                },
                 onTrainScheduleClick = { name, fa, line, useBranch ->
                     navController.navigate(
                         TrainScheduleScreen(
@@ -235,7 +230,7 @@ fun AppNavigation(
                 state = state,
                 faStationName = args.faStationName,
                 lineNumber = args.lineNumber,
-                onBack = { navController.navigateUp() },
+                onBack = navController::navigateUp,
                 onScheduleTypeSelected = { destination, scheduleType ->
                     viewModel.onScheduleTypeSelected(destination, scheduleType)
                 }
@@ -247,39 +242,22 @@ fun AppNavigation(
             val args = it.toRoute<PathDescriptionScreen>()
             PathDescription(
                 steps = args.steps,
-                onBackClick = { navController.navigateUp() }
+                onBackClick = navController::navigateUp
             )
         }
         baseComposable<SubmitFeedbackScreen> {
-            val viewModel: SubmitSuggestionViewModel = koinViewModel()
+            val viewModel: FeedbackViewModel = koinViewModel()
             val state by viewModel.state.collectAsStateWithLifecycle()
-            SubmitFeedback(
-                onSendMessageClicked = { message ->
-                    viewModel.sendSimpleFeedback(
-                        message
-                    )
-                },
+            Feedback(
+                onSendMessage = viewModel::send,
                 viewState = state,
-                onBack = { navController.navigateUp() }
-            )
-        }
-        baseComposable<SubmitStationInfoScreen>(
-            typeMap = mapOf(typeOf<Station>() to navTypeOf<Station>()),
-        ) { backStackEntry ->
-            val viewModel: SubmitSuggestionViewModel = koinViewModel()
-            val args: SubmitStationInfoScreen = backStackEntry.toRoute()
-            SubmitStationInfo(
-                onBack = { navController.navigateUp() },
-                onSubmitInfo = { viewModel.submitStationCorrection(it) },
-                state = viewModel.state.collectAsStateWithLifecycle().value,
-                station = args.station,
-                lineNumber = args.lineNumber
+                onBack = navController::navigateUp
             )
         }
         baseComposable<MapViewerScreen> { backStackEntry ->
             val args = backStackEntry.toRoute<MapViewerScreen>()
             MapViewer(
-                onBack = { navController.navigateUp() },
+                onBack = navController::navigateUp,
                 stations = args.shortestPath
             )
         }
@@ -288,7 +266,7 @@ fun AppNavigation(
             val state by viewModel.state.collectAsStateWithLifecycle()
             PlaceSelection(
                 viewState = state,
-                onBack = { navController.navigateUp() },
+                onBack = navController::navigateUp,
                 onPlaceClick = { lat, long ->
                     viewModel.getNearbyStations(lat, long)
                 },

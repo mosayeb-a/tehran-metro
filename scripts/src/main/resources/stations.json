@@ -11,11 +11,33 @@
     "latitude": "35.804501",
     "address": "خیابان شریعتی-ضلع جنوب غربی میدان قدس",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Gheytariyeh"
     ],
@@ -38,11 +60,33 @@
     "latitude": "35.793119",
     "address": "خیابان دکترشریعتی - روبه روی پل رومی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Tajrish",
       "Shahid Sadr"
@@ -66,11 +110,33 @@
     "latitude": "35.785374",
     "address": "100 متر بعد از تقاطع بزرگراه شهید صدر و خیابان دکتر شریعتی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Gheytariyeh",
       "Qolhak"
@@ -94,11 +160,33 @@
     "latitude": "35.7726822",
     "address": "خیابان دکترشریعتی، بالاتر از دو راهی قلهک، نرسیده به خیابان دولت",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Sadr",
       "Doctor Shariati"
@@ -122,11 +210,33 @@
     "latitude": "35.7626452",
     "address": "خیابان دکتر شریعتی، بالاتر از بلوار میرداماد",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Qolhak",
       "Mirdamad"
@@ -150,11 +260,33 @@
     "latitude": "35.76006",
     "address": "بلوار میرداماد، جنب پمپ بنزین، زیر ساختمان رز میرداماد",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Doctor Shariati",
       "Shahid Haghani"
@@ -178,11 +310,33 @@
     "latitude": "35.7565207",
     "address": "بزرگراه شهید حقانی - جنب پارک طالقانی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Mirdamad",
       "Shahid Hemmat"
@@ -206,11 +360,33 @@
     "latitude": "35.748228",
     "address": "بزرگراه شهید همت ، جنب سازمان فرهنگ و ارتباطات اسلامی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Haghani",
       "Mosalla-ye Imam Khomeini"
@@ -234,11 +410,33 @@
     "latitude": "35.74073",
     "address": "بزرگراه رسالت ، شمال مصلی ، روبروی سازمان فرهنگ و ارتباطات اسلامی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Hemmat",
       "Shahid Beheshti"
@@ -263,11 +461,33 @@
     "latitude": "35.731037",
     "address": "تقاطع خیابان های شهید بهشتی و شهید مفتح",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": true
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Mosalla-ye Imam Khomeini",
       "Sohrevardi",
@@ -297,11 +517,33 @@
     "latitude": "35.724453",
     "address": "تقاطع خیابان های استاد شهید مطهری و شهید مفتح",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Beheshti",
       "Shohada-ye Haftom-e Tir"
@@ -325,11 +567,33 @@
     "latitude": "35.707161",
     "address": "تقاطع خیابان آیت اله طالقانی و خیابان شهید مفتح",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shohada-ye Haftom-e Tir",
       "Darvazeh Dolat"
@@ -352,13 +616,35 @@
     ],
     "longitude": "51.425849",
     "latitude": "35.701316",
-    "address": "خیابان انقلاب اسلامی ، تقاطع سعدی شمالی و شهید مفتح",
+    "address": "خیابان انقلاب اسلامی , تقاطع سعدی شمالی و شهید مفتح",
     "disabled": false,
-    "wc": true,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": true,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": true
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Ayatollah Taleghani",
       "Ferdowsi",
@@ -388,11 +674,33 @@
     "latitude": "35.6934793",
     "address": "میدان استقلال - (میدان مخبرالدوله)",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Darvazeh Dolat",
       "Imam Khomeini"
@@ -417,11 +725,33 @@
     "latitude": "35.686433",
     "address": "میدان امام خمینی (ره)",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": true
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Sa'adi",
       "Hasan Abad",
@@ -451,11 +781,33 @@
     "latitude": "35.678276",
     "address": "تقاطع خیابان های پانزد خرداد و خیام - چهارراه گلوبندک",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Imam Khomeini",
       "Khayyam"
@@ -477,13 +829,35 @@
     ],
     "longitude": "51.416568",
     "latitude": "35.673073",
-    "address": "خیابان خیام شمالی ، پایین تر از چهارراه گلوبندک ، جنب امامزاده",
+    "address": "خیابان خیام شمالی , پایین تر از چهارراه گلوبندک , جنب امامزاده",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Panzdah-e Khordad",
       "Meydan-e Mohammadiyeh"
@@ -506,13 +880,35 @@
     ],
     "longitude": "51.415488",
     "latitude": "35.667753",
-    "address": "میدان محمدیه(اعدام) ، تقاطع خیابان خیام و مولوی",
+    "address": "میدان محمدیه(اعدام) , تقاطع خیابان خیام و مولوی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Khayyam",
       "Mahdiyeh",
@@ -542,11 +938,33 @@
     "latitude": "35.65754",
     "address": "تقاطع خیابان های شوش و خیام",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Meydan-e Mohammadiyeh",
       "Payaneh Jonoub(Jonoub Terminal)"
@@ -568,13 +986,35 @@
     ],
     "longitude": "51.416289",
     "latitude": "35.650688",
-    "address": "خیابان عباسی ، ضلع شمال غربی پایانه جنوب",
+    "address": "خیابان عباسی , ضلع شمال غربی پایانه جنوب",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shoush",
       "Shahid Bokharaei"
@@ -596,13 +1036,35 @@
     ],
     "longitude": "51.414787",
     "latitude": "35.640609",
-    "address": "خیابان شهید رجایی ، خیابان ابریشم ، 100متری شهید همدانی",
+    "address": "خیابان شهید رجایی , خیابان ابریشم , 100متری شهید همدانی",
     "disabled": false,
-    "wc": true,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Payaneh Jonoub(Jonoub Terminal)",
       "Aliabad"
@@ -626,11 +1088,33 @@
     "latitude": "35.629256",
     "address": "جاده قدیم قم- سه راه پالایشگاه - خیابان شهید گلشنی",
     "disabled": false,
-    "wc": true,
-    "coffeeShop": false,
-    "groceryStore": true,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Bokharaei",
       "Javanmard-e Ghassab"
@@ -654,11 +1138,33 @@
     "latitude": "35.609764",
     "address": "بلوار شهید دستواره جنوبی - بین میدان مادر و نماز",
     "disabled": false,
-    "wc": true,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Aliabad",
       "Shahr-e Rey"
@@ -680,13 +1186,35 @@
     ],
     "longitude": "51.422287",
     "latitude": "35.594672",
-    "address": "شهر ری ، میدان فرمانداری ، خیابان مدرس",
+    "address": "شهر ری , میدان فرمانداری , خیابان مدرس",
     "disabled": false,
-    "wc": true,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Javanmard-e Ghassab",
       "Palayeshgah"
@@ -706,7 +1234,37 @@
     "lines": [
       1
     ],
+    "longitude": "51.406975",
+    "latitude": "35.57357",
+    "address": "شهرری جاده قدیم قم نرسیده به باقرشهر روبروی پالایشگاه",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": true,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": true,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahr-e Rey",
       "Shahed - BagherShahr"
@@ -730,11 +1288,33 @@
     "latitude": "35.546998",
     "address": "اتوبان شهید کاظمی، روبه روی درب شمالی بهشت زهرا",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": true,
+      "fastFood": false,
+      "atm": true,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Palayeshgah",
       "Namayeshgah-e Shahr-e Aftab",
@@ -759,11 +1339,33 @@
     "latitude": "35.539811",
     "address": "شهر آفتاب",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahed - BagherShahr",
       "Vavan"
@@ -783,7 +1385,37 @@
     "lines": [
       1
     ],
+    "longitude": "51.30011",
+    "latitude": "35.514507",
+    "address": "اتوبان تهران - قم، بعد از فرودگاه امام خمینی (ره)، شهرک واوان",
     "disabled": true,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Namayeshgah-e Shahr-e Aftab",
       "Emam Khomeini Airport"
@@ -803,7 +1435,37 @@
     "lines": [
       1
     ],
+    "longitude": "51.152221",
+    "latitude": "35.416111",
+    "address": "فرودگاه بین المللی امام خمینی (ره)",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": true,
+      "groceryStore": true,
+      "fastFood": true,
+      "atm": true,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Vavan",
       "Shahr-e Parand"
@@ -823,7 +1485,37 @@
     "lines": [
       1
     ],
+    "longitude": "50.923976",
+    "latitude": "35.489058",
+    "address": "شهر جدید پرند",
     "disabled": true,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Emam Khomeini Airport"
     ],
@@ -846,11 +1538,33 @@
     "latitude": "35.545077",
     "address": "ضلع شرقی حرم امام خمینی - بلوار اصلی بهشت زهرا",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahed - BagherShahr",
       "Kahrizak"
@@ -874,11 +1588,33 @@
     "latitude": "35.521574",
     "address": "جاده قدیم قم - بعداز درب اصلی بهشت زهرا (س) - جنب پارک لاله",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Holy Shrine of Imam Khomeini"
     ],
@@ -899,13 +1635,35 @@
     ],
     "longitude": "51.546757",
     "latitude": "35.729687",
-    "address": "تهرانپارس، اول خیابان درختی ، روبه روی فرهنگسرای اشراق",
+    "address": "تهرانپارس، اول خیابان درختی , روبه روی فرهنگسرای اشراق",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": true,
+      "bicycleParking": false,
+      "waterCooler": true,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Tehranpars"
     ],
@@ -928,11 +1686,33 @@
     "latitude": "35.7316491",
     "address": "بزرگراه رسالت بعد از چهارراه تیرانداز نبش اخوت",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Farhangsara",
       "Shahid Bagheri"
@@ -956,14 +1736,36 @@
     "latitude": "35.733397",
     "address": "تقاطع بزرگراه رسالت و شهید باقری",
     "disabled": false,
-    "wc": true,
-    "coffeeShop": false,
-    "groceryStore": true,
-    "fastFood": false,
-    "atm": true,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": true,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Tehranpars",
-      "Daneshgah-e Elm va Sanat"
+      "Daneshgah-e Elm-o San'at"
     ],
     "positionsInLine": [
       {
@@ -972,8 +1774,8 @@
       }
     ]
   },
-  "Daneshgah-e Elm va Sanat": {
-    "name": "Daneshgah-e Elm va Sanat",
+  "Daneshgah-e Elm-o San'at": {
+    "name": "Daneshgah-e Elm-o San'at",
     "translations": {
       "fa": "دانشگاه علم و صنعت"
     },
@@ -984,11 +1786,33 @@
     "latitude": "35.734425",
     "address": "بزرگراه رسالت، چهار راه دردشت",
     "disabled": false,
-    "wc": true,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Bagheri",
       "Sarsabz"
@@ -1012,13 +1836,35 @@
     "latitude": "35.73547",
     "address": "بزگراه رسالت، چهارراه شهید آیت",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
-      "Daneshgah-e Elm va Sanat",
+      "Daneshgah-e Elm-o San'at",
       "Janbazan"
     ],
     "positionsInLine": [
@@ -1040,11 +1886,33 @@
     "latitude": "35.733088",
     "address": "خیابان شهید مدنی، بالاتر از خیابان گلبرگ",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Sarsabz",
       "Fadak"
@@ -1068,11 +1936,33 @@
     "latitude": "35.7264805",
     "address": "خیابان شهید مدنی، روبروی ساختمان های مسکونی دادگستری",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": true,
+      "bicycleParking": true,
+      "waterCooler": true,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Janbazan",
       "Sabalan"
@@ -1096,11 +1986,33 @@
     "latitude": "35.71826",
     "address": "تقاطع خیابان های شهید مدنی و سبلان",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Fadak",
       "Shahid Madani"
@@ -1124,14 +2036,36 @@
     "latitude": "35.70913",
     "address": "خیابان شهید مدنی، بالاتر از بیمارستان امام حسین (ع)",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Sabalan",
-      "Imam Hussein"
+      "Imam Hossein"
     ],
     "positionsInLine": [
       {
@@ -1140,8 +2074,8 @@
       }
     ]
   },
-  "Imam Hussein": {
-    "name": "Imam Hussein",
+  "Imam Hossein": {
+    "name": "Imam Hossein",
     "translations": {
       "fa": "امام حسین"
     },
@@ -1153,11 +2087,33 @@
     "latitude": "35.702188",
     "address": "میدان امام حسین (ع) - تقاطع خیابان انقلاب اسلامی و شهید مدنی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Madani",
       "Sarbaz",
@@ -1188,13 +2144,35 @@
     "latitude": "35.699338",
     "address": "خیابان بهارستان، میدان ابن سینا",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": true,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
-      "Imam Hussein",
+      "Imam Hossein",
       "Meydan-e Shohada",
       "Darvazeh Dolat",
       "Baharistan"
@@ -1222,11 +2200,33 @@
     "latitude": "35.692263",
     "address": "خیابان بهارستان، جنب ساختمان وزارت فرهنگ و ارشاد اسلامی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Darvazeh Shemiran",
       "Mellat"
@@ -1250,11 +2250,33 @@
     "latitude": "35.6889986",
     "address": "خیابان اکباتان، سه راهی ملت - اکباتان",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Baharistan",
       "Imam Khomeini"
@@ -1278,11 +2300,33 @@
     "latitude": "35.6863779",
     "address": "میدان حسن آباد",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Imam Khomeini",
       "Daneshgah-e Imam Ali"
@@ -1306,11 +2350,33 @@
     "latitude": "35.6874007",
     "address": "خیابان امام خمینی (ره)، روبروی مجلس",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Hasan Abad",
       "Meydan-e Horr"
@@ -1334,11 +2400,33 @@
     "latitude": "35.691008",
     "address": "خیابان کارگر جنوبی، تقاطع پاستور و دانشگاه جنگ",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Daneshgah-e Imam Ali",
       "Shahid Navab-e Safavi"
@@ -1363,11 +2451,33 @@
     "latitude": "35.69526",
     "address": "تقاطع بزرگراه شهید نواب صفوی و خیابان آذربایجان",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Meydan-e Horr",
       "Towhid",
@@ -1398,11 +2508,33 @@
     "latitude": "35.700627",
     "address": "تقاطع خیابان های آزادی و آذربایجان",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Navab-e Safavi",
       "Towhid",
@@ -1432,11 +2564,33 @@
     "latitude": "35.70575",
     "address": "خیابان حبیب الهی - شهید تیموری",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shademan",
       "Tarasht"
@@ -1460,11 +2614,33 @@
     "latitude": "35.716134",
     "address": "خیابان محمدعلی جناح، بلوار شهید گلاب، بلوار شهید چوب تراش",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Daneshgah-e Sharif",
       "Tehran (Sadeghiyeh)"
@@ -1489,11 +2665,33 @@
     "latitude": "35.717598",
     "address": "بزرگراه محمد علی جناح، خیابان سازمان آب",
     "disabled": false,
-    "wc": true,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": true,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": true,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Tarasht",
       "Eram-e Sabz"
@@ -1521,11 +2719,33 @@
     "latitude": "35.799759",
     "address": "بلوار نیروی هوایی، میدان اول شهرک",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Mahallati"
     ],
@@ -1548,11 +2768,33 @@
     "latitude": "35.797925",
     "address": "بزرگراه لشگرک - تقاطع بلوار ارتش - ابتدای شهرک شهید محلاتی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Qa'em",
       "Aghdasiyeh"
@@ -1572,7 +2814,37 @@
     "lines": [
       3
     ],
+    "longitude": "51.493566",
+    "latitude": "35.795958",
+    "address": "تقاطع خیابان پاسداران و بزرگراه ارتش، اقدسیه",
     "disabled": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Mahallati",
       "Nobonyad"
@@ -1596,14 +2868,36 @@
     "latitude": "35.790987",
     "address": "نوبنیاد، ابتدای اقدسیه",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Aghdasiyeh",
-      "Hoseinabad"
+      "Hossein Abad"
     ],
     "positionsInLine": [
       {
@@ -1612,8 +2906,8 @@
       }
     ]
   },
-  "Hoseinabad": {
-    "name": "Hoseinabad",
+  "Hossein Abad": {
+    "name": "Hossein Abad",
     "translations": {
       "fa": "حسین‌آباد"
     },
@@ -1624,11 +2918,33 @@
     "latitude": "35.779428",
     "address": "تقاطع خیابان مغان و بزرگراه شهید صیاد شیرازی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Nobonyad",
       "Meydan-e Heravi"
@@ -1652,13 +2968,35 @@
     "latitude": "35.771831",
     "address": "اتوبان صیاد شیرازی٬ بالاتر از خیابان موسوی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
-      "Hoseinabad",
+      "Hossein Abad",
       "Shahid Zeynoddin"
     ],
     "positionsInLine": [
@@ -1680,11 +3018,33 @@
     "latitude": "35.7595603",
     "address": "بزرگراه صیاد شیرازی، تقاطع بزرگراه شهید زین‌الدین",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Meydan-e Heravi",
       "Khajeh Abdollah-e Ansari"
@@ -1708,11 +3068,33 @@
     "latitude": "35.743739",
     "address": "بلوار خواجه عبدالله انصاری",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Zeynoddin",
       "Shahid Sayyad Shirazi"
@@ -1736,11 +3118,33 @@
     "latitude": "35.735349",
     "address": "تفاطع بزگراه صیاد شیرازی و مسیل باختر",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Khajeh Abdollah-e Ansari",
       "Shahid Ghodousi"
@@ -1762,13 +3166,35 @@
     ],
     "longitude": "51.4445",
     "latitude": "35.731553",
-    "address": "\tخیابان شریعتی - تقاطع خیابان شهید بهشتی",
+    "address": "خیابان شریعتی - تقاطع خیابان شهید بهشتی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Sayyad Shirazi",
       "Sohrevardi"
@@ -1792,11 +3218,33 @@
     "latitude": "35.731066",
     "address": "خیابان عباس آباد، روبروی بلوار یوسفی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Ghodousi",
       "Shahid Beheshti"
@@ -1820,11 +3268,33 @@
     "latitude": "35.728365",
     "address": "خیابان بهشتی، مابین میرزای شیرازی و قائم مقام فرهانی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Beheshti",
       "Meydan-e Jahad"
@@ -1848,11 +3318,33 @@
     "latitude": "35.721672",
     "address": "خیابان ولیعصر، تقاطع خیابان دکتر فاطمی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Mirza-ye Shirazi",
       "Meydan-e Hazrat Vali Asr"
@@ -1877,11 +3369,33 @@
     "latitude": "35.700954",
     "address": "خیابان انقلاب اسلامی، چهارراه ولیعصر(عج)",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": true,
-    "groceryStore": true,
-    "fastFood": true,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": true,
+      "groceryStore": true,
+      "fastFood": true,
+      "atm": true,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Meydan-e Hazrat Vali Asr",
       "Ferdowsi",
@@ -1911,11 +3425,33 @@
     "latitude": "35.681087",
     "address": "خیابان ولیعصر(عج) میدان منیریه",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Teatr-e Shahr",
       "Mahdiyeh"
@@ -1936,7 +3472,37 @@
       3,
       7
     ],
+    "longitude": "51.405474",
+    "latitude": "35.671463",
+    "address": "تقاطع خیابان مولوی و خیابان ولیعصر، مهدیه تهران",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": true,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Moniriyeh",
       "Meydan-e Mohammadiyeh",
@@ -1966,11 +3532,33 @@
     "latitude": "35.6595573",
     "address": "میدان راه آهن",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Mahdiyeh",
       "Javadiyeh"
@@ -1994,11 +3582,33 @@
     "latitude": "35.659075",
     "address": "حد فاصل پل جوادیه و میدان رباط کریم",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Rahahan",
       "Zamzam"
@@ -2022,11 +3632,33 @@
     "latitude": "35.6525844",
     "address": "بزرگراه شهید چراغی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Javadiyeh",
       "Shahrak-e Shariaty"
@@ -2050,11 +3682,33 @@
     "latitude": "35.6435696",
     "address": "بزرگراه شهید چراغی، جوانه",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Zamzam",
       "Abdol Abad"
@@ -2078,11 +3732,33 @@
     "latitude": "35.638159",
     "address": "بزرگراه شهید چراغی،ابتدای خیابان ورزش",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahrak-e Shariaty",
       "Nemat Abad"
@@ -2104,13 +3780,35 @@
     ],
     "longitude": "51.34703",
     "latitude": "35.63392",
-    "address": " بزرگراه سعیدی ، روبروی خیابان سهیل",
+    "address": " بزرگراه سعیدی , روبروی خیابان سهیل",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Abdol Abad",
       "Azadegan"
@@ -2134,11 +3832,33 @@
     "latitude": "35.627216",
     "address": "بزرگراه سعیدی، نرسیده به بزرگراه آزادگان ابتدای شهید حیدری",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Nemat Abad"
     ],
@@ -2161,13 +3881,35 @@
     "latitude": "35.698954",
     "address": "ابتدای بزرگراه شهید دوران،بالاتر از بانک سپه",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
-      "Niroohavaii"
+      "Nirou Havaei"
     ],
     "positionsInLine": [
       {
@@ -2176,8 +3918,8 @@
       }
     ]
   },
-  "Niroohavaii": {
-    "name": "Niroohavaii",
+  "Nirou Havaei": {
+    "name": "Nirou Havaei",
     "translations": {
       "fa": "نیروهوایی"
     },
@@ -2188,11 +3930,33 @@
     "latitude": "35.6926988",
     "address": "خیابان پیروزی- بین خیابانهای چهارم و پنجم نیرو هوایی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Kolahdooz",
       "Nabard"
@@ -2214,15 +3978,37 @@
     ],
     "longitude": "51.4777301",
     "latitude": "35.6913253",
-    "address": "خیابان پیروزی ، چهار راه کوکاکولا ، جنب مجتمع تجاری کسا",
+    "address": "خیابان پیروزی , چهار راه کوکاکولا , جنب مجتمع تجاری کسا",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": true,
+      "fastFood": false,
+      "atm": true,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
-      "Niroohavaii",
+      "Nirou Havaei",
       "Piroozi"
     ],
     "positionsInLine": [
@@ -2244,11 +4030,33 @@
     "latitude": "35.691356",
     "address": "خیابان پیروزی –قبل از خیابان شهید حسن پورمند",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Nabard",
       "Ebn-e Sina"
@@ -2270,13 +4078,35 @@
     ],
     "longitude": "51.4579435",
     "latitude": "35.6907927",
-    "address": "خیابان پیروزی ،چهارصد دستگاه( تقاطع اتوبان امام علی (ع) و پیروزی)",
+    "address": "خیابان پیروزی ,چهارصد دستگاه( تقاطع اتوبان امام علی (ع) و پیروزی)",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Piroozi",
       "Meydan-e Shohada"
@@ -2300,11 +4130,33 @@
     "latitude": "35.701255",
     "address": "میدان فردوسی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Darvazeh Dolat",
       "Teatr-e Shahr"
@@ -2328,11 +4180,33 @@
     "latitude": "35.701255",
     "address": "میدان انقلاب اسلامی،ابتدای خیابان آزادی، کوچه شهید جنتی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": true,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": true,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": true,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": true,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Teatr-e Shahr",
       "Towhid"
@@ -2357,11 +4231,33 @@
     "latitude": "35.700767",
     "address": "خیابان آزادی - شمال شرقی تقاطع خیابان آزادی و شهید نواب صفوی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Meydan-e Enghelab-e Eslami",
       "Modafean-e Salamat",
@@ -2391,11 +4287,33 @@
     "latitude": "35.700653",
     "address": "خیابان آزادی - نرسیده به خیابان دکتر حبیب اله",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shademan",
       "Ostad Mo'in"
@@ -2419,11 +4337,33 @@
     "latitude": "35.700131",
     "address": "خیابان آزادی- قبل از میدان آزادی - تقاطع خیابان نور بخش",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Doctor Habibollah",
       "Meydan-e Azadi"
@@ -2447,11 +4387,33 @@
     "latitude": "35.700802",
     "address": "میدان آزادی - ابتدای بزرگراه شهید برادران رحمانی",
     "disabled": false,
-    "wc": true,
-    "coffeeShop": false,
-    "groceryStore":true,
-    "fastFood": false,
-    "atm": true,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Ostad Mo'in",
       "Bimeh"
@@ -2475,11 +4437,33 @@
     "latitude": "35.699546",
     "address": "بزرگراه شهید لشگری، ابتدای بیمه",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": true,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": true,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": true,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": true,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Meydan-e Azadi",
       "Shahrak-e Ekbatan",
@@ -2504,11 +4488,33 @@
     "latitude": "35.690689",
     "address": "میدان آزادی، پایانه ۲ فرودگاه مهرآباد",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Bimeh",
       "Mehrabad Airport Terminal 4&6"
@@ -2532,11 +4538,33 @@
     "latitude": "35.6886266",
     "address": "میدان آزادی، پایانه ۶ فرودگاه مهرآباد",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Mehrabad Airport Terminal 1&2"
     ],
@@ -2559,11 +4587,33 @@
     "latitude": "35.705557400000004",
     "address": "فاز دو شهرک اکباتان- روبروی بلوک 13",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Bimeh",
       "Eram-e Sabz"
@@ -2583,11 +4633,37 @@
     "lines": [
       4
     ],
+    "longitude": "51.30687773828286",
+    "latitude": "35.73085963000432",
+    "address": null,
     "disabled": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": true,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": true,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Eram-e Sabz"
     ],
@@ -2611,11 +4687,33 @@
     "latitude": "35.717476",
     "address": "ارم سبز",
     "disabled": false,
-    "wc": true,
-    "coffeeShop": true,
-    "groceryStore": true,
-    "fastFood": true,
-    "atm": true,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": true,
+      "groceryStore": true,
+      "fastFood": true,
+      "atm": true,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Tehran (Sadeghiyeh)",
       "Varzeshgah-e Azadi",
@@ -2645,11 +4743,33 @@
     "latitude": "35.716727",
     "address": "اتوبان کرج - جنب مجموعه ورزشی آزادی",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Eram-e Sabz",
       "Chitgar"
@@ -2671,13 +4791,35 @@
     ],
     "longitude": "51.243904",
     "latitude": "35.717563",
-    "address": "کیلومتر 8 اتوبان تهران کرج ، روبروی کارخانه بهنوش ، بلوار کوهک",
+    "address": "کیلومتر 8 اتوبان تهران کرج , روبروی کارخانه بهنوش , بلوار کوهک",
     "disabled": false,
-    "wc": true,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Varzeshgah-e Azadi",
       "Iran Khodro"
@@ -2699,13 +4841,35 @@
     ],
     "longitude": "51.196654",
     "latitude": "35.725402",
-    "address": "کیلومتر 14 اتوبان تهران کرج ، جنب باشگاه ایران خودرو",
+    "address": "کیلومتر 14 اتوبان تهران کرج , جنب باشگاه ایران خودرو",
     "disabled": false,
-    "wc": true,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Chitgar",
       "Vardavard"
@@ -2729,11 +4893,33 @@
     "latitude": "35.7444768",
     "address": "کیلومتر 16 بزرگراه تهران کرج - خیابان دارو پخش",
     "disabled": false,
-    "wc": true,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Iran Khodro",
       "Garmdareh"
@@ -2757,11 +4943,33 @@
     "latitude": "35.751002",
     "address": "کیلومتر ۲۳ بزرگراه تهران-کرج، جنب اردوگاه آموزشی قدس",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Vardavard",
       "Atmosphere"
@@ -2785,11 +4993,33 @@
     "latitude": "35.7662914",
     "address": "کیلومتر 27 جاده مخصوص تهران کرج اتمسفر",
     "disabled": false,
-    "wc": true,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Garmdareh",
       "Karaj"
@@ -2811,13 +5041,35 @@
     ],
     "longitude": "51.0026979",
     "latitude": "35.7870098",
-    "address": "کرج ، پل فردیس ، جنب میدان شهید سلطانی ، ابتدای جاده ملارد",
+    "address": "کرج , پل فردیس , جنب میدان شهید سلطانی , ابتدای جاده ملارد",
     "disabled": false,
-    "wc": true,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Atmosphere",
       "Mohammadshahr"
@@ -2841,11 +5093,33 @@
     "latitude": "35.800951",
     "address": "اتوبان ( تهران - کرج ) جاده محمد شهر",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Karaj",
       "Golshahr"
@@ -2869,11 +5143,33 @@
     "latitude": "35.824877",
     "address": "کرج-45 متری گلشهر- خیابان اختر غربی",
     "disabled": false,
-    "wc": true,
-    "coffeeShop": true,
-    "groceryStore": true,
-    "fastFood": true,
-    "atm": true,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": true,
+      "groceryStore": true,
+      "fastFood": true,
+      "atm": true,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Mohammadshahr",
       "Shahid Sepahbod Qasem Soleimani"
@@ -2893,7 +5189,37 @@
     "lines": [
       5
     ],
+    "longitude": "50.8881",
+    "latitude": "35.8261",
+    "address": "کرج، مهرشهر، انتهای بلوار ارم",
     "disabled": true,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Golshahr"
     ],
@@ -2912,7 +5238,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.4391",
+    "latitude": "35.5916",
+    "address": "شهر ری، جنب حرم حضرت عبدالعظیم (ع)",
     "disabled": true,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Meydan-e Hazrat-e Abdol Azim"
     ],
@@ -2931,7 +5287,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.4406",
+    "latitude": "35.5935",
+    "address": "شهر ری، میدان حضرت عبدالعظیم (ع)",
     "disabled": true,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Haram-e Hazrat-e Abdol Azim",
       "Ebn-e Babviyeh"
@@ -2951,7 +5337,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.4463",
+    "latitude": "35.6037",
+    "address": "شهر ری، خیابان ابن بابویه",
     "disabled": true,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Meydan-e Hazrat-e Abdol Azim",
       "Cheshmeh Ali"
@@ -2971,7 +5387,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.4550",
+    "latitude": "35.6099",
+    "address": "شهر ری، منطقه چشمه علی",
     "disabled": true,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Ebn-e Babviyeh",
       "Shohada-ye Dowlat Abad"
@@ -2991,7 +5437,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.4639",
+    "latitude": "35.6230",
+    "address": "دولت آباد، بلوار قدس",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Cheshmeh Ali",
       "Kiyan Shahr"
@@ -3011,7 +5487,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.4603",
+    "latitude": "35.6392",
+    "address": "کیانشهر، میدان امام رضا (ع)",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shohada-ye Dowlat Abad",
       "Be'sat"
@@ -3031,7 +5537,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.4498",
+    "latitude": "35.6471",
+    "address": "بزرگراه بعثت، تقاطع خیابان ۱۷ شهریور",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": true,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Kiyan Shahr",
       "Shahid Rezaei"
@@ -3051,7 +5587,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.4514",
+    "latitude": "35.6609",
+    "address": "خیابان خراسان، خیابان شهید رضایی (منصور)",
     "disabled": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Be'sat",
       "Meydan-e Khorasan"
@@ -3071,7 +5637,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.4478",
+    "latitude": "35.6728",
+    "address": "میدان خراسان",
     "disabled": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Rezaei",
       "Shohada-ye Hefdah-e Shahrivar"
@@ -3092,12 +5688,42 @@
       6,
       7
     ],
+    "longitude": "51.4491",
+    "latitude": "35.6809",
+    "address": "خیابان ۱۷ شهریور، تقاطع خیابان امیرکبیر",
     "disabled": true,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Meydan-e Khorasan",
       "Amirkabir",
       "Chehel Tan-e Doulab",
-      "Meydan-e Ghiyam"
+      "Meydan-e Giyam"
     ],
     "positionsInLine": [
       {
@@ -3118,7 +5744,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.44802",
+    "latitude": "35.6861",
+    "address": "خیابان امیرکبیر، نرسیده به میدان شهدا",
     "disabled": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shohada-ye Hefdah-e Shahrivar",
       "Meydan-e Shohada"
@@ -3143,16 +5799,38 @@
     "latitude": "35.690381",
     "address": "خیابان پیروزی تقاطع 17 شهریور،نرسیده به میدان شهدا، جنب اداره برق",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Amirkabir",
       "Ebn-e Sina",
       "Darvazeh Shemiran",
-      "Imam Hussein"
+      "Imam Hossein"
     ],
     "positionsInLine": [
       {
@@ -3173,9 +5851,39 @@
     "lines": [
       6
     ],
+    "longitude": "51.4402",
+    "latitude": "35.7077",
+    "address": "خیابان سپاه، میدان سپاه",
     "disabled": true,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
-      "Imam Hussein",
+      "Imam Hossein",
       "Bahar Shiraz (Khanevadeh Hospital)"
     ],
     "positionsInLine": [
@@ -3193,7 +5901,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.4325",
+    "latitude": "35.7122",
+    "address": "خیابان بهار شیراز، جنب بیمارستان خانواده",
     "disabled": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Sarbaz",
       "Shohada-ye Haftom-e Tir"
@@ -3218,11 +5956,33 @@
     "latitude": "35.715986",
     "address": "میدان هفت تیر",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": true,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Bahar Shiraz (Khanevadeh Hospital)",
       "Maryam-e Moghaddas",
@@ -3248,7 +6008,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.4164",
+    "latitude": "35.7133",
+    "address": "خیابان کریمخان زند، خیابان شهید نجات اللهی (ویلا)",
     "disabled": true,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shohada-ye Haftom-e Tir",
       "Meydan-e Hazrat Vali Asr"
@@ -3273,11 +6063,33 @@
     "latitude": "35.7115282",
     "address": "خیابان ولیعصر، میدان ولیعصر",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": true,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Maryam-e Moghaddas",
       "Meydan-e Jahad",
@@ -3303,7 +6115,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.3951",
+    "latitude": "35.7106",
+    "address": "بلوار کشاورز، ضلع شمالی پارک لاله",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Meydan-e Hazrat Vali Asr",
       "Karagar"
@@ -3323,7 +6165,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.3875",
+    "latitude": "35.7145",
+    "address": "خیابان کارگر شمالی، تقاطع بلوار کشاورز",
     "disabled": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Bustan-e Laleh",
       "Daneshgah-e Tarbiat Modarres"
@@ -3344,8 +6216,37 @@
       6,
       7
     ],
-    "address": "تقاطع بزرگراه شهید چمران و بزرگراه جلال آل‌احمد",
+    "longitude": "51.3844",
+    "latitude": "35.7271",
+    "address": "بزرگراه جلال آل احمد، جنب دانشگاه تربیت مدرس",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": true,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Karagar",
       "Boostan-e Goftegou",
@@ -3371,7 +6272,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.3660",
+    "latitude": "35.7305",
+    "address": "بزرگراه شیخ فضل الله نوری، ورودی شهرک آزمایش",
     "disabled": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Daneshgah-e Tarbiat Modarres",
       "Marzdaran"
@@ -3391,7 +6322,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.3525",
+    "latitude": "35.7348",
+    "address": "بزرگراه یادگار امام، بلوار مرزداران",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahrak-e Azmayesh",
       "Yadegar-e Imam"
@@ -3411,7 +6372,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.3402",
+    "latitude": "35.7401",
+    "address": "بزرگراه یادگار امام، تقاطع خیابان سازمان آب",
     "disabled": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Marzdaran",
       "Shahid Ashrafi Esfahani"
@@ -3431,8 +6422,37 @@
     "lines": [
       6
     ],
-    "address": "تقاطع بزرگراه اشرفی اصفهانی و خیابان پیامبر",
+    "longitude": "51.3287",
+    "latitude": "35.7483",
+    "address": "بزرگراه شهید اشرفی اصفهانی، تقاطع بزرگراه حکیم",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Yadegar-e Imam",
       "Shahid Sattari"
@@ -3452,7 +6472,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.3162",
+    "latitude": "35.7512",
+    "address": "بزرگراه شهید ستاری، تقاطع بزرگراه حکیم",
     "disabled": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Ashrafi Esfahani",
       "Ayatollah Kashani"
@@ -3472,7 +6522,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.301673",
+    "latitude": "35.741428",
+    "address": null,
     "disabled": true,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Sattari",
       "Shahr-e Ziba",
@@ -3493,7 +6573,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.2843",
+    "latitude": "35.7437",
+    "address": "شهران، بلوار شهرزیبا",
     "disabled": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Ayatollah Kashani",
       "Shahran"
@@ -3513,7 +6623,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.2701",
+    "latitude": "35.7585",
+    "address": "شهران، میدان الغدیر",
     "disabled": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahr-e Ziba",
       "Shohada-ye Kan"
@@ -3533,7 +6673,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.2588",
+    "latitude": "35.7693",
+    "address": "بزرگراه همت، ورودی کن",
     "disabled": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahran",
       "Kouhsar"
@@ -3553,7 +6723,37 @@
     "lines": [
       6
     ],
+    "longitude": "51.2450",
+    "latitude": "35.7800",
+    "address": "انتهای بزرگراه آبشناسان، شهران شمالی، بلوار کوهسار",
     "disabled": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shohada-ye Kan"
     ],
@@ -3572,7 +6772,37 @@
     "lines": [
       7
     ],
+    "longitude": "51.5088",
+    "latitude": "35.6706",
+    "address": "بزرگراه بسیج، جنب ورزشگاه تختی",
     "disabled": true,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Basij"
     ],
@@ -3595,11 +6825,33 @@
     "latitude": "35.667159",
     "address": "محدوده بزرگراه بسیج - افسریه",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Varzeshgah-e Takhti",
       "Ahang"
@@ -3619,7 +6871,37 @@
     "lines": [
       7
     ],
+    "longitude": "51.4769",
+    "latitude": "35.6681",
+    "address": "بزرگراه شهید محلاتی، خیابان آهنگ",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Basij",
       "Chehel Tan-e Doulab"
@@ -3639,7 +6921,37 @@
     "lines": [
       7
     ],
+    "longitude": "51.4654",
+    "latitude": "35.6742",
+    "address": "خیابان پیروزی، خیابان دولاب",
     "disabled": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Ahang",
       "Shohada-ye Hefdah-e Shahrivar"
@@ -3651,15 +6963,45 @@
       }
     ]
   },
-  "Meydan-e Ghiyam": {
-    "name": "Meydan-e Ghiyam",
+  "Meydan-e Giyam": {
+    "name": "Meydan-e Giyam",
     "translations": {
       "fa": "میدان قیام"
     },
     "lines": [
       7
     ],
+    "longitude": "51.4358",
+    "latitude": "35.6717",
+    "address": "میدان قیام",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": true,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shohada-ye Hefdah-e Shahrivar",
       "Mowlavi"
@@ -3679,9 +7021,39 @@
     "lines": [
       7
     ],
+    "longitude": "51.4248",
+    "latitude": "35.6683",
+    "address": "خیابان مولوی، چهارراه مولوی",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
-      "Meydan-e Ghiyam",
+      "Meydan-e Giyam",
       "Meydan-e Mohammadiyeh"
     ],
     "positionsInLine": [
@@ -3699,7 +7071,37 @@
     "lines": [
       7
     ],
+    "longitude": "51.3969",
+    "latitude": "35.6666",
+    "address": "خیابان کارگر جنوبی، میدان رازی (گمرک)، خیابان هلال احمر",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": true,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Mahdiyeh",
       "Beryanak"
@@ -3719,7 +7121,37 @@
     "lines": [
       7
     ],
+    "longitude": "51.3868",
+    "latitude": "35.6755",
+    "address": "بزرگراه نواب، خیابان بریانک",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Helal Ahmar",
       "Komeyl"
@@ -3743,11 +7175,33 @@
     "latitude": "35.682491",
     "address": "محدوده بزرگراه شهیدنواب صفوی با جنوب خیابان کمیل",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Beryanak",
       "Roudaki"
@@ -3767,7 +7221,37 @@
     "lines": [
       7
     ],
+    "longitude": "51.3788",
+    "latitude": "35.6897",
+    "address": "بزرگراه نواب، تقاطع خیابان رودکی (سلسبیل)",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Komeyl",
       "Shahid Navab-e Safavi"
@@ -3787,7 +7271,37 @@
     "lines": [
       7
     ],
+    "longitude": "51.3811",
+    "latitude": "35.7134",
+    "address": "خیابان ستارخان، جنب بیمارستان امام خمینی",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Towhid",
       "Daneshgah-e Tarbiat Modarres"
@@ -3807,9 +7321,37 @@
     "lines": [
       7
     ],
-    "address":	"بزرگراه شهید چمران (اتوبان پارک وی)",
+    "longitude": "51.3755",
+    "latitude": "35.7388",
+    "address": "بزرگراه شهید چمران، جنب بوستان گفتگو",
     "disabled": false,
-    "wc": true,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Daneshgah-e Tarbiat Modarres",
       "Milad Tower"
@@ -3829,7 +7371,37 @@
     "lines": [
       7
     ],
+    "longitude": "51.3750",
+    "latitude": "35.7446",
+    "address": "بزرگراه شهید حکیم، ورودی برج میلاد",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": true,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": true,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Boostan-e Goftegou",
       "Meydan-e San'at"
@@ -3853,11 +7425,33 @@
     "latitude": "35.754386",
     "address": "محدوده ضلع شمالی میدان صنعت",
     "disabled": false,
-    "wc": false,
-    "coffeeShop": false,
-    "groceryStore": false,
-    "fastFood": false,
-    "atm": false,
+    "facilities": {
+      "wc": false,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": false,
+      "bicycleParking": true,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": true,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Milad Tower",
       "Shahid Dadman"
@@ -3877,7 +7471,37 @@
     "lines": [
       7
     ],
+    "longitude": "51.3600",
+    "latitude": "35.7653",
+    "address": "شهرک غرب، بلوار شهید دادمان",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": false,
+      "atm": false,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": false
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Meydan-e San'at",
       "Meydan-e Ketab"
@@ -3897,7 +7521,37 @@
     "lines": [
       7
     ],
+    "longitude": "51.3493",
+    "latitude": "35.7777",
+    "address": "سعادت آباد، میدان کتاب",
     "disabled": false,
+    "facilities": {
+      "wc": true,
+      "coffeeShop": false,
+      "groceryStore": false,
+      "fastFood": true,
+      "atm": true,
+      "bicycleParking": false,
+      "waterCooler": null,
+      "waitingChair": true,
+      "prayerRoom": false,
+      "freeWifi": false
+    },
+    "accessibility": {
+      "elevator": false,
+      "blindPath": true,
+      "cleanFood": true
+    },
+    "safety": {
+      "fireSuppressionSystem": true,
+      "fireExtinguisher": true,
+      "metroPolice": true,
+      "creditTicketSales": true,
+      "camera": true,
+      "trashCan": true,
+      "smoking": false,
+      "petsAllowed": false
+    },
     "relations": [
       "Shahid Dadman"
     ],
