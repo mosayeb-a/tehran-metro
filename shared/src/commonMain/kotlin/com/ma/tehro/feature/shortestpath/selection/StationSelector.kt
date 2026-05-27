@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -32,14 +31,15 @@ import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.TehroHorizontalDivider
 import com.ma.tehro.common.ui.drawVerticalScrollbar
-import com.ma.tehro.common.ui.theme.LightGray
 import com.ma.tehro.common.ui.theme.Red
+import com.ma.tehro.data.Station
+import com.ma.tehro.domain.BilingualName
 import com.ma.tehro.domain.NearestStation
 import com.ma.tehro.feature.shortestpath.selection.components.DaySelectorSheet
 import com.ma.tehro.feature.shortestpath.selection.components.LineChangeDelaySlider
 import com.ma.tehro.feature.shortestpath.selection.components.NearestStationSheet
 import com.ma.tehro.feature.shortestpath.selection.components.SelectionToolbar
-import com.ma.tehro.feature.shortestpath.selection.components.StationDropdown
+import com.ma.tehro.feature.shortestpath.selection.components.StationField
 import com.ma.tehro.feature.shortestpath.selection.components.TimePickerDialog
 import kotlinx.coroutines.launch
 
@@ -47,6 +47,9 @@ import kotlinx.coroutines.launch
 @Composable
 fun StationSelector(
     viewState: StationSelectionState,
+    searchQuery: String,
+    stations: List<Station>,
+    onSearchQueryChanged: (q: String) -> Unit,
     onFindPathClick: (
         fromEn: String, toEn: String, fromFa: String, toFa: String,
         lineChangeDelayMinutes: Int, dayOfWeek: Int, currentTime: Double
@@ -154,9 +157,14 @@ fun StationSelector(
 
                 item {
                     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
-                        StationDropdown(
-                            query = "${viewState.selectedFaStartStation}\n${viewState.selectedEnStartStation}",
-                            stations = viewState.stations,
+                        StationField(
+                            selectedStation = BilingualName(
+                                viewState.selectedEnStartStation,
+                                viewState.selectedFaStartStation
+                            ),
+                            searchQuery = searchQuery,
+                            onSearchQueryChanged = onSearchQueryChanged,
+                            stations = stations,
                             onStationSelected = { en, fa -> onSelectedChange(true, en, fa) },
                             isFrom = true,
                             nodeColor = startNodeColor,
@@ -171,16 +179,22 @@ fun StationSelector(
 
                 item {
                     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
-                        StationDropdown(
-                            query = "${viewState.selectedFaDestStation}\n${viewState.selectedEnDestStation}",
-                            stations = viewState.stations,
-                            isFrom = false,
+                        StationField(
+                            selectedStation = BilingualName(
+                                viewState.selectedEnDestStation,
+                                viewState.selectedFaDestStation
+                            ),
+                            searchQuery = searchQuery,
+                            onSearchQueryChanged = onSearchQueryChanged,
+                            stations = stations,
                             onStationSelected = { en, fa -> onSelectedChange(false, en, fa) },
+                            isFrom = false,
                             nodeColor = destNodeColor,
                             nodeScale = destScale.value
                         )
                     }
                 }
+
                 item {
                     Spacer(modifier = Modifier.height(28.dp))
                 }

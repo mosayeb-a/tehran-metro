@@ -33,7 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
-import com.ma.tehro.data.BilingualName
+import com.ma.tehro.domain.BilingualName
 import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue
 

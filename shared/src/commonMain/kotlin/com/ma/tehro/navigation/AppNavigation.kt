@@ -128,6 +128,9 @@ fun AppNavigation(
         baseComposable<StationSelectorScreen> { backStackEntry ->
             val viewModel: StationSelectionViewModel = koinViewModel()
             val state by viewModel.uiState.collectAsStateWithLifecycle()
+            val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
+            val filteredStations by viewModel.filteredStations.collectAsStateWithLifecycle()
+
             val savedStateHandle = backStackEntry.savedStateHandle
             val selectedStation =
                 savedStateHandle.get<Map<String, String>>("selected_start_station")
@@ -142,9 +145,10 @@ fun AppNavigation(
             StationSelector(
                 onBack = { navController.navigateUp() },
                 viewState = state,
-                onSelectedChange = { isFrom, query, fa ->
-                    viewModel.onSelectedChange(isFrom, query, fa)
-                },
+                stations = filteredStations,
+                searchQuery = searchQuery,
+                onSearchQueryChanged = viewModel::onSearchQueryChanged,
+                onSelectedChange = viewModel::onSelectedChange,
                 onFindPathClick = { startEn, destEn, startFa, destFa, lineChangeDelayMinutes, dayOfWeek, currentTime ->
                     navController.navigate(
                         PathFinderScreen(
@@ -154,20 +158,19 @@ fun AppNavigation(
                             faDestination = destFa,
                             dayOfWeek = dayOfWeek,
                             currentTime = currentTime,
-                            lineChangeDelayMinutes = lineChangeDelayMinutes,
-
-                            )
+                            lineChangeDelayMinutes = lineChangeDelayMinutes
+                        )
                     )
                 },
-                onNearestStationChanged = { viewModel.onNearestStationSelected(it) },
+                onNearestStationChanged = viewModel::onNearestStationSelected,
                 onFindNearestStationAsStart = {
                     locationPermissionHandler.checkLocationPermission {
                         viewModel.findNearestStation()
                     }
                 },
-                onLineChangeDelayChanged = { viewModel.onLineChangeDelayChanged(it) },
-                onTimeChanged = { viewModel.onTimeChanged(it) },
-                onDayOfWeekChanged = { viewModel.onDayOfWeekChanged(it) },
+                onLineChangeDelayChanged = viewModel::onLineChangeDelayChanged,
+                onTimeChanged = viewModel::onTimeChanged,
+                onDayOfWeekChanged = viewModel::onDayOfWeekChanged,
                 onFindNearestStationsByPlace = { navController.navigate(NearbyPlaceStationsScreen) }
             )
         }
@@ -303,7 +306,7 @@ fun AppNavigation(
             )
         }
 
-        baseComposable<MoreScreen> { backStackEntry ->
+        baseComposable<MoreScreen> {
             More(viewModel = preferencesViewModel)
         }
     }

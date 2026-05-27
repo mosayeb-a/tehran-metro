@@ -4,8 +4,8 @@ import com.ma.tehro.common.LineEndpoints
 import com.ma.tehro.common.TimeUtils
 import com.ma.tehro.common.fractionToTime
 import com.ma.tehro.common.toFarsiNumber
-import com.ma.tehro.data.BilingualName
 import com.ma.tehro.data.repo.TrainScheduleRepository
+import com.ma.tehro.domain.BilingualName
 import com.ma.tehro.domain.PathItem
 
 /**

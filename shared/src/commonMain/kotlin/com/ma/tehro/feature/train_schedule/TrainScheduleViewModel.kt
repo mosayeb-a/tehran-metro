@@ -5,7 +5,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ma.tehro.common.TimeUtils
-import com.ma.tehro.data.BilingualName
+import com.ma.tehro.domain.BilingualName
 import com.ma.tehro.data.ScheduleType
 import com.ma.tehro.data.repo.GroupedScheduleInfo
 import com.ma.tehro.data.repo.TrainScheduleRepository

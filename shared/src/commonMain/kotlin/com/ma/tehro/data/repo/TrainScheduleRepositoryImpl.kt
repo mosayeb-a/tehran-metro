@@ -1,8 +1,8 @@
 package com.ma.tehro.data.repo
 
 import com.ma.tehro.common.LineEndpoints
-import com.ma.tehro.data.BilingualName
 import com.ma.tehro.data.ScheduleType
+import com.ma.tehro.domain.BilingualName
 import com.ma.thero.resources.Res
 import kotlinx.serialization.json.Json
 

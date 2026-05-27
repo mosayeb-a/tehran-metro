@@ -36,7 +36,7 @@ import com.ma.tehro.common.ui.Message
 import com.ma.tehro.common.ui.TehroHorizontalDivider
 import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.common.ui.theme.LightGray
-import com.ma.tehro.data.BilingualName
+import com.ma.tehro.domain.BilingualName
 import com.ma.tehro.data.ScheduleType
 import com.ma.tehro.data.repo.GroupedScheduleInfo
 import com.ma.tehro.feature.train_schedule.components.ScheduleTypeChips

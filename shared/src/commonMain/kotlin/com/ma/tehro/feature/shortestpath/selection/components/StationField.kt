@@ -12,41 +12,44 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.ma.tehro.common.normalizeWords
+import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.common.ui.timelineview.TimelineView
 import com.ma.tehro.common.ui.timelineview.TimelineView.SingleNode
-import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.data.Station
+import com.ma.tehro.domain.BilingualName
 
 @Composable
-fun StationDropdown(
-    query: String,
-    stations: Map<String, Station>,
+fun StationField(
+    selectedStation: BilingualName?,
+    searchQuery: String,
+    onSearchQueryChanged: (String) -> Unit,
+    stations: List<Station>,
     onStationSelected: (en: String, fa: String) -> Unit,
     isFrom: Boolean,
     nodeColor: Color,
     nodeScale: Float
 ) {
-    SearchableExpandedDropDownMenu(
-        listOfItems = stations.entries.toList(),
-        modifier = Modifier
-            .fillMaxWidth(),
-        onDropDownItemSelected = { entry ->
-            onStationSelected(entry.key, entry.value.translations.fa)
+    SearchableBottomSheet(
+        stations = stations,
+        selectedStation = selectedStation,
+        searchQuery = searchQuery,
+        onSearchQueryChanged = onSearchQueryChanged,
+        onStationSelected = { station ->
+            onStationSelected(station.name, station.translations.fa)
         },
-        initialValue = query,
-        dropdownItem = { entry ->
+        dropdownItem = { station ->
             BilingualText(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(end = 16.dp),
-                fa = entry.value.translations.fa,
-                en = entry.value.name.uppercase(),
+                fa = station.translations.fa,
+                en = station.name.uppercase(),
                 style = MaterialTheme.typography.bodyLarge,
                 maxLine = 2,
                 textAlign = TextAlign.End
             )
         },
+        modifier = Modifier.fillMaxWidth(),
         startContent = {
             Row(
                 modifier = Modifier.padding(horizontal = 16.dp),
@@ -81,17 +84,6 @@ fun StationDropdown(
             focusedTextColor = Color.Black,
             unfocusedTextColor = Color.Black,
             cursorColor = Color.Black
-        ),
-        searchPredicate = { searchText, entry ->
-            val queryWords = normalizeWords(searchText)
-            val targetWords =
-                normalizeWords(entry.value.name) + normalizeWords(entry.value.translations.fa)
-
-            queryWords.all { queryWord ->
-                targetWords.any { targetWord ->
-                    targetWord.contains(queryWord)
-                }
-            }
-        }
+        )
     )
 }
