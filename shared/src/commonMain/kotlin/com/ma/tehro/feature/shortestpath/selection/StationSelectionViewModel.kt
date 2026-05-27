@@ -12,7 +12,11 @@ import com.ma.tehro.domain.NearestStation
 import com.ma.tehro.domain.repo.PathRepository
 import com.ma.tehro.services.LocationTracker
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.isoDayNumber
@@ -27,7 +31,6 @@ data class StationSelectionState @OptIn(ExperimentalTime::class) constructor(
     val selectedFaStartStation: String = "",
     val selectedEnDestStation: String = "",
     val selectedFaDestStation: String = "",
-    val stations: Map<String, Station> = emptyMap(),
     val findNearestLocationProgress: Boolean = false,
     val nearestStations: List<NearestStation> = emptyList(),
     val lineChangeDelayMinutes: Int = 8,
@@ -44,29 +47,57 @@ class StationSelectionViewModel(
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(StationSelectionState())
-    val uiState: StateFlow<StationSelectionState> get() = _uiState
+    val uiState: StateFlow<StationSelectionState> = _uiState
+
+    private val _stations = MutableStateFlow<Map<String, Station>>(emptyMap())
+
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery: StateFlow<String> = _searchQuery
+
+    val filteredStations: StateFlow<List<Station>> = combine(
+        flow = _stations,
+        flow2 = _searchQuery
+    ) { stationsMap, query ->
+        val stationsList = stationsMap.values.toList()
+        if (query.isBlank()) {
+            stationsList
+        } else {
+            stationsList.filter { station ->
+                station.name.contains(query, ignoreCase = true) ||
+                        station.translations.fa.contains(query, ignoreCase = true)
+            }
+        }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = emptyList()
+    )
 
     init {
         viewModelScope.launch {
-            val result = pathRepository.getStations()
-            _uiState.value = _uiState.value.copy(stations = result)
+            _stations.update { pathRepository.getStations() }
         }
+    }
+
+    fun onSearchQueryChanged(query: String) {
+        _searchQuery.update { query }
     }
 
     fun onSelectedChange(isFrom: Boolean, enStation: String, faStation: String) {
-        _uiState.update {
-            it.copy(
-                selectedEnStartStation = if (isFrom) enStation else _uiState.value.selectedEnStartStation,
-                selectedFaStartStation = if (isFrom) faStation else _uiState.value.selectedFaStartStation,
-                selectedEnDestStation = if (!isFrom) enStation else _uiState.value.selectedEnDestStation,
-                selectedFaDestStation = if (!isFrom) faStation else _uiState.value.selectedFaDestStation,
+        _uiState.update { currentState ->
+            currentState.copy(
+                selectedEnStartStation = if (isFrom) enStation else currentState.selectedEnStartStation,
+                selectedFaStartStation = if (isFrom) faStation else currentState.selectedFaStartStation,
+                selectedEnDestStation = if (!isFrom) enStation else currentState.selectedEnDestStation,
+                selectedFaDestStation = if (!isFrom) faStation else currentState.selectedFaDestStation,
             )
         }
+        _searchQuery.update { "" }
     }
 
     fun onNearestStationSelected(nearestStation: NearestStation) {
-        _uiState.update {
-            it.copy(
+        _uiState.update { currentState ->
+            currentState.copy(
                 selectedEnStartStation = nearestStation.station.name,
                 selectedFaStartStation = nearestStation.station.translations.fa,
                 selectedNearestStation = nearestStation
@@ -75,48 +106,54 @@ class StationSelectionViewModel(
     }
 
     fun onLineChangeDelayChanged(minutes: Int) {
-        _uiState.value = _uiState.value.copy(lineChangeDelayMinutes = minutes)
+        _uiState.update { it.copy(lineChangeDelayMinutes = minutes) }
     }
 
     fun onTimeChanged(time: Double) {
-        _uiState.value = _uiState.value.copy(currentTime = time)
+        _uiState.update { it.copy(currentTime = time) }
     }
 
     fun onDayOfWeekChanged(day: Int) {
-        _uiState.value = _uiState.value.copy(dayOfWeek = day)
+        _uiState.update { it.copy(dayOfWeek = day) }
     }
 
     fun findNearestStation(forceRefresh: Boolean = false) {
         viewModelScope.launch {
             if (!forceRefresh && _uiState.value.nearestStations.isNotEmpty()) {
-                // for now just do nothing: it should handle try again functionality
                 return@launch
             }
 
             try {
-                _uiState.value = _uiState.value.copy(
-                    findNearestLocationProgress = true,
-                    nearestStations = emptyList(),
-                )
+                _uiState.update {
+                    it.copy(
+                        findNearestLocationProgress = true,
+                        nearestStations = emptyList(),
+                    )
+                }
                 val nearestStations = locationTracker.getNearestStationByCurrentLocation()
                 if (nearestStations.isNotEmpty()) {
-                    _uiState.value = _uiState.value.copy(
-                        nearestStations = nearestStations,
+                    _uiState.update {
+                        it.copy(
+                            nearestStations = nearestStations,
+                            findNearestLocationProgress = false
+                        )
+                    }
+                }
+            }
+            catch (_: CancellationException) {
+            }
+            catch (e: Exception) {
+                _uiState.update {
+                    it.copy(
+                        nearestStations = emptyList(),
                         findNearestLocationProgress = false
                     )
                 }
-            } catch (_: CancellationException) {
-                // do not expose this
-            } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(
-                    nearestStations = emptyList(),
-                    findNearestLocationProgress = false
-                )
                 UiMessageManager.sendEvent(
                     event = UiMessage(
                         message = e.message ?: "Location error",
                         action = Action(
-                            name = "تلاش مجدد\nRetry",
+                            name = "تلاش مجدد",
                             action = { findNearestStation() })
                     )
                 )

@@ -33,7 +33,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.toFarsiNumber
-import com.ma.tehro.data.BilingualName
+import com.ma.tehro.domain.BilingualName
 import com.ma.tehro.shared.BuildKonfig
 import com.ma.thero.resources.Res
 import com.ma.thero.resources.route

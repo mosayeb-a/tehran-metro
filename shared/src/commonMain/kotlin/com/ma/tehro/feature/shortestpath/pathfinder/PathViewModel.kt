@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.ma.tehro.common.ui.PathFinderScreen
-import com.ma.tehro.data.BilingualName
+import com.ma.tehro.domain.BilingualName
 import com.ma.tehro.domain.PathItem
 import com.ma.tehro.domain.Step
 import com.ma.tehro.domain.repo.PathRepository
