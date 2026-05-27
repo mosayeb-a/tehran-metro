@@ -151,7 +151,7 @@ class StationSelectionViewModel(
                 }
                 UiMessageManager.sendEvent(
                     event = UiMessage(
-                        message = e.message ?: "Location error",
+                        message = e.message ?: "مشکلی رخ داده",
                         action = Action(
                             name = "تلاش مجدد",
                             action = { findNearestStation() })

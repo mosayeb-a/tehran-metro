@@ -46,7 +46,7 @@ fun PlaceSelection(
     onSearchQueryChanged: (String) -> Unit,
     onBack: () -> Unit,
 ) {
-    var showBottomSheet by remember { mutableStateOf(false) }
+    var selectedPlaceName by remember { mutableStateOf<String?>(null) }
     val lazyListState = rememberLazyListState()
 
     Scaffold(
@@ -108,8 +108,8 @@ fun PlaceSelection(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
+                                selectedPlaceName = place.name
                                 onPlaceClick(place.latitude, place.longitude)
-                                showBottomSheet = true
                             }
                             .padding(horizontal = 16.dp, vertical = 20.dp),
                     ) {
@@ -136,16 +136,17 @@ fun PlaceSelection(
         }
     }
 
-    if (showBottomSheet) {
+    if (selectedPlaceName != null && viewState.nearbyStations.isNotEmpty()) {
         NearestStationSheet(
+            locationName = selectedPlaceName ?: "",
             nearestStations = viewState.nearbyStations,
             isLoading = viewState.isLoading,
             selectedStation = null,
             onStationSelected = { nearStation ->
                 onStationSelected(nearStation.station.name, nearStation.station.translations.fa)
-                showBottomSheet = false
+                selectedPlaceName = null
             },
-            onDismiss = { showBottomSheet = false }
+            onDismiss = { selectedPlaceName = null }
         )
     }
 }

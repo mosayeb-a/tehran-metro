@@ -249,6 +249,7 @@ fun StationSelector(
 
             if (showNearestStations) {
                 NearestStationSheet(
+                    locationName = "موقعیت شما",
                     nearestStations = viewState.nearestStations,
                     isLoading = viewState.findNearestLocationProgress && hasTriggeredNearestSearch,
                     onStationSelected = { station ->
