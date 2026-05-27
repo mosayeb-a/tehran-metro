@@ -108,7 +108,7 @@ class LineRepositoryImplTest {
     fun `test line 4 main branch order`() {
         val expected = listOf(
             "Shahid Kolahdooz",
-            "Niroohavaii",
+            "Nirou Havaei",
             "Nabard",
             "Piroozi",
             "Ebn-e Sina",
@@ -141,7 +141,7 @@ class LineRepositoryImplTest {
     fun `test line 4  branch order`() {
         val expected = listOf(
             "Shahid Kolahdooz",
-            "Niroohavaii",
+            "Nirou Havaei",
             "Nabard",
             "Piroozi",
             "Ebn-e Sina",

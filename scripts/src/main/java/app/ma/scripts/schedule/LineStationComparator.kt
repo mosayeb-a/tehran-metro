@@ -2,12 +2,13 @@ package app.ma.scripts.schedule
 
 import app.ma.scripts.common.RES_PATH
 import app.ma.scripts.common.readJsonStationsAsText
+import com.ma.tehro.data.Station
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
 import java.io.File
 
 fun main() {
-    val jsonStations = readJsonStationsAsText("stations")
+    val jsonStations : MutableMap<String, Station> = readJsonStationsAsText("stations")
     val englishNames = jsonStations.values.map { it.name }.toSet()
 
     val lineGroups = mapOf(

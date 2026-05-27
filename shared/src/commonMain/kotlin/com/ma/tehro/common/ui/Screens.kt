@@ -29,10 +29,6 @@ data class StationDetailScreen(val station: Station, val lineNumber: Int, val us
 
 @Serializable
 object MapScreen
-
-@Serializable
-data class SubmitStationInfoScreen(val station: Station, val lineNumber: Int)
-
 @Serializable
 data class TrainScheduleScreen(
     val enStationName: String,

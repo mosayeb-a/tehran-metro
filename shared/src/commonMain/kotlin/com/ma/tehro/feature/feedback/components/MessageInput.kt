@@ -1,4 +1,4 @@
-package com.ma.tehro.feature.submit_suggestion.feedback.components
+package com.ma.tehro.feature.feedback.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

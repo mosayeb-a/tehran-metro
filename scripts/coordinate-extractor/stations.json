@@ -963,7 +963,7 @@
     "atm": true,
     "relations": [
       "Tehranpars",
-      "Daneshgah-e Elm va Sanat"
+      "Daneshgah-e Elm-o San'at"
     ],
     "positionsInLine": [
       {
@@ -972,8 +972,8 @@
       }
     ]
   },
-  "Daneshgah-e Elm va Sanat": {
-    "name": "Daneshgah-e Elm va Sanat",
+  "Daneshgah-e Elm-o San'at": {
+    "name": "Daneshgah-e Elm-o San'at",
     "translations": {
       "fa": "دانشگاه علم و صنعت"
     },
@@ -1018,7 +1018,7 @@
     "fastFood": false,
     "atm": false,
     "relations": [
-      "Daneshgah-e Elm va Sanat",
+      "Daneshgah-e Elm-o San'at",
       "Janbazan"
     ],
     "positionsInLine": [
@@ -1131,7 +1131,7 @@
     "atm": false,
     "relations": [
       "Sabalan",
-      "Imam Hussein"
+      "Imam Hossein"
     ],
     "positionsInLine": [
       {
@@ -1140,8 +1140,8 @@
       }
     ]
   },
-  "Imam Hussein": {
-    "name": "Imam Hussein",
+  "Imam Hossein": {
+    "name": "Imam Hossein",
     "translations": {
       "fa": "امام حسین"
     },
@@ -1194,7 +1194,7 @@
     "fastFood": false,
     "atm": false,
     "relations": [
-      "Imam Hussein",
+      "Imam Hossein",
       "Meydan-e Shohada",
       "Darvazeh Dolat",
       "Baharistan"
@@ -1603,7 +1603,7 @@
     "atm": false,
     "relations": [
       "Aghdasiyeh",
-      "Hoseinabad"
+      "Hossein Abad"
     ],
     "positionsInLine": [
       {
@@ -1612,8 +1612,8 @@
       }
     ]
   },
-  "Hoseinabad": {
-    "name": "Hoseinabad",
+  "Hossein Abad": {
+    "name": "Hossein Abad",
     "translations": {
       "fa": "حسین‌آباد"
     },
@@ -1658,7 +1658,7 @@
     "fastFood": false,
     "atm": false,
     "relations": [
-      "Hoseinabad",
+      "Hossein Abad",
       "Shahid Zeynoddin"
     ],
     "positionsInLine": [
@@ -2167,7 +2167,7 @@
     "fastFood": false,
     "atm": false,
     "relations": [
-      "Niroohavaii"
+      "Nirou Havaei"
     ],
     "positionsInLine": [
       {
@@ -2176,8 +2176,8 @@
       }
     ]
   },
-  "Niroohavaii": {
-    "name": "Niroohavaii",
+  "Nirou Havaei": {
+    "name": "Nirou Havaei",
     "translations": {
       "fa": "نیروهوایی"
     },
@@ -2222,7 +2222,7 @@
     "fastFood": false,
     "atm": false,
     "relations": [
-      "Niroohavaii",
+      "Nirou Havaei",
       "Piroozi"
     ],
     "positionsInLine": [
@@ -3097,7 +3097,7 @@
       "Meydan-e Khorasan",
       "Amirkabir",
       "Chehel Tan-e Doulab",
-      "Meydan-e Ghiyam"
+      "Meydan-e Giyam"
     ],
     "positionsInLine": [
       {
@@ -3152,7 +3152,7 @@
       "Amirkabir",
       "Ebn-e Sina",
       "Darvazeh Shemiran",
-      "Imam Hussein"
+      "Imam Hossein"
     ],
     "positionsInLine": [
       {
@@ -3175,7 +3175,7 @@
     ],
     "disabled": true,
     "relations": [
-      "Imam Hussein",
+      "Imam Hossein",
       "Bahar Shiraz (Khanevadeh Hospital)"
     ],
     "positionsInLine": [
@@ -3651,8 +3651,8 @@
       }
     ]
   },
-  "Meydan-e Ghiyam": {
-    "name": "Meydan-e Ghiyam",
+  "Meydan-e Giyam": {
+    "name": "Meydan-e Giyam",
     "translations": {
       "fa": "میدان قیام"
     },
@@ -3681,7 +3681,7 @@
     ],
     "disabled": false,
     "relations": [
-      "Meydan-e Ghiyam",
+      "Meydan-e Giyam",
       "Meydan-e Mohammadiyeh"
     ],
     "positionsInLine": [
