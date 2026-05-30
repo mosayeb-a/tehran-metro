@@ -34,7 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.rememberShareManager
 import com.ma.tehro.common.ui.Appbar
-import com.ma.tehro.domain.Step
+import com.ma.tehro.domain.path.Step
 import com.ma.tehro.feature.shortestpath.guide.components.StepGuideItem
 
 data class StepText(val symbol: String, val message: String)

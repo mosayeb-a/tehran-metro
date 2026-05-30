@@ -66,4 +66,3 @@ fun Appbar(
         content?.invoke(this)
     }
 }
-

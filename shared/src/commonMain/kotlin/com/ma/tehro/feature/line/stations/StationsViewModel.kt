@@ -4,8 +4,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.navigation.toRoute
 import com.ma.tehro.common.ui.StationsScreen
-import com.ma.tehro.data.Station
-import com.ma.tehro.domain.repo.LineRepository
+import com.ma.tehro.domain.line.Station
+import com.ma.tehro.domain.line.repository.LineRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update

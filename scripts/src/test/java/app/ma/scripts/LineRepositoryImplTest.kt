@@ -1,8 +1,8 @@
 package app.ma.scripts
 
 import app.ma.scripts.common.readJsonStationsAsText
-import com.ma.tehro.data.Station
-import com.ma.tehro.data.repo.LineRepositoryImpl
+import com.ma.tehro.domain.line.Station
+import com.ma.tehro.data.line.repository.LineRepositoryImpl
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

@@ -1,7 +1,10 @@
 package app.ma.scripts.stations
 
 import app.ma.scripts.common.readJsonStationsAsText
-import com.ma.tehro.data.*
+import com.ma.tehro.domain.line.Station
+import com.ma.tehro.domain.line.StationAccessibility
+import com.ma.tehro.domain.line.StationFacilities
+import com.ma.tehro.domain.line.StationSafety
 import kotlinx.serialization.json.Json
 import java.io.File
 
@@ -31,30 +34,78 @@ fun main() {
                 disabled = oldStation.disabled,
                 facilities = StationFacilities(
                     wc = updateIfTrue(oldStation.facilities.wc, newStation.facilities.wc),
-                    coffeeShop = updateIfTrue(oldStation.facilities.coffeeShop, newStation.facilities.coffeeShop),
-                    groceryStore = updateIfTrue(oldStation.facilities.groceryStore, newStation.facilities.groceryStore),
-                    fastFood = updateIfTrue(oldStation.facilities.fastFood, newStation.facilities.fastFood),
+                    coffeeShop = updateIfTrue(
+                        oldStation.facilities.coffeeShop,
+                        newStation.facilities.coffeeShop
+                    ),
+                    groceryStore = updateIfTrue(
+                        oldStation.facilities.groceryStore,
+                        newStation.facilities.groceryStore
+                    ),
+                    fastFood = updateIfTrue(
+                        oldStation.facilities.fastFood,
+                        newStation.facilities.fastFood
+                    ),
                     atm = updateIfTrue(oldStation.facilities.atm, newStation.facilities.atm),
-                    bicycleParking = updateIfTrue(oldStation.facilities.bicycleParking, newStation.facilities.bicycleParking),
-                    waterCooler = updateIfNotNull(oldStation.facilities.waterCooler, newStation.facilities.waterCooler),
-                    waitingChair = updateIfTrue(oldStation.facilities.waitingChair, newStation.facilities.waitingChair),
-                    prayerRoom = updateIfTrue(oldStation.facilities.prayerRoom, newStation.facilities.prayerRoom),
-                    freeWifi = updateIfTrue(oldStation.facilities.freeWifi, newStation.facilities.freeWifi),
+                    bicycleParking = updateIfTrue(
+                        oldStation.facilities.bicycleParking,
+                        newStation.facilities.bicycleParking
+                    ),
+                    waterCooler = updateIfNotNull(
+                        oldStation.facilities.waterCooler,
+                        newStation.facilities.waterCooler
+                    ),
+                    waitingChair = updateIfTrue(
+                        oldStation.facilities.waitingChair,
+                        newStation.facilities.waitingChair
+                    ),
+                    prayerRoom = updateIfTrue(
+                        oldStation.facilities.prayerRoom,
+                        newStation.facilities.prayerRoom
+                    ),
+                    freeWifi = updateIfTrue(
+                        oldStation.facilities.freeWifi,
+                        newStation.facilities.freeWifi
+                    ),
                 ),
                 accessibility = StationAccessibility(
-                    elevator = updateIfTrue(oldStation.accessibility.elevator, newStation.accessibility.elevator),
-                    blindPath = updateIfTrue(oldStation.accessibility.blindPath, newStation.accessibility.blindPath),
-                    cleanFood = updateIfTrue(oldStation.accessibility.cleanFood, newStation.accessibility.cleanFood),
+                    elevator = updateIfTrue(
+                        oldStation.accessibility.elevator,
+                        newStation.accessibility.elevator
+                    ),
+                    blindPath = updateIfTrue(
+                        oldStation.accessibility.blindPath,
+                        newStation.accessibility.blindPath
+                    ),
+                    cleanFood = updateIfTrue(
+                        oldStation.accessibility.cleanFood,
+                        newStation.accessibility.cleanFood
+                    ),
                 ),
                 safety = StationSafety(
-                    fireSuppressionSystem = updateIfTrue(oldStation.safety.fireSuppressionSystem, newStation.safety.fireSuppressionSystem),
-                    fireExtinguisher = updateIfTrue(oldStation.safety.fireExtinguisher, newStation.safety.fireExtinguisher),
-                    metroPolice = updateIfTrue(oldStation.safety.metroPolice, newStation.safety.metroPolice),
-                    creditTicketSales = updateIfTrue(oldStation.safety.creditTicketSales, newStation.safety.creditTicketSales),
+                    fireSuppressionSystem = updateIfTrue(
+                        oldStation.safety.fireSuppressionSystem,
+                        newStation.safety.fireSuppressionSystem
+                    ),
+                    fireExtinguisher = updateIfTrue(
+                        oldStation.safety.fireExtinguisher,
+                        newStation.safety.fireExtinguisher
+                    ),
+                    metroPolice = updateIfTrue(
+                        oldStation.safety.metroPolice,
+                        newStation.safety.metroPolice
+                    ),
+                    creditTicketSales = updateIfTrue(
+                        oldStation.safety.creditTicketSales,
+                        newStation.safety.creditTicketSales
+                    ),
                     camera = updateIfTrue(oldStation.safety.camera, newStation.safety.camera),
                     trashCan = updateIfTrue(oldStation.safety.trashCan, newStation.safety.trashCan),
                     smoking = updateIfTrue(oldStation.safety.smoking, newStation.safety.smoking),
-                    petsAllowed = updateIfTrue(oldStation.safety.petsAllowed, newStation.safety.petsAllowed),
+                    petsAllowed = updateIfTrue(
+                        oldStation.safety.petsAllowed,
+                        newStation.safety.petsAllowed
+                    ),
                 ),
                 relations = oldStation.relations,
                 positionsInLine = oldStation.positionsInLine,

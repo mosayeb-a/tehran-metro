@@ -1,7 +1,7 @@
 package com.ma.tehro.feature.line
 
 import androidx.lifecycle.ViewModel
-import com.ma.tehro.domain.repo.LineRepository
+import com.ma.tehro.domain.line.repository.LineRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update

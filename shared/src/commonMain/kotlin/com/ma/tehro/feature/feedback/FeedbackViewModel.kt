@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.ma.tehro.common.ui.Action
 import com.ma.tehro.common.ui.UiMessage
 import com.ma.tehro.common.ui.UiMessageManager
-import com.ma.tehro.domain.repo.DataCorrectionRepository
+import com.ma.tehro.domain.feedback.repository.FeedbackRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -19,7 +19,7 @@ data class FeedbackState(
 )
 
 class FeedbackViewModel(
-    private val dataCorrectionRepository: DataCorrectionRepository
+    private val feedbackRepository: FeedbackRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(FeedbackState())
@@ -30,7 +30,7 @@ class FeedbackViewModel(
             _state.update { it.copy(isLoading = true, isSubmissionSent = false) }
 
             try {
-                dataCorrectionRepository.submitFeedback(message.trim())
+                feedbackRepository.send(message.trim())
                 _state.update { it.copy(isLoading = false, isSubmissionSent = true) }
                 UiMessageManager.sendEvent(
                     UiMessage(

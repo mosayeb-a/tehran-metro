@@ -27,22 +27,21 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.BilingualText
-import com.ma.tehro.domain.NearestStation
+import com.ma.tehro.domain.common.NearbyStation
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3Api::class)
 @Composable
-fun NearestStationSheet(
+fun NearbyStationSheet(
     locationName: String,
-    nearestStations: List<NearestStation>,
+    nearbyStations: List<NearbyStation>,
     isLoading: Boolean,
-    selectedStation: NearestStation?,
-    onStationSelected: (NearestStation) -> Unit,
+    selectedStation: NearbyStation?,
+    onStationSelected: (NearbyStation) -> Unit,
     onDismiss: () -> Unit,
 ) {
     ModalBottomSheet(
@@ -55,7 +54,7 @@ fun NearestStationSheet(
     ) {
         NearestStationsBottomSheetContent(
             locationName = locationName,
-            nearestStations = nearestStations,
+            nearbyStations = nearbyStations,
             isLoading = isLoading,
             onStationSelected = onStationSelected,
             selectedStation = selectedStation,
@@ -68,10 +67,10 @@ fun NearestStationSheet(
 fun NearestStationsBottomSheetContent(
     modifier: Modifier = Modifier,
     locationName: String,
-    selectedStation: NearestStation?,
-    nearestStations: List<NearestStation>,
+    selectedStation: NearbyStation?,
+    nearbyStations: List<NearbyStation>,
     isLoading: Boolean,
-    onStationSelected: (NearestStation) -> Unit,
+    onStationSelected: (NearbyStation) -> Unit,
     onDismiss: () -> Unit
 ) {
     Column(
@@ -79,7 +78,7 @@ fun NearestStationsBottomSheetContent(
             .fillMaxWidth()
             .padding(vertical = 16.dp)
     ) {
-        if (isLoading && nearestStations.isEmpty()) {
+        if (isLoading && nearbyStations.isEmpty()) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -112,9 +111,9 @@ fun NearestStationsBottomSheetContent(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 items(
-                    nearestStations.size,
-                    key = { nearestStations[it].station.name }) { index ->
-                    val station = nearestStations[index]
+                    nearbyStations.size,
+                    key = { nearbyStations[it].station.name }) { index ->
+                    val station = nearbyStations[index]
                     val isSelected = selectedStation?.station?.name == station.station.name
 
                     Row(
@@ -140,7 +139,7 @@ fun NearestStationsBottomSheetContent(
                             ) {
                                 Row(verticalAlignment = Alignment.Bottom) {
                                     Text(
-                                        text = station.distanceNumberFa,
+                                        text = station.distanceNumber,
                                         style = MaterialTheme.typography.bodyMedium.copy(
                                             fontWeight = FontWeight.Bold,
                                             color = Color.White
@@ -148,7 +147,7 @@ fun NearestStationsBottomSheetContent(
                                     )
                                     Spacer(modifier = Modifier.width(4.dp))
                                     Text(
-                                        text = station.distanceUnitFa,
+                                        text = station.distanceUnit,
                                         style = MaterialTheme.typography.bodySmall.copy(
                                             color = MaterialTheme.colorScheme.onSurfaceVariant
                                         )

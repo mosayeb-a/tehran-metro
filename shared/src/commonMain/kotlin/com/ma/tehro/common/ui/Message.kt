@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -27,6 +28,8 @@ fun Message(
     modifier: Modifier = Modifier,
     faMessage: String,
     faces: List<String>,
+    actionText: String? = null,
+    onAction: (() -> Unit)? = null,
 ) {
     val selectedFace = remember { faces.random() }
 
@@ -55,7 +58,15 @@ fun Message(
                     ),
                     textAlign = TextAlign.Center
                 )
+            }
 
+            if (actionText != null && onAction != null) {
+                Spacer(modifier = Modifier.height(24.dp))
+                OutlinedButton(
+                    onClick = onAction
+                ) {
+                    Text(actionText)
+                }
             }
         }
     }

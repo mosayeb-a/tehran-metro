@@ -88,6 +88,7 @@ android {
     }
 
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -119,6 +120,8 @@ dependencies {
     implementation(libs.koin.android)
 
     implementation(libs.osmdroid.android)
+
+    coreLibraryDesugaring(libs.android.desugar)
 
     implementation(projects.shared)
 }

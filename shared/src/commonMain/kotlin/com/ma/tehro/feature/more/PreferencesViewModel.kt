@@ -3,8 +3,8 @@ package com.ma.tehro.feature.more
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ma.tehro.common.ui.theme.Themes
-import com.ma.tehro.domain.Theme
-import com.ma.tehro.domain.repo.PreferencesRepository
+import com.ma.tehro.domain.common.Theme
+import com.ma.tehro.domain.preferences.repository.PreferencesRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

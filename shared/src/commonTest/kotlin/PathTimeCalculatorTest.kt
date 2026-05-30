@@ -1,8 +1,11 @@
 import com.ma.tehro.data.*
-import com.ma.tehro.data.repo.GroupedScheduleInfo
-import com.ma.tehro.data.repo.TrainScheduleRepository
-import com.ma.tehro.domain.PathItem
-import com.ma.tehro.domain.usecase.PathTimeCalculator
+import com.ma.tehro.domain.line.Station
+import com.ma.tehro.domain.line.Translations
+import com.ma.tehro.data.repository.ScheduleGroup
+import com.ma.tehro.data.repository.TrainScheduleRepository
+import com.ma.tehro.domain.path.PathItem
+import com.ma.tehro.domain.schedule.ScheduleType
+import com.ma.tehro.domain.path.PathTimeCalculator
 import kotlinx.coroutines.test.runTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -244,7 +247,7 @@ class MockTrainScheduleRepository : TrainScheduleRepository {
         stationName: String,
         lineNum: Int,
         isBranch: Boolean
-    ): List<GroupedScheduleInfo> {
+    ): List<ScheduleGroup> {
         // Common schedule for all stations on Line 1 going to Kahrizak
         val commonSchedule = listOf(
             0.25, 0.26, 0.27, 0.28, 0.29, 0.30,  // 06:00 - 07:12
@@ -256,7 +259,7 @@ class MockTrainScheduleRepository : TrainScheduleRepository {
 
         return when (stationName) {
             "Tajrish", "Shahr-e Ray", "Kahrizak" -> listOf(
-                GroupedScheduleInfo(
+                ScheduleGroup(
                     destination = BilingualName("Kahrizak", "کهریزک"),
                     schedules = mapOf(
                         ScheduleType.SATURDAY_TO_WEDNESDAY to commonSchedule
@@ -264,13 +267,13 @@ class MockTrainScheduleRepository : TrainScheduleRepository {
                 )
             )
             "Imam Khomeini" -> listOf(
-                GroupedScheduleInfo(
+                ScheduleGroup(
                     destination = BilingualName("Kahrizak", "کهریزک"),
                     schedules = mapOf(
                         ScheduleType.SATURDAY_TO_WEDNESDAY to listOf(0.28, 0.32, 0.36, 0.40)
                     )
                 ),
-                GroupedScheduleInfo(
+                ScheduleGroup(
                     destination = BilingualName("Farhangsara", "فرهنگسرا"),
                     schedules = mapOf(
                         ScheduleType.SATURDAY_TO_WEDNESDAY to listOf(0.29, 0.33, 0.37, 0.41)
@@ -278,13 +281,13 @@ class MockTrainScheduleRepository : TrainScheduleRepository {
                 )
             )
             "Shahid Beheshti" -> listOf(
-                GroupedScheduleInfo(
+                ScheduleGroup(
                     destination = BilingualName("Farhangsara", "فرهنگسرا"),
                     schedules = mapOf(
                         ScheduleType.SATURDAY_TO_WEDNESDAY to listOf(0.31, 0.35, 0.39, 0.43)
                     )
                 ),
-                GroupedScheduleInfo(
+                ScheduleGroup(
                     destination = BilingualName("Azadegan", "آزادگان"),
                     schedules = mapOf(
                         ScheduleType.SATURDAY_TO_WEDNESDAY to listOf(0.32, 0.36, 0.40, 0.44)
@@ -292,7 +295,7 @@ class MockTrainScheduleRepository : TrainScheduleRepository {
                 )
             )
             "Farhangsara" -> listOf(
-                GroupedScheduleInfo(
+                ScheduleGroup(
                     destination = BilingualName("Tehran (Sadeghiyeh)", "صادقیه"),
                     schedules = mapOf(
                         ScheduleType.SATURDAY_TO_WEDNESDAY to listOf(0.33, 0.37, 0.41, 0.45)
@@ -300,7 +303,7 @@ class MockTrainScheduleRepository : TrainScheduleRepository {
                 )
             )
             "Azadegan" -> listOf(
-                GroupedScheduleInfo(
+                ScheduleGroup(
                     destination = BilingualName("Qa'em", "قائم"),
                     schedules = mapOf(
                         ScheduleType.SATURDAY_TO_WEDNESDAY to listOf(0.34, 0.38, 0.42, 0.46)
@@ -308,7 +311,7 @@ class MockTrainScheduleRepository : TrainScheduleRepository {
                 )
             )
             else -> listOf(
-                GroupedScheduleInfo(
+                ScheduleGroup(
                     destination = BilingualName("Kahrizak", "کهریزک"),
                     schedules = mapOf(
                         ScheduleType.SATURDAY_TO_WEDNESDAY to commonSchedule

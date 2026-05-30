@@ -1,8 +1,8 @@
 package com.ma.tehro.common
 
-import com.ma.tehro.data.BranchConfig
-import com.ma.tehro.data.LineBranches
-import com.ma.tehro.domain.BilingualName
+import com.ma.tehro.data.line.BranchConfig
+import com.ma.tehro.data.line.LineBranches
+import com.ma.tehro.domain.common.BilingualName
 
 val lineBranches = mapOf(
     1 to BranchConfig(

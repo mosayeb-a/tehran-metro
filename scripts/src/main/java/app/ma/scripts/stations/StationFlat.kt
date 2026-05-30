@@ -1,11 +1,11 @@
 package app.ma.scripts.stations
 
-import com.ma.tehro.data.PositionInLine
-import com.ma.tehro.data.Station
-import com.ma.tehro.data.StationAccessibility
-import com.ma.tehro.data.StationFacilities
-import com.ma.tehro.data.StationSafety
-import com.ma.tehro.data.Translations
+import com.ma.tehro.domain.line.PositionInLine
+import com.ma.tehro.domain.line.Station
+import com.ma.tehro.domain.line.StationAccessibility
+import com.ma.tehro.domain.line.StationFacilities
+import com.ma.tehro.domain.line.StationSafety
+import com.ma.tehro.domain.line.Translations
 
 @kotlinx.serialization.Serializable
 data class StationFlat(

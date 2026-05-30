@@ -2,7 +2,7 @@ package com.ma.tehro.feature.map.city
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ma.tehro.data.Station
+import com.ma.tehro.domain.line.Station
 import com.ma.tehro.services.LocationClient
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

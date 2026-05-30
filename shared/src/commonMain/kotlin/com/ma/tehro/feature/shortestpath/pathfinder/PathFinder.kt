@@ -35,8 +35,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.ui.drawVerticalScrollbar
-import com.ma.tehro.data.Station
-import com.ma.tehro.domain.PathItem
+import com.ma.tehro.domain.line.Station
+import com.ma.tehro.domain.path.PathItem
 import com.ma.tehro.feature.shortestpath.pathfinder.components.PathFinderAppbar
 import com.ma.tehro.feature.shortestpath.pathfinder.components.PathfinderFloatingToolbar
 import com.ma.tehro.feature.shortestpath.pathfinder.components.PinableTitle
