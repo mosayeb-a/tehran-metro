@@ -27,7 +27,7 @@ import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.common.ui.TehroHorizontalDivider
 import com.ma.tehro.common.ui.theme.LightGray
-import com.ma.tehro.domain.BilingualName
+import com.ma.tehro.domain.common.BilingualName
 
 @Composable
 fun PathFinderAppbar(

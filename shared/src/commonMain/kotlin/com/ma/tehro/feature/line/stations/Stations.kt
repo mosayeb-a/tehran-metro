@@ -39,7 +39,7 @@ import com.ma.tehro.common.ui.timelineview.TimelineView.SingleNode
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.common.ui.drawVerticalScrollbar
-import com.ma.tehro.data.Station
+import com.ma.tehro.domain.line.Station
 
 @Composable
 fun Stations(

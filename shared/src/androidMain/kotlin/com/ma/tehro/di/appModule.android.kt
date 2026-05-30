@@ -4,12 +4,17 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.sqlite.db.SupportSQLiteDatabase
+import app.cash.sqldelight.async.coroutines.synchronous
+import app.cash.sqldelight.db.SqlDriver
+import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import com.ma.tehro.common.STATION_COORDS_QUALIFIER
-import com.ma.tehro.data.Place
-import com.ma.tehro.data.Station
-import com.ma.tehro.domain.MapStationCoordinate
+import com.ma.tehro.data.place.Place
+import com.ma.tehro.domain.line.Station
+import com.ma.tehro.domain.map.MapStationCoordinate
 import com.ma.tehro.services.DefaultLocationClient
 import com.ma.tehro.services.LocationClient
+import com.ma.thero.db.TehroDatabase
 import com.ma.thero.resources.Res
 import com.russhwolf.settings.ExperimentalSettingsApi
 import com.russhwolf.settings.ExperimentalSettingsImplementation
@@ -73,5 +78,18 @@ actual val platformModule: Module
                     }
                 }
             }
+        }
+
+        single<SqlDriver> {
+            AndroidSqliteDriver(
+                TehroDatabase.Schema.synchronous(),
+                context = androidContext(),
+                name = "tehro.db",
+                callback = object : AndroidSqliteDriver.Callback(TehroDatabase.Schema.synchronous()) {
+                    override fun onOpen(db: SupportSQLiteDatabase) {
+                        db.setForeignKeyConstraintsEnabled(true)
+                    }
+                }
+            )
         }
     }

@@ -20,6 +20,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.Send
 import androidx.compose.material.icons.filled.HdrStrong
 import androidx.compose.material.icons.rounded.FormatListNumbered
+import androidx.compose.material.icons.rounded.Headphones
 import androidx.compose.material.icons.rounded.Map
 import androidx.compose.material.icons.rounded.MyLocation
 import androidx.compose.material3.HorizontalDivider
@@ -33,7 +34,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.toFarsiNumber
-import com.ma.tehro.domain.BilingualName
+import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.shared.BuildKonfig
 import com.ma.thero.resources.Res
 import com.ma.thero.resources.route
@@ -45,7 +46,8 @@ fun DrawerContent(
     onPathFinderClick: () -> Unit,
     onLinesClick: () -> Unit,
     onMetroMapClick: () -> Unit,
-    onMoreClick: () -> Unit
+    onMoreClick: () -> Unit,
+    onPodcastClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -93,6 +95,13 @@ fun DrawerContent(
                     BilingualName(fa = "ارسال پیشنهاد", en = "SUBMIT FEEDBACK"),
                     onSubmitFeedbackClick,
                     imageVector = Icons.AutoMirrored.Rounded.Send
+                )
+            }
+            item("podcast") {
+                DrawerItem(
+                    BilingualName(fa = "پادکست", en = "PODCAST"),
+                    onPodcastClick,
+                    imageVector = Icons.Rounded.Headphones
                 )
             }
             item("more") {

@@ -28,8 +28,8 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.onSizeChanged
 import com.ma.tehro.common.STATION_COORDS_QUALIFIER
 import com.ma.tehro.common.ui.Appbar
-import com.ma.tehro.domain.MapStationCoordinate
-import com.ma.tehro.domain.PathPoint
+import com.ma.tehro.domain.map.MapStationCoordinate
+import com.ma.tehro.domain.map.PathPoint
 import com.ma.tehro.feature.map.viewer.zoombox.MutableZoomState
 import com.ma.tehro.feature.map.viewer.zoombox.ZoomState
 import com.ma.tehro.feature.map.viewer.zoombox.gesture.condition.WithinXBoundsTouchCondition

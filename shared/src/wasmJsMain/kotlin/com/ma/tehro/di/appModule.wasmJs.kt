@@ -1,8 +1,8 @@
 package com.ma.tehro.di
 
 import com.ma.tehro.common.WasmPreloadedData
-import com.ma.tehro.data.Place
-import com.ma.tehro.data.Station
+import com.ma.tehro.data.place.Place
+import com.ma.tehro.domain.line.Station
 import com.ma.tehro.services.LocationClient
 import com.ma.tehro.services.WasmLocationClient
 import com.russhwolf.settings.ExperimentalSettingsApi

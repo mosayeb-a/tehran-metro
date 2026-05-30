@@ -7,15 +7,14 @@ import com.ma.tehro.common.TimeUtils
 import com.ma.tehro.common.ui.Action
 import com.ma.tehro.common.ui.UiMessage
 import com.ma.tehro.common.ui.UiMessageManager
-import com.ma.tehro.data.Station
-import com.ma.tehro.domain.NearestStation
-import com.ma.tehro.domain.repo.PathRepository
+import com.ma.tehro.domain.line.Station
+import com.ma.tehro.domain.common.NearbyStation
+import com.ma.tehro.domain.path.repository.PathRepository
 import com.ma.tehro.services.LocationTracker
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -32,13 +31,13 @@ data class StationSelectionState @OptIn(ExperimentalTime::class) constructor(
     val selectedEnDestStation: String = "",
     val selectedFaDestStation: String = "",
     val findNearestLocationProgress: Boolean = false,
-    val nearestStations: List<NearestStation> = emptyList(),
+    val nearbyStations: List<NearbyStation> = emptyList(),
     val lineChangeDelayMinutes: Int = 8,
     val dayOfWeek: Int = Clock.System.now()
         .toLocalDateTime(kotlinx.datetime.TimeZone.currentSystemDefault())
         .dayOfWeek.isoDayNumber,
     val currentTime: Double = TimeUtils.getCurrentTimeAsDouble(),
-    val selectedNearestStation: NearestStation? = null,
+    val selectedNearbyStation: NearbyStation? = null,
 )
 
 class StationSelectionViewModel(
@@ -95,12 +94,12 @@ class StationSelectionViewModel(
         _searchQuery.update { "" }
     }
 
-    fun onNearestStationSelected(nearestStation: NearestStation) {
+    fun onNearestStationSelected(nearbyStation: NearbyStation) {
         _uiState.update { currentState ->
             currentState.copy(
-                selectedEnStartStation = nearestStation.station.name,
-                selectedFaStartStation = nearestStation.station.translations.fa,
-                selectedNearestStation = nearestStation
+                selectedEnStartStation = nearbyStation.station.name,
+                selectedFaStartStation = nearbyStation.station.translations.fa,
+                selectedNearbyStation = nearbyStation
             )
         }
     }
@@ -119,7 +118,7 @@ class StationSelectionViewModel(
 
     fun findNearestStation(forceRefresh: Boolean = false) {
         viewModelScope.launch {
-            if (!forceRefresh && _uiState.value.nearestStations.isNotEmpty()) {
+            if (!forceRefresh && _uiState.value.nearbyStations.isNotEmpty()) {
                 return@launch
             }
 
@@ -127,14 +126,14 @@ class StationSelectionViewModel(
                 _uiState.update {
                     it.copy(
                         findNearestLocationProgress = true,
-                        nearestStations = emptyList(),
+                        nearbyStations = emptyList(),
                     )
                 }
                 val nearestStations = locationTracker.getNearestStationByCurrentLocation()
                 if (nearestStations.isNotEmpty()) {
                     _uiState.update {
                         it.copy(
-                            nearestStations = nearestStations,
+                            nearbyStations = nearestStations,
                             findNearestLocationProgress = false
                         )
                     }
@@ -145,7 +144,7 @@ class StationSelectionViewModel(
             catch (e: Exception) {
                 _uiState.update {
                     it.copy(
-                        nearestStations = emptyList(),
+                        nearbyStations = emptyList(),
                         findNearestLocationProgress = false
                     )
                 }

@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.ma.tehro.common.ui.PathFinderScreen
-import com.ma.tehro.domain.BilingualName
-import com.ma.tehro.domain.PathItem
-import com.ma.tehro.domain.Step
-import com.ma.tehro.domain.repo.PathRepository
-import com.ma.tehro.domain.usecase.PathTimeCalculator
+import com.ma.tehro.domain.common.BilingualName
+import com.ma.tehro.domain.path.PathItem
+import com.ma.tehro.domain.path.Step
+import com.ma.tehro.domain.path.repository.PathRepository
+import com.ma.tehro.domain.path.PathTimeCalculator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update

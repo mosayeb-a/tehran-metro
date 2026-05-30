@@ -44,9 +44,9 @@ import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.calculateLineName
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.ui.Appbar
-import com.ma.tehro.data.Station
-import com.ma.tehro.domain.BilingualName
-import com.ma.tehro.domain.Facility
+import com.ma.tehro.domain.line.Station
+import com.ma.tehro.domain.common.BilingualName
+import com.ma.tehro.domain.line.Facility
 import com.ma.tehro.feature.detail.components.AppbarDetail
 import com.ma.tehro.feature.detail.components.FacilityChip
 import com.ma.tehro.feature.detail.components.FacilitySection

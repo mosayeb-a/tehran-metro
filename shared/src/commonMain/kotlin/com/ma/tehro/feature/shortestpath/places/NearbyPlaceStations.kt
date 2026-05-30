@@ -35,7 +35,7 @@ import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.TehroHorizontalDivider
 import com.ma.tehro.common.ui.TehroSearchBar
 import com.ma.tehro.common.ui.drawVerticalScrollbar
-import com.ma.tehro.feature.shortestpath.selection.components.NearestStationSheet
+import com.ma.tehro.feature.shortestpath.selection.components.NearbyStationSheet
 
 @Composable
 fun PlaceSelection(
@@ -137,9 +137,9 @@ fun PlaceSelection(
     }
 
     if (selectedPlaceName != null && viewState.nearbyStations.isNotEmpty()) {
-        NearestStationSheet(
+        NearbyStationSheet(
             locationName = selectedPlaceName ?: "",
-            nearestStations = viewState.nearbyStations,
+            nearbyStations = viewState.nearbyStations,
             isLoading = viewState.isLoading,
             selectedStation = null,
             onStationSelected = { nearStation ->

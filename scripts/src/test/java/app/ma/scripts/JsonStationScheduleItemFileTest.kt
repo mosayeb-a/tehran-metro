@@ -2,9 +2,9 @@ package app.ma.scripts
 
 import app.ma.scripts.common.readJsonStationsAsText
 import app.ma.scripts.stations.getOrderedStationsByLine
-import com.ma.tehro.data.Station
-import com.ma.tehro.data.repo.LineRepositoryImpl
-import com.ma.tehro.domain.repo.LineRepository
+import com.ma.tehro.domain.line.Station
+import com.ma.tehro.data.line.repository.LineRepositoryImpl
+import com.ma.tehro.domain.line.repository.LineRepository
 import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals

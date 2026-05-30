@@ -14,6 +14,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.buildkonfig)
+    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
@@ -60,6 +61,7 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.material3)
+            implementation(libs.material.icons.extended)
 
             implementation(libs.kotlinx.serialization)
             implementation(libs.kotlinx.datetime)
@@ -67,7 +69,7 @@ kotlin {
             implementation(libs.compose.navigation)
 
             implementation(libs.coil.compose)
-            implementation(libs.coil.svg)
+            implementation(libs.coil.network.ktor)
 
             api(libs.multiplatform.settings)
             api(libs.multiplatform.settings.coroutines)
@@ -80,14 +82,17 @@ kotlin {
             implementation(libs.ktor.core)
             implementation(libs.ktor.serialization.json)
             implementation(libs.ktor.content.negotiation)
+            implementation(libs.ktor.logging)
 
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.androidx.lifecycle.viewModel)
 
             implementation(libs.kotlinx.coroutines.core)
 
-            implementation("io.github.pdvrieze.xmlutil:core:0.91.3")
-            implementation("org.jetbrains.compose.material:material-icons-extended:1.7.3")
+            implementation("io.github.pdvrieze.xmlutil:core:1.0.0-rc2")
+
+            implementation(libs.sqldelight.runtime)
+            implementation(libs.sqldelight.coroutines.extensions)
         }
 
         androidMain {
@@ -104,6 +109,8 @@ kotlin {
 
                 implementation(libs.osmdroid.android)
 //                implementation("org.maplibre.gl:android-sdk:11.11.0")
+
+                implementation(libs.sqldelight.android.driver)
             }
         }
 
@@ -120,6 +127,18 @@ kotlin {
                 implementation(libs.kotlinx.coroutines.core)
                 implementation(libs.kotlinx.coroutines.test)
             }
+        }
+    }
+}
+
+sqldelight {
+    databases {
+        create("TehroDatabase") {
+            packageName.set("com.ma.thero.db")
+            schemaOutputDirectory.set(file("src/commonMain/sqldelight/schemas"))
+            migrationOutputDirectory.set(file("src/commonMain/sqldelight/migrations"))
+            verifyMigrations.set(true)
+            generateAsync = true
         }
     }
 }

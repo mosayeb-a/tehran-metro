@@ -1,10 +1,10 @@
 package app.ma.scripts
 
 import app.ma.scripts.common.readJsonStationsAsText
-import com.ma.tehro.data.Station
-import com.ma.tehro.data.repo.PathRepositoryImpl
-import com.ma.tehro.domain.PathItem
-import com.ma.tehro.domain.repo.PathRepository
+import com.ma.tehro.domain.line.Station
+import com.ma.tehro.data.path.repository.PathRepositoryImpl
+import com.ma.tehro.domain.path.PathItem
+import com.ma.tehro.domain.path.repository.PathRepository
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import org.junit.Before

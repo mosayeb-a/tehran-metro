@@ -2,7 +2,7 @@ package app.ma.scripts.schedule
 
 import app.ma.scripts.common.RES_PATH
 import app.ma.scripts.common.readJsonStationsAsText
-import com.ma.tehro.data.Station
+import com.ma.tehro.domain.line.Station
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
 import java.io.File

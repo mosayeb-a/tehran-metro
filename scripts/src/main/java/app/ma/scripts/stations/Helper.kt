@@ -1,7 +1,7 @@
 package app.ma.scripts.stations
 
-import com.ma.tehro.data.PositionInLine
-import com.ma.tehro.data.Station
+import com.ma.tehro.domain.line.PositionInLine
+import com.ma.tehro.domain.line.Station
 import kotlin.collections.set
 
 

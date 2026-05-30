@@ -1,8 +1,8 @@
-import com.ma.tehro.data.PositionInLine
-import com.ma.tehro.data.Station
-import com.ma.tehro.data.Translations
-import com.ma.tehro.data.repo.PathRepositoryImpl
-import com.ma.tehro.domain.PathItem
+import com.ma.tehro.domain.line.PositionInLine
+import com.ma.tehro.domain.line.Station
+import com.ma.tehro.domain.line.Translations
+import com.ma.tehro.data.path.repository.PathRepositoryImpl
+import com.ma.tehro.domain.path.PathItem
 import kotlinx.coroutines.test.runTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test

@@ -22,7 +22,7 @@ import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.ui.timelineview.TimelineView
 import com.ma.tehro.common.ui.timelineview.TimelineView.SingleNode
 import com.ma.tehro.common.toFarsiNumber
-import com.ma.tehro.data.Station
+import com.ma.tehro.domain.line.Station
 import com.ma.tehro.feature.line.stations.StationItem
 
 @Composable

@@ -1,7 +1,8 @@
 package com.ma.tehro.common.ui
 
-import com.ma.tehro.data.Station
-import com.ma.tehro.domain.Step
+import com.ma.tehro.domain.line.Station
+import com.ma.tehro.domain.path.Step
+import com.ma.tehro.domain.podcast.PodcastFeed
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -61,3 +62,6 @@ object NearbyPlaceStationsScreen
 
 @Serializable
 object MoreScreen
+
+@Serializable
+object PodcastListScreen

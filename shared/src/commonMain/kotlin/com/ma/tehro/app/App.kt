@@ -27,7 +27,7 @@ import com.ma.tehro.common.ui.UiMessageManager
 import com.ma.tehro.common.ui.theme.DarkGray
 import com.ma.tehro.common.ui.theme.TehroTheme
 import com.ma.tehro.feature.more.PreferencesViewModel
-import com.ma.tehro.navigation.AppNavigation
+import com.ma.tehro.navigation.TehroNavigation
 import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -90,7 +90,7 @@ fun App() {
                 }
             ) { innerPadding ->
                 innerPadding.let {}
-                AppNavigation(
+                TehroNavigation(
                     navController = navController,
                     locationPermissionHandler = locationPermissionHandler,
                     preferencesViewModel = preferencesViewModel

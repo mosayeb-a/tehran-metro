@@ -1,6 +1,6 @@
 package com.ma.tehro.common
 
-import com.ma.tehro.data.ScheduleType
+import com.ma.tehro.domain.schedule.ScheduleType
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.isoDayNumber
 import kotlinx.datetime.toLocalDateTime

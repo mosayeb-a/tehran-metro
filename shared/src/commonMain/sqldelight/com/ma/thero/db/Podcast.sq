@@ -1,0 +1,34 @@
+CREATE TABLE podcast_channel (
+    feed_url TEXT PRIMARY KEY NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    author TEXT NOT NULL,
+    artwork_url TEXT NOT NULL
+);
+
+CREATE TABLE podcast_episode (
+    id TEXT PRIMARY KEY NOT NULL,
+    feed_url TEXT NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    audio_url TEXT NOT NULL,
+    duration_sec INTEGER NOT NULL,
+    artwork_url TEXT,
+    FOREIGN KEY (feed_url) REFERENCES podcast_channel(feed_url) ON DELETE CASCADE
+);
+
+insertOrReplaceChannel:
+INSERT OR REPLACE INTO podcast_channel(
+    feed_url, title, description, author, artwork_url
+) VALUES(?, ?, ?, ?, ?);
+
+insertOrReplaceEpisode:
+INSERT OR REPLACE INTO podcast_episode(
+    id, feed_url, title, description, audio_url, duration_sec, artwork_url
+) VALUES(?, ?, ?, ?, ?, ?, ?);
+
+getAllChannels:
+SELECT * FROM podcast_channel;
+
+getEpisodesByFeedUrl:
+SELECT * FROM podcast_episode WHERE feed_url = ?;

@@ -32,12 +32,12 @@ import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.TehroHorizontalDivider
 import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.common.ui.theme.Red
-import com.ma.tehro.data.Station
-import com.ma.tehro.domain.BilingualName
-import com.ma.tehro.domain.NearestStation
+import com.ma.tehro.domain.line.Station
+import com.ma.tehro.domain.common.BilingualName
+import com.ma.tehro.domain.common.NearbyStation
 import com.ma.tehro.feature.shortestpath.selection.components.DaySelectorSheet
 import com.ma.tehro.feature.shortestpath.selection.components.LineChangeDelaySlider
-import com.ma.tehro.feature.shortestpath.selection.components.NearestStationSheet
+import com.ma.tehro.feature.shortestpath.selection.components.NearbyStationSheet
 import com.ma.tehro.feature.shortestpath.selection.components.SelectionToolbar
 import com.ma.tehro.feature.shortestpath.selection.components.StationField
 import com.ma.tehro.feature.shortestpath.selection.components.TimePickerDialog
@@ -57,7 +57,7 @@ fun StationSelector(
     onSelectedChange: (isFrom: Boolean, query: String, faQuery: String) -> Unit,
     onBack: () -> Unit,
     onFindNearestStationAsStart: () -> Unit,
-    onNearestStationChanged: (NearestStation) -> Unit,
+    onNearestStationChanged: (NearbyStation) -> Unit,
     onLineChangeDelayChanged: (Int) -> Unit,
     onTimeChanged: (Double) -> Unit,
     onDayOfWeekChanged: (Int) -> Unit,
@@ -248,15 +248,15 @@ fun StationSelector(
             )
 
             if (showNearestStations) {
-                NearestStationSheet(
+                NearbyStationSheet(
                     locationName = "موقعیت شما",
-                    nearestStations = viewState.nearestStations,
+                    nearbyStations = viewState.nearbyStations,
                     isLoading = viewState.findNearestLocationProgress && hasTriggeredNearestSearch,
                     onStationSelected = { station ->
                         onNearestStationChanged(station)
                         showNearestStations = false
                     },
-                    selectedStation = viewState.selectedNearestStation,
+                    selectedStation = viewState.selectedNearbyStation,
                     onDismiss = { showNearestStations = false }
                 )
             }

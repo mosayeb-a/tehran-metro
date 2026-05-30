@@ -3,10 +3,10 @@ package com.ma.tehro.feature.shortestpath.places
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ma.tehro.common.normalizeWords
-import com.ma.tehro.domain.CategorizedPlaces
-import com.ma.tehro.domain.NearestStation
-import com.ma.tehro.domain.usecase.GetNearbyPlaceStations
-import com.ma.tehro.domain.usecase.ShowPlacesByCategory
+import com.ma.tehro.domain.place.PlaceGroup
+import com.ma.tehro.domain.common.NearbyStation
+import com.ma.tehro.domain.place.FindNearbyStations
+import com.ma.tehro.domain.place.GetPlacesByCategory
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,26 +20,26 @@ import kotlin.time.Duration.Companion.milliseconds
 
 data class PlaceSelectionState(
     val isLoading: Boolean = true,
-    val places: List<CategorizedPlaces> = emptyList(),
-    val nearbyStations: List<NearestStation> = emptyList(),
+    val places: List<PlaceGroup> = emptyList(),
+    val nearbyStations: List<NearbyStation> = emptyList(),
     val searchQuery: String = ""
 )
 
 @OptIn(FlowPreview::class)
 class PlaceSelectionViewModel(
-    private val showPlacesByCategory: ShowPlacesByCategory,
-    private val getNearbyPlaceStations: GetNearbyPlaceStations
+    private val getPlacesByCategory: GetPlacesByCategory,
+    private val findNearbyStations: FindNearbyStations
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(PlaceSelectionState())
     val state: StateFlow<PlaceSelectionState> get() = _state
 
     private val searchQueryFlow = MutableStateFlow("")
-    private var originalPlaces: List<CategorizedPlaces> = emptyList()
+    private var originalPlaces: List<PlaceGroup> = emptyList()
 
     init {
         viewModelScope.launch {
-            val result = showPlacesByCategory.getPlacesByCategory()
+            val result = getPlacesByCategory.getPlaces()
             originalPlaces = result
             _state.update { it.copy(isLoading = false, places = result) }
         }
@@ -88,7 +88,7 @@ class PlaceSelectionViewModel(
     fun getNearbyStations(lat: Double, long: Double) {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }
-            val stations = getNearbyPlaceStations.getStations(
+            val stations = findNearbyStations.getStations(
                 placeLatitude = lat,
                 placeLongitude = long
             )

@@ -20,7 +20,7 @@ import androidx.navigation.NavType
 import androidx.savedstate.SavedState
 import androidx.savedstate.read
 import androidx.savedstate.write
-import com.ma.tehro.domain.BilingualName
+import com.ma.tehro.domain.common.BilingualName
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -204,3 +204,23 @@ fun getWindowHeight(): Dp {
 }
 
 expect val ioCoroutineDispatcher : CoroutineDispatcher
+
+fun formatDuration(seconds: Int): String {
+    val hours = seconds / 3600
+    val minutes = (seconds % 3600) / 60
+    val remainingSeconds = seconds % 60
+
+    return buildString {
+        if (hours > 0) {
+            append(hours)
+            append(":")
+            append(minutes.toString().padStart(2, '0'))
+            append(":")
+            append(remainingSeconds.toString().padStart(2, '0'))
+        } else {
+            append(minutes)
+            append(":")
+            append(remainingSeconds.toString().padStart(2, '0'))
+        }
+    }
+}
