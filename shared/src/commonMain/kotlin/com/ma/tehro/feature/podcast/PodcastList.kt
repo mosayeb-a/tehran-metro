@@ -1,28 +1,23 @@
 package com.ma.tehro.feature.podcast
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -34,24 +29,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.EmptyStatesFaces
 import com.ma.tehro.common.ui.Message
 import com.ma.tehro.domain.podcast.PodcastFeed
 import com.ma.tehro.feature.podcast.components.ChannelCard
 import com.ma.tehro.feature.podcast.components.EpisodeSheet
+import com.ma.tehro.feature.podcast.components.FailureBar
 import com.ma.tehro.feature.podcast.components.PodcastSlider
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PodcastList(
-    viewModel: PodcastViewModel = koinViewModel(),
+    onBack: () -> Unit,
+    viewModel: PodcastViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     var selectedFeed by remember { mutableStateOf<PodcastFeed?>(null) }
@@ -64,19 +59,20 @@ fun PodcastList(
                 Appbar(
                     fa = "پادکست‌ها",
                     en = "podcasts",
+                    onBackClick = onBack
                 )
                 AnimatedVisibility(
                     visible = !state.isLoading && state.failedCount > 0 && state.failedCount < allFeedUrls.size,
-                    enter = slideInVertically(
-                        initialOffsetY = { -it },
-                        animationSpec = tween(durationMillis = 300)
-                    ),
-                    exit = slideOutVertically(
-                        targetOffsetY = { -it },
-                        animationSpec = tween(durationMillis = 300)
-                    )
+                    enter = expandVertically(
+                        expandFrom = Alignment.Top,
+                        animationSpec = tween(250, easing = FastOutSlowInEasing)
+                    ) + fadeIn(animationSpec = tween(250)),
+                    exit = shrinkVertically(
+                        shrinkTowards = Alignment.Top,
+                        animationSpec = tween(200, easing = FastOutSlowInEasing)
+                    ) + fadeOut(animationSpec = tween(200))
                 ) {
-                    AlertBar(
+                    FailureBar(
                         failedCount = state.failedCount,
                         onRetry = { viewModel.refresh() }
                     )
@@ -182,38 +178,6 @@ fun PodcastList(
             },
             searchQuery = sheetSearchQuery,
             onSearchQueryChanged = { sheetSearchQuery = it }
-        )
-    }
-}
-
-@Composable
-fun AlertBar(
-    failedCount: Int,
-    onRetry: () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(48.dp)
-            .background(MaterialTheme.colorScheme.error)
-            .padding(horizontal = 16.dp)
-            .clickable { onRetry() },
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            modifier = Modifier.weight(1f),
-            text = "${failedCount.toFarsiNumber()} کانال بارگذاری نشد، کلیک کنید",
-            style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
-            color = MaterialTheme.colorScheme.onError
-        )
-
-        Spacer(modifier = Modifier.width(8.dp))
-
-        Icon(
-            imageVector = Icons.Default.Refresh,
-            contentDescription = "تلاش مجدد",
-            tint = MaterialTheme.colorScheme.onError,
-            modifier = Modifier.size(18.dp)
         )
     }
 }

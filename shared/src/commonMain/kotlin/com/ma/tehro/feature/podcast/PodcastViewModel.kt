@@ -19,8 +19,17 @@ data class PodcastUiState(
 )
 
 val allFeedUrls = listOf(
-    "https://rss.castbox.fm/everest/79e872f2347e451ca4d061d73ba1b4c8.xml",
-    "https://rss.castbox.fm/everest/a5e1031c4a5c4dc39564f2978c2bb837.xml"
+    "https://rss.castbox.fm/everest/79e872f2347e451ca4d061d73ba1b4c8.xml", // dialoguebox
+    "https://anchor.fm/s/35a3e08c/podcast/rss", // b plus
+    "https://rss.castbox.fm/everest/a5e1031c4a5c4dc39564f2978c2bb837.xml", // farcast
+    "https://feeds.acast.com/public/shows/651e9d60130f3400115df9a0", // channel b
+    "https://feeds.acast.com/public/shows/69c76b5188f1e89132a239bd", // kashkool?
+    "https://feeds.acast.com/public/shows/6722689777f0e7cbfb9e3a37", // fuse
+    "https://feeds.acast.com/public/shows/625aee4922dee40012cfd01e", // alef
+    "https://rss.iono.fm/rss/chan/2303",
+    "https://anchor.fm/s/91e1a78/podcast/rss",
+    "https://anchor.fm/s/6b2b51cc/podcast/rss",
+    "https://feeds.acast.com/public/shows/640dc802ae21760011765ff6"
 )
 
 class PodcastViewModel(
