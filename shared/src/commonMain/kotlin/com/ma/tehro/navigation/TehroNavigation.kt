@@ -292,6 +292,7 @@ fun TehroNavigation(
             val podcastViewModel: PodcastViewModel = koinViewModel()
             PodcastList(
                 viewModel = podcastViewModel,
+                onBack = navController::navigateUp
             )
         }
 
