@@ -54,7 +54,7 @@ import com.ma.tehro.feature.detail.components.TrainScheduleButton
 
 @Composable
 fun StationDetail(
-    onBack: () -> Unit = {},
+    onBack: () -> Unit ,
     useBranch: Boolean,
     station: Station,
     lineNumber: Int,

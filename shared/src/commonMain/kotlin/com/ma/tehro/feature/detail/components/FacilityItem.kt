@@ -49,16 +49,6 @@ fun FacilityChip(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            BilingualText(
-                fa = fa,
-                en = en.uppercase(),
-                style = MaterialTheme.typography.labelMedium,
-                textAlign = TextAlign.End,
-                textColor = MaterialTheme.colorScheme.onSurface
-            )
-
-            Spacer(modifier = Modifier.width(8.dp))
-
             Box(
                 modifier = Modifier
                     .size(36.dp)
@@ -73,6 +63,16 @@ fun FacilityChip(
                     tint = MaterialTheme.colorScheme.background
                 )
             }
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            BilingualText(
+                fa = fa,
+                en = en.uppercase(),
+                style = MaterialTheme.typography.labelMedium,
+                textAlign = TextAlign.End,
+                textColor = MaterialTheme.colorScheme.onSurface
+            )
         }
     }
 }
