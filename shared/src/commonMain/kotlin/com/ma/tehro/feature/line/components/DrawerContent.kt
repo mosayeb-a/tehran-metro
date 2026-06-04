@@ -97,13 +97,13 @@ fun DrawerContent(
                     imageVector = Icons.AutoMirrored.Rounded.Send
                 )
             }
-            item("podcast") {
-                DrawerItem(
-                    BilingualName(fa = "پادکست", en = "PODCAST"),
-                    onPodcastClick,
-                    imageVector = Icons.Rounded.Headphones
-                )
-            }
+//            item("podcast") {
+//                DrawerItem(
+//                    BilingualName(fa = "پادکست", en = "PODCAST"),
+//                    onPodcastClick,
+//                    imageVector = Icons.Rounded.Headphones
+//                )
+//            }
             item("more") {
                 DrawerItem(
                     BilingualName(fa = "بیشتر", en = "MORE"),
