@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -26,19 +25,17 @@ import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.common.ui.TehroHorizontalDivider
-import com.ma.tehro.common.ui.theme.LightGray
 import com.ma.tehro.domain.common.BilingualName
 
 @Composable
 fun PathFinderAppbar(
     modifier: Modifier = Modifier,
-    fromEn: String,
-    toEn: String,
-    fromFa: String,
-    toFa: String,
+    from: BilingualName,
+    to: BilingualName,
     onBack: () -> Unit,
     estimatedTime: BilingualName?,
-    lineChangeDelayMinutes: Int
+    lineChangeDelayMinutes: Int,
+    warningMessage: String?
 ) {
     Column(modifier) {
         Appbar(
@@ -46,8 +43,13 @@ fun PathFinderAppbar(
             en = "Suggested Path",
             onBackClick = onBack
         )
-        AppbarDetail(fromEn = fromEn, toEn = toEn, fromFa = fromFa, toFa = toFa)
+        RouteHeader(from = from, to = to)
         TehroHorizontalDivider()
+
+        warningMessage?.let {
+            WarningBanner(message = it)
+        }
+
         estimatedTime?.let {
             EstimatedTimeDisplay(
                 estimatedTime = estimatedTime,
@@ -58,7 +60,32 @@ fun PathFinderAppbar(
 }
 
 @Composable
-private fun EstimatedTimeDisplay(estimatedTime: BilingualName?, lineChangeDelayMinutes: Int) {
+private fun WarningBanner(message: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.9f))
+            .padding(horizontal = 16.dp, vertical = 10.dp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+            Text(
+                text = message,
+                fontSize = 12.sp,
+                color = MaterialTheme.colorScheme.onErrorContainer,
+                style = MaterialTheme.typography.labelSmall,
+                textAlign = TextAlign.Center
+            )
+        }
+    }
+}
+
+@Composable
+private fun EstimatedTimeDisplay(
+    estimatedTime: BilingualName?,
+    lineChangeDelayMinutes: Int
+) {
     estimatedTime?.let {
         Row(
             modifier = Modifier
@@ -109,12 +136,10 @@ private fun EstimatedTimeDisplay(estimatedTime: BilingualName?, lineChangeDelayM
 }
 
 @Composable
-private fun AppbarDetail(
+private fun RouteHeader(
     modifier: Modifier = Modifier,
-    fromEn: String,
-    toEn: String,
-    fromFa: String,
-    toFa: String,
+    from: BilingualName,
+    to: BilingualName
 ) {
     Row(
         modifier = modifier
@@ -125,8 +150,8 @@ private fun AppbarDetail(
         verticalAlignment = Alignment.CenterVertically
     ) {
         BilingualText(
-            fa = toFa,
-            en = toEn.uppercase(),
+            fa = to.fa,
+            en = to.en.uppercase(),
             style = MaterialTheme.typography.labelSmall,
             enAlpha = .7f,
             enSize = 10.sp,
@@ -142,8 +167,8 @@ private fun AppbarDetail(
             tint = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.8f)
         )
         BilingualText(
-            fa = fromFa,
-            en = fromEn.uppercase(),
+            fa = from.fa,
+            en = from.en.uppercase(),
             style = MaterialTheme.typography.labelSmall,
             enAlpha = .7f,
             enSize = 10.sp,

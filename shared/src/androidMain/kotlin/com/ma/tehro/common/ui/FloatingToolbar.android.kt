@@ -13,11 +13,10 @@ actual fun FloatingToolbarContainer(
     modifier: Modifier,
     containerColor: Color,
     contentColor: Color,
-    scrollBehavior: Any?,
+    scrollBehavior: FloatingToolbarScrollBehavior?,
     content: @Composable RowScope.() -> Unit,
     fab: @Composable (() -> Unit)?,
 ) {
-    val actualScrollBehavior = scrollBehavior as? FloatingToolbarScrollBehavior
     if (fab != null) {
         HorizontalFloatingToolbar(
             expanded = true,
@@ -40,7 +39,7 @@ actual fun FloatingToolbarContainer(
             ),
             expandedShadowElevation = 0.dp,
             content = content,
-            scrollBehavior = actualScrollBehavior
+            scrollBehavior = scrollBehavior
         )
     } else {
         HorizontalFloatingToolbar(
@@ -56,7 +55,7 @@ actual fun FloatingToolbarContainer(
             ),
             expandedShadowElevation = 4.dp,
             content = content,
-            scrollBehavior = actualScrollBehavior
+            scrollBehavior = scrollBehavior
         )
     }
 }

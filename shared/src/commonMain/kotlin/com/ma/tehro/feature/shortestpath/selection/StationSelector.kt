@@ -7,6 +7,8 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -134,23 +136,27 @@ fun StationSelector(
                 Appbar(
                     fa = "مسیریابی",
                     en = "Path Finder",
-                    
+
                     onBackClick = onBack
                 )
                 TehroHorizontalDivider()
             }
         },
-    ) {
+    ) { padding ->
         Box(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
                 .fillMaxSize()
+                .padding(
+                    top = padding.calculateTopPadding(),
+                    start = padding.calculateStartPadding(LocalLayoutDirection.current),
+                    end = padding.calculateEndPadding(LocalLayoutDirection.current),
+                )
         ) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxWidth()
                     .drawVerticalScrollbar(lazyListState),
-                contentPadding = it,
                 state = lazyListState,
             ) {
                 item { Spacer(Modifier.height(28.dp)) }

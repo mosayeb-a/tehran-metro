@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlin.time.Clock
-import kotlin.time.ExperimentalTime
 
 @Immutable
 data class ScheduleSection(
@@ -51,12 +50,19 @@ class TrainScheduleViewModel(
     private val timeScope = CoroutineScope(Dispatchers.Default + timeUpdateJob)
 
     init {
-        savedStateHandle.get<String>("enStationName")?.let { stationName ->
-            savedStateHandle.get<Int>("lineNumber")?.let { lineNumber ->
-                savedStateHandle.get<Boolean>("useBranch")?.let { isBranch ->
-                    loadSchedules(stationName, lineNumber, isBranch)
-                    startTimeUpdates()
-                }
+        val stationName = savedStateHandle.get<String>("enStationName")
+            ?: error("enStationName is required")
+        val lineNumber = savedStateHandle.get<Int>("lineNumber")
+            ?: error("lineNumber is required")
+        val isBranch = savedStateHandle.get<Boolean>("useBranch")
+            ?: error("useBranch is required")
+
+        loadSchedules(stationName, lineNumber, isBranch)
+
+        timeScope.launch {
+            while (isActive) {
+                _state.update { it.copy(currentTimeAsDouble = TimeUtils.getCurrentTimeAsDouble()) }
+                delay(1000 - (Clock.System.now().toEpochMilliseconds() % 1000))
             }
         }
     }
@@ -64,8 +70,10 @@ class TrainScheduleViewModel(
     private fun loadSchedules(stationName: String, lineNumber: Int, isBranch: Boolean) {
         viewModelScope.launch(Dispatchers.Default) {
             val schedules = scheduleRepository.getByStation(stationName, lineNumber, isBranch)
-            val currentDayType = TimeUtils.getScheduleTypeForCurrentDay(schedules.flatMap { it.schedules.keys })
-            println(currentDayType)
+
+            val currentDayType = TimeUtils.getScheduleTypeForCurrentDay(
+                scheduleTypes = schedules.flatMap { it.schedules.keys }
+            )
             val currentTime = TimeUtils.getCurrentTimeAsDouble()
 
             val processedData = schedules.associate { groupInfo ->
@@ -122,16 +130,6 @@ class TrainScheduleViewModel(
                         processedSchedules = state.processedSchedules + (destination to newSections),
                     )
                 }
-            }
-        }
-    }
-
-    @OptIn(ExperimentalTime::class)
-    private fun startTimeUpdates() {
-        timeScope.launch {
-            while (isActive) {
-                _state.update { it.copy(currentTimeAsDouble = TimeUtils.getCurrentTimeAsDouble()) }
-                delay(1000 - (Clock.System.now().toEpochMilliseconds() % 1000))
             }
         }
     }
