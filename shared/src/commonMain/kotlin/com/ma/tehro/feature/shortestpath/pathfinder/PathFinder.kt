@@ -12,10 +12,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -31,10 +33,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.ui.drawVerticalScrollbar
+import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.line.Station
 import com.ma.tehro.domain.path.PathItem
 import com.ma.tehro.feature.shortestpath.pathfinder.components.PathFinderAppbar
@@ -70,17 +74,23 @@ fun PathFinder(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             PathFinderAppbar(
-                fromEn = fromEn,
-                toEn = toEn,
+                from = BilingualName(en = fromEn, fa = fromFa),
+                to = BilingualName(en = toEn, fa = toFa),
                 onBack = onBack,
-                fromFa = fromFa,
-                toFa = toFa,
                 estimatedTime = state.estimatedTime,
-                lineChangeDelayMinutes = lineChangeDelayMinutes
+                lineChangeDelayMinutes = lineChangeDelayMinutes,
+                warningMessage = state.warningMessage
             )
         },
     ) { padding ->
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .padding(
+                top = padding.calculateTopPadding(),
+                start = padding.calculateStartPadding(LocalLayoutDirection.current),
+                end = padding.calculateEndPadding(LocalLayoutDirection.current),
+            )
+        ) {
             val lazyListState = rememberLazyListState()
 
             val currentTitle by remember(lazyListState) {
@@ -92,8 +102,9 @@ fun PathFinder(
                 }
             }
             LazyColumn(
-                modifier = Modifier.drawVerticalScrollbar(lazyListState),
-                contentPadding = padding,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .drawVerticalScrollbar(lazyListState),
                 state = lazyListState
             ) {
                 itemsIndexed(
@@ -156,7 +167,7 @@ fun PathFinder(
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(Alignment.TopCenter)
-                        .offset(y = padding.calculateTopPadding())
+//                        .offset(y = padding.calculateTopPadding())
                         .zIndex(1f), label = ""
                 ) { title ->
                     title?.let {

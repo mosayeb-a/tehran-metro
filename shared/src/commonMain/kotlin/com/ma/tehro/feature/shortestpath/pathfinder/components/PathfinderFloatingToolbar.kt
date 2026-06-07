@@ -6,6 +6,7 @@ import androidx.compose.material.icons.rounded.ArrowUpward
 import androidx.compose.material.icons.rounded.Image
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.FloatingToolbarScrollBehavior
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -21,7 +22,7 @@ fun PathfinderFloatingToolbar(
     lazyListState: LazyListState,
     onInfoClick: () -> Unit,
     onMapClick: () -> Unit,
-    scrollBehavior: Any? = null,
+    scrollBehavior: FloatingToolbarScrollBehavior? = null,
 ) {
     val scope = rememberCoroutineScope()
 

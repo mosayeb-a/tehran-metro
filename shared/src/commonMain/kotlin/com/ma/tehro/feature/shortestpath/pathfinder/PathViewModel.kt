@@ -20,7 +20,8 @@ import kotlinx.coroutines.launch
 data class PathFinderState(
     val shortestPath: List<PathItem> = emptyList(),
     val estimatedTime: BilingualName? = null,
-    val stationTimes: Map<String, String> = emptyMap()
+    val stationTimes: Map<String, String> = emptyMap(),
+    val warningMessage: String? = null
 )
 
 class PathViewModel(
@@ -39,17 +40,17 @@ class PathViewModel(
                 .findShortestPathWithDirection(args.startEnStation, args.enDestination)
             _state.update { it.copy(shortestPath = path) }
 
-            val (stationTimes, estimate) = pathTimeCalculator
-                .calculateStationTimes(
-                    path = path,
-                    lineChangeDelayMinutes = args.lineChangeDelayMinutes,
-                    dayOfWeek = args.dayOfWeek,
-                    currentTime = args.currentTime
-                )
+            val result = pathTimeCalculator.calculateStationTimes(
+                path = path,
+                lineChangeDelayMinutes = args.lineChangeDelayMinutes,
+                dayOfWeek = args.dayOfWeek,
+                currentTime = args.currentTime
+            )
             _state.update {
                 it.copy(
-                    stationTimes = stationTimes,
-                    estimatedTime = estimate
+                    stationTimes = result.stationTimes,
+                    estimatedTime = result.estimatedTime,
+                    warningMessage = result.warning
                 )
             }
         }

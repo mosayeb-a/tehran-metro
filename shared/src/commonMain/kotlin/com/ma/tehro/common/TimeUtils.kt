@@ -25,24 +25,24 @@ object TimeUtils {
         val isoDayOfWeek = dayOfWeek ?: now.dayOfWeek.isoDayNumber
 
         return when (isoDayOfWeek) {
-            1, 2, 3, 4, 5 -> scheduleTypes.find {
+            // Saturday (6), Sunday (7), Monday (1), Tuesday (2), Wednesday (3)
+            6, 7, 1, 2, 3 -> scheduleTypes.find {
                 it == ScheduleType.SATURDAY_TO_WEDNESDAY ||
                         it == ScheduleType.ALL_DAY ||
                         it == ScheduleType.SATURDAY_TO_THURSDAY
             }
-
-            6 -> scheduleTypes.find {
+            // Thursday (4)
+            4 -> scheduleTypes.find {
                 it == ScheduleType.THURSDAY ||
                         it == ScheduleType.ALL_DAY ||
                         it == ScheduleType.SATURDAY_TO_THURSDAY
             }
-
-            7 -> scheduleTypes.find {
+            // Friday (5)
+            5 -> scheduleTypes.find {
                 it == ScheduleType.FRIDAY ||
                         it == ScheduleType.ALL_DAY ||
                         it == ScheduleType.HOLIDAYS_AND_FRIDAY
             }
-
             else -> null
         }
     }
