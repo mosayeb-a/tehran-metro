@@ -116,7 +116,7 @@ class StationSelectionViewModel(
         _uiState.update { it.copy(dayOfWeek = day) }
     }
 
-    fun findNearestStation(forceRefresh: Boolean = false) {
+    fun findNearestStation(forceRefresh: Boolean = false, onError: () -> Unit) {
         viewModelScope.launch {
             if (!forceRefresh && _uiState.value.nearbyStations.isNotEmpty()) {
                 return@launch
@@ -138,10 +138,9 @@ class StationSelectionViewModel(
                         )
                     }
                 }
-            }
-            catch (_: CancellationException) {
-            }
-            catch (e: Exception) {
+            } catch (_: CancellationException) {
+            } catch (e: Exception) {
+                onError()
                 _uiState.update {
                     it.copy(
                         nearbyStations = emptyList(),
@@ -152,8 +151,9 @@ class StationSelectionViewModel(
                     event = UiMessage(
                         message = e.message ?: "مشکلی رخ داده",
                         action = Action(
-                            name = "تلاش مجدد",
-                            action = { findNearestStation() })
+                            name = "باشه",
+                            action = {}
+                        )
                     )
                 )
             }

@@ -18,16 +18,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun AppSnackbar(
+fun TehroSnackbar(
     data: SnackbarData,
     modifier: Modifier = Modifier,
 ) {
     Surface(
         modifier = modifier
-            .padding(start = 16.dp, end = 16.dp, bottom = 86.dp)
+            .padding(start = 16.dp, end = 16.dp, bottom = 112.dp)
             .wrapContentSize(),
-        color = MaterialTheme.colorScheme.primaryContainer,
-        shape = RoundedCornerShape(16.dp),
+        color = MaterialTheme.colorScheme.secondaryContainer,
+        shape = RoundedCornerShape(32.dp),
         tonalElevation = 6.dp
     ) {
         Row(
@@ -40,20 +40,20 @@ fun AppSnackbar(
             Text(
                 text = data.visuals.message,
                 modifier = Modifier.weight(1f),
-                style = MaterialTheme.typography.labelMedium.copy(color = MaterialTheme.colorScheme.onPrimaryContainer),
+                style = MaterialTheme.typography.labelMedium.copy(color = MaterialTheme.colorScheme.onSecondaryContainer),
             )
             data.visuals.actionLabel?.let { actionLabel ->
                 TextButton(
                     onClick = { data.performAction() },
                     colors = ButtonDefaults.textButtonColors(
-                        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer
                     ),
                     shape = MaterialTheme.shapes.large,
                 ) {
                     Text(
                         text = actionLabel,
                         style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
                         textAlign = TextAlign.Center
                     )
                 }

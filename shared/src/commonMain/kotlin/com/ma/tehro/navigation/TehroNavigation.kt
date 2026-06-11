@@ -165,15 +165,12 @@ fun TehroNavigation(
                     )
                 },
                 onNearestStationChanged = viewModel::onNearestStationSelected,
-                onFindNearestStationAsStart = {
-                    locationPermissionHandler.checkLocationPermission {
-                        viewModel.findNearestStation()
-                    }
-                },
+                onFindNearestStationAsStart = { onError -> viewModel.findNearestStation(onError = onError) },
                 onLineChangeDelayChanged = viewModel::onLineChangeDelayChanged,
                 onTimeChanged = viewModel::onTimeChanged,
                 onDayOfWeekChanged = viewModel::onDayOfWeekChanged,
-                onFindNearestStationsByPlace = { navController.navigate(NearbyPlaceStationsScreen) }
+                onFindNearestStationsByPlace = { navController.navigate(NearbyPlaceStationsScreen) },
+                checkLocationPermission = locationPermissionHandler::checkLocationPermission
             )
         }
         baseComposable<PathFinderScreen> { backStackEntry ->

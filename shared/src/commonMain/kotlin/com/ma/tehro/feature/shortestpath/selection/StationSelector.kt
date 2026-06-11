@@ -1,8 +1,6 @@
 package com.ma.tehro.feature.shortestpath.selection
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,7 +18,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,16 +31,16 @@ import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.TehroHorizontalDivider
 import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.common.ui.theme.Red
-import com.ma.tehro.domain.line.Station
 import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.common.NearbyStation
+import com.ma.tehro.domain.line.Station
 import com.ma.tehro.feature.shortestpath.selection.components.DaySelectorSheet
 import com.ma.tehro.feature.shortestpath.selection.components.LineChangeDelaySlider
 import com.ma.tehro.feature.shortestpath.selection.components.NearbyStationSheet
 import com.ma.tehro.feature.shortestpath.selection.components.SelectionToolbar
 import com.ma.tehro.feature.shortestpath.selection.components.StationField
 import com.ma.tehro.feature.shortestpath.selection.components.TimePickerDialog
-import kotlinx.coroutines.launch
+import com.ma.tehro.feature.shortestpath.selection.components.rememberPulseAnimation
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,76 +55,31 @@ fun StationSelector(
     ) -> Unit,
     onSelectedChange: (isFrom: Boolean, query: String, faQuery: String) -> Unit,
     onBack: () -> Unit,
-    onFindNearestStationAsStart: () -> Unit,
+    onFindNearestStationAsStart: (onError: () -> Unit) -> Unit,
     onNearestStationChanged: (NearbyStation) -> Unit,
     onLineChangeDelayChanged: (Int) -> Unit,
     onTimeChanged: (Double) -> Unit,
     onDayOfWeekChanged: (Int) -> Unit,
     onFindNearestStationsByPlace: () -> Unit,
+    checkLocationPermission: (onGranted: () -> Unit) -> Unit,
 ) {
     var showNearestStations by remember { mutableStateOf(false) }
-    var hasTriggeredNearestSearch by remember { mutableStateOf(false) }
     val lazyListState = rememberLazyListState()
     var showDaySelector by remember { mutableStateOf(false) }
     var showTimePicker by remember { mutableStateOf(false) }
-    var triggerStartPulse by remember { mutableStateOf(false) }
-    var triggerDestPulse by remember { mutableStateOf(false) }
 
-    val startScale = remember { Animatable(1f) }
-    val destScale = remember { Animatable(1f) }
+    val startPulse = rememberPulseAnimation()
+    val destPulse = rememberPulseAnimation()
 
     val startNodeColor by animateColorAsState(
-        targetValue = if (triggerStartPulse) Red else MaterialTheme.colorScheme.secondary.copy(
-            alpha = 0.9f
-        ),
+        targetValue = if (startPulse.isAnimating) Red else MaterialTheme.colorScheme.secondary.copy(alpha = 0.9f),
         animationSpec = tween(durationMillis = 300)
     )
+
     val destNodeColor by animateColorAsState(
-        targetValue = if (triggerDestPulse) Red else MaterialTheme.colorScheme.secondary.copy(
-            alpha = 0.9f
-        ),
+        targetValue = if (destPulse.isAnimating) Red else MaterialTheme.colorScheme.secondary.copy(alpha = 0.9f),
         animationSpec = tween(durationMillis = 300)
     )
-
-    LaunchedEffect(triggerStartPulse) {
-        if (triggerStartPulse) {
-            launch {
-                startScale.animateTo(
-                    targetValue = 1.3f,
-                    animationSpec = spring(dampingRatio = 0.8f, stiffness = 2000f)
-                )
-                startScale.animateTo(
-                    targetValue = 0.8f,
-                    animationSpec = spring(dampingRatio = 0.8f, stiffness = 2000f)
-                )
-                startScale.animateTo(
-                    targetValue = 1f,
-                    animationSpec = spring(dampingRatio = 0.8f, stiffness = 2000f)
-                )
-                triggerStartPulse = false
-            }
-        }
-    }
-
-    LaunchedEffect(triggerDestPulse) {
-        if (triggerDestPulse) {
-            launch {
-                destScale.animateTo(
-                    targetValue = 1.3f,
-                    animationSpec = spring(dampingRatio = 0.8f, stiffness = 2000f)
-                )
-                destScale.animateTo(
-                    targetValue = 0.8f,
-                    animationSpec = spring(dampingRatio = 0.8f, stiffness = 2000f)
-                )
-                destScale.animateTo(
-                    targetValue = 1f,
-                    animationSpec = spring(dampingRatio = 0.8f, stiffness = 2000f)
-                )
-                triggerDestPulse = false
-            }
-        }
-    }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -174,7 +126,7 @@ fun StationSelector(
                             onStationSelected = { en, fa -> onSelectedChange(true, en, fa) },
                             isFrom = true,
                             nodeColor = startNodeColor,
-                            nodeScale = startScale.value
+                            nodeScale = startPulse.scale.value
                         )
                     }
                 }
@@ -196,7 +148,7 @@ fun StationSelector(
                             onStationSelected = { en, fa -> onSelectedChange(false, en, fa) },
                             isFrom = false,
                             nodeColor = destNodeColor,
-                            nodeScale = destScale.value
+                            nodeScale = destPulse.scale.value
                         )
                     }
                 }
@@ -223,11 +175,15 @@ fun StationSelector(
                         viewState.selectedEnStartStation == viewState.selectedEnDestStation
 
                     if (isStartEmpty || isDestEmpty || isSameStation) {
-                        if (isStartEmpty) triggerStartPulse = true
-                        if (isDestEmpty) triggerDestPulse = true
+                        if (isStartEmpty) {
+                            startPulse.trigger()
+                        }
+                        if (isDestEmpty) {
+                            destPulse.trigger()
+                        }
                         if (isSameStation) {
-                            triggerStartPulse = true
-                            triggerDestPulse = true
+                            startPulse.trigger()
+                            destPulse.trigger()
                         }
                     } else {
                         onFindPathClick(
@@ -244,11 +200,14 @@ fun StationSelector(
                 onTimeChangeClick = { showTimePicker = true },
                 onDayOfWeekClick = { showDaySelector = true },
                 onFindNearestStationClick = {
-                    if (!viewState.findNearestLocationProgress) {
-                        onFindNearestStationAsStart()
-                        hasTriggeredNearestSearch = true
+                    checkLocationPermission {
+                        if (!viewState.findNearestLocationProgress) {
+                            onFindNearestStationAsStart {
+                                showNearestStations = false
+                            }
+                        }
+                        showNearestStations = true
                     }
-                    showNearestStations = true
                 },
                 onFindNearestStationsByPlaceClick = onFindNearestStationsByPlace,
             )
@@ -257,7 +216,7 @@ fun StationSelector(
                 NearbyStationSheet(
                     locationName = "موقعیت شما",
                     nearbyStations = viewState.nearbyStations,
-                    isLoading = viewState.findNearestLocationProgress && hasTriggeredNearestSearch,
+                    isLoading = viewState.findNearestLocationProgress,
                     onStationSelected = { station ->
                         onNearestStationChanged(station)
                         showNearestStations = false

@@ -3,6 +3,11 @@ package com.ma.tehro.common.ui
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 
+enum class ActionType {
+    RETRY,
+    DONE
+}
+
 data class UiMessage(
     val message: String,
     val action: Action? = null
@@ -10,6 +15,7 @@ data class UiMessage(
 
 data class Action(
     val name: String,
+    val type: ActionType = ActionType.DONE,
     val action: suspend () -> Unit
 )
 

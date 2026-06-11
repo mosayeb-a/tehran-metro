@@ -22,7 +22,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import com.ma.tehro.common.ObserveAsEvents
 import com.ma.tehro.common.rememberLocationPermissionHandler
-import com.ma.tehro.common.ui.AppSnackbar
+import com.ma.tehro.common.ui.ActionType
+import com.ma.tehro.common.ui.TehroSnackbar
 import com.ma.tehro.common.ui.UiMessageManager
 import com.ma.tehro.common.ui.theme.DarkGray
 import com.ma.tehro.common.ui.theme.TehroTheme
@@ -32,9 +33,10 @@ import kotlinx.coroutines.launch
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun App() {
+fun TehroApp() {
     val preferencesViewModel: PreferencesViewModel = koinViewModel()
     val currentTheme by preferencesViewModel.currentTheme.collectAsStateWithLifecycle()
+
     if (currentTheme == null) {
         Box(
             contentAlignment = Alignment.Center,
@@ -60,17 +62,30 @@ fun App() {
                     keyboardController?.hide()
 
                     snackbarHostState.currentSnackbarData?.dismiss()
+
+                    if (event.action == null) {
+                        snackbarHostState.showSnackbar(
+                            message = event.message,
+                            duration = SnackbarDuration.Short
+                        )
+                        return@launch
+                    }
+
                     val result = snackbarHostState.showSnackbar(
                         message = event.message,
-                        actionLabel = event.action?.name,
+                        actionLabel = event.action.name,
                         duration = SnackbarDuration.Short
                     )
 
                     if (result == SnackbarResult.ActionPerformed) {
-                        event.action?.action?.invoke()
-                    }
-                    if (event.action?.name == "Dismiss") {
-                        snackbarHostState.currentSnackbarData?.dismiss()
+                        when (event.action.type) {
+                            ActionType.RETRY -> {
+                                event.action.action.invoke()
+                            }
+                            ActionType.DONE -> {
+                                snackbarHostState.currentSnackbarData?.dismiss()
+                            }
+                        }
                     }
                 }
             }
@@ -84,7 +99,7 @@ fun App() {
                     SnackbarHost(
                         hostState = snackbarHostState,
                         snackbar = { snackbarData ->
-                            AppSnackbar(data = snackbarData)
+                            TehroSnackbar(data = snackbarData)
                         }
                     )
                 }

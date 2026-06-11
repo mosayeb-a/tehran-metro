@@ -49,12 +49,7 @@ class DefaultLocationClient(
             }
 
             if (providers.isEmpty()) {
-                continuation.resumeWithException(Exception(
-                    createBilingualMessage(
-                        fa = "هیچ ارائه‌دهنده موقعیتی در دسترس نیست",
-                        en = "No location provider available"
-                    )
-                ))
+                continuation.resumeWithException(Exception("هیچ ارائه‌دهنده موقعیتی در دسترس نیست"))
                 return@suspendCancellableCoroutine
             }
 
@@ -69,12 +64,7 @@ class DefaultLocationClient(
                     if (fallbackLocation != null) {
                         continuation.resume(fallbackLocation.toPlatformLocation())
                     } else {
-                        continuation.resumeWithException(Exception(
-                            createBilingualMessage(
-                                fa = "دریافت موقعیت با تاخیر مواجه شد",
-                                en = "Location request timed out"
-                            )
-                        ))
+                        continuation.resumeWithException(Exception("دریافت موقعیت با تاخیر مواجه شد"))
                     }
                 }
             }
@@ -103,12 +93,7 @@ class DefaultLocationClient(
 
                         if (listeners.isEmpty() && !locationReceived && continuation.isActive) {
                             mainHandler.removeCallbacks(timeoutRunnable)
-                            continuation.resumeWithException(Exception(
-                                createBilingualMessage(
-                                    fa = "ارائه‌دهنده موقعیت غیرفعال است",
-                                    en = "Location provider is disabled"
-                                )
-                            ))
+                            continuation.resumeWithException(Exception("ارائه‌دهنده موقعیت غیرفعال است"))
                         }
                     }
 
@@ -174,10 +159,7 @@ class DefaultLocationClient(
             }
 
             if (providers.isEmpty()) {
-                close(Exception(createBilingualMessage(
-                    fa = "هیچ ارائه‌دهنده موقعیتی در دسترس نیست",
-                    en = "No location provider available"
-                )))
+                close(Exception("هیچ ارائه‌دهنده موقعیتی در دسترس نیست"))
                 return@callbackFlow
             }
 
