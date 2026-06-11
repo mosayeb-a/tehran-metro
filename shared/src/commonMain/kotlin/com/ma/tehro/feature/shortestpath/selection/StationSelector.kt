@@ -49,19 +49,16 @@ fun StationSelector(
     searchQuery: String,
     stations: List<Station>,
     onSearchQueryChanged: (q: String) -> Unit,
-    onFindPathClick: (
-        fromEn: String, toEn: String, fromFa: String, toFa: String,
-        lineChangeDelayMinutes: Int, dayOfWeek: Int, currentTime: Double
-    ) -> Unit,
-    onSelectedChange: (isFrom: Boolean, query: String, faQuery: String) -> Unit,
+    onFindPath: (from: BilingualName, to: BilingualName, delay: Int, dayOfWeek: Int, time: Double) -> Unit,
+    onSelectStation: (isFrom: Boolean, station: BilingualName) -> Unit,
     onBack: () -> Unit,
-    onFindNearestStationAsStart: (onError: () -> Unit) -> Unit,
-    onNearestStationChanged: (NearbyStation) -> Unit,
-    onLineChangeDelayChanged: (Int) -> Unit,
+    onFindNearest: (onError: () -> Unit) -> Unit,
+    onNearestSelected: (NearbyStation) -> Unit,
+    onDelayChange: (Int) -> Unit,
     onTimeChanged: (Double) -> Unit,
     onDayOfWeekChanged: (Int) -> Unit,
-    onFindNearestStationsByPlace: () -> Unit,
-    checkLocationPermission: (onGranted: () -> Unit) -> Unit,
+    onSearchByPlace: () -> Unit,
+    onCheckPermission: (onGranted: () -> Unit) -> Unit,
 ) {
     var showNearestStations by remember { mutableStateOf(false) }
     val lazyListState = rememberLazyListState()
@@ -72,12 +69,14 @@ fun StationSelector(
     val destPulse = rememberPulseAnimation()
 
     val startNodeColor by animateColorAsState(
-        targetValue = if (startPulse.isAnimating) Red else MaterialTheme.colorScheme.secondary.copy(alpha = 0.9f),
+        targetValue = if (startPulse.isAnimating) Red else
+            MaterialTheme.colorScheme.secondary.copy(alpha = 0.9f),
         animationSpec = tween(durationMillis = 300)
     )
 
     val destNodeColor by animateColorAsState(
-        targetValue = if (destPulse.isAnimating) Red else MaterialTheme.colorScheme.secondary.copy(alpha = 0.9f),
+        targetValue = if (destPulse.isAnimating) Red else
+            MaterialTheme.colorScheme.secondary.copy(alpha = 0.9f),
         animationSpec = tween(durationMillis = 300)
     )
 
@@ -88,7 +87,6 @@ fun StationSelector(
                 Appbar(
                     fa = "مسیریابی",
                     en = "Path Finder",
-
                     onBackClick = onBack
                 )
                 TehroHorizontalDivider()
@@ -116,14 +114,11 @@ fun StationSelector(
                 item {
                     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
                         StationField(
-                            selectedStation = BilingualName(
-                                viewState.selectedEnStartStation,
-                                viewState.selectedFaStartStation
-                            ),
+                            selectedStation = viewState.fromStation,
                             searchQuery = searchQuery,
                             onSearchQueryChanged = onSearchQueryChanged,
                             stations = stations,
-                            onStationSelected = { en, fa -> onSelectedChange(true, en, fa) },
+                            onStationSelected = { station -> onSelectStation(true, station) },
                             isFrom = true,
                             nodeColor = startNodeColor,
                             nodeScale = startPulse.scale.value
@@ -138,14 +133,11 @@ fun StationSelector(
                 item {
                     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
                         StationField(
-                            selectedStation = BilingualName(
-                                viewState.selectedEnDestStation,
-                                viewState.selectedFaDestStation
-                            ),
+                            selectedStation = viewState.toStation,
                             searchQuery = searchQuery,
                             onSearchQueryChanged = onSearchQueryChanged,
                             stations = stations,
-                            onStationSelected = { en, fa -> onSelectedChange(false, en, fa) },
+                            onStationSelected = { station -> onSelectStation(false, station) },
                             isFrom = false,
                             nodeColor = destNodeColor,
                             nodeScale = destPulse.scale.value
@@ -159,8 +151,8 @@ fun StationSelector(
 
                 item {
                     LineChangeDelaySlider(
-                        lineChangeDelay = viewState.lineChangeDelayMinutes,
-                        onLineChangeDelayChanged = { delay -> onLineChangeDelayChanged(delay) },
+                        lineChangeDelay = viewState.transferDelay,
+                        onLineChangeDelayChanged = { delay -> onDelayChange(delay) },
                     )
                 }
 
@@ -169,29 +161,30 @@ fun StationSelector(
             SelectionToolbar(
                 modifier = Modifier.align(Alignment.BottomEnd),
                 onFindPathClick = {
-                    val isStartEmpty = viewState.selectedEnStartStation.isEmpty()
-                    val isDestEmpty = viewState.selectedEnDestStation.isEmpty()
-                    val isSameStation =
-                        viewState.selectedEnStartStation == viewState.selectedEnDestStation
+                    val startStation = viewState.fromStation
+                    val destStation = viewState.toStation
 
-                    if (isStartEmpty || isDestEmpty || isSameStation) {
-                        if (isStartEmpty) {
+                    val isStartEmpty = startStation?.en.isNullOrEmpty()
+                    val isDestEmpty = destStation?.en.isNullOrEmpty()
+                    val isSameStation =
+                        startStation != null && destStation != null && startStation == destStation
+
+                    when {
+                        isStartEmpty && isDestEmpty -> {
                             startPulse.trigger()
-                        }
-                        if (isDestEmpty) {
                             destPulse.trigger()
                         }
-                        if (isSameStation) {
+                        isStartEmpty -> startPulse.trigger()
+                        isDestEmpty -> destPulse.trigger()
+                        isSameStation -> {
                             startPulse.trigger()
                             destPulse.trigger()
                         }
-                    } else {
-                        onFindPathClick(
-                            viewState.selectedEnStartStation,
-                            viewState.selectedEnDestStation,
-                            viewState.selectedFaStartStation,
-                            viewState.selectedFaDestStation,
-                            viewState.lineChangeDelayMinutes,
+
+                        else -> onFindPath(
+                            startStation,
+                            destStation,
+                            viewState.transferDelay,
                             viewState.dayOfWeek,
                             viewState.currentTime
                         )
@@ -200,28 +193,28 @@ fun StationSelector(
                 onTimeChangeClick = { showTimePicker = true },
                 onDayOfWeekClick = { showDaySelector = true },
                 onFindNearestStationClick = {
-                    checkLocationPermission {
-                        if (!viewState.findNearestLocationProgress) {
-                            onFindNearestStationAsStart {
+                    onCheckPermission {
+                        if (!viewState.isSearchingNearby) {
+                            onFindNearest {
                                 showNearestStations = false
                             }
                         }
                         showNearestStations = true
                     }
                 },
-                onFindNearestStationsByPlaceClick = onFindNearestStationsByPlace,
+                onFindNearestStationsByPlaceClick = onSearchByPlace,
             )
 
             if (showNearestStations) {
                 NearbyStationSheet(
                     locationName = "موقعیت شما",
                     nearbyStations = viewState.nearbyStations,
-                    isLoading = viewState.findNearestLocationProgress,
+                    isLoading = viewState.isSearchingNearby,
                     onStationSelected = { station ->
-                        onNearestStationChanged(station)
+                        onNearestSelected(station)
                         showNearestStations = false
                     },
-                    selectedStation = viewState.selectedNearbyStation,
+                    selectedStation = viewState.nearestStation,
                     onDismiss = { showNearestStations = false }
                 )
             }

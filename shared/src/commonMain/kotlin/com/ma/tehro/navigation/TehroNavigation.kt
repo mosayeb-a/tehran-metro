@@ -29,6 +29,7 @@ import com.ma.tehro.common.ui.StationSelectorScreen
 import com.ma.tehro.common.ui.StationsScreen
 import com.ma.tehro.common.ui.SubmitFeedbackScreen
 import com.ma.tehro.common.ui.TrainScheduleScreen
+import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.line.Station
 import com.ma.tehro.domain.path.Step
 import com.ma.tehro.feature.detail.StationDetail
@@ -134,43 +135,45 @@ fun TehroNavigation(
             val filteredStations by viewModel.filteredStations.collectAsStateWithLifecycle()
 
             val savedStateHandle = backStackEntry.savedStateHandle
-            val selectedStation =
-                savedStateHandle.get<Map<String, String>>("selected_start_station")
+            val selectedStation = savedStateHandle.get<Map<String, String>>("selected_start_station")
             selectedStation?.let { stationMap ->
                 viewModel.onSelectedChange(
                     isFrom = true,
-                    enStation = stationMap["en"] ?: "",
-                    faStation = stationMap["fa"] ?: ""
+                    station = BilingualName(
+                        en = stationMap["en"] ?: "",
+                        fa = stationMap["fa"] ?: ""
+                    )
                 )
                 savedStateHandle.remove<Map<String, String>>("selected_start_station")
             }
+
             StationSelector(
                 onBack = navController::navigateUp,
                 viewState = state,
                 stations = filteredStations,
                 searchQuery = searchQuery,
                 onSearchQueryChanged = viewModel::onSearchQueryChanged,
-                onSelectedChange = viewModel::onSelectedChange,
-                onFindPathClick = { startEn, destEn, startFa, destFa, lineChangeDelayMinutes, dayOfWeek, currentTime ->
+                onSelectStation = viewModel::onSelectedChange,
+                onFindPath = { from, to, lineChangeDelayMinutes, dayOfWeek, currentTime ->
                     navController.navigate(
                         PathFinderScreen(
-                            startEnStation = startEn,
-                            startFaStation = startFa,
-                            enDestination = destEn,
-                            faDestination = destFa,
+                            startEnStation = from.en,
+                            startFaStation = from.fa,
+                            enDestination = to.en,
+                            faDestination = to.fa,
                             dayOfWeek = dayOfWeek,
                             currentTime = currentTime,
                             lineChangeDelayMinutes = lineChangeDelayMinutes
                         )
                     )
                 },
-                onNearestStationChanged = viewModel::onNearestStationSelected,
-                onFindNearestStationAsStart = { onError -> viewModel.findNearestStation(onError = onError) },
-                onLineChangeDelayChanged = viewModel::onLineChangeDelayChanged,
+                onNearestSelected = viewModel::onNearestStationSelected,
+                onFindNearest = { onError -> viewModel.findNearestStation(onError = onError) },
+                onDelayChange = viewModel::onLineChangeDelayChanged,
                 onTimeChanged = viewModel::onTimeChanged,
                 onDayOfWeekChanged = viewModel::onDayOfWeekChanged,
-                onFindNearestStationsByPlace = { navController.navigate(NearbyPlaceStationsScreen) },
-                checkLocationPermission = locationPermissionHandler::checkLocationPermission
+                onSearchByPlace = { navController.navigate(NearbyPlaceStationsScreen) },
+                onCheckPermission = locationPermissionHandler::checkLocationPermission
             )
         }
         baseComposable<PathFinderScreen> { backStackEntry ->
