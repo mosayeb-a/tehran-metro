@@ -4,6 +4,7 @@ import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ma.tehro.common.ui.Action
+import com.ma.tehro.common.ui.ActionType
 import com.ma.tehro.common.ui.UiMessage
 import com.ma.tehro.common.ui.UiMessageManager
 import com.ma.tehro.domain.feedback.repository.FeedbackRepository
@@ -35,7 +36,10 @@ class FeedbackViewModel(
                 UiMessageManager.sendEvent(
                     UiMessage(
                         message = ".درخواست با موفقیت ارسال شد",
-                        action = Action(name = "بستن", action = {})
+                        action = Action(
+                            name = "بستن",
+                            action = {}
+                        )
                     )
                 )
             } catch (e: Throwable) {
@@ -45,6 +49,7 @@ class FeedbackViewModel(
                         message = ".درخواست ارسال نشد، یه مشکلی رخ داده",
                         action = Action(
                             name = "تلاش دوباره",
+                            type = ActionType.RETRY,
                             action = { send(message) }
                         )
                     )
