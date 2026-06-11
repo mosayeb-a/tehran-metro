@@ -44,7 +44,7 @@ fun StationField(
     searchQuery: String,
     onSearchQueryChanged: (String) -> Unit,
     stations: List<Station>,
-    onStationSelected: (en: String, fa: String) -> Unit,
+    onStationSelected: (BilingualName) -> Unit,
     isFrom: Boolean,
     nodeColor: Color,
     nodeScale: Float
@@ -151,7 +151,7 @@ fun StationField(
         searchQuery = searchQuery,
         onSearchQueryChanged = onSearchQueryChanged,
         onItemSelected = { station ->
-            onStationSelected(station.name, station.translations.fa)
+            onStationSelected(BilingualName(station.name, station.translations.fa))
         },
         searchPlaceholder = "جستجوی ایستگاه دلخواه",
         itemKey = { it.name },

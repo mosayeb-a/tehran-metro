@@ -7,6 +7,7 @@ import com.ma.tehro.common.TimeUtils
 import com.ma.tehro.common.ui.Action
 import com.ma.tehro.common.ui.UiMessage
 import com.ma.tehro.common.ui.UiMessageManager
+import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.line.Station
 import com.ma.tehro.domain.common.NearbyStation
 import com.ma.tehro.domain.path.repository.PathRepository
@@ -26,18 +27,16 @@ import kotlin.time.ExperimentalTime
 
 @Immutable
 data class StationSelectionState @OptIn(ExperimentalTime::class) constructor(
-    val selectedEnStartStation: String = "",
-    val selectedFaStartStation: String = "",
-    val selectedEnDestStation: String = "",
-    val selectedFaDestStation: String = "",
-    val findNearestLocationProgress: Boolean = false,
+    val fromStation: BilingualName? = null,
+    val toStation: BilingualName? = null,
+    val isSearchingNearby: Boolean = false,
     val nearbyStations: List<NearbyStation> = emptyList(),
-    val lineChangeDelayMinutes: Int = 8,
+    val transferDelay: Int = 8,
     val dayOfWeek: Int = Clock.System.now()
         .toLocalDateTime(kotlinx.datetime.TimeZone.currentSystemDefault())
         .dayOfWeek.isoDayNumber,
     val currentTime: Double = TimeUtils.getCurrentTimeAsDouble(),
-    val selectedNearbyStation: NearbyStation? = null,
+    val nearestStation: NearbyStation? = null,
 )
 
 class StationSelectionViewModel(
@@ -82,14 +81,13 @@ class StationSelectionViewModel(
         _searchQuery.update { query }
     }
 
-    fun onSelectedChange(isFrom: Boolean, enStation: String, faStation: String) {
+    fun onSelectedChange(isFrom: Boolean, station: BilingualName) {
         _uiState.update { currentState ->
-            currentState.copy(
-                selectedEnStartStation = if (isFrom) enStation else currentState.selectedEnStartStation,
-                selectedFaStartStation = if (isFrom) faStation else currentState.selectedFaStartStation,
-                selectedEnDestStation = if (!isFrom) enStation else currentState.selectedEnDestStation,
-                selectedFaDestStation = if (!isFrom) faStation else currentState.selectedFaDestStation,
-            )
+            if (isFrom) {
+                currentState.copy(fromStation = station)
+            } else {
+                currentState.copy(toStation = station)
+            }
         }
         _searchQuery.update { "" }
     }
@@ -97,15 +95,17 @@ class StationSelectionViewModel(
     fun onNearestStationSelected(nearbyStation: NearbyStation) {
         _uiState.update { currentState ->
             currentState.copy(
-                selectedEnStartStation = nearbyStation.station.name,
-                selectedFaStartStation = nearbyStation.station.translations.fa,
-                selectedNearbyStation = nearbyStation
+                fromStation = BilingualName(
+                    en = nearbyStation.station.name,
+                    fa = nearbyStation.station.translations.fa
+                ),
+                nearestStation = nearbyStation
             )
         }
     }
 
     fun onLineChangeDelayChanged(minutes: Int) {
-        _uiState.update { it.copy(lineChangeDelayMinutes = minutes) }
+        _uiState.update { it.copy(transferDelay = minutes) }
     }
 
     fun onTimeChanged(time: Double) {
@@ -125,7 +125,7 @@ class StationSelectionViewModel(
             try {
                 _uiState.update {
                     it.copy(
-                        findNearestLocationProgress = true,
+                        isSearchingNearby = true,
                         nearbyStations = emptyList(),
                     )
                 }
@@ -134,7 +134,7 @@ class StationSelectionViewModel(
                     _uiState.update {
                         it.copy(
                             nearbyStations = nearestStations,
-                            findNearestLocationProgress = false
+                            isSearchingNearby = false
                         )
                     }
                 }
@@ -144,7 +144,7 @@ class StationSelectionViewModel(
                 _uiState.update {
                     it.copy(
                         nearbyStations = emptyList(),
-                        findNearestLocationProgress = false
+                        isSearchingNearby = false
                     )
                 }
                 UiMessageManager.sendEvent(

@@ -79,7 +79,7 @@ fun NearestStationsBottomSheetContent(
             .fillMaxWidth()
             .padding(vertical = 16.dp)
     ) {
-        if (isLoading && nearbyStations.isEmpty()) {
+        if (isLoading || nearbyStations.isEmpty()) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
