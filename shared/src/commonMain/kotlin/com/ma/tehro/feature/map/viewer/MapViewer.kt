@@ -211,11 +211,6 @@ fun MapViewer(
                                         radius = (CIRCLE_RADIUS + 2f) * pulse,
                                         center = point
                                     )
-                                    drawCircle(
-                                        color = White,
-                                        radius = CIRCLE_RADIUS,
-                                        center = point
-                                    )
                                 }
 
                                 scaledPoints.size - 1 -> {
@@ -227,11 +222,6 @@ fun MapViewer(
                                     drawCircle(
                                         color = DEST_COLOR,
                                         radius = (CIRCLE_RADIUS + 2f) * pulse,
-                                        center = point
-                                    )
-                                    drawCircle(
-                                        color = White,
-                                        radius = CIRCLE_RADIUS,
                                         center = point
                                     )
                                 }

@@ -172,7 +172,7 @@ buildkonfig {
         buildConfigField(
             type = STRING,
             name = "VERSION_NAME",
-            value = "1.0.0"
+            value = libs.versions.appVersionName.get()
         )
     }
 }
