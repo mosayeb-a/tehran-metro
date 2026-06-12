@@ -25,9 +25,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.ui.Appbar
+import com.ma.tehro.common.ui.BilingualText
+import com.ma.tehro.common.ui.SearchableBottomSheet
 import com.ma.tehro.common.ui.TehroHorizontalDivider
 import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.common.ui.theme.Red
@@ -38,7 +41,7 @@ import com.ma.tehro.feature.shortestpath.selection.components.DaySelectorSheet
 import com.ma.tehro.feature.shortestpath.selection.components.LineChangeDelaySlider
 import com.ma.tehro.feature.shortestpath.selection.components.NearbyStationSheet
 import com.ma.tehro.feature.shortestpath.selection.components.SelectionToolbar
-import com.ma.tehro.feature.shortestpath.selection.components.StationField
+import com.ma.tehro.feature.shortestpath.selection.components.StationTextField
 import com.ma.tehro.feature.shortestpath.selection.components.TimePickerDialog
 import com.ma.tehro.feature.shortestpath.selection.components.rememberPulseAnimation
 
@@ -65,6 +68,8 @@ fun StationSelector(
     var showDaySelector by remember { mutableStateOf(false) }
     var showTimePicker by remember { mutableStateOf(false) }
 
+    var isFromSheetOpen by remember { mutableStateOf<Boolean?>(null) }
+
     val startPulse = rememberPulseAnimation()
     val destPulse = rememberPulseAnimation()
 
@@ -79,6 +84,15 @@ fun StationSelector(
             MaterialTheme.colorScheme.secondary.copy(alpha = 0.9f),
         animationSpec = tween(durationMillis = 300)
     )
+
+    val filteredStations = if (searchQuery.isBlank()) {
+        stations
+    } else {
+        stations.filter { station ->
+            station.name.contains(searchQuery, ignoreCase = true) ||
+                    station.translations.fa.contains(searchQuery, ignoreCase = true)
+        }
+    }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -113,15 +127,12 @@ fun StationSelector(
 
                 item {
                     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
-                        StationField(
+                        StationTextField(
                             selectedStation = viewState.fromStation,
-                            searchQuery = searchQuery,
-                            onSearchQueryChanged = onSearchQueryChanged,
-                            stations = stations,
-                            onStationSelected = { station -> onSelectStation(true, station) },
                             isFrom = true,
                             nodeColor = startNodeColor,
-                            nodeScale = startPulse.scale.value
+                            nodeScale = startPulse.scale.value,
+                            onClick = { isFromSheetOpen = true }
                         )
                     }
                 }
@@ -132,15 +143,12 @@ fun StationSelector(
 
                 item {
                     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
-                        StationField(
+                        StationTextField(
                             selectedStation = viewState.toStation,
-                            searchQuery = searchQuery,
-                            onSearchQueryChanged = onSearchQueryChanged,
-                            stations = stations,
-                            onStationSelected = { station -> onSelectStation(false, station) },
                             isFrom = false,
                             nodeColor = destNodeColor,
-                            nodeScale = destPulse.scale.value
+                            nodeScale = destPulse.scale.value,
+                            onClick = { isFromSheetOpen = false }
                         )
                     }
                 }
@@ -158,6 +166,7 @@ fun StationSelector(
 
                 item { Spacer(Modifier.height(73.dp)) }
             }
+
             SelectionToolbar(
                 modifier = Modifier.align(Alignment.BottomEnd),
                 onFindPathClick = {
@@ -174,6 +183,7 @@ fun StationSelector(
                             startPulse.trigger()
                             destPulse.trigger()
                         }
+
                         isStartEmpty -> startPulse.trigger()
                         isDestEmpty -> destPulse.trigger()
                         isSameStation -> {
@@ -237,6 +247,36 @@ fun StationSelector(
                     },
                     initialHour = (viewState.currentTime * 24).toInt(),
                     initialMinute = ((viewState.currentTime * 24 * 60) % 60).toInt()
+                )
+            }
+
+            if (isFromSheetOpen != null) {
+                SearchableBottomSheet(
+                    items = filteredStations,
+                    searchQuery = searchQuery,
+                    onSearchQueryChanged = onSearchQueryChanged,
+                    onItemSelected = { station ->
+                        onSelectStation(
+                            isFromSheetOpen == true,
+                            BilingualName(station.name, station.translations.fa)
+                        )
+                        isFromSheetOpen = null
+                    },
+                    searchPlaceholder = "جستجوی ایستگاه دلخواه",
+                    itemKey = { it.name },
+                    onDismiss = { isFromSheetOpen = null },
+                    itemContent = { station ->
+                        BilingualText(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(end = 16.dp),
+                            fa = station.translations.fa,
+                            en = station.name.uppercase(),
+                            style = MaterialTheme.typography.bodyLarge,
+                            maxLine = 2,
+                            textAlign = TextAlign.End
+                        )
+                    }
                 )
             }
         }

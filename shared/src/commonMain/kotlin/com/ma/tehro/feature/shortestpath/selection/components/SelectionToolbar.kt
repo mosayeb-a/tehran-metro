@@ -41,7 +41,7 @@ fun SelectionToolbar(
             )
             ToolbarIconButton(
                 icon = Icons.Filled.LocationOn,
-                label = "ایستگاه",
+                label = "نزدیک من",
                 onClick = onFindNearestStationClick
             )
             ToolbarIconButton(
