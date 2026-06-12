@@ -53,7 +53,6 @@ fun EpisodeSheet(
         },
         searchPlaceholder = "جستجوی اپیزود...",
         itemKey = { it.id },
-        isOpen = isOpen,
         onDismiss = onDismiss,
         itemContent = { episode ->
             Row(

@@ -34,7 +34,6 @@ fun <T> SearchableBottomSheet(
     modifier: Modifier = Modifier,
     searchPlaceholder: String = "جستجو...",
     itemKey: (T) -> Any,
-    isOpen: Boolean,
     onDismiss: () -> Unit,
     itemContent: @Composable (T) -> Unit,
     dividerColor: Color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.12f)
@@ -47,85 +46,82 @@ fun <T> SearchableBottomSheet(
         confirmValueChange = { true }
     )
 
-    if (isOpen) {
-        ModalBottomSheet(
-            onDismissRequest = {
-                onDismiss()
-                onSearchQueryChanged("")
-            },
-            sheetState = sheetState,
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp),
-            dragHandle = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 12.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    HorizontalDivider(
-                        modifier = Modifier.fillMaxWidth(0.3f),
-                        thickness = 3.dp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f),
-                    )
-                }
-            }
-        ) {
-            Column(
-                modifier = modifier
+    ModalBottomSheet(
+        onDismissRequest = {
+            onDismiss()
+            onSearchQueryChanged("")
+        },
+        sheetState = sheetState,
+        containerColor = MaterialTheme.colorScheme.primaryContainer,
+        shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp),
+        dragHandle = {
+            Box(
+                modifier = Modifier
                     .fillMaxWidth()
+                    .padding(vertical = 12.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                HorizontalDivider(
+                    modifier = Modifier.fillMaxWidth(0.3f),
+                    thickness = 3.dp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f),
+                )
+            }
+        }
+    ) {
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .zIndex(0f)
+        ) {
+            TehroSearchBar(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp, horizontal = 16.dp)
+                    .zIndex(1f),
+                value = searchQuery,
+                onValueChange = onSearchQueryChanged,
+                placeholder = searchPlaceholder,
+            )
+
+            LazyColumn(
+                state = listState,
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth()
+                    .drawVerticalScrollbar(listState)
                     .zIndex(0f)
             ) {
-                TehroSearchBar(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp, horizontal = 16.dp)
-                        .zIndex(1f)
-                    ,
-                    value = searchQuery,
-                    onValueChange = onSearchQueryChanged,
-                    placeholder = searchPlaceholder,
-                )
-
-                LazyColumn(
-                    state = listState,
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxWidth()
-                        .drawVerticalScrollbar(listState)
-                        .zIndex(0f)
-                ) {
-                    items(
-                        items = items,
-                        key = { itemKey(it) }
-                    ) { item ->
-                        Column {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clickable {
-                                        keyboardController?.hide()
-                                        onItemSelected(item)
-                                        onDismiss()
-                                        onSearchQueryChanged("")
-                                    }
-                                    .padding(
-                                        horizontal = 16.dp,
-                                        vertical = 16.dp
-                                    )
-                            ) {
-                                itemContent(item)
-                            }
-                            HorizontalDivider(
-                                modifier = Modifier.padding(horizontal = 16.dp),
-                                color = dividerColor
-                            )
+                items(
+                    items = items,
+                    key = { itemKey(it) }
+                ) { item ->
+                    Column {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    keyboardController?.hide()
+                                    onItemSelected(item)
+                                    onDismiss()
+                                    onSearchQueryChanged("")
+                                }
+                                .padding(
+                                    horizontal = 16.dp,
+                                    vertical = 16.dp
+                                )
+                        ) {
+                            itemContent(item)
                         }
+                        HorizontalDivider(
+                            modifier = Modifier.padding(horizontal = 16.dp),
+                            color = dividerColor
+                        )
                     }
+                }
 
-                    item {
-                        Spacer(modifier = Modifier.height(16.dp))
-                    }
+                item {
+                    Spacer(modifier = Modifier.height(16.dp))
                 }
             }
         }

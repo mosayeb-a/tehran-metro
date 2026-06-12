@@ -45,6 +45,8 @@ private const val SVG_WIDTH = 1984.25f
 private const val SVG_HEIGHT = 1417.32f
 private const val CIRCLE_RADIUS = 3.5f
 private const val LINE_WIDTH = 3.1f
+private val START_COLOR = Color(0xFF00FF82)
+private val DEST_COLOR = Color(0xFF00FFDE)
 
 // fake points guide the path along metro lines when stations aren't directly connected
 // key is a pair (from, to) in the direction the fake points are defined
@@ -200,25 +202,36 @@ fun MapViewer(
                             when (index) {
                                 0 -> {
                                     drawCircle(
-                                        color = Color(0xFFC6FF00).copy(alpha = 0.3f),
-                                        radius = (CIRCLE_RADIUS + 4f) * pulse,
+                                        color = START_COLOR.copy(alpha = 0.3f),
+                                        radius = (CIRCLE_RADIUS + 4.2f) * pulse,
                                         center = point
                                     )
                                     drawCircle(
-                                        color = Color(0xFFC6FF00),
-                                        radius = (CIRCLE_RADIUS + 1f) * pulse,
+                                        color = START_COLOR,
+                                        radius = (CIRCLE_RADIUS + 2f) * pulse,
+                                        center = point
+                                    )
+                                    drawCircle(
+                                        color = White,
+                                        radius = CIRCLE_RADIUS,
                                         center = point
                                     )
                                 }
+
                                 scaledPoints.size - 1 -> {
                                     drawCircle(
-                                        color = Color(0xFFFFC107).copy(alpha = 0.3f),
-                                        radius = (CIRCLE_RADIUS + 4f) * pulse,
+                                        color = DEST_COLOR.copy(alpha = 0.3f),
+                                        radius = (CIRCLE_RADIUS + 4.2f) * pulse,
                                         center = point
                                     )
                                     drawCircle(
-                                        color = Color(0xFFFFC107),
-                                        radius = (CIRCLE_RADIUS + 1f) * pulse,
+                                        color = DEST_COLOR,
+                                        radius = (CIRCLE_RADIUS + 2f) * pulse,
+                                        center = point
+                                    )
+                                    drawCircle(
+                                        color = White,
+                                        radius = CIRCLE_RADIUS,
                                         center = point
                                     )
                                 }
