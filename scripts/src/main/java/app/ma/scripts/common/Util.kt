@@ -41,4 +41,8 @@ fun normalizeName(rawName: String): String {
         .replace("ّ", "")
         .replace("ـ", "")
         .replace("ة", "ه")
+        .replace("اعزاماز", "")
+        .replace("اعزام", "")
+        .replace("دریافت", "")
+        .replace("دريافت", "")
 }

@@ -171,6 +171,10 @@ val stationNameMapper = mapOf(
     "کیانشهر" to "Kiyan Shahr",
     "بهارشیراز" to "Bahar Shiraz (Khanevadeh Hospital)",
     "بوستانلاله" to "Bustan-e Laleh",
+    "مریممقدس(س)" to "Maryam-e Moghaddas",
+    "شهدایهفتمتیر" to "Maryam-e Moghaddas",
+    "سربازوطن" to "Sarbaz",
+    "تربیتمدرس" to "Daneshgah-e Tarbiat Modarres",
 )
 
 fun main() {
