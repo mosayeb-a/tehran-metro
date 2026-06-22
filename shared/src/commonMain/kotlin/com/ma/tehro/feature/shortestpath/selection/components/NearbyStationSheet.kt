@@ -27,7 +27,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -91,21 +94,36 @@ fun NearestStationsBottomSheetContent(
                     color = MaterialTheme.colorScheme.onPrimary
                 )
             }
-        } else if (selectedStation != null) {
+        } else {
             CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
-                Text(
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .fillMaxWidth(),
-                    text = "نزدیک‌ترین ایستگاه‌ها به «$locationName»",
-                    style = MaterialTheme.typography.titleMedium.copy(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp
-                    ),
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
-                )
+                    Text(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .fillMaxWidth(),
+                        text = buildAnnotatedString {
+                            withStyle(
+                                style = SpanStyle(
+                                    fontWeight = FontWeight.Medium,
+                                    fontSize = 15.sp,
+                                    color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = .9f)
+                                )
+                            ) {
+                                append("نزدیک‌ترین ایستگاه‌ها به ")
+                            }
+                            withStyle(
+                                style = SpanStyle(
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 16.sp,
+                                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                                )
+                            ) {
+                                append("«$locationName»")
+                            }
+                        },
+                        style = MaterialTheme.typography.titleMedium
+                    )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
             }
 
             LazyColumn(
