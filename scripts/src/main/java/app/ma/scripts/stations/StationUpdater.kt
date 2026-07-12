@@ -203,6 +203,10 @@ fun updateIfNotNull(oldValue: String?, newValue: String?): String? {
     return newValue ?: oldValue
 }
 
+fun updateIfNotNull(oldValue: Double?, newValue: Double?): Double? {
+    return newValue ?: oldValue
+}
+
 fun updateIfTrue(oldValue: Boolean?, newValue: Boolean?): Boolean? {
     return when {
         newValue == true -> true
