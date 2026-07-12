@@ -14,8 +14,8 @@ class FindNearbyStations(
         return stations.values
             .asSequence()
             .mapNotNull { station ->
-                val lat = station.latitude?.toDoubleOrNull()
-                val lon = station.longitude?.toDoubleOrNull()
+                val lat = station.latitude
+                val lon = station.longitude
 
                 if (lat != null && lon != null) {
                     val distance = calculateDistance(placeLatitude, placeLongitude, lat, lon)

@@ -12,19 +12,19 @@
     "address": "خیابان شریعتی-ضلع جنوب غربی میدان قدس",
     "disabled": false,
     "facilities": {
-      "wc": false,
+      "wc": true,
       "coffeeShop": false,
       "groceryStore": false,
       "fastFood": true,
       "atm": false,
-      "bicycleParking": false,
+      "bicycleParking": true,
       "waterCooler": null,
       "waitingChair": true,
       "prayerRoom": true,
       "freeWifi": false
     },
     "accessibility": {
-      "elevator": false,
+      "elevator": true,
       "blindPath": true,
       "cleanFood": true
     },
@@ -1488,7 +1488,7 @@
     "longitude": "50.923976",
     "latitude": "35.489058",
     "address": "شهر جدید پرند",
-    "disabled": true,
+    "disabled": false,
     "facilities": {
       "wc": false,
       "coffeeShop": false,
@@ -5192,7 +5192,7 @@
     "longitude": "50.8881",
     "latitude": "35.8261",
     "address": "کرج، مهرشهر، انتهای بلوار ارم",
-    "disabled": true,
+    "disabled": false,
     "facilities": {
       "wc": false,
       "coffeeShop": false,
@@ -5854,7 +5854,7 @@
     "longitude": "51.4402",
     "latitude": "35.7077",
     "address": "خیابان سپاه، میدان سپاه",
-    "disabled": true,
+    "disabled": false,
     "facilities": {
       "wc": false,
       "coffeeShop": false,
@@ -6011,7 +6011,7 @@
     "longitude": "51.4164",
     "latitude": "35.7133",
     "address": "خیابان کریمخان زند، خیابان شهید نجات اللهی (ویلا)",
-    "disabled": true,
+    "disabled": false,
     "facilities": {
       "wc": false,
       "coffeeShop": false,
@@ -6525,7 +6525,7 @@
     "longitude": "51.301673",
     "latitude": "35.741428",
     "address": null,
-    "disabled": true,
+    "disabled": false,
     "facilities": {
       "wc": false,
       "coffeeShop": false,
@@ -6775,7 +6775,7 @@
     "longitude": "51.5088",
     "latitude": "35.6706",
     "address": "بزرگراه بسیج، جنب ورزشگاه تختی",
-    "disabled": true,
+    "disabled": false,
     "facilities": {
       "wc": false,
       "coffeeShop": false,

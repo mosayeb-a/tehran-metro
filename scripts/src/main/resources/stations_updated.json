@@ -7,24 +7,24 @@
         "lines": [
             1
         ],
-        "longitude": "51.433643000000004",
-        "latitude": "35.804501",
+        "longitude": 51.43348783883829,
+        "latitude": 35.80464927254761,
         "address": "خیابان شریعتی-ضلع جنوب غربی میدان قدس",
         "disabled": false,
         "facilities": {
-            "wc": false,
+            "wc": true,
             "coffeeShop": false,
             "groceryStore": false,
             "fastFood": true,
             "atm": false,
-            "bicycleParking": false,
+            "bicycleParking": true,
             "waterCooler": null,
             "waitingChair": true,
             "prayerRoom": true,
             "freeWifi": false
         },
         "accessibility": {
-            "elevator": false,
+            "elevator": true,
             "blindPath": true,
             "cleanFood": true
         },
@@ -56,8 +56,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.435252",
-        "latitude": "35.793119",
+        "longitude": 51.435008131547185,
+        "latitude": 35.79304519418441,
         "address": "خیابان دکترشریعتی - روبه روی پل رومی",
         "disabled": false,
         "facilities": {
@@ -106,8 +106,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.435639",
-        "latitude": "35.785374",
+        "longitude": 51.435841867673915,
+        "latitude": 35.78517256576695,
         "address": "100 متر بعد از تقاطع بزرگراه شهید صدر و خیابان دکتر شریعتی",
         "disabled": false,
         "facilities": {
@@ -156,8 +156,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.4379137",
-        "latitude": "35.7726822",
+        "longitude": 51.43794821185644,
+        "latitude": 35.772803086807926,
         "address": "خیابان دکترشریعتی، بالاتر از دو راهی قلهک، نرسیده به خیابان دولت",
         "disabled": false,
         "facilities": {
@@ -206,8 +206,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.4440981",
-        "latitude": "35.7626452",
+        "longitude": 51.44424182534614,
+        "latitude": 35.76267935499542,
         "address": "خیابان دکتر شریعتی، بالاتر از بلوار میرداماد",
         "disabled": false,
         "facilities": {
@@ -256,8 +256,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.43375",
-        "latitude": "35.76006",
+        "longitude": 51.433819296509455,
+        "latitude": 35.75982627256205,
         "address": "بلوار میرداماد، جنب پمپ بنزین، زیر ساختمان رز میرداماد",
         "disabled": false,
         "facilities": {
@@ -306,8 +306,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.4257773",
-        "latitude": "35.7565207",
+        "longitude": 51.42661575418256,
+        "latitude": 35.75627557912093,
         "address": "بزرگراه شهید حقانی - جنب پارک طالقانی",
         "disabled": false,
         "facilities": {
@@ -356,8 +356,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.427372",
-        "latitude": "35.748228",
+        "longitude": 51.425991738835656,
+        "latitude": 35.748052365109096,
         "address": "بزرگراه شهید همت ، جنب سازمان فرهنگ و ارتباطات اسلامی",
         "disabled": false,
         "facilities": {
@@ -406,8 +406,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.427082",
-        "latitude": "35.74073",
+        "longitude": 51.427096058695945,
+        "latitude": 35.74046332086735,
         "address": "بزرگراه رسالت ، شمال مصلی ، روبروی سازمان فرهنگ و ارتباطات اسلامی",
         "disabled": false,
         "facilities": {
@@ -457,8 +457,8 @@
             1,
             3
         ],
-        "longitude": "51.42704",
-        "latitude": "35.731037",
+        "longitude": 51.42707272534462,
+        "latitude": 35.730966425953845,
         "address": "تقاطع خیابان های شهید بهشتی و شهید مفتح",
         "disabled": false,
         "facilities": {
@@ -513,8 +513,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.427632",
-        "latitude": "35.724453",
+        "longitude": 51.42783745418104,
+        "latitude": 35.7245795929327,
         "address": "تقاطع خیابان های استاد شهید مطهری و شهید مفتح",
         "disabled": false,
         "facilities": {
@@ -563,8 +563,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.425495",
-        "latitude": "35.707161",
+        "longitude": 51.42549816356315,
+        "latitude": 35.70745447349628,
         "address": "تقاطع خیابان آیت اله طالقانی و خیابان شهید مفتح",
         "disabled": false,
         "facilities": {
@@ -614,8 +614,8 @@
             1,
             4
         ],
-        "longitude": "51.425849",
-        "latitude": "35.701316",
+        "longitude": 51.425749525343356,
+        "latitude": 35.70178021056275,
         "address": "خیابان انقلاب اسلامی , تقاطع سعدی شمالی و شهید مفتح",
         "disabled": false,
         "facilities": {
@@ -670,8 +670,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.4244163",
-        "latitude": "35.6934793",
+        "longitude": 51.42453935232323,
+        "latitude": 35.69333496668028,
         "address": "میدان استقلال - (میدان مخبرالدوله)",
         "disabled": false,
         "facilities": {
@@ -721,8 +721,8 @@
             1,
             2
         ],
-        "longitude": "51.421171",
-        "latitude": "35.686433",
+        "longitude": 51.41988539650591,
+        "latitude": 35.68552517258591,
         "address": "میدان امام خمینی (ره)",
         "disabled": false,
         "facilities": {
@@ -777,8 +777,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.417287",
-        "latitude": "35.678276",
+        "longitude": 51.41753379650562,
+        "latitude": 35.67800327258833,
         "address": "تقاطع خیابان های پانزد خرداد و خیام - چهارراه گلوبندک",
         "disabled": false,
         "facilities": {
@@ -827,8 +827,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.416568",
-        "latitude": "35.673073",
+        "longitude": 51.416903425342056,
+        "latitude": 35.673200056951956,
         "address": "خیابان خیام شمالی , پایین تر از چهارراه گلوبندک , جنب امامزاده",
         "disabled": false,
         "facilities": {
@@ -878,8 +878,8 @@
             1,
             7
         ],
-        "longitude": "51.415488",
-        "latitude": "35.667753",
+        "longitude": 51.4160060658123,
+        "latitude": 35.66823308587964,
         "address": "میدان محمدیه(اعدام) , تقاطع خیابان خیام و مولوی",
         "disabled": false,
         "facilities": {
@@ -934,8 +934,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.414154",
-        "latitude": "35.65754",
+        "longitude": 51.41413394685172,
+        "latitude": 35.657419184572184,
         "address": "تقاطع خیابان های شوش و خیام",
         "disabled": false,
         "facilities": {
@@ -984,8 +984,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.416289",
-        "latitude": "35.650688",
+        "longitude": 51.416637846256535,
+        "latitude": 35.65076177259719,
         "address": "خیابان عباسی , ضلع شمال غربی پایانه جنوب",
         "disabled": false,
         "facilities": {
@@ -1034,8 +1034,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.414787",
-        "latitude": "35.640609",
+        "longitude": 51.414943338696624,
+        "latitude": 35.640656695868415,
         "address": "خیابان شهید رجایی , خیابان ابریشم , 100متری شهید همدانی",
         "disabled": false,
         "facilities": {
@@ -1084,8 +1084,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.416203",
-        "latitude": "35.629256",
+        "longitude": 51.41611118115705,
+        "latitude": 35.629762515281406,
         "address": "جاده قدیم قم- سه راه پالایشگاه - خیابان شهید گلشنی",
         "disabled": false,
         "facilities": {
@@ -1134,8 +1134,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.420141",
-        "latitude": "35.609764",
+        "longitude": 51.419522067666,
+        "latitude": 35.60993278245109,
         "address": "بلوار شهید دستواره جنوبی - بین میدان مادر و نماز",
         "disabled": false,
         "facilities": {
@@ -1184,8 +1184,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.422287",
-        "latitude": "35.594672",
+        "longitude": 51.42233516766524,
+        "latitude": 35.59472807905189,
         "address": "شهر ری , میدان فرمانداری , خیابان مدرس",
         "disabled": false,
         "facilities": {
@@ -1234,8 +1234,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.406975",
-        "latitude": "35.57357",
+        "longitude": 51.3994788965002,
+        "latitude": 35.55974358258574,
         "address": "شهرری جاده قدیم قم نرسیده به باقرشهر روبروی پالایشگاه",
         "disabled": false,
         "facilities": {
@@ -1284,8 +1284,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.382606",
-        "latitude": "35.546998",
+        "longitude": 51.38257987565447,
+        "latitude": 35.54699212568495,
         "address": "اتوبان شهید کاظمی، روبه روی درب شمالی بهشت زهرا",
         "disabled": false,
         "facilities": {
@@ -1335,8 +1335,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.349032",
-        "latitude": "35.539811",
+        "longitude": 51.349153496499326,
+        "latitude": 35.53987425194572,
         "address": "شهر آفتاب",
         "disabled": false,
         "facilities": {
@@ -1385,8 +1385,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.30011",
-        "latitude": "35.514507",
+        "longitude": 51.30011,
+        "latitude": 35.514507,
         "address": "اتوبان تهران - قم، بعد از فرودگاه امام خمینی (ره)، شهرک واوان",
         "disabled": true,
         "facilities": {
@@ -1435,8 +1435,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.152221",
-        "latitude": "35.416111",
+        "longitude": 51.154226667656715,
+        "latitude": 35.406838494162756,
         "address": "فرودگاه بین المللی امام خمینی (ره)",
         "disabled": false,
         "facilities": {
@@ -1485,10 +1485,10 @@
         "lines": [
             1
         ],
-        "longitude": "50.923976",
-        "latitude": "35.489058",
+        "longitude": 50.976677065935476,
+        "latitude": 35.46441271365459,
         "address": "شهر جدید پرند",
-        "disabled": true,
+        "disabled": false,
         "facilities": {
             "wc": false,
             "coffeeShop": false,
@@ -1534,8 +1534,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.373036",
-        "latitude": "35.545077",
+        "longitude": 51.373194344395415,
+        "latitude": 35.54518486863606,
         "address": "ضلع شرقی حرم امام خمینی - بلوار اصلی بهشت زهرا",
         "disabled": false,
         "facilities": {
@@ -1584,8 +1584,8 @@
         "lines": [
             1
         ],
-        "longitude": "51.369292",
-        "latitude": "35.521574",
+        "longitude": 51.36925401927023,
+        "latitude": 35.521557736592776,
         "address": "جاده قدیم قم - بعداز درب اصلی بهشت زهرا (س) - جنب پارک لاله",
         "disabled": false,
         "facilities": {
@@ -1633,8 +1633,8 @@
         "lines": [
             2
         ],
-        "longitude": "51.546757",
-        "latitude": "35.729687",
+        "longitude": 51.54689530764591,
+        "latitude": 35.73000736469926,
         "address": "تهرانپارس، اول خیابان درختی , روبه روی فرهنگسرای اشراق",
         "disabled": false,
         "facilities": {
@@ -1682,8 +1682,8 @@
         "lines": [
             2
         ],
-        "longitude": "51.5285321",
-        "latitude": "35.7316491",
+        "longitude": 51.53174534920288,
+        "latitude": 35.731032252220864,
         "address": "بزرگراه رسالت بعد از چهارراه تیرانداز نبش اخوت",
         "disabled": false,
         "facilities": {
@@ -1732,8 +1732,8 @@
         "lines": [
             2
         ],
-        "longitude": "51.516856",
-        "latitude": "35.733397",
+        "longitude": 51.516413791466555,
+        "latitude": 35.73310824018062,
         "address": "تقاطع بزرگراه رسالت و شهید باقری",
         "disabled": false,
         "facilities": {
@@ -1782,8 +1782,8 @@
         "lines": [
             2
         ],
-        "longitude": "51.504786",
-        "latitude": "35.734425",
+        "longitude": 51.50501472056151,
+        "latitude": 35.734610428888075,
         "address": "بزرگراه رسالت، چهار راه دردشت",
         "disabled": false,
         "facilities": {
@@ -1832,8 +1832,8 @@
         "lines": [
             2
         ],
-        "longitude": "51.494873",
-        "latitude": "35.73547",
+        "longitude": 51.49491362733336,
+        "latitude": 35.73531978593998,
         "address": "بزگراه رسالت، چهارراه شهید آیت",
         "disabled": false,
         "facilities": {
@@ -1882,8 +1882,8 @@
         "lines": [
             2
         ],
-        "longitude": "51.484081",
-        "latitude": "35.733088",
+        "longitude": 51.48459698476707,
+        "latitude": 35.73342366377895,
         "address": "خیابان شهید مدنی، بالاتر از خیابان گلبرگ",
         "disabled": false,
         "facilities": {
@@ -1932,8 +1932,8 @@
         "lines": [
             2
         ],
-        "longitude": "51.4756353",
-        "latitude": "35.7264805",
+        "longitude": 51.475803967952544,
+        "latitude": 35.72654128306413,
         "address": "خیابان شهید مدنی، روبروی ساختمان های مسکونی دادگستری",
         "disabled": false,
         "facilities": {
@@ -1982,8 +1982,8 @@
         "lines": [
             2
         ],
-        "longitude": "51.464531",
-        "latitude": "35.71826",
+        "longitude": 51.46465670720315,
+        "latitude": 35.718205558895995,
         "address": "تقاطع خیابان های شهید مدنی و سبلان",
         "disabled": false,
         "facilities": {
@@ -2032,8 +2032,8 @@
         "lines": [
             2
         ],
-        "longitude": "51.453459",
-        "latitude": "35.70913",
+        "longitude": 51.453372800456044,
+        "latitude": 35.70920813139492,
         "address": "خیابان شهید مدنی، بالاتر از بیمارستان امام حسین (ع)",
         "disabled": false,
         "facilities": {
@@ -2083,8 +2083,8 @@
             2,
             6
         ],
-        "longitude": "51.445702",
-        "latitude": "35.702188",
+        "longitude": 51.44572070502451,
+        "latitude": 35.702215852360844,
         "address": "میدان امام حسین (ع) - تقاطع خیابان انقلاب اسلامی و شهید مدنی",
         "disabled": false,
         "facilities": {
@@ -2140,8 +2140,8 @@
             2,
             4
         ],
-        "longitude": "51.437709",
-        "latitude": "35.699338",
+        "longitude": 51.43769983388175,
+        "latitude": 35.69908634681844,
         "address": "خیابان بهارستان، میدان ابن سینا",
         "disabled": false,
         "facilities": {
@@ -2196,8 +2196,8 @@
         "lines": [
             2
         ],
-        "longitude": "51.432946",
-        "latitude": "35.692263",
+        "longitude": 51.432758239912324,
+        "latitude": 35.69191347602845,
         "address": "خیابان بهارستان، جنب ساختمان وزارت فرهنگ و ارشاد اسلامی",
         "disabled": false,
         "facilities": {
@@ -2246,8 +2246,8 @@
         "lines": [
             2
         ],
-        "longitude": "51.4277635",
-        "latitude": "35.6889986",
+        "longitude": 51.42682095105412,
+        "latitude": 35.688484046889265,
         "address": "خیابان اکباتان، سه راهی ملت - اکباتان",
         "disabled": false,
         "facilities": {
@@ -2296,8 +2296,8 @@
         "lines": [
             2
         ],
-        "longitude": "51.4088914",
-        "latitude": "35.6863779",
+        "longitude": 51.41012096766948,
+        "latitude": 35.686415244197384,
         "address": "میدان حسن آباد",
         "disabled": false,
         "facilities": {
@@ -2346,8 +2346,8 @@
         "lines": [
             2
         ],
-        "longitude": "51.3990645",
-        "latitude": "35.6874007",
+        "longitude": 51.399424318005046,
+        "latitude": 35.687225660229096,
         "address": "خیابان امام خمینی (ره)، روبروی مجلس",
         "disabled": false,
         "facilities": {
@@ -2396,8 +2396,8 @@
         "lines": [
             2
         ],
-        "longitude": "51.3884",
-        "latitude": "35.691008",
+        "longitude": 51.388446693930064,
+        "latitude": 35.690962448655995,
         "address": "خیابان کارگر جنوبی، تقاطع پاستور و دانشگاه جنگ",
         "disabled": false,
         "facilities": {
@@ -2447,8 +2447,8 @@
             2,
             7
         ],
-        "longitude": "51.378229",
-        "latitude": "35.69526",
+        "longitude": 51.37923331665502,
+        "latitude": 35.69446218774433,
         "address": "تقاطع بزرگراه شهید نواب صفوی و خیابان آذربایجان",
         "disabled": false,
         "facilities": {
@@ -2504,8 +2504,8 @@
             2,
             4
         ],
-        "longitude": "51.363809",
-        "latitude": "35.700627",
+        "longitude": 51.36350496310954,
+        "latitude": 35.70066539490897,
         "address": "تقاطع خیابان های آزادی و آذربایجان",
         "disabled": false,
         "facilities": {
@@ -2560,8 +2560,8 @@
         "lines": [
             2
         ],
-        "longitude": "51.353638",
-        "latitude": "35.70575",
+        "longitude": 51.35363318140592,
+        "latitude": 35.7058048453456,
         "address": "خیابان حبیب الهی - شهید تیموری",
         "disabled": false,
         "facilities": {
@@ -2610,8 +2610,8 @@
         "lines": [
             2
         ],
-        "longitude": "51.34351",
-        "latitude": "35.716134",
+        "longitude": 51.34343870910494,
+        "latitude": 35.716167999536054,
         "address": "خیابان محمدعلی جناح، بلوار شهید گلاب، بلوار شهید چوب تراش",
         "disabled": false,
         "facilities": {
@@ -2661,8 +2661,8 @@
             2,
             5
         ],
-        "longitude": "51.330979",
-        "latitude": "35.717598",
+        "longitude": 51.33096191268742,
+        "latitude": 35.717576979751065,
         "address": "بزرگراه محمد علی جناح، خیابان سازمان آب",
         "disabled": false,
         "facilities": {
@@ -2715,8 +2715,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.521684",
-        "latitude": "35.799759",
+        "longitude": 51.5209879438365,
+        "latitude": 35.7987685128104,
         "address": "بلوار نیروی هوایی، میدان اول شهرک",
         "disabled": false,
         "facilities": {
@@ -2764,8 +2764,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.508169",
-        "latitude": "35.797925",
+        "longitude": 51.5081728391952,
+        "latitude": 35.79790926564732,
         "address": "بزرگراه لشگرک - تقاطع بلوار ارتش - ابتدای شهرک شهید محلاتی",
         "disabled": false,
         "facilities": {
@@ -2814,8 +2814,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.493566",
-        "latitude": "35.795958",
+        "longitude": 51.483775336766335,
+        "latitude": 35.80036394698206,
         "address": "تقاطع خیابان پاسداران و بزرگراه ارتش، اقدسیه",
         "disabled": false,
         "facilities": {
@@ -2864,8 +2864,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.478029",
-        "latitude": "35.790987",
+        "longitude": 51.47868420919925,
+        "latitude": 35.790715615863185,
         "address": "نوبنیاد، ابتدای اقدسیه",
         "disabled": false,
         "facilities": {
@@ -2914,8 +2914,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.47852",
-        "latitude": "35.779428",
+        "longitude": 51.478771138837,
+        "latitude": 35.778856448057304,
         "address": "تقاطع خیابان مغان و بزرگراه شهید صیاد شیرازی",
         "disabled": false,
         "facilities": {
@@ -2964,8 +2964,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.473219",
-        "latitude": "35.771831",
+        "longitude": 51.47339266788893,
+        "latitude": 35.77186464474175,
         "address": "اتوبان صیاد شیرازی٬ بالاتر از خیابان موسوی",
         "disabled": false,
         "facilities": {
@@ -3014,8 +3014,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.4659032",
-        "latitude": "35.7595603",
+        "longitude": 51.46548920364399,
+        "latitude": 35.760523492375995,
         "address": "بزرگراه صیاد شیرازی، تقاطع بزرگراه شهید زین‌الدین",
         "disabled": false,
         "facilities": {
@@ -3064,8 +3064,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.462922",
-        "latitude": "35.743739",
+        "longitude": 51.463469815304826,
+        "latitude": 35.743425883530044,
         "address": "بلوار خواجه عبدالله انصاری",
         "disabled": false,
         "facilities": {
@@ -3114,8 +3114,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.458594",
-        "latitude": "35.735349",
+        "longitude": 51.458426696508255,
+        "latitude": 35.73536131951541,
         "address": "تفاطع بزگراه صیاد شیرازی و مسیل باختر",
         "disabled": false,
         "facilities": {
@@ -3164,8 +3164,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.4445",
-        "latitude": "35.731553",
+        "longitude": 51.44437452890492,
+        "latitude": 35.73144645262075,
         "address": "خیابان شریعتی - تقاطع خیابان شهید بهشتی",
         "disabled": false,
         "facilities": {
@@ -3214,8 +3214,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.435852",
-        "latitude": "35.731066",
+        "longitude": 51.436983861080726,
+        "latitude": 35.73106228632752,
         "address": "خیابان عباس آباد، روبروی بلوار یوسفی",
         "disabled": false,
         "facilities": {
@@ -3264,8 +3264,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.417448",
-        "latitude": "35.728365",
+        "longitude": 51.41744408700073,
+        "latitude": 35.728102353394476,
         "address": "خیابان بهشتی، مابین میرزای شیرازی و قائم مقام فرهانی",
         "disabled": false,
         "facilities": {
@@ -3314,8 +3314,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.408803",
-        "latitude": "35.721672",
+        "longitude": 51.40821158345821,
+        "latitude": 35.72060101981384,
         "address": "خیابان ولیعصر، تقاطع خیابان دکتر فاطمی",
         "disabled": false,
         "facilities": {
@@ -3365,8 +3365,8 @@
             3,
             4
         ],
-        "longitude": "51.405831",
-        "latitude": "35.700954",
+        "longitude": 51.40534185101572,
+        "latitude": 35.70115619978607,
         "address": "خیابان انقلاب اسلامی، چهارراه ولیعصر(عج)",
         "disabled": false,
         "facilities": {
@@ -3421,8 +3421,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.401594",
-        "latitude": "35.681087",
+        "longitude": 51.40158998370889,
+        "latitude": 35.681079689206186,
         "address": "خیابان ولیعصر(عج) میدان منیریه",
         "disabled": false,
         "facilities": {
@@ -3472,8 +3472,8 @@
             3,
             7
         ],
-        "longitude": "51.405474",
-        "latitude": "35.671463",
+        "longitude": 51.39929005768028,
+        "latitude": 35.667066187380414,
         "address": "تقاطع خیابان مولوی و خیابان ولیعصر، مهدیه تهران",
         "disabled": false,
         "facilities": {
@@ -3528,8 +3528,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.3984659",
-        "latitude": "35.6595573",
+        "longitude": 51.39834374868766,
+        "latitude": 35.658659693529906,
         "address": "میدان راه آهن",
         "disabled": false,
         "facilities": {
@@ -3578,8 +3578,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.388215",
-        "latitude": "35.659075",
+        "longitude": 51.388141527579855,
+        "latitude": 35.65911627746628,
         "address": "حد فاصل پل جوادیه و میدان رباط کریم",
         "disabled": false,
         "facilities": {
@@ -3628,8 +3628,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.3733202",
-        "latitude": "35.6525844",
+        "longitude": 51.37329904910739,
+        "latitude": 35.65258765923896,
         "address": "بزرگراه شهید چراغی",
         "disabled": false,
         "facilities": {
@@ -3678,8 +3678,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.3677387",
-        "latitude": "35.6435696",
+        "longitude": 51.36927744889414,
+        "latitude": 35.64433913304947,
         "address": "بزرگراه شهید چراغی، جوانه",
         "disabled": false,
         "facilities": {
@@ -3728,8 +3728,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.359773",
-        "latitude": "35.638159",
+        "longitude": 51.36016010714025,
+        "latitude": 35.63813580890704,
         "address": "بزرگراه شهید چراغی،ابتدای خیابان ورزش",
         "disabled": false,
         "facilities": {
@@ -3778,8 +3778,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.34703",
-        "latitude": "35.63392",
+        "longitude": 51.347081546602425,
+        "latitude": 35.63389614355468,
         "address": " بزرگراه سعیدی , روبروی خیابان سهیل",
         "disabled": false,
         "facilities": {
@@ -3828,8 +3828,8 @@
         "lines": [
             3
         ],
-        "longitude": "51.335533",
-        "latitude": "35.627216",
+        "longitude": 51.335490511644274,
+        "latitude": 35.62732694905995,
         "address": "بزرگراه سعیدی، نرسیده به بزرگراه آزادگان ابتدای شهید حیدری",
         "disabled": false,
         "facilities": {
@@ -3877,8 +3877,8 @@
         "lines": [
             4
         ],
-        "longitude": "51.498563",
-        "latitude": "35.698954",
+        "longitude": 51.49985618004835,
+        "latitude": 35.698258629647235,
         "address": "ابتدای بزرگراه شهید دوران،بالاتر از بانک سپه",
         "disabled": false,
         "facilities": {
@@ -3926,8 +3926,8 @@
         "lines": [
             4
         ],
-        "longitude": "51.4886226",
-        "latitude": "35.6926988",
+        "longitude": 51.488247662419106,
+        "latitude": 35.69293668867253,
         "address": "خیابان پیروزی- بین خیابانهای چهارم و پنجم نیرو هوایی",
         "disabled": false,
         "facilities": {
@@ -3976,8 +3976,8 @@
         "lines": [
             4
         ],
-        "longitude": "51.4777301",
-        "latitude": "35.6913253",
+        "longitude": 51.47746281806465,
+        "latitude": 35.69159833444614,
         "address": "خیابان پیروزی , چهار راه کوکاکولا , جنب مجتمع تجاری کسا",
         "disabled": false,
         "facilities": {
@@ -4026,8 +4026,8 @@
         "lines": [
             4
         ],
-        "longitude": "51.46775",
-        "latitude": "35.691356",
+        "longitude": 51.46791847268905,
+        "latitude": 35.69100756244922,
         "address": "خیابان پیروزی –قبل از خیابان شهید حسن پورمند",
         "disabled": false,
         "facilities": {
@@ -4076,8 +4076,8 @@
         "lines": [
             4
         ],
-        "longitude": "51.4579435",
-        "latitude": "35.6907927",
+        "longitude": 51.456541439825315,
+        "latitude": 35.69064287074757,
         "address": "خیابان پیروزی ,چهارصد دستگاه( تقاطع اتوبان امام علی (ع) و پیروزی)",
         "disabled": false,
         "facilities": {
@@ -4126,8 +4126,8 @@
         "lines": [
             4
         ],
-        "longitude": "51.418569",
-        "latitude": "35.701255",
+        "longitude": 51.418506516640896,
+        "latitude": 35.701335063593696,
         "address": "میدان فردوسی",
         "disabled": false,
         "facilities": {
@@ -4176,8 +4176,8 @@
         "lines": [
             4
         ],
-        "longitude": "51.392176",
-        "latitude": "35.701255",
+        "longitude": 51.389983004854955,
+        "latitude": 35.70118753104048,
         "address": "میدان انقلاب اسلامی،ابتدای خیابان آزادی، کوچه شهید جنتی",
         "disabled": false,
         "facilities": {
@@ -4227,8 +4227,8 @@
             4,
             7
         ],
-        "longitude": "51.378572",
-        "latitude": "35.700767",
+        "longitude": 51.378564150294714,
+        "latitude": 35.70085257588454,
         "address": "خیابان آزادی - شمال شرقی تقاطع خیابان آزادی و شهید نواب صفوی",
         "disabled": false,
         "facilities": {
@@ -4283,8 +4283,8 @@
         "lines": [
             4
         ],
-        "longitude": "51.356079",
-        "latitude": "35.700653",
+        "longitude": 51.356038792281,
+        "latitude": 35.700688779675005,
         "address": "خیابان آزادی - نرسیده به خیابان دکتر حبیب اله",
         "disabled": false,
         "facilities": {
@@ -4333,8 +4333,8 @@
         "lines": [
             4
         ],
-        "longitude": "51.34461",
-        "latitude": "35.700131",
+        "longitude": 51.344610347765624,
+        "latitude": 35.700121277637706,
         "address": "خیابان آزادی- قبل از میدان آزادی - تقاطع خیابان نور بخش",
         "disabled": false,
         "facilities": {
@@ -4383,8 +4383,8 @@
         "lines": [
             4
         ],
-        "longitude": "51.332492",
-        "latitude": "35.700802",
+        "longitude": 51.333326937560194,
+        "latitude": 35.701162131955776,
         "address": "میدان آزادی - ابتدای بزرگراه شهید برادران رحمانی",
         "disabled": false,
         "facilities": {
@@ -4433,8 +4433,8 @@
         "lines": [
             4
         ],
-        "longitude": "51.32036",
-        "latitude": "35.699546",
+        "longitude": 51.320203078841026,
+        "latitude": 35.69963393508256,
         "address": "بزرگراه شهید لشگری، ابتدای بیمه",
         "disabled": false,
         "facilities": {
@@ -4484,8 +4484,8 @@
         "lines": [
             4
         ],
-        "longitude": "51.3196823",
-        "latitude": "35.690689",
+        "longitude": 51.32412755578428,
+        "latitude": 35.69582428567988,
         "address": "میدان آزادی، پایانه ۲ فرودگاه مهرآباد",
         "disabled": false,
         "facilities": {
@@ -4534,8 +4534,8 @@
         "lines": [
             4
         ],
-        "longitude": "51.3271795",
-        "latitude": "35.6886266",
+        "longitude": 51.3311217144775,
+        "latitude": 35.688655093664195,
         "address": "میدان آزادی، پایانه ۶ فرودگاه مهرآباد",
         "disabled": false,
         "facilities": {
@@ -4583,8 +4583,8 @@
         "lines": [
             4
         ],
-        "longitude": "51.3074478",
-        "latitude": "35.705557400000004",
+        "longitude": 51.3076514993387,
+        "latitude": 35.70542641649221,
         "address": "فاز دو شهرک اکباتان- روبروی بلوک 13",
         "disabled": false,
         "facilities": {
@@ -4633,8 +4633,8 @@
         "lines": [
             4
         ],
-        "longitude": "51.30687773828286",
-        "latitude": "35.73085963000432",
+        "longitude": 51.30725541293873,
+        "latitude": 35.73071888431695,
         "address": null,
         "disabled": false,
         "facilities": {
@@ -4683,8 +4683,8 @@
             4,
             5
         ],
-        "longitude": "51.301979",
-        "latitude": "35.717476",
+        "longitude": 51.30178953947772,
+        "latitude": 35.71779722200492,
         "address": "ارم سبز",
         "disabled": false,
         "facilities": {
@@ -4739,8 +4739,8 @@
         "lines": [
             5
         ],
-        "longitude": "51.281208",
-        "latitude": "35.716727",
+        "longitude": 51.28403182648372,
+        "latitude": 35.717234943300866,
         "address": "اتوبان کرج - جنب مجموعه ورزشی آزادی",
         "disabled": false,
         "facilities": {
@@ -4789,8 +4789,8 @@
         "lines": [
             5
         ],
-        "longitude": "51.243904",
-        "latitude": "35.717563",
+        "longitude": 51.243843136928454,
+        "latitude": 35.717051515872264,
         "address": "کیلومتر 8 اتوبان تهران کرج , روبروی کارخانه بهنوش , بلوار کوهک",
         "disabled": false,
         "facilities": {
@@ -4839,8 +4839,8 @@
         "lines": [
             5
         ],
-        "longitude": "51.196654",
-        "latitude": "35.725402",
+        "longitude": 51.196807349845535,
+        "latitude": 35.725609187647265,
         "address": "کیلومتر 14 اتوبان تهران کرج , جنب باشگاه ایران خودرو",
         "disabled": false,
         "facilities": {
@@ -4889,8 +4889,8 @@
         "lines": [
             5
         ],
-        "longitude": "51.1509866",
-        "latitude": "35.7444768",
+        "longitude": 51.15103133982739,
+        "latitude": 35.74435836939475,
         "address": "کیلومتر 16 بزرگراه تهران کرج - خیابان دارو پخش",
         "disabled": false,
         "facilities": {
@@ -4939,8 +4939,8 @@
         "lines": [
             5
         ],
-        "longitude": "51.08193",
-        "latitude": "35.751002",
+        "longitude": 51.081781876919074,
+        "latitude": 35.75103678574071,
         "address": "کیلومتر ۲۳ بزرگراه تهران-کرج، جنب اردوگاه آموزشی قدس",
         "disabled": false,
         "facilities": {
@@ -4989,8 +4989,8 @@
         "lines": [
             5
         ],
-        "longitude": "51.0469759",
-        "latitude": "35.7662914",
+        "longitude": 51.046564975722,
+        "latitude": 35.76653088007448,
         "address": "کیلومتر 27 جاده مخصوص تهران کرج اتمسفر",
         "disabled": false,
         "facilities": {
@@ -5039,8 +5039,8 @@
         "lines": [
             5
         ],
-        "longitude": "51.0026979",
-        "latitude": "35.7870098",
+        "longitude": 51.00270499651076,
+        "latitude": 35.78700975978792,
         "address": "کرج , پل فردیس , جنب میدان شهید سلطانی , ابتدای جاده ملارد",
         "disabled": false,
         "facilities": {
@@ -5089,8 +5089,8 @@
         "lines": [
             5
         ],
-        "longitude": "50.964729",
-        "latitude": "35.800951",
+        "longitude": 50.96482512274756,
+        "latitude": 35.802094307718946,
         "address": "اتوبان ( تهران - کرج ) جاده محمد شهر",
         "disabled": false,
         "facilities": {
@@ -5139,8 +5139,8 @@
         "lines": [
             5
         ],
-        "longitude": "50.933079",
-        "latitude": "35.824877",
+        "longitude": 50.933065067675706,
+        "latitude": 35.82487887349704,
         "address": "کرج-45 متری گلشهر- خیابان اختر غربی",
         "disabled": false,
         "facilities": {
@@ -5189,10 +5189,10 @@
         "lines": [
             5
         ],
-        "longitude": "50.8881",
-        "latitude": "35.8261",
+        "longitude": 50.719114690587546,
+        "latitude": 35.95900066056138,
         "address": "کرج، مهرشهر، انتهای بلوار ارم",
-        "disabled": true,
+        "disabled": false,
         "facilities": {
             "wc": false,
             "coffeeShop": false,
@@ -5238,8 +5238,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.4391",
-        "latitude": "35.5916",
+        "longitude": 51.4391,
+        "latitude": 35.5916,
         "address": "شهر ری، جنب حرم حضرت عبدالعظیم (ع)",
         "disabled": true,
         "facilities": {
@@ -5287,8 +5287,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.4406",
-        "latitude": "35.5935",
+        "longitude": 51.4406,
+        "latitude": 35.5935,
         "address": "شهر ری، میدان حضرت عبدالعظیم (ع)",
         "disabled": true,
         "facilities": {
@@ -5337,8 +5337,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.4463",
-        "latitude": "35.6037",
+        "longitude": 51.4463,
+        "latitude": 35.6037,
         "address": "شهر ری، خیابان ابن بابویه",
         "disabled": true,
         "facilities": {
@@ -5387,8 +5387,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.4550",
-        "latitude": "35.6099",
+        "longitude": 51.455,
+        "latitude": 35.6099,
         "address": "شهر ری، منطقه چشمه علی",
         "disabled": true,
         "facilities": {
@@ -5437,8 +5437,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.4639",
-        "latitude": "35.6230",
+        "longitude": 51.46461183910625,
+        "latitude": 35.618896274330154,
         "address": "دولت آباد، بلوار قدس",
         "disabled": false,
         "facilities": {
@@ -5487,8 +5487,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.4603",
-        "latitude": "35.6392",
+        "longitude": 51.448598964280926,
+        "latitude": 35.632845132735895,
         "address": "کیانشهر، میدان امام رضا (ع)",
         "disabled": false,
         "facilities": {
@@ -5537,8 +5537,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.4498",
-        "latitude": "35.6471",
+        "longitude": 51.44426629272494,
+        "latitude": 35.64472632973612,
         "address": "بزرگراه بعثت، تقاطع خیابان ۱۷ شهریور",
         "disabled": false,
         "facilities": {
@@ -5587,8 +5587,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.4514",
-        "latitude": "35.6609",
+        "longitude": 51.44471695119032,
+        "latitude": 35.65237572978883,
         "address": "خیابان خراسان، خیابان شهید رضایی (منصور)",
         "disabled": false,
         "facilities": {
@@ -5637,8 +5637,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.4478",
-        "latitude": "35.6728",
+        "longitude": 51.445149666909494,
+        "latitude": 35.66413851159522,
         "address": "میدان خراسان",
         "disabled": false,
         "facilities": {
@@ -5688,8 +5688,8 @@
             6,
             7
         ],
-        "longitude": "51.4491",
-        "latitude": "35.6809",
+        "longitude": 51.44541700354487,
+        "latitude": 35.668382544515524,
         "address": "خیابان ۱۷ شهریور، تقاطع خیابان امیرکبیر",
         "disabled": true,
         "facilities": {
@@ -5744,8 +5744,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.44802",
-        "latitude": "35.6861",
+        "longitude": 51.44702291322249,
+        "latitude": 35.682479930721314,
         "address": "خیابان امیرکبیر، نرسیده به میدان شهدا",
         "disabled": false,
         "facilities": {
@@ -5795,8 +5795,8 @@
             4,
             6
         ],
-        "longitude": "51.447237",
-        "latitude": "35.690381",
+        "longitude": 51.447573991000134,
+        "latitude": 35.69046819891562,
         "address": "خیابان پیروزی تقاطع 17 شهریور،نرسیده به میدان شهدا، جنب اداره برق",
         "disabled": false,
         "facilities": {
@@ -5851,10 +5851,10 @@
         "lines": [
             6
         ],
-        "longitude": "51.4402",
-        "latitude": "35.7077",
+        "longitude": 51.44282476747766,
+        "latitude": 35.708965257212725,
         "address": "خیابان سپاه، میدان سپاه",
-        "disabled": true,
+        "disabled": false,
         "facilities": {
             "wc": false,
             "coffeeShop": false,
@@ -5901,8 +5901,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.4325",
-        "latitude": "35.7122",
+        "longitude": 51.4325,
+        "latitude": 35.7122,
         "address": "خیابان بهار شیراز، جنب بیمارستان خانواده",
         "disabled": false,
         "facilities": {
@@ -5952,8 +5952,8 @@
             1,
             6
         ],
-        "longitude": "51.426042",
-        "latitude": "35.715986",
+        "longitude": 51.42627241803309,
+        "latitude": 35.71532411227465,
         "address": "میدان هفت تیر",
         "disabled": false,
         "facilities": {
@@ -6008,10 +6008,10 @@
         "lines": [
             6
         ],
-        "longitude": "51.4164",
-        "latitude": "35.7133",
+        "longitude": 51.414545041430245,
+        "latitude": 35.71543003739339,
         "address": "خیابان کریمخان زند، خیابان شهید نجات اللهی (ویلا)",
-        "disabled": true,
+        "disabled": false,
         "facilities": {
             "wc": false,
             "coffeeShop": false,
@@ -6059,8 +6059,8 @@
             3,
             6
         ],
-        "longitude": "51.4070255",
-        "latitude": "35.7115282",
+        "longitude": 51.40786886120657,
+        "latitude": 35.71202629383182,
         "address": "خیابان ولیعصر، میدان ولیعصر",
         "disabled": false,
         "facilities": {
@@ -6115,8 +6115,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.3951",
-        "latitude": "35.7106",
+        "longitude": 51.3908470712869,
+        "latitude": 35.708172999999995,
         "address": "بلوار کشاورز، ضلع شمالی پارک لاله",
         "disabled": false,
         "facilities": {
@@ -6165,8 +6165,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.3875",
-        "latitude": "35.7145",
+        "longitude": 51.38957556915313,
+        "latitude": 35.71493526247226,
         "address": "خیابان کارگر شمالی، تقاطع بلوار کشاورز",
         "disabled": false,
         "facilities": {
@@ -6216,8 +6216,8 @@
             6,
             7
         ],
-        "longitude": "51.3844",
-        "latitude": "35.7271",
+        "longitude": 51.3813022329255,
+        "latitude": 35.72413657282073,
         "address": "بزرگراه جلال آل احمد، جنب دانشگاه تربیت مدرس",
         "disabled": false,
         "facilities": {
@@ -6272,8 +6272,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.3660",
-        "latitude": "35.7305",
+        "longitude": 51.37133820553804,
+        "latitude": 35.73162345726911,
         "address": "بزرگراه شیخ فضل الله نوری، ورودی شهرک آزمایش",
         "disabled": false,
         "facilities": {
@@ -6322,8 +6322,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.3525",
-        "latitude": "35.7348",
+        "longitude": 51.35946088139418,
+        "latitude": 35.73455522161478,
         "address": "بزرگراه یادگار امام، بلوار مرزداران",
         "disabled": false,
         "facilities": {
@@ -6372,8 +6372,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.3402",
-        "latitude": "35.7401",
+        "longitude": 51.34616137121202,
+        "latitude": 35.7349857300152,
         "address": "بزرگراه یادگار امام، تقاطع خیابان سازمان آب",
         "disabled": false,
         "facilities": {
@@ -6422,8 +6422,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.3287",
-        "latitude": "35.7483",
+        "longitude": 51.33175593750171,
+        "latitude": 35.73600106730899,
         "address": "بزرگراه شهید اشرفی اصفهانی، تقاطع بزرگراه حکیم",
         "disabled": false,
         "facilities": {
@@ -6472,8 +6472,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.3162",
-        "latitude": "35.7512",
+        "longitude": 51.319948407717405,
+        "latitude": 35.736882178757604,
         "address": "بزرگراه شهید ستاری، تقاطع بزرگراه حکیم",
         "disabled": false,
         "facilities": {
@@ -6522,10 +6522,10 @@
         "lines": [
             6
         ],
-        "longitude": "51.301673",
-        "latitude": "35.741428",
+        "longitude": 51.30259777850838,
+        "latitude": 35.74100968403951,
         "address": null,
-        "disabled": true,
+        "disabled": false,
         "facilities": {
             "wc": false,
             "coffeeShop": false,
@@ -6573,8 +6573,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.2843",
-        "latitude": "35.7437",
+        "longitude": 51.29469436724632,
+        "latitude": 35.745683564857195,
         "address": "شهران، بلوار شهرزیبا",
         "disabled": false,
         "facilities": {
@@ -6623,8 +6623,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.2701",
-        "latitude": "35.7585",
+        "longitude": 51.288140667283,
+        "latitude": 35.75395279299403,
         "address": "شهران، میدان الغدیر",
         "disabled": false,
         "facilities": {
@@ -6673,8 +6673,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.2588",
-        "latitude": "35.7693",
+        "longitude": 51.28346118280588,
+        "latitude": 35.76350331872328,
         "address": "بزرگراه همت، ورودی کن",
         "disabled": false,
         "facilities": {
@@ -6723,8 +6723,8 @@
         "lines": [
             6
         ],
-        "longitude": "51.2450",
-        "latitude": "35.7800",
+        "longitude": 51.27914785190507,
+        "latitude": 35.770810717303846,
         "address": "انتهای بزرگراه آبشناسان، شهران شمالی، بلوار کوهسار",
         "disabled": false,
         "facilities": {
@@ -6772,10 +6772,10 @@
         "lines": [
             7
         ],
-        "longitude": "51.5088",
-        "latitude": "35.6706",
+        "longitude": 51.508351640093636,
+        "latitude": 35.67082903161425,
         "address": "بزرگراه بسیج، جنب ورزشگاه تختی",
-        "disabled": true,
+        "disabled": false,
         "facilities": {
             "wc": false,
             "coffeeShop": false,
@@ -6821,8 +6821,8 @@
         "lines": [
             7
         ],
-        "longitude": "51.489404",
-        "latitude": "35.667159",
+        "longitude": 51.49085866766856,
+        "latitude": 35.6667482543179,
         "address": "محدوده بزرگراه بسیج - افسریه",
         "disabled": false,
         "facilities": {
@@ -6871,8 +6871,8 @@
         "lines": [
             7
         ],
-        "longitude": "51.4769",
-        "latitude": "35.6681",
+        "longitude": 51.47382899650526,
+        "latitude": 35.66953177750175,
         "address": "بزرگراه شهید محلاتی، خیابان آهنگ",
         "disabled": false,
         "facilities": {
@@ -6921,8 +6921,8 @@
         "lines": [
             7
         ],
-        "longitude": "51.4654",
-        "latitude": "35.6742",
+        "longitude": 51.46256923399226,
+        "latitude": 35.66793780192468,
         "address": "خیابان پیروزی، خیابان دولاب",
         "disabled": false,
         "facilities": {
@@ -6971,8 +6971,8 @@
         "lines": [
             7
         ],
-        "longitude": "51.4358",
-        "latitude": "35.6717",
+        "longitude": 51.4373240157089,
+        "latitude": 35.67000475397928,
         "address": "میدان قیام",
         "disabled": false,
         "facilities": {
@@ -7021,8 +7021,8 @@
         "lines": [
             7
         ],
-        "longitude": "51.4248",
-        "latitude": "35.6683",
+        "longitude": 51.41601339759233,
+        "latitude": 35.668181587846355,
         "address": "خیابان مولوی، چهارراه مولوی",
         "disabled": false,
         "facilities": {
@@ -7071,8 +7071,8 @@
         "lines": [
             7
         ],
-        "longitude": "51.3969",
-        "latitude": "35.6666",
+        "longitude": 51.38758465752482,
+        "latitude": 35.66800970632861,
         "address": "خیابان کارگر جنوبی، میدان رازی (گمرک)، خیابان هلال احمر",
         "disabled": false,
         "facilities": {
@@ -7121,8 +7121,8 @@
         "lines": [
             7
         ],
-        "longitude": "51.3868",
-        "latitude": "35.6755",
+        "longitude": 51.3808000388323,
+        "latitude": 35.673191256951,
         "address": "بزرگراه نواب، خیابان بریانک",
         "disabled": false,
         "facilities": {
@@ -7171,8 +7171,8 @@
         "lines": [
             7
         ],
-        "longitude": "51.380143",
-        "latitude": "35.682491",
+        "longitude": 51.379828288372224,
+        "latitude": 35.6805029770884,
         "address": "محدوده بزرگراه شهیدنواب صفوی با جنوب خیابان کمیل",
         "disabled": false,
         "facilities": {
@@ -7221,8 +7221,8 @@
         "lines": [
             7
         ],
-        "longitude": "51.3788",
-        "latitude": "35.6897",
+        "longitude": 51.37908769121558,
+        "latitude": 35.687617922639255,
         "address": "بزرگراه نواب، تقاطع خیابان رودکی (سلسبیل)",
         "disabled": false,
         "facilities": {
@@ -7271,8 +7271,8 @@
         "lines": [
             7
         ],
-        "longitude": "51.3811",
-        "latitude": "35.7134",
+        "longitude": 51.37734433897117,
+        "latitude": 35.706678505970594,
         "address": "خیابان ستارخان، جنب بیمارستان امام خمینی",
         "disabled": false,
         "facilities": {
@@ -7321,8 +7321,8 @@
         "lines": [
             7
         ],
-        "longitude": "51.3755",
-        "latitude": "35.7388",
+        "longitude": 51.382599,
+        "latitude": 35.73256007254948,
         "address": "بزرگراه شهید چمران، جنب بوستان گفتگو",
         "disabled": false,
         "facilities": {
@@ -7371,8 +7371,8 @@
         "lines": [
             7
         ],
-        "longitude": "51.3750",
-        "latitude": "35.7446",
+        "longitude": 51.378312966476884,
+        "latitude": 35.74770719166458,
         "address": "بزرگراه شهید حکیم، ورودی برج میلاد",
         "disabled": false,
         "facilities": {
@@ -7421,8 +7421,8 @@
         "lines": [
             7
         ],
-        "longitude": "51.367808",
-        "latitude": "35.754386",
+        "longitude": 51.36739593228225,
+        "latitude": 35.7544706937203,
         "address": "محدوده ضلع شمالی میدان صنعت",
         "disabled": false,
         "facilities": {
@@ -7471,8 +7471,8 @@
         "lines": [
             7
         ],
-        "longitude": "51.3600",
-        "latitude": "35.7653",
+        "longitude": 51.36612886767306,
+        "latitude": 35.767048177938676,
         "address": "شهرک غرب، بلوار شهید دادمان",
         "disabled": false,
         "facilities": {
@@ -7521,8 +7521,8 @@
         "lines": [
             7
         ],
-        "longitude": "51.3493",
-        "latitude": "35.7777",
+        "longitude": 51.35548756724749,
+        "latitude": 35.77730678107591,
         "address": "سعادت آباد، میدان کتاب",
         "disabled": false,
         "facilities": {

@@ -27,8 +27,8 @@ class StationsMapViewModel(
         MapUiState(
             markers = stations.values.map { station ->
                 MapMarker(
-                    lat = station.latitude?.toDoubleOrNull() ?: 0.0,
-                    lon = station.longitude?.toDoubleOrNull() ?: 0.0,
+                    lat = station.latitude ?: 0.0,
+                    lon = station.longitude ?: 0.0,
                     title = station.name,
                     titleFa = station.translations.fa,
                     line = station.lines.firstOrNull()
