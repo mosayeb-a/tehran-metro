@@ -33,8 +33,7 @@ import com.ma.tehro.feature.more.PreferencesViewModel
 import com.ma.tehro.feature.podcast.PodcastViewModel
 import com.ma.tehro.feature.schedule.TrainScheduleViewModel
 import com.ma.tehro.feature.shortestpath.pathfinder.PathViewModel
-import com.ma.tehro.feature.shortestpath.places.PlaceSelectionViewModel
-import com.ma.tehro.feature.shortestpath.selection.StationSelectionViewModel
+import com.ma.tehro.feature.shortestpath.selection.StationSelectorViewModel
 import com.ma.tehro.services.LocationTracker
 import com.ma.tehro.services.LocationTrackerImpl
 import com.russhwolf.settings.ExperimentalSettingsApi
@@ -129,16 +128,12 @@ val appModule = module {
             savedStateHandle = get()
         )
     }
-    viewModel<PlaceSelectionViewModel> {
-        PlaceSelectionViewModel(
+    viewModel<StationSelectorViewModel> {
+        StationSelectorViewModel(
+            pathRepository = get(),
+            locationTracker = get(),
             getPlacesByCategory = get(),
             findNearbyStations = get()
-        )
-    }
-    viewModel<StationSelectionViewModel> {
-        StationSelectionViewModel(
-            pathRepository = get(),
-            locationTracker = get()
         )
     }
     viewModel<FeedbackViewModel> {

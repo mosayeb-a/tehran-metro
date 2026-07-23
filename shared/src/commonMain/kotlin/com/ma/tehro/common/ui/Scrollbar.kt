@@ -28,7 +28,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.collectLatest
 
-
 const val scrollDefaultDelay = 150L
 const val scrollBarFadeDuration = 300
 
@@ -46,16 +45,46 @@ private fun Modifier.drawScrollbar(
 ) { reverseDirection, atEnd, color, alpha ->
     val layoutInfo = state.layoutInfo
     val viewportSize = layoutInfo.viewportEndOffset - layoutInfo.viewportStartOffset
-    val items = layoutInfo.visibleItemsInfo
-    val itemsSize = items.fastSumBy { it.size }
-    if (items.size < layoutInfo.totalItemsCount || itemsSize > viewportSize) {
-        val estimatedItemSize = if (items.isEmpty()) 0f else itemsSize.toFloat() / items.size
-        val totalSize = estimatedItemSize * layoutInfo.totalItemsCount
-        val canvasSize = if (orientation == Orientation.Horizontal) size.width else size.height
-        val thumbSize = viewportSize / totalSize * canvasSize
-        val startOffset = if (items.isEmpty()) 0f else items.first().run {
-            (estimatedItemSize * index - offset) / totalSize * canvasSize
+    val totalItemsCount = layoutInfo.totalItemsCount
+
+    if (totalItemsCount > 0) {
+        // Get the actual scroll position from the state
+        val firstVisibleIndex = state.firstVisibleItemIndex
+        val firstVisibleScrollOffset = state.firstVisibleItemScrollOffset.toFloat()
+
+        // Get visible items to calculate average item height
+        val visibleItems = layoutInfo.visibleItemsInfo
+        val averageItemHeight = if (visibleItems.isNotEmpty()) {
+            val totalVisibleHeight = visibleItems.fastSumBy { it.size }
+            totalVisibleHeight.toFloat() / visibleItems.size
+        } else {
+            100f // Default fallback
         }
+
+        // Calculate total content height
+        val totalContentHeight = totalItemsCount * averageItemHeight
+
+        // Calculate current scroll position
+        val currentScroll = (firstVisibleIndex * averageItemHeight) + firstVisibleScrollOffset
+        val maxScroll = (totalContentHeight - viewportSize).coerceAtLeast(1f)
+
+        // Calculate scroll progress (0 to 1)
+        val scrollProgress = (currentScroll / maxScroll).coerceIn(0f, 1f)
+
+        val canvasSize = if (orientation == Orientation.Horizontal) size.width else size.height
+
+        // Calculate thumb size
+        val thumbSize = if (totalContentHeight > 0) {
+            val size = (viewportSize / totalContentHeight * canvasSize)
+            size.coerceIn(20f, canvasSize)
+        } else {
+            canvasSize
+        }
+
+        // Calculate start offset based on progress
+        val maxStartOffset = canvasSize - thumbSize
+        val startOffset = scrollProgress * maxStartOffset
+
         drawScrollbar(
             orientation, reverseDirection, atEnd, color, alpha, thumbSize, startOffset
         )
