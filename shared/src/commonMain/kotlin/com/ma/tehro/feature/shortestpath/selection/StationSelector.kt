@@ -25,22 +25,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.ui.Appbar
-import com.ma.tehro.common.ui.BilingualText
-import com.ma.tehro.common.ui.SearchableBottomSheet
 import com.ma.tehro.common.ui.TehroHorizontalDivider
 import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.common.ui.theme.Red
+import com.ma.tehro.data.place.Place
 import com.ma.tehro.domain.common.BilingualName
-import com.ma.tehro.domain.common.NearbyStation
 import com.ma.tehro.domain.line.Station
 import com.ma.tehro.feature.shortestpath.selection.components.DaySelectorSheet
 import com.ma.tehro.feature.shortestpath.selection.components.LineChangeDelaySlider
-import com.ma.tehro.feature.shortestpath.selection.components.NearbyStationSheet
 import com.ma.tehro.feature.shortestpath.selection.components.SelectionToolbar
+import com.ma.tehro.feature.shortestpath.selection.components.StationSelectorSheet
 import com.ma.tehro.feature.shortestpath.selection.components.StationTextField
 import com.ma.tehro.feature.shortestpath.selection.components.TimePickerDialog
 import com.ma.tehro.feature.shortestpath.selection.components.rememberPulseAnimation
@@ -48,22 +45,21 @@ import com.ma.tehro.feature.shortestpath.selection.components.rememberPulseAnima
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StationSelector(
-    viewState: StationSelectionState,
+    viewState: StationSelectorState,
     searchQuery: String,
     stations: List<Station>,
+    places: List<Place>,
     onSearchQueryChanged: (q: String) -> Unit,
     onFindPath: (from: BilingualName, to: BilingualName, delay: Int, dayOfWeek: Int, time: Double) -> Unit,
     onSelectStation: (isFrom: Boolean, station: BilingualName) -> Unit,
-    onBack: () -> Unit,
-    onFindNearest: (onError: () -> Unit) -> Unit,
-    onNearestSelected: (NearbyStation) -> Unit,
+    onFindNearbyStations: (onError: () -> Unit) -> Unit,
+    onFindStationsNearPlace: (Place) -> Unit,
     onDelayChange: (Int) -> Unit,
     onTimeChanged: (Double) -> Unit,
     onDayOfWeekChanged: (Int) -> Unit,
-    onSearchByPlace: () -> Unit,
     onCheckPermission: (onGranted: () -> Unit) -> Unit,
+    onBack: () -> Unit,
 ) {
-    var showNearestStations by remember { mutableStateOf(false) }
     val lazyListState = rememberLazyListState()
     var showDaySelector by remember { mutableStateOf(false) }
     var showTimePicker by remember { mutableStateOf(false) }
@@ -196,38 +192,13 @@ fun StationSelector(
                             destStation,
                             viewState.transferDelay,
                             viewState.dayOfWeek,
-                            viewState.currentTime
+                            viewState.departureTime
                         )
                     }
                 },
                 onTimeChangeClick = { showTimePicker = true },
                 onDayOfWeekClick = { showDaySelector = true },
-                onFindNearestStationClick = {
-                    onCheckPermission {
-                        if (!viewState.isSearchingNearby) {
-                            onFindNearest {
-                                showNearestStations = false
-                            }
-                        }
-                        showNearestStations = true
-                    }
-                },
-                onFindNearestStationsByPlaceClick = onSearchByPlace,
             )
-
-            if (showNearestStations) {
-                NearbyStationSheet(
-                    locationName = "موقعیت شما",
-                    nearbyStations = viewState.nearbyStations,
-                    isLoading = viewState.isSearchingNearby,
-                    onStationSelected = { station ->
-                        onNearestSelected(station)
-                        showNearestStations = false
-                    },
-                    selectedStation = viewState.nearestStation,
-                    onDismiss = { showNearestStations = false }
-                )
-            }
 
             if (showDaySelector) {
                 DaySelectorSheet(
@@ -245,38 +216,45 @@ fun StationSelector(
                         onTimeChanged(newTime)
                         showTimePicker = false
                     },
-                    initialHour = (viewState.currentTime * 24).toInt(),
-                    initialMinute = ((viewState.currentTime * 24 * 60) % 60).toInt()
+                    initialHour = (viewState.departureTime * 24).toInt(),
+                    initialMinute = ((viewState.departureTime * 24 * 60) % 60).toInt()
                 )
             }
 
             if (isFromSheetOpen != null) {
-                SearchableBottomSheet(
-                    items = filteredStations,
+                StationSelectorSheet(
+                    stations = filteredStations,
+                    places = places,
+                    placesNearMe = emptyList(),
+                    stationsNearMe = viewState.nearbyStations,
+                    placeNearbyStations = viewState.placeNearbyStations,
                     searchQuery = searchQuery,
                     onSearchQueryChanged = onSearchQueryChanged,
-                    onItemSelected = { station ->
+                    onStationSelected = { station ->
                         onSelectStation(
                             isFromSheetOpen == true,
                             BilingualName(station.name, station.translations.fa)
                         )
                         isFromSheetOpen = null
                     },
-                    searchPlaceholder = "جستجوی ایستگاه دلخواه",
-                    itemKey = { it.name },
-                    onDismiss = { isFromSheetOpen = null },
-                    itemContent = { station ->
-                        BilingualText(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(end = 16.dp),
-                            fa = station.translations.fa,
-                            en = station.name.uppercase(),
-                            style = MaterialTheme.typography.bodyLarge,
-                            maxLine = 2,
-                            textAlign = TextAlign.End
-                        )
-                    }
+                    onPlaceSelected = { place ->
+                        onFindStationsNearPlace(place)
+                    },
+                    onNearMeClick = {
+                        onCheckPermission {
+                            if (!viewState.isLoadingNearbyStations) {
+                                onFindNearbyStations {}
+                            }
+                        }
+                    },
+                    onMapClick = {
+                    },
+                    isLoadingNearbyPlaces = false,
+                    isLoadingNearbyStations = viewState.isLoadingNearbyStations,
+                    isLoadingStationsByPlace = viewState.isLoadingStationsByPlace,
+                    onDismiss = {
+                        isFromSheetOpen = null
+                    },
                 )
             }
         }

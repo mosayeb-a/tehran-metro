@@ -26,24 +26,12 @@ fun SelectionToolbar(
     onFindPathClick: () -> Unit,
     onTimeChangeClick: () -> Unit,
     onDayOfWeekClick: () -> Unit,
-    onFindNearestStationClick: () -> Unit,
-    onFindNearestStationsByPlaceClick: () -> Unit,
 ) {
     FloatingToolbarContainer(
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.primaryContainer,
         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
         content = {
-            ToolbarIconButton(
-                icon = Icons.Filled.Business,
-                label = "مکان",
-                onClick = onFindNearestStationsByPlaceClick
-            )
-            ToolbarIconButton(
-                icon = Icons.Filled.LocationOn,
-                label = "نزدیک من",
-                onClick = onFindNearestStationClick
-            )
             ToolbarIconButton(
                 icon = Icons.Filled.CalendarMonth,
                 label = "روز",

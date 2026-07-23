@@ -20,7 +20,6 @@ import com.ma.tehro.common.ui.LinesScreen
 import com.ma.tehro.common.ui.MapScreen
 import com.ma.tehro.common.ui.MapViewerScreen
 import com.ma.tehro.common.ui.MoreScreen
-import com.ma.tehro.common.ui.NearbyPlaceStationsScreen
 import com.ma.tehro.common.ui.PathDescriptionScreen
 import com.ma.tehro.common.ui.PathFinderScreen
 import com.ma.tehro.common.ui.PodcastListScreen
@@ -29,11 +28,11 @@ import com.ma.tehro.common.ui.StationSelectorScreen
 import com.ma.tehro.common.ui.StationsScreen
 import com.ma.tehro.common.ui.SubmitFeedbackScreen
 import com.ma.tehro.common.ui.TrainScheduleScreen
-import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.line.Station
 import com.ma.tehro.domain.path.Step
 import com.ma.tehro.feature.detail.StationDetail
 import com.ma.tehro.feature.feedback.Feedback
+import com.ma.tehro.feature.feedback.FeedbackViewModel
 import com.ma.tehro.feature.line.LineViewModel
 import com.ma.tehro.feature.line.Lines
 import com.ma.tehro.feature.line.stations.Stations
@@ -43,18 +42,15 @@ import com.ma.tehro.feature.map.city.StationsOnCityMap
 import com.ma.tehro.feature.map.viewer.MapViewer
 import com.ma.tehro.feature.more.More
 import com.ma.tehro.feature.more.PreferencesViewModel
-import com.ma.tehro.feature.shortestpath.guide.PathDescription
-import com.ma.tehro.feature.shortestpath.pathfinder.PathFinder
-import com.ma.tehro.feature.shortestpath.pathfinder.PathViewModel
-import com.ma.tehro.feature.shortestpath.places.PlaceSelection
-import com.ma.tehro.feature.shortestpath.places.PlaceSelectionViewModel
-import com.ma.tehro.feature.shortestpath.selection.StationSelectionViewModel
-import com.ma.tehro.feature.shortestpath.selection.StationSelector
-import com.ma.tehro.feature.feedback.FeedbackViewModel
 import com.ma.tehro.feature.podcast.PodcastList
 import com.ma.tehro.feature.podcast.PodcastViewModel
 import com.ma.tehro.feature.schedule.TrainSchedule
 import com.ma.tehro.feature.schedule.TrainScheduleViewModel
+import com.ma.tehro.feature.shortestpath.guide.PathDescription
+import com.ma.tehro.feature.shortestpath.pathfinder.PathFinder
+import com.ma.tehro.feature.shortestpath.pathfinder.PathViewModel
+import com.ma.tehro.feature.shortestpath.selection.StationSelectorViewModel
+import com.ma.tehro.feature.shortestpath.selection.StationSelector
 import org.koin.compose.viewmodel.koinViewModel
 import kotlin.jvm.JvmSuppressWildcards
 import kotlin.reflect.KType
@@ -129,31 +125,21 @@ fun TehroNavigation(
             )
         }
         baseComposable<StationSelectorScreen> { backStackEntry ->
-            val viewModel: StationSelectionViewModel = koinViewModel()
+            val viewModel: StationSelectorViewModel = koinViewModel()
             val state by viewModel.uiState.collectAsStateWithLifecycle()
             val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
-            val filteredStations by viewModel.filteredStations.collectAsStateWithLifecycle()
-
-            val savedStateHandle = backStackEntry.savedStateHandle
-            val selectedStation = savedStateHandle.get<Map<String, String>>("selected_start_station")
-            selectedStation?.let { stationMap ->
-                viewModel.onSelectedChange(
-                    isFrom = true,
-                    station = BilingualName(
-                        en = stationMap["en"] ?: "",
-                        fa = stationMap["fa"] ?: ""
-                    )
-                )
-                savedStateHandle.remove<Map<String, String>>("selected_start_station")
-            }
+            val searchResults by viewModel.searchResults.collectAsStateWithLifecycle()
 
             StationSelector(
                 onBack = navController::navigateUp,
                 viewState = state,
-                stations = filteredStations,
+                stations = searchResults.stations,
+                places = searchResults.places,
                 searchQuery = searchQuery,
-                onSearchQueryChanged = viewModel::onSearchQueryChanged,
-                onSelectStation = viewModel::onSelectedChange,
+                onSearchQueryChanged = viewModel::setSearchQuery,
+                onSelectStation = { isFrom, station ->
+                    if (isFrom) viewModel.setFromStation(station) else viewModel.setToStation(station)
+                },
                 onFindPath = { from, to, lineChangeDelayMinutes, dayOfWeek, currentTime ->
                     navController.navigate(
                         PathFinderScreen(
@@ -167,15 +153,17 @@ fun TehroNavigation(
                         )
                     )
                 },
-                onNearestSelected = viewModel::onNearestStationSelected,
-                onFindNearest = { onError -> viewModel.findNearestStation(onError = onError) },
-                onDelayChange = viewModel::onLineChangeDelayChanged,
-                onTimeChanged = viewModel::onTimeChanged,
-                onDayOfWeekChanged = viewModel::onDayOfWeekChanged,
-                onSearchByPlace = { navController.navigate(NearbyPlaceStationsScreen) },
+                onFindNearbyStations = { onError -> viewModel.findNearbyStations(onError = onError) },
+                onFindStationsNearPlace = { place ->
+                    viewModel.findStationsNear(place.latitude, place.longitude)
+                },
+                onDelayChange = viewModel::setTransferDelay,
+                onTimeChanged = viewModel::setDepartureTime,
+                onDayOfWeekChanged = viewModel::setDayOfWeek,
                 onCheckPermission = locationPermissionHandler::checkLocationPermission
             )
         }
+
         baseComposable<PathFinderScreen> { backStackEntry ->
             val viewModel: PathViewModel = koinViewModel()
             val state by viewModel.state.collectAsStateWithLifecycle()
@@ -263,28 +251,6 @@ fun TehroNavigation(
             MapViewer(
                 onBack = navController::navigateUp,
                 stations = args.shortestPath
-            )
-        }
-        baseComposable<NearbyPlaceStationsScreen> {
-            val viewModel: PlaceSelectionViewModel = koinViewModel()
-            val state by viewModel.state.collectAsStateWithLifecycle()
-            PlaceSelection(
-                viewState = state,
-                onBack = navController::navigateUp,
-                onPlaceClick = { lat, long ->
-                    viewModel.getNearbyStations(lat, long)
-                },
-                onStationSelected = { en, fa ->
-                    navController.previousBackStackEntry?.savedStateHandle?.set(
-                        key = "selected_start_station",
-                        value = mapOf(
-                            "en" to en,
-                            "fa" to fa
-                        )
-                    )
-                    navController.popBackStack()
-                },
-                onSearchQueryChanged = { q -> viewModel.onSearchQueryChanged(q) },
             )
         }
 

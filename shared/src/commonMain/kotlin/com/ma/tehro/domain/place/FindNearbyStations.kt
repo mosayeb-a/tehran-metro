@@ -25,7 +25,7 @@ class FindNearbyStations(
                 }
             }
             .sortedBy { it.distanceInMeters }
-            .take(5)
+            .take(3)
             .toList()
     }
 }

@@ -26,7 +26,7 @@ fun BilingualText(
     maxLine: Int = Int.MAX_VALUE,
     spaceBetween: Dp = (-2).dp,
     enSize: TextUnit = 11.sp,
-    enAlpha: Float = .9f,
+    enAlpha: Float = .6f,
     textAlign: TextAlign = TextAlign.Start,
     overflow: TextOverflow = TextOverflow.Ellipsis,
     textColor: Color = Color.White
