@@ -119,7 +119,7 @@ fun NearbyStations(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clip(RoundedCornerShape(12.dp))
+                            .clip(RoundedCornerShape(18.dp))
                             .background(
                                 MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
                             )
