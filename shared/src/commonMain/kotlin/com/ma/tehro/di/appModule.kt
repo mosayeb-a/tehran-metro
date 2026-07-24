@@ -15,6 +15,7 @@ import com.ma.tehro.data.podcast.repository.source.remote.PodcastRemoteDataSourc
 import com.ma.tehro.data.podcast.repository.source.remote.PodcastRemoteDataSourceImpl
 import com.ma.tehro.data.preferences.repository.PreferencesRepositoryImpl
 import com.ma.tehro.data.schedule.repository.ScheduleRepositoryImpl
+import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.feedback.repository.FeedbackRepository
 import com.ma.tehro.domain.line.repository.LineRepository
 import com.ma.tehro.domain.path.PathTimeCalculator
@@ -121,11 +122,15 @@ val appModule = module {
             savedStateHandle = get()
         )
     }
-    viewModel<PathViewModel> {
+    viewModel { (from: BilingualName, to: BilingualName, dayOfWeek: Int, departureTime: Double, transferDelayMinutes: Int) ->
         PathViewModel(
+            from = from,
+            to = to,
+            dayOfWeek = dayOfWeek,
+            departureTime = departureTime,
+            transferDelayMinutes = transferDelayMinutes,
             pathRepository = get(),
-            pathTimeCalculator = get(),
-            savedStateHandle = get()
+            pathTimeCalculator = get()
         )
     }
     viewModel<StationSelectorViewModel> {
@@ -139,8 +144,13 @@ val appModule = module {
     viewModel<FeedbackViewModel> {
         FeedbackViewModel(feedbackRepository = get())
     }
-    viewModel<TrainScheduleViewModel> {
-        TrainScheduleViewModel(savedStateHandle = get(), scheduleRepository = get())
+    viewModel { (stationName: String, lineNumber: Int, useBranch: Boolean) ->
+        TrainScheduleViewModel(
+            station = stationName,
+            lineNumber = lineNumber,
+            isBranch = useBranch,
+            scheduleRepository = get()
+        )
     }
     viewModel<StationsMapViewModel> {
         StationsMapViewModel(

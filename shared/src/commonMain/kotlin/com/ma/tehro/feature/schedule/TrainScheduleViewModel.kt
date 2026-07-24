@@ -4,7 +4,9 @@ import androidx.compose.runtime.Immutable
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import com.ma.tehro.common.TimeUtils
+import com.ma.tehro.common.ui.TrainScheduleScreen
 import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.schedule.ScheduleGroup
 import com.ma.tehro.domain.schedule.ScheduleType
@@ -40,8 +42,10 @@ data class TrainScheduleState(
 )
 
 class TrainScheduleViewModel(
-    savedStateHandle: SavedStateHandle,
     private val scheduleRepository: ScheduleRepository,
+    station: String,
+    lineNumber: Int,
+    isBranch: Boolean,
 ) : ViewModel() {
     private val _state = MutableStateFlow(TrainScheduleState())
     val state = _state.asStateFlow()
@@ -50,14 +54,7 @@ class TrainScheduleViewModel(
     private val timeScope = CoroutineScope(Dispatchers.Default + timeUpdateJob)
 
     init {
-        val stationName = savedStateHandle.get<String>("enStationName")
-            ?: error("enStationName is required")
-        val lineNumber = savedStateHandle.get<Int>("lineNumber")
-            ?: error("lineNumber is required")
-        val isBranch = savedStateHandle.get<Boolean>("useBranch")
-            ?: error("useBranch is required")
-
-        loadSchedules(stationName, lineNumber, isBranch)
+        loadSchedules(station, lineNumber, isBranch)
 
         timeScope.launch {
             while (isActive) {
