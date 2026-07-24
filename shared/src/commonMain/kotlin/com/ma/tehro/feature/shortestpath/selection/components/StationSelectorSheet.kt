@@ -59,6 +59,7 @@ fun StationSelectorSheet(
         skipPartiallyExpanded = true,
         confirmValueChange = { true }
     )
+    val listState = rememberLazyListState()
 
     val nearbyStations = when (val currentMode = mode) {
         is StationSearchMode.Nearby -> {
@@ -138,7 +139,6 @@ fun StationSelectorSheet(
             ) { currentMode ->
                 when (currentMode) {
                     is StationSearchMode.Search -> {
-                        val listState = rememberLazyListState()
                         LazyColumn(
                             state = listState,
                             modifier = Modifier
