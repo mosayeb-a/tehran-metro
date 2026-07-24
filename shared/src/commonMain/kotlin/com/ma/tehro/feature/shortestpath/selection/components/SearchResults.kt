@@ -143,7 +143,7 @@ fun LazyListScope.SearchResults(
 
         items(
             items = placesNearMe,
-            key = { "place_${it.name}" }
+            key = { "nearby_${it.name}_${it.latitude}_${it.longitude}" }
         ) { place ->
             PlaceItem(
                 place = place,
@@ -191,7 +191,7 @@ fun LazyListScope.SearchResults(
 
         items(
             items = places,
-            key = { "place_${it.name}" }
+            key = { "place_${it.name}_${it.latitude}_${it.longitude}" }
         ) { place ->
             PlaceItem(
                 place = place,
