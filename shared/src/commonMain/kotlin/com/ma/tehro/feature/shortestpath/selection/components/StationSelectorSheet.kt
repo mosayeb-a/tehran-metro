@@ -25,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.TehroSearchBar
 import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.data.place.Place
@@ -175,7 +176,7 @@ fun StationSelectorSheet(
 
                     is StationSearchMode.Nearby -> {
                         NearbyStations(
-                            locationName = locationName,
+                            locationName = locationName.toFarsiNumber(),
                             nearbyStations = nearbyStations,
                             isLoading = isLoadingNearby,
                             onStationSelected = { nearbyStation ->
