@@ -27,6 +27,7 @@ import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.ui.timelineview.TimelineView
 import com.ma.tehro.common.ui.timelineview.TimelineView.SingleNode
 import com.ma.tehro.common.toImageBitmap
+import androidx.compose.ui.text.style.TextOverflow
 
 @Composable
 fun PinableTitle(
@@ -65,9 +66,11 @@ fun PinableTitle(
             color = MaterialTheme.colorScheme.onBackground.copy(alpha = .92f),
             fontSize = 11.sp,
             modifier = Modifier.weight(1f),
-            maxLines = 2,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
             textAlign = TextAlign.Start
         )
+
         Text(
             text = fa,
             style = MaterialTheme.typography.labelSmall,

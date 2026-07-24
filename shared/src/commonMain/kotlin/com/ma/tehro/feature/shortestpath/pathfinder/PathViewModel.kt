@@ -1,11 +1,8 @@
 package com.ma.tehro.feature.shortestpath.pathfinder
 
 import androidx.compose.runtime.Stable
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.toRoute
-import com.ma.tehro.common.ui.PathFinderScreen
 import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.path.PathItem
 import com.ma.tehro.domain.path.Step
@@ -19,43 +16,45 @@ import kotlinx.coroutines.launch
 @Stable
 data class PathFinderState(
     val shortestPath: List<PathItem> = emptyList(),
-    val estimatedTime: BilingualName? = null,
-    val stationTimes: Map<String, String> = emptyMap(),
+    val totalTravelTime: BilingualName? = null,
+    val arrivalTimes: Map<String, String> = emptyMap(),
     val warningMessage: String? = null
 )
 
 class PathViewModel(
+    private val from: BilingualName,
+    private val to: BilingualName,
+    private val dayOfWeek: Int,
+    private val departureTime: Double,
+    private val transferDelayMinutes: Int,
     private val pathRepository: PathRepository,
     private val pathTimeCalculator: PathTimeCalculator,
-    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(PathFinderState())
     val state: StateFlow<PathFinderState> get() = _state
 
     init {
-        val args = savedStateHandle.toRoute<PathFinderScreen>()
         viewModelScope.launch {
             val path = pathRepository
-                .findShortestPathWithDirection(args.startEnStation, args.enDestination)
+                .findShortestPathWithDirection(from.en, to.en)
             _state.update { it.copy(shortestPath = path) }
 
             val result = pathTimeCalculator.calculateStationTimes(
                 path = path,
-                lineChangeDelayMinutes = args.lineChangeDelayMinutes,
-                dayOfWeek = args.dayOfWeek,
-                currentTime = args.currentTime
+                lineChangeDelayMinutes = transferDelayMinutes,
+                dayOfWeek = dayOfWeek,
+                currentTime = departureTime
             )
             _state.update {
                 it.copy(
-                    stationTimes = result.stationTimes,
-                    estimatedTime = result.estimatedTime,
+                    arrivalTimes = result.stationTimes,
+                    totalTravelTime = result.estimatedTime,
                     warningMessage = result.warning
                 )
             }
         }
     }
-
 
     fun generateGuidSteps(): List<Step> {
         val steps = mutableListOf<Step>()

@@ -50,16 +50,14 @@ import com.ma.tehro.feature.shortestpath.pathfinder.components.StationRow
 @Composable
 fun PathFinder(
     modifier: Modifier = Modifier,
-    fromEn: String,
-    fromFa: String,
-    toEn: String,
-    toFa: String,
+    from: BilingualName,
+    to: BilingualName,
     state: PathFinderState,
-    onBack: () -> Unit,
     onStationClick: (station: Station, lineNumber: Int) -> Unit,
-    onInfoClick: () -> Unit,
+    onRouteGuideClick: () -> Unit,
     onMetroMapClick: (shortestPath: List<String>) -> Unit,
-    lineChangeDelayMinutes: Int,
+    transferDelayMinutes: Int,
+    onBack: () -> Unit,
 ) {
     val titleIndices = remember(state.shortestPath) {
         state.shortestPath.mapIndexedNotNull { index, item ->
@@ -74,11 +72,11 @@ fun PathFinder(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             PathFinderAppbar(
-                from = BilingualName(en = fromEn, fa = fromFa),
-                to = BilingualName(en = toEn, fa = toFa),
+                from = BilingualName(en = from.en, fa = from.fa),
+                to = BilingualName(en = to.en, fa = to.fa),
                 onBack = onBack,
-                estimatedTime = state.estimatedTime,
-                lineChangeDelayMinutes = lineChangeDelayMinutes,
+                estimatedTime = state.totalTravelTime,
+                lineChangeDelayMinutes = transferDelayMinutes,
                 warningMessage = state.warningMessage
             )
         },
@@ -136,7 +134,7 @@ fun PathFinder(
                                     isLastItem = index == state.shortestPath.size - 1,
                                     disabled = item.isPassthrough,
                                     lineNumber = item.lineNumber,
-                                    arrivalTime = state.stationTimes[item.station.name]
+                                    arrivalTime = state.arrivalTimes[item.station.name]
                                 )
                                 Box(
                                     modifier = Modifier
@@ -167,7 +165,6 @@ fun PathFinder(
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(Alignment.TopCenter)
-//                        .offset(y = padding.calculateTopPadding())
                         .zIndex(1f), label = ""
                 ) { title ->
                     title?.let {
@@ -186,7 +183,7 @@ fun PathFinder(
                 modifier = Modifier
                     .align(Alignment.BottomCenter),
                 lazyListState = lazyListState,
-                onInfoClick = onInfoClick,
+                onInfoClick = onRouteGuideClick,
                 onMapClick = {
                     onMetroMapClick(
                         state.shortestPath

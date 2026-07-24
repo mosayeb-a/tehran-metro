@@ -28,6 +28,7 @@ import com.ma.tehro.common.ui.StationSelectorScreen
 import com.ma.tehro.common.ui.StationsScreen
 import com.ma.tehro.common.ui.SubmitFeedbackScreen
 import com.ma.tehro.common.ui.TrainScheduleScreen
+import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.line.Station
 import com.ma.tehro.domain.path.Step
 import com.ma.tehro.feature.detail.StationDetail
@@ -49,9 +50,10 @@ import com.ma.tehro.feature.schedule.TrainScheduleViewModel
 import com.ma.tehro.feature.shortestpath.guide.PathDescription
 import com.ma.tehro.feature.shortestpath.pathfinder.PathFinder
 import com.ma.tehro.feature.shortestpath.pathfinder.PathViewModel
-import com.ma.tehro.feature.shortestpath.selection.StationSelectorViewModel
 import com.ma.tehro.feature.shortestpath.selection.StationSelector
+import com.ma.tehro.feature.shortestpath.selection.StationSelectorViewModel
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 import kotlin.jvm.JvmSuppressWildcards
 import kotlin.reflect.KType
 import kotlin.reflect.typeOf
@@ -138,18 +140,18 @@ fun TehroNavigation(
                 searchQuery = searchQuery,
                 onSearchQueryChanged = viewModel::setSearchQuery,
                 onSelectStation = { isFrom, station ->
-                    if (isFrom) viewModel.setFromStation(station) else viewModel.setToStation(station)
+                    if (isFrom) viewModel.setFromStation(station) else viewModel.setToStation(
+                        station
+                    )
                 },
-                onFindPath = { from, to, lineChangeDelayMinutes, dayOfWeek, currentTime ->
+                onFindPath = { from, to, delay, dayOfWeek, time ->
                     navController.navigate(
                         PathFinderScreen(
-                            startEnStation = from.en,
-                            startFaStation = from.fa,
-                            enDestination = to.en,
-                            faDestination = to.fa,
+                            from = from,
+                            to = to,
                             dayOfWeek = dayOfWeek,
-                            currentTime = currentTime,
-                            lineChangeDelayMinutes = lineChangeDelayMinutes
+                            departureTime = time,
+                            transferDelayMinutes = delay
                         )
                     )
                 },
@@ -164,15 +166,26 @@ fun TehroNavigation(
             )
         }
 
-        baseComposable<PathFinderScreen> { backStackEntry ->
-            val viewModel: PathViewModel = koinViewModel()
-            val state by viewModel.state.collectAsStateWithLifecycle()
+        baseComposable<PathFinderScreen>(
+            typeMap = mapOf(typeOf<BilingualName>() to navTypeOf<BilingualName>()),
+        ) { backStackEntry ->
             val args: PathFinderScreen = backStackEntry.toRoute()
+            val viewModel: PathViewModel = koinViewModel {
+                parametersOf(
+                    args.from,
+                    args.to,
+                    args.dayOfWeek,
+                    args.departureTime,
+                    args.transferDelayMinutes
+                )
+            }
+            val state by viewModel.state.collectAsStateWithLifecycle()
+
             PathFinder(
                 state = state,
                 onBack = navController::navigateUp,
-                fromEn = args.startEnStation,
-                toEn = args.enDestination,
+                from = args.from,
+                to = args.to,
                 onStationClick = { station, line ->
                     navController.navigate(
                         StationDetailScreen(
@@ -182,12 +195,10 @@ fun TehroNavigation(
                         )
                     )
                 },
-                fromFa = args.startFaStation,
-                toFa = args.faDestination,
-                onInfoClick = {
+                onRouteGuideClick = {
                     navController.navigate(PathDescriptionScreen(viewModel.generateGuidSteps()))
                 },
-                lineChangeDelayMinutes = args.lineChangeDelayMinutes,
+                transferDelayMinutes = args.transferDelayMinutes,
                 onMetroMapClick = { path ->
                     navController.navigate(MapViewerScreen(shortestPath = path))
                 }
@@ -202,25 +213,29 @@ fun TehroNavigation(
                 onBack = navController::navigateUp,
                 lineNumber = args.lineNumber,
                 useBranch = args.useBranch,
-                onTrainScheduleClick = { name, fa, line, useBranch ->
+                onTrainScheduleClick = { station, line, useBranch ->
                     navController.navigate(
                         TrainScheduleScreen(
-                            enStationName = name,
+                            station = station,
                             lineNumber = line,
                             useBranch = useBranch,
-                            faStationName = fa
                         )
                     )
                 }
             )
         }
-        baseComposable<TrainScheduleScreen> {
-            val viewModel: TrainScheduleViewModel = koinViewModel()
-            val state by viewModel.state.collectAsStateWithLifecycle()
+        baseComposable<TrainScheduleScreen>(
+            typeMap = mapOf(typeOf<BilingualName>() to navTypeOf<BilingualName>())
+        ) {
             val args = it.toRoute<TrainScheduleScreen>()
+            val viewModel: TrainScheduleViewModel = koinViewModel {
+                parametersOf(args.station.en, args.lineNumber, args.useBranch)
+            }
+            val state by viewModel.state.collectAsStateWithLifecycle()
+
             TrainSchedule(
                 state = state,
-                faStationName = args.faStationName,
+                faStationName = args.station.fa,
                 lineNumber = args.lineNumber,
                 onBack = navController::navigateUp,
                 onScheduleTypeSelected = { destination, scheduleType ->

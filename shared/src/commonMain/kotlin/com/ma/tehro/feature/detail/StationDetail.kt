@@ -54,11 +54,11 @@ import com.ma.tehro.feature.detail.components.TrainScheduleButton
 
 @Composable
 fun StationDetail(
-    onBack: () -> Unit ,
+    onBack: () -> Unit,
     useBranch: Boolean,
     station: Station,
     lineNumber: Int,
-    onTrainScheduleClick: (stationName: String, faStationName: String, lineNumber: Int, useBranch: Boolean) -> Unit
+    onTrainScheduleClick: (station: BilingualName, lineNumber: Int, useBranch: Boolean) -> Unit
 ) {
     val lineName = remember(lineNumber) { calculateLineName(lineNumber, useBranch) }
     val lineColor = remember { getLineColorByNumber(lineNumber) }
@@ -227,8 +227,10 @@ fun StationDetail(
                     lineColor = lineColor,
                     onClick = {
                         onTrainScheduleClick(
-                            station.name,
-                            station.translations.fa,
+                            BilingualName(
+                                en = station.name,
+                                fa = station.translations.fa,
+                            ),
                             lineNumber,
                             useBranch
                         )
