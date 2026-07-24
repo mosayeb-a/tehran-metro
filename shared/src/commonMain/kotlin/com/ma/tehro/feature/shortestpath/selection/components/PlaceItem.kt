@@ -25,6 +25,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.data.place.Place
 
 @Composable
@@ -60,7 +61,7 @@ fun PlaceItem(
             horizontalAlignment = Alignment.End
         ) {
             Text(
-                text = place.name,
+                text = place.name.toFarsiNumber(),
                 style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.W500,
                 color = Color.White,

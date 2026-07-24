@@ -59,9 +59,8 @@ fun LazyListScope.SearchResults(
                 )
 
                 HorizontalDivider(
-                    color = MaterialTheme.colorScheme.onSecondaryContainer.copy(
-                        alpha = 0.12f
-                    )
+                    color = MaterialTheme.colorScheme
+                        .onSecondaryContainer.copy(alpha = 0.12f)
                 )
 
                 QuickActionItem(
