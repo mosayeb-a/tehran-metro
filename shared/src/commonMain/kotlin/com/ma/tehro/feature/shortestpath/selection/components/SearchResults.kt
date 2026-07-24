@@ -10,8 +10,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.LocationCity
 import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material.icons.outlined.Map
+import androidx.compose.material.icons.outlined.MyLocation
 import androidx.compose.material.icons.rounded.DirectionsRailway
 import androidx.compose.material.icons.rounded.LocationCity
 import androidx.compose.material3.CircularProgressIndicator
@@ -47,7 +49,7 @@ fun LazyListScope.SearchResults(
                 QuickActionItem(
                     icon = {
                         Icon(
-                            Icons.Outlined.LocationOn,
+                            Icons.Outlined.MyLocation,
                             contentDescription = null,
                             modifier = Modifier.size(24.dp),
                             tint = MaterialTheme.colorScheme.onSecondaryContainer
@@ -85,7 +87,7 @@ fun LazyListScope.SearchResults(
                 QuickActionItem(
                     icon = {
                         Icon(
-                            Icons.Outlined.LocationOn,
+                            Icons.Outlined.LocationCity,
                             contentDescription = null,
                             modifier = Modifier.size(24.dp),
                             tint = MaterialTheme.colorScheme.onSecondaryContainer
