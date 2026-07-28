@@ -35,14 +35,14 @@ fun TrainScheduleButton(
     ) {
         Icon(
             imageVector = Icons.Rounded.DirectionsSubway,
-            contentDescription = "train schedule"
+            contentDescription = "زمان‌بندی حرکت قطار"
         )
         BilingualText(
             fa = "زمان‌بندی حرکت قطار",
             en = "TRAIN SCHEDULE",
             style = MaterialTheme.typography.labelSmall,
             textAlign = TextAlign.Center,
-            enSize = 11.sp
+            enSize = 10.sp
         )
     }
 }

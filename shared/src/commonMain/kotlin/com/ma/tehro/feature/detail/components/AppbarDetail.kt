@@ -23,14 +23,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ma.tehro.domain.common.BilingualName
 
 
 @Composable
 fun AppbarDetail(
     modifier: Modifier = Modifier,
-    text: String,
-    fa: String,
-    en: String,
+    station: BilingualName,
+    address: String,
     lineColor: Color
 ) {
     Column(modifier = modifier) {
@@ -47,7 +47,7 @@ fun AppbarDetail(
                     modifier = Modifier
                         .wrapContentWidth()
                         .fillMaxWidth(),
-                    text = fa,
+                    text = station.fa,
                     style = MaterialTheme.typography.bodyLarge.copy(
                         fontWeight = FontWeight.W500,
                         fontSize = 20.sp
@@ -58,7 +58,7 @@ fun AppbarDetail(
                     modifier = Modifier
                         .wrapContentWidth()
                         .fillMaxWidth(),
-                    text = en.uppercase(),
+                    text = station.en.uppercase(),
                     style = MaterialTheme.typography.bodyMedium.copy(fontSize = 12.sp),
                     textAlign = TextAlign.Center
                 )
@@ -73,7 +73,7 @@ fun AppbarDetail(
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                text = text,
+                text = address,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 style = MaterialTheme.typography.labelMedium,
@@ -83,7 +83,7 @@ fun AppbarDetail(
             Icon(
                 modifier = Modifier.size(18.dp),
                 imageVector = Icons.Rounded.LocationOn,
-                contentDescription = "address"
+                contentDescription = "آدرس"
             )
         }
     }

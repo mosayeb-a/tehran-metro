@@ -209,9 +209,11 @@ fun StationDetail(
                         .background(MaterialTheme.colorScheme.secondary),
                 )
                 AppbarDetail(
-                    text = station.address ?: "آدرس مشخص نشده",
-                    fa = station.translations.fa,
-                    en = station.name,
+                    station = BilingualName(
+                        fa = station.translations.fa,
+                        en = station.name
+                    ),
+                    address = station.address ?: "آدرس مشخص نشده",
                     lineColor = lineColor
                 )
             }
