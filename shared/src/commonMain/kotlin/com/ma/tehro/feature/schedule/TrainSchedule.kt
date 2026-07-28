@@ -21,8 +21,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,7 +38,7 @@ import com.ma.tehro.common.ui.Message
 import com.ma.tehro.common.ui.TehroHorizontalDivider
 import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.domain.common.BilingualName
-import com.ma.tehro.domain.schedule.ScheduleGroup
+import com.ma.tehro.domain.schedule.StationSchedule
 import com.ma.tehro.domain.schedule.ScheduleType
 import com.ma.tehro.feature.schedule.components.ScheduleTypeChips
 import com.ma.tehro.feature.schedule.components.TimeListItem
@@ -44,7 +47,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun TrainSchedule(
     modifier: Modifier = Modifier,
-    faStationName: String,
+    station: BilingualName,
     lineNumber: Int,
     state: TrainScheduleState,
     onBack: () -> Unit,
@@ -61,8 +64,8 @@ fun TrainSchedule(
                     .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Top))
             ) {
                 Appbar(
-                    fa = "زمان‌بندی حرکت قطار برای ایستگاه $faStationName",
-                    en = "train schedule for ${state.stationName}",
+                    fa = "زمان‌بندی ایستگاه ${station.fa}",
+                    en = "schedule for ${station.en}",
                     onBackClick = onBack,
                     modifier = Modifier.height(43.dp),
                     backgroundColor = lineColor
@@ -70,11 +73,10 @@ fun TrainSchedule(
                 if (state.schedules.isNotEmpty()) {
                     Content(
                         schedules = state.schedules,
-                        processedSchedules = state.processedSchedules,
+                        selectedTypes = state.selectedTypes,
                         onScheduleTypeSelected = onScheduleTypeSelected,
-                        selectedScheduleTypes = state.selectedScheduleTypes,
                         lineColor = lineColor,
-                        currentTimeAsDouble = state.currentTimeAsDouble
+                        currentTime = state.currentTime
                     )
                 }
             }
@@ -92,7 +94,7 @@ fun TrainSchedule(
             else ->
                 Message(
                     modifier = Modifier.fillMaxSize(),
-                    faMessage = "هیچ زمان‌بندی‌ای برای این ایستگاه ثبت نشده. به‌احتمالِ زیاد، ایستگاه غیرفعال است",
+                    faMessage = "زمان‌بندی‌ای برای این ایستگاه موجود نیست. به نظر می‌رسد ایستگاه غیرفعال است",
                     faces = EmptyStatesFaces.sad
                 )
         }
@@ -102,14 +104,13 @@ fun TrainSchedule(
 @Composable
 fun Content(
     modifier: Modifier = Modifier,
-    schedules: List<ScheduleGroup>,
-    processedSchedules: Map<BilingualName, List<ScheduleSection>>,
-    selectedScheduleTypes: Map<BilingualName, ScheduleType?>,
+    schedules: Map<BilingualName, List<ScheduleSection>>,
+    selectedTypes: Map<BilingualName, ScheduleType?>,
     onScheduleTypeSelected: (BilingualName, ScheduleType?) -> Unit,
     lineColor: Color,
-    currentTimeAsDouble: Double,
+    currentTime: Double,
 ) {
-    val destinations = remember(schedules) { schedules.map { it.destination } }
+    val destinations = remember(schedules) { schedules.keys.toList() }
 
     DraggableTabRow(
         modifier = modifier
@@ -118,18 +119,19 @@ fun Content(
         tabsList = destinations,
         lineColor = lineColor,
         onTabSelected = { page, lazyListState ->
-            val currentSchedule = schedules.getOrNull(page)
-            if (currentSchedule != null) {
-                val destination = currentSchedule.destination
+            val destination = destinations.getOrNull(page)
+            if (destination != null) {
+                val sections = schedules[destination] ?: emptyList()
+                val selectedType = selectedTypes[destination]
+
                 ScheduleList(
-                    scheduleInfo = currentSchedule,
-                    processedSections = processedSchedules[destination] ?: emptyList(),
+                    sections = sections,
+                    selectedType = selectedType,
                     lazyListState = lazyListState,
-                    selectedType = selectedScheduleTypes[destination],
                     onScheduleTypeSelected = { scheduleType ->
                         onScheduleTypeSelected(destination, scheduleType)
                     },
-                    currentTimeAsDouble = currentTimeAsDouble,
+                    currentTime = currentTime,
                 )
             }
         }
@@ -138,20 +140,21 @@ fun Content(
 
 @Composable
 private fun ScheduleList(
-    scheduleInfo: ScheduleGroup,
-    processedSections: List<ScheduleSection>,
+    sections: List<ScheduleSection>,
+    selectedType: ScheduleType?,
     lazyListState: LazyListState,
     modifier: Modifier = Modifier,
-    selectedType: ScheduleType?,
     onScheduleTypeSelected: (ScheduleType?) -> Unit,
-    currentTimeAsDouble: Double,
+    currentTime: Double,
 ) {
     val coroutineScope = rememberCoroutineScope()
-    LaunchedEffect(Unit) {
+    val availableTypes = remember(sections) { sections.map { it.type }.distinct() }
+
+    LaunchedEffect(selectedType, sections) {
         val sectionsToShow = if (selectedType != null) {
-            processedSections.filter { it.type == selectedType }
+            sections.filter { it.type == selectedType }
         } else {
-            processedSections
+            sections
         }
 
         var targetIndex = 0
@@ -159,7 +162,7 @@ private fun ScheduleList(
 
         sectionsToShow.forEach { section ->
             if (!found && section.isCurrentDay) {
-                val firstActiveTimeIndex = section.times.indexOfFirst { it > currentTimeAsDouble }
+                val firstActiveTimeIndex = section.times.indexOfFirst { it > currentTime }
                 if (firstActiveTimeIndex != -1) {
                     targetIndex += firstActiveTimeIndex
                     found = true
@@ -184,7 +187,7 @@ private fun ScheduleList(
             modifier = modifier.fillMaxSize()
         ) {
             ScheduleTypeChips(
-                scheduleTypes = scheduleInfo.schedules.keys.toList(),
+                scheduleTypes = availableTypes,
                 selectedType = selectedType,
                 onScheduleTypeSelected = onScheduleTypeSelected
             )
@@ -196,9 +199,9 @@ private fun ScheduleList(
                 contentPadding = PaddingValues(vertical = 8.dp)
             ) {
                 val sectionsToShow = if (selectedType != null) {
-                    processedSections.filter { it.type == selectedType }
+                    sections.filter { it.type == selectedType }
                 } else {
-                    processedSections
+                    sections
                 }
 
                 sectionsToShow.forEach { section ->
@@ -206,14 +209,14 @@ private fun ScheduleList(
                         items = section.times,
                         key = { time -> "${section.type.name}_$time" }
                     ) { time ->
-                        val isFirstActiveTime = remember(section.times, currentTimeAsDouble) {
+                        val isFirstActiveTime = remember(section.times, currentTime) {
                             section.isCurrentDay &&
-                                    time == section.times.firstOrNull { it > currentTimeAsDouble }
+                                    time == section.times.firstOrNull { it > currentTime }
                         }
 
                         TimeListItem(
                             time = time,
-                            currentTimeAsDouble = currentTimeAsDouble,
+                            currentTimeAsDouble = currentTime,
                             isCurrentDaySchedule = section.isCurrentDay,
                             isFirstActiveTime = isFirstActiveTime
                         )

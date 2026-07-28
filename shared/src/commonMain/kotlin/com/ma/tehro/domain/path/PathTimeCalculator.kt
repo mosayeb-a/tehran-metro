@@ -84,12 +84,12 @@ class PathTimeCalculator(
                     println("using: ${scheduleInfo.destination.en}")
 
                     val todaySchedule = TimeUtils.getScheduleTypeForCurrentDay(
-                        scheduleTypes = scheduleInfo.schedules.keys.toList(),
+                        scheduleTypes = scheduleInfo.timetable.keys.toList(),
                         dayOfWeek = dayOfWeek
                     )
                     println("schedule type: $todaySchedule")
 
-                    val schedules = scheduleInfo.schedules[todaySchedule]?.sorted()
+                    val schedules = scheduleInfo.timetable[todaySchedule]?.sorted()
                         ?: return@forEach
                     println("train times: ${schedules.take(3)}")
 
