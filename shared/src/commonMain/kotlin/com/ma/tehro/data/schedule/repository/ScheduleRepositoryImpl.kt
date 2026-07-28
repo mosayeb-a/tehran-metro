@@ -49,10 +49,15 @@ class ScheduleRepositoryImpl(
 
         if (endpointsEn == null || endpointsFa == null) return emptyList()
 
+        println("schedule data keys: ${scheduleData.keys}")
+
         return scheduleData
             .map { (scheduleKey, times) ->
                 val scheduleType = ScheduleType.fromScheduleKey(scheduleKey)
-                val towardsStation = scheduleKey.substringBefore(scheduleType?.id?.toString() ?: "")
+                val towardsStation = scheduleKey.substringBeforeLast(scheduleType?.id?.toString() ?: "")
+
+                println("key: $scheduleKey, type: $scheduleType, towards: $towardsStation")
+
                 val (validEn, validFa) = when (towardsStation) {
                     endpointsEn.first -> endpointsEn.first to endpointsFa.first
                     endpointsEn.second -> endpointsEn.second to endpointsFa.second
