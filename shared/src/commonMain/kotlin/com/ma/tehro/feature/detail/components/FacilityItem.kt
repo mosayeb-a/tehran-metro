@@ -70,7 +70,7 @@ fun FacilityChip(
                 fa = fa,
                 en = en.uppercase(),
                 style = MaterialTheme.typography.labelMedium,
-                textAlign = TextAlign.End,
+                textAlign = TextAlign.Start,
                 textColor = MaterialTheme.colorScheme.onSurface
             )
         }
