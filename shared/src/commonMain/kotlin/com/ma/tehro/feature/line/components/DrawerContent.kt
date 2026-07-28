@@ -2,6 +2,7 @@ package com.ma.tehro.feature.line.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -20,7 +21,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.Send
 import androidx.compose.material.icons.filled.HdrStrong
 import androidx.compose.material.icons.rounded.FormatListNumbered
-import androidx.compose.material.icons.rounded.Headphones
 import androidx.compose.material.icons.rounded.Map
 import androidx.compose.material.icons.rounded.MyLocation
 import androidx.compose.material3.HorizontalDivider
@@ -34,6 +34,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.ma.tehro.common.toFarsiNumber
+import com.ma.tehro.common.ui.TehroIcon
 import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.shared.BuildKonfig
 import com.ma.thero.resources.Res
@@ -59,7 +60,21 @@ fun DrawerContent(
         LazyColumn(
             modifier = Modifier.weight(1f)
         ) {
-            item { Spacer(Modifier.height(56.dp)) }
+            item {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(56.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    TehroIcon(
+                        size = 52.dp,
+                        cornerRadius = 18.dp,
+                    )
+                }
+            }
+
+            item { Spacer(Modifier.height(8.dp)) }
 
             item("lines") {
                 DrawerItem(

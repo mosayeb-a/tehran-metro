@@ -1,19 +1,13 @@
 package com.ma.tehro.feature.more
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.BugReport
 import androidx.compose.material.icons.rounded.Coffee
@@ -26,19 +20,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ma.tehro.common.ui.TehroIcon
 import com.ma.tehro.common.ui.theme.Themes
 import com.ma.tehro.feature.more.components.AboutItem
 import com.ma.tehro.feature.more.components.AppThemeItem
-import com.ma.thero.resources.Res
-import com.ma.thero.resources.icon
-import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun More(
@@ -63,25 +53,10 @@ fun More(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .size(84.dp)
-                            .border(
-                                width = 1.dp,
-                                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.1f),
-                                shape = RoundedCornerShape(28.dp)
-                            )
-                            .clip(RoundedCornerShape(16.dp))
-                    ) {
-                        Image(
-                            painter = painterResource(Res.drawable.icon),
-                            contentDescription = "",
-                            modifier = Modifier
-                                .padding(2.dp)
-                                .fillMaxSize(),
-                            contentScale = ContentScale.FillBounds
-                        )
-                    }
+                    TehroIcon(
+                        size = 84.dp,
+                        cornerRadius = 28.dp,
+                    )
                     Spacer(Modifier.height(36.dp))
                     HorizontalDivider(color = MaterialTheme.colorScheme.onBackground.copy(alpha = .28f))
                 }
