@@ -1,14 +1,10 @@
 package com.ma.tehro.feature.schedule
 
 import androidx.compose.runtime.Immutable
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.toRoute
 import com.ma.tehro.common.TimeUtils
-import com.ma.tehro.common.ui.TrainScheduleScreen
 import com.ma.tehro.domain.common.BilingualName
-import com.ma.tehro.domain.schedule.ScheduleGroup
 import com.ma.tehro.domain.schedule.ScheduleType
 import com.ma.tehro.domain.schedule.repository.ScheduleRepository
 import kotlinx.coroutines.CoroutineScope
@@ -20,6 +16,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlin.collections.mapValues
 import kotlin.time.Clock
 
 @Immutable
@@ -31,14 +28,10 @@ data class ScheduleSection(
 
 @Immutable
 data class TrainScheduleState(
-    val stationName: String = "",
-    val lineNumber: Int = 0,
-    val schedules: List<ScheduleGroup> = emptyList(),
-    val selectedScheduleTypes: Map<BilingualName, ScheduleType?> = emptyMap(),
-    val currentTimeAsDouble: Double = 0.0,
-    val currentDayType: ScheduleType? = null,
+    val schedules: Map<BilingualName, List<ScheduleSection>> = emptyMap(),
+    val selectedTypes: Map<BilingualName, ScheduleType?> = emptyMap(),
+    val currentTime: Double = 0.0,
     val isLoading: Boolean = true,
-    val processedSchedules: Map<BilingualName, List<ScheduleSection>> = emptyMap(),
 )
 
 class TrainScheduleViewModel(
@@ -58,29 +51,23 @@ class TrainScheduleViewModel(
 
         timeScope.launch {
             while (isActive) {
-                _state.update { it.copy(currentTimeAsDouble = TimeUtils.getCurrentTimeAsDouble()) }
+                _state.update { it.copy(currentTime = TimeUtils.getCurrentTimeAsDouble()) }
                 delay(1000 - (Clock.System.now().toEpochMilliseconds() % 1000))
             }
         }
     }
 
     private fun loadSchedules(stationName: String, lineNumber: Int, isBranch: Boolean) {
-        viewModelScope.launch(Dispatchers.Default) {
-            val schedules = scheduleRepository.getByStation(stationName, lineNumber, isBranch)
+        viewModelScope.launch {
+            val rawSchedules = scheduleRepository.getByStation(stationName, lineNumber, isBranch)
 
             val currentDayType = TimeUtils.getScheduleTypeForCurrentDay(
-                scheduleTypes = schedules.flatMap { it.schedules.keys }
+                scheduleTypes = rawSchedules.flatMap { it.timetable.keys }
             )
             val currentTime = TimeUtils.getCurrentTimeAsDouble()
 
-            val processedData = schedules.associate { groupInfo ->
-                val selectedType = groupInfo.schedules.keys.run {
-                    find { it == currentDayType }
-                        ?: find { it == ScheduleType.ALL_DAY }
-                        ?: firstOrNull()
-                }
-
-                val sections = groupInfo.schedules.map { (type, times) ->
+            val scheduleData = rawSchedules.associate { stationSchedule ->
+                val sections = stationSchedule.timetable.map { (type, times) ->
                     ScheduleSection(
                         type = type,
                         times = times,
@@ -88,45 +75,32 @@ class TrainScheduleViewModel(
                     )
                 }
 
-                groupInfo.destination to Pair(selectedType, sections)
+                val defaultSelectedType = stationSchedule.timetable.keys.run {
+                    find { it == currentDayType }
+                        ?: find { it == ScheduleType.ALL_DAY }
+                        ?: firstOrNull()
+                }
+
+                stationSchedule.destination to Pair(sections, defaultSelectedType)
             }
 
             _state.update {
                 it.copy(
                     isLoading = false,
-                    schedules = schedules,
-                    stationName = stationName,
-                    lineNumber = lineNumber,
-                    selectedScheduleTypes = processedData.mapValues { it.value.first },
-                    currentDayType = currentDayType,
-                    processedSchedules = processedData.mapValues { it.value.second },
-                    currentTimeAsDouble = currentTime
+                    schedules = scheduleData.mapValues { it.value.first },
+                    selectedTypes = scheduleData.mapValues { it.value.second },
+                    currentTime = currentTime
                 )
             }
         }
     }
 
-    fun onScheduleTypeSelected(destination: BilingualName, scheduleType: ScheduleType?) {
-        viewModelScope.launch(Dispatchers.Default) {
-            val currentState = state.value
-            val schedule = currentState.schedules.find { it.destination == destination }
-
-            schedule?.let {
-                val newSections = it.schedules.map { (type, times) ->
-                    ScheduleSection(
-                        type = type,
-                        times = times,
-                        isCurrentDay = type == currentState.currentDayType ||
-                                type == ScheduleType.ALL_DAY
-                    )
-                }
-
-                _state.update { state ->
-                    state.copy(
-                        selectedScheduleTypes = state.selectedScheduleTypes + (destination to scheduleType),
-                        processedSchedules = state.processedSchedules + (destination to newSections),
-                    )
-                }
+    fun setScheduleType(destination: BilingualName, scheduleType: ScheduleType?) {
+        viewModelScope.launch {
+            _state.update { state ->
+                state.copy(
+                    selectedTypes = state.selectedTypes + (destination to scheduleType)
+                )
             }
         }
     }

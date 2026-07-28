@@ -2,7 +2,7 @@ package com.ma.tehro.domain.schedule
 
 import com.ma.tehro.domain.common.BilingualName
 
-data class ScheduleGroup(
+data class StationSchedule(
     val destination: BilingualName,
-    val schedules: Map<ScheduleType, List<Double>>
+    val timetable: Map<ScheduleType, List<Double>>
 )

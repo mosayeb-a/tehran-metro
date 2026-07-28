@@ -119,7 +119,7 @@ fun DraggableTabRow(
                         ) {
                             BilingualText(
                                 fa = "به سمت ${name.fa}",
-                                en = "To ${name.en}",
+                                en = "TO ${name.en.uppercase()}",
                                 style = MaterialTheme.typography.bodySmall.copy(
                                     color = if (tabIndex == selectedTabIndex.value) {
                                         MaterialTheme.colorScheme.onBackground

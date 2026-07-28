@@ -3,7 +3,7 @@ package com.ma.tehro.data.schedule.repository
 import com.ma.tehro.common.LineEndpoints
 import com.ma.tehro.domain.schedule.ScheduleType
 import com.ma.tehro.domain.common.BilingualName
-import com.ma.tehro.domain.schedule.ScheduleGroup
+import com.ma.tehro.domain.schedule.StationSchedule
 import com.ma.tehro.domain.schedule.repository.ScheduleRepository
 import com.ma.thero.resources.Res
 import kotlinx.serialization.json.Json
@@ -30,7 +30,7 @@ class ScheduleRepositoryImpl(
         stationName: String,
         lineNum: Int,
         isBranch: Boolean,
-    ): List<ScheduleGroup> {
+    ): List<StationSchedule> {
         val schedule = getLineSchedule(lineNum)
         if (schedule.isEmpty()) return emptyList()
 
@@ -67,9 +67,9 @@ class ScheduleRepositoryImpl(
             }
             .groupBy { it.first }
             .map { (destination, schedules) ->
-                ScheduleGroup(
+                StationSchedule(
                     destination = destination,
-                    schedules = schedules.mapNotNull { (_, type, times) ->
+                    timetable = schedules.mapNotNull { (_, type, times) ->
                         type?.let { it to times }
                     }.toMap()
                 )

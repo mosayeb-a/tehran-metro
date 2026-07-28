@@ -235,11 +235,11 @@ fun TehroNavigation(
 
             TrainSchedule(
                 state = state,
-                faStationName = args.station.fa,
+                station = args.station,
                 lineNumber = args.lineNumber,
                 onBack = navController::navigateUp,
                 onScheduleTypeSelected = { destination, scheduleType ->
-                    viewModel.onScheduleTypeSelected(destination, scheduleType)
+                    viewModel.setScheduleType(destination, scheduleType)
                 }
             )
         }
