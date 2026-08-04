@@ -3,10 +3,10 @@ package com.ma.tehro.di
 import com.ma.tehro.data.feedback.repository.FeedbackRepositoryImpl
 import com.ma.tehro.data.line.repository.LineRepositoryImpl
 import com.ma.tehro.data.path.repository.PathRepositoryImpl
-import com.ma.tehro.data.place.PlaceCategory
-import com.ma.tehro.data.place.PlaceCategorySerializer
-import com.ma.tehro.data.place.PlaceType
-import com.ma.tehro.data.place.PlaceTypeSerializer
+import com.ma.tehro.domain.path.PlaceCategory
+import com.ma.tehro.domain.path.PlaceCategorySerializer
+import com.ma.tehro.domain.path.PlaceType
+import com.ma.tehro.domain.path.PlaceTypeSerializer
 import com.ma.tehro.data.place.repository.PlacesRepositoryImpl
 import com.ma.tehro.data.podcast.repository.PodcastRepositoryImpl
 import com.ma.tehro.data.podcast.repository.source.local.PodcastLocalDataSource
@@ -20,8 +20,7 @@ import com.ma.tehro.domain.feedback.repository.FeedbackRepository
 import com.ma.tehro.domain.line.repository.LineRepository
 import com.ma.tehro.domain.path.PathTimeCalculator
 import com.ma.tehro.domain.path.repository.PathRepository
-import com.ma.tehro.domain.place.FindNearbyStations
-import com.ma.tehro.domain.place.GetPlacesByCategory
+import com.ma.tehro.domain.path.FindNearbyStations
 import com.ma.tehro.domain.place.repository.PlacesRepository
 import com.ma.tehro.domain.podcast.repository.PodcastRepository
 import com.ma.tehro.domain.preferences.repository.PreferencesRepository
@@ -35,8 +34,6 @@ import com.ma.tehro.feature.podcast.PodcastViewModel
 import com.ma.tehro.feature.schedule.TrainScheduleViewModel
 import com.ma.tehro.feature.shortestpath.pathfinder.PathViewModel
 import com.ma.tehro.feature.shortestpath.selection.StationSelectorViewModel
-import com.ma.tehro.services.LocationTracker
-import com.ma.tehro.services.LocationTrackerImpl
 import com.russhwolf.settings.ExperimentalSettingsApi
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
@@ -106,9 +103,7 @@ val appModule = module {
     singleOf(::FeedbackRepositoryImpl) { bind<FeedbackRepository>() }
     single<ScheduleRepository> { ScheduleRepositoryImpl(json = get()) }
 
-    single<LocationTracker> { LocationTrackerImpl(locationClient = get(), stations = get()) }
     single<FindNearbyStations> { FindNearbyStations(stations = get()) }
-    single<GetPlacesByCategory> { GetPlacesByCategory(placesRepository = get()) }
 
     single<PreferencesRepository> { PreferencesRepositoryImpl(get()) }
 
@@ -136,9 +131,8 @@ val appModule = module {
     viewModel<StationSelectorViewModel> {
         StationSelectorViewModel(
             pathRepository = get(),
-            locationTracker = get(),
-            getPlacesByCategory = get(),
-            findNearbyStations = get()
+            locationClient = get(),
+            placeRepository = get()
         )
     }
     viewModel<FeedbackViewModel> {

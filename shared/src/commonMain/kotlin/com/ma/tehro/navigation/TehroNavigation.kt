@@ -155,10 +155,7 @@ fun TehroNavigation(
                         )
                     )
                 },
-                onFindNearbyStations = { onError -> viewModel.findNearbyStations(onError = onError) },
-                onFindStationsNearPlace = { place ->
-                    viewModel.findStationsNear(place.latitude, place.longitude)
-                },
+                onSearchNearby = viewModel::searchNearby,
                 onDelayChange = viewModel::setTransferDelay,
                 onTimeChanged = viewModel::setDepartureTime,
                 onDayOfWeekChanged = viewModel::setDayOfWeek,

@@ -1,5 +1,7 @@
 package com.ma.tehro.domain.line
 
+import com.ma.tehro.domain.common.GeoPoint
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -7,8 +9,10 @@ data class Station(
     val name: String,
     val translations: Translations,
     val lines: List<Int> = emptyList(),
-    val longitude: Double? = null,
-    val latitude: Double? = null,
+    @SerialName("longitude")
+    private val _longitude: Double? = null,
+    @SerialName("latitude")
+    private val _latitude: Double? = null,
     val address: String? = null,
     val disabled: Boolean = false,
     val facilities: StationFacilities = StationFacilities(),
@@ -16,7 +20,13 @@ data class Station(
     val safety: StationSafety = StationSafety(),
     val relations: List<String> = emptyList(),
     val positionsInLine: List<PositionInLine> = emptyList(),
-)
+) : GeoPoint {
+    override val latitude: Double
+        get() = requireNotNull(_latitude) { "station $name has no latitude" }
+
+    override val longitude: Double
+        get() = requireNotNull(_longitude) { "station $name has no longitude" }
+}
 
 @Serializable
 data class StationFacilities(

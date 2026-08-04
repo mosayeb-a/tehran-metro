@@ -17,6 +17,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,31 +25,32 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.toFarsiNumber
+import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.common.ui.TehroSearchBar
 import com.ma.tehro.common.ui.drawVerticalScrollbar
-import com.ma.tehro.data.place.Place
-import com.ma.tehro.domain.common.NearbyStation
 import com.ma.tehro.domain.line.Station
+import com.ma.tehro.domain.path.Place
+import com.ma.tehro.feature.shortestpath.selection.NearbyType
+import com.ma.tehro.feature.shortestpath.selection.NearbySource
+import com.ma.tehro.feature.shortestpath.selection.NearbySearchState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StationSelectorSheet(
     stations: List<Station>,
     places: List<Place>,
-    placesNearMe: List<Place>,
-    stationsNearMe: List<NearbyStation>,
-    placeNearbyStations: List<NearbyStation>,
+    nearbyState: NearbySearchState,
     searchQuery: String,
     onSearchQueryChanged: (String) -> Unit,
     onStationSelected: (Station) -> Unit,
     onPlaceSelected: (Place) -> Unit,
-    onNearMeClick: () -> Unit,
+    onSearchNearby: (source: NearbySource, type: NearbyType, onReady: () -> Unit) -> Unit,
     onMapClick: () -> Unit,
-    isLoadingNearbyPlaces: Boolean,
-    isLoadingNearbyStations: Boolean,
-    isLoadingStationsByPlace: Boolean,
     onDismiss: () -> Unit,
 ) {
     var mode by remember {
@@ -61,37 +63,10 @@ fun StationSelectorSheet(
     )
     val listState = rememberLazyListState()
 
-    val nearbyStations = when (val currentMode = mode) {
-        is StationSearchMode.Nearby -> {
-            when (currentMode.source) {
-                NearbySource.CurrentLocation -> stationsNearMe
-                NearbySource.Place -> placeNearbyStations
-            }
-        }
-
-        else -> emptyList()
-    }
-
-    val isLoadingNearby = when (val currentMode = mode) {
-        is StationSearchMode.Nearby -> {
-            when (currentMode.source) {
-                NearbySource.CurrentLocation -> isLoadingNearbyStations
-                NearbySource.Place -> isLoadingStationsByPlace
-            }
-        }
-
-        else -> false
-    }
-
-    val locationName = when (val currentMode = mode) {
-        is StationSearchMode.Nearby -> currentMode.locationName
-        else -> ""
-    }
-
     val isSearchMode = mode is StationSearchMode.Search
 
     val cornerRadius by animateDpAsState(
-        targetValue = if (isSearchMode) 0.dp else 32.dp,
+        targetValue = if (isSearchMode) 0.dp else 42.dp,
         animationSpec = tween(durationMillis = 400)
     )
 
@@ -149,23 +124,31 @@ fun StationSelectorSheet(
                             SearchResults(
                                 stations = stations,
                                 places = places,
-                                placesNearMe = placesNearMe,
                                 searchQuery = searchQuery,
-                                isLoadingNearbyPlaces = isLoadingNearbyPlaces,
                                 onStationSelected = onStationSelected,
                                 onPlaceSelected = { place ->
-                                    mode = StationSearchMode.Nearby(
-                                        source = NearbySource.Place,
-                                        locationName = place.name
-                                    )
-                                    onPlaceSelected(place)
+                                    onSearchNearby(
+                                        NearbySource.Place(place),
+                                        NearbyType.Stations
+                                    ) {
+                                        mode = StationSearchMode.Nearby(
+                                            source = NearbySource.Place(place),
+                                            type = NearbyType.Stations,
+                                            locationName = place.name
+                                        )
+                                    }
                                 },
-                                onNearMeClick = {
-                                    mode = StationSearchMode.Nearby(
-                                        source = NearbySource.CurrentLocation,
-                                        locationName = "موقعیت فعلی"
-                                    )
-                                    onNearMeClick()
+                                onNearMeClick = { content ->
+                                    onSearchNearby(
+                                        NearbySource.CurrentLocation,
+                                        content
+                                    ) {
+                                        mode = StationSearchMode.Nearby(
+                                            source = NearbySource.CurrentLocation,
+                                            type = content,
+                                            locationName = "موقعیت فعلی شما"
+                                        )
+                                    }
                                 },
                                 onMapClick = onMapClick,
                                 onDismiss = onDismiss,
@@ -175,24 +158,75 @@ fun StationSelectorSheet(
                     }
 
                     is StationSearchMode.Nearby -> {
-                        NearbyStations(
-                            locationName = locationName.toFarsiNumber(),
-                            nearbyStations = nearbyStations,
-                            isLoading = isLoadingNearby,
-                            onStationSelected = { nearbyStation ->
-                                onStationSelected(
-                                    Station(
-                                        name = nearbyStation.station.name,
-                                        translations = nearbyStation.station.translations,
-                                    )
+                        when (currentMode.type) {
+                            NearbyType.Stations -> {
+                                NearbyList(
+                                    locationName = currentMode.locationName.toFarsiNumber(),
+                                    nearbyState = nearbyState,
+                                    items = nearbyState.stations,
+                                    onItemSelected = { station ->
+                                        onStationSelected(
+                                            Station(
+                                                name = station.name,
+                                                translations = station.translations,
+                                            )
+                                        )
+                                        onDismiss()
+                                    },
+                                    onBack = {
+                                        mode = StationSearchMode.Search
+                                    },
+                                    onDismiss = onDismiss,
+                                    onRetry = {
+                                        nearbyState.source?.let { request ->
+                                            onSearchNearby(request, currentMode.type) {}
+                                        }
+                                    },
+                                    itemContent = { item, _ ->
+                                        BilingualText(
+                                            fa = item.translations.fa,
+                                            en = item.name.uppercase(),
+                                            style = MaterialTheme.typography.titleMedium.copy(
+                                                fontSize = 16.sp
+                                            ),
+                                        )
+                                    }
                                 )
-                                onDismiss()
-                            },
-                            onBack = {
-                                mode = StationSearchMode.Search
-                            },
-                            onDismiss = onDismiss
-                        )
+                            }
+
+                            NearbyType.Places -> {
+                                NearbyList(
+                                    locationName = currentMode.locationName.toFarsiNumber(),
+                                    nearbyState = nearbyState,
+                                    items = nearbyState.places,
+                                    onItemSelected = { place ->
+                                        onPlaceSelected(place)
+                                        onDismiss()
+                                    },
+                                    onBack = {
+                                        mode = StationSearchMode.Search
+                                    },
+                                    onDismiss = onDismiss,
+                                    onRetry = {
+                                        nearbyState.source?.let { request ->
+                                            onSearchNearby(request, currentMode.type) {}
+                                        }
+                                    },
+                                    itemContent = { item, _ ->
+                                        Text(
+                                            text = item.name,
+                                            style = MaterialTheme.typography.titleMedium.copy(
+                                                fontSize = 16.sp,
+                                                fontWeight = FontWeight.Bold
+                                            ),
+                                            maxLines = 1,
+                                            overflow = TextOverflow.Ellipsis,
+                                            color = MaterialTheme.colorScheme.onSurface
+                                        )
+                                    }
+                                )
+                            }
+                        }
                     }
                 }
             }

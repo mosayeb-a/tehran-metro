@@ -1,4 +1,4 @@
-package com.ma.tehro.domain.place
+package com.ma.tehro.domain.path
 
 import com.ma.tehro.common.calculateDistance
 import com.ma.tehro.domain.common.NearbyStation

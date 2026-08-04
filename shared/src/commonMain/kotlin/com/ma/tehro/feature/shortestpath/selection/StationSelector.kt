@@ -31,7 +31,7 @@ import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.TehroHorizontalDivider
 import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.common.ui.theme.Red
-import com.ma.tehro.data.place.Place
+import com.ma.tehro.domain.path.Place
 import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.line.Station
 import com.ma.tehro.feature.shortestpath.selection.components.DaySelectorSheet
@@ -52,8 +52,7 @@ fun StationSelector(
     onSearchQueryChanged: (q: String) -> Unit,
     onFindPath: (from: BilingualName, to: BilingualName, delay: Int, dayOfWeek: Int, time: Double) -> Unit,
     onSelectStation: (isFrom: Boolean, station: BilingualName) -> Unit,
-    onFindNearbyStations: (onError: () -> Unit) -> Unit,
-    onFindStationsNearPlace: (Place) -> Unit,
+    onSearchNearby: (NearbySource, NearbyType) -> Unit,
     onDelayChange: (Int) -> Unit,
     onTimeChanged: (Double) -> Unit,
     onDayOfWeekChanged: (Int) -> Unit,
@@ -225,9 +224,7 @@ fun StationSelector(
                 StationSelectorSheet(
                     stations = filteredStations,
                     places = places,
-                    placesNearMe = emptyList(),
-                    stationsNearMe = viewState.nearbyStations,
-                    placeNearbyStations = viewState.placeNearbyStations,
+                    nearbyState = viewState.nearby,
                     searchQuery = searchQuery,
                     onSearchQueryChanged = onSearchQueryChanged,
                     onStationSelected = { station ->
@@ -238,20 +235,23 @@ fun StationSelector(
                         isFromSheetOpen = null
                     },
                     onPlaceSelected = { place ->
-                        onFindStationsNearPlace(place)
+                        onSearchNearby(
+                            NearbySource.Place(place),
+                            NearbyType.Stations
+                        )
                     },
-                    onNearMeClick = {
-                        onCheckPermission {
-                            if (!viewState.isLoadingNearbyStations) {
-                                onFindNearbyStations {}
+                    onSearchNearby = { request, content, onPermissionGranted ->
+                        if (request is NearbySource.CurrentLocation) {
+                            onCheckPermission {
+                                onSearchNearby(request, content)
+                                onPermissionGranted()
                             }
+                        } else {
+                            onSearchNearby(request, content)
+                            onPermissionGranted()
                         }
                     },
-                    onMapClick = {
-                    },
-                    isLoadingNearbyPlaces = false,
-                    isLoadingNearbyStations = viewState.isLoadingNearbyStations,
-                    isLoadingStationsByPlace = viewState.isLoadingStationsByPlace,
+                    onMapClick = { },
                     onDismiss = {
                         isFromSheetOpen = null
                     },

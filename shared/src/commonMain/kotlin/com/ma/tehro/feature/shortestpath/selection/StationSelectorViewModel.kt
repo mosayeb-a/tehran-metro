@@ -4,17 +4,13 @@ import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ma.tehro.common.TimeUtils
-import com.ma.tehro.common.ui.Action
-import com.ma.tehro.common.ui.UiMessage
-import com.ma.tehro.common.ui.UiMessageManager
-import com.ma.tehro.data.place.Place
 import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.line.Station
-import com.ma.tehro.domain.common.NearbyStation
+import com.ma.tehro.domain.path.NearbyFinder
+import com.ma.tehro.domain.path.Place
 import com.ma.tehro.domain.path.repository.PathRepository
-import com.ma.tehro.domain.place.FindNearbyStations
-import com.ma.tehro.domain.place.GetPlacesByCategory
-import com.ma.tehro.services.LocationTracker
+import com.ma.tehro.domain.place.repository.PlacesRepository
+import com.ma.tehro.services.LocationClient
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -32,10 +28,7 @@ import kotlin.time.Clock
 data class StationSelectorState(
     val fromStation: BilingualName? = null,
     val toStation: BilingualName? = null,
-    val isLoadingNearbyStations: Boolean = false,
-    val isLoadingStationsByPlace: Boolean = false,
-    val nearbyStations: List<NearbyStation> = emptyList(),
-    val placeNearbyStations: List<NearbyStation> = emptyList(),
+    val nearby: NearbySearchState = NearbySearchState(),
     val transferDelay: Int = 8,
     val dayOfWeek: Int = Clock.System.now()
         .toLocalDateTime(TimeZone.currentSystemDefault())
@@ -51,9 +44,8 @@ data class SearchResult(
 
 class StationSelectorViewModel(
     private val pathRepository: PathRepository,
-    private val locationTracker: LocationTracker,
-    private val getPlacesByCategory: GetPlacesByCategory,
-    private val findNearbyStations: FindNearbyStations
+    private val locationClient: LocationClient,
+    private val placeRepository: PlacesRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(StationSelectorState())
@@ -93,12 +85,19 @@ class StationSelectorViewModel(
         initialValue = SearchResult()
     )
 
+    private val stationFinder: NearbyFinder<Station> by lazy {
+        NearbyFinder(_stations.value.values.toList())
+    }
+
+    private val placeFinder: NearbyFinder<Place> by lazy {
+        NearbyFinder(_places.value)
+    }
+
     init {
         viewModelScope.launch {
             _stations.update { pathRepository.getStations() }
 
-            val placeGroups = getPlacesByCategory.getPlaces()
-            _places.update { placeGroups.flatMap { it.places } }
+            _places.update { placeRepository.getAll }
         }
     }
 
@@ -120,62 +119,92 @@ class StationSelectorViewModel(
 
     fun setDayOfWeek(day: Int) = _uiState.update { it.copy(dayOfWeek = day) }
 
-    fun findNearbyStations(forceRefresh: Boolean = false, onError: () -> Unit) {
+    fun searchNearby(
+        request: NearbySource,
+        content: NearbyType,
+        forceRefresh: Boolean = false
+    ) {
         viewModelScope.launch {
-                if (!forceRefresh && _uiState.value.nearbyStations.isNotEmpty()) {
+            val currentNearby = _uiState.value.nearby
+
+            if (
+                !forceRefresh &&
+                currentNearby.source == request &&
+                currentNearby.type == content &&
+                when (content) {
+                    NearbyType.Stations -> currentNearby.stations.isNotEmpty()
+                    NearbyType.Places -> currentNearby.places.isNotEmpty()
+                }
+            ) {
                 return@launch
             }
 
-            try {
-                _uiState.update {
-                    it.copy(
-                        isLoadingNearbyStations = true,
-                        nearbyStations = emptyList(),
-                    )
-                }
-                val nearestStations = locationTracker.getNearestStationByCurrentLocation()
-                if (nearestStations.isNotEmpty()) {
-                    _uiState.update {
-                        it.copy(
-                            nearbyStations = nearestStations,
-                            isLoadingNearbyStations = false
-                        )
-                    }
-                }
-            } catch (_: CancellationException) {
-            } catch (e: Exception) {
-                onError()
-                _uiState.update {
-                    it.copy(
-                        nearbyStations = emptyList(),
-                        isLoadingNearbyStations = false
-                    )
-                }
-                UiMessageManager.sendEvent(
-                    event = UiMessage(
-                        message = e.message ?: "مشکلی رخ داده",
-                        action = Action(
-                            name = "باشه",
-                            action = {}
-                        )
+            _uiState.update {
+                it.copy(
+                    nearby = NearbySearchState(
+                        isLoading = true,
+                        source = request,
+                        type = content
                     )
                 )
             }
-        }
-    }
 
-    fun findStationsNear(lat: Double, long: Double) {
-        viewModelScope.launch {
-            _uiState.update { it.copy(isLoadingStationsByPlace = true) }
-            val stations = findNearbyStations.getStations(
-                placeLatitude = lat,
-                placeLongitude = long
-            )
-            _uiState.update {
-                it.copy(
-                    isLoadingStationsByPlace = false,
-                    placeNearbyStations = stations
-                )
+            try {
+                val (latitude, longitude) = when (request) {
+                    is NearbySource.CurrentLocation -> {
+                        val location = locationClient.getCurrentLocation()
+                        location.latitude to location.longitude
+                    }
+
+                    is NearbySource.Place -> {
+                        request.place.latitude to request.place.longitude
+                    }
+                }
+
+                when (content) {
+                    NearbyType.Stations -> {
+                        val stations = stationFinder.find(latitude, longitude)
+                        _uiState.update {
+                            it.copy(
+                                nearby = NearbySearchState(
+                                    source = request,
+                                    type = content,
+                                    stations = stations,
+                                    places = it.nearby.places
+                                )
+                            )
+                        }
+                    }
+
+                    NearbyType.Places -> {
+                        val places = placeFinder.find(latitude, longitude)
+                        _uiState.update {
+                            it.copy(
+                                nearby = NearbySearchState(
+                                    source = request,
+                                    type = content,
+                                    places = places,
+                                    stations = it.nearby.stations
+                                )
+                            )
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                if (e is CancellationException) throw e
+                val error = when (e) {
+                    else -> NearbyError.Unknown
+                }
+
+                _uiState.update {
+                    it.copy(
+                        nearby = NearbySearchState(
+                            source = request,
+                            type = content,
+                            error = error
+                        )
+                    )
+                }
             }
         }
     }
