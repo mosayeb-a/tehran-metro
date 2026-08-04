@@ -9,7 +9,7 @@ import app.cash.sqldelight.async.coroutines.synchronous
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import com.ma.tehro.common.STATION_COORDS_QUALIFIER
-import com.ma.tehro.data.place.Place
+import com.ma.tehro.domain.path.Place
 import com.ma.tehro.domain.line.Station
 import com.ma.tehro.domain.map.MapStationCoordinate
 import com.ma.tehro.services.DefaultLocationClient

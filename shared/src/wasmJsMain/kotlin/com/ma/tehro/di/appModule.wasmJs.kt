@@ -1,7 +1,7 @@
 package com.ma.tehro.di
 
 import com.ma.tehro.common.WasmPreloadedData
-import com.ma.tehro.data.place.Place
+import com.ma.tehro.domain.path.Place
 import com.ma.tehro.domain.line.Station
 import com.ma.tehro.services.LocationClient
 import com.ma.tehro.services.WasmLocationClient

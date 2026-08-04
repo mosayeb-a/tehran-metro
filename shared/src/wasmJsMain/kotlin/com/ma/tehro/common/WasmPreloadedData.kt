@@ -1,6 +1,6 @@
 package com.ma.tehro.common
 
-import com.ma.tehro.data.place.Place
+import com.ma.tehro.domain.path.Place
 import com.ma.tehro.domain.line.Station
 import com.ma.thero.resources.Res
 import kotlinx.serialization.json.Json

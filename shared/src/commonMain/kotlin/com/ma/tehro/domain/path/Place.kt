@@ -1,5 +1,6 @@
-package com.ma.tehro.data.place
+package com.ma.tehro.domain.path
 
+import com.ma.tehro.domain.common.GeoPoint
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -15,9 +16,9 @@ data class Place(
     val category: PlaceCategory,
     @Serializable(with = PlaceTypeSerializer::class)
     val type: PlaceType,
-    val longitude: Double,
-    val latitude: Double
-)
+    override val longitude: Double,
+    override val latitude: Double
+): GeoPoint
 
 @Serializable
 enum class PlaceType(val value: String) {

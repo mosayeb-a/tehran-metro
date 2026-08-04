@@ -1,42 +1,33 @@
 package com.ma.tehro.feature.shortestpath.selection.components
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.LocationCity
-import androidx.compose.material.icons.outlined.LocationOn
 import androidx.compose.material.icons.outlined.Map
 import androidx.compose.material.icons.outlined.MyLocation
 import androidx.compose.material.icons.rounded.DirectionsRailway
 import androidx.compose.material.icons.rounded.LocationCity
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.ma.tehro.data.place.Place
+import com.ma.tehro.domain.path.Place
 import com.ma.tehro.domain.line.Station
-
+import com.ma.tehro.feature.shortestpath.selection.NearbyType
 
 fun LazyListScope.SearchResults(
+    searchQuery: String,
     stations: List<Station>,
     places: List<Place>,
-    placesNearMe: List<Place>,
-    searchQuery: String,
-    isLoadingNearbyPlaces: Boolean,
     onStationSelected: (Station) -> Unit,
     onPlaceSelected: (Place) -> Unit,
-    onNearMeClick: () -> Unit,
+    onNearMeClick: (NearbyType) -> Unit,
     onMapClick: () -> Unit,
     onDismiss: () -> Unit,
     onSearchQueryChanged: (String) -> Unit,
@@ -57,7 +48,7 @@ fun LazyListScope.SearchResults(
                     },
                     title = "ایستگاه‌های نزدیک من",
                     subtitle = "پیدا کردن ایستگاه‌های نزدیک به موقعیت شما",
-                    onClick = onNearMeClick
+                    onClick = { onNearMeClick(NearbyType.Stations) }
                 )
 
                 HorizontalDivider(
@@ -95,8 +86,7 @@ fun LazyListScope.SearchResults(
                     },
                     title = "مکان‌های نزدیک من",
                     subtitle = "پیدا کردن مکان‌های نزدیک به موقعیت شما",
-                    onClick = {
-                    }
+                    onClick = { onNearMeClick(NearbyType.Places) }
                 )
 
                 HorizontalDivider(
@@ -104,55 +94,6 @@ fun LazyListScope.SearchResults(
                     color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.16f)
                 )
             }
-        }
-    }
-
-    if (isLoadingNearbyPlaces) {
-        item(
-            key = "loading_places"
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(32.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(32.dp),
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        text = "در حال پیدا کردن مکان‌ها...",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-        }
-    } else if (placesNearMe.isNotEmpty() && searchQuery.isBlank()) {
-        stickyHeader(
-            key = "nearby_places_header"
-        ) {
-            StickyHeader(
-                icon = Icons.Rounded.LocationCity,
-                title = "مکان‌های نزدیک شما"
-            )
-        }
-
-        items(
-            items = placesNearMe,
-            key = { "nearby_${it.name}_${it.latitude}_${it.longitude}" }
-        ) { place ->
-            PlaceItem(
-                place = place,
-                onClick = {
-                    onPlaceSelected(place)
-                }
-            )
         }
     }
 
