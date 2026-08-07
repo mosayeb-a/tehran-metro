@@ -7,11 +7,6 @@ plugins {
 
 group = "app.ma"
 version = "1.0"
-//
-//repositories {
-//    mavenCentral()
-//    google()
-//}
 
 kotlin {
     jvmToolchain(11)

@@ -9,7 +9,6 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
-        maven("https://maven.myket.ir/")
     }
 }
 dependencyResolutionManagement {
@@ -17,7 +16,6 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
-        maven("https://maven.myket.ir/")
     }
 }
 
