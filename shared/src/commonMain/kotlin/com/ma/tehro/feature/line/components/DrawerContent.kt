@@ -74,7 +74,7 @@ fun DrawerContent(
                 }
             }
 
-            item { Spacer(Modifier.height(8.dp)) }
+            item { Spacer(Modifier.height(16.dp)) }
 
             item("lines") {
                 DrawerItem(

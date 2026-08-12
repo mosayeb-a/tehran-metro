@@ -20,7 +20,6 @@ import com.ma.tehro.domain.feedback.repository.FeedbackRepository
 import com.ma.tehro.domain.line.repository.LineRepository
 import com.ma.tehro.domain.path.PathTimeCalculator
 import com.ma.tehro.domain.path.repository.PathRepository
-import com.ma.tehro.domain.path.FindNearbyStations
 import com.ma.tehro.domain.place.repository.PlacesRepository
 import com.ma.tehro.domain.podcast.repository.PodcastRepository
 import com.ma.tehro.domain.preferences.repository.PreferencesRepository
@@ -102,8 +101,6 @@ val appModule = module {
     singleOf(::LineRepositoryImpl) { bind<LineRepository>() }
     singleOf(::FeedbackRepositoryImpl) { bind<FeedbackRepository>() }
     single<ScheduleRepository> { ScheduleRepositoryImpl(json = get()) }
-
-    single<FindNearbyStations> { FindNearbyStations(stations = get()) }
 
     single<PreferencesRepository> { PreferencesRepositoryImpl(get()) }
 
