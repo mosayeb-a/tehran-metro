@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -79,7 +80,7 @@ fun TehroNavigation(
                 },
                 lines = state.lines,
                 onFindPathClicked = { navController.navigate(StationSelectorScreen) },
-                onMapClick = { navController.navigate(MapScreen) },
+                onMapClick = { navController.navigate(MapScreen()) },
                 onSubmitFeedbackClick = {
                     navController.navigate(
                         SubmitFeedbackScreen
@@ -95,17 +96,34 @@ fun TehroNavigation(
                 onPodcastClick = { navController.navigate(PodcastListScreen) }
             )
         }
+
         baseComposable<MapScreen> {
+            val args = it.toRoute<MapScreen>()
             val viewModel: StationsMapViewModel = koinViewModel()
+            val state by viewModel.uiState.collectAsStateWithLifecycle()
+
             StationsOnCityMap(
-                onFindCurrentLocationClick = {
+                viewState = state,
+                isStationSelection = args.isSelection,
+                onFindMyLocation = {
                     locationPermissionHandler.checkLocationPermission {
                         viewModel.locateMe()
                     }
                 },
-                viewState = viewModel.uiState.collectAsStateWithLifecycle().value,
+                onFindNearby = viewModel::findNearbyStations,
+                onStationSelected = { en , fa ->
+                    navController.previousBackStackEntry
+                        ?.savedStateHandle
+                        ?.apply {
+                            set("station_en", en)
+                            set("station_fa", fa)
+                            set("station_is_from", args.isFrom)
+                        }
+                    navController.navigateUp()
+                }
             )
         }
+
         baseComposable<StationsScreen> { backStackEntry ->
             val stationsViewModel: StationsViewModel = koinViewModel()
             val state by stationsViewModel.uiState.collectAsStateWithLifecycle()
@@ -126,11 +144,35 @@ fun TehroNavigation(
                 },
             )
         }
+
         baseComposable<StationSelectorScreen> { backStackEntry ->
             val viewModel: StationSelectorViewModel = koinViewModel()
             val state by viewModel.uiState.collectAsStateWithLifecycle()
             val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
             val searchResults by viewModel.searchResults.collectAsStateWithLifecycle()
+
+            val stationEn = backStackEntry.savedStateHandle.get<String>("station_en")
+            val stationFa = backStackEntry.savedStateHandle.get<String>("station_fa")
+            val isFrom = backStackEntry.savedStateHandle.get<Boolean>("station_is_from")
+
+            LaunchedEffect(stationEn, stationFa, isFrom) {
+                if (stationEn != null && stationFa != null && isFrom != null) {
+                    val bilingualName = BilingualName(
+                        en = stationEn,
+                        fa = stationFa
+                    )
+
+                    if (isFrom) {
+                        viewModel.setFromStation(bilingualName)
+                    } else {
+                        viewModel.setToStation(bilingualName)
+                    }
+
+                    backStackEntry.savedStateHandle.remove<String>("station_en")
+                    backStackEntry.savedStateHandle.remove<String>("station_fa")
+                    backStackEntry.savedStateHandle.remove<Boolean>("station_is_from")
+                }
+            }
 
             StationSelector(
                 onBack = navController::navigateUp,
@@ -159,7 +201,15 @@ fun TehroNavigation(
                 onDelayChange = viewModel::setTransferDelay,
                 onTimeChanged = viewModel::setDepartureTime,
                 onDayOfWeekChanged = viewModel::setDayOfWeek,
-                onCheckPermission = locationPermissionHandler::checkLocationPermission
+                onCheckPermission = locationPermissionHandler::checkLocationPermission,
+                onMapClick = { isFrom ->
+                    navController.navigate(
+                        MapScreen(
+                            isSelection = true,
+                            isFrom = isFrom
+                        )
+                    )
+                }
             )
         }
 

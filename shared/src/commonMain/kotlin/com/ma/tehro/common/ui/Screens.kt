@@ -27,7 +27,10 @@ data class PathFinderScreen(
 data class StationDetailScreen(val station: Station, val lineNumber: Int, val useBranch: Boolean)
 
 @Serializable
-object MapScreen
+data class MapScreen(
+    val isSelection: Boolean = false,
+    val isFrom: Boolean = false
+)
 
 @Serializable
 data class TrainScheduleScreen(

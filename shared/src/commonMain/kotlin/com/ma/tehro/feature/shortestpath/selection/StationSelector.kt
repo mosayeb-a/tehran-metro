@@ -57,6 +57,7 @@ fun StationSelector(
     onTimeChanged: (Double) -> Unit,
     onDayOfWeekChanged: (Int) -> Unit,
     onCheckPermission: (onGranted: () -> Unit) -> Unit,
+    onMapClick: (isFrom: Boolean) -> Unit,
     onBack: () -> Unit,
 ) {
     val lazyListState = rememberLazyListState()
@@ -251,7 +252,7 @@ fun StationSelector(
                             onPermissionGranted()
                         }
                     },
-                    onMapClick = { },
+                    onMapClick = { onMapClick(isFromSheetOpen == true) },
                     onDismiss = {
                         isFromSheetOpen = null
                     },
