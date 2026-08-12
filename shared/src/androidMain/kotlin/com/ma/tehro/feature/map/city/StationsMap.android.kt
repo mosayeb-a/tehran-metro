@@ -51,9 +51,6 @@ actual fun StationsMap(
     val redMarkerIcon: Drawable? = remember {
         ContextCompat.getDrawable(context, R.drawable.map_marker_red)
     }
-    val stationIcon: Drawable? = remember {
-        ContextCompat.getDrawable(context, R.drawable.location_on_24px)
-    }
 
     val onCenterChanged by rememberUpdatedState(onMarkerCenterChanged)
 
@@ -96,10 +93,18 @@ actual fun StationsMap(
 
             viewState.stations.forEach { marker ->
                 val geoPoint = GeoPoint(marker.lat, marker.lon)
+                val stationIcon = StationMarkerDrawable(marker.lines)
+
                 val osMarker = Marker(mapView).apply {
                     position = geoPoint
                     title = createBilingualMessage(fa = marker.name.fa, en = marker.name.en)
                     icon = stationIcon
+
+                    setAnchor(
+                        Marker.ANCHOR_CENTER,
+                        Marker.ANCHOR_BOTTOM
+                    )
+
                     infoWindow = StationInfoWindow(mapView, this)
                 }
                 mapView.overlays.add(osMarker)
