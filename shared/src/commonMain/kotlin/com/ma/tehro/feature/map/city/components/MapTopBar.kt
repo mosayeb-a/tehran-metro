@@ -23,6 +23,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,7 +31,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -63,12 +66,14 @@ fun MapTopBar(
                 enter = expandHorizontally(tween(300)) + fadeIn(tween(200)),
                 exit = shrinkHorizontally(tween(300)) + fadeOut(tween(200))
             ) {
-                Text(
-                    text = "نقشه را حرکت دهید، مکان مورد نظر را انتخاب کنید و دکمه پایین را برای یافتن ایستگاه‌های نزدیک بزنید.",
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer,
-                    textAlign = TextAlign.End,
-                )
+                CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+                    Text(
+                        text = "نقشه را حرکت دهید، مکان مورد نظر را انتخاب کنید و دکمه پایین را برای یافتن ایستگاه‌های نزدیک بزنید.",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        textAlign = TextAlign.End,
+                    )
+                }
             }
 
             Icon(

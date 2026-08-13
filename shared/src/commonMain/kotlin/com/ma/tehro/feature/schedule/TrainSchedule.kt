@@ -94,7 +94,7 @@ fun TrainSchedule(
             else ->
                 Message(
                     modifier = Modifier.fillMaxSize(),
-                    faMessage = "زمان‌بندی‌ای برای این ایستگاه موجود نیست. به نظر می‌رسد ایستگاه غیرفعال است",
+                    faMessage = "زمان‌بندی‌ای برای این ایستگاه موجود نیست. به نظر می‌رسد ایستگاه غیرفعال است" + ".",
                     faces = EmptyStatesFaces.sad
                 )
         }

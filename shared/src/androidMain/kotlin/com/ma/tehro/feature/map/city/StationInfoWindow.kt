@@ -172,7 +172,7 @@ class StationInfoWindow(
 
             val linesView = TextView(context).apply {
                 text = linesText
-                textSize = 10f
+                textSize = 11f
                 setTextColor(Color.rgb(120, 120, 120))
                 gravity = Gravity.CENTER
                 includeFontPadding = false

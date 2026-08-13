@@ -66,17 +66,16 @@ fun StationSelector(
 
     var isFromSheetOpen by remember { mutableStateOf<Boolean?>(null) }
 
-    val startPulse = rememberPulseAnimation()
-    val destPulse = rememberPulseAnimation()
+    val fromPulse = rememberPulseAnimation()
+    val toPulse = rememberPulseAnimation()
 
-    val startNodeColor by animateColorAsState(
-        targetValue = if (startPulse.isAnimating) Red else
+    val fromColor by animateColorAsState(
+        targetValue = if (fromPulse.isAnimating) Red else
             MaterialTheme.colorScheme.secondary.copy(alpha = 0.9f),
         animationSpec = tween(durationMillis = 300)
     )
-
-    val destNodeColor by animateColorAsState(
-        targetValue = if (destPulse.isAnimating) Red else
+    val toColor by animateColorAsState(
+        targetValue = if (toPulse.isAnimating) Red else
             MaterialTheme.colorScheme.secondary.copy(alpha = 0.9f),
         animationSpec = tween(durationMillis = 300)
     )
@@ -126,8 +125,8 @@ fun StationSelector(
                         StationTextField(
                             selectedStation = viewState.fromStation,
                             isFrom = true,
-                            nodeColor = startNodeColor,
-                            nodeScale = startPulse.scale.value,
+                            nodeColor = fromColor,
+                            nodeScale = fromPulse.scale.value,
                             onClick = { isFromSheetOpen = true }
                         )
                     }
@@ -142,8 +141,8 @@ fun StationSelector(
                         StationTextField(
                             selectedStation = viewState.toStation,
                             isFrom = false,
-                            nodeColor = destNodeColor,
-                            nodeScale = destPulse.scale.value,
+                            nodeColor = toColor,
+                            nodeScale = toPulse.scale.value,
                             onClick = { isFromSheetOpen = false }
                         )
                     }
@@ -176,15 +175,15 @@ fun StationSelector(
 
                     when {
                         isStartEmpty && isDestEmpty -> {
-                            startPulse.trigger()
-                            destPulse.trigger()
+                            fromPulse.trigger()
+                            toPulse.trigger()
                         }
 
-                        isStartEmpty -> startPulse.trigger()
-                        isDestEmpty -> destPulse.trigger()
+                        isStartEmpty -> fromPulse.trigger()
+                        isDestEmpty -> toPulse.trigger()
                         isSameStation -> {
-                            startPulse.trigger()
-                            destPulse.trigger()
+                            fromPulse.trigger()
+                            toPulse.trigger()
                         }
 
                         else -> onFindPath(
