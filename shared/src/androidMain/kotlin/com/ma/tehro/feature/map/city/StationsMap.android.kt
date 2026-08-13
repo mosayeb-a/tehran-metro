@@ -99,13 +99,12 @@ actual fun StationsMap(
                     position = geoPoint
                     title = createBilingualMessage(fa = marker.name.fa, en = marker.name.en)
                     icon = stationIcon
-
-                    setAnchor(
-                        Marker.ANCHOR_CENTER,
-                        Marker.ANCHOR_BOTTOM
+                    setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+                    infoWindow = StationInfoWindow(
+                        mapView,
+                        marker.name.en,
+                        marker.name.fa
                     )
-
-                    infoWindow = StationInfoWindow(mapView, this)
                 }
                 mapView.overlays.add(osMarker)
             }
@@ -174,16 +173,4 @@ actual fun StationsMap(
             color = Color.Black.copy(alpha = .6f)
         )
     }
-}
-
-class StationInfoWindow(mapView: MapView, val myMarker: Marker) :
-    InfoWindow(R.layout.bubble, mapView) {
-    override fun onOpen(item: Any) {
-        val bubble = mView.findViewById<View>(R.id.bubble_title)
-        if (bubble is android.widget.TextView) {
-            bubble.text = myMarker.title
-        }
-    }
-
-    override fun onClose() {}
 }
