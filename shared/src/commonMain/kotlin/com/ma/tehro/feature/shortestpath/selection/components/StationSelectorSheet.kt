@@ -20,11 +20,15 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -62,6 +66,8 @@ fun StationSelectorSheet(
         confirmValueChange = { true }
     )
     val listState = rememberLazyListState()
+    val focusRequester = remember { FocusRequester() }
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     val isSearchMode = mode is StationSearchMode.Search
 
@@ -70,10 +76,16 @@ fun StationSelectorSheet(
         animationSpec = tween(durationMillis = 400)
     )
 
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
+        keyboardController?.show()
+    }
+
     ModalBottomSheet(
         onDismissRequest = {
             onDismiss()
             onSearchQueryChanged("")
+            keyboardController?.hide()
         },
         sheetState = sheetState,
         containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -97,7 +109,8 @@ fun StationSelectorSheet(
                 TehroSearchBar(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 8.dp, horizontal = 16.dp),
+                        .padding(vertical = 8.dp, horizontal = 16.dp)
+                        .focusRequester(focusRequester),
                     value = searchQuery,
                     onValueChange = onSearchQueryChanged,
                     placeholder = "جستجوی ایستگاه یا مکان...",
