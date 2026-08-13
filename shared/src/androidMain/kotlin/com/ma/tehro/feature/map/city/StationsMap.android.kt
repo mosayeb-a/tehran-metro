@@ -102,8 +102,8 @@ actual fun StationsMap(
                     setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
                     infoWindow = StationInfoWindow(
                         mapView,
-                        marker.name.en,
-                        marker.name.fa
+                        marker.name.fa,
+                        marker.lines
                     )
                 }
                 mapView.overlays.add(osMarker)

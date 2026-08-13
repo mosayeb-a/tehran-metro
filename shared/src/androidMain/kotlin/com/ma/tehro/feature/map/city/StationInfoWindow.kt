@@ -15,24 +15,23 @@ import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.ma.tehro.common.toFarsiNumber
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.infowindow.InfoWindow
 import kotlin.math.min
 
 class StationInfoWindow(
     mapView: MapView,
-    private val stationName: String,
     private val stationNameFa: String,
-) : InfoWindow(createContentView(mapView.context), mapView) {
+    lines: List<Int>,
+) : InfoWindow(createContentView(mapView.context, lines), mapView) {
 
     override fun onOpen(item: Any) {
         val container = mView as? LinearLayout ?: return
 
         val nameFaView = container.findViewWithTag<TextView>("name_fa")
-        val nameEnView = container.findViewWithTag<TextView>("name_en")
 
         nameFaView.text = stationNameFa
-        nameEnView.text = stationName
 
         val lp = container.layoutParams
         if (lp is ViewGroup.MarginLayoutParams) {
@@ -65,7 +64,7 @@ class StationInfoWindow(
     override fun onClose() {}
 
     companion object {
-        fun createContentView(context: Context): View {
+        fun createContentView(context: Context, lines: List<Int>): View {
             val container = LinearLayout(context).apply {
                 orientation = LinearLayout.VERTICAL
                 gravity = Gravity.CENTER
@@ -140,6 +139,7 @@ class StationInfoWindow(
                         invalidateSelf()
                     }
 
+                    @Deprecated("Deprecated in Java")
                     override fun getOpacity(): Int = android.graphics.PixelFormat.TRANSLUCENT
                 }
                 pivotX = 0.5f
@@ -159,10 +159,21 @@ class StationInfoWindow(
                 )
             }
 
-            val nameEnView = TextView(context).apply {
-                tag = "name_en"
+            val lineNumbers = lines.map { it.toFarsiNumber() }
+            val linesText = when (lineNumbers.size) {
+                1 -> "خط ${lineNumbers[0]}"
+                2 -> "خط ${lineNumbers[0]} و ${lineNumbers[1]}"
+                else -> {
+                    val last = lineNumbers.last()
+                    val rest = lineNumbers.dropLast(1).joinToString("، ")
+                    "خط $rest و $last"
+                }
+            }
+
+            val linesView = TextView(context).apply {
+                text = linesText
                 textSize = 10f
-                setTextColor(Color.rgb(90, 90, 80))
+                setTextColor(Color.rgb(120, 120, 120))
                 gravity = Gravity.CENTER
                 includeFontPadding = false
                 layoutParams = LinearLayout.LayoutParams(
@@ -172,7 +183,7 @@ class StationInfoWindow(
             }
 
             container.addView(nameFaView)
-            container.addView(nameEnView)
+            container.addView(linesView)
 
             return container
         }
