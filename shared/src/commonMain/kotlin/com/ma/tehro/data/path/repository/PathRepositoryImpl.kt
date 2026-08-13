@@ -230,8 +230,8 @@ class PathRepositoryImpl(
         stations: Map<String, Station>,
         from: String,
         to: String,
-        stationCost: Int = 3,
-        lineChangeCost: Int = 6
+        stationCost: Int = 1,
+        lineChangeCost: Int = 10
     ): PathResult {
         val queue = PriorityQueue<PathCost>(compareBy { it.cost })
 
