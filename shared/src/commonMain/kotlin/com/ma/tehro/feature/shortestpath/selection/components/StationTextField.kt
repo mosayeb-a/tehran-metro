@@ -29,6 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ma.tehro.common.ui.BilingualText
 import com.ma.tehro.common.ui.timelineview.TimelineView
 import com.ma.tehro.common.ui.timelineview.TimelineView.SingleNode
 import com.ma.tehro.domain.common.BilingualName
@@ -70,19 +71,22 @@ fun StationTextField(
                         nodeType = if (isFrom) TimelineView.NodeType.FIRST else TimelineView.NodeType.LAST,
                         nodeSize = 20f,
                         isChecked = true,
-                        lineWidth = 5.2f,
+                        lineWidth = 6.0f,
                         isDashed = true,
                         scale = nodeScale
                     )
-                    Text(
-                        text = if (isFrom) "مبدا" + "\n" + "FROM" else "مقصد" + "\n" + "TO",
+                    BilingualText(
                         modifier = Modifier
                             .padding(start = 4.dp, bottom = 8.dp, top = 8.dp)
                             .align(Alignment.CenterVertically),
-                        style = MaterialTheme.typography.labelSmall.copy(
-                            color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.45f),
-                        ),
-                        textAlign = TextAlign.Center
+                        fa = if (isFrom) "مبدا" else "مقصد",
+                        en = if (isFrom) "FROM" else "TO",
+                        style = MaterialTheme.typography.labelSmall,
+                        enSize = 9.5.sp,
+                        enAlpha = .6f,
+                        spaceBetween = (-4).dp,
+                        textAlign = TextAlign.Center,
+                        textColor = Color.Black.copy(alpha = 0.7f)
                     )
                 }
             },
@@ -118,7 +122,7 @@ fun StationTextField(
                     )
                 }
             },
-            shape = RoundedCornerShape(32.dp),
+            shape = RoundedCornerShape(36.dp),
         )
 
         Box(

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -119,8 +120,7 @@ fun Lines(
                             },
                             modifier = Modifier
                                 .padding(end = 6.dp)
-                                .fillMaxHeight()
-                                .width(46.dp)
+                                .size(46.dp)
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Menu,

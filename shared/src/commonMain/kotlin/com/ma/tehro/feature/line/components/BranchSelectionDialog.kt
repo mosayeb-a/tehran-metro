@@ -28,6 +28,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.LineEndpoints
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.ui.BilingualText
@@ -56,9 +57,10 @@ fun BranchSelectionDialog(
             .padding(horizontal = 16.dp)
     ) {
         Surface(
-            shape = RoundedCornerShape(24.dp),
+            shape = RoundedCornerShape(32.dp),
             color = MaterialTheme.colorScheme.primaryContainer,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            shadowElevation = 10.dp
         ) {
             Column(
                 modifier = Modifier
@@ -70,7 +72,9 @@ fun BranchSelectionDialog(
                     fa = "انتخاب مسیر",
                     en = "SELECT PATH",
                     style = MaterialTheme.typography.bodyLarge,
+                    spaceBetween = (-6).dp,
                     maxLine = 2,
+                    enSize = 10.sp,
                     textAlign = TextAlign.Center,
                 )
 

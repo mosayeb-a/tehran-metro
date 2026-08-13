@@ -190,6 +190,6 @@ class StationMarkerDrawable(
     @Deprecated("Deprecated in Java")
     override fun getOpacity(): Int = android.graphics.PixelFormat.TRANSLUCENT
 
-    override fun getIntrinsicWidth(): Int = 72
-    override fun getIntrinsicHeight(): Int = 88
+    override fun getIntrinsicWidth(): Int = 62
+    override fun getIntrinsicHeight(): Int = 78
 }
