@@ -51,16 +51,18 @@ fun MapFabContainer(
                 onClick = { if (!isLocating) onFindCurrentLocationClick() },
                 containerColor = MaterialTheme.colorScheme.secondaryContainer,
             ) {
-                if (!isLocating) {
-                    Icon(
-                        imageVector = Icons.Rounded.MyLocation,
-                        contentDescription = "یافتن موقعیت فعلی",
-                        tint = MaterialTheme.colorScheme.onPrimary
-                    )
-                } else {
+                Icon(
+                    imageVector = Icons.Rounded.MyLocation,
+                    contentDescription = "یافتن موقعیت فعلی",
+                    tint = MaterialTheme.colorScheme.onPrimary
+                )
+                if (isLocating) {
                     CircularProgressIndicator(
-                        modifier = Modifier.size(28.dp),
-                        color = MaterialTheme.colorScheme.onPrimary
+                        modifier = Modifier
+                            .padding(1.dp)
+                            .size(17.dp),
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        strokeWidth = 3.dp
                     )
                 }
             }
@@ -71,16 +73,18 @@ fun MapFabContainer(
             containerColor = MaterialTheme.colorScheme.primary,
             modifier = modifier
         ) {
-            if (!isLocating) {
-                Icon(
-                    imageVector = Icons.Rounded.MyLocation,
-                    contentDescription = "یافتن موقعیت فعلی",
-                    tint = MaterialTheme.colorScheme.onPrimary
-                )
-            } else {
+            Icon(
+                imageVector = Icons.Rounded.MyLocation,
+                contentDescription = "یافتن موقعیت فعلی",
+                tint = MaterialTheme.colorScheme.onPrimary
+            )
+            if (isLocating) {
                 CircularProgressIndicator(
-                    modifier = Modifier.size(28.dp),
-                    color = MaterialTheme.colorScheme.onPrimary
+                    modifier = Modifier
+                        .padding(1.dp)
+                        .size(17.dp),
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    strokeWidth = 3.dp
                 )
             }
         }
