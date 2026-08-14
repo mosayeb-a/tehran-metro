@@ -17,6 +17,7 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.ArrowForward
 import androidx.compose.material.icons.rounded.BugReport
 import androidx.compose.material.icons.rounded.Coffee
+import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material.icons.rounded.Source
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -34,6 +35,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.ma.tehro.common.ShareManager
+import com.ma.tehro.common.rememberShareManager
 import com.ma.tehro.common.ui.TehroIcon
 import com.ma.tehro.common.ui.theme.Themes
 import com.ma.tehro.feature.more.components.AboutItem
@@ -47,6 +50,7 @@ fun More(
 ) {
     val currentTheme by viewModel.currentTheme.collectAsStateWithLifecycle()
     val uriHandler = LocalUriHandler.current
+    val shareManager = rememberShareManager()
 
     Scaffold(
         modifier = modifier,
@@ -137,15 +141,38 @@ fun More(
                     modifier = Modifier
                         .padding(horizontal = 16.dp)
                         .fillMaxWidth(),
-                    text = "درباره",
+                    text = "بیشتر",
                     color = MaterialTheme.colorScheme.onBackground,
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.W500,
                     textAlign = TextAlign.End
                 )
             }
+            
+            item { Spacer(Modifier.height(8.dp)) }
 
-            item { Spacer(Modifier.height(6.dp)) }
+            item {
+                AboutItem(
+                    icon = Icons.Rounded.Share,
+                    title = "اشتراک‌گذاری برنامه",
+                    description = "این برنامه رو با بقیه به اشتراک بذار",
+                    onClick = {
+                        val shareText = """
+                            دریافت نرم‌افزار مترو تهران
+
+                            کافه بازار:
+                            http://cafebazaar.ir/app/?id=com.ma.tehro
+
+                            مایکت:
+                            https://myket.ir/app/com.ma.tehro
+
+                            گیت هاب:
+                            https://github.com/mosayeb-a/tehran-metro/releases/
+                        """.trimIndent()
+                        shareManager.shareText(shareText, "اشتراک‌گذاری برنامه مترو تهران")
+                    }
+                )
+            }
 
             item {
                 AboutItem(
