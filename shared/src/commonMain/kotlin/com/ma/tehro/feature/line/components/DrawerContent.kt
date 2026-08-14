@@ -154,7 +154,7 @@ fun DrawerContent(
             )
             CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
                 Text(
-                    text = "۲۲ خرداد ۱۴۰۵ - نسخه " + BuildKonfig.VERSION_NAME.toFarsiNumber(),
+                    text = "۲۳ مرداد ۱۴۰۵ - نسخه " + BuildKonfig.VERSION_NAME.toFarsiNumber(),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
                 )
