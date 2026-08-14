@@ -12,15 +12,14 @@
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/02_pathfinder.png" width="150">
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/03_station_selection.png" width="150">
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/04_detail.png" width="150">
-  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/05_places.png" width="150">
+  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/05_metro_guide.png" width="150">
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/06_stations.png" width="150">
-  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/13_more.png" width="150">
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/07_path_guide.png" width="150">
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/08_station_schedule.png" width="150">
-  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/12_map_viewer.png" width="150">
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/09_map.png" width="150">
-  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/10_station_submission.png" width="150">
   <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/11_feedback.png" width="150">
+  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/12_map_viewer.png" width="150">
+  <img src="https://raw.githubusercontent.com/mosayeb-a/tehran-metro/main/fastlane/metadata/android/en-US/images/phoneScreenshots/13_more.png" width="150">
 </p>
 
 ## Data Source
