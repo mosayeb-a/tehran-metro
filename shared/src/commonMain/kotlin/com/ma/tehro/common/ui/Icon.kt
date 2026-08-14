@@ -33,7 +33,6 @@ fun TehroIcon(
     Box(
         modifier = modifier
             .size(size)
-            .clip(shape)
             .border(
                 width = 1.dp,
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.1f),

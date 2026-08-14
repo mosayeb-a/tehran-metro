@@ -68,10 +68,9 @@ fun MapTopBar(
             ) {
                 CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
                     Text(
-                        text = "نقشه را حرکت دهید، مکان مورد نظر را انتخاب کنید و دکمه پایین را برای یافتن ایستگاه‌های نزدیک بزنید.",
+                        text = "نقشه را حرکت دهید، مکان مورد نظر را انتخاب کنید و برای یافتن ایستگاه‌های نزدیک، دکمه پایین را بزنید.",
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
-                        textAlign = TextAlign.End,
                     )
                 }
             }

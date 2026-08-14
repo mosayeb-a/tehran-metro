@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.Help
+import androidx.compose.material.icons.automirrored.rounded.HelpCenter
 import androidx.compose.material.icons.automirrored.rounded.Send
 import androidx.compose.material.icons.filled.HdrStrong
 import androidx.compose.material.icons.rounded.FormatListNumbered
@@ -45,10 +47,9 @@ fun DrawerContent(
     onCityMapClick: () -> Unit,
     onSubmitFeedbackClick: () -> Unit,
     onPathFinderClick: () -> Unit,
-    onLinesClick: () -> Unit,
     onMetroMapClick: () -> Unit,
     onMoreClick: () -> Unit,
-    onPodcastClick: () -> Unit
+    onMetroGuideClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -76,13 +77,6 @@ fun DrawerContent(
 
             item { Spacer(Modifier.height(16.dp)) }
 
-            item("lines") {
-                DrawerItem(
-                    BilingualName(fa = "فهرست خطوط", en = "LINES"),
-                    onLinesClick,
-                    imageVector = Icons.Rounded.FormatListNumbered
-                )
-            }
             item("pathfinder") {
                 DrawerItem(
                     BilingualName(fa = "مسیریابی", en = "PATHFINDER"),
@@ -90,6 +84,7 @@ fun DrawerContent(
                     icon = Res.drawable.route
                 )
             }
+
             item("station_on_city_map") {
                 DrawerItem(
                     BilingualName(
@@ -98,6 +93,7 @@ fun DrawerContent(
                     ), onCityMapClick, imageVector = Icons.Rounded.MyLocation
                 )
             }
+
             item("metro_map") {
                 DrawerItem(
                     BilingualName(fa = "نقشه مترو", en = "METRO MAP"),
@@ -105,6 +101,15 @@ fun DrawerContent(
                     imageVector = Icons.Rounded.Map
                 )
             }
+
+            item("metro_guide") {
+                DrawerItem(
+                    BilingualName(fa = "راهنمای مترو", en = "METRO GUIDE"),
+                    onMetroGuideClick,
+                    imageVector = Icons.AutoMirrored.Rounded.Help
+                )
+            }
+
             item("submit_feedback") {
                 DrawerItem(
                     BilingualName(fa = "ارسال پیشنهاد", en = "SUBMIT FEEDBACK"),
@@ -112,9 +117,10 @@ fun DrawerContent(
                     imageVector = Icons.AutoMirrored.Rounded.Send
                 )
             }
+
 //            item("podcast") {
 //                DrawerItem(
-//                    BilingualName(fa = "پادکست", en = "PODCAST"),
+//                   mode BilingualName(fa = "پادکست", en = "PODCAST"),
 //                    onPodcastClick,
 //                    imageVector = Icons.Rounded.Headphones
 //                )

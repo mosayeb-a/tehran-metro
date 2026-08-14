@@ -52,7 +52,7 @@ fun Lines(
     onPathFinderClick: () -> Unit,
     onMetroMapClick: () -> Unit,
     onMoreClick: () -> Unit,
-    onPodcastClick: () -> Unit
+    onMetroGuideClick: () -> Unit
 ) {
     val screenHeight = getWindowHeight()
 
@@ -88,9 +88,6 @@ fun Lines(
                     coroutineScope.launch { drawerState.close() }
                     onPathFinderClick()
                 },
-                onLinesClick = {
-                    coroutineScope.launch { drawerState.close() }
-                },
                 onMetroMapClick = {
                     coroutineScope.launch { drawerState.close() }
                     onMetroMapClick()
@@ -99,10 +96,10 @@ fun Lines(
                     coroutineScope.launch { drawerState.close() }
                     onMoreClick()
                 },
-                onPodcastClick = {
+                onMetroGuideClick = {
                     coroutineScope.launch { drawerState.close() }
-                    onPodcastClick()
-                }
+                    onMetroGuideClick()
+                },
             )
         }
     ) {

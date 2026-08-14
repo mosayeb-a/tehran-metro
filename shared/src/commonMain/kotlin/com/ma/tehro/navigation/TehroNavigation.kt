@@ -20,6 +20,7 @@ import com.ma.tehro.common.navTypeOf
 import com.ma.tehro.common.ui.LinesScreen
 import com.ma.tehro.common.ui.MapScreen
 import com.ma.tehro.common.ui.MapViewerScreen
+import com.ma.tehro.common.ui.MetroGuideScreen
 import com.ma.tehro.common.ui.MoreScreen
 import com.ma.tehro.common.ui.PathDescriptionScreen
 import com.ma.tehro.common.ui.PathFinderScreen
@@ -35,6 +36,7 @@ import com.ma.tehro.domain.path.Step
 import com.ma.tehro.feature.detail.StationDetail
 import com.ma.tehro.feature.feedback.Feedback
 import com.ma.tehro.feature.feedback.FeedbackViewModel
+import com.ma.tehro.feature.guide.MetroGuide
 import com.ma.tehro.feature.line.LineViewModel
 import com.ma.tehro.feature.line.Lines
 import com.ma.tehro.feature.line.stations.Stations
@@ -93,7 +95,7 @@ fun TehroNavigation(
                     navController.navigate(MapViewerScreen(null))
                 },
                 onMoreClick = { navController.navigate(MoreScreen) },
-                onPodcastClick = { navController.navigate(PodcastListScreen) }
+                onMetroGuideClick = { navController.navigate(MetroGuideScreen) },
             )
         }
 
@@ -111,7 +113,7 @@ fun TehroNavigation(
                     }
                 },
                 onFindNearby = viewModel::findNearbyStations,
-                onStationSelected = { en , fa ->
+                onStationSelected = { en, fa ->
                     navController.previousBackStackEntry
                         ?.savedStateHandle
                         ?.apply {
@@ -182,9 +184,8 @@ fun TehroNavigation(
                 searchQuery = searchQuery,
                 onSearchQueryChanged = viewModel::setSearchQuery,
                 onSelectStation = { isFrom, station ->
-                    if (isFrom) viewModel.setFromStation(station) else viewModel.setToStation(
-                        station
-                    )
+                    if (isFrom) viewModel.setFromStation(station)
+                    else viewModel.setToStation(station)
                 },
                 onFindPath = { from, to, delay, dayOfWeek, time ->
                     navController.navigate(
@@ -209,7 +210,8 @@ fun TehroNavigation(
                             isFrom = isFrom
                         )
                     )
-                }
+                },
+                onMetroGuideClick = { navController.navigate(MetroGuideScreen) }
             )
         }
 
@@ -308,6 +310,7 @@ fun TehroNavigation(
                 onBack = navController::navigateUp
             )
         }
+
         baseComposable<MapViewerScreen> { backStackEntry ->
             val args = backStackEntry.toRoute<MapViewerScreen>()
             MapViewer(
@@ -324,9 +327,17 @@ fun TehroNavigation(
             )
         }
 
-
         baseComposable<MoreScreen> {
-            More(viewModel = preferencesViewModel)
+            More(
+                viewModel = preferencesViewModel,
+                onBack = navController::navigateUp,
+            )
+        }
+
+        baseComposable<MetroGuideScreen> {
+            MetroGuide(
+                onBack = navController::navigateUp,
+                onFeedback = { navController.navigate(SubmitFeedbackScreen) })
         }
     }
 }

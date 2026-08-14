@@ -2,9 +2,8 @@ package com.ma.tehro.feature.shortestpath.selection.components
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Business
+import androidx.compose.material.icons.automirrored.filled.Help
 import androidx.compose.material.icons.filled.CalendarMonth
-import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FloatingActionButton
@@ -26,12 +25,18 @@ fun SelectionToolbar(
     onFindPathClick: () -> Unit,
     onTimeChangeClick: () -> Unit,
     onDayOfWeekClick: () -> Unit,
+    onMetroGuideClick: () -> Unit,
 ) {
     FloatingToolbarContainer(
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.primaryContainer,
         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
         content = {
+            ToolbarIconButton(
+                icon = Icons.AutoMirrored.Filled.Help,
+                label = "راهنما",
+                onClick = onMetroGuideClick
+            )
             ToolbarIconButton(
                 icon = Icons.Filled.CalendarMonth,
                 label = "روز",
