@@ -19,12 +19,10 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.Help
-import androidx.compose.material.icons.automirrored.rounded.HelpCenter
 import androidx.compose.material.icons.automirrored.rounded.Send
 import androidx.compose.material.icons.filled.HdrStrong
-import androidx.compose.material.icons.rounded.FormatListNumbered
+import androidx.compose.material.icons.filled.MyLocation
 import androidx.compose.material.icons.rounded.Map
-import androidx.compose.material.icons.rounded.MyLocation
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -90,7 +88,7 @@ fun DrawerContent(
                     BilingualName(
                         fa = "ایستگاها در نقشه شهر",
                         en = "STATION ON CITY MAP"
-                    ), onCityMapClick, imageVector = Icons.Rounded.MyLocation
+                    ), onCityMapClick, imageVector = Icons.Filled.MyLocation
                 )
             }
 
