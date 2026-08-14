@@ -1,18 +1,26 @@
 package com.ma.tehro.feature.more
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.automirrored.rounded.ArrowForward
 import androidx.compose.material.icons.rounded.BugReport
 import androidx.compose.material.icons.rounded.Coffee
 import androidx.compose.material.icons.rounded.Source
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -20,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -34,6 +43,7 @@ import com.ma.tehro.feature.more.components.AppThemeItem
 fun More(
     modifier: Modifier = Modifier,
     viewModel: PreferencesViewModel,
+    onBack: () -> Unit
 ) {
     val currentTheme by viewModel.currentTheme.collectAsStateWithLifecycle()
     val uriHandler = LocalUriHandler.current
@@ -46,23 +56,48 @@ fun More(
             modifier = Modifier.fillMaxWidth(),
             contentPadding = innerPadding,
         ) {
-            item { Spacer(Modifier.height(28.dp)) }
-
             item {
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    TehroIcon(
-                        size = 84.dp,
-                        cornerRadius = 28.dp,
-                    )
-                    Spacer(Modifier.height(36.dp))
+                    Box(modifier = Modifier.fillMaxWidth()) {
+                        IconButton(
+                            onClick = onBack,
+                            modifier = Modifier
+                                .padding(top = 16.dp)
+                                .padding(horizontal = 16.dp)
+                                .clip(CircleShape)
+                                .background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.02f))
+                                .size(38.dp)
+                                .align(Alignment.TopStart)
+                        ) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Rounded.ArrowBack,
+                                contentDescription = "بازگشت",
+                                tint = MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .align(Alignment.Center),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            TehroIcon(
+                                modifier = Modifier.padding(top = 46.dp),
+                                size = 64.dp,
+                                cornerRadius = 22.dp,
+                            )
+                        }
+                    }
+                    Spacer(Modifier.height(24.dp))
                     HorizontalDivider(color = MaterialTheme.colorScheme.onBackground.copy(alpha = .28f))
                 }
             }
 
-            item { Spacer(Modifier.height(14.dp)) }
+            item { Spacer(Modifier.height(8.dp)) }
 
             item {
                 Text(

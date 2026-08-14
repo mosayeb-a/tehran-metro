@@ -58,6 +58,7 @@ fun StationSelector(
     onDayOfWeekChanged: (Int) -> Unit,
     onCheckPermission: (onGranted: () -> Unit) -> Unit,
     onMapClick: (isFrom: Boolean) -> Unit,
+    onMetroGuideClick: () -> Unit,
     onBack: () -> Unit,
 ) {
     val lazyListState = rememberLazyListState()
@@ -197,6 +198,7 @@ fun StationSelector(
                 },
                 onTimeChangeClick = { showTimePicker = true },
                 onDayOfWeekClick = { showDaySelector = true },
+                onMetroGuideClick = onMetroGuideClick
             )
 
             if (showDaySelector) {
