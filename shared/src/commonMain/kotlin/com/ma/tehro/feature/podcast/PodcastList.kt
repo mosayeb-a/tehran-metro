@@ -35,6 +35,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.EmptyStatesFaces
 import com.ma.tehro.common.ui.Message
+import com.ma.tehro.common.ui.MessageAction
 import com.ma.tehro.domain.podcast.PodcastFeed
 import com.ma.tehro.feature.podcast.components.ChannelCard
 import com.ma.tehro.feature.podcast.components.EpisodeSheet
@@ -84,10 +85,12 @@ fun PodcastList(
             when {
                 !state.isLoading && state.failedCount >= allFeedUrls.size && state.feeds.isEmpty() -> {
                     Message(
-                        faMessage = "خطایی رخ داده، لطفا دوباره تلاش کنید!",
+                        message = "خطایی رخ داده، لطفا دوباره تلاش کنید!",
                         faces = EmptyStatesFaces.sad,
-                        actionText = "تلاش دوباره",
-                        onAction = { viewModel.refresh() }
+                        action = MessageAction(
+                            name = "تلاش دوباره",
+                            action = viewModel::refresh
+                        )
                     )
                 }
 

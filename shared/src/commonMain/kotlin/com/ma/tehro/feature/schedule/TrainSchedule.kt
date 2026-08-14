@@ -21,11 +21,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -38,7 +35,6 @@ import com.ma.tehro.common.ui.Message
 import com.ma.tehro.common.ui.TehroHorizontalDivider
 import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.domain.common.BilingualName
-import com.ma.tehro.domain.schedule.StationSchedule
 import com.ma.tehro.domain.schedule.ScheduleType
 import com.ma.tehro.feature.schedule.components.ScheduleTypeChips
 import com.ma.tehro.feature.schedule.components.TimeListItem
@@ -94,7 +90,7 @@ fun TrainSchedule(
             else ->
                 Message(
                     modifier = Modifier.fillMaxSize(),
-                    faMessage = "زمان‌بندی‌ای برای این ایستگاه موجود نیست. به نظر می‌رسد ایستگاه غیرفعال است" + ".",
+                    message = "زمان‌بندی‌ای برای این ایستگاه موجود نیست. به نظر می‌رسد ایستگاه غیرفعال است" + ".",
                     faces = EmptyStatesFaces.sad
                 )
         }

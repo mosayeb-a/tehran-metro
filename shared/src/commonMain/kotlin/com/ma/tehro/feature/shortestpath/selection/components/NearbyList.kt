@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.EmptyStatesFaces
 import com.ma.tehro.common.ui.Message
+import com.ma.tehro.common.ui.MessageAction
 import com.ma.tehro.domain.common.GeoPoint
 import com.ma.tehro.domain.line.Station
 import com.ma.tehro.domain.path.Nearby
@@ -86,7 +87,7 @@ fun <T : GeoPoint> NearbyList(
                             modifier = Modifier
                                 .padding(0.dp)
                                 .height(185.dp),
-                            faMessage = "در حال پیدا کردن $contentLabel به «${locationName.trim()}»...",
+                            message = "در حال پیدا کردن $contentLabel به «${locationName.trim()}»...",
                             faces = EmptyStatesFaces.happy,
                         )
                         CircularProgressIndicator(
@@ -107,10 +108,12 @@ fun <T : GeoPoint> NearbyList(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(200.dp),
-                        faMessage = message,
+                        message = message,
                         faces = faces,
-                        actionText = actionText,
-                        onAction = onRetry
+                        action = MessageAction(
+                            name = actionText,
+                            action = onRetry
+                        )
                     )
                 }
 
@@ -121,10 +124,12 @@ fun <T : GeoPoint> NearbyList(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(200.dp),
-                        faMessage = "هیچ $contentLabel در نزدیکی «${locationName.trim()}» پیدا نشد",
+                        message = "هیچ $contentLabel در نزدیکی «${locationName.trim()}» پیدا نشد",
                         faces = EmptyStatesFaces.sad,
-                        actionText = "تلاش مجدد",
-                        onAction = onRetry
+                        action = MessageAction(
+                            name = "تلاش مجدد",
+                            action = onRetry
+                        )
                     )
                 }
 
