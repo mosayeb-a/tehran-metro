@@ -19,9 +19,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.common.ui.EmptyStatesFaces
 import com.ma.tehro.common.ui.Message
+import com.ma.tehro.common.ui.MessageAction
 import com.ma.tehro.feature.feedback.components.MessageInput
 
 @Composable
@@ -31,6 +33,7 @@ fun Feedback(
     onBack: () -> Unit
 ) {
     var messageText by remember { mutableStateOf("") }
+    val uriHandler = LocalUriHandler.current
 
     LaunchedEffect(viewState.isSubmissionSent) {
         if (viewState.isSubmissionSent) {
@@ -83,15 +86,21 @@ fun Feedback(
 
                         viewState.isSubmissionSent -> {
                             Message(
-                                faMessage = "پیشنهادت با موفقیت ثبت شد. از همراهیت سپاسگزاریم.",
+                                message = "پیشنهادت با موفقیت ثبت شد. از همراهیت سپاسگزاریم.",
                                 faces = EmptyStatesFaces.happy
                             )
                         }
 
                         else -> {
                             Message(
-                                faMessage = "برای بهتر شدن برنامه، نظرات و پیشنهادتت رو ارسال کن.",
-                                faces = EmptyStatesFaces.suggestion
+                                message = "برای بهبود برنامه، پیشنهاداتت رو ارسال کن. درصورت داشتن گیت‌هاب، ارسال از اونجا توصیه می‌شه.",                                faces = EmptyStatesFaces.suggestion,
+                                messageStyle = MaterialTheme.typography.bodyMedium,
+                                action = MessageAction(
+                                    name = "ارسال از طریق گیت‌هاب",
+                                    action = {
+                                        uriHandler.openUri("https://github.com/mosayeb-a/tehran-metro/issues/new")
+                                    }
+                                )
                             )
                         }
                     }

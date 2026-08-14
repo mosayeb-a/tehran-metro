@@ -17,19 +17,28 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+data class MessageAction(
+    val name: String,
+    val action: () -> Unit,
+)
+
 @Composable
 fun Message(
     modifier: Modifier = Modifier,
-    faMessage: String,
+    message: String,
+    messageStyle: TextStyle = LocalTextStyle.current.copy(
+        color = Color.White,
+        fontWeight = FontWeight.W500
+    ),
     faces: List<String>,
-    actionText: String? = null,
-    onAction: (() -> Unit)? = null,
+    action: MessageAction? = null,
 ) {
     val selectedFace = remember { faces.random() }
 
@@ -51,21 +60,16 @@ fun Message(
 
             CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
                 Text(
-                    text = faMessage,
-                    style = LocalTextStyle.current.copy(
-                        color = Color.White,
-                        fontWeight = FontWeight.W500
-                    ),
+                    text = message,
+                    style = messageStyle,
                     textAlign = TextAlign.Center
                 )
             }
 
-            if (actionText != null && onAction != null) {
-                Spacer(modifier = Modifier.height(24.dp))
-                OutlinedButton(
-                    onClick = onAction
-                ) {
-                    Text(actionText)
+            if (action != null) {
+                Spacer(modifier = Modifier.height(16.dp))
+                OutlinedButton(onClick = action.action) {
+                    Text(action.name)
                 }
             }
         }
