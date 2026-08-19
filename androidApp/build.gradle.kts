@@ -1,4 +1,3 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -24,8 +23,9 @@ android {
         applicationId = "com.ma.tehro"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = libs.versions.appVersionCode.get().toInt()
-        versionName = libs.versions.appVersionName.get()
+        versionCode = System.getenv("VERSION_CODE")?.toInt() ?: libs.versions.appVersionCode.get().toInt()
+        versionName = System.getenv("VERSION_NAME") ?: libs.versions.appVersionName.get()
+
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -33,30 +33,23 @@ android {
         androidResources.localeFilters += listOf("en")
     }
 
-    val localProperties = gradleLocalProperties(rootDir, providers)
-
     signingConfigs {
-        val releaseKeystorePath = localProperties.getProperty("store_file")?.takeIf { it.isNotBlank() }
-        val fallbackKeystore = File(rootDir, "debug.keystore")
+        val keystorePath = System.getenv("ANDROID_KEYSTORE_PATH")
+        val keystorePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD")
+        val keyAlias = System.getenv("ANDROID_KEY_ALIAS")
+        val keyPassword = System.getenv("ANDROID_KEY_PASSWORD")
 
-        if (releaseKeystorePath != null) {
-            val releaseKeystore = file(releaseKeystorePath)
-            if (releaseKeystore.exists()) {
-                create("release") {
-                    storeFile = releaseKeystore
-                    storePassword = localProperties.getProperty("store_password")
-                    keyAlias = localProperties.getProperty("key_alias")
-                    keyPassword = localProperties.getProperty("key_password")
-                }
-            }
-        }
-
-        if (signingConfigs.findByName("release") == null && fallbackKeystore.exists()) {
-            create("fallback") {
-                storeFile = fallbackKeystore
-                storePassword = "android"
-                keyAlias = "androiddebugkey"
-                keyPassword = "android"
+        if (
+            !keystorePath.isNullOrBlank() &&
+            !keystorePassword.isNullOrBlank() &&
+            !keyAlias.isNullOrBlank() &&
+            !keyPassword.isNullOrBlank()
+        ) {
+            create("release") {
+                storeFile = file(keystorePath)
+                storePassword = keystorePassword
+                this.keyAlias = keyAlias
+                this.keyPassword = keyPassword
             }
         }
     }
@@ -70,20 +63,7 @@ android {
                 "proguard-rules.pro"
             )
 
-            signingConfig = when {
-                signingConfigs.findByName("release") != null -> {
-                    println("using real signing config for release.")
-                    signingConfigs.getByName("release")
-                }
-                signingConfigs.findByName("fallback") != null -> {
-                    println("using fallback debug signing for release.")
-                    signingConfigs.getByName("fallback")
-                }
-                else -> {
-                    println("no signing config found. release may fail.")
-                    null
-                }
-            }
+            signingConfigs.findByName("release")?.let { signingConfig = it }
         }
 
         getByName("debug") {
@@ -102,16 +82,19 @@ android {
         compose = true
         buildConfig = true
     }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
     composeCompiler {
         reportsDestination = layout.buildDirectory.dir("compose_compiler")
         metricsDestination = layout.buildDirectory.dir("compose_compiler")
     }
 }
+
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)

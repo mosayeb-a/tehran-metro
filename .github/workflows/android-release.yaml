@@ -1,0 +1,132 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build-android-app:
+    runs-on: ubuntu-latest
+
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          cache-read-only: false
+
+      - name: Extract Version from Tag
+        id: version
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+          CODE=$((MAJOR * 1000000 + MINOR * 1000 + PATCH))
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "code=$CODE" >> "$GITHUB_OUTPUT"
+
+      - name: Decode Keystore
+        env:
+          KEYSTORE: ${{ secrets.KEYSTORE }}
+        run: |
+          echo "$KEYSTORE" | base64 -d > androidApp/keystore.jks
+
+      - name: Build Android App
+        env:
+          ANDROID_KEYSTORE_PATH: keystore.jks
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          VERSION_NAME: ${{ steps.version.outputs.version }}
+          VERSION_CODE: ${{ steps.version.outputs.code }}
+        run: ./gradlew :androidApp:assembleRelease
+
+      - name: Rename APK with Version
+        id: apk
+        run: |
+          APK_NAME="tehran-metro-v${{ steps.version.outputs.version }}.apk"
+          cp androidApp/build/outputs/apk/release/*.apk "$APK_NAME"
+          echo "apk_name=$APK_NAME" >> "$GITHUB_OUTPUT"
+
+      - name: Upload APK as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tehran-metro-v${{ steps.version.outputs.version }}
+          path: tehran-metro-v${{ steps.version.outputs.version }}.apk
+
+  create-release:
+    runs-on: ubuntu-latest
+    needs: build-android-app
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download APK
+        uses: actions/download-artifact@v4
+        with:
+          name: tehran-metro-v${{ needs.build-android-app.outputs.version }}
+          path: ./
+
+      - name: Generate Changelog
+        uses: orhun/git-cliff-action@v4
+        with:
+          config: cliff.toml
+          args: --latest
+        env:
+          OUTPUT: CHANGELOG.md
+
+      - name: Add Full Changelog Link
+        run: |
+          CURRENT_TAG="${GITHUB_REF_NAME}"
+          
+          PREVIOUS_TAG=$(git tag --sort=-version:refname \
+            | grep '^v[0-9]' \
+            | grep -v "^${CURRENT_TAG}$" \
+            | head -n 1)
+          
+          if [ -n "$PREVIOUS_TAG" ]; then
+            {
+              echo ""
+              echo "---"
+              echo ""
+              echo "**Full Changelog**: [\`${PREVIOUS_TAG}...${CURRENT_TAG}\`](https://github.com/${GITHUB_REPOSITORY}/compare/${PREVIOUS_TAG}...${CURRENT_TAG})"
+            } >> CHANGELOG.md
+          else
+            {
+              echo ""
+              echo "---"
+              echo ""
+              echo "**Full Changelog**: [\`${CURRENT_TAG}\`](https://github.com/${GITHUB_REPOSITORY}/commits/${CURRENT_TAG})"
+            } >> CHANGELOG.md
+          fi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          name: "v${{ needs.build-android-app.outputs.version }}"
+          body_path: CHANGELOG.md
+          files: |
+            *.apk
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
