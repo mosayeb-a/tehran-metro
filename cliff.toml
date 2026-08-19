@@ -1,0 +1,43 @@
+[changelog]
+
+header = """
+## What's Changed
+"""
+
+body = """
+{% for group, commits in commits | group_by(attribute="group") -%}
+### {{ group | upper_first }}
+
+{% for commit in commits -%}
+- {{ commit.message | upper_first }} [`{{ commit.id | truncate(length=7, end="") }}`](https://github.com/mosayeb-a/tehro-cicd/commit/{{ commit.id }})
+{% endfor %}
+
+{% endfor -%}
+"""
+
+trim = true
+
+[git]
+
+conventional_commits = true
+filter_unconventional = false
+split_commits = false
+tag_pattern = "v[0-9]*"
+sort_commits = "oldest"
+protect_breaking_commits = true
+
+commit_parsers = [
+    { message = "^feat", group = "Added" },
+    { message = "^fix", group = "Fixed" },
+    { message = "^refactor", group = "Changed" },
+    { message = "^docs", group = "Documentation" },
+    { message = "^perf", group = "Performance" },
+
+    { message = "^chore", skip = true },
+    { message = "^build", skip = true },
+    { message = "^ci", skip = true },
+    { message = "^style", skip = true },
+    { message = "^test", skip = true },
+
+    { message = ".*", group = "Other Changes" },
+]
