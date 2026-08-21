@@ -23,9 +23,8 @@ android {
         applicationId = "com.ma.tehro"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = System.getenv("VERSION_CODE")?.toInt() ?: libs.versions.appVersionCode.get().toInt()
-        versionName = System.getenv("VERSION_NAME") ?: libs.versions.appVersionName.get()
-
+        versionCode = libs.versions.appVersionCode.get().toInt()
+        versionName = libs.versions.appVersionName.get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

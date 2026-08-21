@@ -172,7 +172,7 @@ buildkonfig {
         buildConfigField(
             type = STRING,
             name = "VERSION_NAME",
-            value = System.getenv("VERSION_NAME") ?: libs.versions.appVersionName.get()
+            value = libs.versions.appVersionName.get()
         )
     }
 }

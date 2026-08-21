@@ -33,10 +33,7 @@ jobs:
         id: version
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
-          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
-          CODE=$((MAJOR * 1000000 + MINOR * 1000 + PATCH))
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "code=$CODE" >> "$GITHUB_OUTPUT"
 
       - name: Decode Keystore
         env:
@@ -50,8 +47,6 @@ jobs:
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          VERSION_NAME: ${{ steps.version.outputs.version }}
-          VERSION_CODE: ${{ steps.version.outputs.code }}
         run: ./gradlew :androidApp:assembleRelease
 
       - name: Rename APK with Version
