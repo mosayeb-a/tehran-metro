@@ -1,34 +1,65 @@
 package com.ma.tehro.common.ui
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
-import androidx.compose.material3.FloatingToolbarScrollBehavior
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.unit.dp
 
-@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-expect fun FloatingToolbarContainer(
-    modifier: Modifier = Modifier,
-    containerColor: Color = MaterialTheme.colorScheme.primaryContainer,
-    contentColor: Color = MaterialTheme.colorScheme.onPrimaryContainer,
+fun FloatingToolbarContainer(
+    modifier: Modifier,
+    containerColor: Color,
+    contentColor: Color,
     scrollBehavior: FloatingToolbarScrollBehavior? = null,
     content: @Composable RowScope.() -> Unit,
-    fab: @Composable (() -> Unit)? =null,
-)
+    fab: @Composable (() -> Unit)?,
+) {
+    if (fab != null) {
+        HorizontalFloatingToolbar(
+            expanded = true,
+            floatingActionButton = {
+                FloatingToolbarDefaults.VibrantFloatingActionButton(
+                    onClick = {},
+                    containerColor = MaterialTheme.colorScheme.primary
+                ) {
+                    fab.invoke()
+                }
+            },
+            modifier = modifier
+                .padding(
+                    bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+                )
+                .offset(y = -FloatingToolbarDefaults.ScreenOffset),
+            colors = FloatingToolbarDefaults.vibrantFloatingToolbarColors(
+                toolbarContainerColor = containerColor,
+                toolbarContentColor = contentColor
+            ),
+            expandedShadowElevation = 0.dp,
+            content = content,
+            scrollBehavior = scrollBehavior
+        )
+    } else {
+        HorizontalFloatingToolbar(
+            expanded = true,
+            modifier = modifier
+                .padding(
+                    bottom = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
+                )
+                .offset(y = -FloatingToolbarDefaults.ScreenOffset),
+            colors = FloatingToolbarDefaults.standardFloatingToolbarColors(
+                toolbarContainerColor = containerColor,
+                toolbarContentColor = contentColor
+            ),
+            expandedShadowElevation = 4.dp,
+            content = content,
+            scrollBehavior = scrollBehavior
+        )
+    }
+}
 
 @Composable
 fun ToolbarIconButton(

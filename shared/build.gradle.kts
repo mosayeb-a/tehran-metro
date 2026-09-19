@@ -18,9 +18,16 @@ plugins {
 }
 
 kotlin {
+    compilerOptions {
+        freeCompilerArgs.add("-Xcollection-literals")
+        freeCompilerArgs.add("-Xreturn-value-checker=check")
+        freeCompilerArgs.add("-Xcontext-sensitive-resolution")
+        freeCompilerArgs.add("-Xallow-returns-result-of")
+    }
+
     jvm()
 
-    androidLibrary {
+    android {
         namespace = "com.ma.tehro.shared"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
@@ -38,7 +45,6 @@ kotlin {
 
     listOf(
         iosArm64(),
-        iosX64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
@@ -54,11 +60,10 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
+            implementation(libs.compose.runtime)
+            implementation(libs.compose.foundation)
+            implementation(libs.compose.ui)
+            implementation(libs.compose.resources)
 
             implementation(libs.material3)
             implementation(libs.material.icons.extended)
@@ -89,7 +94,7 @@ kotlin {
 
             implementation(libs.kotlinx.coroutines.core)
 
-            implementation("io.github.pdvrieze.xmlutil:core:1.0.0-rc2")
+            implementation(libs.xmlutil.core)
 
             implementation(libs.sqldelight.runtime)
             implementation(libs.sqldelight.coroutines.extensions)
@@ -97,7 +102,6 @@ kotlin {
 
         androidMain {
             dependencies {
-                implementation(compose.preview)
                 implementation(libs.androidx.activity.compose)
 
                 implementation(libs.koin.android)
