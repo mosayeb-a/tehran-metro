@@ -2,22 +2,22 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.kotlin.parcelize)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.kotlin.serialization)
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_17)
+        freeCompilerArgs.add("-Xcollection-literals")
+        freeCompilerArgs.add("-Xreturn-value-checker=check")
+        freeCompilerArgs.add("-Xcontext-sensitive-resolution")
+        freeCompilerArgs.add("-Xallow-returns-result-of")
+    }
 }
 
 android {
     namespace = "com.ma.tehro"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
-
-    kotlin {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
-        }
-    }
 
     defaultConfig {
         applicationId = "com.ma.tehro"
@@ -80,17 +80,13 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+        resValues = true
     }
 
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
-    }
-
-    composeCompiler {
-        reportsDestination = layout.buildDirectory.dir("compose_compiler")
-        metricsDestination = layout.buildDirectory.dir("compose_compiler")
     }
 }
 
