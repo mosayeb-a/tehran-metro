@@ -20,20 +20,24 @@ class PathTimeCalculator(
      * Calculates station arrival times and total estimated journey time for a given path.
      *
      * @param path List of path items (titles and stations)
-     * @param lineChangeDelayMinutes Time to add for line changes (default: 8 minutes)
+     * @param transferDelay Time to add for line changes (default: 8 minutes)
      * @return TimeCalculationResult containing station times, total duration, and optional warning
      */
-    suspend fun calculateStationTimes(
+    suspend fun calculate(
         path: List<PathItem>,
-        lineChangeDelayMinutes: Int,
+        transferDelay: Int,
         dayOfWeek: Int,
         currentTime: Double? = null,
     ): TimeCalculationResult {
         var transferCount = 0
         var currentLine = 0
         var currentDestination = ""
-        val stationTimes = mutableMapOf<String, Double>()
+        val stationTimes = mutableListOf<StationTime>()
+
+        var journeyStartTime: Double? = null
+        var finalArrivalTime: Double? = null
         var timeTracker = currentTime ?: 0.0
+
         var isFirstTitle = true
         var warningMessage: String? = null
 
@@ -44,16 +48,20 @@ class PathTimeCalculator(
                     currentLine = item.en.substringAfter("Line ")
                         .substringBefore(":").toIntOrNull() ?: return@forEach
 
-                    currentDestination = item.en.substringAfter(":")
-                        .removePrefix("To ").trim()
+                    currentDestination = item.en
+                        .substringAfter(":")
+                        .trim()
+                        .removePrefix("To ")
+                        .trim()
+
                     println("line: $currentLine, destination: $currentDestination")
 
                     if (!isFirstTitle) {
                         transferCount++
-                        val delayFraction = lineChangeDelayMinutes.toDouble() / (24 * 60.0)
+                        val delayFraction = transferDelay.toDouble() / (24 * 60.0)
                         timeTracker += delayFraction
                         println(
-                            "transfer #$transferCount, +${lineChangeDelayMinutes}min, " +
+                            "transfer #$transferCount, +${transferDelay}min, " +
                                     "time: ${fractionToTime(timeTracker)}"
                         )
                     }
@@ -62,7 +70,6 @@ class PathTimeCalculator(
 
                 is PathItem.StationItem -> {
                     println("station: ${item.station.name}")
-                    if (stationTimes.containsKey(item.station.name)) return@forEach
 
                     val availableSchedules = scheduleRepository.getByStation(
                         stationName = item.station.name,
@@ -118,7 +125,20 @@ class PathTimeCalculator(
                     val arrivalTime = nextTime ?: schedules.first()
                     println("arrival: ${fractionToTime(arrivalTime)}")
 
-                    stationTimes[item.station.name] = arrivalTime
+                    if (journeyStartTime == null) {
+                        journeyStartTime = arrivalTime
+                    }
+                    finalArrivalTime = arrivalTime
+
+                    stationTimes.add(
+                        StationTime(
+                            stationName = item.station.name,
+                            line = currentLine,
+                            destination = currentDestination,
+                            time = arrivalTime,
+                        )
+                    )
+
                     timeTracker = arrivalTime
                     println("tracker: ${fractionToTime(timeTracker)}")
                     println("----")
@@ -127,32 +147,29 @@ class PathTimeCalculator(
         }
 
         return TimeCalculationResult(
-            stationTimes = stationTimes.mapValues { fractionToTime(it.value) },
-            estimatedTime = calculateFinalEstimateTime(stationTimes, transferCount),
+            stationTimes = stationTimes,
+            estimatedTime = calculateFinalEstimateTime(
+                journeyStartTime = journeyStartTime,
+                finalArrivalTime = finalArrivalTime
+            ),
             warning = warningMessage
         )
     }
 
     /**
-     * Calculates the total estimated journey time based on station times and line changes.
-     *
-     * @param stationTimes Map of station names to their arrival times (as day fractions)
-     * @param transferCount Number of line changes in the journey
-     * @return Bilingual estimated time (English and Farsi)
+     * Calculates the total estimated journey time based on journey start and final arrival times.
      */
     private fun calculateFinalEstimateTime(
-        stationTimes: Map<String, Double>,
-        transferCount: Int
+        journeyStartTime: Double?,
+        finalArrivalTime: Double?,
     ): BilingualName {
-        if (stationTimes.isEmpty()) return BilingualName("0 MIN", "۰ دقیقه")
-
-        val times = stationTimes.values
-        val first = times.minOrNull() ?: 0.0
-        val last = times.maxOrNull() ?: 0.0
+        if (journeyStartTime == null || finalArrivalTime == null) {
+            return BilingualName("0 MIN", "۰ دقیقه")
+        }
 
         val millisInDay = 24 * 60 * 60 * 1000
-        val firstMin = (first * millisInDay / (60 * 1000)).toInt()
-        val lastMin = (last * millisInDay / (60 * 1000)).toInt()
+        val firstMin = (journeyStartTime * millisInDay / (60 * 1000)).toInt()
+        val lastMin = (finalArrivalTime * millisInDay / (60 * 1000)).toInt()
 
         val diff = if (lastMin >= firstMin) {
             lastMin - firstMin
@@ -160,17 +177,15 @@ class PathTimeCalculator(
             (lastMin + 24 * 60) - firstMin
         }
 
-        val totalMin = diff + (transferCount * 8)
-
-        return if (totalMin >= 60) {
-            val h = totalMin / 60
-            val m = totalMin % 60
+        return if (diff >= 60) {
+            val h = diff / 60
+            val m = diff % 60
             BilingualName(
                 "$h HOUR AND $m MINUTES",
                 "${h.toFarsiNumber()} ساعت و ${m.toFarsiNumber()} دقیقه"
             )
         } else {
-            BilingualName("$totalMin MIN", "${totalMin.toFarsiNumber()} دقیقه")
+            BilingualName("$diff MIN", "${diff.toFarsiNumber()} دقیقه")
         }
     }
 }
