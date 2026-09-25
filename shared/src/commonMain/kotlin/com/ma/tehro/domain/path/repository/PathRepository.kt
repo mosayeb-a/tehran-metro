@@ -1,9 +1,9 @@
 package com.ma.tehro.domain.path.repository
 
 import com.ma.tehro.domain.line.Station
-import com.ma.tehro.domain.path.PathItem
+import com.ma.tehro.domain.path.PathStep
 
 interface PathRepository {
-    suspend fun findShortestPathWithDirection(from: String, to: String): List<PathItem>
+    suspend fun findShortestPath(from: String, to: String): List<PathStep>
     fun getStations(): Map<String, Station>
 }

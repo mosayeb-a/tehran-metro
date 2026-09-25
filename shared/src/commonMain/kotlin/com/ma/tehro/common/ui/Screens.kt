@@ -2,7 +2,7 @@ package com.ma.tehro.common.ui
 
 import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.line.Station
-import com.ma.tehro.domain.path.Step
+import com.ma.tehro.domain.path.PathStep
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -43,7 +43,7 @@ data class TrainScheduleScreen(
 object SubmitFeedbackScreen
 
 @Serializable
-data class PathDescriptionScreen(val steps: List<Step>)
+data class PathDescriptionScreen(val steps: List<PathStep>)
 
 @Serializable
 data class MapViewerScreen(val shortestPath: List<String>?)

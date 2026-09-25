@@ -3,9 +3,9 @@ package com.ma.tehro.data.path.repository
 import com.ma.tehro.common.LineEndpoints
 import com.ma.tehro.common.PriorityQueue
 import com.ma.tehro.common.lineBranches
-import com.ma.tehro.common.toFarsiNumber
+import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.line.Station
-import com.ma.tehro.domain.path.PathItem
+import com.ma.tehro.domain.path.PathStep
 import com.ma.tehro.domain.path.repository.PathRepository
 import kotlin.comparisons.compareBy
 
@@ -44,18 +44,13 @@ class PathRepositoryImpl(
      *
      * @param from The starting station name.
      * @param to The destination station name.
-     * @return A list of [PathItem] objects representing the path with titles and stations.
+     * @return A list of [PathStep] objects representing the path with titles and stations.
      */
-    override suspend fun findShortestPathWithDirection(from: String, to: String): List<PathItem> {
+    override suspend fun findShortestPath(from: String, to: String): List<PathStep> {
         val path = findShortestPath(stations, from, to).path
-        val result = mutableListOf<PathItem>()
+        val result = mutableListOf<PathStep>()
         var currentLine: Int? = null
         var isBranchSegment = false
-
-        fun createTitle(line: Int, enDirection: String, faDirection: String) = PathItem.Title(
-            en = "Line $line: To $enDirection",
-            fa = "خط ${line.toFarsiNumber()}: به سمت $faDirection"
-        )
 
         fun getDirectionEndpoints(
             line: Int,
@@ -94,17 +89,22 @@ class PathRepositoryImpl(
                     getDirectionEndpoints(currentLine, isBranchSegment, isForward) ?: return@forEachIndexed
                 }
 
-                result.add(createTitle(currentLine, enDirection, faDirection))
+                result.add(
+                    PathStep.Transfer(
+                        line = currentLine,
+                        destination = BilingualName(en = enDirection, fa = faDirection),
+                    )
+                )
             }
 
             // add the current station to the path
             // formula: Each station is added with its line number and passthrough status (disabled stations
             // are marked as passthrough). if no line is set, use -1 as a fallback.
             result.add(
-                PathItem.StationItem(
+                PathStep.Station(
                     station = currentStation,
                     isPassthrough = currentStation.disabled,
-                    lineNumber = currentLine ?: -1
+                    line = currentLine ?: -1
                 )
             )
 
@@ -128,12 +128,17 @@ class PathRepositoryImpl(
                     val (enDirection, faDirection) = getDirectionEndpoints(currentLine, false, isForward)
                         ?: return@forEachIndexed
 
-                    result.add(createTitle(currentLine, enDirection, faDirection))
                     result.add(
-                        PathItem.StationItem(
+                        PathStep.Transfer(
+                            line = currentLine,
+                            destination = BilingualName(en = enDirection, fa = faDirection),
+                        )
+                    )
+                    result.add(
+                        PathStep.Station(
                             station = currentStation,
                             isPassthrough = currentStation.disabled,
-                            lineNumber = currentLine
+                            line = currentLine
                         )
                     )
                 }
@@ -144,12 +149,17 @@ class PathRepositoryImpl(
                     val (enDirection, faDirection) = getDirectionEndpoints(currentLine, true, true)
                         ?: return@forEachIndexed
 
-                    result.add(createTitle(currentLine, enDirection, faDirection))
                     result.add(
-                        PathItem.StationItem(
+                        PathStep.Transfer(
+                            line = currentLine,
+                            destination = BilingualName(en = enDirection, fa = faDirection),
+                        )
+                    )
+                    result.add(
+                        PathStep.Station(
                             station = currentStation,
                             isPassthrough = currentStation.disabled,
-                            lineNumber = currentLine
+                            line = currentLine
                         )
                     )
                 }
@@ -179,12 +189,17 @@ class PathRepositoryImpl(
                     getDirectionEndpoints(newLine, isBranchSegment, isForward) ?: return@forEachIndexed
                 }
 
-                result.add(createTitle(newLine, enDirection, faDirection))
                 result.add(
-                    PathItem.StationItem(
+                    PathStep.Transfer(
+                        line = newLine,
+                        destination = BilingualName(en = enDirection, fa = faDirection),
+                    )
+                )
+                result.add(
+                    PathStep.Station(
                         station = currentStation,
                         isPassthrough = currentStation.disabled,
-                        lineNumber = newLine
+                        line = newLine
                     )
                 )
             }
