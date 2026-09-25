@@ -3,7 +3,7 @@ import com.ma.tehro.domain.line.Station
 import com.ma.tehro.domain.line.Translations
 import com.ma.tehro.data.repository.ScheduleGroup
 import com.ma.tehro.data.repository.TrainScheduleRepository
-import com.ma.tehro.domain.path.PathItem
+import com.ma.tehro.domain.path.PathStep
 import com.ma.tehro.domain.schedule.ScheduleType
 import com.ma.tehro.domain.path.PathTimeCalculator
 import kotlinx.coroutines.test.runTest
@@ -28,18 +28,18 @@ class PathTimeCalculatorTest {
         println("=== Test 1: Basic Path (Line 1, Tajrish to Kahrizak) ===")
 
         val path = listOf(
-            PathItem.Title("Line 1: To Kahrizak", "خط ۱: به سمت کهریزک"),
-            PathItem.StationItem(
+            PathStep.Transfer("Line 1: To Kahrizak", "خط ۱: به سمت کهریزک"),
+            PathStep.Station(
                 station = createMockStation("Tajrish", "تجریش"),
-                lineNumber = 1
+                line = 1
             ),
-            PathItem.StationItem(
+            PathStep.Station(
                 station = createMockStation("Shahr-e Ray", "شهرری"),
-                lineNumber = 1
+                line = 1
             ),
-            PathItem.StationItem(
+            PathStep.Station(
                 station = createMockStation("Kahrizak", "کهریزک"),
-                lineNumber = 1
+                line = 1
             )
         )
 
@@ -68,27 +68,27 @@ class PathTimeCalculatorTest {
         println("=== Test 2: Path with Transfer (Line 1 -> Line 2) ===")
 
         val path = listOf(
-            PathItem.Title("Line 1: To Kahrizak", "خط ۱: به سمت کهریزک"),
-            PathItem.StationItem(
+            PathStep.Transfer("Line 1: To Kahrizak", "خط ۱: به سمت کهریزک"),
+            PathStep.Station(
                 station = createMockStation("Tajrish", "تجریش"),
-                lineNumber = 1
+                line = 1
             ),
-            PathItem.StationItem(
+            PathStep.Station(
                 station = createMockStation("Imam Khomeini", "امام خمینی"),
-                lineNumber = 1
+                line = 1
             ),
-            PathItem.Title("Line 2: To Farhangsara", "خط ۲: به سمت فرهنگسرا"),
-            PathItem.StationItem(
+            PathStep.Transfer("Line 2: To Farhangsara", "خط ۲: به سمت فرهنگسرا"),
+            PathStep.Station(
                 station = createMockStation("Imam Khomeini", "امام خمینی"),
-                lineNumber = 2
+                line = 2
             ),
-            PathItem.StationItem(
+            PathStep.Station(
                 station = createMockStation("Shahid Beheshti", "شهید بهشتی"),
-                lineNumber = 2
+                line = 2
             ),
-            PathItem.StationItem(
+            PathStep.Station(
                 station = createMockStation("Farhangsara", "فرهنگسرا"),
-                lineNumber = 2
+                line = 2
             )
         )
 
@@ -117,14 +117,14 @@ class PathTimeCalculatorTest {
         println("=== Test 3: Different Start Times ===")
 
         val path = listOf(
-            PathItem.Title("Line 1: To Kahrizak", "خط ۱: به سمت کهریزک"),
-            PathItem.StationItem(
+            PathStep.Transfer("Line 1: To Kahrizak", "خط ۱: به سمت کهریزک"),
+            PathStep.Station(
                 station = createMockStation("Tajrish", "تجریش"),
-                lineNumber = 1
+                line = 1
             ),
-            PathItem.StationItem(
+            PathStep.Station(
                 station = createMockStation("Kahrizak", "کهریزک"),
-                lineNumber = 1
+                line = 1
             )
         )
 
@@ -155,14 +155,14 @@ class PathTimeCalculatorTest {
         println("=== Test 5: Verify No Transfer Delay on First Line ===")
 
         val path = listOf(
-            PathItem.Title("Line 1: To Kahrizak", "خط ۱: به سمت کهریزک"),
-            PathItem.StationItem(
+            PathStep.Transfer("Line 1: To Kahrizak", "خط ۱: به سمت کهریزک"),
+            PathStep.Station(
                 station = createMockStation("Tajrish", "تجریش"),
-                lineNumber = 1
+                line = 1
             ),
-            PathItem.StationItem(
+            PathStep.Station(
                 station = createMockStation("Kahrizak", "کهریزک"),
-                lineNumber = 1
+                line = 1
             )
         )
 
@@ -190,18 +190,18 @@ class PathTimeCalculatorTest {
         println("=== Test 8: Duplicate Station Handling ===")
 
         val path = listOf(
-            PathItem.Title("Line 1: To Kahrizak", "خط ۱: به سمت کهریزک"),
-            PathItem.StationItem(
+            PathStep.Transfer("Line 1: To Kahrizak", "خط ۱: به سمت کهریزک"),
+            PathStep.Station(
                 station = createMockStation("Tajrish", "تجریش"),
-                lineNumber = 1
+                line = 1
             ),
-            PathItem.StationItem(
+            PathStep.Station(
                 station = createMockStation("Tajrish", "تجریش"),
-                lineNumber = 1
+                line = 1
             ), // Duplicate
-            PathItem.StationItem(
+            PathStep.Station(
                 station = createMockStation("Kahrizak", "کهریزک"),
-                lineNumber = 1
+                line = 1
             )
         )
 

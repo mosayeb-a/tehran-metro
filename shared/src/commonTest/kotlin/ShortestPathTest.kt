@@ -2,7 +2,7 @@ import com.ma.tehro.domain.line.PositionInLine
 import com.ma.tehro.domain.line.Station
 import com.ma.tehro.domain.line.Translations
 import com.ma.tehro.data.path.repository.PathRepositoryImpl
-import com.ma.tehro.domain.path.PathItem
+import com.ma.tehro.domain.path.PathStep
 import kotlinx.coroutines.test.runTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -51,27 +51,27 @@ class ShortestPathTest {
 
     @Test
     fun `direct path on same line - no line change`() = runTest {
-        val result = repository.findShortestPathWithDirection("A", "X")
+        val result = repository.findShortestPath("A", "X")
 
-        val stations = result.filterIsInstance<PathItem.StationItem>().map { it.station.name }
+        val stations = result.filterIsInstance<PathStep.Station>().map { it.station.name }
         assertEquals(listOf("A", "B", "C", "D", "X"), stations)
 
-        val titles = result.filterIsInstance<PathItem.Title>()
-        assertEquals(1, titles.size)
-        assertTrue(titles[0].en.contains("Line 1"))
+        val transfers = result.filterIsInstance<PathStep.Transfer>()
+        assertEquals(1, transfers.size)
+        assertTrue(transfers[0].en.contains("Line 1"))
     }
 
     @Test
     fun `path with one line change - prefers fewer stations even with change`() = runTest {
-        val result = repository.findShortestPathWithDirection("A", "F")
+        val result = repository.findShortestPath("A", "F")
 
-        val stations = result.filterIsInstance<PathItem.StationItem>().map { it.station.name }
+        val stations = result.filterIsInstance<PathStep.Station>().map { it.station.name }
         assertEquals(listOf("A", "B", "C", "C", "E", "F"), stations) // change at C
 
-        val titles = result.filterIsInstance<PathItem.Title>()
-        assertEquals(2, titles.size)
-        assertTrue(titles[0].en.contains("Line 1"))
-        assertTrue(titles[1].en.contains("Line 2"))
+        val transfers = result.filterIsInstance<PathStep.Transfer>()
+        assertEquals(2, transfers.size)
+        assertTrue(transfers[0].en.contains("Line 1"))
+        assertTrue(transfers[1].en.contains("Line 2"))
     }
 
     @Test
@@ -98,9 +98,9 @@ class ShortestPathTest {
         graph["C"] = graph["C"]!!.copy(disabled = true)
 
         val repo = PathRepositoryImpl(graph)
-        val result = repo.findShortestPathWithDirection("A", "X")
+        val result = repo.findShortestPath("A", "X")
 
-        val cItem = result.filterIsInstance<PathItem.StationItem>()
+        val cItem = result.filterIsInstance<PathStep.Station>()
             .find { it.station.name == "C" }
 
         assertEquals(cItem?.isPassthrough, true)
@@ -108,26 +108,26 @@ class ShortestPathTest {
 
     @Test
     fun `direction title correct - forward on line`() = runTest {
-        val result = repository.findShortestPathWithDirection("A", "X")
+        val result = repository.findShortestPath("A", "X")
 
-        val firstTitle = result.filterIsInstance<PathItem.Title>().first()
-        assertTrue(firstTitle.en.contains("Line 1"))
+        val firstTransfer = result.filterIsInstance<PathStep.Transfer>().first()
+        assertTrue(firstTransfer.en.contains("Line 1"))
     }
 
     @Test
     fun `direction title correct - backward on line`() = runTest {
-        val result = repository.findShortestPathWithDirection("X", "A")
+        val result = repository.findShortestPath("X", "A")
 
-        val stations = result.filterIsInstance<PathItem.StationItem>().map { it.station.name }
+        val stations = result.filterIsInstance<PathStep.Station>().map { it.station.name }
         assertEquals(listOf("X", "D", "C", "B", "A"), stations)
 
-        val firstTitle = result.filterIsInstance<PathItem.Title>().first()
-        assertTrue(firstTitle.en.contains("Line 1"))
+        val firstTransfer = result.filterIsInstance<PathStep.Transfer>().first()
+        assertTrue(firstTransfer.en.contains("Line 1"))
     }
 
     @Test
     fun `no path returns empty list`() = runTest {
-        val result = repository.findShortestPathWithDirection("A", "NONEXISTENT")
+        val result = repository.findShortestPath("A", "NONEXISTENT")
         assertTrue(result.isEmpty())
     }
 

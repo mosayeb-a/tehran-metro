@@ -32,7 +32,7 @@ import com.ma.tehro.common.ui.SubmitFeedbackScreen
 import com.ma.tehro.common.ui.TrainScheduleScreen
 import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.line.Station
-import com.ma.tehro.domain.path.Step
+import com.ma.tehro.domain.path.PathStep
 import com.ma.tehro.feature.detail.StationDetail
 import com.ma.tehro.feature.feedback.Feedback
 import com.ma.tehro.feature.feedback.FeedbackViewModel
@@ -244,8 +244,8 @@ fun TehroNavigation(
                         )
                     )
                 },
-                onRouteGuideClick = {
-                    navController.navigate(PathDescriptionScreen(viewModel.generateGuidSteps()))
+                onPathGuideClick = { path ->
+                    navController.navigate(PathDescriptionScreen(path))
                 },
                 transferDelayMinutes = args.transferDelayMinutes,
                 onMetroMapClick = { path ->
@@ -293,11 +293,10 @@ fun TehroNavigation(
             )
         }
         baseComposable<PathDescriptionScreen>(
-            typeMap = mapOf(typeOf<List<Step>>() to navTypeOf<List<Step>>())
+            typeMap = mapOf(typeOf<List<PathStep>>() to navTypeOf<List<PathStep>>())
         ) {
-            val args = it.toRoute<PathDescriptionScreen>()
             PathDescription(
-                steps = args.steps,
+                steps = it.toRoute<PathDescriptionScreen>().steps,
                 onBackClick = navController::navigateUp
             )
         }

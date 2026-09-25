@@ -34,73 +34,57 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.rememberShareManager
 import com.ma.tehro.common.ui.Appbar
-import com.ma.tehro.domain.path.Step
+import com.ma.tehro.domain.path.PathStep
 import com.ma.tehro.feature.shortestpath.guide.components.StepGuideItem
 
 data class StepText(val symbol: String, val message: String)
 
 @Composable
-fun PathDescription(steps: List<Step>, onBackClick: () -> Unit) {
+fun PathDescription(
+    steps: List<PathStep>,
+    onBackClick: () -> Unit,
+) {
     val lastLine by remember(steps) {
         derivedStateOf {
-            val lastChangeOrFirst = steps.lastOrNull {
-                it is Step.ChangeLine || it is Step.FirstStation
-            }
-            when (lastChangeOrFirst) {
-                is Step.ChangeLine -> lastChangeOrFirst.newLineTitle
-                is Step.FirstStation -> lastChangeOrFirst.lineTitle
-                else -> ""
-            }
-                .substringAfter("خط ")
-                .substringBefore(":")
-                .trim()
-                .toIntOrNull() ?: 0
+            steps.lastOrNull { it is PathStep.Transfer || it is PathStep.Station }
+                ?.let { step ->
+                    when (step) {
+                        is PathStep.Transfer -> step.line
+                        is PathStep.Station -> step.line
+                    }
+                } ?: 0
         }
     }
+
     val stepTexts by remember(steps) {
         derivedStateOf {
-            steps.map { step ->
+            steps.mapIndexed { index, step ->
+                val isLast = index == steps.lastIndex
                 when (step) {
-                    is Step.FirstStation -> {
-                        val lineNum =
-                            step.lineTitle.substringAfter("خط ").substringBefore(":").trim()
-                        val direction = step.lineTitle.substringAfter(":").trim()
-                            .replace("به سمت ", "")
-                            .takeIf { it.isNotEmpty() }
-                        StepText(
-                            symbol = ">",
-                            message = buildString {
-                                append("وارد ایستگاه ${step.stationName} (خط $lineNum)")
-                                if (!direction.isNullOrBlank()) append(" و به سمت $direction")
-                                append(" سوار قطار شوید")
-                            }
-                        )
+                    is PathStep.Station -> {
+                        if (isLast) {
+                            StepText(
+                                symbol = "<",
+                                message = "در ایستگاه ${step.station.translations.fa} از قطار پیاده شوید",
+                            )
+                        } else {
+                            StepText(
+                                symbol = ">",
+                                message = buildString {
+                                    append("وارد ایستگاه ${step.station.translations.fa} (خط ${step.line})")
+                                    append(" سوار قطار شوید")
+                                },
+                            )
+                        }
                     }
 
-                    is Step.ChangeLine -> {
-                        val lineNum =
-                            step.newLineTitle.substringAfter("خط ").substringBefore(":").trim()
-                        val direction = step.newLineTitle.substringAfter(":").trim()
-                            .replace("به سمت ", "")
-                            .takeIf { it.isNotEmpty() }
-                        StepText(
-                            symbol = "<>",
-                            message = buildString {
-                                append("در ایستگاه ${step.stationName} از قطار پیاده شوید و به سمت ")
-                                append(direction ?: step.newLineTitle)
-                                append(" (خط $lineNum) خط عوض کنید")
-                            }
-                        )
-                    }
-
-                    is Step.LastStation -> StepText(
-                        symbol = "<",
-                        message = "در ایستگاه ${step.stationName} از قطار پیاده شوید"
-                    )
-
-                    Step.Destination -> StepText(
-                        symbol = "*",
-                        message = "شما به مقصد رسیدید"
+                    is PathStep.Transfer -> StepText(
+                        symbol = "<>",
+                        message = buildString {
+                            append("در ایستگاه ${step.destination.fa} از قطار پیاده شوید و به سمت ")
+                            append(step.destination.fa)
+                            append(" (خط ${step.line}) خط عوض کنید")
+                        },
                     )
                 }
             }
@@ -130,33 +114,35 @@ fun PathDescription(steps: List<Step>, onBackClick: () -> Unit) {
                     .padding(bottom = 24.dp)
                     .fillMaxWidth()
                     .navigationBarsPadding(),
-                contentAlignment = Alignment.Center
+                contentAlignment = Alignment.Center,
             ) {
                 Button(
                     onClick = {
                         shareManager.shareText(stepsText, "اشتراک‌گذاری مسیر")
                     },
-                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    ),
                     elevation = ButtonDefaults.buttonElevation(defaultElevation = 1.dp),
-                    contentPadding = PaddingValues(vertical = 18.dp, horizontal = 16.dp)
+                    contentPadding = PaddingValues(vertical = 18.dp, horizontal = 16.dp),
                 ) {
                     Row {
                         Text(
                             text = "اشتراک‌گذاری مسیر",
                             fontSize = 17.sp,
                             fontWeight = FontWeight.W300,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
                         )
                         Spacer(Modifier.width(8.dp))
                         Icon(
                             imageVector = Icons.Rounded.PeopleAlt,
                             contentDescription = "share",
-                            tint = MaterialTheme.colorScheme.onPrimaryContainer
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer,
                         )
                     }
                 }
             }
-        }
+        },
     ) { innerPadding ->
         CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
             LazyColumn(modifier = Modifier.padding(innerPadding)) {
@@ -166,7 +152,7 @@ fun PathDescription(steps: List<Step>, onBackClick: () -> Unit) {
                         modifier = Modifier.clickable {},
                         symbol = stepText.symbol,
                         message = stepText.message,
-                        lineColor = lastLine
+                        lineColor = lastLine,
                     )
                 }
                 item("last_spacer") { Spacer(Modifier.height(58.dp)) }

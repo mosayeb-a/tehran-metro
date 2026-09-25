@@ -40,7 +40,7 @@ import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.ui.drawVerticalScrollbar
 import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.line.Station
-import com.ma.tehro.domain.path.PathItem
+import com.ma.tehro.domain.path.PathStep
 import com.ma.tehro.feature.shortestpath.pathfinder.components.PathFinderAppbar
 import com.ma.tehro.feature.shortestpath.pathfinder.components.PathfinderFloatingToolbar
 import com.ma.tehro.feature.shortestpath.pathfinder.components.PinableTitle
@@ -54,14 +54,14 @@ fun PathFinder(
     to: BilingualName,
     state: PathFinderState,
     onStationClick: (station: Station, lineNumber: Int) -> Unit,
-    onRouteGuideClick: () -> Unit,
+    onPathGuideClick: (path: List<PathStep>) -> Unit,
     onMetroMapClick: (shortestPath: List<String>) -> Unit,
     transferDelayMinutes: Int,
     onBack: () -> Unit,
 ) {
-    val titleIndices = remember(state.shortestPath) {
+    val transferIndices = remember(state.shortestPath) {
         state.shortestPath.mapIndexedNotNull { index, item ->
-            if (item is PathItem.Title) index to item else null
+            if (item is PathStep.Transfer) index to item else null
         }
     }
     val exitAlwaysScrollBehavior =
@@ -81,20 +81,21 @@ fun PathFinder(
             )
         },
     ) { padding ->
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .padding(
-                top = padding.calculateTopPadding(),
-                start = padding.calculateStartPadding(LocalLayoutDirection.current),
-                end = padding.calculateEndPadding(LocalLayoutDirection.current),
-            )
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(
+                    top = padding.calculateTopPadding(),
+                    start = padding.calculateStartPadding(LocalLayoutDirection.current),
+                    end = padding.calculateEndPadding(LocalLayoutDirection.current),
+                )
         ) {
             val lazyListState = rememberLazyListState()
 
             val currentTitle by remember(lazyListState) {
                 derivedStateOf {
                     val firstVisibleItem = lazyListState.firstVisibleItemIndex
-                    titleIndices.lastOrNull { (index, _) ->
+                    transferIndices.lastOrNull { (index, _) ->
                         index <= firstVisibleItem
                     }?.second
                 }
@@ -109,42 +110,42 @@ fun PathFinder(
                     items = state.shortestPath,
                     key = { index, item ->
                         when (item) {
-                            is PathItem.Title -> "${item.en}_$index"
-                            is PathItem.StationItem -> "${item.station.name}_$index"
+                            is PathStep.Transfer -> "${item.destination.en}_$index"
+                            is PathStep.Station -> "${item.station.name}_$index"
                         }
                     }
                 ) { index, item ->
                     when (item) {
-                        is PathItem.Title -> {
+                        is PathStep.Transfer -> {
                             PinableTitle(
-                                en = item.en,
-                                fa = item.fa,
+                                en = item.destination.en,
+                                fa = item.destination.fa,
                                 isFirstItem = index == 0,
-                                lineNumber = item.en[5].digitToInt()
+                                lineNumber = item.line
                             )
                         }
 
-                        is PathItem.StationItem -> {
+                        is PathStep.Station -> {
                             val arrival = state.arrivals.firstOrNull {
-                                it.stationName == item.station.name && it.line == item.lineNumber
+                                it.stationName == item.station.name && it.line == item.line
                             }
 
                             Column {
                                 StationRow(
                                     modifier = Modifier.clickable {
-                                        onStationClick(item.station, item.lineNumber)
+                                        onStationClick(item.station, item.line)
                                     },
                                     station = item.station,
                                     isLastItem = index == state.shortestPath.size - 1,
                                     disabled = item.isPassthrough,
-                                    lineNumber = item.lineNumber,
+                                    lineNumber = item.line,
                                     arrivalTime = arrival?.time,
                                 )
                                 Box(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .height(0.77.dp)
-                                        .background(getLineColorByNumber(item.lineNumber).copy(alpha = 0.9f))
+                                        .background(getLineColorByNumber(item.line).copy(alpha = 0.9f))
                                 )
                             }
                         }
@@ -174,10 +175,10 @@ fun PathFinder(
                     title?.let {
                         PinableTitle(
                             modifier = Modifier.fillMaxWidth(),
-                            en = title.en,
-                            fa = title.fa,
-                            isFirstItem = title == state.shortestPath[0],
-                            lineNumber = title.en[5].digitToInt()
+                            en = it.destination.en,
+                            fa = it.destination.fa,
+                            isFirstItem = it == state.shortestPath[0],
+                            lineNumber = it.line
                         )
                     }
                 }
@@ -187,12 +188,12 @@ fun PathFinder(
                 modifier = Modifier
                     .align(Alignment.BottomCenter),
                 lazyListState = lazyListState,
-                onInfoClick = onRouteGuideClick,
+                onInfoClick = { onPathGuideClick(state.shortestPath) },
                 onMapClick = {
                     onMetroMapClick(
                         state.shortestPath
                             .mapNotNull { item ->
-                                (item as? PathItem.StationItem)?.station
+                                (item as? PathStep.Station)?.station
                             }
                             .filter { !it.disabled }
                             .map { it.name }

@@ -24,7 +24,7 @@ class PathTimeCalculator(
      * @return TimeCalculationResult containing station times, total duration, and optional warning
      */
     suspend fun calculate(
-        path: List<PathItem>,
+        path: List<PathStep>,
         transferDelay: Int,
         dayOfWeek: Int,
         currentTime: Double? = null,
@@ -43,16 +43,10 @@ class PathTimeCalculator(
 
         path.forEach { item ->
             when (item) {
-                is PathItem.Title -> {
-                    println("title: ${item.en}")
-                    currentLine = item.en.substringAfter("Line ")
-                        .substringBefore(":").toIntOrNull() ?: return@forEach
-
-                    currentDestination = item.en
-                        .substringAfter(":")
-                        .trim()
-                        .removePrefix("To ")
-                        .trim()
+                is PathStep.Transfer -> {
+                    println("title: ${item.destination.en}")
+                    currentLine = item.line
+                    currentDestination = item.destination.en
 
                     println("line: $currentLine, destination: $currentDestination")
 
@@ -68,7 +62,7 @@ class PathTimeCalculator(
                     isFirstTitle = false
                 }
 
-                is PathItem.StationItem -> {
+                is PathStep.Station -> {
                     println("station: ${item.station.name}")
 
                     val availableSchedules = scheduleRepository.getByStation(

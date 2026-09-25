@@ -3,7 +3,7 @@ package app.ma.scripts
 import app.ma.scripts.common.readJsonStationsAsText
 import com.ma.tehro.domain.line.Station
 import com.ma.tehro.data.path.repository.PathRepositoryImpl
-import com.ma.tehro.domain.path.PathItem
+import com.ma.tehro.domain.path.PathStep
 import com.ma.tehro.domain.path.repository.PathRepository
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
@@ -135,9 +135,9 @@ class RealDataShortestPathTest {
         runTest {
             val from = "Mowlavi"
             val to = "Darvazeh Shemiran"
-            val result = repository.findShortestPathWithDirection(from, to)
+            val result = repository.findShortestPath(from, to)
             val actualStations = result
-                .filterIsInstance<PathItem.StationItem>()
+                .filterIsInstance<PathStep.Station>()
                 .map { it.station.name }
                 .toSet()
                 .toList()
@@ -148,9 +148,9 @@ class RealDataShortestPathTest {
 
     private fun assertShortestPath(from: String, to: String, expectedStations: List<String>) =
         runBlocking {
-            val result = repository.findShortestPathWithDirection(from, to)
+            val result = repository.findShortestPath(from, to)
             val actualStations = result
-                .filterIsInstance<PathItem.StationItem>()
+                .filterIsInstance<PathStep.Station>()
                 .map { it.station.name }
                 .toSet()
                 .toList()
