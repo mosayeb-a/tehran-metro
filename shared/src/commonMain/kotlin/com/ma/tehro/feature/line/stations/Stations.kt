@@ -130,9 +130,11 @@ fun StationItem(
     iconSize: Dp = 18.dp,
     verticalOffset: Dp = (-8).dp,
 ) {
-
     val transferLines = remember(station, lineNumber) {
         station.lines.filter { it != lineNumber }
+    }
+    val otherLinesText = remember(transferLines) {
+        transferLines.joinToString("، ") { "خط $it" }
     }
     val colors = remember(transferLines) {
         transferLines.map { getLineColorByNumber(it) }
@@ -150,9 +152,8 @@ fun StationItem(
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-
         if (showTransferIndicator && colors.isNotEmpty()) {
             TransferIndicator(
                 colors = colors,
@@ -160,24 +161,23 @@ fun StationItem(
                 circleSizeStep = circleSizeStep,
                 iconSize = iconSize,
                 verticalOffset = verticalOffset,
-                contentDescription = "Transfer lines for ${station.translations.fa}"
+                contentDescription = "ایستگاه ${station.translations.fa}، دسترسی به $otherLinesText",
             )
         } else {
             Box(modifier = Modifier.size(maxCircleSize))
         }
 
         Column(
-            modifier = Modifier
-                .weight(1f),
+            modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.End
+            horizontalAlignment = Alignment.End,
         ) {
             BilingualText(
                 fa = station.translations.fa,
                 en = station.name.uppercase(),
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.End,
-                maxLine = 2 
+                maxLine = 2,
             )
         }
     }
