@@ -1,0 +1,29 @@
+CREATE TABLE path_history (
+    from_station_id TEXT NOT NULL,
+    to_station_id TEXT NOT NULL,
+    timestamp INTEGER NOT NULL,
+    PRIMARY KEY (from_station_id, to_station_id)
+);
+
+insertOrReplace:
+INSERT OR REPLACE INTO path_history(
+    from_station_id, to_station_id, timestamp
+) VALUES(?, ?, ?);
+
+getAll:
+SELECT * FROM path_history ORDER BY timestamp DESC LIMIT ?;
+
+delete:
+DELETE FROM path_history
+WHERE from_station_id = ? AND to_station_id = ?;
+
+deleteAll:
+DELETE FROM path_history;
+
+trim:
+DELETE FROM path_history
+WHERE timestamp < (
+    SELECT timestamp FROM path_history
+    ORDER BY timestamp DESC
+    LIMIT 1 OFFSET ?
+);
