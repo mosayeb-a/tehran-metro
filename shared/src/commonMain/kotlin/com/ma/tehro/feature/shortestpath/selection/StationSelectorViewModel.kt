@@ -7,7 +7,9 @@ import com.ma.tehro.common.TimeUtils
 import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.line.Station
 import com.ma.tehro.domain.path.NearbyFinder
+import com.ma.tehro.domain.path.PathHistory
 import com.ma.tehro.domain.path.Place
+import com.ma.tehro.domain.path.repository.PathHistoryRepository
 import com.ma.tehro.domain.path.repository.PathRepository
 import com.ma.tehro.domain.place.repository.PlacesRepository
 import com.ma.tehro.services.LocationClient
@@ -45,7 +47,8 @@ data class SearchResult(
 class StationSelectorViewModel(
     private val pathRepository: PathRepository,
     private val locationClient: LocationClient,
-    private val placeRepository: PlacesRepository
+    private val placeRepository: PlacesRepository,
+    private val pathHistoryRepository: PathHistoryRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(StationSelectorState())
@@ -84,6 +87,14 @@ class StationSelectorViewModel(
         started = SharingStarted.WhileSubscribed(5000),
         initialValue = SearchResult()
     )
+
+    val pathHistory: StateFlow<List<PathHistory>> =
+        pathHistoryRepository.getAll()
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = emptyList(),
+            )
 
     private val stationFinder: NearbyFinder<Station> by lazy {
         NearbyFinder(_stations.value.values.toList())
@@ -206,6 +217,24 @@ class StationSelectorViewModel(
                     )
                 }
             }
+        }
+    }
+
+    fun saveToHistory(from: Station, to: Station) {
+        viewModelScope.launch {
+            pathHistoryRepository.add(
+                PathHistory(
+                    from = from,
+                    to = to,
+                    timestamp = Clock.System.now().toEpochMilliseconds(),
+                )
+            )
+        }
+    }
+
+    fun removeFromHistory(history: PathHistory) {
+        viewModelScope.launch {
+            pathHistoryRepository.delete(history)
         }
     }
 }

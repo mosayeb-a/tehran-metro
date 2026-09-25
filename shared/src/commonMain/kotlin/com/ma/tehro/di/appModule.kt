@@ -2,7 +2,10 @@ package com.ma.tehro.di
 
 import com.ma.tehro.data.feedback.repository.FeedbackRepositoryImpl
 import com.ma.tehro.data.line.repository.LineRepositoryImpl
+import com.ma.tehro.data.path.repository.PathHistoryRepositoryImpl
 import com.ma.tehro.data.path.repository.PathRepositoryImpl
+import com.ma.tehro.data.path.source.local.PathHistoryLocalDataSource
+import com.ma.tehro.data.path.source.local.PathHistoryLocalDataSourceImpl
 import com.ma.tehro.domain.path.PlaceCategory
 import com.ma.tehro.domain.path.PlaceCategorySerializer
 import com.ma.tehro.domain.path.PlaceType
@@ -19,6 +22,7 @@ import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.feedback.repository.FeedbackRepository
 import com.ma.tehro.domain.line.repository.LineRepository
 import com.ma.tehro.domain.path.PathTimeCalculator
+import com.ma.tehro.domain.path.repository.PathHistoryRepository
 import com.ma.tehro.domain.path.repository.PathRepository
 import com.ma.tehro.domain.place.repository.PlacesRepository
 import com.ma.tehro.domain.podcast.repository.PodcastRepository
@@ -101,6 +105,8 @@ val appModule = module {
     singleOf(::LineRepositoryImpl) { bind<LineRepository>() }
     singleOf(::FeedbackRepositoryImpl) { bind<FeedbackRepository>() }
     single<ScheduleRepository> { ScheduleRepositoryImpl(json = get()) }
+    single<PathHistoryLocalDataSource> { PathHistoryLocalDataSourceImpl(get()) }
+    single<PathHistoryRepository> { PathHistoryRepositoryImpl(get(), get()) }
 
     single<PreferencesRepository> { PreferencesRepositoryImpl(get()) }
 
@@ -129,7 +135,8 @@ val appModule = module {
         StationSelectorViewModel(
             pathRepository = get(),
             locationClient = get(),
-            placeRepository = get()
+            placeRepository = get(),
+            pathHistoryRepository = get()
         )
     }
     viewModel<FeedbackViewModel> {

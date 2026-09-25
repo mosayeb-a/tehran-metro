@@ -17,6 +17,7 @@ import com.ma.tehro.common.ui.ToolbarIconButton
 import com.ma.thero.resources.Res
 import com.ma.thero.resources.route
 import org.jetbrains.compose.resources.painterResource
+import androidx.compose.material.icons.filled.History
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -26,12 +27,18 @@ fun SelectionToolbar(
     onTimeChangeClick: () -> Unit,
     onDayOfWeekClick: () -> Unit,
     onMetroGuideClick: () -> Unit,
+    onHistoryClick: () -> Unit,
 ) {
     FloatingToolbarContainer(
         modifier = modifier,
         containerColor = MaterialTheme.colorScheme.primaryContainer,
         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
         content = {
+            ToolbarIconButton(
+                icon = Icons.Filled.History,
+                label = "تاریخچه",
+                onClick = onHistoryClick,
+            )
             ToolbarIconButton(
                 icon = Icons.AutoMirrored.Filled.Help,
                 label = "راهنما",

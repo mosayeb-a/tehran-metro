@@ -36,11 +36,13 @@ import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.line.Station
 import com.ma.tehro.feature.shortestpath.selection.components.DaySelectorSheet
 import com.ma.tehro.feature.shortestpath.selection.components.LineChangeDelaySlider
+import com.ma.tehro.feature.shortestpath.selection.components.PathHistorySheet
 import com.ma.tehro.feature.shortestpath.selection.components.SelectionToolbar
 import com.ma.tehro.feature.shortestpath.selection.components.StationSelectorSheet
 import com.ma.tehro.feature.shortestpath.selection.components.StationTextField
 import com.ma.tehro.feature.shortestpath.selection.components.TimePickerDialog
 import com.ma.tehro.feature.shortestpath.selection.components.rememberPulseAnimation
+import com.ma.tehro.domain.path.PathHistory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,6 +51,7 @@ fun StationSelector(
     searchQuery: String,
     stations: List<Station>,
     places: List<Place>,
+    pathHistory: List<PathHistory>,
     onSearchQueryChanged: (q: String) -> Unit,
     onFindPath: (from: BilingualName, to: BilingualName, delay: Int, dayOfWeek: Int, time: Double) -> Unit,
     onSelectStation: (isFrom: Boolean, station: BilingualName) -> Unit,
@@ -59,6 +62,8 @@ fun StationSelector(
     onCheckPermission: (onGranted: () -> Unit) -> Unit,
     onMapClick: (isFrom: Boolean) -> Unit,
     onMetroGuideClick: () -> Unit,
+    onRemoveFromHistory: (PathHistory) -> Unit,
+    onSaveToHistory: (Station, Station) -> Unit,
     onBack: () -> Unit,
 ) {
     val lazyListState = rememberLazyListState()
@@ -66,6 +71,7 @@ fun StationSelector(
     var showTimePicker by remember { mutableStateOf(false) }
 
     var isFromSheetOpen by remember { mutableStateOf<Boolean?>(null) }
+    var showHistorySheet by remember { mutableStateOf(false) }
 
     val fromPulse = rememberPulseAnimation()
     val toPulse = rememberPulseAnimation()
@@ -187,19 +193,42 @@ fun StationSelector(
                             toPulse.trigger()
                         }
 
-                        else -> onFindPath(
-                            startStation,
-                            destStation,
-                            viewState.transferDelay,
-                            viewState.dayOfWeek,
-                            viewState.departureTime
-                        )
+                        else -> {
+                            val fromStation = stations.firstOrNull { it.name == startStation.en }
+                            val toStation = stations.firstOrNull { it.name == destStation.en }
+
+                            if (fromStation != null && toStation != null) {
+                                onSaveToHistory(fromStation, toStation)
+                            }
+
+                            onFindPath(
+                                startStation,
+                                destStation,
+                                viewState.transferDelay,
+                                viewState.dayOfWeek,
+                                viewState.departureTime,
+                            )
+                        }
                     }
                 },
                 onTimeChangeClick = { showTimePicker = true },
                 onDayOfWeekClick = { showDaySelector = true },
-                onMetroGuideClick = onMetroGuideClick
+                onMetroGuideClick = onMetroGuideClick,
+                onHistoryClick = { showHistorySheet = true }
             )
+
+            if (showHistorySheet) {
+                PathHistorySheet(
+                    history = pathHistory,
+                    onSelect = { item ->
+                        onSelectStation(true, BilingualName(item.from.name, item.from.translations.fa))
+                        onSelectStation(false, BilingualName(item.to.name, item.to.translations.fa))
+                        showHistorySheet = false
+                    },
+                    onDelete = onRemoveFromHistory,
+                    onDismiss = { showHistorySheet = false },
+                )
+            }
 
             if (showDaySelector) {
                 DaySelectorSheet(

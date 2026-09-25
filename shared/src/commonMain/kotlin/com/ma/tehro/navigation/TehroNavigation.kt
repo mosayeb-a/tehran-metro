@@ -152,6 +152,7 @@ fun TehroNavigation(
             val state by viewModel.uiState.collectAsStateWithLifecycle()
             val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
             val searchResults by viewModel.searchResults.collectAsStateWithLifecycle()
+            val pathHistory by viewModel.pathHistory.collectAsStateWithLifecycle()
 
             val stationEn = backStackEntry.savedStateHandle.get<String>("station_en")
             val stationFa = backStackEntry.savedStateHandle.get<String>("station_fa")
@@ -211,7 +212,10 @@ fun TehroNavigation(
                         )
                     )
                 },
-                onMetroGuideClick = { navController.navigate(MetroGuideScreen) }
+                onMetroGuideClick = { navController.navigate(MetroGuideScreen) },
+                pathHistory = pathHistory,
+                onRemoveFromHistory = viewModel::removeFromHistory,
+                onSaveToHistory = viewModel::saveToHistory,
             )
         }
 
