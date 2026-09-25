@@ -18,6 +18,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ma.tehro.common.fractionToTime
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.ui.timelineview.TimelineView
 import com.ma.tehro.common.ui.timelineview.TimelineView.SingleNode
@@ -32,7 +33,7 @@ fun StationRow(
     isLastItem: Boolean,
     disabled: Boolean = false,
     lineNumber: Int,
-    arrivalTime: String? = null
+    arrivalTime: Double? = null
 ) {
     val color = getLineColorByNumber(lineNumber)
     Row(
@@ -50,15 +51,15 @@ fun StationRow(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxHeight(),
-                horizontalAlignment = Alignment.Start, // changed to Start
+                horizontalAlignment = Alignment.Start,
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "ساعت ${arrivalTime.toFarsiNumber()}",
+                    text = "ساعت ${fractionToTime(arrivalTime).toFarsiNumber()}",
                     style = MaterialTheme.typography.bodySmall.copy(fontSize = 11.sp),
                 )
                 Text(
-                    text = "AT $arrivalTime",
+                    text = "AT ${fractionToTime(arrivalTime)}",
                     textAlign = TextAlign.Start,
                     style = MaterialTheme.typography.bodySmall.copy(fontSize = 10.sp),
                 )

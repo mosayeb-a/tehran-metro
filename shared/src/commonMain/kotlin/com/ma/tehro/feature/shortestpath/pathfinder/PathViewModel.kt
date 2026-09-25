@@ -8,6 +8,7 @@ import com.ma.tehro.domain.path.PathItem
 import com.ma.tehro.domain.path.Step
 import com.ma.tehro.domain.path.repository.PathRepository
 import com.ma.tehro.domain.path.PathTimeCalculator
+import com.ma.tehro.domain.path.StationTime
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -17,8 +18,8 @@ import kotlinx.coroutines.launch
 data class PathFinderState(
     val shortestPath: List<PathItem> = emptyList(),
     val totalTravelTime: BilingualName? = null,
-    val arrivalTimes: Map<String, String> = emptyMap(),
-    val warningMessage: String? = null
+    val arrivals: List<StationTime> = emptyList(),
+    val warningMessage: String? = null,
 )
 
 class PathViewModel(
@@ -31,24 +32,24 @@ class PathViewModel(
     private val pathTimeCalculator: PathTimeCalculator,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(PathFinderState())
-    val state: StateFlow<PathFinderState> get() = _state
+    val state: StateFlow<PathFinderState>
+        field = MutableStateFlow(PathFinderState())
 
     init {
         viewModelScope.launch {
             val path = pathRepository
                 .findShortestPathWithDirection(from.en, to.en)
-            _state.update { it.copy(shortestPath = path) }
+            state.update { it.copy(shortestPath = path) }
 
-            val result = pathTimeCalculator.calculateStationTimes(
+            val result = pathTimeCalculator.calculate(
                 path = path,
-                lineChangeDelayMinutes = transferDelayMinutes,
+                transferDelay = transferDelayMinutes,
                 dayOfWeek = dayOfWeek,
                 currentTime = departureTime
             )
-            _state.update {
+            state.update {
                 it.copy(
-                    arrivalTimes = result.stationTimes,
+                    arrivals = result.stationTimes,
                     totalTravelTime = result.estimatedTime,
                     warningMessage = result.warning
                 )
@@ -63,7 +64,7 @@ class PathViewModel(
         var currentLineTitle: String? = null
         var isFirstSegment = true
 
-        _state.value.shortestPath.forEach { item ->
+        state.value.shortestPath.forEach { item ->
             when (item) {
                 is PathItem.Title -> {
                     lastStation?.let {

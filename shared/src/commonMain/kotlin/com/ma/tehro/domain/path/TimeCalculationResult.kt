@@ -12,7 +12,14 @@ import com.ma.tehro.domain.common.BilingualName
  *
  */
 data class TimeCalculationResult(
-    val stationTimes: Map<String, String>,
+    val stationTimes: List<StationTime>,
     val estimatedTime: BilingualName,
     val warning: String? = null
+)
+
+data class StationTime(
+    val stationName: String,
+    val line: Int,
+    val destination: String,
+    val time: Double
 )

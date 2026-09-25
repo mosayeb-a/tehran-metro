@@ -125,6 +125,10 @@ fun PathFinder(
                         }
 
                         is PathItem.StationItem -> {
+                            val arrival = state.arrivals.firstOrNull {
+                                it.stationName == item.station.name && it.line == item.lineNumber
+                            }
+
                             Column {
                                 StationRow(
                                     modifier = Modifier.clickable {
@@ -134,7 +138,7 @@ fun PathFinder(
                                     isLastItem = index == state.shortestPath.size - 1,
                                     disabled = item.isPassthrough,
                                     lineNumber = item.lineNumber,
-                                    arrivalTime = state.arrivalTimes[item.station.name]
+                                    arrivalTime = arrival?.time,
                                 )
                                 Box(
                                     modifier = Modifier

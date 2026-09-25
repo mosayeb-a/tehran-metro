@@ -43,9 +43,9 @@ class PathTimeCalculatorTest {
             )
         )
 
-        val (stationTimes, estimate) = calculator.calculateStationTimes(
+        val (stationTimes, estimate) = calculator.calculate(
             path = path,
-            lineChangeDelayMinutes = 8,
+            transferDelay = 8,
             dayOfWeek = 3,
             currentTime = 0.25 // 6:00 AM
         )
@@ -92,9 +92,9 @@ class PathTimeCalculatorTest {
             )
         )
 
-        val (stationTimes, estimate) = calculator.calculateStationTimes(
+        val (stationTimes, estimate) = calculator.calculate(
             path = path,
-            lineChangeDelayMinutes = 8,
+            transferDelay = 8,
             dayOfWeek = 3,
             currentTime = 0.3 // 7:12 AM
         )
@@ -138,9 +138,9 @@ class PathTimeCalculatorTest {
         )
 
         testTimes.forEach { (time, description) ->
-            val (stationTimes, estimate) = calculator.calculateStationTimes(
+            val (stationTimes, estimate) = calculator.calculate(
                 path = path,
-                lineChangeDelayMinutes = 8,
+                transferDelay = 8,
                 dayOfWeek = 3,
                 currentTime = time
             )
@@ -166,9 +166,9 @@ class PathTimeCalculatorTest {
             )
         )
 
-        val (stationTimes, _) = calculator.calculateStationTimes(
+        val (stationTimes, _) = calculator.calculate(
             path = path,
-            lineChangeDelayMinutes = 8,
+            transferDelay = 8,
             dayOfWeek = 3,
             currentTime = 0.25 // 6:00 AM
         )
@@ -205,9 +205,9 @@ class PathTimeCalculatorTest {
             )
         )
 
-        val (stationTimes, _) = calculator.calculateStationTimes(
+        val (stationTimes, _) = calculator.calculate(
             path = path,
-            lineChangeDelayMinutes = 8,
+            transferDelay = 8,
             dayOfWeek = 3,
             currentTime = 0.25
         )
