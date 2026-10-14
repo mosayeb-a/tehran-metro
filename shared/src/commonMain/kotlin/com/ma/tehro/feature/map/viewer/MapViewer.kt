@@ -22,12 +22,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.onSizeChanged
 import com.ma.tehro.common.STATION_COORDS_QUALIFIER
 import com.ma.tehro.common.ui.Appbar
+import com.ma.tehro.common.ui.FLAG_PATH_DATA
+import com.ma.tehro.common.ui.PLAY_ARROW_PATH_DATA
+import com.ma.tehro.common.ui.drawVectorIcon
 import com.ma.tehro.domain.map.MapStationCoordinate
 import com.ma.tehro.domain.map.PathPoint
 import com.ma.tehro.feature.map.viewer.zoombox.MutableZoomState
@@ -47,6 +54,9 @@ private const val CIRCLE_RADIUS = 3.5f
 private const val LINE_WIDTH = 3.1f
 private val START_COLOR = Color(0xFF00FF82)
 private val DEST_COLOR = Color(0xFF00FFDE)
+
+private val START_ICON_TINT = Color(0xFF003D20)
+private val DEST_ICON_TINT  = Color(0xFF003D3D)
 
 // fake points guide the path along metro lines when stations aren't directly connected
 // key is a pair (from, to) in the direction the fake points are defined
@@ -174,28 +184,36 @@ fun MapViewer(
                 )
 
                 Canvas(modifier = Modifier.fillMaxSize()) {
-                    if (scaledPoints.size >= 2) {
-                        val path = androidx.compose.ui.graphics.Path()
-                        path.moveTo(scaledPoints.first().x, scaledPoints.first().y)
+                    if (scaledPoints.size < 2) return@Canvas
 
+                    val routePath = Path().apply {
+                        moveTo(scaledPoints.first().x, scaledPoints.first().y)
                         for (i in 1 until scaledPoints.size) {
                             val prev = scaledPoints[i - 1]
                             val curr = scaledPoints[i]
-
-                            val cp1x = prev.x + (curr.x - prev.x) * 0.3f
-                            val cp1y = prev.y + (curr.y - prev.y) * 0.3f
-                            val cp2x = curr.x - (curr.x - prev.x) * 0.3f
-                            val cp2y = curr.y - (curr.y - prev.y) * 0.3f
-
-                            path.cubicTo(cp1x, cp1y, cp2x, cp2y, curr.x, curr.y)
+                            cubicTo(
+                                prev.x + (curr.x - prev.x) * 0.3f, prev.y + (curr.y - prev.y) * 0.3f,
+                                curr.x - (curr.x - prev.x) * 0.3f, curr.y - (curr.y - prev.y) * 0.3f,
+                                curr.x, curr.y
+                            )
                         }
-
-                        drawPath(
-                            path = path,
-                            color = White,
-                            style = Stroke(width = LINE_WIDTH)
-                        )
                     }
+
+                    val roundStroke = { w: Float ->
+                        Stroke(width = w, cap = StrokeCap.Round, join = StrokeJoin.Round)
+                    }
+
+                    val brush = Brush.linearGradient(
+                        colors = listOf(START_COLOR, White, DEST_COLOR),
+                        start = scaledPoints.first(),
+                        end = scaledPoints.last()
+                    )
+
+                    drawPath(
+                        path = routePath,
+                        brush = brush,
+                        style = roundStroke(LINE_WIDTH * 2.6f)
+                    )
 
                     scaledPoints.forEachIndexed { index, point ->
                         if (isRealStation[index]) {
@@ -211,6 +229,12 @@ fun MapViewer(
                                         radius = (CIRCLE_RADIUS + 2f) * pulse,
                                         center = point
                                     )
+                                    drawVectorIcon(
+                                        pathData = PLAY_ARROW_PATH_DATA,
+                                        center = point,
+                                        size = CIRCLE_RADIUS * 2.3f * pulse,
+                                        color = START_ICON_TINT
+                                    )
                                 }
 
                                 scaledPoints.size - 1 -> {
@@ -224,16 +248,18 @@ fun MapViewer(
                                         radius = (CIRCLE_RADIUS + 2f) * pulse,
                                         center = point
                                     )
+                                    drawVectorIcon(
+                                        pathData = FLAG_PATH_DATA,
+                                        center = point,
+                                        size = CIRCLE_RADIUS * 2.2f * pulse,
+                                        color = DEST_ICON_TINT
+                                    )
                                 }
+
                                 else -> {
                                     drawCircle(
-                                        color = White,
-                                        radius = CIRCLE_RADIUS,
-                                        center = point
-                                    )
-                                    drawCircle(
                                         color = Color(0xFF044434),
-                                        radius = CIRCLE_RADIUS / 2f,
+                                        radius = CIRCLE_RADIUS,
                                         center = point
                                     )
                                 }
