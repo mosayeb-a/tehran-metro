@@ -7,11 +7,15 @@ import kotlinx.serialization.Serializable
 @Serializable
 @Immutable
 sealed class PathStep {
+
+    @Serializable
     data class Transfer(
         val line: Int,
-        val destination: BilingualName
+        val destination: BilingualName,
+        val station: String,
     ) : PathStep()
 
+    @Serializable
     data class Station(
         val station: com.ma.tehro.domain.line.Station,
         val isPassthrough: Boolean = false,

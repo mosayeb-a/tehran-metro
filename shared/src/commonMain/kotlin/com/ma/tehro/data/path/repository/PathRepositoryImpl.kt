@@ -93,6 +93,7 @@ class PathRepositoryImpl(
                     PathStep.Transfer(
                         line = currentLine,
                         destination = BilingualName(en = enDirection, fa = faDirection),
+                        station = currentStation.translations.fa
                     )
                 )
             }
@@ -132,6 +133,7 @@ class PathRepositoryImpl(
                         PathStep.Transfer(
                             line = currentLine,
                             destination = BilingualName(en = enDirection, fa = faDirection),
+                            station = currentStation.translations.fa
                         )
                     )
                     result.add(
@@ -153,6 +155,7 @@ class PathRepositoryImpl(
                         PathStep.Transfer(
                             line = currentLine,
                             destination = BilingualName(en = enDirection, fa = faDirection),
+                            station = currentStation.translations.fa
                         )
                     )
                     result.add(
@@ -193,6 +196,7 @@ class PathRepositoryImpl(
                     PathStep.Transfer(
                         line = newLine,
                         destination = BilingualName(en = enDirection, fa = faDirection),
+                        station = currentStation.translations.fa
                     )
                 )
                 result.add(

@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.rememberShareManager
+import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.domain.path.PathStep
 import com.ma.tehro.feature.shortestpath.guide.components.StepGuideItem
@@ -58,36 +59,32 @@ fun PathDescription(
 
     val stepTexts by remember(steps) {
         derivedStateOf {
-            steps.mapIndexed { index, step ->
-                val isLast = index == steps.lastIndex
-                when (step) {
-                    is PathStep.Station -> {
-                        if (isLast) {
-                            StepText(
-                                symbol = "<",
-                                message = "در ایستگاه ${step.station.translations.fa} از قطار پیاده شوید",
-                            )
-                        } else {
-                            StepText(
-                                symbol = ">",
-                                message = buildString {
-                                    append("وارد ایستگاه ${step.station.translations.fa} (خط ${step.line})")
-                                    append(" سوار قطار شوید")
-                                },
-                            )
-                        }
-                    }
+            val firstTransferIndex = steps.indexOfFirst { it is PathStep.Transfer }
 
-                    is PathStep.Transfer -> StepText(
-                        symbol = "<>",
-                        message = buildString {
-                            append("در ایستگاه ${step.destination.fa} از قطار پیاده شوید و به سمت ")
-                            append(step.destination.fa)
-                            append(" (خط ${step.line}) خط عوض کنید")
-                        },
+            steps.mapIndexedNotNull { index, step ->
+                val isLast = index == steps.lastIndex
+
+                when {
+                    step is PathStep.Station && isLast -> StepText(
+                        symbol = "<",
+                        message = "در ایستگاه ${step.station.translations.fa} از قطار پیاده شوید",
                     )
+
+                    step is PathStep.Station -> null
+
+                    step is PathStep.Transfer && index == firstTransferIndex -> StepText(
+                        symbol = ">",
+                        message = "وارد ایستگاه ${step.station} (خط ${step.line.toFarsiNumber()}) و به سمت ${step.destination.fa} سوار قطار شوید",
+                    )
+
+                    step is PathStep.Transfer -> StepText(
+                        symbol = "<>",
+                        message = "در ایستگاه ${step.station} از قطار پیاده شوید و به سمت ${step.destination.fa} (خط ${step.line.toFarsiNumber()}) خط عوض کنید",
+                    )
+
+                    else -> null
                 }
-            }
+            } + StepText(symbol = "*", message = "شما به مقصد رسیدید")
         }
     }
 
