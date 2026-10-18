@@ -43,6 +43,7 @@ import com.ma.tehro.feature.shortestpath.selection.components.StationTextField
 import com.ma.tehro.feature.shortestpath.selection.components.TimePickerDialog
 import com.ma.tehro.feature.shortestpath.selection.components.rememberPulseAnimation
 import com.ma.tehro.domain.path.PathHistory
+import com.ma.tehro.feature.shortestpath.selection.components.SwapStationsButton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,6 +65,7 @@ fun StationSelector(
     onMetroGuideClick: () -> Unit,
     onRemoveFromHistory: (PathHistory) -> Unit,
     onSaveToHistory: (Station, Station) -> Unit,
+    onSwapStations: () -> Unit,
     onBack: () -> Unit,
 ) {
     val lazyListState = rememberLazyListState()
@@ -128,29 +130,33 @@ fun StationSelector(
                 item { Spacer(Modifier.height(28.dp)) }
 
                 item {
-                    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
-                        StationTextField(
-                            selectedStation = viewState.fromStation,
-                            isFrom = true,
-                            nodeColor = fromColor,
-                            nodeScale = fromPulse.scale.value,
-                            onClick = { isFromSheetOpen = true }
-                        )
-                    }
-                }
+                    Box(modifier = Modifier.fillMaxWidth()) {
+                        CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+                            Column {
+                                StationTextField(
+                                    selectedStation = viewState.fromStation,
+                                    isFrom = true,
+                                    nodeColor = fromColor,
+                                    nodeScale = fromPulse.scale.value,
+                                    onClick = { isFromSheetOpen = true }
+                                )
+                                Spacer(Modifier.height(16.dp))
+                                StationTextField(
+                                    selectedStation = viewState.toStation,
+                                    isFrom = false,
+                                    nodeColor = toColor,
+                                    nodeScale = toPulse.scale.value,
+                                    onClick = { isFromSheetOpen = false }
+                                )
+                            }
+                        }
 
-                item {
-                    Spacer(modifier = Modifier.height(16.dp))
-                }
-
-                item {
-                    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
-                        StationTextField(
-                            selectedStation = viewState.toStation,
-                            isFrom = false,
-                            nodeColor = toColor,
-                            nodeScale = toPulse.scale.value,
-                            onClick = { isFromSheetOpen = false }
+                        SwapStationsButton(
+                            modifier = Modifier
+                                .align(Alignment.CenterEnd)
+                                .padding(end = 24.dp),
+                            enabled = viewState.fromStation != null || viewState.toStation != null,
+                            onClick = onSwapStations
                         )
                     }
                 }
