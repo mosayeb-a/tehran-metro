@@ -114,12 +114,12 @@ class StationSelectorViewModel(
 
     fun setSearchQuery(query: String) = _searchQuery.update { query }
 
-    fun setFromStation(station: BilingualName) {
+    fun setFromStation(station: BilingualName?) {
         _uiState.update { it.copy(fromStation = station) }
         _searchQuery.update { "" }
     }
 
-    fun setToStation(station: BilingualName) {
+    fun setToStation(station: BilingualName?) {
         _uiState.update { it.copy(toStation = station) }
         _searchQuery.update { "" }
     }

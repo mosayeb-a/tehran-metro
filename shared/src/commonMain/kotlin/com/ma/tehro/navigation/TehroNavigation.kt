@@ -216,6 +216,28 @@ fun TehroNavigation(
                 pathHistory = pathHistory,
                 onRemoveFromHistory = viewModel::removeFromHistory,
                 onSaveToHistory = viewModel::saveToHistory,
+                onSwapStations = {
+                    val current = state
+                    val from = current.fromStation
+                    val to = current.toStation
+                    when {
+                        from == null && to == null -> Unit
+                        from == null -> {
+                            viewModel.setFromStation(to!!)
+                            viewModel.setToStation(null)
+                        }
+
+                        to == null -> {
+                            viewModel.setToStation(from)
+                            viewModel.setFromStation(null)
+                        }
+
+                        else -> {
+                            viewModel.setFromStation(to)
+                            viewModel.setToStation(from)
+                        }
+                    }
+                }
             )
         }
 
