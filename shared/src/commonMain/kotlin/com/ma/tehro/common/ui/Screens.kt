@@ -1,6 +1,7 @@
 package com.ma.tehro.common.ui
 
 import com.ma.tehro.domain.common.BilingualName
+import com.ma.tehro.domain.line.NearbyBus
 import com.ma.tehro.domain.line.Station
 import com.ma.tehro.domain.path.PathStep
 import kotlinx.serialization.Serializable
@@ -37,6 +38,13 @@ data class TrainScheduleScreen(
     val station: BilingualName,
     val lineNumber: Int,
     val useBranch: Boolean
+)
+
+@Serializable
+data class NearbyBusesScreen(
+    val station: BilingualName,
+    val lineNumber: Int,
+    val nearbyBuses: List<NearbyBus>
 )
 
 @Serializable

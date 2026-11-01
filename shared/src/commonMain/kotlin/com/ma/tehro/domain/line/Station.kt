@@ -1,8 +1,10 @@
 package com.ma.tehro.domain.line
 
+import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.domain.common.GeoPoint
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.math.round
 
 @Serializable
 data class Station(
@@ -20,12 +22,57 @@ data class Station(
     val safety: StationSafety = StationSafety(),
     val relations: List<String> = emptyList(),
     val positionsInLine: List<PositionInLine> = emptyList(),
+    val nearbyBuses: List<NearbyBus> = emptyList(),
 ) : GeoPoint {
     override val latitude: Double
         get() = requireNotNull(_latitude) { "station $name has no latitude" }
 
     override val longitude: Double
         get() = requireNotNull(_longitude) { "station $name has no longitude" }
+}
+
+@Serializable
+data class NearbyBus(
+    val id: String,
+    val name: String,
+    @SerialName("distance_m")
+    val distanceMeters: Double,
+    val lines: List<NearbyBusLine> = emptyList(),
+) {
+    val distanceNumber: String
+        get() = if (distanceMeters < 1000) {
+            distanceMeters.toInt().toFarsiNumber()
+        } else {
+            val km = round((distanceMeters / 1000) * 10) / 10
+            km.toString().toFarsiNumber()
+        }
+
+    val distanceUnit: String
+        get() = if (distanceMeters < 1000) "متر" else "کیلومتر"
+
+    val formattedDistanceFa: String
+        get() = "$distanceNumber $distanceUnit"
+
+    val formattedDistanceEn: String
+        get() = if (distanceMeters < 1000) "${distanceMeters.toInt()} m" else "${round((distanceMeters / 1000) * 10) / 10} km"
+}
+
+@Serializable
+data class NearbyBusLine(
+    val line: Int,
+    @SerialName("is_forward")
+    val isForward: Boolean,
+    val destination: String? = null,
+) {
+    val direction: String
+        get() = if (isForward) "رفت" else "برگشت"
+
+    val displayLabel: String
+        get() = if (!destination.isNullOrBlank()) {
+            "به سمت $destination"
+        } else {
+            ""
+        }
 }
 
 @Serializable

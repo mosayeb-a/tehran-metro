@@ -2,13 +2,16 @@ package com.ma.tehro.feature.detail
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Wc
@@ -38,6 +41,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -45,11 +49,13 @@ import com.ma.tehro.common.calculateLineName
 import com.ma.tehro.common.getLineColorByNumber
 import com.ma.tehro.common.ui.Appbar
 import com.ma.tehro.domain.line.Station
+import com.ma.tehro.domain.line.NearbyBus
 import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.line.Facility
 import com.ma.tehro.feature.detail.components.AppbarDetail
 import com.ma.tehro.feature.detail.components.FacilityChip
 import com.ma.tehro.feature.detail.components.FacilitySection
+import com.ma.tehro.feature.detail.components.NearbyBusesButton
 import com.ma.tehro.feature.detail.components.TrainScheduleButton
 
 @Composable
@@ -58,7 +64,8 @@ fun StationDetail(
     useBranch: Boolean,
     station: Station,
     lineNumber: Int,
-    onTrainScheduleClick: (station: BilingualName, lineNumber: Int, useBranch: Boolean) -> Unit
+    onTrainScheduleClick: (station: BilingualName, lineNumber: Int, useBranch: Boolean) -> Unit,
+    onNearbyBusesClick: (station: BilingualName, lineNumber: Int, nearbyBuses: List<NearbyBus>) -> Unit = { _, _, _ -> },
 ) {
     val lineName = remember(lineNumber) { calculateLineName(lineNumber, useBranch) }
     val lineColor = remember { getLineColorByNumber(lineNumber) }
@@ -225,19 +232,47 @@ fun StationDetail(
                 .padding(paddingValues),
         ) {
             item {
-                TrainScheduleButton(
-                    lineColor = lineColor,
-                    onClick = {
-                        onTrainScheduleClick(
-                            BilingualName(
-                                en = station.name,
-                                fa = station.translations.fa,
-                            ),
-                            lineNumber,
-                            useBranch
-                        )
-                    }
-                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(lineColor),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    NearbyBusesButton(
+                        modifier = Modifier.weight(1f),
+                        lineColor = lineColor,
+                        onClick = {
+                            onNearbyBusesClick(
+                                BilingualName(
+                                    en = station.name,
+                                    fa = station.translations.fa,
+                                ),
+                                lineNumber,
+                                station.nearbyBuses
+                            )
+                        }
+                    )
+                    Box(
+                        modifier = Modifier
+                            .width(1.dp)
+                            .height(40.dp)
+                            .background(Color.White.copy(alpha = 0.25f))
+                    )
+                    TrainScheduleButton(
+                        modifier = Modifier.weight(1f),
+                        lineColor = lineColor,
+                        onClick = {
+                            onTrainScheduleClick(
+                                BilingualName(
+                                    en = station.name,
+                                    fa = station.translations.fa,
+                                ),
+                                lineNumber,
+                                useBranch
+                            )
+                        }
+                    )
+                }
             }
 
             item { Spacer(Modifier.height(12.dp)) }

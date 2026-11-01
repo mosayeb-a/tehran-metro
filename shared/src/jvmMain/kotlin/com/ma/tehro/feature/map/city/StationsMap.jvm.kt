@@ -5,7 +5,9 @@ import androidx.compose.ui.Modifier
 
 @Composable
 actual fun StationsMap(
+    modifier: Modifier,
     viewState: MapUiState,
-    modifier: Modifier
+    isSelection: Boolean,
+    onMarkerCenterChanged: ((Double, Double) -> Unit)?,
 ) {
 }
