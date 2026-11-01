@@ -7,7 +7,8 @@ import com.ma.tehro.common.ui.theme.LightGray
 
 @Composable
 fun TehroHorizontalDivider(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    alpha: Float = 1f
 ) {
-    HorizontalDivider(modifier = modifier, color = LightGray)
+    HorizontalDivider(modifier = modifier, color = LightGray.copy(alpha))
 }

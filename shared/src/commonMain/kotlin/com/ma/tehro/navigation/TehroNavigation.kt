@@ -31,6 +31,7 @@ import com.ma.tehro.common.ui.StationSelectorScreen
 import com.ma.tehro.common.ui.StationsScreen
 import com.ma.tehro.common.ui.SubmitFeedbackScreen
 import com.ma.tehro.common.ui.TrainScheduleScreen
+import com.ma.tehro.common.ui.StationSearchScreen
 import com.ma.tehro.domain.common.BilingualName
 import com.ma.tehro.domain.line.NearbyBus
 import com.ma.tehro.domain.line.Station
@@ -53,6 +54,8 @@ import com.ma.tehro.feature.podcast.PodcastList
 import com.ma.tehro.feature.podcast.PodcastViewModel
 import com.ma.tehro.feature.schedule.TrainSchedule
 import com.ma.tehro.feature.schedule.TrainScheduleViewModel
+import com.ma.tehro.feature.search.StationSearch
+import com.ma.tehro.feature.search.StationSearchViewModel
 import com.ma.tehro.feature.shortestpath.guide.PathDescription
 import com.ma.tehro.feature.shortestpath.pathfinder.PathFinder
 import com.ma.tehro.feature.shortestpath.pathfinder.PathViewModel
@@ -99,6 +102,24 @@ fun TehroNavigation(
                 },
                 onMoreClick = { navController.navigate(MoreScreen) },
                 onMetroGuideClick = { navController.navigate(MetroGuideScreen) },
+                onSearchClick = { navController.navigate(StationSearchScreen) }
+            )
+        }
+
+        baseComposable<StationSearchScreen> {
+            val viewModel: StationSearchViewModel = koinViewModel()
+            StationSearch(
+                viewModel = viewModel,
+                onBack = navController::navigateUp,
+                onStationClick = { station ->
+                    navController.navigate(
+                        StationDetailScreen(
+                            station = station,
+                            lineNumber = station.lines.random(),
+                            useBranch = false,
+                        )
+                    )
+                }
             )
         }
 

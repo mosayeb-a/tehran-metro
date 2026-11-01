@@ -64,3 +64,6 @@ object MetroGuideScreen
 
 @Serializable
 object PodcastListScreen
+
+@Serializable
+object StationSearchScreen
