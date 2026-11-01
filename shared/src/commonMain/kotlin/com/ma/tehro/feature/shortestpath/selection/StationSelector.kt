@@ -97,6 +97,7 @@ fun StationSelector(
                     station.translations.fa.contains(searchQuery, ignoreCase = true)
         }
     }
+    val hasAnyStation = viewState.fromStation != null || viewState.toStation != null
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -151,13 +152,15 @@ fun StationSelector(
                             }
                         }
 
-                        SwapStationsButton(
-                            modifier = Modifier
-                                .align(Alignment.CenterEnd)
-                                .padding(end = 24.dp),
-                            enabled = viewState.fromStation != null || viewState.toStation != null,
-                            onClick = onSwapStations
-                        )
+                        if (hasAnyStation) {
+                            SwapStationsButton(
+                                modifier = Modifier
+                                    .align(Alignment.CenterEnd)
+                                    .padding(end = 24.dp),
+                                enabled = true,
+                                onClick = onSwapStations
+                            )
+                        }
                     }
                 }
 
