@@ -7,25 +7,19 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.BilingualText
+import com.ma.tehro.common.ui.LineBadge
 import com.ma.tehro.domain.line.Station
 
 @Composable
@@ -58,21 +52,12 @@ fun StationItem(
                     textAlign = TextAlign.Start
                 )
 
-                if (station.lines.isNotEmpty()) {
+                val lineNumbers = station.lines.ifEmpty {
+                    station.positionsInLine.map { it.line }.distinct()
+                }
+                if (lineNumbers.isNotEmpty()) {
                     Spacer(Modifier.width(12.dp))
-                    Surface(
-                        shape = RoundedCornerShape(50),
-                        color = Color.White.copy(alpha = 0.08f)
-                    ) {
-                        Text(
-                            text = "خط ${station.lines.joinToString("، ") { it.toFarsiNumber() }}",
-                            style = MaterialTheme.typography.labelSmall,
-                            fontWeight = FontWeight.Medium,
-                            color = Color.White.copy(alpha = 0.75f),
-                            fontSize = 11.sp,
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-                        )
-                    }
+                    LineBadge(lineNumbers = lineNumbers)
                 }
             }
         }

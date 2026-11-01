@@ -37,15 +37,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.EmptyStatesFaces
+import com.ma.tehro.common.ui.LineBadge
 import com.ma.tehro.common.ui.Message
 import com.ma.tehro.common.ui.MessageAction
 import com.ma.tehro.domain.common.GeoPoint
 import com.ma.tehro.domain.line.Station
 import com.ma.tehro.domain.path.Nearby
 import com.ma.tehro.domain.path.Place
-import com.ma.tehro.feature.shortestpath.selection.NearbyType
 import com.ma.tehro.feature.shortestpath.selection.NearbyError
 import com.ma.tehro.feature.shortestpath.selection.NearbySearchState
+import com.ma.tehro.feature.shortestpath.selection.NearbyType
 
 @Composable
 fun <T : GeoPoint> NearbyList(
@@ -78,8 +79,7 @@ fun <T : GeoPoint> NearbyList(
                         "مکان‌های نزدیک"
                     }
                     Column(
-                        modifier = Modifier
-                            .fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
@@ -91,8 +91,7 @@ fun <T : GeoPoint> NearbyList(
                             faces = EmptyStatesFaces.happy,
                         )
                         CircularProgressIndicator(
-                            modifier = Modifier
-                                .size(32.dp),
+                            modifier = Modifier.size(32.dp),
                             color = MaterialTheme.colorScheme.onPrimaryContainer,
                             strokeWidth = 3.dp,
                         )
@@ -182,61 +181,87 @@ fun <T : GeoPoint> NearbyList(
                                 }
                             }
                         ) { index ->
-                            val nearby = items[index]
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clip(RoundedCornerShape(28.dp))
-                                    .clickable {
-                                        onItemSelected(nearby.item)
-                                        onDismiss()
-                                    }
-                                    .background(
-                                        MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
-                                    )
-                                    .padding(vertical = 12.dp, horizontal = 8.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
-                                    Row(
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                                    ) {
-                                        Text(
-                                            text = (index + 1).toFarsiNumber(),
-                                            style = MaterialTheme.typography.titleLarge.copy(
-                                                fontWeight = FontWeight.Black
-                                            ),
-                                            color = MaterialTheme.colorScheme.onSurface
-                                        )
-
-                                        Spacer(Modifier.width(2.dp))
-
-                                        itemContent(nearby.item, index)
-                                    }
-
-                                    Spacer(modifier = Modifier.weight(1f))
-
-                                    Row {
-                                        Text(
-                                            text = nearby.distanceNumber,
-                                            style = MaterialTheme.typography.bodyMedium.copy(
-                                                fontWeight = FontWeight.Bold,
-                                                color = MaterialTheme.colorScheme.onSurface
-                                            )
-                                        )
-                                        Spacer(modifier = Modifier.width(4.dp))
-                                        Text(
-                                            text = nearby.distanceUnit,
-                                            style = MaterialTheme.typography.bodySmall.copy(
-                                                color = MaterialTheme.colorScheme.onSurfaceVariant
-                                            )
-                                        )
-                                    }
+                            NearbyItem(
+                                index = index,
+                                nearby = items[index],
+                                itemContent = { itemContent(items[index].item, index) },
+                                onClick = {
+                                    onItemSelected(items[index].item)
+                                    onDismiss()
                                 }
-                            }
+                            )
                         }
                     }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun <T : GeoPoint> NearbyItem(
+    index: Int,
+    nearby: Nearby<T>,
+    itemContent: @Composable () -> Unit,
+    onClick: () -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(28.dp))
+            .clickable(onClick = onClick)
+            .background(
+                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+            )
+            .padding(vertical = 12.dp, horizontal = 8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Row(
+            modifier = Modifier.weight(1f),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Text(
+                text = (index + 1).toFarsiNumber(),
+                style = MaterialTheme.typography.titleLarge.copy(
+                    fontWeight = FontWeight.Black
+                ),
+                color = MaterialTheme.colorScheme.onSurface
+            )
+
+            Spacer(Modifier.width(2.dp))
+
+            itemContent()
+        }
+
+        Column(
+            horizontalAlignment = Alignment.End
+        ) {
+            Row(verticalAlignment = Alignment.Bottom) {
+                Text(
+                    text = nearby.distanceNumber,
+                    style = MaterialTheme.typography.bodyMedium.copy(
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                )
+                Spacer(Modifier.width(4.dp))
+                Text(
+                    text = nearby.distanceUnit,
+                    style = MaterialTheme.typography.bodySmall.copy(
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                )
+            }
+
+            val station = nearby.item as? Station
+            if (station != null) {
+                val lineNumbers = station.lines.ifEmpty {
+                    station.positionsInLine.map { it.line }.distinct()
+                }
+                if (lineNumbers.isNotEmpty()) {
+                    Spacer(Modifier.height(4.dp))
+                    LineBadge(lineNumbers = lineNumbers)
                 }
             }
         }

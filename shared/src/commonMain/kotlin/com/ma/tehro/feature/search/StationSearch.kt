@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.EmptyStatesFaces
+import com.ma.tehro.common.ui.LineBadge
 import com.ma.tehro.common.ui.Message
 import com.ma.tehro.common.ui.TehroHorizontalDivider
 import com.ma.tehro.common.ui.TehroSearchBar
@@ -161,20 +162,12 @@ private fun StationResultItem(
                 }
             }
 
-            if (station.lines.isNotEmpty()) {
+            val lineNumbers = station.lines.ifEmpty {
+                station.positionsInLine.map { it.line }.distinct()
+            }
+            if (lineNumbers.isNotEmpty()) {
                 Spacer(Modifier.width(12.dp))
-                Surface(
-                    shape = RoundedCornerShape(50),
-                    color = Color.White.copy(alpha = 0.08f)
-                ) {
-                    Text(
-                        text = "خط ${station.lines.joinToString("، ") { it.toFarsiNumber() }}",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = Color.White.copy(alpha = 0.75f),
-                        fontSize = 11.sp,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-                    )
-                }
+                LineBadge(lineNumbers = lineNumbers)
             }
         }
     }
