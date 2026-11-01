@@ -35,6 +35,7 @@ import com.ma.tehro.feature.map.city.StationsMapViewModel
 import com.ma.tehro.feature.more.PreferencesViewModel
 import com.ma.tehro.feature.podcast.PodcastViewModel
 import com.ma.tehro.feature.schedule.TrainScheduleViewModel
+import com.ma.tehro.feature.search.StationSearchViewModel
 import com.ma.tehro.feature.shortestpath.pathfinder.PathViewModel
 import com.ma.tehro.feature.shortestpath.selection.StationSelectorViewModel
 import com.russhwolf.settings.ExperimentalSettingsApi
@@ -157,4 +158,5 @@ val appModule = module {
         )
     }
     viewModel<PodcastViewModel> { PodcastViewModel(repository = get()) }
+    viewModel { StationSearchViewModel(pathRepository = get()) }
 }
