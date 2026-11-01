@@ -21,11 +21,12 @@ import com.ma.tehro.common.ui.BilingualText
 
 @Composable
 fun TrainScheduleButton(
+    modifier: Modifier = Modifier,
     lineColor: Color,
     onClick: () -> Unit
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .clickable { onClick() }
             .background(lineColor)
@@ -35,7 +36,8 @@ fun TrainScheduleButton(
     ) {
         Icon(
             imageVector = Icons.Rounded.DirectionsSubway,
-            contentDescription = "زمان‌بندی حرکت قطار"
+            contentDescription = "زمان‌بندی حرکت قطار",
+            tint = Color.White
         )
         BilingualText(
             fa = "زمان‌بندی حرکت قطار",

@@ -22,6 +22,7 @@ import com.ma.tehro.common.ui.MapScreen
 import com.ma.tehro.common.ui.MapViewerScreen
 import com.ma.tehro.common.ui.MetroGuideScreen
 import com.ma.tehro.common.ui.MoreScreen
+import com.ma.tehro.common.ui.NearbyBusesScreen
 import com.ma.tehro.common.ui.PathDescriptionScreen
 import com.ma.tehro.common.ui.PathFinderScreen
 import com.ma.tehro.common.ui.PodcastListScreen
@@ -31,8 +32,10 @@ import com.ma.tehro.common.ui.StationsScreen
 import com.ma.tehro.common.ui.SubmitFeedbackScreen
 import com.ma.tehro.common.ui.TrainScheduleScreen
 import com.ma.tehro.domain.common.BilingualName
+import com.ma.tehro.domain.line.NearbyBus
 import com.ma.tehro.domain.line.Station
 import com.ma.tehro.domain.path.PathStep
+import com.ma.tehro.feature.bus.NearbyBuses
 import com.ma.tehro.feature.detail.StationDetail
 import com.ma.tehro.feature.feedback.Feedback
 import com.ma.tehro.feature.feedback.FeedbackViewModel
@@ -296,7 +299,30 @@ fun TehroNavigation(
                             useBranch = useBranch,
                         )
                     )
+                },
+                onNearbyBusesClick = { station, line, nearbyBuses ->
+                    navController.navigate(
+                        NearbyBusesScreen(
+                            station = station,
+                            lineNumber = line,
+                            nearbyBuses = nearbyBuses,
+                        )
+                    )
                 }
+            )
+        }
+        baseComposable<NearbyBusesScreen>(
+            typeMap = mapOf(
+                typeOf<BilingualName>() to navTypeOf<BilingualName>(),
+                typeOf<List<NearbyBus>>() to navTypeOf<List<NearbyBus>>(),
+            )
+        ) { backStackEntry ->
+            val args = backStackEntry.toRoute<NearbyBusesScreen>()
+            NearbyBuses(
+                station = args.station,
+                lineNumber = args.lineNumber,
+                nearbyBuses = args.nearbyBuses,
+                onBack = navController::navigateUp
             )
         }
         baseComposable<TrainScheduleScreen>(
