@@ -160,18 +160,13 @@ buildkonfig {
 
         buildConfigField(
             type = STRING,
-            name = "GITHUB_TOKEN",
-            value = localProperties.getProperty("github_token", "")
+            name = "BALE_BOT_TOKEN",
+            value = System.getenv("BALE_BOT_TOKEN") ?: ""
         )
         buildConfigField(
             type = STRING,
-            name = "STATIONS_GIST_ID",
-            value = localProperties.getProperty("stations_gist_id", "")
-        )
-        buildConfigField(
-            type = STRING,
-            name = "FEEDBACKS_GIST_ID",
-            value = localProperties.getProperty("feedbacks_gist_id", "")
+            name = "BALE_CHAT_ID",
+            value = System.getenv("BALE_CHAT_ID") ?: ""
         )
         buildConfigField(
             type = STRING,
