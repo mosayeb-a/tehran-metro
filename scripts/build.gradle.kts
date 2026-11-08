@@ -13,6 +13,14 @@ kotlin {
 
     compilerOptions {
         jvmTarget.set(JvmTarget.JVM_11)
+        freeCompilerArgs.add("-Xcollection-literals")
+        freeCompilerArgs.add("-Xreturn-value-checker=check")
+        freeCompilerArgs.add("-Xcontext-sensitive-resolution")
+        freeCompilerArgs.add("-Xallow-returns-result-of")
+    }
+
+    compilerOptions {
+        jvmTarget.set(JvmTarget.JVM_11)
     }
 }
 

@@ -134,6 +134,7 @@ val stationNameMapper = mapOf(
     "اتمسفر" to "Atmosphere",
     "هشتگرد" to "Shahid Sepahbod Qasem Soleimani",
     "شهيدآرمان" to "Kouhsar",
+    "ماموت" to "Mamut",
     "دولتآباد" to "Shohada-ye Dowlat Abad",
     "شهيدرضايی" to "Shahid Rezaei",
     "شهيدستاری" to "Shahid Sattari",
@@ -172,12 +173,12 @@ val stationNameMapper = mapOf(
     "بهارشیراز" to "Bahar Shiraz (Khanevadeh Hospital)",
     "بوستانلاله" to "Bustan-e Laleh",
     "مریممقدس(س)" to "Maryam-e Moghaddas",
-    "شهدایهفتمتیر" to "Maryam-e Moghaddas",
+    "شهدایهفتمتیر" to "Shohada-ye Haftom-e Tir",
     "سربازوطن" to "Sarbaz",
     "تربیتمدرس" to "Daneshgah-e Tarbiat Modarres",
 )
 
-fun main() {
+fun runMapper() {
     val files = listOf(
         "train_timetable_1.json",
         "train_timetable_2.json",

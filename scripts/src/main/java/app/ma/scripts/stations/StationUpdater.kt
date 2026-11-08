@@ -28,8 +28,6 @@ fun main() {
                 name = oldStation.name,
                 translations = oldStation.translations,
                 lines = oldStation.lines,
-                longitude = updateIfNotNull(oldStation.longitude, newStation.longitude),
-                latitude = updateIfNotNull(oldStation.latitude, newStation.latitude),
                 address = updateIfNotNull(oldStation.address, newStation.address),
                 disabled = oldStation.disabled,
                 facilities = StationFacilities(

@@ -47,8 +47,6 @@ fun StationFlat.toStation(): Station {
         name = name,
         translations = translations,
         lines = lines,
-        longitude = longitude,
-        latitude = latitude,
         address = address,
         disabled = disabled,
         facilities = StationFacilities(
