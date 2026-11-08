@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import com.ma.tehro.common.isoToPersianDate
 import com.ma.tehro.common.toFarsiNumber
 import com.ma.tehro.common.ui.TehroIcon
 import com.ma.tehro.domain.common.BilingualName
@@ -152,7 +153,7 @@ fun DrawerContent(
             )
             CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
                 Text(
-                    text = "۲۳ مرداد ۱۴۰۵ - نسخه " + BuildKonfig.VERSION_NAME.toFarsiNumber(),
+                    text = isoToPersianDate(BuildKonfig.RELEASE_DATE_ISO) + " - نسخه " + BuildKonfig.VERSION_NAME.toFarsiNumber(),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f)
                 )

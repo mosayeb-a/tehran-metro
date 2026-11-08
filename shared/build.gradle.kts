@@ -3,7 +3,7 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import java.util.Properties
+import java.time.LocalDate
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -151,13 +151,6 @@ buildkonfig {
     packageName = "com.ma.tehro.shared"
 
     defaultConfigs {
-        val localProperties = Properties().apply {
-            val localPropsFile = rootProject.file("local.properties")
-            if (localPropsFile.exists()) {
-                load(localPropsFile.reader())
-            }
-        }
-
         buildConfigField(
             type = STRING,
             name = "BALE_BOT_TOKEN",
@@ -172,6 +165,11 @@ buildkonfig {
             type = STRING,
             name = "VERSION_NAME",
             value = libs.versions.appVersionName.get()
+        )
+        buildConfigField(
+            type = STRING,
+            name = "RELEASE_DATE_ISO",
+            value = LocalDate.now().toString()
         )
     }
 }
