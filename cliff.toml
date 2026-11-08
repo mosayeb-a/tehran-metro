@@ -9,7 +9,7 @@ body = """
 ### {{ group | upper_first }}
 
 {% for commit in commits -%}
-- {{ commit.message | upper_first }} [`{{ commit.id | truncate(length=7, end="") }}`](https://github.com/mosayeb-a/tehro-cicd/commit/{{ commit.id }})
+- {{ commit.message | upper_first }} [`{{ commit.id | truncate(length=7, end="") }}`](https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}/commit/{{ commit.id }})
 {% endfor %}
 
 {% endfor -%}
@@ -41,3 +41,7 @@ commit_parsers = [
 
     { message = ".*", group = "Other Changes" },
 ]
+
+[remote.github]
+owner = "mosayeb-a"
+repo = "tehran-metro"
